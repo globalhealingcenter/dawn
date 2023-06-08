@@ -12,7 +12,15 @@
   }
 {%- endstyle -%}
 
-<section class="gh--product-content section-{{ section.id }}-padding" {% if product %}data-product-sku="{{ product.selected_or_first_available_variant.sku }}"{% endif %}>
+{% assign has_product_config = false %}
+
+{% if product and product.metafields.globalhealing.body %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.globalhealing.body %}
+{% endif %}
+
+{% unless has_product_config %}
+<section class="gh--product-content section-{{ section.id }}-padding">
   
   {{ 'gh-product-content.css' | asset_url | stylesheet_tag }}
   
@@ -27,12 +35,10 @@
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>UNIQUELY MADE</span>
-                  100 Billion CFUs. Maximum Potency.
+                  <span>{{ config.intro.title.before }}</span>
+                  {{ config.intro.title.main }}
                 </h2>
-                <p>
-                  Experience the gold standard in gut health with Global Healing’s Ultimate Probiotic supplement. While other brands use low- quality strains and inflated CFU counts, we believe in quality over quantity. That’s why we use only the highest quality strains in our vegan-friendly formula, expertly crafted to deliver maximum potency and effectiveness. With a concentrated 100 billion CFUs per bottle, our supplement ensures you get the full spectrum of gut-healing benefits from our probiotic strains with every dose.
-                </p>
+                {{ config.intro.content }}
               </div>
             </div>
             <div data-type="image">
@@ -53,6 +59,7 @@
   {% endfor %}
   </div>
 </section>
+{% endunless %}
 
 {% schema %}
 {
