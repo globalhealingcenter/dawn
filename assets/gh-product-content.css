@@ -143,6 +143,7 @@
 .ghd--block--curated [data-type="items"] .price{
   font-weight: bold;
   margin-top: .5em;
+  margin-bottom: 1em;
   border: 1px solid var(--gh-color-gray);
   border-width: 1px 0;
   padding: 0.25em 0;
