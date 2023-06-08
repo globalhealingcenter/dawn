@@ -136,7 +136,9 @@
       </div>
       {% when 'curated' %}
       <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>
-        test
+        {% for p in product.metafields.globalhealing.curated_collection.value %}
+          <div>Test</div>
+        {% endfor %}
       </div>
     {% endcase %}
 
