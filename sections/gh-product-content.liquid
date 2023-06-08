@@ -43,12 +43,9 @@
             </div>
             <div data-type="image">
               <picture>
-                <source media="(min-width: 650px)"
-                        srcset="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro.png">
-                <source media="(max-width: 649px)"
-                        srcset="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro-mobile.png">
-                <img src="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro.png"
-                     alt="">
+                <source media="(min-width: 650px)" srcset="{{ config.intro.image.desktop }}">
+                <source media="(max-width: 649px)" srcset="{{ config.intro.image.mobile }}">
+                <img src="{{ config.intro.image.desktop }}" alt="">
               </picture>
             </div>
           </div>
