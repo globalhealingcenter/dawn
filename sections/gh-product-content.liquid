@@ -22,7 +22,7 @@
       {%- when '@app' -%}
         {% render block %}
       {% when 'intro' %}
-        <div class="ghd--block--intro ghd--block">
+        <div class="ghd--block--intro ghd--block" {{ block.shopify_attributes }}>
           <div data-type="cols">
             <div data-type="text">
               <div class="mw">
