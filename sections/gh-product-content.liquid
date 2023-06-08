@@ -19,7 +19,7 @@
   {% assign config = product.metafields.globalhealing.body %}
 {% endif %}
 
-{{ product.metafields.globalhealing.body }}
+{{ product.metafields.globalhealing.body.value.intro.title.before }}
 
 {% unless has_product_config %}
 <section class="gh--product-content section-{{ section.id }}-padding">
