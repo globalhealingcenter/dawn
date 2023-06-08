@@ -112,7 +112,7 @@
 }
 
 .ghd--block--curated{
-  
+  padding: 5rem 1rem;
 }
 .ghd--block--curated [data-type="header"]{
   text-align: center;
@@ -120,6 +120,21 @@
 }
 .ghd--block--curated [data-type="items"]{
   display: flex;
+  justify-content: center;
+}
+.ghd--block--curated [data-type="items"] > div{
+  padding: 1rem 2rem;
+  max-width: 300px;
+}
+.ghd--block--curated [data-type="items"] .title{
+  font-family: var(--gh-font-primary);
+  margin-bottom: 0;
+}
+.ghd--block--curated [data-type="items"] .tagline{
+  font-family: var(--gh-font-secondary);
+}
+.ghd--block--curated [data-type="items"] .price{
+  font-weight: bold;
 }
 
 .ghd--block--faq{
