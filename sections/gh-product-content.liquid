@@ -144,10 +144,12 @@
         </div>
         <div data-type="items">
           {% for p in product.metafields.globalhealing.curated_collection.value %}
+            {% assign curated = config.curated.items[forloop.index] %}
           <div>
             <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
             <h4 class="title">{{ p.title }}</h4>
             <p class="tagline">{{ p.metafields.globalhealing.product_tagline }}</p>
+            <p class="description">{{ curated.content }}</p>
             <p class="price">{{ p.price | money }}</p>
           </div>
           {% endfor %}
