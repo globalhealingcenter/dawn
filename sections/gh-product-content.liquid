@@ -154,7 +154,7 @@
             <p class="price">{{ v.price | money }}</p>
 
             {% form 'product', p, class: 'gh-curated-product-form' %}
-                <input type="hidden" name="id" value="{{ v.variant_id }}">
+                <input type="hidden" name="id" value="{{ v.id }}">
                 <input type="hidden" name="quantity" min="1" value="1">
 
                 <button type="submit" name="add" class="gh-buy-again--add-to-cart btn btn--full add-to-cart"
