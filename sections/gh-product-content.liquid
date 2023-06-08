@@ -153,12 +153,9 @@
             <p class="description">{{ curated.content }}</p>
             <p class="price">{{ v.price | money }}</p>
 
-            {% form 'product', p, class: 'form' %}
+            {% form 'product', p %}
                 <input type="hidden" name="id" value="{{ v.id }}">
-                <input type="hidden" name="quantity" min="1" value="1">
-                <button type="submit" name="add" class="product-form__submit button button--full-width button--secondary" {% unless v.available %}disabled="disabled"{% endunless %}>
-                    Add to Cart
-                </button>
+                {{ form | payment_terms }}
             {% endform %}
           </div>
           {% endfor %}
