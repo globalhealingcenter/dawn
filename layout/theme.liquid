@@ -265,7 +265,7 @@
     </script>
     <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
 {%- render 'ordergroove_static_asset' -%}
-</head>
+{% include 'wiser' %}{% include 'wiser_popup' %}</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
