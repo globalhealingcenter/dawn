@@ -167,6 +167,8 @@
                   {{ product.description }}
                 </div>
               {%- endif -%}
+            {%- when 'info_tabs' -%}
+              {% render 'gh-block-product-tabs', block: block, product: product %}
             {%- when 'sku' -%}
               <p
                 class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -579,6 +581,49 @@
       "type": "@app"
     },
     {
+      "type": "info_tabs",
+      "name": "Tabs",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_1_title",
+          "default": "Tab 1",
+          "label": "Tab 1 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_1_content",
+          "default": "<p>Lorem Ipsum</p>",
+          "label": "Tab 1 Content"
+        },
+        {
+          "type": "text",
+          "id": "tab_2_title",
+          "default": "Tab 2",
+          "label": "Tab 2 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_2_content",
+          "default": "<p>Lorem Ipsum</p>",
+          "label": "Tab 2 Content"
+        },
+        {
+          "type": "text",
+          "id": "tab_3_title",
+          "default": "Tab 3",
+          "label": "Tab 3 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_3_content",
+          "default": "<p>Lorem Ipsum</p>",
+          "label": "Tab 3 Content"
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "t:sections.main-product.blocks.text.name",
       "settings": [
@@ -733,7 +778,7 @@
         {
           "type": "checkbox",
           "id": "show_gift_card_recipient",
-          "default": true,
+          "default": false,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_gift_card_recipient.info"
         }

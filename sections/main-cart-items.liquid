@@ -94,6 +94,7 @@
                     {%- endif -%}
 
                     <a href="{{ item.url }}" class="cart-item__name h4 break">{{ item.product.title | escape }}</a>
+<og-offer product="{{item.key}}" location="cart" cart></og-offer>
 
                     {%- if item.original_price != item.final_price -%}
                       <div class="cart-item__discounted-prices">

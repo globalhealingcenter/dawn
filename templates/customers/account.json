@@ -1,10 +1,1 @@
-{
-  "sections": {
-    "main": {
-      "type": "main-account"
-    }
-  },
-  "order": [
-    "main"
-  ]
-}
+{"sections":{"0a5c7c21-802d-4186-be62-a4c68b0b882c":{"type":"rich-text","disabled":true,"blocks":{"template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0":{"type":"heading","settings":{"heading":"My Account","heading_size":"h1"}},"template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-1":{"type":"text","settings":{"text":"<p><a href=\"https:\/\/globalhealing.com\/apps\/subscriptions\/manage\/\" title=\"https:\/\/globalhealing.com\/apps\/subscriptions\/manage\/\">My Subscribe & Save<\/a><\/p><p><a href=\"\/pages\/live-healthy-rewards-terms\" title=\"Live Healthy Rewards Program Terms & Conditions\">My Rewards<\/a><\/p><p><a href=\"\/pages\/my-preferences\" title=\"My Preferences\">My Preferences<\/a><\/p><p><a href=\"\/pages\/my-courses\" title=\"My Courses\">My Courses<\/a><\/p><p><a href=\"https:\/\/globalhealing.com\/pages\/my-courses\" title=\"https:\/\/globalhealing.com\/pages\/my-courses\">My Downloads<\/a><\/p><p><a href=\"\/account\/logout\" title=\"Logout\">Logout<\/a><\/p>"}}},"block_order":["template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0","template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-1"],"settings":{"desktop_content_position":"center","content_alignment":"left","color_scheme":"background-1","full_width":true,"padding_top":40,"padding_bottom":52}},"main":{"type":"main-account","custom_css":[".customer > div:last-child {align-items: baseline;}",".customer > div:last-child > div:first-child {order: 2; padding-right: 0; padding-left: 3rem;}",".customer > div:last-child > div:last-child {order: 1; padding: 1.5rem 2rem; border: 1px solid; border-radius: 15px;}","@media (max-width: 989px) {.customer > div:last-child {display: flex; flex-wrap: wrap; margin-top: 2rem; } .customer > div:last-child > div {width: 100%; } .customer > div:last-child h2 {margin-top: 0; } .customer > div:last-child > div:first-child {padding-top: 20px; padding-left: 0; }}"],"settings":{"padding_top":36,"padding_bottom":36}}},"order":["0a5c7c21-802d-4186-be62-a4c68b0b882c","main"]}

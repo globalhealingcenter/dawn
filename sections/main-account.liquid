@@ -146,6 +146,8 @@
       <a href="{{ routes.account_addresses_url }}">
         {{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})
       </a>
+      {{ section.settings.account_links }}
+{%- render 'ordergroove_subscription_interface_link' -%}
     </div>
   </div>
 </div>
@@ -157,6 +159,12 @@
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "liquid",
+      "id": "account_links",
+      "default": "<p>Account Links</p>",
+      "label": "Account Links"
     },
     {
       "type": "range",

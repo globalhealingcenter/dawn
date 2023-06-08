@@ -1,0 +1,64 @@
+{% if customer %}
+
+    {% assign ghi_subscription_length = 365 | times: 24 | times: 60 | times: 60 %}
+    {% assign minimum_date = 'now' | date: '%s' | minus: ghi_subscription_length %}
+
+    {% assign purchased_skus = '' %}
+    {% assign ghi_sku = "GHI GHI-BNDL" | split: ' ' %}
+    {% assign course_skus = 'GHI-RCD GHI-SOH GHI-VH GHI-POF GHI-UT GHI-PC GHI-INTRO GHI-GUT GHI-INTRO-F GHI-JOYF GHI-NUTR' | split: ' ' %}
+
+    {% paginate customer.orders by 250 %}
+        {% for order in customer.orders by 250 %}
+
+            {% if order.financial_status != 'refunded' and order.cancelled != true %}
+                {% unless order.tags contains "chargeback-accepted" %}
+
+                    {% for line_item in order.line_items %}
+                        {% if line_item.variant.sku != empty %}
+                            {% if ghi_sku contains line_item.variant.sku %}
+                                {% assign purchased_skus = purchased_skus | append: 'GHI' | append: ' ' %}
+                            {% elsif course_skus contains line_item.variant.sku  %}
+                                {% assign line_item_sku = line_item.variant.sku | replace: "-F", ""  %}
+                                {% assign purchased_skus = purchased_skus | append: line_item_sku | append: ' ' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endunless %}
+            {% endif %}
+
+        {% endfor %}
+    {% endpaginate %}
+
+    {% comment %} add the Q&A video for everyone with a purchased course {% endcomment %}
+    {% if purchased_skus != empty %}
+        {% assign purchased_skus = purchased_skus | append: 'GHI-QA' |  %}
+    {% endif %}
+
+    {% assign purchased_skus = purchased_skus | split: ' ' %}
+
+    {% if customer.tags contains 'ghi_membership_1' or customer.email contains '@globalhealing' or customer.tags contains 'nft_guardian' %}
+        {% assign purchased_skus = 'GHI ' | split: ' ' %}
+    {% endif %}
+
+{% endif %}
+
+<div class="page-content page-full">
+    <div class="rte rte--nomargin">
+
+        {% if customer %}
+        {% if purchased_skus != empty %}
+            {{ page.content }}
+            <script>
+              let purchased_skus = {{ purchased_skus | json }};
+              gh_courses.init( purchased_skus );
+            </script>
+        {% else %}
+            <p>To access the GHI courses, please purchase courses <a href="/collections/courses">here</a>!</p>
+        {% endif %}
+        {% else %}
+            <p>To access the GHI courses, please <a href="/account">login</a></p>
+        {% endif %}
+
+    </div>
+</div>
