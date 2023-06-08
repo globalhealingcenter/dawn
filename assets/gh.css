@@ -172,13 +172,12 @@ img {
     max-width: 1300px;
   }
 }
-
+/*
 .pagination{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .pagination>.page:not(:last-child){
     margin-right: 1rem;
 }
@@ -189,6 +188,7 @@ img {
 }
 
 .pagination a,
+*/
 .ss__pagination__page--current.current{
     color: rgb(var(--color-foreground));
     display: inline-flex;
