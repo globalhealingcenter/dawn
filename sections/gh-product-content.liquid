@@ -19,6 +19,8 @@
   {% assign config = product.metafields.globalhealing.body %}
 {% endif %}
 
+{{ product.metafields.globalhealing.body }}
+
 {% unless has_product_config %}
 <section class="gh--product-content section-{{ section.id }}-padding">
   
