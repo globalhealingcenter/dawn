@@ -11,6 +11,7 @@
     }
   }
 {%- endstyle -%}
+
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <div class="section-{{ section.id }}-padding">
     {{ section.settings.custom_liquid }}
@@ -44,9 +45,17 @@
       "default": 52
     }
   ],
+  "blocks": [
+    {
+      "type": "intro",
+      "name": "Intro",
+      "limit": 1,
+      "settings": []
+    }
+  ],
   "presets": [
     {
-      "name": "Product Content!"
+      "name": "Product Content"
     }
   ]
 }
