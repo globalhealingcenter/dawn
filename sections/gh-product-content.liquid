@@ -145,12 +145,23 @@
         <div data-type="items">
           {% for p in product.metafields.globalhealing.curated_collection.value %}
             {% assign curated = config.curated.items[forloop.index0] %}
+            {% assign v = p.selected_or_first_available_variant %}
           <div>
             <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
             <h4 class="title">{{ p.title }}</h4>
             <p class="tagline">{{ curated.tagline }}</p>
             <p class="description">{{ curated.content }}</p>
-            <p class="price">{{ p.price | money }}</p>
+            <p class="price">{{ v.price | money }}</p>
+
+            {% form 'product', p, class: 'gh-curated-product-form' %}
+                <input type="hidden" name="id" value="{{ v.variant_id }}">
+                <input type="hidden" name="quantity" min="1" value="1">
+
+                <button type="submit" name="add" class="gh-buy-again--add-to-cart btn btn--full add-to-cart"
+                        {% unless v.available %}disabled="disabled"{% endunless %}>
+                    Add to Cart
+                </button>
+            {% endform %}
           </div>
           {% endfor %}
         </div>
