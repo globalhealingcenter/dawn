@@ -126,6 +126,10 @@
   padding: 1rem 3rem;
   max-width: 300px;
 }
+.ghd--block--curated [data-type="items"] .image{
+  display: block;
+  text-align: center;
+}
 .ghd--block--curated [data-type="items"] .title{
   font-family: var(--gh-font-primary);
   font-weight: bold;
