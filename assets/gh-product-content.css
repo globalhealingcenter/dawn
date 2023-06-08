@@ -123,7 +123,7 @@
   justify-content: center;
 }
 .ghd--block--curated [data-type="items"] > div{
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   max-width: 300px;
 }
 .ghd--block--curated [data-type="items"] .title{
