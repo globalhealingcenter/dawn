@@ -155,7 +155,9 @@
 
             {% form 'product', p %}
                 <input type="hidden" name="id" value="{{ v.id }}">
-                {{ form | payment_terms }}
+                <button type="submit" name="add" class="product-form__submit button button--full-width button--secondary" {% unless v.available %}disabled="disabled"{% endunless %}>
+                    Add to Cart
+                </button>
             {% endform %}
           </div>
           {% endfor %}
