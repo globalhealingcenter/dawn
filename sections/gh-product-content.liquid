@@ -74,6 +74,66 @@
             </div>
           </div>
         </div>
+      {% when 'ingredients' %}
+        <div class="ghd--block--ingredients ghd--block" {{ block.shopify_attributes }}>
+          <div data-type="header">
+            <h2 class="eyebrow">
+              <span>{{ config.ingredients.title.before }}</span>
+              {{ config.ingredients.title.main }}
+            </h2>
+            <h4>{{ config.ingredients.title.after }}</h4>
+          </div>
+          <div data-type="cols">
+            <div data-type="text">
+              <div class="ghd--details">
+                {% for detail in config.ingredients.items %}
+                  <details data-ingredient-image='{{ detail.image }}'>
+                    <summary>{{ detail.title }}</summary>
+                    {{ detail.content }}
+                  </details>
+                {% endfor %}
+              </div>
+            </div>
+            <div data-type="image">
+              <!-- @todo: need to make this dynamic! -->
+              <img src="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/prebiotic-blend.png?w=500" alt="">
+            </div>
+          </div>
+        </div>
+      {% when 'impact' %}
+      <div class="ghd--block--impact ghd--block" {{ block.shopify_attributes }}>
+        <div data-type="cols">
+          <div data-type="text">
+            <div class="mw">
+              <h2 class="eyebrow">
+                <span>{{ config.impact.title.before }}</span>
+                {{ config.impact.title.main }}
+              </h2>
+              <h4>{{ config.impact.title.after }}</h4>
+              {{ config.impact.content }}
+            </div>
+          </div>
+          <div data-type="image">
+            <picture>
+              <source media="(min-width: 650px)" srcset="{{ config.impact.image.desktop }}">
+              <source media="(max-width: 649px)" srcset="{{ config.impact.image.mobile }}">
+              <img src="{{ config.impact.image.desktop }}" alt="">
+            </picture>
+          </div>
+        </div>
+      </div>
+      {% when 'faqs' %}
+      <div class="ghd--block--faq ghd--block">
+        <h2 class="eyebrow">{{ config.faqs.title.main }}</h2>
+        <div class="ghd--details mw">
+          {% for detail in config.faqs.items %}
+            <details>
+              <summary>{{ detail.title }}</summary>
+              {{ detail.content }}
+            </details>
+          {% endfor %}
+        </div>
+      </div>
     {% endcase %}
 
   
