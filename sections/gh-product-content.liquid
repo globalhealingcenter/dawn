@@ -12,7 +12,7 @@
   }
 {%- endstyle -%}
 
-<section class="gh--product-content section-{{ section.id }}-padding">
+<section class="gh--product-content section-{{ section.id }}-padding" {% if product %}data-product-sku="{{ product.selected_or_first_available_variant.sku }}"{% endif %}>
   
   {{ 'gh-product-content.css' | asset_url | stylesheet_tag }}
   
