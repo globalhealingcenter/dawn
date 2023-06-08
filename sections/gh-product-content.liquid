@@ -141,6 +141,7 @@
             {{ p.featured_image | image_url: width: 200 | image_tag }}
             <h4>{{ p.title }}</h4>
             <p>{{ p.metafields.globalhealing.tagline }}</p>
+            <p>{{ p.price }}</p>
           </div>
         {% endfor %}
       </div>
