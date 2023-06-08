@@ -19,7 +19,7 @@
   {% assign config = product.metafields.globalhealing.body.value %}
 {% endif %}
 
-{% unless has_product_config %}
+{% if has_product_config %}
 <section class="gh--product-content section-{{ section.id }}-padding">
   
   {{ 'gh-product-content.css' | asset_url | stylesheet_tag }}
@@ -59,7 +59,7 @@
   {% endfor %}
   </div>
 </section>
-{% endunless %}
+{% endif %}
 
 {% schema %}
 {
