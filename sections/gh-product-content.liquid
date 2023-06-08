@@ -12,11 +12,44 @@
   }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="section-{{ section.id }}-padding">
-    {{ section.settings.custom_liquid }}
+<section class="gh--product-content section-{{ section.id }}-padding">
+  <div class="ghd--product-container">
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when '@app' -%}
+        {% render block %}
+      {% when 'intro' %}
+        <div class="ghd--block--intro ghd--block">
+          <div data-type="cols">
+            <div data-type="text">
+              <div class="mw">
+                <h2 class="eyebrow">
+                  <span>UNIQUELY MADE</span>
+                  100 Billion CFUs. Maximum Potency.
+                </h2>
+                <p>
+                  Experience the gold standard in gut health with Global Healing’s Ultimate Probiotic supplement. While other brands use low- quality strains and inflated CFU counts, we believe in quality over quantity. That’s why we use only the highest quality strains in our vegan-friendly formula, expertly crafted to deliver maximum potency and effectiveness. With a concentrated 100 billion CFUs per bottle, our supplement ensures you get the full spectrum of gut-healing benefits from our probiotic strains with every dose.
+                </p>
+              </div>
+            </div>
+            <div data-type="image">
+              <picture>
+                <source media="(min-width: 650px)"
+                        srcset="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro.png">
+                <source media="(max-width: 649px)"
+                        srcset="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro-mobile.png">
+                <img src="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/intro.png"
+                     alt="">
+              </picture>
+            </div>
+          </div>
+        </div>
+    {% endcase %}
+
+  
+  {% endfor %}
   </div>
-</div>
+</section>
 
 {% schema %}
 {
