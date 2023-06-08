@@ -123,7 +123,7 @@
         </div>
       </div>
       {% when 'faqs' %}
-      <div class="ghd--block--faq ghd--block">
+      <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
         <h2 class="eyebrow">{{ config.faqs.title.main }}</h2>
         <div class="ghd--details mw">
           {% for detail in config.faqs.items %}
