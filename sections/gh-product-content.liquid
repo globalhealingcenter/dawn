@@ -1,8 +1,59 @@
+<section
+  id="MainProduct-{{ section.id }}"
+  class="page-width section-{{ section.id }}-padding"
+  data-section="{{ section.id }}"
+>
+
+  <p>Hello!</p>
+
+</section>
+
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Product Content",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "intro",
+      "name": "Intro",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "benefits",
+      "name": "Benefits",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "ingredients",
+      "name": "Ingredients",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "impact",
+      "name": "Impact",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "curated",
+      "name": "Curated Collection",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "faqs",
+      "name": "FAQs",
+      "limit": 1,
+      "settings": []
+    }
+  ]
+}
 {% endschema %}
 
 {% stylesheet %}
