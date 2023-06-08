@@ -111,6 +111,16 @@
     margin: 0 auto;
 }
 
+.ghd--block--curated{
+  
+}
+.ghd--block--curated [data-type="header"]{
+  text-align: center;
+  padding-bottom: 2rem;
+}
+.ghd--block--curated [data-type="items"]{
+  display: flex;
+}
 
 .ghd--block--faq{
     padding: 7rem 1rem;
