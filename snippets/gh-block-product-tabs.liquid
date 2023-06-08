@@ -1,0 +1,68 @@
+<div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="info-tabs__links">
+    <a href="#" data-tab="1" class="active">{{ block.settings.tab_1_title }}</a>
+    <a href="#" data-tab="2">{{ block.settings.tab_2_title }}</a>
+    <a href="#" data-tab="3">{{ block.settings.tab_3_title }}</a>
+  </div>
+  <div class="info-tabs__content">
+    <div data-tab="1" class="active">
+      <span>{{ product.metafields.globalhealing.product_tagline }}</span>
+      {{ product.description }}
+      {{ block.settings.tab_1_content }}
+    </div>
+    <div data-tab="2">{{ block.settings.tab_2_content }}</div>
+    <div data-tab="3">{{ block.settings.tab_3_content }}</div>
+  </div>
+</div>
+<script>
+  let all_tabs = document.querySelectorAll('.info-tabs__content > div');
+  let all_links = document.querySelectorAll('.info-tabs__links a');
+  
+  all_links.forEach( t => {
+    t.addEventListener('click', e => {
+      all_links.forEach( c => c.classList.remove('active') );
+      all_tabs.forEach( c => c.classList.remove('active') );
+      let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
+      target.classList.add('active');
+      t.classList.add('active');
+    })
+  })
+</script>
+<style>
+  
+  .info-tabs__links{
+    border-bottom: 2px solid #00000040;
+    display: flex;
+    margin-bottom: 1.5rem;
+    font-family: var(--gh-font-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .info-tabs__links a {
+    text-decoration: none;
+    color: #00000095;
+    flex: 1;
+    margin-bottom: -3px;
+    border-bottom: 4px solid transparent;
+  }
+  .info-tabs__links a:not(:first-child) {
+    padding-left: 9px;
+  }
+  .info-tabs__links a.active {
+    color: var(--gh-color-green);
+    border-bottom-color: var(--gh-color-green);
+  }
+  .info-tabs__content [data-tab="1"] span{
+    color: var(--gh-color-green);
+    font-weight: bold;
+  }
+  .info-tabs__content [data-tab="1"] p:nth-child(2){
+    margin-top: 0;
+  }
+  .info-tabs__content > div{
+    display: none;
+  }
+  .info-tabs__content > div.active{
+    display: block;
+  }
+</style>

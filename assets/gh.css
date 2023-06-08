@@ -1,0 +1,216 @@
+body{
+  --gh-color-gray: #545454;
+  --gh-color-gold: #CCA72D;
+  --gh-color-green: #21472D;
+  --gh-color-dark-green: #00260f;
+  --gh-color-brown: #2D1F15;
+  --gh-color-cream: #F9F2E8;
+  --gh-color-dark-cream: #E3D2BE;
+  --gh-font-primary: "Miller Display", serif;
+  --gh-font-secondary: "Proxima Nova", sans-serif;
+}
+
+@font-face {
+    font-family: "Miller Display";
+    font-weight: 500;
+    src:
+      url("https://cdn.globalhealing.com/web/font/miller-display/500.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/500.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/500.eot") format("embedded-opentype");
+}
+@font-face {
+    font-family: "Miller Display";
+    font-weight: 700;
+    src:
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.eot") format("embedded-opentype");
+}
+@font-face {
+    font-family: "Proxima Nova";
+    font-weight: 500;
+    src:
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/500.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/500.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/500.eot") format("embedded-opentype");
+}
+@font-face {
+    font-family: "Proxima Nova";
+    font-weight: 700;
+    src:
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/700.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/700.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/proxima-nova/700.eot") format("embedded-opentype");
+}
+
+body{
+  color: var(--gh-color-gray);
+}
+
+h1, h2, h3, .h0, .h1, .h2, .h3, .gh-font-primary{
+  font-family: var(--gh-font-primary);
+}
+
+h4, h5, .h4, .h5, .gh-font-secondary{
+  font-family: var(--gh-font-secondary);
+}
+
+h1, h2, h3, .h1, .h2, .h3{
+  font-weight: 700;
+}
+
+h4, .h4 {
+    font-size: calc(var(--font-heading-scale) * 2rem);
+}
+
+h5, .h5 {
+    font-size: calc(var(--font-heading-scale) * 1.6rem);
+}
+
+
+iframe, img {
+    max-width: 100%;
+}
+
+img {
+    border: 0 none;
+}
+
+.align--center,
+.text-center{
+  text-align: center;
+}
+
+.hide{
+  display: none !important;
+}
+
+.remove-swell-tab .swell-tab{
+  display: none !important;
+}
+
+.swell-tab{
+  background: #008249 !important;
+  border-radius: 10px 10px 0 0 !important;
+  font-weight: bold !important;
+  width: 154px !important;
+  padding-top: 8px !important;
+  inset: auto 10px 0px auto !important;
+}
+
+.yotpo-widget-campaign-widget .yotpo-logged-out-tile.yotpo-is-mobile{
+  position: relative !important;
+}
+.yotpo-widget-campaign-widget .yotpo-logged-out-tile.yotpo-is-mobile .yotpo-action-button-widget{
+  margin-top: 20px;
+}
+[aria-label="PointsForPurchasesCampaign"] .yotpo-overlay-tile {
+  display: none !important;
+}
+
+.yotpo-widget-my-rewards-widget .yotpo-is-mobile .yotpo-loyalty-popup-overlay{
+  padding-top: 56px;
+}
+
+.yotpo-is-mobile .yotpo-widget-campaign-widget-close-icon{
+  top: 89px
+}
+
+.yotpo-widget-products-redemption .yotpo-close-button-mobile-modal{
+  top: 89px !important;
+  background: #008249;
+  padding: 10px 13px;
+}
+
+.evm-featured-collections-product .evm-wscontainer .evm-wiser-owl-carousel{
+  z-index: 0;
+}
+
+.yotpo-redemption-option-footer-mobile-modal{
+  position: relative !important;
+  border-top: 0 !important;
+}
+
+.yotpo .yotpo-bottomline .yotpo-icon-star,
+.yotpo .yotpo-bottomline .yotpo-icon-star, .yotpo .yotpo-bottomline .yotpo-icon-half-star, .yotpo .yotpo-bottomline .yotpo-icon-empty-star{
+  color: var(--gh-color-gold) !important;
+}
+
+.yotpo-display-wrapper .yotpo-bottomline a{
+  color: var(--gh-color-gray) !important;
+}
+
+/* dawn specific "fixes" */
+.product__info-container > .gh--modal{
+  margin: 0;
+}
+
+.gh-modal-open .shopify-section-group-header-group {
+    z-index: 0;
+}
+
+.gh-block--tips--recommended-use h5{
+  margin-top: 0;
+}
+
+.ghpdp--supplement-facts-table{
+  width: 100%;
+}
+.ghpdp--supplement-facts--caps{
+  margin-top: 0;
+}
+
+/* searchspring */
+@media (min-width: 769px){
+  .search-modal__form .ss__autocomplete--target{
+    top: 70px;
+  }
+}
+
+@media (min-width: 990px){
+  .search-modal__form {
+    max-width: 1300px;
+  }
+}
+
+.pagination{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pagination>.page:not(:last-child){
+    margin-right: 1rem;
+}
+
+.pagination>.page {
+    flex: 1 0 4.4rem;
+    max-width: 4.4rem;
+}
+
+.pagination a,
+.ss__pagination__page--current.current{
+    color: rgb(var(--color-foreground));
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 4.4rem;
+    width: 100%;
+    padding: 0;
+    text-decoration: none;
+    border-bottom: none;
+}
+
+.ss__pagination .next .icon, 
+.ss__pagination .prev .icon{
+  visibility: hidden;
+}
+
+.collection-search{
+  padding-bottom: 5rem;
+}
+
+.ss__pagination__page--current.current{
+  opacity: .4;
+}
