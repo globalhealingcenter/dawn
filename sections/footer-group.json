@@ -2,15 +2,6 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
-    "f972f3fc-7123-44ee-8f76-b6634e50772d": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<p class=\"align--center\"><img src=\"https:\/\/cdn.globalhealing.com\/web\/img\/publications\/bbb-award-2021.png?w=70\"><\/p>",
-        "color_scheme": "background-1",
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
-    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -84,7 +75,6 @@
     }
   },
   "order": [
-    "f972f3fc-7123-44ee-8f76-b6634e50772d",
     "footer",
     "f2b378ac-331e-49bc-b144-696adb524db9"
   ]
