@@ -125,6 +125,8 @@
 .ghd--block--curated [data-type="items"] > div{
   padding: 1rem 3rem;
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 .ghd--block--curated [data-type="items"] .image{
   display: block;
@@ -139,6 +141,9 @@
 .ghd--block--curated [data-type="items"] .tagline{
   font-family: var(--gh-font-secondary);
   margin: 0;
+}
+.ghd--block--curated [data-type="items"] .description{
+  flex: 1;
 }
 .ghd--block--curated [data-type="items"] .price{
   font-weight: bold;
