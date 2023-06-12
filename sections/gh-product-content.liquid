@@ -43,9 +43,9 @@
             </div>
             <div data-type="image">
               <picture>
-                <source media="(min-width: 650px)" srcset="{{ config.intro.image.desktop | default: '' }}">
-                <source media="(max-width: 649px)" srcset="{{ config.intro.image.mobile | default: '' }}">
-                <img src="{{ config.intro.image.desktop }}" alt="">
+                <source media="(min-width: 650px)" srcset="{{ config.intro.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile' }}">
+                <source media="(max-width: 649px)" srcset="{{ config.intro.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
+                <img src="{{ config.intro.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile' }}" alt="">
               </picture>
             </div>
           </div>
@@ -138,13 +138,13 @@
       <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>
         <div data-type="header">
           <h2 class="eyebrow">
-            {{ config.curated.title.main }}
+            {{ config.curated_collection.title.main }}
           </h2>
-          <h4>{{ config.curated.title.after }}</h4>
+          <h4>{{ config.curated_collection.title.after }}</h4>
         </div>
         <div data-type="items">
           {% for p in product.metafields.globalhealing.curated_collection.value %}
-            {% assign curated = config.curated.items[forloop.index0] %}
+            {% assign curated = config.curated_collection.items[forloop.index0] %}
             {% assign v = p.selected_or_first_available_variant %}
           <div>
             <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
