@@ -86,7 +86,7 @@
     font-weight: 700;
 }
 
-.ghd--block--ingredients--full-list summary {
+.ghd--block--ingredients [data-type=text] .ghd--block--ingredients--full-list summary{
     font-size: 14px;
     font-weight: bold;
 }
