@@ -191,11 +191,12 @@
 
     function setActiveImage(){
       if( !current_open ) return;
+      if( !current_open.getAttribute('data-ingredient-image') ) return;
       ingredients_img.src = current_open.getAttribute('data-ingredient-image')
     }
 
     ingredients_details.forEach( d => {
-      d.addEventListener('click', () => {
+      d.addEventListener('toggle', () => {
         if( d.open === true ){
           if( current_open ) current_open.open = false;
           setCurrentOpen();
