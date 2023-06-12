@@ -174,13 +174,28 @@
 
 <script>
   {
-    let ingredients_img = document.querySelector('.ghd--block--ingredients img');
+    let ingredients = document.querySelector('.ghd--block--ingredients');
+    let current_open = ingredients.querySelector('details[open]');
+    let ingredients_img = ingredients.querySelector('img');
+    let ingredients_details = ingredients.querySelectorAll('details');
+
+    function setCurrentOpen() {
+      current_open = ingredients.querySelector('details[open]');
+    }
 
     function setActiveImage(){
-      let opened = document.querySelector('.ghd--block--ingredients details[open]')
-      if( !opened ) return;
-      ingredients_img.src = opened.getAttribute('data-ingredient-image')
+      ingredients_img.src = current_open.getAttribute('data-ingredient-image')
     }
+
+    ingredients_details.forEach( d => {
+      d.addEventListener('toggle', () => {
+        if( d.open === true ){
+          current_open.open = false;
+          setCurrentOpen();
+          setActiveImage();
+        }
+      })
+    })
 
     setActiveImage();
   }
