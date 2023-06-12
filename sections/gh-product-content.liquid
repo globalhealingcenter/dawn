@@ -174,7 +174,6 @@
 
 <script>
   {
-    let ingredients = document.querySelectorAll('.ghd--block--ingredients .ghd--details details');
     let ingredients_img = document.querySelector('.ghd--block--ingredients img');
 
     function setActiveImage(){
@@ -183,7 +182,6 @@
       ingredients_img.src = opened.getAttribute('data-ingredient-image')
     }
 
-    if( ingredients[0] ) ingredients[0].open = true;
     setActiveImage();
   }
 </script>
