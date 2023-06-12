@@ -54,7 +54,7 @@
         <div class="ghd--block--benefits ghd--block" {{ block.shopify_attributes }}>
           <div data-type="cols">
             <div data-type="image">
-              <img src="{{ config.benefits.image.desktop }}?w=500" alt="">
+              <img src="{{ config.benefits.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="">
             </div>
             <div data-type="text">
               <div class="mw">
@@ -81,7 +81,7 @@
               <span>{{ config.ingredients.title.before | default: 'Made With' }}</span>
               {{ config.ingredients.title.main | default: 'Clean, Pure, Premium Ingredients' }}
             </h2>
-            <h4>{{ config.ingredients.title.after | default: '100% Vegan | Gluten-free | No Additives, Fillers, or Preservatives' }}</h4>
+            <h4>{{ config.ingredients.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h4>
           </div>
           <div data-type="cols">
             <div data-type="text">
@@ -96,7 +96,7 @@
             </div>
             <div data-type="image">
               <!-- @todo: need to make this dynamic! -->
-              <img src="https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/prebiotic-blend.png?w=500" alt="">
+              <img src="" alt="">
             </div>
           </div>
         </div>
@@ -171,6 +171,22 @@
   </div>
 </section>
 {% endif %}
+
+<script>
+  {
+    function setActiveImage(){
+      let opened = ingredients.filter( i => i.open === true );
+      if( !opened.length ) return;
+      ingredients_img.src = opened.getAttribute('data-ingredient-image')
+    }
+
+    let ingredients = document.querySelectorAll('.ghd--block--ingredients .ghd--details');
+    let ingredients_img = document.querySelector('.ghd--block--ingredients img');
+
+    if( ingredients[0] ) ingredients[0].open = true;
+    setActiveImage();
+  }
+</script>
 
 {% schema %}
 {
