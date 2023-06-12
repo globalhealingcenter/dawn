@@ -189,7 +189,7 @@
     }
 
     ingredients_details.forEach( d => {
-      d.addEventListener('toggle', () => {
+      d.addEventListener('click', () => {
         if( d.open === true ){
           if( current_open ) current_open.open = false;
           setCurrentOpen();
