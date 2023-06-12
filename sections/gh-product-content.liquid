@@ -184,6 +184,7 @@
     }
 
     function setActiveImage(){
+      if( !current_open ) return;
       ingredients_img.src = current_open.getAttribute('data-ingredient-image')
     }
 
