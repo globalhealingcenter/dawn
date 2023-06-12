@@ -64,7 +64,7 @@
                 </h2>
                 <div class="ghd--details">
                   {% for detail in config.benefits.items %}
-                  <details>
+                  <details {% if forloop.first %}open{% endif %}>
                     <summary>{{ detail.title }}</summary>
                     {{ detail.content }}
                   </details>
@@ -87,7 +87,7 @@
             <div data-type="text">
               <div class="ghd--details">
                 {% for detail in config.ingredients.items %}
-                  <details data-ingredient-image='{{ detail.image }}'>
+                  <details data-ingredient-image='{{ detail.image }}' {% if forloop.first %}open{% endif %}>
                     <summary>{{ detail.title }}</summary>
                     {{ detail.content }}
                   </details>
