@@ -69,11 +69,6 @@
                     {{ detail.content }}
                   </details>
                   {% endfor %}
-
-                  <details>
-                    <summary>See Full Ingredient List</summary>
-                    <img src='{{ config.supplement_facts }}' alt='supplement facts'>
-                  </details>
                 </div>
               </div>
             </div>
@@ -97,10 +92,16 @@
                     {{ detail.content }}
                   </details>
                 {% endfor %}
+
+                {% if config.supplement_facts %}
+                  <details>
+                    <summary>See Full Ingredient List</summary>
+                    <img src='{{ config.supplement_facts }}' alt='supplement facts'>
+                  </details>
+                {% endif %}
               </div>
             </div>
             <div data-type="image">
-              <!-- @todo: need to make this dynamic! -->
               <img src="" alt="">
             </div>
           </div>
