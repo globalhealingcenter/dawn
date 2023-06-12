@@ -35,7 +35,7 @@
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>{{ config.intro.title.before }}</span>
+                  <span>{{ config.intro.title.before | default: 'Uniquely Made' }}</span>
                   {{ config.intro.title.main }}
                 </h2>
                 {{ config.intro.content }}
@@ -43,8 +43,8 @@
             </div>
             <div data-type="image">
               <picture>
-                <source media="(min-width: 650px)" srcset="{{ config.intro.image.desktop }}">
-                <source media="(max-width: 649px)" srcset="{{ config.intro.image.mobile }}">
+                <source media="(min-width: 650px)" srcset="{{ config.intro.image.desktop | default: '' }}">
+                <source media="(max-width: 649px)" srcset="{{ config.intro.image.mobile | default: '' }}">
                 <img src="{{ config.intro.image.desktop }}" alt="">
               </picture>
             </div>
@@ -59,7 +59,7 @@
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>{{ config.benefits.title.before }}</span>
+                  <span>{{ config.benefits.title.before | default: 'The Benefits' }}</span>
                   {{ config.benefits.title.main }}
                 </h2>
                 <div class="ghd--details">
@@ -78,10 +78,10 @@
         <div class="ghd--block--ingredients ghd--block" {{ block.shopify_attributes }}>
           <div data-type="header">
             <h2 class="eyebrow">
-              <span>{{ config.ingredients.title.before }}</span>
-              {{ config.ingredients.title.main }}
+              <span>{{ config.ingredients.title.before | default: 'Made With' }}</span>
+              {{ config.ingredients.title.main | default: 'Clean, Pure, Premium Ingredients' }}
             </h2>
-            <h4>{{ config.ingredients.title.after }}</h4>
+            <h4>{{ config.ingredients.title.after | default: '100% Vegan | Gluten-free | No Additives, Fillers, or Preservatives' }}</h4>
           </div>
           <div data-type="cols">
             <div data-type="text">
@@ -106,7 +106,7 @@
           <div data-type="text">
             <div class="mw">
               <h2 class="eyebrow">
-                <span>{{ config.impact.title.before }}</span>
+                <span>{{ config.impact.title.before | default: 'The Impact' }}</span>
                 {{ config.impact.title.main }}
               </h2>
               <h4>{{ config.impact.title.after }}</h4>
