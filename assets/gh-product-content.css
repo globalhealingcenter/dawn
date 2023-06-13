@@ -146,6 +146,7 @@
 .ghd--block--curated [data-type="items"] .tagline{
   font-family: var(--gh-font-secondary);
   margin: 0;
+  line-height: 1.4;
 }
 .ghd--block--curated [data-type="items"] .description{
   flex: 1;
