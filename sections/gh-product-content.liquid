@@ -99,8 +99,13 @@
 
               <div class="ghd--accordion">
                 {% for detail in config.ingredients.items %}
-                <div data-ingredient-image='{{ detail.image }}'>
-                  <input type="radio" name="{{ block.id }}-ingredients" id="{{ block.id }}-ingredients-{{ forloop.index }}" {% if forloop.first %}checked{% endif %} hidden />
+                <div>
+                  <input type="radio"
+                         data-ingredient-image='{{ detail.image }}'
+                         name="{{ block.id }}-ingredients"
+                         id="{{ block.id }}-ingredients-{{ forloop.index }}"
+                         {% if forloop.first %}checked{% endif %}
+                  hidden />
                   <label for="{{ block.id }}-ingredients-{{ forloop.index }}">{{ detail.title }}</label>
                   <div>{{ detail.content }}</div>
                 </div>
@@ -147,7 +152,7 @@
           {% for detail in config.faqs.items %}
             <details>
               <summary>{{ detail.title }}</summary>
-              {{ detail.content }}
+              "{{ detail.content }}"
             </details>
           {% endfor %}
         </div>
@@ -192,20 +197,25 @@
 
 <script>
   {
-    let current_open;
     let ingredients = document.querySelector('.ghd--block--ingredients');
     let ingredients_img = ingredients.querySelector('[data-type="image"] img');
-    let ingredients_details = ingredients.querySelectorAll('details');
-
-    function setCurrentOpen() {
-      current_open = ingredients.querySelector('details[open]');
-    }
+    let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
 
     function setActiveImage(){
-      if( !current_open ) return;
-      if( !current_open.getAttribute('data-ingredient-image') ) return;
-      ingredients_img.src = current_open.getAttribute('data-ingredient-image')
+      ingredients_inputs.forEach( i => {
+        if(!i.checked) return;
+        ingredients_img.src = i.getAttribute('data-ingredient-image')
+      })
     }
+
+    ingredients_inputs.forEach( i => {
+      i.addEventListener('change', e => {
+        if( !i.checked ) return;
+        setActiveImage()
+      })
+    })
+
+    setActiveImage();
 
     /*
     ingredients_details.forEach( d => {
