@@ -237,16 +237,12 @@ h2.eyebrow + h4{
 .ghd--accordion > div {
     display: block;
     position: relative;
-    padding: 0 0 0 0;
+    padding: 0 10px;
     color: black;
     border-bottom: 1px solid var(--gh-color-gray);;
 }
 .ghd--accordion > div:first-child {
-    border-top: 1px solid var(--gh-color-gray);;
-    padding-top: 12px;
-}
-.ghd--accordion > div:not(:last-of-type) {
-    margin: 0 0 10px;
+    border-top: 1px solid var(--gh-color-gray);
 }
 .ghd--accordion > div input + label {
     font-family: var(--gh-font-secondary);
@@ -258,10 +254,14 @@ h2.eyebrow + h4{
     color: black;
 }
 .ghd--accordion > div input ~ div {
+    overflow: hidden;
     visibility: hidden;
     max-height: 0;
     opacity: 0;
     transition: all 0.5s ease-in-out 0.2s, opacity 0.25s ease-in-out 0.25s, padding 0s ease-in-out 0s;
+}
+.ghd--accordion > div input ~ div p:first-child{
+    margin-top: 0;
 }
 .ghd--accordion > div input:checked + label {
     color: var(--gh-color-green);
