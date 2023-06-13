@@ -237,7 +237,7 @@ h2.eyebrow + h4{
 .ghd--accordion > div {
     display: block;
     position: relative;
-    padding: 0 10px;
+    padding: 5px 10px;
     color: black;
     border-bottom: 1px solid var(--gh-color-gray);;
 }
