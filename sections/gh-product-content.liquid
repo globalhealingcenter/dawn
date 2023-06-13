@@ -132,7 +132,7 @@
       </div>
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
-        <h2 class="eyebrow">{{ config.faqs.title.main }}</h2>
+        <h2 class="eyebrow">{{ config.faqs.title.main | default: 'Frequently Asked Questions' }}</h2>
         <div class="ghd--details mw">
           {% for detail in config.faqs.items %}
             <details>
@@ -146,7 +146,7 @@
       <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>
         <div data-type="header">
           <h2 class="eyebrow">
-            {{ config.curated_collection.title.main }}
+            {{ config.curated_collection.title.main | default: 'Curate Your Collection' }}
           </h2>
           <h4>{{ config.curated_collection.title.after }}</h4>
         </div>
