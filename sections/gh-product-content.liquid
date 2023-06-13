@@ -85,14 +85,18 @@
           </div>
           <div data-type="cols">
             <div data-type="text">
-              <div class="ghd--details">
-                {% for detail in config.ingredients.items %}
-                  <details data-ingredient-image='{{ detail.image }}' {% if forloop.first %}open{% endif %}>
-                    <summary>{{ detail.title }}</summary>
-                    {{ detail.content }}
-                  </details>
-                {% endfor %}
 
+              <div class="ghd--accordion">
+                {% for detail in config.ingredients.items %}
+                <div data-ingredient-image='{{ detail.image }}' {% if forloop.first %}class='active'{% endif %}>
+                  <input type="radio" name="item" id="{{ block.id }}-item-{{ forloop.index }}" checked hidden />
+                  <label for="{{ block.id }}-item-{{ forloop.index }}">{{ detail.title }}</label>
+                  <div>{{ detail.content }}</div>
+                </div>
+                {% endfor %}
+              </div>
+
+              <div class="ghd--details">
                 {% if config.supplement_facts %}
                   <details class='ghd--block--ingredients--full-list'>
                     <summary>See Full Ingredient List</summary>
