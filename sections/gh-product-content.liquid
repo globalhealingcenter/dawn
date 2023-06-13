@@ -88,21 +88,18 @@
 
               <div class="ghd--accordion">
                 {% for detail in config.ingredients.items %}
-                <div data-ingredient-image='{{ detail.image }}' {% if forloop.first %}class='active'{% endif %}>
-                  <input type="radio" name="item" id="{{ block.id }}-item-{{ forloop.index }}" checked hidden />
+                <div data-ingredient-image='{{ detail.image }}'>
+                  <input type="radio" name="item" id="{{ block.id }}-item-{{ forloop.index }}" {% if forloop.first %}checked{% endif %} hidden />
                   <label for="{{ block.id }}-item-{{ forloop.index }}">{{ detail.title }}</label>
                   <div>{{ detail.content }}</div>
                 </div>
                 {% endfor %}
-              </div>
 
-              <div class="ghd--details">
-                {% if config.supplement_facts %}
-                  <details class='ghd--block--ingredients--full-list'>
-                    <summary>See Full Ingredient List</summary>
-                    <img src='{{ config.supplement_facts }}' alt='supplement facts!'>
-                  </details>
-                {% endif %}
+                <div>
+                  <input type="radio" name="item" id="{{ block.id }}-item-full-ingredients" hidden />
+                  <label for="{{ block.id }}-item-full-ingredients">See Full Ingredient List</label>
+                  <img src='{{ config.supplement_facts }}' alt='supplement facts!'>
+                </div>
               </div>
             </div>
             <div data-type="image">
@@ -199,6 +196,7 @@
       ingredients_img.src = current_open.getAttribute('data-ingredient-image')
     }
 
+    /*
     ingredients_details.forEach( d => {
       d.addEventListener('toggle', () => {
         if( d.open === true ){
@@ -211,6 +209,7 @@
 
     setCurrentOpen();
     setActiveImage();
+    */
   }
 </script>
 
