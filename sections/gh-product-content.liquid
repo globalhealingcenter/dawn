@@ -62,6 +62,15 @@
                   <span>{{ config.benefits.title.before | default: 'The Benefits' }}</span>
                   {{ config.benefits.title.main }}
                 </h2>
+                <div class="ghd--details">
+                  {% for detail in config.benefits.items %}
+                    <details {% if forloop.first %}open{% endif %}>
+                      <summary>{{ detail.title }}</summary>
+                      {{ detail.content }}
+                    </details>
+                  {% endfor %}
+                </div>
+                {% comment %}
                 <div class="ghd--accordion">
                   {% for detail in config.benefits.items %}
                     <div>
@@ -71,6 +80,7 @@
                     </div>
                   {% endfor %}
                 </div>
+                {% endcomment %}
               </div>
             </div>
           </div>
