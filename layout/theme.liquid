@@ -238,8 +238,9 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-  {{ 'wisernewlive.css' | asset_url | stylesheet_tag }}
+    {{ 'wisernewlive.css' | asset_url | stylesheet_tag }}
     {{ 'wisercustom.css' | asset_url | stylesheet_tag }}
+    
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
@@ -324,26 +325,5 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
-    <script>
-      function wiseraddtocart() {
-        setTimeout(function () {
-            $.getJSON('/cart.js', function(cart) {
-            var ws_item_count = cart.item_count
-            $(".cart-count-bubble").remove();
-            $("#cart-icon-bubble").append('<div class="cart-count-bubble"><span aria-hidden="true">'+ws_item_count+'</span><span class="visually-hidden">'+ws_item_count+' item</span></div>');
-            $("body .header__icons #cart-icon-bubble")[0].click();
-            });
-        }, 1000);
-        $(document).click(function(e){
-          if($(e.target).closest('.drawer__inner').length != 0) return false;
-            $(".drawer__close").trigger('click');    
-        });  
-        $(".drawer").load(location.href + " .drawer>*", "");
-        setTimeout(function() {
-              $(".drawer").addClass("active");
-              $(".drawer").removeClass("is-empty");
-        },1000);  
-      }
-      </script>     
   </body>
 </html>
