@@ -161,56 +161,12 @@ img {
 }
 
 /* searchspring */
-@media (min-width: 769px){
-  .search-modal__form .ss__autocomplete--target{
-    top: 70px;
-  }
-}
 
 @media (min-width: 990px){
   .search-modal__form {
-    max-width: 1300px;
+    /*max-width: 1300px;*/
   }
 }
-/*
-.pagination{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.pagination>.page:not(:last-child){
-    margin-right: 1rem;
-}
-
-.pagination>.page {
-    flex: 1 0 4.4rem;
-    max-width: 4.4rem;
-}
-
-.pagination a,
-*/
-.ss__pagination__page--current.current{
-    color: rgb(var(--color-foreground));
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 4.4rem;
-    width: 100%;
-    padding: 0;
-    text-decoration: none;
-    border-bottom: none;
-}
-
-.ss__pagination .next .icon, 
-.ss__pagination .prev .icon{
-  visibility: hidden;
-}
-
 .collection-search{
   padding-bottom: 5rem;
-}
-
-.ss__pagination__page--current.current{
-  opacity: .4;
 }
