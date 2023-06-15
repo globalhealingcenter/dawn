@@ -208,6 +208,7 @@ h2.eyebrow + h4{
     font-family: var(--gh-font-secondary);
     font-size: 2rem;
     padding-right: 1em;
+    position: relative;
 }
 
 .ghd--details details summary:after {
@@ -323,15 +324,15 @@ h2.eyebrow + h4{
     }
 
     .ghd--block--curated{
-        padding-top: 4rem;
-        padding-bottom: 4rem;
+        padding: 4rem 0;
     }
     .ghd--block--curated .items-container{
         overflow-y: scroll;
     }
     .ghd--block--curated [data-type="items"] > div{
-        max-width: initial;
+        max-width: 100%;
         padding: 1rem 1.5rem;
+        width: 100%;
     }
     .ghd--block--curated [data-type="items"][data-item-count="2"]{
         width: 200%
