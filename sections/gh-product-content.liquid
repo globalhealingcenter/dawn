@@ -179,6 +179,7 @@
         </div>
       </div>
       {% when 'miron' %}
+      {% if product.tags contains "miron" %}
       <div class="ghd--block--miron ghd--block" {{ block.shopify_attributes }}>
         <div data-type="cols">
           <div data-type="text">
@@ -193,6 +194,7 @@
           </div>
         </div>
       </div>
+      {% endif %}
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
         <h2 class="eyebrow">{{ config.faqs.title.main | default: 'Frequently Asked Questions' }}</h2>
