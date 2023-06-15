@@ -128,14 +128,16 @@
   padding-bottom: 2rem;
 }
 .ghd--block--curated [data-type="items"]{
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    max-width: 900px;
 }
 .ghd--block--curated [data-type="items"] > div{
-  padding: 1rem 3rem;
-  max-width: 300px;
-  display: flex;
-  flex-direction: column;
+    padding: 1rem 3rem;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    flex: 1;
 }
 .ghd--block--curated [data-type="items"] .image{
   display: block;
