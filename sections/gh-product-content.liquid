@@ -89,6 +89,32 @@
             </div>
           </div>
         </div>
+      {% when 'how_it_works' %}
+        {% if config.how_it_works.title %}
+        <div class="ghd--block--benefits ghd--block" {{ block.shopify_attributes }}>
+          <div data-type="cols">
+            <div data-type="text">
+              <div class="mw">
+                <h2 class="eyebrow">
+                  <span>{{ config.how_it_works.title.before | default: 'The Benefits' }}</span>
+                  {{ config.how_it_works.title.main }}
+                </h2>
+                <div class="ghd--details">
+                  {% for detail in config.how_it_works.items %}
+                    <details {% if forloop.first %}open{% endif %}>
+                      <summary>{{ detail.title }}</summary>
+                      {{ detail.content }}
+                    </details>
+                  {% endfor %}3282 1930
+                </div>
+              </div>
+            </div>
+            <div data-type="image">
+              <img src="{{ config.how_it_works.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading='lazy'>
+            </div>
+          </div>
+        </div>
+        {% endif %}
       {% when 'ingredients' %}
         <div class="ghd--block--ingredients ghd--block" {{ block.shopify_attributes }}>
           <div data-type="header">
