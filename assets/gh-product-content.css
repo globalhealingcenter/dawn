@@ -1,3 +1,7 @@
+.ghd--product-container{
+    --mobile-gutters: 2rem;
+}
+
 .ghd--block--intro{
     background: #fff;
     box-shadow: 0px 0px 19px #00000050;
@@ -286,9 +290,13 @@ h2.eyebrow + h4{
 @media (max-width: 700px){
     h2.eyebrow {
         font-size: 3rem;
+
     }
     h2.eyebrow+h4{
         font-size: 1.8rem;
+    }
+    .ghd--block [data-type="header"]{
+        text-align: left;
     }
     .ghd--block [data-type="cols"]{
         flex-wrap: wrap;
@@ -300,5 +308,12 @@ h2.eyebrow + h4{
     .ghd--block [data-type="text"]{
         padding-top: 2rem;
         order: 2;
+    }
+
+    /* for the mobile gutters */
+    .ghd--block [data-type="text"],
+    .ghd--block [data-type="header"]{
+        padding-left: var(--mobile-gutters);
+        padding-right: var(--mobile-gutters);
     }
 }

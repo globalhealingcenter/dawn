@@ -133,7 +133,7 @@
                 {{ config.impact.title.main }}
               </h2>
               <h4>{{ config.impact.title.after }}</h4>
-              {{ config.impact.content }}
+              "{{ config.impact.content }}"
             </div>
           </div>
           <div data-type="image">
@@ -152,7 +152,7 @@
           {% for detail in config.faqs.items %}
             <details>
               <summary>{{ detail.title }}</summary>
-              "{{ detail.content }}"
+              {{ detail.content }}
             </details>
           {% endfor %}
         </div>
