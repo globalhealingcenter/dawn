@@ -96,7 +96,7 @@
               <div class="mw">
                 <h2 class="eyebrow">
                   <span>{{ config.how_it_works.title.before | default: product.title }}</span>
-                  {{ config.how_it_works.title.main }}
+                  {{ config.how_it_works.title.main |  default: 'How It Works' }}
                 </h2>
                 <div class="ghd--details">
                   {% for detail in config.how_it_works.items %}
