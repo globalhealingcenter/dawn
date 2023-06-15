@@ -64,10 +64,14 @@
                 </h2>
                 <div class="ghd--details">
                   {% for detail in config.benefits.items %}
+                    {% if detail.content %}
                     <details {% if forloop.first %}open{% endif %}>
                       <summary>{{ detail.title }}</summary>
                       {{ detail.content }}
                     </details>
+                    {% else %}
+                    <span>{{ detail.title }}</span>
+                    {% endif %}
                   {% endfor %}
                 </div>
                 {% comment %}

@@ -218,6 +218,10 @@ h2.eyebrow + h4{
     margin-top: 0;
 }
 
+
+/*
+    Details
+ */
 .ghd--details details{
     border-bottom: 1px solid var(--gh-color-gray);
     padding: 1rem 1rem;
@@ -225,7 +229,8 @@ h2.eyebrow + h4{
 .ghd--details details:first-child{
     border-top: 1px solid var(--gh-color-gray);
 }
-.ghd--details details summary{
+.ghd--details details summary,
+.ghd--details > span{
     font-family: var(--gh-font-secondary);
     font-size: 2rem;
     padding-right: 1em;
@@ -241,7 +246,8 @@ h2.eyebrow + h4{
     line-height: 1;
 }
 
-.ghd--details details[open] summary{
+.ghd--details details[open] summary,
+.ghd--details > span{
     color: var(--gh-color-green);
     font-weight: 700;
 }
