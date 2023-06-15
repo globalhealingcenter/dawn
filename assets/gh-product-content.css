@@ -131,6 +131,7 @@
     display: flex;
     justify-content: center;
     max-width: 900px;
+    margin: 0 auto;
 }
 .ghd--block--curated [data-type="items"] > div{
     padding: 1rem 3rem;
@@ -351,6 +352,9 @@ h2.eyebrow + h4{
     }
     .ghd--block--curated [data-type="items"]{
         justify-content: start;
+    }
+    .ghd--block--curated [data-type="items"][data-item-count="1"]{
+        justify-content: center;
     }
     .ghd--block--curated [data-type="items"] > div{
         max-width: calc(100vw - 60px);
