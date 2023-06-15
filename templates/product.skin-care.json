@@ -19,10 +19,10 @@
           "settings": {
             "tab_1_title": "About",
             "tab_1_content": "",
-            "tab_2_title": "Who It's For",
-            "tab_2_content": "<p>{{ product.metafields.custom.who_its_for | metafield_tag }}<\/p>",
-            "tab_3_title": "Suggested Use",
-            "tab_3_content": "<p>{{ product.metafields.globalhealing.suggested_use | metafield_tag }}<\/p>"
+            "tab_2_title": "Suitable For",
+            "tab_2_content": "{{ product.metafields.custom.who_its_for | metafield_tag }}",
+            "tab_3_title": "How to Use",
+            "tab_3_content": "{{ product.metafields.globalhealing.suggested_use | metafield_tag }}"
           }
         },
         "price": {
