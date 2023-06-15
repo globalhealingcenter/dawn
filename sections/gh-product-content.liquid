@@ -151,6 +151,7 @@
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
         <h2 class="eyebrow">{{ config.faqs.title.main | default: 'Frequently Asked Questions' }}</h2>
+        <input type='radio' name='view-more' id='{{ block.id }}-view-more' hidden>
         <div class="ghd--details mw">
           {% for detail in config.faqs.items %}
             <details>
@@ -158,6 +159,9 @@
               {{ detail.content }}
             </details>
           {% endfor %}
+          {% if config.faqs.items.size > 5 %}
+            <label for='{{ block.id }}-view-more'>View More</label>
+          {% endif %}
         </div>
       </div>
       {% when 'curated' %}
