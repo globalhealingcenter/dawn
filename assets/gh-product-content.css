@@ -286,8 +286,16 @@ h2.eyebrow + h4{
 /*
     END Accordion
 */
-
+@media (min-width: 701px){
+    .ghd--hide-desktop{
+        display: none;
+    }
+}
 @media (max-width: 700px){
+    .ghd--hide-mobile{
+        display: none;
+    }
+
     h2.eyebrow {
         font-size: 3rem;
 
