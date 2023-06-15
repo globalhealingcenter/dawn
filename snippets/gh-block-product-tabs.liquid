@@ -20,6 +20,7 @@
   
   all_links.forEach( t => {
     t.addEventListener('click', e => {
+      e.preventDefault();
       all_links.forEach( c => c.classList.remove('active') );
       all_tabs.forEach( c => c.classList.remove('active') );
       let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
