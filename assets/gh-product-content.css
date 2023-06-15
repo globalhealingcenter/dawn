@@ -159,6 +159,15 @@
   border-width: 1px 0;
   padding: 0.25em 0;
 }
+@media (max-width: 600px){
+    .ghd--block--curated [data-type="items"]{
+        flex-wrap: wrap;
+    }
+    .ghd--block--curated [data-type="items"] > div{
+        max-width: initial;
+        padding: 1rem 1.5rem;
+    }
+}
 
 
 .ghd--block--faq{
