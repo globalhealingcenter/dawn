@@ -163,15 +163,7 @@
   border-width: 1px 0;
   padding: 0.25em 0;
 }
-@media (max-width: 600px){
-    .ghd--block--curated [data-type="items"]{
-        flex-wrap: wrap;
-    }
-    .ghd--block--curated [data-type="items"] > div{
-        max-width: initial;
-        padding: 1rem 1.5rem;
-    }
-}
+
 
 
 .ghd--block--faq{
@@ -334,9 +326,12 @@ h2.eyebrow + h4{
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
-
     .ghd--block--curated .items-container{
         overflow-y: scroll;
+    }
+    .ghd--block--curated [data-type="items"] > div{
+        max-width: initial;
+        padding: 1rem 1.5rem;
     }
     .ghd--block--curated [data-type="items"][data-item-count="2"]{
         width: 200%
