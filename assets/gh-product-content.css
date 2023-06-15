@@ -175,13 +175,22 @@
     background: #fff;
     padding: 8rem 1rem 12rem 1rem;
 }
+.ghd--block--miron .mw{
+    max-width: 650px;
+}
+.ghd--block--miron h2{
+    font-size: 7rem;
+    color: #000;
+    margin-bottom: 0;
+    margin-top: 0;
+}
 .ghd--block--miron [data-type="cols"]{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .ghd--block--miron [data-type="image"]{
-    text-align: center;
+    text-align: right;
     width: 40%;
     max-width: 600px;
 }
@@ -379,6 +388,10 @@ h2.eyebrow + h4{
     .ghd--block [data-type="header"]{
         padding-left: var(--mobile-gutters);
         padding-right: var(--mobile-gutters);
+    }
+
+    .ghd--block--miron h2{
+        font-size: 5rem;
     }
 
     .ghd--block--curated{
