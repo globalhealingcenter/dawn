@@ -178,10 +178,15 @@
     margin: 0 auto;
 }
 
+.ghd--block--faq .ghd--details > details:nth-child(n+5){
+    display: none;
+}
 .ghd--block--faq [name='view-more']:checked + .ghd--details label{
     display: none;
 }
-
+.ghd--block--faq [name='view-more']:checked + .ghd--details > details:nth-child(n+5){
+    display: block;
+}
 
  h2.eyebrow{
     font-size: 5rem;
