@@ -334,4 +334,14 @@ h2.eyebrow + h4{
         padding-top: 4rem;
         padding-bottom: 4rem;
     }
+
+    .ghd--block--curated .items-container{
+        overflow-y: scroll;
+    }
+    .ghd--block--curated [data-type="items"][data-item-count="2"]{
+        width: 200%
+    }
+    .ghd--block--curated [data-type="items"][data-item-count="3"]{
+        width: 300%;
+    }
 }
