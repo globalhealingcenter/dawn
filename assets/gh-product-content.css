@@ -329,15 +329,17 @@ h2.eyebrow + h4{
     .ghd--block--curated .items-container{
         overflow-y: scroll;
     }
+    .ghd--block--curated [data-type="items"]{
+        justify-content: start;
+    }
     .ghd--block--curated [data-type="items"] > div{
-        max-width: 100%;
+        max-width: calc(100vw - 60px);
         padding: 1rem 1.5rem;
-        width: 100%;
     }
     .ghd--block--curated [data-type="items"][data-item-count="2"]{
-        width: 200%
+        width: calc( 200vw - 120px);
     }
     .ghd--block--curated [data-type="items"][data-item-count="3"]{
-        width: 300%;
+        width: calc( 300vw - 180px);
     }
 }
