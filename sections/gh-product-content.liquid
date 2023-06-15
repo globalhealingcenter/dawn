@@ -176,6 +176,21 @@
           </div>
         </div>
       </div>
+      {% when 'miron' %}
+      <div class="ghd--block--miron ghd--block" {{ block.shopify_attributes }}>
+        <div data-type="cols">
+          <div data-type="text">
+            <div class="mw">
+              <h2>Preserving the Essence of Natural Ingredients</h2>
+              <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
+              <p><a href='https://vimeo.com/405459325'>Watch the Video</a></p>
+            </div>
+          </div>
+          <div data-type="image">
+            <img src='https://cdn.globalhealing.com/products/pages/all/v2/miron-bottle.png' alt='' loading='lazy'>
+          </div>
+        </div>
+      </div>
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
         <h2 class="eyebrow">{{ config.faqs.title.main | default: 'Frequently Asked Questions' }}</h2>
