@@ -215,11 +215,16 @@ h2.eyebrow + h4{
 .ghd--details details summary{
     font-family: var(--gh-font-secondary);
     font-size: 2rem;
+    padding-right: 1em;
 }
 
 .ghd--details details summary:after {
     content: "+";
-    float: right;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -0.5em;
+    line-height: 1;
 }
 
 .ghd--details details[open] summary{
@@ -280,7 +285,7 @@ h2.eyebrow + h4{
     display: block;
     opacity: 1;
     visibility: visible;
-    max-height: 500px;
+    max-height: 900px;
     transition: all 0.5s ease-in-out 0.2s, opacity 0.25s ease-in-out 0.5s, padding 0s ease-in-out 0s;
 }
 /*
@@ -323,5 +328,10 @@ h2.eyebrow + h4{
     .ghd--block [data-type="header"]{
         padding-left: var(--mobile-gutters);
         padding-right: var(--mobile-gutters);
+    }
+
+    .ghd--block--curated{
+        padding-top: 4rem;
+        padding-bottom: 4rem;
     }
 }

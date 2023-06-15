@@ -136,7 +136,7 @@
                 {{ config.impact.title.main }}
               </h2>
               <h4>{{ config.impact.title.after }}</h4>
-              "{{ config.impact.content }}"
+              {{ config.impact.content }}
             </div>
           </div>
           <div data-type="image">
@@ -168,26 +168,28 @@
           </h2>
           <h4>{{ config.curated_collection.title.after }}</h4>
         </div>
-        <div data-type="items">
-          {% for p in product.metafields.globalhealing.curated_collection.value %}
-            {% assign curated = config.curated_collection.items[forloop.index0] %}
-            {% assign v = p.selected_or_first_available_variant %}
-          <div>
-            <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
-            <h4 class="title">{{ p.title }}</h4>
-            <p class="tagline">{{ curated.tagline }}</p>
-            <div class="description">{{ curated.content }}</div>
-            <p class="price">{{ v.price | money }}</p>
+        <div class='items-container'>
+          <div data-type="items">
+            {% for p in product.metafields.globalhealing.curated_collection.value %}
+              {% assign curated = config.curated_collection.items[forloop.index0] %}
+              {% assign v = p.selected_or_first_available_variant %}
+            <div>
+              <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
+              <h4 class="title">{{ p.title }}</h4>
+              <p class="tagline">{{ curated.tagline }}</p>
+              <div class="description">{{ curated.content }}</div>
+              <p class="price">{{ v.price | money }}</p>
 
-            {%- assign product_form_id = 'product-form-' | append: v.id | append: block.id -%}
-            {%- render 'buy-buttons',
-                block: block,
-                product: p,
-                product_form_id: product_form_id,
-                section_id: section.id
-              -%}
+              {%- assign product_form_id = 'product-form-' | append: v.id | append: block.id -%}
+              {%- render 'buy-buttons',
+                  block: block,
+                  product: p,
+                  product_form_id: product_form_id,
+                  section_id: section.id
+                -%}
+            </div>
+            {% endfor %}
           </div>
-          {% endfor %}
         </div>
       </div>
     {% endcase %}
