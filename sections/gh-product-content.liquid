@@ -159,10 +159,10 @@
               {{ detail.content }}
             </details>
           {% endfor %}
-          {% if config.faqs.items.size > 5 %}
-            <label for='{{ block.id }}-view-more'>View More</label>
-          {% endif %}
         </div>
+        {% if config.faqs.items.size > 5 %}
+          <label for='{{ block.id }}-view-more'>View More</label>
+        {% endif %}
       </div>
       {% when 'curated' %}
       <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>

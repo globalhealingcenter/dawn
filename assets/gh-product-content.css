@@ -177,21 +177,20 @@
     max-width: 1000px;
     margin: 0 auto;
 }
-.ghd--block--faq .ghd--details label{
+.ghd--block--faq label{
     font-weight: bold;
-    border-top: 1px solid var(--gh-color-gray);
     border-bottom: 1px solid var(--gh-color-gray);
     display: block;
     padding: 1rem 1rem;
 }
-.ghd--block--faq .ghd--details label:after{
+.ghd--block--faq label:after{
     content: "+";
     float: right;
 }
 .ghd--block--faq .ghd--details > details:nth-child(n+6){
     display: none;
 }
-.ghd--block--faq [name='view-more']:checked + .ghd--details label{
+.ghd--block--faq [name='view-more']:checked + .ghd--details + label{
     display: none;
 }
 .ghd--block--faq [name='view-more']:checked + .ghd--details > details:nth-child(n+6){
