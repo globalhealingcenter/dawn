@@ -1,0 +1,52 @@
+<meta name="referrer" content="no-referrer-when-downgrade"/>
+
+
+<script name="littledata-tracking-tag" data-ot-ignore>
+  (function(){
+    /* Data layer for Google Analytics by Littledata app */
+    /* Version v11.0.1 */
+
+    LittledataLayer = {
+      "version":"v11.0.1",
+      "transactionWatcherURL":"https://transactions.littledata.io",
+      "referralExclusion":"/(paypal|visa|MasterCard|clicksafe|arcot\\.com|geschuetzteinkaufen|checkout\\.shopify\\.com|checkout\\.rechargeapps\\.com|portal\\.afterpay\\.com|payfort)/",
+      "googleSignals":true,
+      "anonymizeIp":true,
+      "productClicks":true,
+      "persistentUserId":true,
+      "hideBranding":false,
+      "ecommerce":{"currencyCode":"{{shop.currency}}",
+        "impressions":[]},
+      "pageType":"{{request.page_type}}",
+      "measurementId":"G-3MTGW9HKRC",
+      "segmentUserId":"shopifyCustomerId",
+      "segmentUserIdUpdatedAt":"2021-05-26T20:32:37.757Z",
+      "addRevenueToOrderCompleted":false,
+      "webPropertyId":"UA-207602-21",
+      "uniqueIdentifierForOrders":"orderName",
+      "cookieUpdate":true,
+      "googleAnalytics4":{"disabledEvents":[]}
+    }
+
+      {%if customer %}
+    LittledataLayer.customer = {
+      id: '{{customer.id | json}}',
+      email: {{customer.email | json}},
+      firstName: {{customer.first_name | json}},
+      lastName: {{customer.last_name | json}},
+      phone: {{customer.phone | json}},
+      createdAt: {{customer.created_at | json}},
+      address: {{customer.default_address | json}},
+      customerLifetimeValue: parseFloat({{customer.total_spent | json}} || 0),
+    purchaseCount: parseInt({{customer.orders_count | json}} || 0),
+    tags: {{customer.tags | json}},
+    generatedClientID: {{customer.metafields.littledata.clientID | json}}
+      };
+      {% endif %}
+  })();
+</script>
+<script async type="text/javascript" src="https://d26ky332zktp97.cloudfront.net/colibrius-g.js"></script>
+
+
+
+
