@@ -89,10 +89,18 @@
     color: var(--gh-color-green);
     font-weight: 700;
 }
-
 .ghd--block--ingredients [data-type=text] .ghd--block--ingredients--full-list summary{
     font-size: 14px;
     font-weight: bold;
+}
+.ghd--block--ingredients .ghd--dialog--button{
+    font-family: var(--gh-font-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    display: block;
+    padding: 5px 0;
+    border: 0;
+    background: transparent;
 }
 
 
@@ -326,6 +334,11 @@ h2.eyebrow + h4{
     transition: all 0.25s ease-in-out 0.5s, color 0.25s ease-in-out 0.5s;
     color: black;
 }
+.ghd--accordion>div input+label:after{
+    content: "+";
+    float: right;
+    transition: transform .25s ease-in-out;
+}
 .ghd--accordion > div input ~ div {
     overflow: hidden;
     visibility: hidden;
@@ -340,6 +353,9 @@ h2.eyebrow + h4{
     color: var(--gh-color-green);
     font-weight: 700;
     transition: background-color 0s ease-in-out 0s;
+}
+.ghd--accordion > div input:checked + label:after {
+    transform: rotate(45deg);
 }
 .ghd--accordion > div input:checked ~ div {
     display: block;
