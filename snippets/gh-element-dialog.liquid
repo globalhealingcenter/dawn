@@ -3,12 +3,12 @@
 <button class="ghd--dialog--button" data-dialog="{{ id }}">{{ button_text }}</button>
 <dialog class="ghd--dialog" id="{{ id }}">
     <div>
-        <div><button data-dialog="{{ id }}">Close</button></div>
+        <div class='text--right'><button data-dialog="{{ id }}">Close</button></div>
         <div>
             <h3 class="dialog-title">{{ title }}</h3>
             {{ content }}
         </div>
-        <div><button class="cancel button" data-dialog="{{ id }}">Close</button></div>
+        <div class='text--right'><button class="cancel button" data-dialog="{{ id }}">Close</button></div>
     </div>
 </dialog>
 
