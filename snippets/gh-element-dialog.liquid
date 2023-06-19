@@ -2,7 +2,7 @@
 
 <button class="ghd--dialog--button" data-dialog="{{ id }}">{{ button_text }}</button>
 <dialog class="ghd--dialog" id="{{ id }}">
-    <div>
+    <div class='ghd--dialog--inner'>
         <div class='text--right'><button data-dialog="{{ id }}">Close</button></div>
         <div>
             <h3 class="dialog-title">{{ title }}</h3>
@@ -22,5 +22,9 @@
                 modal.showModal()
             }
         });
+
+        d.addEventListener('click', e => {
+            if( !e.target.classList.contains('ghd--dialog--inner') ) d.close();
+        })
     })
 </script>
