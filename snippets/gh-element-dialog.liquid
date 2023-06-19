@@ -1,30 +1,32 @@
 
 
-<button class="ghd--dialog--button" data-dialog="{{ id }}">{{ button_text }}</button>
-<dialog class="ghd--dialog" id="{{ id }}">
+<button class="ghd--dialog--button" data-dialog="dialog-{{ id }}">{{ button_text }}</button>
+<dialog class="ghd--dialog" id="dialog-{{ id }}">
     <div class='ghd--dialog--inner'>
-        <div class='text--right'><button data-dialog="{{ id }}">Close</button></div>
+        <div class='text--right'><button data-dialog="dialog-{{ id }}">Close</button></div>
         <div>
             <h3 class="dialog-title">{{ title }}</h3>
             {{ content }}
         </div>
-        <div class='text--right'><button class="cancel button" data-dialog="{{ id }}">Close</button></div>
+        <div class='text--right'><button class="cancel button" data-dialog="dialog-{{ id }}">Close</button></div>
     </div>
 </dialog>
 
 <script>
-    document.querySelectorAll('[data-dialog="{{ id }}"]').forEach( d => {
-        d.addEventListener('click', function(e){
-            let modal = document.getElementById(this.getAttribute('data-dialog'));
-            if( modal.open ){
-                modal.close();
-            } else{
-                modal.showModal()
-            }
-        });
+  {
+    let modal = document.getElementById('dialog-{{ id }}');
+    document.querySelectorAll('[data-dialog="dialog-{{ id }}"]').forEach(d => {
+      d.addEventListener('click', function(e) {
+        if (modal.open) {
+          modal.close();
+        } else {
+          modal.showModal()
+        }
+      });
 
-        d.addEventListener('click', e => {
-            if( !e.target.classList.contains('ghd--dialog--inner') ) d.close();
-        })
+      d.addEventListener('click', e => {
+        if (!e.target.classList.contains('ghd--dialog--inner')) d.close();
+      })
     })
+  }
 </script>
