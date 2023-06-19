@@ -172,17 +172,17 @@ img {
 }
 
 /* GH DIALOG */
-.ghd--modal{
+.ghd--dialog{
     padding: 2em;
     border-radius: 10px;
     border: 1px solid #eee;
 }
-.ghd--modal::backdrop{
+.ghd--dialog::backdrop{
     background: rgba(0,0,0,.25);
 }
-.ghd--modal .dialog-title{
+.ghd--dialog .dialog-title{
     margin-top: 0;
 }
-.ghd--modal > div{
+.ghd--dialog > div{
     max-width: 800px;
 }

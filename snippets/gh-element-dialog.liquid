@@ -1,7 +1,7 @@
 
 
-<button class="aa" data-dialog="{{ id }}">{{ button_text }}</button>
-<dialog class="ghd--modal" id="{{ id }}">
+<button class="ghd--dialog--button" data-dialog="{{ id }}">{{ button_text }}</button>
+<dialog class="ghd--dialog" id="{{ id }}">
     <div>
         <div><button data-dialog="{{ id }}">Close</button></div>
         <div>
@@ -11,3 +11,16 @@
         <div><button class="cancel button" data-dialog="{{ id }}">Close</button></div>
     </div>
 </dialog>
+
+<script>
+    document.querySelectorAll('[data-dialog="{{ id }}"]').forEach( d => {
+        d.addEventListener('click', function(e){
+            let modal = document.getElementById(this.getAttribute('data-dialog'));
+            if( modal.open ){
+                modal.close();
+            } else{
+                modal.showModal()
+            }
+        })
+    })
+</script>
