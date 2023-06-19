@@ -1,1 +1,275 @@
-{"sections":{"19bf28aa-9913-4dd6-a831-f9a63e280de7":{"type":"custom-liquid","custom_css":["img {width: 100%;}"],"settings":{"custom_liquid":"<div class=\"glide\">\n\t\t\t<div class=\"glide__track\" data-glide-el=\"track\">\n\t\t\t\t<ul class=\"glide__slides\">\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Multivitamin-Homepage_Banner_Desktop-NEW_1728x.jpg?v=1678304189\"><\/a><\/li>\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Ashwagandha-Homepage_Banner_Desktop_1728x.jpg?v=1683231467\"><\/a><\/li>\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Omega-Homepage_Banner_Website-01_1728x.jpg?v=1675718238\"><\/a><\/li>\n\t\t\t\t<\/ul>\n\t\t\t<\/div>\n\t\t\t<div class=\"glide__arrows\" data-glide-el=\"controls\">\n\t\t\t\t<button class=\"glide__arrow glide__arrow--left\" data-glide-dir=\"<\">prev<\/button>\n\t\t\t\t<button class=\"glide__arrow glide__arrow--right\" data-glide-dir=\">\">next<\/button>\n\t\t\t<\/div>\n\t\t\t<div class=\"glide__bullets\" data-glide-el=\"controls[nav]\">\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=0\"><\/button>\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=1\"><\/button>\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=2\"><\/button>\n\t\t\t<\/div>\n\t\t<\/div>\n\t\t<script>\n\t\t\tnew Glide('.glide', {\n\t\t\t\tautoplay: 3000\n\t\t\t}).mount()\n\t\t<\/script>","color_scheme":"background-1","padding_top":0,"padding_bottom":0}},"4bd8e196-6dca-4f6c-abe1-db7219625c75":{"type":"multicolumn","blocks":{"template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-0":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/forbes_75bc13b2-5f14-4310-bcde-60ab5914af0f.png","title":"","text":"","link_label":"","link":""}},"template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-1":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/huffpost_a965ef9b-c696-4431-8805-72ac52f6af33.png","title":"","text":"","link_label":"","link":""}},"template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-2":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/livestrong_547b5f21-bcef-4251-8965-607126aece2b.png","title":"","text":"","link_label":"","link":""}},"f5e64156-0a6f-4b73-ab19-0ea0c525ea76":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/medicaldaily_a309b286-326a-4584-a23d-365f7682d0d4.png","title":"","text":"","link_label":"","link":""}}},"block_order":["template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-0","template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-1","template--16050089656520__4bd8e196-6dca-4f6c-abe1-db7219625c75-1683844186d30098d9-2","f5e64156-0a6f-4b73-ab19-0ea0c525ea76"],"custom_css":[".title-wrapper-with-link {justify-content: center;}"],"settings":{"title":"Natural Supplements and Detox Programs. Made With Pure Ingredients","heading_size":"h2","image_width":"third","image_ratio":"adapt","columns_desktop":4,"column_alignment":"center","background_style":"none","button_label":"","button_link":"","color_scheme":"background-2","columns_mobile":"2","swipe_on_mobile":true,"padding_top":36,"padding_bottom":16}},"1683818704d37cf4e9":{"type":"apps","blocks":{"9b473fe5-2fc3-4737-9b58-0a37011054a8":{"type":"shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d","settings":{}}},"block_order":["9b473fe5-2fc3-4737-9b58-0a37011054a8"],"settings":{"include_margins":true}},"537ad251-e578-481e-9a87-4992a10ccf7e":{"type":"custom-liquid","disabled":true,"custom_css":[],"settings":{"custom_liquid":"<br><h2 class=\"shop-by-health-goal-title align--center\" style=\"margin: 0; text-align: center; font-size: 40px;\">Shop by Health Goal<\/h2>","color_scheme":"background-1","padding_top":24,"padding_bottom":0}},"40ebc01d-1148-4c49-8ac1-441a86972718":{"type":"custom-liquid","disabled":true,"settings":{"custom_liquid":"Shopy By health benefit","color_scheme":"background-1","padding_top":40,"padding_bottom":52}},"0ebbc8ac-86e5-482a-97e9-5432ef483169":{"type":"multicolumn","blocks":{"template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-1":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/year-to-love-it.svg","title":"<a href=\"https:\/\/globalhealing.com\/pages\/help-guarantee\"><strong>Year to Love It<\/strong><\/a>","text":"<p>One Year Money-Back Guarantee<\/p>","link_label":"","link":""}},"template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-0":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/free-shipping.svg","title":"<a href=\"https:\/\/globalhealing.com\/pages\/shipping\"><strong>Free U.S. Shipping<\/strong><\/a>","text":"<p>Free Shipping in the<br\/>U.S. on Orders $100+<\/p>","link_label":"","link":""}},"template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-2":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/subscribe-save.svg","title":"<a href=\"https:\/\/globalhealing.com\/pages\/subscribe-and-save\"><strong>Subscribe & Save<\/strong><\/a>","text":"<p>Up to 20% Off+ Free U.S. Shipping<\/p>","link_label":"","link":""}}},"block_order":["template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-1","template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-0","template--16050089656520__0ebbc8ac-86e5-482a-97e9-5432ef483169-16838240588aa0eadb-2"],"custom_css":[],"settings":{"title":"","heading_size":"h1","image_width":"third","image_ratio":"adapt","columns_desktop":3,"column_alignment":"center","background_style":"none","button_label":"","button_link":"","color_scheme":"background-2","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":36}},"020cd395-ad8c-4ec4-82be-35c042671dc4":{"type":"custom-liquid","settings":{"custom_liquid":"<div class=\"nosto_element\" id=\"frontpage-nosto-1\"><\/div>\n<div class=\"evm-most-popular-products\"><\/div>","color_scheme":"background-1","padding_top":40,"padding_bottom":52}},"1705a273-749b-4625-83f2-dc4baccf3db8":{"type":"multicolumn","disabled":true,"blocks":{"template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-0":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/homepage-category-category-supplements_no_heading.jpg","title":"","text":"","link_label":"Shop Supplements","link":"https:\/\/globalhealing.com\/collections\/supplements"}},"template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-1":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/homepage-category-category-detox.jpg","title":"","text":"","link_label":"","link":"https:\/\/globalhealing.com\/collections\/detox"}},"template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-2":{"type":"column","settings":{"image":"shopify:\/\/shop_images\/homepage-category-category-featured.jpg","title":"","text":"","link_label":"","link":"https:\/\/globalhealing.com\/collections\/featured-products"}},"8eebf067-7701-438b-ab13-2e0b91aa450b":{"type":"column","settings":{"title":"Column","text":"<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>","link_label":"","link":""}}},"block_order":["template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-0","template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-1","template--16050089656520__1705a273-749b-4625-83f2-dc4baccf3db8-16838240588aa0eadb-2","8eebf067-7701-438b-ab13-2e0b91aa450b"],"settings":{"title":"Shop by Category","heading_size":"h1","image_width":"full","image_ratio":"adapt","columns_desktop":2,"column_alignment":"center","background_style":"primary","button_label":"","button_link":"","color_scheme":"background-1","columns_mobile":"1","swipe_on_mobile":true,"padding_top":36,"padding_bottom":0}},"c65de5e1-1e8a-4815-a019-4717a28c9830":{"type":"custom-liquid","disabled":true,"settings":{"custom_liquid":"<div class=\"protein-box-explain\">\n\t<h2>Organic Protein with Enzymes & Probiotics Made for You<\/h2>\n\t<p>Getting enough protein has never been easier — and tastier! Our deliciously smooth protein blends are available in Chocolate and Vanilla.<\/p>\n\n\t<p>Pure Plant Protein is always made with love and pure ingredients — never dairy, gluten, soy, stevia, or added sugars.<\/p>\n\n\t<div style=\"display: flex; align-items:center;\">\n\t\t<div style=\"padding-right: 20px;\">\n\t\t\t<img style=\"display: inline-block; border-radius: 50%; width: 160px;\" src=\"https:\/\/cdn.globalhealing.com\/pages\/home\/fernando.jpg\">\n\t\t<\/div>\n\t\t<div>\n\t\t\t<p><i>\"Really great taste! Super easy and fast to make. Amazing on the go!\"<\/i><\/p>\n\t\t\t<b>- Fernando<\/b>\n\t\t<\/div>\n\t<\/div>\n<\/div>\n\n<style>\n\n\t@media (min-width: 700px) {\n        .protein-box-explain {\n            padding-right: 20px\n        }\n    }\n\n\t.protein-box{\n        border: 2px solid #eee;\n\n\t}\n\t.protein-box--content{\n        padding: 20px;\n\t}\n<\/style>","color_scheme":"background-1","padding_top":40,"padding_bottom":52}},"0808a197-716c-4410-b566-a7da4e5ba5d5":{"type":"image-with-text","blocks":{"template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-0":{"type":"heading","settings":{"heading":"All-Natural Products You Can Trust","heading_size":"h1"}},"template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-1":{"type":"text","settings":{"text":"<p>At our state-of-the-art manufacturing laboratory, we develop and formulate innovative products that offer the best supplements in the industry, hands down. <\/p>","text_style":"body"}},"template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-2":{"type":"button","settings":{"button_label":"Learn More","button_link":"shopify:\/\/pages\/manufacturing"}}},"block_order":["template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-0","template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-1","template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-2"],"settings":{"image":"shopify:\/\/shop_images\/All-Natural-Products-OxyPowder.jpg","height":"small","desktop_image_width":"medium","layout":"text_first","desktop_content_position":"middle","desktop_content_alignment":"left","content_layout":"no-overlap","color_scheme":"background-1","image_behavior":"ambient","mobile_content_alignment":"left","padding_top":36,"padding_bottom":36}},"47b889c4-5a5c-4de1-bee6-d4c49e4b4a1c":{"type":"custom-liquid","disabled":true,"settings":{"custom_liquid":"<div class=\"subscribe-save-perks feature-row__item feature-row__text feature-row__text--right larger-text\">\n\t<p class=\"subtitle\">Never Run Out Again<\/p>\n\t<h2 class=\"h3\" style=\"margin-top: 0; margin-bottom: 20px\">Subscribe & Save Perks<\/h2>\n\t<div class=\"rte featured-row__subtext subscribe-save-perks--perks\">\n\t    <div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/02a58797-31ef-467a-b149-f39df48d5e09\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Save up to 20% off Every Order<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/7e744e76-e1b0-4a50-891d-d250dedef522\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Earn Double<br>Loyalty Points<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/5f93c9de-e4b2-4092-90d4-15806442e529\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Always Free Shipping<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/f411048f-ea37-4e56-959a-32d51a3fa356\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Ship Now<br>Option<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/841f18fe-e5d8-4244-8dd1-4fb1c3324913\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Add-On &<br>Save BIG<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/553fb148-dcf3-4790-aff2-739a5b4b2296\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Best Price Guarantee<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/fc3c367c-2558-4e85-9e81-330b2f7cda27\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>15% off on Programs<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/17c2d9e1-ebf9-4e7e-9212-74711d0d3ab2\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Year to Love It Guarantee<\/p>\n    \t\t<\/div>\n    \t<\/div>\n\t<\/div> <a href=\"https:\/\/globalhealing.com\/pages\/subscribe?icn_ghc=subscribe_&_save_campaign&ici_ghc=HomePageSection\" class=\"btn\">\n\tLearn More\n<\/a> <\/div>\n<style>\n    .subscribe-save-perks p,\n    .subscribe-save-perks div {\n        margin-bottom: 5px;\n    }\n\n\t@media (min-width: 590px) {\n        .subscribe-save-perks {\n            margin-left: 35px;\n        }\n    }\n    .subscribe-save-perks--perks > div > div {\n        width: 50%;\n    }\n    \n    .subscribe-save-perks--perks > div > div > div:first-child {\n        width: 55px;\n    }\n    \n    .subscribe-save-perks--perks > div > div > p {\n        flex: 1;\n        padding-right: 10px;\n    }\n\n<\/style>","color_scheme":"background-1","padding_top":40,"padding_bottom":52}},"ce92b37c-7b22-44d7-bacd-d86fbace00f9":{"type":"custom-liquid","settings":{"custom_liquid":"<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>","color_scheme":"background-1","padding_top":40,"padding_bottom":0}},"4a534389-073e-4980-a2fd-d7304e59caec":{"type":"custom-liquid","settings":{"custom_liquid":"<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>","color_scheme":"background-1","padding_top":40,"padding_bottom":52}},"9fed8746-996c-4c46-ad38-cbea578eecf7":{"type":"image-banner","disabled":true,"blocks":{"template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-0":{"type":"heading","settings":{"heading":"All-Natural Products You Can Trust","heading_size":"h1"}},"template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-1":{"type":"text","settings":{"text":"At our state-of-the-art manufacturing laboratory, we develop and formulate innovative products that offer the best supplements in the industry, hands down.","text_style":"subtitle"}},"template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-2":{"type":"buttons","settings":{"button_label_1":"About Us","button_link_1":"shopify:\/\/pages\/affiliates-getting-started-guide","button_style_secondary_1":false,"button_label_2":"Our Manufacturing","button_link_2":"{{ shop.brand.favicon_url }}","button_style_secondary_2":true}}},"block_order":["template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-0","template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-1","template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-2"],"settings":{"image":"shopify:\/\/shop_images\/All-Natural-Products-OxyPowder_2.jpg","image_overlay_opacity":0,"image_height":"adapt","desktop_content_position":"middle-center","show_text_box":true,"desktop_content_alignment":"center","color_scheme":"background-1","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":true,"show_text_below":true}}},"order":["19bf28aa-9913-4dd6-a831-f9a63e280de7","4bd8e196-6dca-4f6c-abe1-db7219625c75","1683818704d37cf4e9","537ad251-e578-481e-9a87-4992a10ccf7e","40ebc01d-1148-4c49-8ac1-441a86972718","0ebbc8ac-86e5-482a-97e9-5432ef483169","020cd395-ad8c-4ec4-82be-35c042671dc4","1705a273-749b-4625-83f2-dc4baccf3db8","c65de5e1-1e8a-4815-a019-4717a28c9830","0808a197-716c-4410-b566-a7da4e5ba5d5","47b889c4-5a5c-4de1-bee6-d4c49e4b4a1c","ce92b37c-7b22-44d7-bacd-d86fbace00f9","4a534389-073e-4980-a2fd-d7304e59caec","9fed8746-996c-4c46-ad38-cbea578eecf7"]}
+{
+  "sections": {
+    "127baa61-ada5-47f5-9c5e-e40cbe146ca4": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-0": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "Image banner",
+            "heading_size": "h1"
+          }
+        },
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-1": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-2": {
+          "type": "buttons",
+          "disabled": true,
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-0",
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-1",
+        "template--16067869475016__127baa61-ada5-47f5-9c5e-e40cbe146ca4-168720979219240ef7-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/h1.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    },
+    "19bf28aa-9913-4dd6-a831-f9a63e280de7": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [
+        "img {width: 100%;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"glide\">\n\t\t\t<div class=\"glide__track\" data-glide-el=\"track\">\n\t\t\t\t<ul class=\"glide__slides\">\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Multivitamin-Homepage_Banner_Desktop-NEW_1728x.jpg?v=1678304189\"><\/a><\/li>\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Ashwagandha-Homepage_Banner_Desktop_1728x.jpg?v=1683231467\"><\/a><\/li>\n\t\t\t\t\t<li class=\"glide__slide\"><a href=\"\/products\/multivitamin\"><img src=\"https:\/\/cdn.shopify.com\/s\/files\/1\/0539\/5621\/4984\/files\/Omega-Homepage_Banner_Website-01_1728x.jpg?v=1675718238\"><\/a><\/li>\n\t\t\t\t<\/ul>\n\t\t\t<\/div>\n\t\t\t<div class=\"glide__arrows\" data-glide-el=\"controls\">\n\t\t\t\t<button class=\"glide__arrow glide__arrow--left\" data-glide-dir=\"<\">prev<\/button>\n\t\t\t\t<button class=\"glide__arrow glide__arrow--right\" data-glide-dir=\">\">next<\/button>\n\t\t\t<\/div>\n\t\t\t<div class=\"glide__bullets\" data-glide-el=\"controls[nav]\">\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=0\"><\/button>\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=1\"><\/button>\n\t\t\t\t<button class=\"glide__bullet\" data-glide-dir=\"=2\"><\/button>\n\t\t\t<\/div>\n\t\t<\/div>\n\t\t<script>\n\t\t\tnew Glide('.glide', {\n\t\t\t\tautoplay: 3000\n\t\t\t}).mount()\n\t\t<\/script>",
+        "color_scheme": "background-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "b571646f-b9fc-471a-8267-8842f5ab565c": {
+      "type": "collage",
+      "blocks": {
+        "template--16067869475016__b571646f-b9fc-471a-8267-8842f5ab565c-1687209170accd84e3-0": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/b1.jpg"
+          }
+        },
+        "29260e77-de60-4824-9270-22219d361302": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/b2.jpg"
+          }
+        },
+        "1e5649e3-c495-4290-b11a-7f0e119036cc": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/b3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "template--16067869475016__b571646f-b9fc-471a-8267-8842f5ab565c-1687209170accd84e3-0",
+        "29260e77-de60-4824-9270-22219d361302",
+        "1e5649e3-c495-4290-b11a-7f0e119036cc"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "desktop_layout": "left",
+        "mobile_layout": "column",
+        "card_styles": "none",
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1683818704d37cf4e9": {
+      "type": "apps",
+      "blocks": {
+        "9b473fe5-2fc3-4737-9b58-0a37011054a8": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "9b473fe5-2fc3-4737-9b58-0a37011054a8"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "020cd395-ad8c-4ec4-82be-35c042671dc4": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"nosto_element\" id=\"frontpage-nosto-1\"><\/div>\n<div class=\"evm-most-popular-products\"><\/div>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "c65de5e1-1e8a-4815-a019-4717a28c9830": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div class=\"protein-box-explain\">\n\t<h2>Organic Protein with Enzymes & Probiotics Made for You<\/h2>\n\t<p>Getting enough protein has never been easier — and tastier! Our deliciously smooth protein blends are available in Chocolate and Vanilla.<\/p>\n\n\t<p>Pure Plant Protein is always made with love and pure ingredients — never dairy, gluten, soy, stevia, or added sugars.<\/p>\n\n\t<div style=\"display: flex; align-items:center;\">\n\t\t<div style=\"padding-right: 20px;\">\n\t\t\t<img style=\"display: inline-block; border-radius: 50%; width: 160px;\" src=\"https:\/\/cdn.globalhealing.com\/pages\/home\/fernando.jpg\">\n\t\t<\/div>\n\t\t<div>\n\t\t\t<p><i>\"Really great taste! Super easy and fast to make. Amazing on the go!\"<\/i><\/p>\n\t\t\t<b>- Fernando<\/b>\n\t\t<\/div>\n\t<\/div>\n<\/div>\n\n<style>\n\n\t@media (min-width: 700px) {\n        .protein-box-explain {\n            padding-right: 20px\n        }\n    }\n\n\t.protein-box{\n        border: 2px solid #eee;\n\n\t}\n\t.protein-box--content{\n        padding: 20px;\n\t}\n<\/style>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "0808a197-716c-4410-b566-a7da4e5ba5d5": {
+      "type": "image-with-text",
+      "blocks": {
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "All-Natural Products You Can Trust",
+            "heading_size": "h1"
+          }
+        },
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At our state-of-the-art manufacturing laboratory, we develop and formulate innovative products that offer the best supplements in the industry, hands down. <\/p>",
+            "text_style": "body"
+          }
+        },
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Learn More",
+            "button_link": "shopify:\/\/pages\/manufacturing"
+          }
+        }
+      },
+      "block_order": [
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-0",
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-1",
+        "template--16050089656520__0808a197-716c-4410-b566-a7da4e5ba5d5-16838204931d65783c-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/All-Natural-Products-OxyPowder.jpg",
+        "height": "small",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-1",
+        "image_behavior": "ambient",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "47b889c4-5a5c-4de1-bee6-d4c49e4b4a1c": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "settings": {
+        "custom_liquid": "<div class=\"subscribe-save-perks feature-row__item feature-row__text feature-row__text--right larger-text\">\n\t<p class=\"subtitle\">Never Run Out Again<\/p>\n\t<h2 class=\"h3\" style=\"margin-top: 0; margin-bottom: 20px\">Subscribe & Save Perks<\/h2>\n\t<div class=\"rte featured-row__subtext subscribe-save-perks--perks\">\n\t    <div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/02a58797-31ef-467a-b149-f39df48d5e09\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Save up to 20% off Every Order<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/7e744e76-e1b0-4a50-891d-d250dedef522\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Earn Double<br>Loyalty Points<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/5f93c9de-e4b2-4092-90d4-15806442e529\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Always Free Shipping<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/f411048f-ea37-4e56-959a-32d51a3fa356\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Ship Now<br>Option<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/841f18fe-e5d8-4244-8dd1-4fb1c3324913\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Add-On &<br>Save BIG<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/553fb148-dcf3-4790-aff2-739a5b4b2296\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Best Price Guarantee<\/p>\n    \t\t<\/div>\n    \t<\/div>\n    \t\n    \t<div style=\"display: flex; \">\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/fc3c367c-2558-4e85-9e81-330b2f7cda27\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>15% off on Programs<\/p>\n    \t\t<\/div>\n    \t\t<div style=\"display: flex; \">\n    \t\t\t<div style=\"padding-right: 20px;\"> <img style=\"display: inline-block; width: 35px;\" src=\"https:\/\/i.shgcdn.com\/17c2d9e1-ebf9-4e7e-9212-74711d0d3ab2\/-\/format\/auto\/-\/preview\/3000x3000\/-\/quality\/lighter\/\"> <\/div>\n    \t\t\t<p>Year to Love It Guarantee<\/p>\n    \t\t<\/div>\n    \t<\/div>\n\t<\/div> <a href=\"https:\/\/globalhealing.com\/pages\/subscribe?icn_ghc=subscribe_&_save_campaign&ici_ghc=HomePageSection\" class=\"btn\">\n\tLearn More\n<\/a> <\/div>\n<style>\n    .subscribe-save-perks p,\n    .subscribe-save-perks div {\n        margin-bottom: 5px;\n    }\n\n\t@media (min-width: 590px) {\n        .subscribe-save-perks {\n            margin-left: 35px;\n        }\n    }\n    .subscribe-save-perks--perks > div > div {\n        width: 50%;\n    }\n    \n    .subscribe-save-perks--perks > div > div > div:first-child {\n        width: 55px;\n    }\n    \n    .subscribe-save-perks--perks > div > div > p {\n        flex: 1;\n        padding-right: 10px;\n    }\n\n<\/style>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "ce92b37c-7b22-44d7-bacd-d86fbace00f9": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "4a534389-073e-4980-a2fd-d7304e59caec": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "9fed8746-996c-4c46-ad38-cbea578eecf7": {
+      "type": "image-banner",
+      "blocks": {
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "All-Natural Products You Can Trust",
+            "heading_size": "h1"
+          }
+        },
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-1": {
+          "type": "text",
+          "settings": {
+            "text": "At our state-of-the-art manufacturing laboratory, we develop and formulate innovative products that offer the best supplements in the industry, hands down.",
+            "text_style": "subtitle"
+          }
+        },
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-2": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "About Us",
+            "button_link_1": "shopify:\/\/pages\/affiliates-getting-started-guide",
+            "button_style_secondary_1": false,
+            "button_label_2": "Our Manufacturing",
+            "button_link_2": "{{ shop.brand.favicon_url }}",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": [
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-0",
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-1",
+        "template--16050089656520__9fed8746-996c-4c46-ad38-cbea578eecf7-16838455677cd81d72-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/All-Natural-Products-OxyPowder_2.jpg",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "background-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
+    }
+  },
+  "order": [
+    "127baa61-ada5-47f5-9c5e-e40cbe146ca4",
+    "19bf28aa-9913-4dd6-a831-f9a63e280de7",
+    "b571646f-b9fc-471a-8267-8842f5ab565c",
+    "1683818704d37cf4e9",
+    "020cd395-ad8c-4ec4-82be-35c042671dc4",
+    "c65de5e1-1e8a-4815-a019-4717a28c9830",
+    "0808a197-716c-4410-b566-a7da4e5ba5d5",
+    "47b889c4-5a5c-4de1-bee6-d4c49e4b4a1c",
+    "ce92b37c-7b22-44d7-bacd-d86fbace00f9",
+    "4a534389-073e-4980-a2fd-d7304e59caec",
+    "9fed8746-996c-4c46-ad38-cbea578eecf7"
+  ]
+}
