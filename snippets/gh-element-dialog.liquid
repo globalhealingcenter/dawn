@@ -16,7 +16,8 @@
   {
     let modal = document.getElementById('dialog-{{ id }}');
     modal.addEventListener('click', e => {
-      if (!e.target.classList.contains('ghd--dialog--inner')) modal.close()
+      let inner = modal.querySelector('.ghd--dialog--inner');
+      if( !inner.contains(e.target) ) modal.close();
     })
 
     document.querySelectorAll('[data-dialog="dialog-{{ id }}"]').forEach(d => {
