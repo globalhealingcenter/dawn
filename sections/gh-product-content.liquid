@@ -144,12 +144,13 @@
                 </div>
                 {% endfor %}
 
+                {% if config.supplement_facts %}
                 <div>
-                  <input type="radio" name="{{ block.id }}-ingredients" id="{{ block.id }}-ingredients-full-ingredients" hidden />
-                  <label for="{{ block.id }}-ingredients-full-ingredients">See Full Ingredient List</label>
-                  <div><img src='{{ config.supplement_facts }}' alt='supplement facts!'></div>
+                  {%- capture sf_content -%}<img src='{{ config.supplement_facts }}' alt='supplement facts!'>{% endcapture %}
+                  {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: block.id, title: 'Supplement Facts', content: sf_content %}
                 </div>
               </div>
+              {% endif %}
             </div>
             <div data-type="image" class='ghd--hide-mobile'>
               <img src="" alt="" loading='lazy'>
