@@ -27,7 +27,7 @@ text-align: center!important;
 
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .card-details-wraper  { padding-bottom: 5px;}
 
-.evm-also-bought.evm_visible_text #alsopresets3 .checkbox-wrapper span.checkmark  {    border-radius: 50%; }
+.evm-also-bought.evm_visible_text #alsopresets3 .checkbox-wrapper span.checkmark  {    border-radius: 50%; border: 1px solid #3C5949; }
 #alsopresets3 .checkbox-wrapper input:checked~span.checkmark:after {    width: 5px;top: 4px;
     left: 6px;
     height: 9px; border-color: #3C5949;}
