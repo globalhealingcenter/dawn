@@ -75,6 +75,7 @@ h5, .h5 {
     color: var(--gh-color-green);
     line-height: 1.4;
     padding: 5px 9px;
+    font-size: 16px;
 }
 
 iframe, img {
@@ -197,8 +198,8 @@ img {
 }
 .ghd--dialog--inner > div:first-child{
     position: absolute;
-    top: 6px;
-    right: 7px;
+    top: 9px;
+    right: 10px;
 }
 .ghd--dialog::backdrop{
     background: rgba(0,0,0,.25);
