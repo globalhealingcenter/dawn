@@ -144,13 +144,13 @@
                 </div>
                 {% endfor %}
 
-                {% if config.supplement_facts %}
+                {% unless config.supplement_facts == blank  %}
                 <div>
                   {%- capture sf_content -%}<img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!'>{% endcapture %}
                   {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: block.id, title: 'Supplement Facts', content: sf_content %}
                 </div>
               </div>
-              {% endif %}
+              {% endunless %}
             </div>
             <div data-type="image" class='ghd--hide-mobile'>
               <img src="" alt="" loading='lazy'>
