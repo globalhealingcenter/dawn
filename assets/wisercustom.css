@@ -51,8 +51,8 @@ span#evm-ws-alsobought-total-text:before {
     content: "Boundle Price";
     font-weight: bold;
 }
-span#evm-ws-alsobought-total-text span.fbt_ttl{
-    font-weight: bold;
+span#evm-ws-alsobought-total-text span.fbt_ttl {
+    font-weight: bold!important;
 } 
 
 #alsopresets3 .review-wrapper {text-align: left;}
