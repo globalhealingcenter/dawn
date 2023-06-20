@@ -139,7 +139,6 @@
 .ghd--block--curated [data-type="items"]{
     display: flex;
     justify-content: center;
-    max-width: 900px;
     margin: 0 auto;
 }
 .ghd--block--curated [data-type="items"] > div{

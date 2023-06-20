@@ -220,7 +220,7 @@
           </h2>
           <h4>{{ config.curated_collection.title.after }}</h4>
         </div>
-        <div class='items-container'>
+        <div class='items-container page-width'>
           <div data-type="items" data-item-count='{{ config.curated_collection.items | size }}'>
             {% for p in product.metafields.globalhealing.curated_collection.value %}
               {% assign curated = config.curated_collection.items[forloop.index0] %}
