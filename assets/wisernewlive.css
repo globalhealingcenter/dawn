@@ -492,7 +492,7 @@ align-self: center;
 #alsopresets3 .card-wraper { display:block;width:100%;overflow: hidden;    padding-top: 15px; 
     /* float:left; */
  }  
-#alsopresets3 .card-details-wraper {display:block; padding-bottom:15px;border-bottom: 2px solid #545454;
+#alsopresets3 .card-details-wraper {display:block; padding-bottom:15px;border-bottom: 1px solid #545454;
     /* float:left; */
 
 }
