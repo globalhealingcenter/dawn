@@ -17,7 +17,9 @@ text-align: center!important;
     min-height: 37px;line-height: 1.3;    font-size: 14px;
                                   
                                   }
-
+.also3_butoon_wrapper {
+    background: #3C5949!important;
+}
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .ws-product-price-variants { 
     justify-content: space-between; padding-top: 5px;
         min-height: 38px; }
