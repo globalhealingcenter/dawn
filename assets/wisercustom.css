@@ -30,7 +30,7 @@ text-align: center!important;
 .evm-also-bought.evm_visible_text #alsopresets3 .checkbox-wrapper span.checkmark  {    border-radius: 50%; }
 #alsopresets3 .checkbox-wrapper input:checked~span.checkmark:after {    width: 5px;top: 4px;
     left: 6px;
-    height: 9px;}
+    height: 9px; border-color: #3C5949;}
 #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text { padding-left:30px;} 
 .alsobought_template3 .add-to-cart-btn { align-self: center; margin-bottom: 45px; width: 18%; margin-left: 10px;}
 
