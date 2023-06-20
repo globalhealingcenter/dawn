@@ -57,8 +57,11 @@ span#evm-ws-alsobought-total-text:before {
 }
 .evm-ws-alsobought-total span.fbt_ttl {
     font-weight: bold!important;
+  letter-spacing: 0rem;
 } 
-
+span#evm-ws-alsobought-amount {
+    letter-spacing: 0rem;
+}
 #alsopresets3 .review-wrapper {text-align: left;}
 #presets2 .ws-box-wrapper .evm-ws-card, #presets2 .ws-box-wrapper .evm-ws-card .ws-card_image_container .ws-card__background-image, #presets2 .ws-box-wrapper .evm-ws-card:before{background-color: transparent;}
 #presets2 .ws-box-wrapper .evm-ws-card:before{box-shadow: unset;}
