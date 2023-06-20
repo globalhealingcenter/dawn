@@ -20,7 +20,7 @@ text-align: center!important;
 
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .ws-product-price-variants { 
     justify-content: space-between; padding-top: 5px;
-    border-top: 2px solid #545454;    min-height: 38px; }
+        min-height: 38px; }
 
 .evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; }
 
