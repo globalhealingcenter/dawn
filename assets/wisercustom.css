@@ -44,6 +44,14 @@ span#evm-ws-alsobought-total-text {
     flex: 0 0 100%;
       border-bottom: 1px solid #545454;
 }
+span#evm-ws-alsobought-total-text b {
+    display: none;
+}
+span#evm-ws-alsobought-total-text:before {
+    content: "Boundle Price";
+    font-weight: bold;
+}
+
 
 #alsopresets3 .review-wrapper {text-align: left;}
 #presets2 .ws-box-wrapper .evm-ws-card, #presets2 .ws-box-wrapper .evm-ws-card .ws-card_image_container .ws-card__background-image, #presets2 .ws-box-wrapper .evm-ws-card:before{background-color: transparent;}
