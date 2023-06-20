@@ -51,7 +51,9 @@ span#evm-ws-alsobought-total-text:before {
     content: "Boundle Price";
     font-weight: bold;
 }
-
+span#evm-ws-alsobought-total-text span.fbt_ttl {
+    font-weight: bold;
+} 
 
 #alsopresets3 .review-wrapper {text-align: left;}
 #presets2 .ws-box-wrapper .evm-ws-card, #presets2 .ws-box-wrapper .evm-ws-card .ws-card_image_container .ws-card__background-image, #presets2 .ws-box-wrapper .evm-ws-card:before{background-color: transparent;}
