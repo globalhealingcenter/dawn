@@ -25,7 +25,7 @@ text-align: center!important;
     justify-content: space-between; padding-top: 5px;
         min-height: 38px; }
 
-.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; }
+.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold; }
 
 
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .card-details-wraper  { padding-bottom: 5px;}
