@@ -5,7 +5,7 @@
 text-align: center!important;
 }  
 
-.evm-wscontainer p.fbt_disc_msg{ text-align:center!important;     display: inline-block;}
+.evm-wscontainer p.fbt_disc_msg{ text-align:center!important;     display: inline-block;line-height: 1.3;}
 .evm-also-bought #alsopresets3 .ws-card__title {text-align:left!important; font-size:18px;}
 .evm-also-bought #alsopresets3 .ws-card_image_container  { text-align:left!important;}
 .evm-also-bought #alsopresets3 .ws-card_image_container .ws-card__background-image  { background:transparent}
