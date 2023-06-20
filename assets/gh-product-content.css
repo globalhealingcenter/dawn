@@ -339,7 +339,7 @@ h2.eyebrow + h4{
 .ghd--accordion>div input+label:before{
     content: "+";
     float: right;
-    transition: transform .25s ease-in-out;
+    transition: opacity .25s ease-in-out;
 }
 .ghd--accordion > div input ~ div {
     overflow: hidden;
@@ -357,7 +357,7 @@ h2.eyebrow + h4{
     transition: background-color 0s ease-in-out 0s;
 }
 .ghd--accordion > div input:checked + label:before {
-    transform: rotate(45deg);
+    opacity: 0;
 }
 .ghd--accordion > div input:checked ~ div {
     display: block;
