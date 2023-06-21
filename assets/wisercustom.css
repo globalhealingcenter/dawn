@@ -70,6 +70,7 @@ span#evm-ws-alsobought-amount {
 
 @media only screen and (max-width: 767px) {
  #alsopresets3 .yotpo-display-wrapper  { line-height:unset;}
+  #alsopresets3 .evm-ws-card .yotpo-bottomline { height: auto;} 
 #alsopresets3 .evm-ws-body-section .product_tagline { min-width:unset; min-height:unset;} 
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-body-section .ws-card__price{width: max-content;margin: 8px 0;}
 #alsopresets3 .evm-ws-card .yotpo.bottomLine {width: auto; text-align: left;}
