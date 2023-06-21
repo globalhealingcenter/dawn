@@ -24,7 +24,7 @@ text-align: center!important;
 }
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .ws-product-price-variants { 
     justify-content: space-between; padding-top: 5px;
-        min-height: 38px; }
+        min-height: 30px; }
 
 .evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold; }
 
