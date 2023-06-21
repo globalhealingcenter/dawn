@@ -1,7 +1,8 @@
 .evm-also-bought.evm_visible_text  #alsopresets3 .evm-ws-image-section .ws-box-wrapper{ width:18%; }
 
 .evm-also-bought.evm_visible_text .evm_wiser_heading {
-    font-family: 'Caslon Bold';
+    font-family: 'Miller Display';
+  font-weight: bold;
 text-align: center!important;
 }  
 
