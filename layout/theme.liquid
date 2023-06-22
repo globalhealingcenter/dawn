@@ -269,7 +269,9 @@
 {% include 'LittledataLayer' %}
 <!-- End of LittledataLayer -->
 {%- render 'ordergroove_static_asset' -%}
-{% include 'wiser' %}{% include 'wiser_popup' %}</head>
+{% include 'wiser' %}{% include 'wiser_popup' %}
+  {% render 'shogun-head' %}
+</head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
