@@ -1,0 +1,658 @@
+{%- style -%}
+    .section-{{ section.id }}-padding {
+        padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+        padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+    }
+
+    @media screen and (min-width: 750px) {
+        .section-{{ section.id }}-padding {
+            padding-top: {{ section.settings.padding_top }}px;
+            padding-bottom: {{ section.settings.padding_bottom }}px;
+        }
+    }
+
+    section a{
+        color: var(--gh-color-green);
+    }
+    hr{
+        background: var(--gh-color-gray);
+    }
+    section h2.eyebrow,
+    section h3.eyebrow{
+        font-size: 5rem;
+        margin-bottom: 0.4em;
+        margin-top: 0;
+        line-height: 1.2;
+    }
+    section h2.eyebrow span,
+    section h3.eyebrow span{
+        font-family: var(--gh-font-secondary);
+        font-weight: 500;
+        font-size: .5em;
+        display: block;
+    }
+{%- endstyle -%}
+
+<div class="gh--home-page section-{{ section.id }}-padding">
+
+    <section class="ghd--hero">
+        <img src="https://cdn.globalhealing.com/products/testing/h1.jpg" alt="">
+    </section>
+    <style>
+        .ghd--hero img{
+            display: block;
+        }
+    </style>
+
+    <section class="ghd--logos ghd--bg-white">
+        <div class="ghd--flex">
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-forbes.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-chicago-tribune.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-mens-journal.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-huffpost.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-us-weekly.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-miami-herald.svg"></div>
+            <div><img src="https://cdn.globalhealing.com/pages/home/v2/logos-livestrong.svg"></div>
+        </div>
+    </section>
+    <style>
+        .ghd--logos{
+            padding: 2rem 2rem;
+            border-bottom: 1px solid var(--gh-color-gray);
+        }
+
+        .ghd--logos .ghd--flex{
+            align-items: center;
+        }
+        .ghd--logos .ghd--flex > div{
+            flex: 1;
+        }
+        .ghd--logos img{
+            display: block;
+            max-height: 30px;
+            margin: 0 auto;
+        }
+    </style>
+
+    <section class="ghd--banners ghd--bg-white">
+        <div class="page-width ghd--flex">
+            <div>
+                <img src="https://cdn.globalhealing.com/products/testing/b1.jpg" alt="">
+            </div>
+            <div class="ghd--flex" data-side="right">
+                <div><img src="https://cdn.globalhealing.com/products/testing/b2.jpg" alt=""></div>
+                <div><img src="https://cdn.globalhealing.com/products/testing/b3.jpg" alt=""></div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .ghd--banners{
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+        .ghd--banners > div{
+            justify-content: space-between;
+            column-gap: 2rem;
+        }
+        .ghd--banners [data-side="right"]{
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .ghd--banners [data-side="right"] > div{
+
+        }
+    </style>
+
+    <section class="ghd--our-process">
+        <div class="page-width ghd--flex">
+            <div>
+                <h2>The Quality & Purity<br> Your Body Deserves</h2>
+                <a href="#">OUR PROCESS</a>
+            </div>
+            <div data-side="right">
+              <span>
+                  <img src="https://cdn.globalhealing.com/pages/home/v2/quality-vegan.svg" alt="">
+                  Vegan-Friendly
+              </span>
+                <span>
+                  <img src="https://cdn.globalhealing.com/pages/home/v2/quality-gmo-free.svg" alt="">
+                  GMO-Free
+              </span>
+                <span>
+                  <img src="https://cdn.globalhealing.com/pages/home/v2/quality-gluten-free.svg" alt="">
+                  Gluten-Free
+              </span>
+                <span>
+                  <img src="https://cdn.globalhealing.com/pages/home/v2/quality-additive-free.svg" alt="">
+                  No Additives
+              </span>
+            </div>
+        </div>
+    </section>
+    <style>
+        .ghd--our-process{
+            padding: 5rem 0;
+            background: var(--gh-color-green) url(https://cdn.globalhealing.com/pages/home/v2/quality-bg.jpg?w=1000) center center no-repeat;
+            background-size: cover;
+        }
+        .ghd--our-process > div{
+            gap: 4rem;
+            align-items: center;
+        }
+        .ghd--our-process h2,
+        .ghd--our-process a,
+        .ghd--our-process span{
+            color: #fff;
+        }
+        .ghd--our-process h2{
+            font-size: 3rem;
+            margin: 0;
+        }
+        .ghd--our-process [data-side="right"]{
+            display: flex;
+            justify-content: flex-end;
+            flex: 1;
+        }
+        .ghd--our-process [data-side="right"] span{
+            padding: 0px 5rem;
+        }
+        .ghd--our-process img{
+            width: 50px;
+            display: block;
+        }
+    </style>
+
+    <section class="ghd--journey">
+        <div class="page-width">
+            <div data-type="header">
+                <h2 class="text-center">Products Uniquely Made <br>With You in Mind</h2>
+            </div>
+            <div class="ghd--flex" data-type="cols">
+                <div>
+                    <h3>Start Your Journey</h3>
+                    <p>Find the right product for you. If you need help, our quiz can help you find the right products for you.</p>
+                    <p><a class="button button--gold" href="#">Shop Our Collection</a></p>
+                    <p><a class="button" href="#">Take Our Quiz</a></p>
+                </div>
+                <div>
+                    <h4 class="text-center">SHOP BY HEALTH GOALS</h4>
+                    <div class="ghd--journey--goals ghd--flex">
+                        <div><a href="#">CLEANSE & DETOX</a></div>
+                        <div><a href="#">IMMUNE HEALTH</a></div>
+                        <div><a href="#">ENERGY</a></div>
+                        <div><a href="#">GUT HEALTH</a></div>
+                        <div><a href="#">BRAIN HEALTH</a></div>
+                        <div><a href="#">HORMONE SUPPORT</a></div>
+                        <div><a href="#">MOOD & SLEEP</a></div>
+                        <div><a href="#">SKIN CARE</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .ghd--journey{
+            padding: 3rem 0;
+        }
+        .ghd--journey [data-type="header"] h2{
+            font-size: 7rem;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--gh-color-green);
+        }
+        .ghd--journey h3{
+            font-size: 3.4rem;
+            margin-top: 2rem;
+            margin-bottom: 0;
+            line-height: 1.1;
+        }
+        .ghd--journey [data-type="cols"]{
+            border-top: 1px solid var(--gh-color-gray);
+            border-bottom: 1px solid var(--gh-color-gray);
+        }
+        .ghd--journey [data-type="cols"] > div{
+            padding: 1.5rem 5rem 4rem 5rem;
+        }
+        .ghd--journey [data-type="cols"] > div:first-child{
+            width: 30%;
+            border-right: 1px solid var(--gh-color-gray);
+        }
+        .ghd--journey [data-type="cols"] > div:last-child{
+            width: 70%;
+        }
+        .ghd--journey--goals{
+            flex-wrap: wrap;
+        }
+        .ghd--journey--goals > div{
+            width: 50%;
+        }
+        .ghd--journey--goals a{
+            font-size: 3rem;
+            text-decoration: none;
+            color: #777;
+            transition: color .3s ease-in-out;
+            position: relative;
+            padding-right: 1.2em;
+        }
+        .ghd--journey--goals a::after{
+            content: "->";
+            position: absolute;
+            top: 0;
+            right: 1em;
+            height: 1em;
+            line-height: 1;
+            opacity: 0;
+            transition: opacity .2s ease-in-out, right .2s ease-in-out;
+        }
+        .ghd--journey--goals a:hover{
+            color: var(--gh-color-green);
+        }
+        .ghd--journey--goals a:hover::after{
+            opacity: 1;
+            right: 0;
+        }
+    </style>
+
+    <section class="ghd--foundation">
+
+        <div class="ghd--flex">
+            <div data-type="text">
+                <h2 class="eyebrow">
+                    <span>THE FOUNDATION OF WELLNESS</span>
+                    Healing Starts <br>From the Inside Out
+                </h2>
+                <p><b>Live a more natural, toxin-free life.</b> Regular cleansing and detoxification practices help eliminate toxins, supporting optimal organ function, boosting energy levels, and promoting overall well-being.</p>
+                <p><a class="button button--gold" href="#">SHOP CLEANSES & DETOX</a></p>
+                <p><a class="button button--gold-outline" href="#">ULTIMATE DETOX GUIDE</a></p>
+            </div>
+            <div data-type="image">
+                <img src="https://cdn.globalhealing.com/pages/home/v2/foundation.png" alt="">
+            </div>
+        </div>
+
+    </section>
+    <style>
+        .ghd--foundation{
+            background-color: var(--gh-color-dark-green);
+            color: #fff;
+            margin-top: 80px;
+        }
+        .ghd--foundation .ghd--flex{
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ghd--foundation .ghd--flex > div{
+            padding: 0 2rem;
+        }
+
+        .ghd--foundation [data-type="image"]{
+            max-width: 800px;
+        }
+
+        .ghd--foundation [data-type="text"]{
+            max-width: 500px;
+        }
+
+        .ghd--foundation [data-type="text"] > div{
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .ghd--foundation h2{
+            color: #fff;
+        }
+
+        .ghd--foundation [data-type="image"] img{
+            margin-top: -80px;
+        }
+        .ghd--foundation img{
+            display: block;
+        }
+    </style>
+
+    <section class="ghd--autoship-info">
+
+        <div class="page-width ghd--flex">
+            <div data-type="image"><div><img src="https://cdn.globalhealing.com/pages/home/v2/20-percent-off.v2.svg" alt=""></div></div>
+            <div data-type="border">&nbsp;</div>
+            <div data-type="text">
+                <h2 class="eyebrow">
+                    <span>SUBSCRIPTION PROGRAM</span>
+                    Living Healthy<br>
+                    Requires Commitment
+                </h2>
+                <p>Noticeable changes from taking supplements may not be immediate, but consistency is key. Our subscription program offers perks to support your long-term commitment to better health.</p>
+                <a class="button button--tertiary button--secondary" href="#">SEE ALL PERKS</a>
+            </div>
+        </div>
+
+    </section>
+    <style>
+
+        .ghd--autoship-info{
+            padding: 6rem 0;
+        }
+
+        .ghd--autoship-info .page-width{
+            padding: 4rem 5rem;
+            background: var(--gh-color-light-green);
+            justify-content: space-between;
+        }
+        .ghd--autoship-info [data-type="image"]{
+            max-width: 40%;
+            text-align: center;
+        }
+        .ghd--autoship-info [data-type="image"] > div{
+            margin: 0 auto;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .ghd--autoship-info [data-type="image"] img{
+            width: 100%;
+        }
+        .ghd--autoship-info [data-type="border"]{
+            width: 1px;
+            border-right: 1px solid var(--gh-color-gray);
+        }
+        .ghd--autoship-info [data-type="text"]{
+            width: 60%;
+        }
+        .ghd--autoship-info h2 span{
+            color: var(--gh-color-gray);
+        }
+        .ghd--autoship-info h2{
+            color: var(--gh-color-green);
+        }
+    </style>
+
+    <hr class="page-width">
+
+    <section class="ghd--mission">
+        <div class="ghd--flex page-width" data-type="header">
+            <div><h2>Global Healing<br> is Our Mission</h2></div>
+            <div>
+                <p>Since 1998, we want to empower people to support their health naturally and to restore your body's self-healing mechanisms.
+                    <br><a href="#"><b>OUR COMMITMENT</b></a></p>
+            </div>
+        </div>
+        <div class="page-width ghd--flex" data-type="cols">
+            <div>
+                <img src="https://cdn.globalhealing.com/pages/home/v2/mission-natural.png" alt="">
+                <div>
+                    <h3 class="eyebrow">
+                        <span>WE BELIEVE IN</span>
+                        NATURAL
+                    </h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                </div>
+            </div>
+            <div>
+                <img src="https://cdn.globalhealing.com/pages/home/v2/mission-innovation.png" alt="">
+                <div>
+                    <h3 class="eyebrow">
+                        <span>WE BELIEVE IN</span>
+                        INNOVATION
+                    </h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                </div>
+            </div>
+            <div>
+                <img src="https://cdn.globalhealing.com/pages/home/v2/mission-sustainability.png" alt="">
+                <div>
+                    <h3 class="eyebrow">
+                        <span>WE BELIEVE IN</span>
+                        SUSTAINABILITY
+                    </h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                </div>
+            </div>
+            <div>
+                <img src="https://cdn.globalhealing.com/pages/home/v2/mission-giving-back.png" alt="">
+                <div>
+                    <h3 class="eyebrow">
+                        <span>WE BELIEVE IN</span>
+                        GIVING BACK
+                    </h3>
+                    <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .ghd--mission{
+            padding: 4rem 0;
+        }
+        .ghd--mission [data-type="header"]{
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ghd--mission h2{
+            font-size: 5rem;
+            color: var(--gh-color-green);
+        }
+        .ghd--mission [data-type="header"] > div:last-child{
+            max-width: 550px;
+        }
+
+        .ghd--mission [data-type="cols"]{
+            justify-content: space-between;
+        }
+        .ghd--mission [data-type="cols"] > div{
+            width: calc(25% - 10px);
+            background: #fff;
+            border: 1px solid var(--gh-color-gray);
+        }
+        .ghd--mission [data-type="cols"] > div > div{
+            padding: 1rem 2rem;
+        }
+        .ghd--mission [data-type="cols"] h3{
+            margin-top: 0;
+            font-size: 2.5rem;
+            font-style: italic;
+            color: var(--gh-color-green);
+        }
+        .ghd--mission [data-type="cols"] h3 span{
+            color: var(--gh-color-gray);
+        }
+    </style>
+
+    <section class="ghd--reviews">
+        <div class="ghd--flex" data-type="cols">
+            <div class="text-center">
+                <div>
+                    <img src="https://cdn.globalhealing.com/pages/home/v2/reviews-stars.svg" width="150" alt="">
+                    <h3 class="eyebrow">
+                        Tens of Thousands
+                        <span>OF FIVE-STAR REVIEWS</span>
+                    </h3>
+
+                    <h3 class="ghd--reviews--featured-title">Featured Reviews</h3>
+                    <div class="slider">
+                        <div>
+                            <p>“Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet Lorem ipsum dolor sit amet, consectetuer adipiscing elit, ”</p>
+                            <b>JESSICA</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-type="image">
+                <div>
+                    <div>
+                        <div><img src="https://cdn.globalhealing.com/pages/home/v2/reviews-free-shipping.v2.svg" alt=""></div>
+                        <div><p>For U.S. Addresses on Orders $100+ <br> <a href="#">LEARN MORE</a></p></div>
+                    </div>
+                    <div>
+                        <div><img src="https://cdn.globalhealing.com/pages/home/v2/reviews-1-year.v2.svg" alt=""></div>
+                        <div><p>Lorem ipsum dolor sit amet, consec- tetuer adipiscing elit,</p></div>
+                    </div>
+                    <div>
+                        <div><img src="https://cdn.globalhealing.com/pages/home/v2/reviews-award-winning.v2.svg" alt=""></div>
+                        <div><p>Lorem ipsum dolor sit amet, consec- tetuer adipiscing elit,</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .ghd--reviews h3{
+            color: var(--gh-color-gold);
+        }
+        .ghd--reviews h3 span{
+            color: var(--gh-color-gray);
+        }
+        .ghd--reviews [data-type="image"] a{
+            color: #fff;
+        }
+        .ghd--reviews .ghd--reviews--featured-title{
+            font-size: 4rem;
+            margin-top: 2em;
+            margin-bottom: 0;
+        }
+        .ghd--reviews [data-type="cols"] > div{
+            width: 50%;
+        }
+        .ghd--reviews [data-type="cols"] > div:first-child{
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 0;
+        }
+        .ghd--reviews [data-type="cols"] > div:first-child > div{
+            max-width: 500px;
+        }
+        .ghd--reviews [data-type="cols"] > div:last-child{
+            background: var(--gh-color-dark-green) url(https://cdn.globalhealing.com/pages/home/v2/reviews-bg.png) center center no-repeat;
+            background-size: cover;
+        }
+        .ghd--reviews [data-type="image"]{
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        .ghd--reviews [data-type="image"] > div{
+            display: flex;
+            flex-direction: column;
+            padding: 8rem 0;
+            max-width: 500px;
+        }
+        .ghd--reviews [data-type="image"] > div > div{
+            display: flex;
+            justify-content: space-between;
+            gap: 10rem;
+            padding: 2rem 0;
+            align-items: center;
+        }
+        .ghd--reviews [data-type="image"] > div > div > div:first-child{
+            width: 200px;
+        }
+        .ghd--reviews [data-type="image"] > div > div > div:last-child{
+            max-width: 200px;
+            color: #fff;
+        }
+        .ghd--reviews [data-type="image"] > div > div:not(:last-child){
+            border-bottom: 1px solid var(--gh-color-gold);
+        }
+        .ghd--reviews [data-type="image"] [data-type="border"]{
+            height: 1px;
+            background: var(--gh-color-gold);
+        }
+
+    </style>
+
+
+</div>
+
+
+{% schema %}
+{
+  "name": "GH Home Page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero",
+      "name": "Hero",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "logos",
+      "name": "Logos",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "banners",
+      "name": "Banners",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "quality",
+      "name": "Quality",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "journey",
+      "name": "Journey",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "foundation",
+      "name": "Foundation",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "autoship",
+      "name": "Autoship",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "reviews",
+      "name": "Reviews",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "instagram",
+      "name": "Explore Our Instagram",
+      "limit": 1,
+      "settings": []
+    }
+  ],
+  "presets": [
+    {
+      "name": "GH Home Page"
+    }
+  ]
+}
+{% endschema %}

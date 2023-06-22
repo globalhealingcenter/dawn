@@ -76,6 +76,20 @@ h5, .h5 {
     line-height: 1.4;
     padding: 5px 9px;
     font-size: 16px;
+    cursor: pointer;
+}
+
+.button--gold{
+    background-color: var(--gh-color-gold);
+}
+.button--gold::after{
+    box-shadow: none;
+}
+.button--gold-outline{
+    background-color: transparent;
+}
+.button--gold-outline::after{
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text),var(--border-opacity)),0 0 0 var(--buttons-border-width) var(--gh-color-gold);
 }
 
 iframe, img {
@@ -97,6 +111,18 @@ img {
 
 .hide{
   display: none !important;
+}
+
+.ghd--flex{
+    display: flex;
+}
+
+.ghd--bg-white{
+    background: #fff;
+}
+
+.color-white{
+    color: #fff;
 }
 
 .remove-swell-tab .swell-tab{
