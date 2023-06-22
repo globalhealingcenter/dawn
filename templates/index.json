@@ -65,19 +65,10 @@
         "padding_bottom": 52
       }
     },
-    "ce92b37c-7b22-44d7-bacd-d86fbace00f9": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>",
-        "color_scheme": "background-1",
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
-    },
     "4a534389-073e-4980-a2fd-d7304e59caec": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>",
+        "custom_liquid": "<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>\n\n<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>",
         "color_scheme": "background-1",
         "padding_top": 40,
         "padding_bottom": 52
@@ -86,7 +77,6 @@
   },
   "order": [
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493",
-    "ce92b37c-7b22-44d7-bacd-d86fbace00f9",
     "4a534389-073e-4980-a2fd-d7304e59caec"
   ]
 }
