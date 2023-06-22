@@ -22,7 +22,7 @@
 {% if has_product_config %}
 <section class="gh--product-content section-{{ section.id }}-padding">
   
-  {{ 'gh-product-content.css' | asset_url | stylesheet_tag }}
+  {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
   
   <div class="ghd--product-container">
   {%- for block in section.blocks -%}

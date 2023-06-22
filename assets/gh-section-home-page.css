@@ -1,0 +1,352 @@
+section a{
+    color: var(--gh-color-green);
+}
+hr{
+    background: var(--gh-color-gray);
+}
+section h2.eyebrow,
+section h3.eyebrow{
+    font-size: 5rem;
+    margin-bottom: 0.4em;
+    margin-top: 0;
+    line-height: 1.2;
+}
+section h2.eyebrow span,
+section h3.eyebrow span{
+    font-family: var(--gh-font-secondary);
+    font-weight: 500;
+    font-size: .5em;
+    display: block;
+}
+
+/*
+    HERO
+*/
+
+.ghd--hero img{
+    display: block;
+}
+
+/*
+    LOGOS
+*/
+.ghd--logos{
+    padding: 2rem 2rem;
+    border-bottom: 1px solid var(--gh-color-gray);
+}
+
+.ghd--logos .ghd--flex{
+    align-items: center;
+    justify-content: space-between;
+}
+.ghd--logos .ghd--flex > div{
+
+}
+.ghd--logos img{
+    display: block;
+    height: 30px;
+    margin: 0 auto;
+}
+
+/*
+    BANNERS
+*/
+.ghd--banners{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+.ghd--banners > div{
+    justify-content: space-between;
+    column-gap: 2rem;
+}
+.ghd--banners [data-side="right"]{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.ghd--banners [data-side="right"] > div{
+
+}
+
+/*
+    OUR PROCESS / QUALITY
+*/
+.ghd--our-process{
+    padding: 5rem 0;
+    background: var(--gh-color-green) url(https://cdn.globalhealing.com/pages/home/v2/quality-bg.jpg?w=1000) center center no-repeat;
+    background-size: cover;
+}
+.ghd--our-process > div{
+    gap: 4rem;
+    align-items: center;
+}
+.ghd--our-process h2,
+.ghd--our-process a,
+.ghd--our-process span{
+    color: #fff;
+}
+.ghd--our-process h2{
+    font-size: 3rem;
+    margin: 0;
+}
+.ghd--our-process [data-side="right"]{
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+.ghd--our-process [data-side="right"] span{
+    padding: 0px 5rem;
+}
+.ghd--our-process img{
+    width: 50px;
+    display: block;
+}
+
+/*
+    JOURNEY
+*/
+.ghd--journey{
+    padding: 3rem 0;
+}
+.ghd--journey [data-type="header"] h2{
+    font-size: 7rem;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gh-color-green);
+}
+.ghd--journey h3{
+    font-size: 3.4rem;
+    margin-top: 2rem;
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+.ghd--journey [data-type="cols"]{
+    border-top: 1px solid var(--gh-color-gray);
+    border-bottom: 1px solid var(--gh-color-gray);
+}
+.ghd--journey [data-type="cols"] > div{
+    padding: 1.5rem 5rem 4rem 5rem;
+}
+.ghd--journey [data-type="cols"] > div:first-child{
+    width: 30%;
+    border-right: 1px solid var(--gh-color-gray);
+}
+.ghd--journey [data-type="cols"] > div:last-child{
+    width: 70%;
+}
+.ghd--journey--goals{
+    flex-wrap: wrap;
+}
+.ghd--journey--goals > div{
+    width: 50%;
+}
+.ghd--journey--goals a{
+    font-size: 3rem;
+    text-decoration: none;
+    color: #777;
+    transition: color .3s ease-in-out;
+    position: relative;
+    padding-right: 1.2em;
+}
+.ghd--journey--goals a::after{
+    content: "->";
+    position: absolute;
+    top: 0;
+    right: 1em;
+    height: 1em;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity .2s ease-in-out, right .2s ease-in-out;
+}
+.ghd--journey--goals a:hover{
+    color: var(--gh-color-green);
+}
+.ghd--journey--goals a:hover::after{
+    opacity: 1;
+    right: 0;
+}
+
+/*
+    FOUNDATION
+*/
+.ghd--foundation{
+    background-color: var(--gh-color-dark-green);
+    color: #fff;
+    margin-top: 80px;
+}
+.ghd--foundation .ghd--flex{
+    justify-content: center;
+    align-items: center;
+}
+
+.ghd--foundation .ghd--flex > div{
+    padding: 0 2rem;
+}
+
+.ghd--foundation [data-type="image"]{
+    max-width: 800px;
+}
+
+.ghd--foundation [data-type="text"]{
+    max-width: 500px;
+}
+
+.ghd--foundation [data-type="text"] > div{
+    max-width: 500px;
+    margin: 0 auto;
+}
+.ghd--foundation h2{
+    color: #fff;
+}
+
+.ghd--foundation [data-type="image"] img{
+    margin-top: -80px;
+}
+.ghd--foundation img{
+    display: block;
+}
+
+/*
+    AUTOSHIP
+*/
+.ghd--autoship-info{
+    padding: 6rem 0;
+}
+
+.ghd--autoship-info .page-width{
+    padding: 4rem 5rem;
+    background: var(--gh-color-light-green);
+    justify-content: space-between;
+}
+.ghd--autoship-info [data-type="image"]{
+    max-width: 40%;
+    text-align: center;
+}
+.ghd--autoship-info [data-type="image"] > div{
+    margin: 0 auto;
+    max-width: 300px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.ghd--autoship-info [data-type="image"] img{
+    width: 100%;
+}
+.ghd--autoship-info [data-type="border"]{
+    width: 1px;
+    border-right: 1px solid var(--gh-color-gray);
+}
+.ghd--autoship-info [data-type="text"]{
+    width: 60%;
+}
+.ghd--autoship-info h2 span{
+    color: var(--gh-color-gray);
+}
+.ghd--autoship-info h2{
+    color: var(--gh-color-green);
+}
+
+/*
+    MISSION
+*/
+.ghd--mission{
+    padding: 4rem 0;
+}
+.ghd--mission [data-type="header"]{
+    justify-content: space-between;
+    align-items: center;
+}
+.ghd--mission h2{
+    font-size: 5rem;
+    color: var(--gh-color-green);
+}
+.ghd--mission [data-type="header"] > div:last-child{
+    max-width: 550px;
+}
+
+.ghd--mission [data-type="cols"]{
+    justify-content: space-between;
+}
+.ghd--mission [data-type="cols"] > div{
+    width: calc(25% - 10px);
+    background: #fff;
+    border: 1px solid var(--gh-color-gray);
+}
+.ghd--mission [data-type="cols"] > div > div{
+    padding: 1rem 2rem;
+}
+.ghd--mission [data-type="cols"] h3{
+    margin-top: 0;
+    font-size: 2.5rem;
+    font-style: italic;
+    color: var(--gh-color-green);
+}
+.ghd--mission [data-type="cols"] h3 span{
+    color: var(--gh-color-gray);
+}
+
+/*
+    REVIEWS
+*/
+.ghd--reviews h3{
+    color: var(--gh-color-gold);
+}
+.ghd--reviews h3 span{
+    color: var(--gh-color-gray);
+}
+.ghd--reviews [data-type="image"] a{
+    color: #fff;
+}
+.ghd--reviews .ghd--reviews--featured-title{
+    font-size: 4rem;
+    margin-top: 2em;
+    margin-bottom: 0;
+}
+.ghd--reviews [data-type="cols"] > div{
+    width: 50%;
+}
+.ghd--reviews [data-type="cols"] > div:first-child{
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 0;
+}
+.ghd--reviews [data-type="cols"] > div:first-child > div{
+    max-width: 500px;
+}
+.ghd--reviews [data-type="cols"] > div:last-child{
+    background: var(--gh-color-dark-green) url(https://cdn.globalhealing.com/pages/home/v2/reviews-bg.png) center center no-repeat;
+    background-size: cover;
+}
+.ghd--reviews [data-type="image"]{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.ghd--reviews [data-type="image"] > div{
+    display: flex;
+    flex-direction: column;
+    padding: 8rem 0;
+    max-width: 500px;
+}
+.ghd--reviews [data-type="image"] > div > div{
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+    padding: 2rem 0;
+    align-items: center;
+}
+.ghd--reviews [data-type="image"] > div > div > div:first-child{
+    width: 200px;
+}
+.ghd--reviews [data-type="image"] > div > div > div:last-child{
+    max-width: 200px;
+    color: #fff;
+}
+.ghd--reviews [data-type="image"] > div > div:not(:last-child){
+    border-bottom: 1px solid var(--gh-color-gold);
+}
+.ghd--reviews [data-type="image"] [data-type="border"]{
+    height: 1px;
+    background: var(--gh-color-gold);
+}
