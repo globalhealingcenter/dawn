@@ -249,7 +249,7 @@ section h3.eyebrow span{
     MISSION
 */
 .ghd--mission{
-    padding: 4rem 0;
+    padding: 4rem 0 8rem 0;
 }
 .ghd--mission [data-type="header"]{
     justify-content: space-between;
