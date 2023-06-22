@@ -1,3 +1,49 @@
+
+  <!-- PERC V1: BEGIN -->
+  <!--
+    This code excerpt was included automatically as a result of installing the get-percs app.
+    Head over to https://percs.notion.site/How-do-I-install-PERCS-Shopify-Plugin-Detailed-Version-0936ca7a794f45eb987f4c450dd2fc71 to read more on how to safely remove it.
+  -->
+  {% liquid
+    assign perc = false
+    assign hideCart = false
+    assign percCheckout = false
+    for tag in product.tags
+      if tag contains 'perc:'
+        assign perc = true
+        if tag contains 'perc: access'
+          assign hideCart = true
+        endif
+        if tag contains 'perc: checkout'
+          assign percCheckout = true
+        endif
+      endif
+    endfor
+  %}
+  {% if perc %}
+  {% if hideCart %}
+  <style>
+    .product-form__buttons {
+      display: none;
+    }
+  </style>
+  {% endif %}
+  <div>
+    {% if percCheckout %}
+    {% else %}
+      <nft-connect
+       product="{{product.id}}"
+       variant="{{product.variants[0].id}}"
+       selector=".product-form__buttons"
+       ></nft-connect>
+    {% endif %}
+
+    <script type="text/javascript" src="{{ 'nft-connect.js' | asset_url }}"></script>
+  </div>
+  {% endif %}
+  <!-- PERCS ENGAGE: END --> 
+
+  
 <section
   id="MainProduct-{{ section.id }}"
   class="evm-also-bought-products page-width section-{{ section.id }}-padding"
