@@ -30,6 +30,7 @@
       {%- when '@app' -%}
         {% render block %}
       {% when 'intro' %}
+        {% if config.intro %}
         <div class="ghd--block--intro ghd--block" {{ block.shopify_attributes }}>
           <div data-type="cols">
             <div data-type="text">
@@ -50,6 +51,7 @@
             </div>
           </div>
         </div>
+        {% endif %}
       {% when 'benefits' %}
         <div class="ghd--block--benefits ghd--block" {{ block.shopify_attributes }}>
           <div data-type="cols">
