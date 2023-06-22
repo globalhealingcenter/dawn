@@ -43,6 +43,16 @@
           "settings": {
           }
         },
+        "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98": {
+          "type": "br",
+          "settings": {
+          }
+        },
+        "90d53a3e-607e-44cf-81c0-4d063ee2042c": {
+          "type": "mission",
+          "settings": {
+          }
+        },
         "b871651f-c308-4034-8741-ebbb3f7989ed": {
           "type": "reviews",
           "settings": {
@@ -58,6 +68,8 @@
         "a26c34a7-5d4d-4929-83fe-2265308200c0",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
+        "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
+        "90d53a3e-607e-44cf-81c0-4d063ee2042c",
         "b871651f-c308-4034-8741-ebbb3f7989ed"
       ],
       "settings": {
