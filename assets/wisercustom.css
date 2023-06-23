@@ -19,7 +19,7 @@ text-align: center!important;
     min-height: 37px;line-height: 1.3;    font-size: 14px;
                                   font-family: 'Proxima Nova';
                                   }
-#alsopresets3 a , #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text , span#evm-ws-alsobought-total-text , span#evm-ws-alsobought-amount { font-family: 'Proxima Nova';}
+#alsopresets3 a , #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text , span#evm-ws-alsobought-total-text , span#evm-ws-alsobought-amount , #alsopresets3 .evm-ws__cart-submit , .evm-wscontainer p.fbt_disc_msg { font-family: 'Proxima Nova';}
 .also3_butoon_wrapper {
     background: #3C5949!important;
 }
