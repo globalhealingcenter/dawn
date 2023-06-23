@@ -128,7 +128,9 @@ section h3.eyebrow span{
 }
 .ghd--journey [data-type="cols"] > div:first-child{
     width: 30%;
-    border-right: 1px solid var(--gh-color-gray);
+    border-style: solid;
+    border-color: var(--gh-color-gray);
+    border-width: 0 1px 0 0;
 }
 .ghd--journey [data-type="cols"] > div:last-child{
     width: 70%;
@@ -349,4 +351,76 @@ section h3.eyebrow span{
 .ghd--reviews [data-type="image"] [data-type="border"]{
     height: 1px;
     background: var(--gh-color-gold);
+}
+
+@media (max-width: 700px) {
+
+    .ghd--autoship-info [data-type=border],
+    .ghd--autoship-info [data-type=text] .eyebrow br,
+    .ghd--journey [data-type=header] h2 br{
+        display: none;
+    }
+
+    .ghd--flex,
+    .ghd--our-process [data-side=right],
+    .ghd--reviews [data-type=image]>div>div{
+        flex-wrap: wrap;
+    }
+
+    .ghd--reviews [data-type=cols]>div,
+    .ghd--mission [data-type=cols]>div,
+    .ghd--journey [data-type=cols]>div:last-child,
+    .ghd--journey [data-type=cols]>div:first-child,
+    .ghd--autoship-info [data-type=image],
+    .ghd--autoship-info [data-type=text]{
+        width: 100%;
+    }
+
+    .ghd--our-process [data-side=right] span{
+        width: 50%;
+        padding: 1rem 1rem;
+    }
+
+    .ghd--journey [data-type=cols]>div{
+        padding: 0;
+    }
+    .ghd--autoship-info .page-width{
+        padding: 2rem;
+    }
+    .ghd--autoship-info [data-type=text] .eyebrow{
+        padding-top:  5rem;
+    }
+
+    .ghd--journey [data-type=cols]>div:first-child{
+        border-right-width: 0;
+        border-bottom-width: 1px;
+    }
+
+    .ghd--mission [data-type=cols]{
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .ghd--journey [data-type=header] h2{
+        font-size: 4rem;
+        margin-top: 1rem;
+    }
+    .ghd--reviews section h3.eyebrow{
+        padding-top:0
+    }
+
+    .ghd--reviews [data-type=image]>div>div{
+        gap: 0;
+        justify-content: center;
+    }
+    .ghd--reviews [data-type=image]>div>div>div:last-child{
+        max-width: initial;
+        padding: 0 2rem;
+    }
+    .ghd--reviews [data-type=image]>div>div>div:last-child p{
+        margin-bottom: 0;
+    }
+    .ghd--reviews [data-type=image]>div{
+        padding: 2rem;
+    }
 }
