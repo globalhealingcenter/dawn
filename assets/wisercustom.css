@@ -66,6 +66,9 @@ span#evm-ws-alsobought-amount {
 #alsopresets3 .review-wrapper {text-align: left; line-height: 1;}
 #alsopresets3 .rating-star {
     --letter-spacing: 0.4; }
+.yotpo a:hover {
+    color: #3C5949 !important;
+}
 #alsopresets3 .evm-ws-card .yotpo-bottomline  { height:"auto"}
 #presets2 .ws-box-wrapper .evm-ws-card, #presets2 .ws-box-wrapper .evm-ws-card .ws-card_image_container .ws-card__background-image, #presets2 .ws-box-wrapper .evm-ws-card:before{background-color: transparent;}
 #presets2 .ws-box-wrapper .evm-ws-card:before{box-shadow: unset;}
