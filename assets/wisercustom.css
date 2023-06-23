@@ -79,6 +79,9 @@ span#evm-ws-alsobought-amount {
   #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text {
     padding-left: 24px;
 }
+  #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text {
+    font-size: 14px;
+  }
 }
 @media only screen and (max-width: 767px) {
  #alsopresets3 .yotpo-display-wrapper  { line-height:unset;}
