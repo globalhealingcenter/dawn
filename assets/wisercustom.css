@@ -63,7 +63,7 @@ span#evm-ws-alsobought-total-text:before {
 span#evm-ws-alsobought-amount {
     letter-spacing: 0rem;
 }
-#alsopresets3 .yotpo .standalone-bottomline.star-clickable,#alsopresets3  .yotpo .standalone-bottomline .star-clickable { display:block!important}
+#alsopresets3 .yotpo .standalone-bottomline.star-clickable,#alsopresets3  .yotpo .standalone-bottomline .star-clickable { flex-wrap: wrap;}
 #alsopresets3 .review-wrapper {text-align: left; line-height: 1;}
 #alsopresets3 .rating-star {
     --letter-spacing: 0.4; }
