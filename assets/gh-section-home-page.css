@@ -372,7 +372,8 @@ section h3.eyebrow span{
     .ghd--journey [data-type=cols]>div:last-child,
     .ghd--journey [data-type=cols]>div:first-child,
     .ghd--autoship-info [data-type=image],
-    .ghd--autoship-info [data-type=text]{
+    .ghd--autoship-info [data-type=text],
+    .ghd--journey--goals>div{
         width: 100%;
     }
 
@@ -381,9 +382,7 @@ section h3.eyebrow span{
         padding: 1rem 1rem;
     }
 
-    .ghd--journey [data-type=cols]>div{
-        padding: 0;
-    }
+
     .ghd--autoship-info .page-width{
         padding: 2rem;
     }
@@ -391,6 +390,9 @@ section h3.eyebrow span{
         padding-top:  5rem;
     }
 
+    .ghd--journey [data-type=cols]>div{
+        padding: 2rem 0 3rem;
+    }
     .ghd--journey [data-type=cols]>div:first-child{
         border-right-width: 0;
         border-bottom-width: 1px;
@@ -408,6 +410,10 @@ section h3.eyebrow span{
     .ghd--reviews section h3.eyebrow{
         padding-top:0
     }
+    .ghd--mission h2{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 
     .ghd--reviews [data-type=image]>div>div{
         gap: 0;
@@ -423,4 +429,8 @@ section h3.eyebrow span{
     .ghd--reviews [data-type=image]>div{
         padding: 2rem;
     }
+    .ghd--autoship-info [data-type=image]{
+        max-width: 100%;
+    }
+
 }
