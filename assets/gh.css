@@ -11,6 +11,10 @@ body{
   --gh-font-secondary: "Proxima Nova", sans-serif;
 }
 
+.page-shogun-default{
+    --gradient-background: #fff;
+}
+
 @font-face {
     font-family: "Miller Display";
     font-weight: 500;
