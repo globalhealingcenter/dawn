@@ -19,7 +19,7 @@ text-align: center!important;
     min-height: 37px;line-height: 1.3;    font-size: 14px;
                                   font-family: 'Proxima Nova';
                                   }
-
+#alsopresets3 a , #alsopresets3 .checkbox-wrapper .evm-ab-wiser-text , span#evm-ws-alsobought-total-text , span#evm-ws-alsobought-amount { font-family: 'Proxima Nova';}
 .also3_butoon_wrapper {
     background: #3C5949!important;
 }
@@ -27,7 +27,7 @@ text-align: center!important;
     justify-content: space-between; padding-top: 0px;
         min-height: 30px; }
 
-.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold; }
+.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold;font-family: 'Proxima Nova';  }
 
 
 .evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .card-details-wraper  { padding-bottom: 5px;}
@@ -58,7 +58,7 @@ span#evm-ws-alsobought-total-text:before {
 }
 .evm-ws-alsobought-total span.fbt_ttl {
     font-weight: bold!important;
-  letter-spacing: 0rem;
+  letter-spacing: 0rem; font-family: 'Proxima Nova';
 } 
 span#evm-ws-alsobought-amount {
     letter-spacing: 0rem;
