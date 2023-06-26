@@ -40,11 +40,11 @@
             <section class="ghd--banners ghd--bg-white" {{ block.shopify_attributes }}>
                 <div class="page-width ghd--flex">
                     <div>
-                        <img src="https://cdn.globalhealing.com/products/testing/b1.jpg" alt="">
+                        <a href='{{ block.settings.banner_1_url }}'><img src="{{ block.settings.banner_1_image }}" alt="" loading="lazy"></a>
                     </div>
                     <div class="ghd--flex" data-side="right">
-                        <div><img src="https://cdn.globalhealing.com/products/testing/b2.jpg" alt=""></div>
-                        <div><img src="https://cdn.globalhealing.com/products/testing/b3.jpg" alt=""></div>
+                        <div><a href='{{ block.settings.banner_2_url }}'><img src="{{ block.settings.banner_2_image }}" alt="" loading="lazy"></a></div>
+                        <div><a href='{{ block.settings.banner_3_url }}'><img src="{{ block.settings.banner_3_image }}" alt="" loading="lazy"></a></div>
                     </div>
                 </div>
             </section>
