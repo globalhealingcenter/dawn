@@ -368,13 +368,17 @@ section h3.eyebrow span{
         height: calc(30px + 4rem)
     }
 
-
+    @keyframes homepage-logos {
+        from {left: 2rem}
+        to {left: calc( calc(calc(1200px - 100%) + 2rem) * -1);}
+    }
     .ghd--logos .ghd--flex{
         flex-wrap: nowrap;
         min-width: 1200px;
         position: absolute;
         left: 2rem;
         top: 2rem;
+        animation: 3s linear 1s infinite alternate homepage-logos;
     }
 
     .ghd--our-process > div > div{
