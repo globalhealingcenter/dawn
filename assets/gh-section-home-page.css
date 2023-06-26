@@ -170,6 +170,10 @@ section h3.eyebrow span{
     right: 0;
 }
 
+.ghd--journey .button{
+    min-width: 230px;
+}
+
 /*
     FOUNDATION
 */
@@ -356,7 +360,7 @@ section h3.eyebrow span{
     background: var(--gh-color-gold);
 }
 
-@media( min-width: 701px ) and (max-width: 1100px){
+@media( min-width: 701px ) and (max-width: 1250px){
     .ghd--our-process > div > div{
         flex-wrap: wrap;
     }
@@ -420,7 +424,7 @@ section h3.eyebrow span{
     }
 }
 
-@media (max-width: 1100px){
+@media (max-width: 1250px){
     .ghd--foundation .ghd--flex{
         flex-wrap: wrap;
     }
@@ -485,6 +489,9 @@ section h3.eyebrow span{
     }
     .ghd--foundation h2.eyebrow{
         font-size: 4rem;
+    }
+    .ghd--foundation [data-type=image] img{
+        margin-top: -30px;
     }
 
     .ghd--journey [data-type=cols]>div:first-child{
