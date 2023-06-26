@@ -384,26 +384,6 @@ section h3.eyebrow span{
     .ghd--journey--goals>div{
         width: 100%;
     }
-    .ghd--journey--goals a{
-        font-size: 2.6rem;
-    }
-
-    .ghd--autoship-info .page-width{
-        flex-direction: column;
-    }
-    .ghd--autoship-info [data-type=image]{
-        max-width: 100%;
-        padding-bottom: 3rem;
-    }
-    .ghd--autoship-info [data-type=border]{
-        width: 100%;
-        height: 1px;
-        background: var(--gh-color-gray);
-    }
-    .ghd--autoship-info [data-type=text]{
-        width: 100%;
-        padding-top: 3rem;
-    }
 
     .ghd--mission .ghd--flex > div:first-child{
         min-width: 400px;
@@ -439,12 +419,46 @@ section h3.eyebrow span{
         padding: 5rem;
         background: var(--gh-color-green);
     }
+
+    .ghd--autoship-info .page-width{
+        flex-direction: column;
+    }
+    .ghd--autoship-info [data-type=image]{
+        max-width: 100%;
+        padding-bottom: 3rem;
+    }
+    .ghd--autoship-info [data-type=image]>div{
+        margin-left: 0;
+    }
+    .ghd--autoship-info [data-type=border]{
+        width: 100%;
+        height: 1px;
+        background: var(--gh-color-gray);
+    }
+    .ghd--autoship-info [data-type=text]{
+        width: 100%;
+        padding-top: 3rem;
+    }
+
+    .ghd--reviews [data-type=image]>div>div>div:last-child{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .ghd--journey--goals a{
+        font-size: 2.6rem;
+    }
 }
 
 @media (max-width: 700px) {
 
-    .ghd--autoship-info [data-type=border],
-    .ghd--autoship-info [data-type=text] .eyebrow br,
+    .ghd--our-process .ghd--flex,
+    .ghd--journey,
+    .ghd--reviews [data-type=cols]>div:first-child{
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
     .ghd--journey [data-type=header] h2 br,
     .ghd--our-process h2 br{
         display: none;
@@ -460,8 +474,6 @@ section h3.eyebrow span{
     .ghd--mission [data-type=cols]>div,
     .ghd--journey [data-type=cols]>div:last-child,
     .ghd--journey [data-type=cols]>div:first-child,
-    .ghd--autoship-info [data-type=image],
-    .ghd--autoship-info [data-type=text],
     .ghd--our-process > div,
     .ghd--journey--goals>div{
         width: 100%;
@@ -470,12 +482,6 @@ section h3.eyebrow span{
     .ghd--our-process [data-side=right] span{
         width: 50%;
         padding: 1rem 1rem;
-    }
-    .ghd--autoship-info .page-width{
-        padding: 6rem 3rem;
-    }
-    .ghd--autoship-info [data-type=text] .eyebrow{
-        padding-top:  5rem;
     }
     .ghd--mission [data-type=header]{
         padding-bottom: 3rem;
@@ -515,7 +521,6 @@ section h3.eyebrow span{
 
     .ghd--reviews [data-type=image]>div>div{
         gap: 0;
-        justify-content: center;
     }
     .ghd--reviews [data-type=image]>div>div>div:last-child{
         max-width: initial;
@@ -526,9 +531,6 @@ section h3.eyebrow span{
     }
     .ghd--reviews [data-type=image]>div{
         padding: 2rem;
-    }
-    .ghd--autoship-info [data-type=image]{
-        max-width: 100%;
     }
 
 }
