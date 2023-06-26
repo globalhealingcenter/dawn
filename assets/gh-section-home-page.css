@@ -361,6 +361,22 @@ section h3.eyebrow span{
 }
 
 @media( min-width: 701px ) and (max-width: 1250px){
+
+    .ghd--logos{
+        position: relative;
+        overflow: hidden;
+        height: calc(30px + 4rem)
+    }
+
+
+    .ghd--logos .ghd--flex{
+        flex-wrap: nowrap;
+        min-width: 1200px;
+        position: absolute;
+        left: 2rem;
+        top: 2rem;
+    }
+
     .ghd--our-process > div > div{
         flex-wrap: wrap;
     }
