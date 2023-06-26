@@ -16,6 +16,12 @@
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
           "settings": {
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/products\/testing\/b1.jpg",
+            "banner_1_url": "",
+            "banner_2_image": "https:\/\/cdn.globalhealing.com\/products\/testing\/b2.jpg",
+            "banner_2_url": "",
+            "banner_3_image": "https:\/\/cdn.globalhealing.com\/products\/testing\/b3.jpg",
+            "banner_3_url": ""
           }
         },
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
