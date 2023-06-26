@@ -423,9 +423,9 @@ section h3.eyebrow span{
         position: absolute;
         left: 2rem;
         top: 2rem;
-        animation: 18s linear 1s infinite alternate homepage-logos;
+        animation: 21s linear 0 infinite alternate homepage-logos;
     }
-    
+
     .ghd--foundation .ghd--flex{
         flex-wrap: wrap;
     }
