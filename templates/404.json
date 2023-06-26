@@ -1,1 +1,35 @@
-{"sections":{"main":{"type":"main-404","settings":{}}},"order":["main"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "settings": {
+      }
+    },
+    "168777959137dea880": {
+      "type": "apps",
+      "blocks": {
+        "d0f19cac-77bb-4c93-8128-6175925813cf": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        },
+        "4c6e2702-ebdf-4c6f-be01-e08e8d6c301f": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_browsing\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "d0f19cac-77bb-4c93-8128-6175925813cf",
+        "4c6e2702-ebdf-4c6f-be01-e08e8d6c301f"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "168777959137dea880"
+  ]
+}
