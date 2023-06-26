@@ -458,7 +458,7 @@ section h3.eyebrow span{
 @media (max-width: 700px) {
 
     .ghd--our-process .ghd--flex,
-    .ghd--journey,
+    .ghd--journey .page-width,
     .ghd--reviews [data-type=cols]>div:first-child{
         padding-left: 2rem;
         padding-right: 2rem;
@@ -529,7 +529,6 @@ section h3.eyebrow span{
     }
     .ghd--reviews [data-type=image]>div>div>div:last-child{
         max-width: initial;
-        padding: 0 2rem;
     }
     .ghd--reviews [data-type=image]>div>div>div:last-child p{
         margin-bottom: 0;
