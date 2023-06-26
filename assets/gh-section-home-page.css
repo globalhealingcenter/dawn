@@ -410,16 +410,19 @@ section h3.eyebrow span{
     .ghd--logos{
         position: relative;
         overflow: hidden;
-        height: calc(30px + 4rem)
+        height: calc(22px + 4rem)
+    }
+    .ghd--logos img{
+        height: 22px;
     }
 
     @keyframes homepage-logos {
         from {left: 2rem}
-        to {left: calc( calc(calc(1200px - 100%) + 2rem) * -1);}
+        to {left: calc( calc(calc(1100px - 100%) + 2rem) * -1);}
     }
     .ghd--logos .ghd--flex{
         flex-wrap: nowrap;
-        min-width: 1200px;
+        min-width: 1100px;
         position: absolute;
         left: 2rem;
         top: 2rem;
