@@ -428,10 +428,10 @@ section h3.eyebrow span{
     .ghd--foundation [data-type=image] img{
         margin-top: -60px;
     }
-    .ghd--foundation [data-type=text]{
+    .ghd--foundation > div >[data-type=text]{
         order: 2;
         max-width: 100%;
-        padding: 6rem;
+        padding: 5rem;
         background: var(--gh-color-green);
     }
 }
@@ -479,6 +479,14 @@ section h3.eyebrow span{
     .ghd--journey [data-type=cols]>div{
         padding: 2rem 0 3rem;
     }
+
+    .ghd--foundation > div >[data-type=text]{
+        padding: 3rem;
+    }
+    .ghd--foundation h2.eyebrow{
+        font-size: 4rem;
+    }
+
     .ghd--journey [data-type=cols]>div:first-child{
         border-right-width: 0;
         border-bottom-width: 1px;
