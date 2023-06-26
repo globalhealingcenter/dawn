@@ -6,6 +6,11 @@
 .checkbox-wrapper.fbt_template3_desktop_chk {
     grid-row-start: 4;
 }
+.evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .card-details-wraper  { padding-bottom: 5px; grid-row-start: 2;}
+
+// above code for tag line 
+
+
 .evm-also-bought.evm_visible_text .evm_wiser_heading {
     font-family: 'Miller Display';
   font-weight: bold;
@@ -36,7 +41,7 @@ text-align: center!important;
 .evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold;font-family: 'Proxima Nova';  }
 
 
-.evm-also-bought.evm_visible_text #alsopresets3 .evm-ws-image-section .card-details-wraper  { padding-bottom: 5px; grid-row-start: 2;}
+
 
 .evm-also-bought.evm_visible_text #alsopresets3 .checkbox-wrapper span.checkmark  {    border-radius: 50%; border: 1px solid #3C5949; }
 #alsopresets3 .checkbox-wrapper input:checked~span.checkmark:after {    width: 5px;top: 4px;
