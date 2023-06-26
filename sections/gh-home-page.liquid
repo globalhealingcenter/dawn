@@ -45,7 +45,7 @@
                 type: 'slider',
                 startAt: 0,
                 perView: 7,
-                autoplay: 2000,
+                autoplay: false,
                 breakpoints: {
                   475: {
                     perView: 3
@@ -54,7 +54,8 @@
                     perView: 3
                   },
                   1200: {
-                    perView: 4
+                    perView: 4,
+                    autoplay: 2000,
                   }
                 }
               }).mount();
