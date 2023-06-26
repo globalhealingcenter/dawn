@@ -18,11 +18,8 @@
           "type": "info_tabs",
           "settings": {
             "tab_1_title": "About",
-            "tab_1_content": "",
             "tab_2_title": "Who It's For",
-            "tab_2_content": "<p>{{ product.metafields.globalhealing.who_its_for | metafield_tag }}<\/p>",
-            "tab_3_title": "Suggested Use",
-            "tab_3_content": "<p>{{ product.metafields.globalhealing.suggested_use | metafield_tag }}<\/p>"
+            "tab_3_title": "Suggested Use"
           }
         },
         "price": {
@@ -215,6 +212,28 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "1687770021657df7cc": {
+      "type": "apps",
+      "blocks": {
+        "f1ce1112-f8a2-470c-be5a-3e6af8836361": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        },
+        "0c5b410f-8a7d-4fc2-9643-1a54a568a1d3": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_browsing\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "f1ce1112-f8a2-470c-be5a-3e6af8836361",
+        "0c5b410f-8a7d-4fc2-9643-1a54a568a1d3"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -223,6 +242,7 @@
     "1683650930059df865",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
-    "1686083501cc540fa5"
+    "1686083501cc540fa5",
+    "1687770021657df7cc"
   ]
 }
