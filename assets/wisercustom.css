@@ -107,11 +107,13 @@ span#evm-ws-alsobought-amount {
 } 
 #presets2 .ws-card__title, #ws-popup-layout1 .ws-card__title, #presets2 .ws-card__price, #ws-popup-layout1 .ws-card__price, #alsopresets2 .ws-card__title {     font-family: 'Proxima Nova';}
 
-@media screen and (min-width: 750px){
-.page-width {
-    padding: 0 5rem;
-} 
-}
+
+.evm_visible_text .evm-wscontainer { max-width:100%; padding:0; } 
+
+
+
+
+
 
 
 
