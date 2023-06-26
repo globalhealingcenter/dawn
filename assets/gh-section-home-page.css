@@ -72,7 +72,7 @@ section h3.eyebrow span{
 */
 .ghd--our-process{
     padding: 5rem 0;
-    background: var(--gh-color-green) url(https://cdn.globalhealing.com/pages/home/v2/quality-bg.jpg?w=1000) center center no-repeat;
+    background: var(--gh-color-green) url(https://cdn.globalhealing.com/pages/v2/home/quality-bg.jpg?w=1000) center center no-repeat;
     background-size: cover;
 }
 .ghd--our-process > div{
@@ -320,7 +320,7 @@ section h3.eyebrow span{
     max-width: 500px;
 }
 .ghd--reviews [data-type="cols"] > div:last-child{
-    background: var(--gh-color-dark-green) url(https://cdn.globalhealing.com/pages/home/v2/reviews-bg.png) center center no-repeat;
+    background: var(--gh-color-dark-green) url(https://cdn.globalhealing.com/pages/v2/home/reviews-bg.png) center center no-repeat;
     background-size: cover;
 }
 .ghd--reviews [data-type="image"]{
