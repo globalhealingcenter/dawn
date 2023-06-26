@@ -420,8 +420,13 @@ section h3.eyebrow span{
         background: var(--gh-color-green);
     }
 
+    .ghd--autoship-info h2 br{
+        display: none;
+    }
     .ghd--autoship-info .page-width{
         flex-direction: column;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
     .ghd--autoship-info [data-type=image]{
         max-width: 100%;
@@ -455,8 +460,8 @@ section h3.eyebrow span{
     .ghd--our-process .ghd--flex,
     .ghd--journey,
     .ghd--reviews [data-type=cols]>div:first-child{
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 
     .ghd--journey [data-type=header] h2 br,
