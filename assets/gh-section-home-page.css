@@ -48,6 +48,14 @@ section h3.eyebrow span{
     margin: 0 auto;
 }
 
+.ghd--logos img[data-logo="huffpost"]{
+    height: 21px;
+}
+.ghd--logos img[data-logo="miami-herald"],
+.ghd--logos img[data-logo="forbes"]{
+    height: 27px;
+}
+
 /*
     BANNERS
 */
