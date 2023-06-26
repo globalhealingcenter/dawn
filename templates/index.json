@@ -34,8 +34,8 @@
           "settings": {
           }
         },
-        "a26c34a7-5d4d-4929-83fe-2265308200c0": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_recommended\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+        "0353913e-ce5a-4823-b72c-7d0b126eb112": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "settings": {
           }
         },
@@ -71,7 +71,7 @@
         "ee09762d-26e5-443b-8985-8a77f1574932",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
-        "a26c34a7-5d4d-4929-83fe-2265308200c0",
+        "0353913e-ce5a-4823-b72c-7d0b126eb112",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
@@ -95,11 +95,6 @@
     "1687779425f103d894": {
       "type": "apps",
       "blocks": {
-        "46d6aee0-45bf-46a6-b6df-7de2efcd554b": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
-        },
         "898be88a-3a74-46c6-88cf-30e877d68acf": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "settings": {
@@ -107,7 +102,6 @@
         }
       },
       "block_order": [
-        "46d6aee0-45bf-46a6-b6df-7de2efcd554b",
         "898be88a-3a74-46c6-88cf-30e877d68acf"
       ],
       "settings": {
