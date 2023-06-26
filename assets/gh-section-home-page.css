@@ -367,8 +367,22 @@ section h3.eyebrow span{
         padding: 1rem 2rem;
         width: 50%;
     }
+
+    .ghd--autoship-info .page-width{
+        flex-direction: column;
+    }
+    .ghd--autoship-info [data-type=image]{
+        max-width: 100%;
+        padding-bottom: 3rem;
+    }
     .ghd--autoship-info [data-type=border]{
-        
+        width: 100%;
+        height: 1px;
+        background: var(--gh-color-gray);
+    }
+    .ghd--autoship-info [data-type=text]{
+        width: 100%;
+        padding-top: 3rem;
     }
 }
 
