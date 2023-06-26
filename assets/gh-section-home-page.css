@@ -400,6 +400,40 @@ section h3.eyebrow span{
         width: 100%;
         padding-top: 3rem;
     }
+
+    .ghd--mission .ghd--flex > div:first-child{
+        min-width: 400px;
+    }
+    .ghd--mission [data-type=cols]{
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+    .ghd--mission [data-type=cols]>div{
+        width: calc(50% - 10px);
+    }
+
+    .ghd--reviews .ghd--flex{
+        flex-wrap: wrap;
+    }
+    .ghd--reviews [data-type=cols]>div{
+        width: 100%;
+    }
+}
+
+@media (max-width: 1100px){
+    .ghd--foundation .ghd--flex{
+        flex-wrap: wrap;
+    }
+
+    .ghd--foundation [data-type=image] img{
+        margin-top: -60px;
+    }
+    .ghd--foundation [data-type=text]{
+        order: 2;
+        max-width: 100%;
+        padding: 6rem;
+        background: var(--gh-color-green);
+    }
 }
 
 @media (max-width: 700px) {
