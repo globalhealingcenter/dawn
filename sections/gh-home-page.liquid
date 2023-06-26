@@ -26,40 +26,16 @@
             </section>
         {% when 'logos' %}
             <section class="ghd--logos ghd--bg-white" {{ block.shopify_attributes }}>
-                <div class="glide" data-glide-id='{{ block.id }}'>
-                    <div class="glide__track" data-glide-el="track">
-                        <ul class="glide__slides">
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-miami-herald.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-forbes.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-chicago-tribune.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-huffpost.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-mens-journal.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-us-weekly.svg"></li>
-                            <li><img src="https://cdn.globalhealing.com/pages/v2/home/logos-livestrong.svg"></li>
-                        </ul>
-                    </div>
+                <div class="ghd--flex">
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-miami-herald.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-forbes.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-chicago-tribune.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-huffpost.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-mens-journal.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-us-weekly.svg"></div>
+                    <div><img src="https://cdn.globalhealing.com/pages/v2/home/logos-livestrong.svg"></div>
                 </div>
             </section>
-            <script>
-              new Glide('[data-glide-id="{{ block.id }}"]', {
-                type: 'slider',
-                startAt: 0,
-                perView: 7,
-                autoplay: false,
-                breakpoints: {
-                  475: {
-                    perView: 3
-                  },
-                  800: {
-                    perView: 3
-                  },
-                  1200: {
-                    perView: 4,
-                    autoplay: 2000,
-                  }
-                }
-              }).mount();
-            </script>
         {% when 'banners' %}
             <section class="ghd--banners ghd--bg-white" {{ block.shopify_attributes }}>
                 <div class="page-width ghd--flex">
