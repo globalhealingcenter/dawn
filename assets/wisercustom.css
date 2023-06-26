@@ -117,7 +117,8 @@ span#evm-ws-alsobought-amount {
 .evm_visible_text #presets2 .ws-card__header-link  p { font-family: 'Proxima Nova';  line-height:1.3; margin:0;} 
 .evm_visible_text #presets2 .product .rating-star {
     --letter-spacing: 0.4;
-
+}
+#presets2 .yotpo.bottomLine .yotpo-bottomline a { font-family: 'Proxima Nova';}
 
 
 
