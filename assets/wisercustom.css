@@ -99,3 +99,15 @@ span#evm-ws-alsobought-amount {
 .alsobought_template3 .add-to-cart-btn{width: 100%; margin-left: 0;}
 }
 
+
+// Main Widgets
+.evm_wiser_heading, .evm-ws-popup-innerSection .evm-ws-popup-title {
+    font-family: 'Miller Display';
+    font-weight: 600;
+} 
+#presets2 .ws-card__title, #ws-popup-layout1 .ws-card__title, #presets2 .ws-card__price, #ws-popup-layout1 .ws-card__price, #alsopresets2 .ws-card__title {     font-family: 'Proxima Nova';}
+
+
+
+
+
