@@ -48,6 +48,10 @@ body{
       url("https://cdn.globalhealing.com/web/font/proxima-nova/700.eot") format("embedded-opentype");
 }
 
+a{
+    color: var(--gh-color-green);
+}
+
 body{
   color: var(--gh-color-gray);
 }

@@ -150,14 +150,17 @@ section h3.eyebrow span{
     padding-right: 1.2em;
 }
 .ghd--journey--goals a::after{
-    content: "->";
+    content: "";
+    background: transparent url(https://cdn.globalhealing.com/web/v2/icon/arrow-right.svg) right center no-repeat;
+    background-size: contain;
     position: absolute;
     top: 0;
     right: 1em;
-    height: 1em;
+    bottom: 0;
+    width: 1em;
     line-height: 1;
     opacity: 0;
-    transition: opacity .2s ease-in-out, right .2s ease-in-out;
+    transition: opacity .2s ease-in-out,right .2s ease-in-out;
 }
 .ghd--journey--goals a:hover{
     color: var(--gh-color-green);
