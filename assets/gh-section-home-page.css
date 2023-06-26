@@ -367,6 +367,22 @@ section h3.eyebrow span{
         padding: 1rem 2rem;
         width: 50%;
     }
+    .ghd--journey [data-type=cols]>div:first-child{
+        padding-left: 0;
+        padding-right: 2rem;
+        width: 50%;
+    }
+    .ghd--journey [data-type=cols]>div:last-child{
+        padding-right: 0;
+        padding-left: 3rem;
+        width: 50%;
+    }
+    .ghd--journey--goals>div{
+        width: 100%;
+    }
+    .ghd--journey--goals a{
+        font-size: 2.6rem;
+    }
 
     .ghd--autoship-info .page-width{
         flex-direction: column;
@@ -416,13 +432,14 @@ section h3.eyebrow span{
         width: 50%;
         padding: 1rem 1rem;
     }
-
-
     .ghd--autoship-info .page-width{
-        padding: 2rem;
+        padding: 6rem 3rem;
     }
     .ghd--autoship-info [data-type=text] .eyebrow{
         padding-top:  5rem;
+    }
+    .ghd--mission [data-type=header]{
+        padding-bottom: 3rem;
     }
 
     .ghd--journey [data-type=cols]>div{
