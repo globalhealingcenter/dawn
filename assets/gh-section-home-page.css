@@ -430,7 +430,8 @@ section h3.eyebrow span{
     }
 
     .ghd--foundation [data-type=image] img{
-        margin-top: -60px;
+        margin-top: -30px;
+        width: 500px;
     }
     .ghd--foundation > div >[data-type=text]{
         order: 2;
@@ -490,10 +491,6 @@ section h3.eyebrow span{
     .ghd--foundation h2.eyebrow{
         font-size: 4rem;
     }
-    .ghd--foundation [data-type=image] img{
-        margin-top: -30px;
-    }
-
     .ghd--journey [data-type=cols]>div:first-child{
         border-right-width: 0;
         border-bottom-width: 1px;
