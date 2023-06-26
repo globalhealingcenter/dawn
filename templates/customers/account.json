@@ -44,10 +44,27 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "16877798907f42cf35": {
+      "type": "apps",
+      "blocks": {
+        "fedcd4f0-8bf8-434b-82f5-aae2ac9931fa": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "fedcd4f0-8bf8-434b-82f5-aae2ac9931fa"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "0a5c7c21-802d-4186-be62-a4c68b0b882c",
-    "main"
+    "main",
+    "16877798907f42cf35"
   ]
 }
