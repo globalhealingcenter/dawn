@@ -88,6 +88,12 @@ section h3.eyebrow span{
     font-size: 3rem;
     margin: 0;
 }
+.ghd--our-process > div{
+    flex-wrap: wrap;
+}
+.ghd--our-process > div:first-child{
+    min-width: 300px;
+}
 .ghd--our-process [data-side="right"]{
     display: flex;
     justify-content: flex-end;
@@ -360,7 +366,8 @@ section h3.eyebrow span{
 
     .ghd--autoship-info [data-type=border],
     .ghd--autoship-info [data-type=text] .eyebrow br,
-    .ghd--journey [data-type=header] h2 br{
+    .ghd--journey [data-type=header] h2 br,
+    .ghd--our-process h2 br{
         display: none;
     }
 
@@ -376,6 +383,7 @@ section h3.eyebrow span{
     .ghd--journey [data-type=cols]>div:first-child,
     .ghd--autoship-info [data-type=image],
     .ghd--autoship-info [data-type=text],
+    .ghd--our-process > div,
     .ghd--journey--goals>div{
         width: 100%;
     }

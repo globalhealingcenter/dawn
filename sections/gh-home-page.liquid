@@ -44,8 +44,31 @@
               new Glide('[data-glide-id="{{ block.id }}"]', {
                 type: 'carousel',
                 startAt: 0,
-                perView: 3
-              });
+                perView: 7,
+                breakpoints: {
+                  475: {
+                    perView: 2,
+                    peek: {
+                      before: 0,
+                      after: 20
+                    }
+                  },
+                  800: {
+                    perView: 3,
+                    peek: {
+                      before: 0,
+                      after: 40
+                    }
+                  },
+                  1200: {
+                    perView: 4,
+                    peek: {
+                      before: 0,
+                      after: 100
+                    }
+                  }
+                }
+              }).mount();
             </script>
         {% when 'banners' %}
             <section class="ghd--banners ghd--bg-white" {{ block.shopify_attributes }}>
