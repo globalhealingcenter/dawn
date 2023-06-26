@@ -145,12 +145,6 @@ a.ws-card__header-link {
 	color: #3b3f67;
 	line-height: normal;
 	margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    height: auto;
-    overflow: hidden;
-
 }
 
 #alsopresets3 .ws-card__body {
