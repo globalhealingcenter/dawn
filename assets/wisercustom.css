@@ -109,6 +109,7 @@ span#evm-ws-alsobought-amount {
 
 
 .evm_visible_text .evm-wscontainer { max-width:100%; padding:0; } 
+.evm_visible_text #presets2 .ws-card__title {font-family: 'Proxima Nova';}
 
 
 
