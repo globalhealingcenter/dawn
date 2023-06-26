@@ -423,6 +423,13 @@ section h3.eyebrow span{
     .ghd--logos img{
         height: 22px;
     }
+    .ghd--logos img[data-logo="huffpost"]{
+        height: 16px;
+    }
+    .ghd--logos img[data-logo="miami-herald"],
+    .ghd--logos img[data-logo="forbes"]{
+        height: 20px;
+    }
 
     @keyframes homepage-logos {
         from {left: 2rem}
