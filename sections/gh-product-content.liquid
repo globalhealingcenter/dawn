@@ -140,7 +140,7 @@
                   hidden />
                   <label for="{{ block.id }}-ingredients-{{ forloop.index }}">{{ detail.title }}</label>
                   <div>
-                    <img class='ghd--hide-desktop' src="{{ detail.image }}" alt="" loading='lazy'>
+                    <img class='ghd--hide-desktop' src="{{ detail.image }}?w=600" srcset='{{ detail.image }}?w=1200 2x' alt="" loading='lazy'>
                     {{ detail.content }}
                   </div>
                 </div>
@@ -155,7 +155,7 @@
               </div>
             </div>
             <div data-type="image" class='ghd--hide-mobile'>
-              <img src="" alt="" loading='lazy'>
+              <img src="" srcset='' alt="" loading='lazy'>
             </div>
           </div>
         </div>
@@ -265,7 +265,19 @@
     function setActiveImage(){
       ingredients_inputs.forEach( i => {
         if(!i.checked) return;
-        ingredients_img.src = i.getAttribute('data-ingredient-image')
+        ingredients_img.classList.add('loading');
+
+        ingredients_img.src = i.getAttribute('data-ingredient-image') + '?w=600'
+        ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
+
+        if(ingredients_img.complete){
+          ingredients_img.classList.remove('loading');
+        }
+
+        ingredients_img.addEventListener('load', () => {
+          ingredients_img.classList.remove('loading');
+        })
+
       })
     }
 
