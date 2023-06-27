@@ -252,3 +252,7 @@ img {
     padding-top: 2px;
     padding-left: 4px;
 }
+
+.evm-wscontainer .yotpo .standalone-bottomline .star-clickable{
+    align-items: center;
+}
