@@ -100,6 +100,19 @@ h5, .h5 {
     box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text),var(--border-opacity)),0 0 0 var(--buttons-border-width) var(--gh-color-gold);
 }
 
+.button--light-green{
+    background-color: var(--gh-color-light-green);
+}
+.button--light-green::after{
+    box-shadow: none;
+}
+.button--light-green-outline{
+    background-color: transparent;
+}
+.button--light-green-outline::after{
+    box-shadow: 0 0 0 calc(var(--buttons-border-width) + var(--border-offset)) rgba(var(--color-button-text),var(--border-opacity)),0 0 0 var(--buttons-border-width) var(--gh-color-light-green);
+}
+
 iframe, img {
     max-width: 100%;
 }
