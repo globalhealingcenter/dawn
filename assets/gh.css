@@ -241,3 +241,14 @@ img {
 .ghd--dialog .dialog-title{
     margin-top: 0;
 }
+
+/* YOTPO */
+.evm-wscontainer .yotpo .yotpo-icon{
+    width: 1em !important;
+}
+
+.evm-wscontainer .yotpo-display-wrapper .yotpo-bottomline a{
+    line-height: 1em;
+    padding-top: 2px;
+    padding-left: 4px;
+}
