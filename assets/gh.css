@@ -185,7 +185,12 @@ img {
 }
 
 .yotpo-display-wrapper .yotpo-bottomline a{
-  color: var(--gh-color-gray) !important;
+    color: var(--gh-color-gray) !important;
+    font-size: 14px;
+    line-height: 1;
+}
+.yotpo .standalone-bottomline .star-clickable{
+    align-items: center;
 }
 
 /* dawn specific "fixes" */
