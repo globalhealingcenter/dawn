@@ -1,6 +1,4 @@
-{% assign has_product_config = false %}
 {% if product and product.metafields.globalhealing.body %}
-  {% assign has_product_config = true %}
   {% assign config = product.metafields.globalhealing.body.value %}
 {% endif %}
 
@@ -70,6 +68,10 @@
   }
   .info-tabs__content > div.active{
     display: block;
+  }
+  .info-tabs__content p{
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
   @media (max-width: 600px){
     .info-tabs__links a{
