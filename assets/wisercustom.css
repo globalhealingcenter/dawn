@@ -101,7 +101,7 @@ span#evm-ws-alsobought-amount {
 
 
 
-.evm_wiser_heading, .evm-ws-popup-innerSection .evm-ws-popup-title {
+.evm_visible_text .evm_wiser_heading , .evm-ws-popup-innerSection .evm-ws-popup-title {
     font-family: 'Miller Display';
     font-weight: 600;
 } 
