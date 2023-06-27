@@ -12,6 +12,11 @@
     <div data-tab="1" class="active">
       <span>{{ product.metafields.globalhealing.product_tagline }}</span>
       {{ product.description }}
+      {% if has_product_config %}
+        {% unless config.instructions == empty %}
+          <p><a href='{{ config.instructions }}'>View Instuctions</a></p>
+        {% endunless %}
+      {% endif %}
     </div>
     <div data-tab="2">{{ product.metafields.globalhealing.who_its_for }}</div>
     <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
