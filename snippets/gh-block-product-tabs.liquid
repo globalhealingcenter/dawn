@@ -1,8 +1,14 @@
+{% assign has_product_config = false %}
+{% if product and product.metafields.globalhealing.body %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.globalhealing.body.value %}
+{% endif %}
+
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
   <div class="info-tabs__links">
-    <a href="#" data-tab="1" class="active">{{ block.settings.tab_1_title }}</a>
-    <a href="#" data-tab="2">{{ block.settings.tab_2_title }}</a>
-    <a href="#" data-tab="3">{{ block.settings.tab_3_title }}</a>
+    <a href="#" data-tab="1" class="active">{{ config.tab_1_title | default: block.settings.tab_1_title }}</a>
+    <a href="#" data-tab="2">{{ config.tab_2_title | default: block.settings.tab_2_title }}</a>
+    <a href="#" data-tab="3">{{ config.tab_3_title | default: block.settings.tab_3_title }}</a>
   </div>
   <div class="info-tabs__content">
     <div data-tab="1" class="active">
