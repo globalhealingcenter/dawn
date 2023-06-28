@@ -58,7 +58,7 @@
 }
 
 .ghd--block--how-it-works[data-video] [data-type="cols"]{
-  align-items: flex-start;
+/*   align-items: flex-start; */
 }
 
 
