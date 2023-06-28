@@ -215,7 +215,7 @@
         </div>
       </div>
       {% when 'curated' %}
-      {% if product.metafields.globalhealing.curated_collection.value and product.metafields.globalhealing.curated_collection.value.size > 0 %}
+      {% if product.metafields.globalhealing.curated_collection.value %}
       <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>
         <div data-type="header">
           <h2 class="eyebrow">
