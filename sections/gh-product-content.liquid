@@ -230,7 +230,7 @@
               {% assign v = p.selected_or_first_available_variant %}
             <div>
               <span class="image"><a href="{{ p.url }}">{{ p.featured_image | image_url: width: 150 | image_tag }}</a></span>
-              <h4 class="title">{{ p.title }}</h4>
+              <h4 class="title"><a href="{{ p.url }}">{{ p.title }}</a></h4>
               <p class="tagline">{{ curated.tagline }}</p>
               <div class="description">{{ curated.content }}</div>
               <p class="price">{{ v.price | money }}</p>
