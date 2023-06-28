@@ -52,6 +52,19 @@ a{
     color: var(--gh-color-green);
 }
 
+a:hover{
+    text-decoration: none;
+}
+
+a.subtle{
+  text-decoration: none;
+  color: inherit;
+}
+
+a.subtle:hover{
+  text-decoration: underline;
+}
+
 body{
   color: var(--gh-color-gray);
 }
