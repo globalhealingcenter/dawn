@@ -229,7 +229,7 @@
               {% assign curated = config.curated_collection.items[forloop.index0] %}
               {% assign v = p.selected_or_first_available_variant %}
             <div>
-              <span class="image">{{ p.featured_image | image_url: width: 150 | image_tag }}</span>
+              <span class="image"><a href="{{ p.url }}">{{ p.featured_image | image_url: width: 150 | image_tag }}</a></span>
               <h4 class="title">{{ p.title }}</h4>
               <p class="tagline">{{ curated.tagline }}</p>
               <div class="description">{{ curated.content }}</div>
