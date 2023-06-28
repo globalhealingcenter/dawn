@@ -6,6 +6,9 @@
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
           "settings": {
+            "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-3-1.v2.jpg",
+            "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-mobile.jpg",
+            "url": "shopify:\/\/pages\/our-story"
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
