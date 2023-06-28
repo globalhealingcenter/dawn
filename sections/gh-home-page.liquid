@@ -22,7 +22,13 @@
             {% render block %}
         {% when 'hero' %}
             <section class="ghd--hero" {{ block.shopify_attributes }}>
-                <img src="https://cdn.globalhealing.com/pages/v2/home/banner-3-1.v2.jpg" alt="">
+              <a href="{{ block.settings.url }}">
+                <picture>
+                  <source media="(min-width: 650px)" srcset="{{ block.settings.image }}">
+                  <source media="(max-width: 649px)" srcset="{{ block.settings.image_mobile }}">
+                  <img src="{{ block.settings.image }}" alt="">
+                </picture>
+              </a>
             </section>
         {% when 'logos' %}
             <section class="ghd--logos ghd--bg-white" {{ block.shopify_attributes }}>
