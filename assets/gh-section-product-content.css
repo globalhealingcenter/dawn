@@ -57,7 +57,7 @@
     padding-top: 0;
 }
 
-.ghd--block--how-it-works[data-video]{
+.ghd--block--how-it-works[data-video] [data-type="cols"]{
   align-items: flex-start;
 }
 
