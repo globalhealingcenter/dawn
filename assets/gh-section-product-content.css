@@ -49,11 +49,16 @@
 }
 
 .ghd--block--benefits video{
-    padding: 4.5rem;
+    padding-left: 4.5rem ;
+    padding-right: 4.5rem ;
 }
 
 .ghd--block--how-it-works{
     padding-top: 0;
+}
+
+.ghd--block--how-it-works[data-video]{
+  align-items: flex-start;
 }
 
 
