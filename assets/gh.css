@@ -65,6 +65,10 @@ a.subtle:hover{
   text-decoration: underline;
 }
 
+video{
+  max-width: 100%;
+}
+
 body{
   color: var(--gh-color-gray);
 }
