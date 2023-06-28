@@ -112,7 +112,13 @@
               </div>
             </div>
             <div data-type="image">
-              <img src="{{ config.how_it_works.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading='lazy'>
+              {% if config.how_it_works.image.desktop contains "mp4" %}
+                <video id="bgVideo" preload="true" autoplay loop muted>
+                  <source src="{{ config.how_it_works.image.desktop }}" type="video/mp4" />
+                </video>
+              {% else %}
+                <img src="{{ config.how_it_works.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading='lazy'>
+              {% endif %}              
             </div>
           </div>
         </div>
