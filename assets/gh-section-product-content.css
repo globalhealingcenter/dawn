@@ -48,6 +48,14 @@
     padding: 1rem 2rem;
 }
 
+.ghd--block--benefits video{
+    padding: 4.5rem;
+}
+
+.ghd--block--how-it-works{
+    padding-top: 0;
+}
+
 
 .ghd--block--ingredients{
     background: #fff;
