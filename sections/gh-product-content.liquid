@@ -244,12 +244,15 @@
               <p class="price">{{ v.price | money }}</p>
 
               {%- assign product_form_id = 'product-form-' | append: v.id | append: block.id -%}
+              {% capture buy_buttons %}
               {%- render 'buy-buttons',
                   block: block,
                   product: p,
                   product_form_id: product_form_id,
                   section_id: section.id 
                 -%}
+                {% endcapture %}
+                {{ buy_buttons | replace: "selling_plan", "selling" }}
             </div>
             {% endfor %}
           </div>
