@@ -1,0 +1,90 @@
+{%- liquid
+	assign has_subscription = "0"
+	for line_item in checkout.line_items
+		if line_item.line_level_total_discount > 0
+			assign has_subscription = "1"
+		endif
+	endfor
+-%}
+
+<style>
+	.product-thumbnail__quantity{
+		background-color: #008249;
+	}
+
+	.sidebar .icon-svg--color-adaptive-lighter,
+	.sidebar .payment-due__price,
+	.sidebar .payment-due-label__total,
+	.sidebar .payment-due__currency{
+		color: #008249;
+	}
+
+	.js .sidebar .btn--disabled{
+		background-color: rgba(0, 130, 73, .3);
+	}
+	.product__description__selling_plan,
+	.ajaxcart__product-meta,
+	.cart__item--name > div{
+		text-transform: lowercase;
+	}
+	.total-line--recurring-total{ /* not calculating the right amount and tooltip doesn't work */
+		display: none;
+	}
+
+	{% if has_subscription %}
+	[data-shipping-method-label-title="Shipping"] + .radio__label__accessory > br + .content-box__small-text,
+	.content-box__row.content-box__panel{
+	display: none;
+	}
+	{% endif %}
+
+	.product__description > ul > .reduction-code:nth-child(2){
+	display: none;
+	}
+
+	.gh--prop65-checkout-message{
+		padding: 20px;
+		background: #f1f1f1;
+		margin-top: 20px;
+	}
+	.gh--prop65-checkout-message h5{
+		margin-bottom: 10px;
+		font-size:16px;
+	}
+
+    {% if customer %}
+    	{% if customer.orders.size < 2 %}
+		#survey_form{
+			display: none !important;
+		}
+    	{% endif %}
+    {% else %}
+    #survey_form{
+		display: none !important;
+	}
+    {% endif %}
+</style>
+
+<script>
+	let line_item_products = [ {% for line_item in checkout.line_items %} "{{ line_item.sku }}", {% endfor %} ];
+	gh.shopify.checkout.init( line_item_products );
+</script>
+
+<!-- [osano] -->
+<style>
+    .osano-cm-widget{display: none;}
+    .osano-cm-info-dialog__info p {
+        font-size: 14px;
+    }
+</style>
+<script>
+	let osano_trigger = document.querySelector('[href="#osano-cookie-drawer"]');
+	if( osano_trigger ) {
+		osano_trigger.addEventListener('click', e => {
+			e.preventDefault();
+			Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')
+			return false;
+		})
+	}
+</script>
+<!-- [/osano] -->

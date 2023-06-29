@@ -1,0 +1,117 @@
+<script>
+	if(
+		document.location.pathname === '/products/protein-powder'
+		|| document.location.pathname === '/'
+		|| document.location.search.includes('utm_campaign=1341853')
+	){
+		let top_bar = document.querySelector('.header-wrapper .announcement')
+		if (top_bar) top_bar.classList.add('hide')
+	}
+
+	// prevent health benefits link from making the category page blank when on a category page
+	document.querySelector('.site-nav__dropdown-link[href="#"]').addEventListener('click', e => {
+		e.preventDefault();
+	})
+</script>
+
+<!-- [osano] -->
+<style>
+    .osano-cm-widget{display: none;}
+    .osano-cm-info-dialog__info p {
+        font-size: 14px;
+    }
+</style>
+<script>
+	let osano_trigger = document.querySelector('[href="#osano-cookie-drawer"]');
+	if( osano_trigger ) {
+		osano_trigger.addEventListener('click', e => {
+			e.preventDefault();
+			Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')
+			return false;
+		})
+	}
+</script>
+<!-- [/osano] -->
+
+{% if product %}
+
+	<script>
+		// initiate ordergroove custom functionality
+		if( typeof og === 'object'){
+			gh.shopify.ordergroove.init({{ product.selected_or_first_available_variant.id }});
+		}
+
+		// Tooltip
+		gh.tooltip.create(
+			'[data-tippy-content]', {
+				animation: 'shift-away',
+				allowHTML: true
+			}
+		)
+	</script>
+
+{% endif %}
+
+{%- if template == 'customers/account' -%}
+	{%- render 'gh-ordergroove_subscription_interface_link' -%}
+{%- endif -%}
+
+<style>
+	.only-when-logged-in{
+		display: none;
+	}
+</style>
+
+{% if customer %}
+	<script>
+		$(document).on('swell:setup', () => {
+			let customerDetails = swellAPI.getCustomerDetails();
+			if( !customerDetails ) return;
+			let tier = customerDetails.vipTier.name.replace('"', '').replace('"','');
+			let multiplier = '';
+
+			switch( tier ){
+				case 'GREEN':
+					multiplier = '1';
+					break;
+				case 'SILVER':
+					multiplier = '1.5';
+					break;
+				case 'GOLD':
+				case 'GHI MEMBERSHIP':
+					multiplier = '2';
+			}
+
+			let points_container = document.querySelector('[aria-label="PointsForPurchasesCampaign"] .yotpo-title-text')
+			if( points_container ) points_container.innerHTML = `${multiplier} Point Per $1.00`;
+		});
+	</script>
+
+	<style>
+		.only-when-logged-in{
+			display: block;
+		}
+	</style>
+{% endif %}
+
+{% if customer and customer.tags contains 'swell_vip_"gold"' %}
+	<style>
+		.yotpo-vip-tiers-progress-bar-summary-maintain,
+        .yotpo-vip-tiers-progress-bar-summary-next,
+		.yotpo-progress-bar-container{
+			display: none !important;
+		}
+	</style>
+{% endif %}
+
+<!--MNTN Tracking Pixel-->
+<!-- INSTALL ON ALL PAGES OF SITE-->
+<script type="text/javascript">
+	(function(){"use strict";var e=null,b="4.0.0",
+	n="30743",
+	additional="term=value",
+	t,r,i;try{t=top.document.referer!==""?encodeURIComponent(top.document.referrer.substring(0,2048)):""}catch(o){t=document.referrer!==null?document.referrer.toString().substring(0,2048):""}try{r=window&&window.top&&document.location&&window.top.location===document.location?document.location:window&&window.top&&window.top.location&&""!==window.top.location?window.top.location:document.location}catch(u){r=document.location}try{i=parent.location.href!==""?encodeURIComponent(parent.location.href.toString().substring(0,2048)):""}catch(a){try{i=r!==null?encodeURIComponent(r.toString().substring(0,2048)):""}catch(f){i=""}}var l,c=document.createElement("script"),h=null,p=document.getElementsByTagName("script"),d=Number(p.length)-1,v=document.getElementsByTagName("script")[d];if(typeof l==="undefined"){l=Math.floor(Math.random()*1e17)}h="dx.mountain.com/spx?"+"dxver="+b+"&shaid="+n+"&tdr="+t+"&plh="+i+"&cb="+l+additional;c.type="text/javascript";c.src=("https:"===document.location.protocol?"https://":"http://")+h;v.parentNode.insertBefore(c,v)})()
+</script>
+
+<!-- [accessiBe] -->
+<script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init({ statementLink : '', footerHtml : '', hideMobile : false, hideTrigger : false, disableBgProcess : false, language : 'en', position : 'left', leadColor : '#008249', triggerColor : '#008249', triggerRadius : '5px', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerIcon : 'people', triggerSize : 'small', triggerOffsetX : 0, triggerOffsetY : 98, mobile : { triggerSize : 'small', triggerPositionX : 'left', triggerPositionY : 'bottom', triggerOffsetX : 0, triggerOffsetY : 140, triggerRadius : '5px' } }); }; h.appendChild(s); })(); </script>
