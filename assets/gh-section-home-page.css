@@ -72,7 +72,7 @@ section h3.eyebrow span{
     justify-content: space-between;
     flex: 1;
 }
-.ghd--banners [data-side="right"] > div:first-child{
+.ghd--banners > .ghd--flex > div:first-child{
       width: 64%;
 }
 
