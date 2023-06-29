@@ -129,7 +129,7 @@
 .ghd--prop65-warning{
     padding-left: 3rem;
 }
-.ghd--block--ingredients .ghd--prop65-warning .ghd--dialog--button{
+.ghd--block--ingredients [data-type="ghd--prop65-warning"] .ghd--dialog--button{
     font-weight: normal;
 }
 
