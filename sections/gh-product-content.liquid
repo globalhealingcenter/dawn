@@ -244,11 +244,12 @@
               <p class="price">{{ v.price | money }}</p>
 
               {%- assign product_form_id = 'product-form-' | append: v.id | append: block.id -%}
+              {%- assign section_id = section.id | append: v.id | append: block.id -%}
               {%- render 'buy-buttons',
                   block: block,
                   product: p,
                   product_form_id: product_form_id,
-                  section_id: section.id
+                  section_id: section_id
                 -%}
             </div>
             {% endfor %}
