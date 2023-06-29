@@ -128,6 +128,7 @@
 
 .ghd--block--ingredients [data-type="ghd--prop65-warning"]{
     padding-left: 3rem;
+    padding-top: 4rem;
 }
 .ghd--block--ingredients [data-type="ghd--prop65-warning"] .ghd--dialog--button{
     font-weight: normal;
