@@ -182,7 +182,7 @@
               {% endfor %}
 
               gh.shopify.checkout.prop65Message( product_skus, (html) => {
-                document.querySelector('#{{ prop65_id }} .ghd--dialog-content').innerHTML = html;
+                document.querySelector('#dialog-{{ prop65_id }} .ghd--dialog-content').innerHTML = html;
               })
             </script>
           </div>
