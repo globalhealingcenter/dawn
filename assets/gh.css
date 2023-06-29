@@ -281,6 +281,16 @@ img {
     margin-top: 0;
 }
 
+.gh-prop-65--title{
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  font-family: var(--gh-font-primary);
+  color: #000;
+}
+.gh-prop-65--icon{
+  padding-right: 6px;
+}
+
 /* YOTPO */
 .evm-wscontainer .yotpo .yotpo-icon{
     width: 1em !important;
