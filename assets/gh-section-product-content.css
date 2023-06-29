@@ -126,7 +126,7 @@
     font-size: 1.5rem;
 }
 
-.ghd--prop65-warning{
+.ghd--block--ingredients [data-type="ghd--prop65-warning"]{
     padding-left: 3rem;
 }
 .ghd--block--ingredients [data-type="ghd--prop65-warning"] .ghd--dialog--button{
