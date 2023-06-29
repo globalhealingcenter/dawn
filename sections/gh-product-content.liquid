@@ -164,6 +164,7 @@
               <img src="" srcset='' alt="" loading='lazy'>
             </div>
           </div>
+          {% if product.tags contains 'prop65' %}
           <div data-type="ghd--prop65-warning">
             {% assign prop65_id = 'prop65-' | append: block.id %}
             {% render
@@ -184,6 +185,7 @@
               })
             </script>
           </div>
+          {% endif %}
         </div>
       {% when 'impact' %}
       <div class="ghd--block--impact ghd--block" {{ block.shopify_attributes }}>
