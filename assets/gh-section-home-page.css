@@ -70,9 +70,10 @@ section h3.eyebrow span{
 .ghd--banners [data-side="right"]{
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
 }
-.ghd--banners [data-side="right"] > div{
-
+.ghd--banners [data-side="right"] > div:first-child{
+      width: 64%;
 }
 
 /*
