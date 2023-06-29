@@ -1,0 +1,36 @@
+{% layout 'theme-blank' %}
+
+{% assign first = true %}
+
+{% paginate collections.all.products by 1000 %}
+	{ "products" : {
+	{% for product in collections.all.products %}
+
+		{% if
+			product.tags contains 'remove-klevu'
+			or product.tags contains 'magento_disabled'
+			or product.tags contains 'digital'
+			or product.gift_card? == true
+			or product.available == false
+		%}
+			{% continue %}
+		{% endif %}
+
+
+		{% for variant in product.variants %}
+
+			{% if first == true %}
+				{% assign first = false %}
+			{% else %}
+				,
+			{% endif %}
+
+			"{{ variant.sku }}": {
+				"id": "{{ variant.id }}",
+				"qty": "{{ variant.inventory_quantity }}"
+			}
+		{% endfor %}
+
+	{% endfor %}
+	}}
+{% endpaginate %}
