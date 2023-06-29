@@ -164,6 +164,17 @@
               <img src="" srcset='' alt="" loading='lazy'>
             </div>
           </div>
+          <div data-type="ghd--prop65-warning">
+            {% assign prop65_id = block.id | append: '-prop65' %}
+            {% render
+              'gh-element-dialog',
+              button_class: 'button--link',
+              button_text: "<b>WARNING</b> - California's Proposition 65",
+              id: prop65_id,
+              content: '',
+              title: 'Proposition 65 Warning for California Customers'
+            %}
+          </div>
         </div>
       {% when 'impact' %}
       <div class="ghd--block--impact ghd--block" {{ block.shopify_attributes }}>

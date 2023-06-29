@@ -126,6 +126,12 @@
     font-size: 1.5rem;
 }
 
+.ghd--prop65-warning{
+    padding-left: 3rem;
+}
+.ghd--prop65-warning a{
+    color: var(--gh-color-gray);
+}
 
 .ghd--block--impact{
     background: #E3D2BE;
