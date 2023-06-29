@@ -15,7 +15,7 @@
       <span>{{ product.metafields.globalhealing.product_tagline }}</span>
       {{ product.description }}
       {% if has_product_config %}
-        {% if config.instructions != empty %}
+        {% if config.instructions != '' %}
           <p><a href='{{ config.instructions }}'>View Instuctions</a></p>
         {% endif %}
       {% endif %}
