@@ -1,19 +1,67 @@
 <!DOCTYPE html>
 <html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
   <head>
+
+  {% include 'elevar-head' %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
     <meta name="referrer" content="origin">
 
     <title>{{ page_title }}</title>
-
+	<script  src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
+	<script async  src="https://wiser.expertvillagemedia.com/assets/js/wiser_recom_checkout.js" evm-ws-shop-id="{{ shop.id }}"  data-shop-id='globalhealing.myshopify.com'></script>
     {{ content_for_header }}
 
     {{ checkout_stylesheets }}
+
+    {% render 'legacy-gh-header-scripts' %}
+    {% render 'legacy-gh-checkout' %}
+
+    <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
     {{ checkout_scripts }}
-  </head>
+    
+    
+    <!-- ADDRESS VALIDATOR -->
+<script async src="https://d3ox8tdk614ykk.cloudfront.net/pobox_checker.js"></script>
+    
+    <!-- EXPONEA start -->
+    <script>(function(b,c){if(!b.exponea){var a=function(a,g){function k(d){return function(){var e=arguments;""==a&&"initialize"==d&&e&&e[0].modify&&e[0].modify.overlay&&"loading"==c.readyState&&(c.write('<div id="__inf__overlay__" style="position:absolute;background:#fff;left:0;top:0;width:100%;height:100%;z-index:1000000"></div>'),setTimeout(function(){var a=c.getElementById("__inf__overlay__");a&&c.body.removeChild(a);res.__=!0},e[0].modify.delay||500));b.exponea._.push([a+d,arguments])}}var h=g.split(" "),f,d;res={_:[]};for(d=0;d<h.length;d++)f=h[d],res[f]=k(f);return res};b.exponea=a("","initialize identify update track trackLink trackEnhancedEcommerce getHtml showHtml showBanner showForm ping getAbTest");b.exponea.notifications=a("notifications.","isAvailable isSubscribed subscribe unsubscribe");var a=c.createElement("script"),g="https:"===c.location.protocol?"https:":"http:";a.type="text/javascript";a.async=!0;a.src=g+"//api.us1.exponea.com/js/exponea.min.js";c.getElementsByTagName("head")[0].appendChild(a);b.webxpClient=b.webxpClient||{};b.webxpClient.sdk=b.exponea;b.webxpClient.sdkObjectName="exponea"}})(window,document);</script>
+    <script type="text/javascript">
+        exponea.initialize({
+            "target": "//api.us1.exponea.com",
+			"token": "cdfa07d2-90b2-11eb-b9b6-867564e6537c",
+            "cookies": {
+              expires: 730 * 24 * 3600 // = 730 days
+            },
+            "customer": {
+        {% if checkout.customer %}
+        {% if checkout.customer.email %}"email_id": {{ checkout.customer.email | json }}{% endif %}
+        {% endif %}
+        },
+        "track": {
+            "visits": true,
+            {% if shop %}"default_properties": { "domain": {{ shop.permanent_domain|json }} } {% endif %}
+        }
+        });
+        if (Shopify && Shopify.Checkout && Shopify.Checkout.step) {
+            exponea.track('checkout', {
+                step_title: Shopify.Checkout.step,
+                shipping_city: {{ checkout.shipping_address.city | json }},
+            shipping_cost: {{ checkout.shipping_method.price | json }},
+            shipping_country: {{ checkout.shipping_address.country | json }},
+            shipping_type: {{ checkout.shipping_method.title | json }},
+            total_price: {{ checkout.total_price }}
+        });
+        }
+    </script>
+    <!-- EXPONEA end -->
+  
+  {% render 'shogun-head' %}
+        <script src="https://use.fortawesome.com/50a7ad91.js"></script>
+</head>
   <body>
+  {% include 'elevar-checkout-end' %}
     {{ skip_to_content_link }}
 
     <header class="banner" data-header role="banner">
@@ -45,10 +93,14 @@
           <div class="sidebar__content">
             {{ content_for_order_summary }}
           </div>
+          <div class="yotpo-widget-instance" data-yotpo-instance-id="38319"></div>
+          <div class="nosto_element" id="thankyou-nosto-1"></div>
         </aside>
       </div>
     </div>
 
     {{ tracking_code }}
+
+    {% render 'legacy-gh-checkout-footer' %}
   </body>
 </html>
