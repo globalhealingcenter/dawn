@@ -1,6 +1,6 @@
 
 
-<button class="ghd--dialog--button" data-dialog="dialog-{{ id }}">{{ button_text }}</button>
+<button class="{{ button_class | default: 'ghd--dialog--button' }}" data-dialog="dialog-{{ id }}">{{ button_text }}</button>
 <dialog class="ghd--dialog" id="dialog-{{ id }}">
     <div class='ghd--dialog--inner'>
         <div class='text--right'><button class='button--link' data-dialog="dialog-{{ id }}">Close</button></div>
@@ -11,7 +11,9 @@
             <br>
             {% endif %}
 
-            {{ content }}
+            <div class='ghd--dialog-content'>
+                {{ content }}
+            </div>
         </div>
         {% comment %}<div class='text--right'><button class="cancel button" data-dialog="dialog-{{ id }}">Close</button></div>{% endcomment %}
     </div>

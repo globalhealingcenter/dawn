@@ -129,8 +129,8 @@
 .ghd--prop65-warning{
     padding-left: 3rem;
 }
-.ghd--prop65-warning a{
-    color: var(--gh-color-gray);
+.ghd--block--ingredients .ghd--prop65-warning .ghd--dialog--button{
+    font-weight: normal;
 }
 
 .ghd--block--impact{
