@@ -168,11 +168,9 @@
             {% assign prop65_id = 'prop65-' | append: block.id %}
             {% render
               'gh-element-dialog',
-              button_class: 'button--link',
               button_text: "<b>WARNING</b> - California's Proposition 65",
               id: prop65_id,
-              content: '',
-              title: 'Proposition 65 Warning for California Customers'
+              content: ''
             %}
             <script>
               let product_skus = [];
