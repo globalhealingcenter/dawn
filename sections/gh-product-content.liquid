@@ -165,7 +165,7 @@
             </div>
           </div>
           <div data-type="ghd--prop65-warning">
-            {% assign prop65_id = block.id | append: '-prop65' %}
+            {% assign prop65_id = 'prop65-' | append: block.id %}
             {% render
               'gh-element-dialog',
               button_class: 'button--link',
