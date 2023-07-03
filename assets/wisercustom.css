@@ -56,13 +56,7 @@ span#evm-ws-alsobought-total-text {
     flex: 0 0 100%;
       border-bottom: 1px solid #545454;
 }
-span#evm-ws-alsobought-total-text b {
-    display: none;
-}
-span#evm-ws-alsobought-total-text:before {
-    content: "Bundle Price";
-    font-weight: bold;
-}
+
 .evm-ws-alsobought-total span.fbt_ttl {
     font-weight: bold!important;
   letter-spacing: 0rem; font-family: 'Proxima Nova';
