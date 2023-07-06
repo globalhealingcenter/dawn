@@ -99,6 +99,9 @@
       {%- if order.name -%}
         order_name: {{- order.name | json -}},
       {%- endif -%}
+      {%- if order.order_number -%}
+        order_number: {{- order.order_number | json -}},
+      {%- endif -%}
       affiliation: {{- shop.name | json -}},
       revenue: "{{- checkout.total_price | times: 0.01 | json -}}",
       tax: "{{- checkout.tax_price | times: 0.01 | json -}}",
