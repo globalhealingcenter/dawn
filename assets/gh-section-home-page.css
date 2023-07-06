@@ -157,6 +157,7 @@ section h3.eyebrow span{
     transition: color .3s ease-in-out;
     position: relative;
     padding-right: 1.2em;
+    text-transform: uppercase;
 }
 .ghd--journey--goals a::after{
     content: "";
