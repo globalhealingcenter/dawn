@@ -468,6 +468,12 @@ section h3.eyebrow span{
     }
 }
 
+@media (min-width: 801px) and (max-width: 1200px){
+  .ghd--logos .ghd--flex div:nth-child(2n) {
+    display: none;
+  }
+}
+
 @media (max-width: 800px){
   .ghd--logos{
         position: relative;
