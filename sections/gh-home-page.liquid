@@ -227,15 +227,15 @@
                     <div data-type="image">
                         <div>
                             <div>
-                                <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-free-shipping.v2.svg" alt=""></div>
+                                <div><img src="{{ block.settings.row_1_img }}" alt=""></div>
                                 <div>{{ block.settings.row_1_text }}</div>
                             </div>
                             <div>
-                                <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-1-year.v3.svg" alt=""></div>
+                                <div><img src="{{ block.settings.row_2_img }}" alt=""></div>
                                 <div>{{ block.settings.row_2_text }}</div>
                             </div>
                             <div>
-                                <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-award-winning.v2.svg" alt=""></div>
+                                <div><img src="{{ block.settings.row_3_img }}" alt=""></div>
                                 <div>{{ block.settings.row_3_text }}</div>
                             </div>
                         </div>
@@ -414,14 +414,29 @@
           "label": "Featured Review"
         },
         {
+          "type": "text",
+          "id": "row_1_img",
+          "label": "Row 1 Image"
+        },
+        {
           "type": "richtext",
           "id": "row_1_text",
           "label": "Row 1 Text"
         },
         {
+          "type": "text",
+          "id": "row_2_img",
+          "label": "Row 2 Image"
+        },
+        {
           "type": "richtext",
           "id": "row_2_text",
           "label": "Row 2 Text"
+        },
+        {
+          "type": "text",
+          "id": "row_3_img",
+          "label": "Row 3 Image"
         },
         {
           "type": "richtext",
