@@ -30,11 +30,15 @@
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
           "type": "quality",
           "settings": {
+            "heading": "The Quality & Purity<br> Your Body Deserves",
+            "link_text": "OUR PROCESS",
+            "link": "shopify:\/\/pages\/manufacturing"
           }
         },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "settings": {
+            "heading": "Products Uniquely Made <br>With You in Mind"
           }
         },
         "0353913e-ce5a-4823-b72c-7d0b126eb112": {
