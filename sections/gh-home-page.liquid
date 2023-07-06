@@ -110,13 +110,10 @@
 
                 <div class="ghd--flex">
                     <div data-type="text">
-                        <h2 class="eyebrow">
-                            <span>THE FOUNDATION OF WELLNESS</span>
-                            Healing Starts <br>From the Inside Out
-                        </h2>
-                        <p><b>Live a more natural, toxin-free life.</b> Regular cleansing and detoxification practices help eliminate toxins, supporting optimal organ function, boosting energy levels, and promoting overall well-being.</p>
-                        <p><a class="button button--gold" href="#">SHOP CLEANSES & DETOX</a></p>
-                        <p><a class="button button--gold-outline" href="#">ULTIMATE DETOX GUIDE</a></p>
+                        <h2 class="eyebrow">{{ block.settings.heading }}</h2>
+                        {{ block.settings.text }}
+                        <p><a class="button button--gold" href="{{ block.settings.link_1 }}">{{ block.settings.link_1_text }}</a></p>
+                        <p><a class="button button--gold-outline" href="{{ block.settings.link_2 }}">{{ block.settings.link_2_text }}</a></p>
                     </div>
                     <div data-type="image">
                         <img src="https://cdn.globalhealing.com/pages/v2/home/foundation.png" alt="">
