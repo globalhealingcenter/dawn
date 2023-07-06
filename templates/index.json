@@ -38,7 +38,15 @@
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "settings": {
-            "heading": "Products Uniquely Made <br>With You in Mind"
+            "heading": "Products Uniquely Made <br>With You in Mind",
+            "left_col_heading": "Start Your Journey",
+            "left_col_text": "<p>Find the right product for you. If you need help, our quiz can help you find the right products for you.<\/p>",
+            "link_1_text": "Shop Our Collection",
+            "link_1": "",
+            "link_2_text": "Take Our Quiz",
+            "link_2": "",
+            "link_list_heading": "",
+            "menu": ""
           }
         },
         "0353913e-ce5a-4823-b72c-7d0b126eb112": {

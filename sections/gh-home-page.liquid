@@ -89,13 +89,13 @@
                     </div>
                     <div class="ghd--flex" data-type="cols">
                         <div>
-                            <h3>Start Your Journey</h3>
-                            <p>Find the right product for you. If you need help, our quiz can help you find the right products for you.</p>
-                            <p><a class="button button--gold" href="#">Shop Our Collection</a></p>
-                            <p><a class="button" href="#">Take Our Quiz</a></p>
+                            <h3>{{ block.settings.left_col.heading }}</h3>
+                            {{ block.settings.left_col.text }}
+                            <p><a class="button button--gold" href="{{ block.settings.link_1 }}">{{ block.settings.link_1_text }}</a></p>
+                            <p><a class="button" href="{{ block.settings.link_2 }}">{{ block.settings.link_2_text }}</a></p>
                         </div>
                         <div>
-                            <h4 class="text-center">SHOP BY HEALTH GOALS</h4>
+                            <h4 class="text-center">{{ block.settings.link_list_heading }}</h4>
                             <div class="ghd--journey--goals ghd--flex">
                                 <div><a href="#">CLEANSE & DETOX</a></div>
                                 <div><a href="#">IMMUNE HEALTH</a></div>
