@@ -395,7 +395,7 @@ section h3.eyebrow span{
         width: 100%;
     }
 
-    .ghd--mission .ghd--flex > div:first-child{
+    .ghd--mission [data-type="header"] > div:first-child{
         min-width: 400px;
     }
     .ghd--mission [data-type=cols]{
