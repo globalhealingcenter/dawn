@@ -11,7 +11,7 @@
     align-items: center;
 }
 .ghd--block--intro [data-type="text"]{
-    padding: 1rem;
+    padding: 3rem;
     width: 60%;
 }
 .ghd--block--intro [data-type="text"] .mw{
@@ -151,7 +151,7 @@
 }
 .ghd--block--impact [data-type="text"]{
     width: 60%;
-    padding: 1rem 2rem;
+    padding: 3rem;
 }
 .ghd--block--impact [data-type="text"] .mw{
     max-width: 600px;
@@ -332,7 +332,6 @@ h2.eyebrow + h4{
 .ghd--details details[open] summary:after{
     transform: rotate(45deg);
 }
-
 
 /*
     Accordion

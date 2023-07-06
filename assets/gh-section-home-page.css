@@ -526,6 +526,7 @@ section h3.eyebrow span{
         flex-wrap: wrap;
     }
 
+    .ghd--banners .ghd--flex 
     .ghd--reviews [data-type=cols]>div,
     .ghd--mission [data-type=cols]>div,
     .ghd--journey [data-type=cols]>div:last-child,
