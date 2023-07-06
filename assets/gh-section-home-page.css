@@ -416,34 +416,7 @@ section h3.eyebrow span{
 
 @media (max-width: 1250px){
 
-    .ghd--logos{
-        position: relative;
-        overflow: hidden;
-        height: calc(22px + 4rem)
-    }
-    .ghd--logos img{
-        height: 22px;
-    }
-    .ghd--logos img[data-logo="huffpost"]{
-        height: 16px;
-    }
-    .ghd--logos img[data-logo="miami-herald"],
-    .ghd--logos img[data-logo="forbes"]{
-        height: 20px;
-    }
 
-    @keyframes homepage-logos {
-        from {left: 2rem}
-        to {left: calc( calc(calc(1000px - 100%) + 2rem) * -1);}
-    }
-    .ghd--logos .ghd--flex{
-        flex-wrap: nowrap;
-        min-width: 1000px;
-        position: absolute;
-        left: 2rem;
-        top: 2rem;
-        animation: 21s linear 0s infinite alternate homepage-logos;
-    }
 
     .ghd--foundation .ghd--flex{
         flex-wrap: wrap;
@@ -494,6 +467,38 @@ section h3.eyebrow span{
         font-size: 2.6rem;
     }
 }
+
+@media (max-width: 800px){
+  .ghd--logos{
+        position: relative;
+        overflow: hidden;
+        height: calc(22px + 4rem)
+    }
+    .ghd--logos img{
+        height: 22px;
+    }
+    .ghd--logos img[data-logo="huffpost"]{
+        height: 16px;
+    }
+    .ghd--logos img[data-logo="miami-herald"],
+    .ghd--logos img[data-logo="forbes"]{
+        height: 20px;
+    }
+
+    @keyframes homepage-logos {
+        from {left: 2rem}
+        to {left: calc( calc(calc(1000px - 100%) + 2rem) * -1);}
+    }
+    .ghd--logos .ghd--flex{
+        flex-wrap: nowrap;
+        min-width: 1000px;
+        position: absolute;
+        left: 2rem;
+        top: 2rem;
+        animation: 21s linear 0s infinite alternate homepage-logos;
+    }
+}
+
 
 @media (max-width: 700px) {
 
