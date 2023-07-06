@@ -136,12 +136,9 @@
         {% when 'mission' %}
             <section class="ghd--mission" {{ block.shopify_attributes }}>
                 <div class="ghd--flex page-width" data-type="header">
-                    <div><h2>Global Healing<br> is Our Mission</h2></div>
+                    <div><h2>{{ block.settings.heading }}</h2></div>
                     <div>
-                        <p>
-                            Since 1998, our mission has been to empower people to take control of their health naturally and restore their body’s self-healing abilities.
-                            <br><a href="#"><b>OUR STORY</b></a>
-                        </p>
+                        {{ block.settings.intro_text }}
                     </div>
                 </div>
                 <div class="page-width ghd--flex" data-type="cols">
@@ -401,7 +398,18 @@
       "type": "mission",
       "name": "Mission",
       "limit": 1,
-      "settings": []
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Header"
+        },
+        {
+          "type": "text",
+          "id": "intro_text",
+          "label": "Intro Text"
+        }
+      ]
     },
     {
       "type": "reviews",
