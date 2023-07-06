@@ -451,14 +451,23 @@ h2.eyebrow + h4{
     .ghd--block--curated [data-type="items"][data-item-count="1"]{
         justify-content: center;
     }
+    .ghd--block--curated [data-type="items"]{
+      --item-count: 1;
+      --item-gap: 60px;
+      width: calc(calc(100vw * var(--item-count)) - calc(var(--item-gap) * var(--item-count)));
+    }
     .ghd--block--curated [data-type="items"] > div{
-        max-width: calc(100vw - 60px);
+        max-width: calc(calc(100vw * var(--item-count)) - calc(var(--item-gap) * var(--item-count)));
         padding: 1rem 1.5rem;
     }
+  
     .ghd--block--curated [data-type="items"][data-item-count="2"]{
-        width: calc( 200vw - 120px);
+        --item-count: 2;
     }
     .ghd--block--curated [data-type="items"][data-item-count="3"]{
-        width: calc( 300vw - 180px);
+        --item-count: 3;
+    }
+    .ghd--block--curated [data-type="items"][data-item-count="4"]{
+        --item-count: 4;
     }
 }
