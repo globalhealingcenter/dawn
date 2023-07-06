@@ -228,15 +228,15 @@
                         <div>
                             <div>
                                 <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-free-shipping.v2.svg" alt=""></div>
-                                <div><p>For U.S. Addresses on Orders $100+ <br> <a href="#">LEARN MORE</a></p></div>
+                                <div>{{ block.settings.row_1_text }}</div>
                             </div>
                             <div>
                                 <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-1-year.v3.svg" alt=""></div>
-                                <div><p>We’re so sure you’ll love the way our products work for you that we give you a full year to try them. If you’re not completely satisfied, we’ll refund your money.</p></div>
+                                <div>{{ block.settings.row_2_text }}</div>
                             </div>
                             <div>
                                 <div><img src="https://cdn.globalhealing.com/pages/v2/home/reviews-award-winning.v2.svg" alt=""></div>
-                                <div><p>Our knowledgeable, compassionate team is always here to guide you and answer your questions so you get the right products for your wellness journey. </p></div>
+                                <div>{{ block.settings.row_3_text }}</div>
                             </div>
                         </div>
                     </div>
@@ -412,6 +412,21 @@
           "type": "richtext",
           "id": "review",
           "label": "Featured Review"
+        },
+        {
+          "type": "richtext",
+          "id": "row_1_text",
+          "label": "Row 1 Text"
+        },
+        {
+          "type": "richtext",
+          "id": "row_2_text",
+          "label": "Row 2 Text"
+        },
+        {
+          "type": "richtext",
+          "id": "row_3_text",
+          "label": "Row 3 Text"
         }
       ]
     },

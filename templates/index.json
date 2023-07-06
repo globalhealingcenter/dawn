@@ -59,6 +59,7 @@
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98": {
           "type": "br",
           "settings": {
+            "image_one": "Products Uniquely Made With You in Mind"
           }
         },
         "90d53a3e-607e-44cf-81c0-4d063ee2042c": {
@@ -69,6 +70,7 @@
         "b871651f-c308-4034-8741-ebbb3f7989ed": {
           "type": "reviews",
           "settings": {
+            "review": "<p>“Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet Lorem ipsum dolor sit amet, consectetuer adipiscing elit, ”<\/p><p><strong>JESSICA<\/strong><\/p>"
           }
         }
       },
