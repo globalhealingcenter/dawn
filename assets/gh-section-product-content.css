@@ -430,6 +430,14 @@ h2.eyebrow + h4{
   .product__title h1 {
     font-size: 5rem;
   }
+
+  .ghd--block--curated [data-type=items]{
+    flex-wrap:wrap;
+  }
+
+  .ghd--block--curated [data-type=items][data-item-count="4"]>div{
+    width: 50%;
+  }
   
 }
 
