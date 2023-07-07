@@ -437,6 +437,7 @@ h2.eyebrow + h4{
 
   .ghd--block--curated [data-type=items][data-item-count="4"]>div{
     width: 50%;
+    flex: inherit;
   }
   
 }
