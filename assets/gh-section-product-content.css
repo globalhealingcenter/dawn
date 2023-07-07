@@ -421,6 +421,10 @@ h2.eyebrow + h4{
   h2.eyebrow{
     font-size: 4em;
   }
+
+  .product__title h1 {
+    font-size: 5rem;
+  }
   
 }
 
