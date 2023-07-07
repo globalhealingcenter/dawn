@@ -418,6 +418,11 @@ h2.eyebrow + h4{
 
 @media (min-width: 701px) and (max-width: 1070px){
 
+  #MainContent > section:first-child > section.page-width:first-child{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
   h2.eyebrow{
     font-size: 4rem;
   }
