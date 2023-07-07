@@ -86,13 +86,21 @@
     margin-top: 0;
     margin-bottom: 1rem;
   }
-  @media (max-width: 600px){
+  @media (max-width: 749px){
     .info-tabs__links a{
       text-align: center;
       white-space: nowrap;
     }
     .info-tabs__links a:nth-child(2){
       flex-grow: 2;
+    }
+  }
+  @media (min-width: 750px) and (max-width: 900px){
+    .info-tabs__links{
+      justify-content: space-between;
+    }
+    .info-tabs__links a{
+      flex: inherit;
     }
   }
 </style>
