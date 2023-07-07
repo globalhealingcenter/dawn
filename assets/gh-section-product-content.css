@@ -1,3 +1,10 @@
+.product__title {
+  margin-bottom: 0 !important;
+}
+.product__title h1 {
+  font-size: 6rem;
+}
+
 .ghd--product-container{
     --mobile-gutters: 2rem;
 }
@@ -408,6 +415,15 @@ h2.eyebrow + h4{
         display: none;
     }
 }
+
+@media (min-width: 701px) and (max-width: 1070px){
+
+  h2.eyebrow{
+    font-size: 4em;
+  }
+  
+}
+
 @media (max-width: 700px){
     .ghd--hide-mobile{
         display: none;

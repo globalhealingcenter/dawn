@@ -73,10 +73,7 @@
         "86dcf870-60e1-4a4d-b38b-2ae9e1ed5141"
       ],
       "custom_css": [
-        ".product__title {margin-bottom: 0 !important;}",
-        ".product__title h1 {font-size: 6rem;}",
-        ".product__info-tabs {padding-bottom: 1rem;}",
-        ".product__info-tabs li p {margin: 0; display: inline;}"
+
       ],
       "settings": {
         "enable_sticky_info": true,
