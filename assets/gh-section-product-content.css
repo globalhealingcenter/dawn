@@ -165,6 +165,11 @@
     margin: 0 auto;
 }
 
+.ghd--block--impact .mw > div > p:first-child:before,
+.ghd--block--impact .mw > div > p:last-child:after{
+  content: '"';
+}
+
 .ghd--block--curated{
   padding: 8rem 1rem;
 }
