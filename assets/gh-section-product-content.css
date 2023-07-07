@@ -211,7 +211,7 @@
   padding: 0.25em 0;
 }
 
-@media ( min-width: 701px ) and (max-width: 1200px){
+@media ( min-width: 750px ) and (max-width: 1200px){
   .ghd--block--curated [data-type="items"][data-item-count="4"]>div{
     padding-left: 1rem;
     padding-right: 1rem;
@@ -410,13 +410,13 @@ h2.eyebrow + h4{
 /*
     END Accordion
 */
-@media (min-width: 701px){
+@media (min-width: 750px){
     .ghd--hide-desktop{
         display: none;
     }
 }
 
-@media (min-width: 701px) and (max-width: 1070px){
+@media (min-width: 750px) and (max-width: 1070px){
 
   #MainContent > section:first-child > section.page-width:first-child{
     padding-left: 2rem;
