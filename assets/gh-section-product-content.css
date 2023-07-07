@@ -442,7 +442,7 @@ h2.eyebrow + h4{
   
 }
 
-@media (max-width: 700px){
+@media (max-width: 749px){
     .ghd--hide-mobile{
         display: none;
     }
