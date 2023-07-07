@@ -4,26 +4,6 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "Subscribe & Save Up to 20% On Your Favorite Supplements",
-            "link": "shopify:\/\/collections\/supplements"
-          }
-        },
-        "a54ddca0-8ef7-4e63-9f5d-130adbc17a4e": {
-          "type": "announcement",
-          "settings": {
-            "text": "Checkout our new look!",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0",
-        "a54ddca0-8ef7-4e63-9f5d-130adbc17a4e"
-      ],
       "settings": {
         "color_scheme": "accent-2",
         "show_line_separator": true,
