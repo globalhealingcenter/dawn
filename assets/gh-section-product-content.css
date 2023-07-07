@@ -419,7 +419,7 @@ h2.eyebrow + h4{
 @media (min-width: 701px) and (max-width: 1070px){
 
   h2.eyebrow{
-    font-size: 4em;
+    font-size: 4rem;
   }
 
   .product__title h1 {
