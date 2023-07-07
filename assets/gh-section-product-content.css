@@ -439,6 +439,10 @@ h2.eyebrow + h4{
     width: 50%;
     flex: inherit;
   }
+
+  .product__info-wrapper{
+    padding-left: 1rem;
+  }
   
 }
 
