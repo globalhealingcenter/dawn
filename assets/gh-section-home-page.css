@@ -480,6 +480,10 @@ section h3.eyebrow span{
 }
 
 @media (max-width: 800px){
+  .ghd--reviews [data-type=cols]>div{
+        width: 100%;
+    }
+  
   .ghd--logos{
         position: relative;
         overflow: hidden;
