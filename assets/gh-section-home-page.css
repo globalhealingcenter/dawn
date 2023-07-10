@@ -257,6 +257,7 @@ section h3.eyebrow span{
 }
 .ghd--autoship-info [data-type="text"]{
     width: 60%;
+    padding: 4rem;
 }
 .ghd--autoship-info h2 span{
     color: var(--gh-color-gray);
