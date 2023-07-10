@@ -249,6 +249,7 @@ section h3.eyebrow span{
 }
 .ghd--autoship-info [data-type="image"] img{
     width: 100%;
+    display: block;
 }
 .ghd--autoship-info [data-type="border"]{
     width: 1px;
