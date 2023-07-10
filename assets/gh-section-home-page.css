@@ -442,12 +442,13 @@ section h3.eyebrow span{
     }
     .ghd--autoship-info .page-width{
         flex-direction: column;
-        padding-left: 2rem;
-        padding-right: 2rem;
     }
     .ghd--autoship-info [data-type=image]{
         max-width: 100%;
+        width: 100%;
         padding-bottom: 3rem;
+        height: 140px;
+        background-image: url(https://cdn.globalhealing.com/pages/v2/home/subscription-mobile.png);
     }
     .ghd--autoship-info [data-type=image]>div{
         margin-left: 0;
