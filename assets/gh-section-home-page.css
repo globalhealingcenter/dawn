@@ -237,7 +237,7 @@ section h3.eyebrow span{
     justify-content: space-between;
 }
 .ghd--autoship-info [data-type="image"]{
-    max-width: 40%;
+    width: 40%;
     background: url(https://cdn.globalhealing.com/pages/v2/home/subscription.png) right center no-repeat;
     background-size: cover;
 }
