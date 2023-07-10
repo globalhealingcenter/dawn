@@ -238,7 +238,8 @@ section h3.eyebrow span{
 }
 .ghd--autoship-info [data-type="image"]{
     max-width: 40%;
-    text-align: center;
+    background: url(https://cdn.globalhealing.com/pages/v2/home/subscription.png) right center no-repeat;
+    background-size: cover;
 }
 .ghd--autoship-info [data-type="image"] > div{
     margin: 0 auto;
@@ -257,7 +258,7 @@ section h3.eyebrow span{
 }
 .ghd--autoship-info [data-type="text"]{
     width: 60%;
-    padding: 4rem;
+    padding: 3rem;
 }
 .ghd--autoship-info h2 span{
     color: var(--gh-color-gray);
