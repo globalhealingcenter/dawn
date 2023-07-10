@@ -232,8 +232,8 @@ section h3.eyebrow span{
 }
 
 .ghd--autoship-info .page-width{
-    padding: 4rem 5rem;
-    background: var(--gh-color-light-green);
+    padding: 0;
+    background: #e9ebea;
     justify-content: space-between;
 }
 .ghd--autoship-info [data-type="image"]{
