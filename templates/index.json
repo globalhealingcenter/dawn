@@ -69,6 +69,7 @@
           "type": "autoship",
           "settings": {
             "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/subscription.png",
+            "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/subscription-mobile.png",
             "heading": "<span>SUBSCRIPTION PROGRAM<\/span> Stay Committed <br>to Wellness",
             "text": "<p>Even the most potent and pure supplements take time to be effective. Consistency is key when it comes to healing your body from within. Our subscription program helps support your commitment to a lifelong wellness journey by ensuring you always have the products you need.<\/p>",
             "link_text": "SEE ALL PERKS",
