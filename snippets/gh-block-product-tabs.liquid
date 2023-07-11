@@ -10,7 +10,9 @@
     {% if product.metafields.globalhealing.who_its_for %}
     <a href="#" data-tab="2">{{ config.tab_2_title | default: block.settings.tab_2_title }}</a>
     {% endif %}
+    {% if product.metafields.globalhealing.suggested_use %}
     <a href="#" data-tab="3">{{ config.tab_3_title | default: block.settings.tab_3_title }}</a>
+    {% endif %}
   </div>
   <div class="info-tabs__content">
     <div data-tab="1" class="active">
