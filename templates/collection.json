@@ -15,7 +15,7 @@
       "type": "main-collection-product-grid",
       "custom_css": [
         ".card__heading {font-weight: 700; color: #545454; margin-top: 10px; font-size: 16px;}",
-        ".price {color: #008249; font-weight: bold; font-size: 13px;}",
+        ".price {color: var(--gh-color-green); font-weight: bold; font-size: 13px;}",
         ".card--standard > .card__content {padding: 0 10px 10px 10px; border: 2px solid #eee; border-radius: 0 0 10px 10px; border-top: 0;}"
       ],
       "settings": {
