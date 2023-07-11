@@ -164,8 +164,12 @@
             {% if show_rating %}
               <div class="yotpo bottomLine" data-domain="globalhealing.myshopify.com" data-product-id="{{ card_product.id }}" data-product-models="{{ card_product.id }}" data-name="{{ card_product.title }}"></div>
               <style>
+              .yotpo.bottomLine.yotpo-small {
+                  padding-top: 3px;
+              }
               .yotpo .standalone-bottomline .star-clickable{
                 flex-wrap: wrap;
+                gap: 5px;
               }
               .yotpo.bottomLine .yotpo-bottomline .yotpo-stars{
                 min-width: 6.5em;
