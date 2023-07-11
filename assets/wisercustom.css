@@ -1,6 +1,6 @@
 .evm-also-bought.evm_visible_text  #alsopresets3 .evm-ws-image-section .ws-box-wrapper{ width:18%; display: flex;
     flex-direction: column; }
-#alsopresets3 .card-wraper { display: grid!important;
+#alsopresets3 .card-wraper { display: grid;
     grid-template-rows: max-content minmax(0,1fr) auto;
     flex-grow: 1;}
 .checkbox-wrapper.fbt_template3_desktop_chk {
