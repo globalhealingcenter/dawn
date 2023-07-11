@@ -344,7 +344,7 @@
             $("body .header__icons #cart-icon-bubble")[0].click();
             });
         }, 1000);
-        $(document).on("click", "#CartDrawer-Overlay", function(e){
+        $(document).click(function(e){
             //console.log("click");
             //console.log($(e.target).closest('.drawer__inner').length);
             if($(e.target).closest('.drawer__inner').length != 0){
