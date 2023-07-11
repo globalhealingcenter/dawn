@@ -14,7 +14,7 @@ This file can be re-written at any time.
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-  {% include 'elevar-head' %}
+    {% include 'elevar-head' %}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -247,7 +247,7 @@ This file can be re-written at any time.
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-  {{ 'wisernewlive.css' | asset_url | stylesheet_tag }}
+<!--   {{ 'wisernewlive.css' | asset_url | stylesheet_tag }} -->
     {{ 'wisercustom.css' | asset_url | stylesheet_tag }}
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -279,13 +279,13 @@ This file can be re-written at any time.
 <!-- End of LittledataLayer -->
 {%- render 'ordergroove_static_asset' -%}
 {% include 'wiser' %}{% include 'wiser_popup' %}
-
   {% render 'shogun-head' %}
+
 </head>
 
 
   
-<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }}">
   
   
   {{ content_for_layout }}
@@ -331,9 +331,13 @@ This file can be re-written at any time.
             });
         }, 1000);
         $(document).click(function(e){
-          if($(e.target).closest('.drawer__inner').length != 0) return false;
-            $(".drawer__close").trigger('click');    
-        });  
+            //console.log("click");
+            //console.log($(e.target).closest('.drawer__inner').length);                        
+            //if($(e.target).closest('.drawer__inner').length != 0){
+              //$(".drawer__close").trigger('click');
+            //}
+        });
+        //$(".cart-drawer__overlay").on('click', function(){ $(".drawer__close").trigger('click'); });
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
               $(".drawer").addClass("active");
@@ -347,8 +351,6 @@ This file can be re-written at any time.
       background: white !important;
     }
   </style>
-
-  {% include 'elevar-body-end' %}
   
 </body>
 
