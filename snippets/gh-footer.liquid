@@ -1,0 +1,10 @@
+{% if product %}
+
+	<script>
+		// initiate ordergroove custom functionality
+		if( typeof og === 'object'){
+			gh.shopify.ordergroove.init({{ product.selected_or_first_available_variant.id }});
+		}
+	</script>
+
+{% endif %}
