@@ -18,7 +18,13 @@
         {% if config.instructions contains 'https' %}
           <p><a href='{{ config.instructions }}'>View Instuctions</a></p>
         {% endif %}
-      {% endif %}
+
+        {% if config.supplement_facts contains 'https' %}
+          {%- capture sf_content -%}<img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">{% endcapture %}
+          {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'full-ingredients-header', content: sf_content %}
+        {% endif %}
+        
+        {% endif %}
     </div>
     <div data-tab="2">{{ product.metafields.globalhealing.who_its_for }}</div>
     <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
