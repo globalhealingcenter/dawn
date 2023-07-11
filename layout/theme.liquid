@@ -348,12 +348,9 @@
             //console.log("click");
             console.log($(e.target).closest('.drawer__inner').length);            
             
-            if($(e.target).closest('.drawer__inner').length == 1){
+            if($(e.target).closest('.drawer__inner').length == 0){
               $(".drawer__close").trigger('click');
             }
-        });  
-        $("#CartDrawer-Overlay").click(function(e){
-            $(".drawer__close").trigger('click');
         });
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
