@@ -7,7 +7,7 @@
           "type": "hero",
           "settings": {
             "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-3-1.v4.jpg",
-            "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-mobile.jpg",
+            "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-mobile.jpg?w=1400",
             "url": "shopify:\/\/pages\/our-story"
           }
         },
