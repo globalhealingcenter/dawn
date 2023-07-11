@@ -233,15 +233,33 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {
+      }
+    },
+    "shogun-below": {
+      "type": "shogun-below",
+      "settings": {
+      }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {
+      }
     }
   },
   "order": [
+    "shogun-helper",
+    "shogun-above",
     "main",
     "53b760f3-79fb-4c05-9926-a95158273dc9",
     "1683650930059df865",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
     "1686083501cc540fa5",
-    "1687770021657df7cc"
+    "1687770021657df7cc",
+    "shogun-below"
   ]
 }
