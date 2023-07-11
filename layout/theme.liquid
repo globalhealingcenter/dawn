@@ -347,9 +347,9 @@
         $(document).click(function(e){
             //console.log("click");
             //console.log($(e.target).closest('.drawer__inner').length);                        
-            if($(e.target).closest('.drawer__inner').length != 0){
-              $(".drawer__close").trigger('click');
-            }
+            //if($(e.target).closest('.drawer__inner').length != 0){
+              //$(".drawer__close").trigger('click');
+            //}
         });
         //$(".cart-drawer__overlay").on('click', function(){ $(".drawer__close").trigger('click'); });
         $(".drawer").load(location.href + " .drawer>*", "");
