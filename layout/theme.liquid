@@ -345,10 +345,11 @@
             });
         }, 1000);
         $(document).click(function(e){
-          console.log("click");
-          console.log($(e.target).closest('.drawer__inner').length);
-          if($(e.target).closest('.drawer__inner').length != 0) return false;
-            //$(".drawer__close").trigger('click');
+            console.log("click");
+            console.log($(e.target).closest('.drawer__inner').length);
+            if($(e.target).closest('.drawer__inner').length != 0){
+              $(".drawer__close").trigger('click');
+            }
         });  
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
