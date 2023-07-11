@@ -3,19 +3,6 @@ html {
 	box-sizing: border-box
 } 
 
-/* .evm-ws-center {
-	text-align: center
-} */
-
-/* .evm-ws-left {
-	text-align: left
-} */
-
-/* .evm-ws-right {
-	text-align: right
-} */
-
-
 .evm-wscontainer {	width: 100%;	max-width: 1170px;	margin: 0 auto;	overflow: hidden;}
 .evm-wscontainer p{ margin: 8px 0;} 
 #alsopresets3 a{color: inherit;}
