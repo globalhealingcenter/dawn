@@ -545,7 +545,7 @@ button.also_temp3:after {
 
 
    #alsopresets3 .evm-ws-image-section.evm-ws-two-products .ws-box-wrapper{ 
-	width:45%;
+	width:45%!important;
 }
 
 #alsopresets3 .evm-ws-image-section .ws-box-wrapper{ 
