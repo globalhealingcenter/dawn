@@ -34,7 +34,7 @@ text-align: center!important;
     justify-content: space-between; padding-top: 0px;
         max-height: 30px; }
 
-.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold;font-family: 'Proxima Nova';  }
+.evm-also-bought.evm_visible_text #alsopresets3 .ws-card__price { margin:0; font-weight:bold;font-family: 'Proxima Nova'; text-align:left!important; }
 
 
 
