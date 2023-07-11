@@ -7,7 +7,9 @@
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
   <div class="info-tabs__links">
     <a href="#" data-tab="1" class="active">{{ config.tab_1_title | default: block.settings.tab_1_title }}</a>
+    {% unless product.metafields.globalhealing.who_its_for == '' %}
     <a href="#" data-tab="2">{{ config.tab_2_title | default: block.settings.tab_2_title }}</a>
+    {% endunless %}
     <a href="#" data-tab="3">{{ config.tab_3_title | default: block.settings.tab_3_title }}</a>
   </div>
   <div class="info-tabs__content">
