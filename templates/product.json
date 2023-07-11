@@ -92,6 +92,7 @@
     },
     "53b760f3-79fb-4c05-9926-a95158273dc9": {
       "type": "custom-liquid",
+      "disabled": true,
       "settings": {
         "custom_liquid": "<div class=\"evm-also-bought-products\"><\/div>",
         "color_scheme": "background-1",
