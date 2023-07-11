@@ -5,7 +5,7 @@ Last updated at: 2023-06-08T15:21:37.920Z / Version: 3.0.0
 {%- render 'ordergroove_static_asset' -%}
 {% endcomment %}
 <script type="text/javascript" src="https://static.ordergroove.com/98d71fca8cd111ebb13f8e5c81121b1e/main.js" data-shopify-selling-plans {% if customer -%}
-{%- assign secret_key = "}Up^e&=t9x1cF7ep&rV)lBxwK^R2gd*%" -%}
+{% assign secret_key = "7d38da9e45739b194a273ee8447d3e8ee0a16d7e" %}
 {%- assign timestamp = "now" | date: "%s" -%}
 {%- assign signature = customer.id | append: "|" | append: timestamp | hmac_sha256: secret_key -%}
 data-customer="{{customer.id | append: "|" | append: timestamp | append: "|" | append: signature | append: "|" | append: customer.email | base64_encode }}"
