@@ -346,7 +346,7 @@
         }, 1000);
         $(document).click(function(e){
             //console.log("click");
-            //console.log($(e.target).closest('.drawer__inner').length);            
+            console.log($(e.target).closest('.drawer__inner').length);            
             if($(e.target).closest('.drawer__inner').length == 1){
               $(".drawer__close").trigger('click');
             }
