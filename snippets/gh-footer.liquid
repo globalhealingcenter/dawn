@@ -8,3 +8,22 @@
 	</script>
 
 {% endif %}
+
+<!-- [osano] -->
+<style>
+    .osano-cm-widget{display: none;}
+    .osano-cm-info-dialog__info p {
+        font-size: 14px;
+    }
+</style>
+<script>
+	let osano_trigger = document.querySelector('[href="#osano-cookie-drawer"]');
+	if( osano_trigger ) {
+		osano_trigger.addEventListener('click', e => {
+			e.preventDefault();
+			Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')
+			return false;
+		})
+	}
+</script>
+<!-- [/osano] -->
