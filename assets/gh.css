@@ -97,7 +97,7 @@ h5, .h5 {
     font-size: calc(var(--font-heading-scale) * 1.6rem);
 }
 
-.button--link{
+.button--link, .button--text-link{
     background: none;
     border: 0;
     text-decoration: underline;
@@ -106,6 +106,12 @@ h5, .h5 {
     padding: 5px 9px;
     font-size: 16px;
     cursor: pointer;
+}
+.button--text-link{
+  padding: 0;
+}
+.text-bold{
+  font-weight: bold;
 }
 
 .button--gold{
