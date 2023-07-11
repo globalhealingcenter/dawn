@@ -344,11 +344,11 @@
             $("body .header__icons #cart-icon-bubble")[0].click();
             });
         }, 1000);
-        $(document).click(function(e){
+        $(document).on("click", "#CartDrawer-Overlay", function(e){
             //console.log("click");
             //console.log($(e.target).closest('.drawer__inner').length);                        
             //if($(e.target).closest('.drawer__inner').length != 0){
-              //$(".drawer__close").trigger('click');
+              $(".drawer__close").trigger('click');
             //}
         });
         //$(".cart-drawer__overlay").on('click', function(){ $(".drawer__close").trigger('click'); });
