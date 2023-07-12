@@ -11,7 +11,7 @@ Please add following code in customers/account.liquid at the end.
 {% endcomment %}
 
 {% if customer %}
-  {% assign secret_key = "}Up^e&=t9x1cF7ep&rV)lBxwK^R2gd*%" %}
+  {% assign secret_key = "7d38da9e45739b194a273ee8447d3e8ee0a16d7e" %}
   {% assign timestamp = "now" | date: "%s" %}
   {% assign customer_id = customer.id  %}
   {% assign customer_email = customer.email | url_encode %}
