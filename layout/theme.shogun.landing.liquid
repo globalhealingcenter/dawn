@@ -277,9 +277,10 @@ This file can be re-written at any time.
 <!-- Start of LittledataLayer -->
 {% include 'LittledataLayer' %}
 <!-- End of LittledataLayer -->
-{%- render 'ordergroove_static_asset' -%}
+
 {% include 'wiser' %}{% include 'wiser_popup' %}
   {% render 'shogun-head' %}
+{%- render 'ordergroove_static_asset' -%}
 
 </head>
 
@@ -320,31 +321,6 @@ This file can be re-written at any time.
       };
     </script>
 <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-<script>
-      function wiseraddtocart() {
-        setTimeout(function () {
-            $.getJSON('/cart.js', function(cart) {
-            var ws_item_count = cart.item_count
-            $(".cart-count-bubble").remove();
-            $("#cart-icon-bubble").append('<div class="cart-count-bubble"><span aria-hidden="true">'+ws_item_count+'</span><span class="visually-hidden">'+ws_item_count+' item</span></div>');
-            $("body .header__icons #cart-icon-bubble")[0].click();
-            });
-        }, 1000);
-        $(document).click(function(e){
-            //console.log("click");
-            //console.log($(e.target).closest('.drawer__inner').length);                        
-            //if($(e.target).closest('.drawer__inner').length != 0){
-              //$(".drawer__close").trigger('click');
-            //}
-        });
-        //$(".cart-drawer__overlay").on('click', function(){ $(".drawer__close").trigger('click'); });
-        $(".drawer").load(location.href + " .drawer>*", "");
-        setTimeout(function() {
-              $(".drawer").addClass("active");
-              $(".drawer").removeClass("is-empty");
-        },1000);  
-      }
-      </script>
   <style type="text/css">
     body, html {
       width: 100% !important;
