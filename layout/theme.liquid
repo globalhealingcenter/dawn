@@ -345,21 +345,15 @@
             });
         }, 1000);
         $(document).click(function(e){
-            console.log("click");
-            console.log($(e.target).closest('.drawer__inner').length);                        
-            if($(e.target).closest('.drawer__inner').length == 0){
-              $(".drawer__close").trigger('click');
-            }
-        });
-        // $("#cart-drawer__overlay").on('click', function() { $(".drawer__close").trigger('click'); });
+          if($(e.target).closest('.drawer__inner').length != 0) return false;
+            $(".drawer__close").trigger('click');    
+        });  
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
               $(".drawer").addClass("active");
               $(".drawer").removeClass("is-empty");
         },1000);  
       }
-      </script>   
-
-    {%- render 'gh-footer', product: product,settings: settings, cart: cart -%}
+      </script>     
   </body>
 </html>
