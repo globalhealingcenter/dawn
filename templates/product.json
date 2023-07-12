@@ -33,12 +33,6 @@
             "picker_type": "button"
           }
         },
-        "ordergroove_offer": {
-          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-          "settings": {
-            "location": ""
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -67,7 +61,6 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
         "variant_picker",
-        "ordergroove_offer",
         "buy_buttons",
         "fd07f90a-d072-4889-9f15-50599ae59cfd",
         "86dcf870-60e1-4a4d-b38b-2ae9e1ed5141"
