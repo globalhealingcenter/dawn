@@ -120,7 +120,8 @@
     "checkout_logo_image": "shopify:\/\/shop_images\/gh-logo.png",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
-    "checkout_sidebar_background_color": "#f5f5f5",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_sidebar_background_color": "#f9f2e8",
     "checkout_accent_color": "#21472d",
     "checkout_button_color": "#3c5949",
     "sections": {
