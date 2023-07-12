@@ -253,6 +253,13 @@ img {
   margin-top: 0;
 }
 
+/* ordergroove */
+og-upsell-button > button {
+    background: transparent;
+    border: 1px solid var(--gh-color-gray);
+    padding: 14px;
+}
+
 /* searchspring */
 
 @media (min-width: 990px){
