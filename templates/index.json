@@ -6,7 +6,7 @@
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
           "settings": {
-            "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-3-1.v4.jpg",
+            "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner.v2.jpg",
             "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-mobile.jpg?w=1400",
             "url": "shopify:\/\/pages\/our-story"
           }
@@ -19,7 +19,7 @@
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
           "settings": {
-            "banner_1_image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-3-1.v3.png",
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-3-1.v5.png?w=1400",
             "banner_1_url": "shopify:\/\/products\/oxy-powder",
             "banner_2_image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/banner-featured-blog.png?w=500",
             "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
