@@ -53,6 +53,11 @@
           "settings": {
             "custom_liquid": "<script type=\"text\/javascript\">(function e(){var e=document.createElement(\"script\");e.type=\"text\/javascript\",e.async=true,e.src=\"\/\/staticw2.yotpo.com\/63EcnfHVSENo8yIBbBSY9uqxQxPZztn6xa7YvxGC\/widget.js\";var t=document.getElementsByTagName(\"script\")[0];t.parentNode.insertBefore(e,t)})();<\/script>"
           }
+        },
+        "ordergroove_offer": {
+          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -61,6 +66,7 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
         "variant_picker",
+        "ordergroove_offer",
         "buy_buttons",
         "fd07f90a-d072-4889-9f15-50599ae59cfd",
         "86dcf870-60e1-4a4d-b38b-2ae9e1ed5141"

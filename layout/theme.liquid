@@ -273,6 +273,7 @@
 
 {% include 'wiser' %}{% include 'wiser_popup' %}
   {% render 'shogun-head' %}
+{%- render 'ordergroove_static_asset' -%}
 </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }}">
@@ -288,6 +289,7 @@
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       
+{%- render 'ordergroove_global' -%}
 {{ content_for_layout }}
     </main>
 
