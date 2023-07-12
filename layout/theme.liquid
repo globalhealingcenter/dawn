@@ -344,11 +344,12 @@
             $("body .header__icons #cart-icon-bubble")[0].click();
             });
         }, 1000);
-        $(document).on("click", "#CartDrawer-Overlay", function(e){
+        $(document).on("click", "#CartDrawer-Overlay", function(e) {
+          e.preventDefault();
           console.log(" 11111111111 ");
           // if($(e.target).closest('.drawer__inner').length != 0) return false;
           //   $(".drawer__close").trigger('click');
-          $("#CartDrawer").parent().addClass("ssdfsdfsdactive");
+          $("#CartDrawer").parent().removeClass("active");
         });  
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
