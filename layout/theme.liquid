@@ -345,8 +345,8 @@
             });
         }, 1000);
         $(document).click(function(e){
-          if($(e.target).closest('.drawer__inner').length != 0) return false;
-            $(".drawer__close").trigger('click');    
+          // if($(e.target).closest('.drawer__inner').length != 0) return false;
+          //   $(".drawer__close").trigger('click');    
         });  
         $(".drawer").load(location.href + " .drawer>*", "");
         setTimeout(function() {
