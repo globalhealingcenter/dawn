@@ -254,7 +254,8 @@ img {
 }
 
 /* ordergroove */
-og-upsell-button > button {
+og-upsell-button > button,
+og-upsell-modal button{
     background: transparent;
     border: 1px solid var(--gh-color-gray);
     padding: 14px;
