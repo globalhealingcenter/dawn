@@ -1,6 +1,6 @@
 {% assign product_collection = product.collections.first %}
 {% assign current_product = product.handle %}
-{% assign popup_status = "1" %}
+{% assign popup_status = "0" %}
 {% assign evmemail_status = "1" %}
 {% assign wiser_view_products = "4" %}
 {% assign wiser_template = template %}
@@ -145,14 +145,17 @@ if(!window.jQuery){
           product_type : "{{ wsProducttype }}",
           published_at : "{{ product.published_at }}",
           collections : evmCollectionsDetails,
+
       });
   }else{
       var evmproductIds = localStorage.getItem("wi_related_browse");
       evmproductIds = JSON.parse(evmproductIds);
       
       var wi_recent_products = localStorage.getItem("wi_recent_products");
-      var evmProductDetails = JSON.parse(wi_recent_products);    
-      var wiser_total = evmproductIds.length;      
+      var evmProductDetails = JSON.parse(wi_recent_products);
+    
+      var wiser_total = evmproductIds.length;
+      
       if(wiser_total == wiser_view_products){
         var productdetail_index = evmProductDetails.pdetails.findIndex(function(item, i){
           return item.id === evmproductIds[0];
