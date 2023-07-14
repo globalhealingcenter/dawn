@@ -306,6 +306,13 @@ og-upsell-modal button{
   padding-right: 6px;
 }
 
+/* ORDERGROOVE */
+@media (max-width: 649px{
+  .og-regular-offer-content {
+      font-size: 13px;
+  }
+}
+
 /* YOTPO */
 .evm-wscontainer .yotpo .yotpo-icon{
     width: 1em !important;
