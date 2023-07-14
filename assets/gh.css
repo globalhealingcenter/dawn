@@ -307,7 +307,7 @@ og-upsell-modal button{
 }
 
 /* ORDERGROOVE */
-@media (max-width: 649px{
+@media (max-width: 649px){
   .og-regular-offer-content {
       font-size: 13px;
   }
