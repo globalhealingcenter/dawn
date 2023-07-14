@@ -124,6 +124,7 @@
 }
 .ghd--block--ingredients .ghd--dialog--button{
     font-family: var(--gh-font-secondary);
+    color: var(--gh-color-gray);
     cursor: pointer;
     display: block;
     padding: 11px 0;
