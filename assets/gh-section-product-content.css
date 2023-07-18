@@ -93,7 +93,7 @@
 .ghd--block--ingredients [data-type="image"] img{
     transition: opacity .2s ease-in-out, background .2s ease-in-out;
 }
-.ghd--block--ingredients[label="small-image"] img{
+.ghd--block--ingredients[data-label="small-image"] img{
     max-width: 60%;
 }
 .ghd--block--ingredients [data-type="image"] img.loading{
