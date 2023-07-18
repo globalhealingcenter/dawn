@@ -124,7 +124,7 @@
         </div>
       {% endif %}
       {% when 'ingredients' %}
-        <div class="ghd--block--ingredients ghd--block" {{ block.shopify_attributes }}>
+        <div class="ghd--block--ingredients ghd--block" data-label="{{ config.ingredients.label }}" {{ block.shopify_attributes }}>
           <div data-type="header">
             <h2 class="eyebrow">
               <span>{{ config.ingredients.title.before | default: 'Made With' }}</span>
