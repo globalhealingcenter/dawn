@@ -481,7 +481,7 @@
     "checkout": {
       "shipping": {
         "subscription_delivery_description": {
-          "recurring_order_shipping_price": "followed by $0"
+          "recurring_order_shipping_price": "Every month"
         }
       }
     }
