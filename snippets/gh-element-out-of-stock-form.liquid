@@ -1,0 +1,77 @@
+<style>
+  .out-of-stock-form-signup{
+      display: flex;
+      gap: 5%;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 0 2rem;
+  }
+  .out-of-stock-form-signup > form{
+      min-width: 300px;
+      flex: 1;
+  }
+  .out-of-stock-form-signup .input-group{
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+  }
+  .out-of-stock-form-signup input[type="email"]{
+      border: 1px solid #00000030;
+      padding: 10px 15px;
+      background: #fff;
+      color: #fff;
+      flex: 1;
+  }
+  .out-of-stock-form-signup label{
+      font-size: 14px;
+  }
+  .out-of-stock-form-signup a{
+      color: #fff
+  }
+</style>
+
+<div class="out-of-stock-form-signup" style="margin-bottom: 30px;">
+  <p>Get notified when this product is back in stock.</p>
+  <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
+    <div class="input-group pre-submit">
+      <input type="email" placeholder="Enter Your Email" name="email" required>
+      <button class="button button--secondary" type="submit">Sign Up</button>
+    </div>
+    <div class="success hide">
+      Success! You'll be receiving an email shortly.
+    </div>
+  </form>
+  <script>
+    {
+      let outofstock_form = document.getElementById('product-out-of-stock-form');
+      let preSubmit = outofstock_form.querySelector('.pre-submit');
+      let success = outofstock_form.querySelector('.success');
+      let button = outofstock_form.querySelector('.btn');
+
+      outofstock_form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        let email = outofstock_form.querySelector('[name="email"]').value;
+        let url = outofstock_form.getAttribute('action');
+
+        button.classList.add('btn--loading');
+        button.disabled = true;
+
+        fetch(url, {
+          method: 'post',
+          body: JSON.stringify({
+            email: email,
+            sku: '{{ product.selected_or_first_available_variant.sku }}',
+            shopify_product_id: '{{ product.id }}'
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          console.log(data);
+          preSubmit.classList.add('hide');
+          success.classList.remove('hide');
+        });
+      })
+    }
+  </script>
+</div>
