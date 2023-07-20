@@ -2,13 +2,17 @@ body{
   --gh-color-gray: #545454;
   --gh-color-gold: #CCA72D;
   --gh-color-green: #21472D;
-  --gh-color-light-green: #d7dad3;
-  --gh-color-dark-green: #00260f;
+  --gh-color-green-light: #d7dad3;
+  --gh-color-green-dark: #00260f;
   --gh-color-brown: #2D1F15;
   --gh-color-cream: #F9F2E8;
-  --gh-color-dark-cream: #E3D2BE;
+  --gh-color-cream-dark: #E3D2BE;
   --gh-font-primary: "Miller Display", serif;
   --gh-font-secondary: "Proxima Nova", sans-serif;
+
+  --gh-color-dark-cream: #E3D2BE;
+  --gh-color-light-green: #d7dad3;
+  --gh-color-dark-green: #00260f;
 }
 
 .page-shogun-default{
