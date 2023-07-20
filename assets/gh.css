@@ -20,7 +20,7 @@ body{
 }
 
 .drawer{
-  z-index: 1000000000000000000;
+  z-index: 1000000000000000000 !important;
 }
 
 @font-face {
