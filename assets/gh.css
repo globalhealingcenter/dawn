@@ -19,6 +19,10 @@ body{
     --gradient-background: #fff;
 }
 
+.drawer{
+  z-index: 1000000000000000000;
+}
+
 @font-face {
     font-family: "Miller Display";
     font-weight: 500;
