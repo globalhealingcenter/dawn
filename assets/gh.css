@@ -348,3 +348,95 @@ og-upsell-modal button{
 .evm-wscontainer .yotpo .standalone-bottomline .star-clickable{
     align-items: center;
 }
+
+/* GH PROMOTION STUFF */
+
+
+.product-list-container{
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+.product-list-container .product-list{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.product-list-container .product-list li{
+    padding: 10px 20px;
+    flex: 1;
+    min-width: 351px;
+    max-widtH: 400px;
+}
+
+.product-list-container .product-list-free{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.product-list-container .product-list label{
+    margin-top: 10px;
+}
+
+.product-list-container .product-list input{
+    text-align: center;
+    width: 72px
+}
+
+.product-list-container .qualify-no{
+    opacity: .5;
+}
+
+.product-list-container .add-to-cart.loading{
+    opacity: .7;
+}
+
+.product-list-container .add-to-cart .loading,
+.product-list-container .add-to-cart .done,
+.product-list-container .add-to-cart.loading .add,
+.product-list-container .add-to-cart.done .add{
+    display: none;
+}
+.product-list-container .add-to-cart.loading .loading,
+.product-list-container .add-to-cart.done .done{
+    display: inline-block;
+}
+
+.product-list-container .gh-promotion-product-title{
+    color: var(--colorBtnPrimaryDim);
+    font-size: 23px;
+    margin: 15px 0 10px 0;
+}
+
+.product-list-container .added-products-container{
+    background: #f1f1f1;
+    padding: 20px 20px 10px 20px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.product-list-container #added-products{
+    margin: 10px 0 0 0;
+    padding-bottom: 5px;
+    list-style-type: none;
+    padding-left: 0;
+}
+.product-list-container .gh-promotion-group-button{
+    display: flex;
+}
+.product-list-container .gh-promotion-group-button select{
+    flex: 1;
+}
+.product-list-container .gh-promotion-group-button .button{
+    width: 90px;
+}
+.product-list-container .btn-dark-green{
+    background-color: #3C5949;
+}
