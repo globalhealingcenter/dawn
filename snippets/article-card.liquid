@@ -23,10 +23,10 @@
       assign ratio = media_aspect_ratio
     endif
   -%}
-  <div class="article-card-wrapper card-wrapper underline-links-hover">
+  <div class="testing article-card-wrapper card-wrapper underline-links-hover">
     {% comment %} <article aria-labelledby="Article-{{ article.id }}"> {% endcomment %}
     <div
-      class="testing
+      class="
         card article-card
         card--{{ settings.blog_card_style }}
         {% if media_height and media_height != 'adapt' %} article-card__image--{{ media_height }}{% endif %}
