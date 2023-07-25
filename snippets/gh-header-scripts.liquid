@@ -1,5 +1,5 @@
 <script>
-  let gh_promotion = (function(){
+let gh_promotion = (function(){
   
   let config = {};
   let config_compiled = {}
@@ -16,7 +16,7 @@
   let added_products_container = document.getElementById('added-products');
   let added_products_text = document.getElementById('added-products-text');
   let setup = (data) => {
-    setup = data;
+    config = data;
     compileConfig()
     createQualifyingProducts();
     attachVariantEvents()
