@@ -3,6 +3,7 @@ let gh_promotion = (function(){
   
   let config = {};
   let config_compiled = {}
+  let product_list_container;
   let qualifying_products_container;
   let free_products_container;
   let add_to_cart;
@@ -15,6 +16,24 @@ let gh_promotion = (function(){
   let variant_image_attribute = 'data-image-for'
   let variant_input_selector = 'data-input-for'
   let trigger_attribute = 'data-trigger-for'
+
+  let inner_html = `
+    <ul id="gh-promotion-qualifying-products" class="product-list"></ul>
+
+  	<br>
+  	<div style="text-align: center; position: relative; z-index: 5;">
+  		<div class="added-products-container fa-filson">
+  			<span id="added-products-text"></span>
+  			<ul id="added-products"></ul>
+  		<br>
+  		<button id="gh-promotion-add-to-cart" class="qualify-no evm-add-to-cart button btn--full btn-dark-green add-to-cart" disabled>
+  			<span class="add">Add to Cart</span>
+  			<span class="loading">Adding..</span>
+  			<span class="done">Added!</span>
+  		</button>
+      </div>
+	</div>
+  `;
   
   let setup = (data) => {
     config = data;
@@ -29,6 +48,8 @@ let gh_promotion = (function(){
   }
   let setupNodes = () =>
   {
+    product_list_container = document.querySelector('.product-list-container');
+    product_list_container.innerHTML = inner_html;
     qualifying_products_container = document.getElementById('gh-promotion-qualifying-products');
     free_products_container = document.getElementById('gh-promotion-free-products');
     add_to_cart = document.getElementById('gh-promotion-add-to-cart');
