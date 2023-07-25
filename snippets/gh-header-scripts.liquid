@@ -189,7 +189,7 @@
       }
       added_products_container.innerHTML = text;
 
-      added_products_text.innerHTML = getText();
+      added_products_text.innerHTML = `<b>${getText()}</b>`;
     }
 
     let rounder = (num)=>{
@@ -197,16 +197,16 @@
     }
 
     let getText = () => {
-      
+
       let type = 'qty';
-      if( config.min_price && config.min_price !== false ) type = 'price';
-      
+      if( qualifying_products.minimum_price && qualifying_products.minimum_price !== false ) type = 'price';
+
       if( config_compiled.total_qty === 0 )
         return config.default_buy_text;
-      
+
       if( config_compiled.qualifies  )
-        return config.qualifies_buy_text;
-      
+        return `<span style="color: var(--colorBtnPrimaryDim);">${config.qualifies_buy_text}</span>`;
+
       switch (type){
         case 'qty':
           let left = config.qualifying_products.minimum_count - config_compiled.total_qty;
@@ -214,7 +214,7 @@
         case 'price':
           return `<b>Add $${rounder(config.qualifying_products.minimum_price - config_compiled.total_price)} more to qualify for 5 Oxy-Powder Travel Samples for FREE!</b>`;
       }
-      
+
     }
 
     let addToCart = () =>
