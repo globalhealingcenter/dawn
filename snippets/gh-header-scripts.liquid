@@ -3,9 +3,11 @@ let gh_promotion = (function(){
   
   let config = {};
   let config_compiled = {}
-  let qualifying_products_container = document.getElementById('gh-promotion-qualifying-products');
-  let free_products_container = document.getElementById('gh-promotion-free-products');
-  let add_to_cart = document.getElementById('gh-promotion-add-to-cart');
+  let qualifying_products_container;
+  let free_products_container;
+  let add_to_cart;
+  let added_products_container;
+  let added_products_text;
   let class_name = 'gh-promotion-qualifying-products-input';
   let no_qualify_class = 'qualify-no';
   let loading_class = 'loading';
@@ -13,10 +15,10 @@ let gh_promotion = (function(){
   let variant_image_attribute = 'data-image-for'
   let variant_input_selector = 'data-input-for'
   let trigger_attribute = 'data-trigger-for'
-  let added_products_container = document.getElementById('added-products');
-  let added_products_text = document.getElementById('added-products-text');
+  
   let setup = (data) => {
     config = data;
+    setupNodes();
     compileConfig()
     createQualifyingProducts();
     attachVariantEvents()
@@ -24,6 +26,14 @@ let gh_promotion = (function(){
     setupTriggers();
     updateText()
     add_to_cart.addEventListener('click', addToCart);
+  }
+  let setupNodes = () =>
+  {
+    qualifying_products_container = document.getElementById('gh-promotion-qualifying-products');
+    free_products_container = document.getElementById('gh-promotion-free-products');
+    add_to_cart = document.getElementById('gh-promotion-add-to-cart');
+    added_products_container = document.getElementById('added-products');
+    added_products_text = document.getElementById('added-products-text');
   }
   let compileConfig = () =>
   {
