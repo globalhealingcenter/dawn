@@ -423,11 +423,14 @@ og-upsell-modal button{
     right: 0;
 }
 .product-list-container #added-products{
-    margin: 10px 0 0 0;
-    padding-bottom: 5px;
+    margin: 10px 0 10px 0;
     list-style-type: none;
     padding-left: 0;
 }
+.product-list-container #added-products-text{
+  display: block;
+}
+
 .product-list-container .gh-promotion-group-button{
     display: flex;
 }
