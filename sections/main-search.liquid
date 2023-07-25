@@ -253,6 +253,7 @@
                                   <a href="{{ item.url }}" class="full-unstyled-link">
                                     {{ item.title | truncate: 50 | escape }}
                                   </a>
+                                  <p>{{ item.metafields.page_description }}</p>
                                 </h3>
                               </div>
                               <div class="card__badge {{ settings.badge_position }}">
