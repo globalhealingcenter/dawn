@@ -249,7 +249,7 @@
                           <div class="card card--card card--text ratio color-{{ settings.blog_card_color_scheme }}" style="--ratio-percent: 100%;">
                             <div class="card__content">
                               <div class="card__information">
-                                <h3 class="card__heading" data-description="{{ item.metafields | json }}">
+                                <h3 class="card__heading" data-description="{{ item.metafields.description }}">
                                   <a href="{{ item.url }}" class="full-unstyled-link">
                                     {{ item.title | truncate: 50 | escape }}
                                   </a>
