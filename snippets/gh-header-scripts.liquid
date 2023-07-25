@@ -199,7 +199,7 @@
     let getText = () => {
 
       let type = 'qty';
-      if( qualifying_products.minimum_price && qualifying_products.minimum_price !== false ) type = 'price';
+      if( config.qualifying_products.minimum_price && config.qualifying_products.minimum_price !== false ) type = 'price';
 
       if( config_compiled.total_qty === 0 )
         return config.default_buy_text;
