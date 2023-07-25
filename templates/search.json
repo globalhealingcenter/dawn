@@ -3,7 +3,7 @@
     "main": {
       "type": "main-search",
       "custom_css": [
-        ".article-card-wrapper .card{background-color:var(--gh-color-cream-dark)}"
+
       ],
       "settings": {
         "columns_desktop": 4,

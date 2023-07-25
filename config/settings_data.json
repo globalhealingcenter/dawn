@@ -58,7 +58,7 @@
     "blog_card_style": "standard",
     "blog_card_image_padding": 0,
     "blog_card_text_alignment": "left",
-    "blog_card_color_scheme": "background-2",
+    "blog_card_color_scheme": "scheme-06b3de34-9b7e-4f30-93af-7a09a713f3bf",
     "blog_card_border_thickness": 0,
     "blog_card_border_opacity": 10,
     "blog_card_corner_radius": 0,
@@ -221,6 +221,17 @@
           "text": "#545454",
           "button": "{{ shop.brand.colors.primary[0].background }}",
           "button_label": "#ffffff",
+          "secondary_button_label": "#121212",
+          "shadow": "#545454"
+        }
+      },
+      "scheme-06b3de34-9b7e-4f30-93af-7a09a713f3bf": {
+        "settings": {
+          "background": "#e3d2be",
+          "background_gradient": "",
+          "text": "#545454",
+          "button": "{{ shop.brand.colors.primary[0].background }}",
+          "button_label": "#FFFFFF",
           "secondary_button_label": "#121212",
           "shadow": "#545454"
         }
