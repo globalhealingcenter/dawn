@@ -2,7 +2,7 @@
   "current": {
     "logo": "shopify:\/\/shop_images\/seal-white.png",
     "logo_width": 60,
-    "favicon": "shopify:\/\/shop_images\/favicon.png",
+    "favicon": "shopify:\/\/shop_images\/favicon2023.svg",
     "type_header_font": "serif",
     "heading_scale": 100,
     "type_body_font": "sans-serif",
@@ -118,7 +118,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "ss_enable": false,
-    "checkout_logo_image": "shopify:\/\/shop_images\/gh-logo.png",
+    "checkout_logo_image": "shopify:\/\/shop_images\/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
     "checkout_body_background_color": "#ffffff",
@@ -231,7 +231,7 @@
           "background_gradient": "",
           "text": "#545454",
           "button": "{{ shop.brand.colors.primary[0].background }}",
-          "button_label": "#FFFFFF",
+          "button_label": "#ffffff",
           "secondary_button_label": "#121212",
           "shadow": "#545454"
         }
