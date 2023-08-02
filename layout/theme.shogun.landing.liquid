@@ -8,6 +8,7 @@ This file can be re-written at any time.
   
 <head>
   
+  <meta name="google-site-verification" content="IxCqVMAA2jMmzyctkD_74jxhXRW48ZM1IsTKXOtzoXo" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -247,8 +248,7 @@ This file can be re-written at any time.
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-<!--   {{ 'wisernewlive.css' | asset_url | stylesheet_tag }} -->
-    {{ 'wisercustom.css' | asset_url | stylesheet_tag }}
+
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
