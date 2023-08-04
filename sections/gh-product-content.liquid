@@ -194,6 +194,7 @@
           {% endif %}
         </div>
       {% when 'impact' %}
+      {% if config.impact.title %}
       <div class="ghd--block--impact ghd--block" {{ block.shopify_attributes }}>
         <div data-type="cols">
           <div data-type="text">
@@ -225,7 +226,7 @@
       {% if product.tags contains 'impact-brown' %}
       <style>.ghd--block--impact{background: #C99D75}</style>
       {% endif %}
-      
+      {% endif %}
       {% when 'miron' %}
       {% if product.tags contains "miron" %}
       <div class="ghd--block--miron ghd--block" {{ block.shopify_attributes }}>
