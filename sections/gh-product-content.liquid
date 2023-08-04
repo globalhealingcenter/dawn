@@ -30,11 +30,13 @@
       {%- when '@app' -%}
         {% render block %}
       {%- when 'blank' -%}
+       {% if config.blank.content %}
         <div class="ghd--block--blank ghd--block" {{ block.shopify_attributes }}>
           <div class="page-width">
             {{ config.blank.content }}
           </div>
         </div>
+       {% endif %}
       {% when 'intro' %}
         {% if config.intro %}
         <div class="ghd--block--intro ghd--block" {{ block.shopify_attributes }}>
