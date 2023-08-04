@@ -29,6 +29,12 @@
     {%- case block.type -%}
       {%- when '@app' -%}
         {% render block %}
+      {%- when 'blank' -%}
+        <div class="ghd--block--blank ghd--block" {{ block.shopify_attributes }}>
+          <div class="page-width">
+            {{ config.blank.content }}
+          </div>
+        </div>
       {% when 'intro' %}
         {% if config.intro %}
         <div class="ghd--block--intro ghd--block" {{ block.shopify_attributes }}>
@@ -426,6 +432,12 @@
     {
       "type": "faqs",
       "name": "FAQs",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "blank",
+      "name": "Blank",
       "limit": 1,
       "settings": []
     }
