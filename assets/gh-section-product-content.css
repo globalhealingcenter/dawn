@@ -266,6 +266,10 @@
 
 .ghd--block--blank h2{
   text-align: center;
+  font-size: 5rem;
+  color: var(--gh-color-green);
+  padding-bottom: 0;
+  padding-top: 1rem;
 }
 
 .ghd--block--blank .embed-container{
@@ -477,7 +481,7 @@ h2.eyebrow + h4{
         display: none;
     }
 
-    h2.eyebrow {
+    h2.eyebrow, .ghd--block--blank h2 {
         font-size: 3rem;
 
     }
