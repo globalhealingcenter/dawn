@@ -142,6 +142,11 @@
           "settings": {
           }
         },
+        "5e11a993-a93b-4a40-9f15-a04711b9783d": {
+          "type": "blank",
+          "settings": {
+          }
+        },
         "09cb2b2a-d327-41c1-8c96-bfbdc5c78b20": {
           "type": "impact",
           "settings": {
@@ -157,11 +162,6 @@
           "settings": {
           }
         },
-        "5e11a993-a93b-4a40-9f15-a04711b9783d": {
-          "type": "blank",
-          "settings": {
-          }
-        },
         "87d2a586-3c28-400d-989d-8836299e6efc": {
           "type": "faqs",
           "settings": {
@@ -173,10 +173,10 @@
         "f337cad7-73f6-4357-9195-8e40138d9780",
         "99d44ae2-8420-494e-ae15-c50949303594",
         "76fbc246-177e-499e-a484-0a06dbaacafc",
+        "5e11a993-a93b-4a40-9f15-a04711b9783d",
         "09cb2b2a-d327-41c1-8c96-bfbdc5c78b20",
         "5c03b9c3-0d35-48cc-9700-e77d1f3a932c",
         "62939461-ed1c-4168-b23a-0b4cf3da94d3",
-        "5e11a993-a93b-4a40-9f15-a04711b9783d",
         "87d2a586-3c28-400d-989d-8836299e6efc"
       ],
       "settings": {
