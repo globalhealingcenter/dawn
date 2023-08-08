@@ -56,11 +56,34 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16067869081800__94a50d09-d564-4967-97aa-bcb0b9d99f43-text-1": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16067869081800__94a50d09-d564-4967-97aa-bcb0b9d99f43-text-1"
+      ],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "banner",
     "product-grid",
-    "168777948032aeb944"
+    "168777948032aeb944",
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43"
   ]
 }
