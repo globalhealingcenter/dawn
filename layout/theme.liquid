@@ -358,5 +358,25 @@
 <script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
 </script>
 <!--Gorgias Chat Widget End-->
+
+    <script>
+      $(document).ready(function () {
+        var wsOldCartCnt = 0;
+        setTimeout(function () {
+          setInterval(function () {
+           var wsCartCnt = $(".cart-count-bubble span:first").text();
+            var wsCountDiv = $(".evm-drawer-main div").children().length;
+            if(wsCountDiv == 0 && wsOldCartCnt != wsCartCnt) {
+              $(".evm-drawer-main").attr("ws-data-drawer", 1);
+              wsOldCartCnt = wsCartCnt
+              window.WISER_INIT("cart", 1);
+              // setTimeout(function () {
+              //   $(".evm-drawer-main").attr("ws-data-drawer", 0);
+              // }, 5000);
+            }
+          }, 200);
+        }, 3000);
+      })
+    </script>
 </body>
 </html>
