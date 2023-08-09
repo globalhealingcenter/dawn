@@ -368,7 +368,7 @@
             var wsCountDiv = $(".evm-drawer-main div").children().length;
             if(wsCountDiv == 0 && wsOldCartCnt != wsCartCnt) {
               console.log(" 1111111111111 ");
-              $(".evm-drawer-main").attr("ws-data-drawer", 1);
+              $("cart-drawer").attr("ws-data-drawer", 1);
               wsOldCartCnt = wsCartCnt
               window.WISER_INIT("cart", 1);
               // setTimeout(function () {
