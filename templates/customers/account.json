@@ -2,7 +2,6 @@
   "sections": {
     "0a5c7c21-802d-4186-be62-a4c68b0b882c": {
       "type": "rich-text",
-      "disabled": true,
       "blocks": {
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0": {
           "type": "heading",
@@ -22,6 +21,7 @@
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0",
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-1"
       ],
+      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "left",
@@ -40,7 +40,7 @@
         "@media (max-width: 989px) {.customer > div:last-child {display: flex; flex-wrap: wrap; margin-top: 2rem; } .customer > div:last-child > div {width: 100%; } .customer > div:last-child h2 {margin-top: 0; } .customer > div:last-child > div:first-child {padding-top: 20px; padding-left: 0; }}"
       ],
       "settings": {
-        "account_links": "<p>\n    <a href=\"\/pages\/live-healthy-rewards-program\">My Rewards<\/a><br>\n    <a href=\"\/pages\/my-preferences\">Email Preferences<\/a><br>\n    <a href=\"\/pages\/my-courses\">My Courses<\/a><br>\n    <a href=\"\/apps\/downloads\/orders\">My Downloads<\/a>\n<br>\n<a href=\"\/account\/login#recover\">Reset Password<\/a>\n<\/p>",
+        "account_links": "<p>\n    <a href=\"\/pages\/live-healthy-rewards-program\">My Rewards<\/a><br>\n    <a class=\"bloomreach-email-preferences\" href=\"#\">Email Preferences<\/a><br>\n    <a href=\"\/pages\/my-courses\">My Courses<\/a><br>\n    <a href=\"\/apps\/downloads\/orders\">My Downloads<\/a>\n<br>\n<a href=\"\/account\/login#recover\">Reset Password<\/a>\n<\/p>",
         "padding_top": 36,
         "padding_bottom": 36
       }
