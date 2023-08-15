@@ -14,66 +14,66 @@
 
 {% assign has_product_config = false %}
 
-{% if product and product.metafields.globalhealing.body %}
+{% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
-  {% assign config = product.metafields.globalhealing.body.value %}
+  {% assign config = product.metafields.gh_product.data.value %}
 {% endif %}
 
 {% if has_product_config %}
+
 <section class="gh--product-content section-{{ section.id }}-padding">
   
   {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
   
   <div class="ghd--product-container">
-  {%- for block in section.blocks -%}
+    
+  {% for block in config.blocks %}
     {%- case block.type -%}
-      {%- when '@app' -%}
-        {% render block %}
       {%- when 'blank' -%}
-       {% if config.blank.content %}
-        <div class="ghd--block--blank ghd--block" {{ block.shopify_attributes }}>
+       {% if block.content %}
+        <div class="ghd--block--blank ghd--block">
           <div class="page-width">
-            {{ config.blank.content }}
+            {{ block.content }}
           </div>
         </div>
        {% endif %}
       {% when 'intro' %}
-        {% if config.intro %}
-        <div class="ghd--block--intro ghd--block" {{ block.shopify_attributes }}>
+        {% if block.intro %}
+        <div class="ghd--block--intro ghd--block">
           <div data-type="cols">
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>{{ config.intro.title.before | default: 'Uniquely Made' }}</span>
-                  {{ config.intro.title.main }}
+                  <span>{{ block.title.before | default: 'Uniquely Made' }}</span>
+                  {{ block.title.main }}
                 </h2>
-                {{ config.intro.content }}
+                {{ block.content }}
               </div>
             </div>
             <div data-type="image">
               <picture>
-                <source media="(min-width: 750px)" srcset="{{ config.intro.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}">
-                <source media="(max-width: 749px)" srcset="{{ config.intro.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
-                <img src="{{ config.intro.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
+                <source media="(min-width: 750px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}">
+                <source media="(max-width: 749px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
+                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
               </picture>
             </div>
           </div>
         </div>
         {% endif %}
       {% when 'benefits' %}
-        <div class="ghd--block--benefits ghd--block" {{ block.shopify_attributes }}>
+        <div class="ghd--block--benefits ghd--block">
           <div data-type="cols">
             <div data-type="image">
-              <img src="{{ config.benefits.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading="lazy">
+              <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading="lazy">
             </div>
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>{{ config.benefits.title.before | default: 'The Benefits' }}</span>
-                  {{ config.benefits.title.main }}
+                  <span>{{ block.title.before | default: 'The Benefits' }}</span>
+                  {{ block.title.main }}
                 </h2>
                 <div class="ghd--details">
-                  {% for detail in config.benefits.items %}
+                  {% for detail in block.items %}
                     {% if detail.content != '' %}
                     <details {% if forloop.first %}open{% endif %}>
                       <summary>{{ detail.title }}</summary>
@@ -86,7 +86,7 @@
                 </div>
                 {% comment %}
                 <div class="ghd--accordion">
-                  {% for detail in config.benefits.items %}
+                  {% for detail in block.items %}
                     <div>
                       <input type="radio" name="{{ block.id }}-benefits" id="{{ block.id }}-benefits-{{ forloop.index }}" {% if forloop.first %}checked{% endif %} hidden />
                       <label for="{{ block.id }}-benefits-{{ forloop.index }}">{{ detail.title }}</label>
@@ -100,17 +100,17 @@
           </div>
         </div>
       {% when 'how_it_works' %}
-      {% if config.how_it_works.items.size > 0 %}
-        <div class="ghd--block--benefits ghd--block--how-it-works ghd--block" data-video {{ block.shopify_attributes }}>
+      {% if block.items.size > 0 %}
+        <div class="ghd--block--benefits ghd--block--how-it-works ghd--block" data-video>
           <div data-type="cols">
             <div data-type="text">
               <div class="mw">
                 <h2 class="eyebrow">
-                  <span>{{ config.how_it_works.title.before | default: product.title }}</span>
-                  {{ config.how_it_works.title.main |  default: 'How It Works' }}
+                  <span>{{ block.title.before | default: product.title }}</span>
+                  {{ block.title.main |  default: 'How It Works' }}
                 </h2>
                 <div class="ghd--details">
-                  {% for detail in config.how_it_works.items %}
+                  {% for detail in block.items %}
                     <details {% if forloop.first %}open{% endif %}>
                       <summary>{{ detail.title }}</summary>
                       {{ detail.content }}
@@ -120,31 +120,31 @@
               </div>
             </div>
             <div data-type="image">
-              {% if config.how_it_works.image.desktop contains "mp4" %}
+              {% if block.image.desktop contains "mp4" %}
                 <video id="bgVideo" preload="true" autoplay loop muted>
-                  <source src="{{ config.how_it_works.image.desktop }}" type="video/mp4" />
+                  <source src="{{ block.image.desktop }}" type="video/mp4" />
                 </video>
               {% else %}
-                <img src="{{ config.how_it_works.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading='lazy'>
+                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?w=500" alt="" loading='lazy'>
               {% endif %}              
             </div>
           </div>
         </div>
       {% endif %}
       {% when 'ingredients' %}
-        <div class="ghd--block--ingredients ghd--block" data-label="{{ config.ingredients.label }}" {{ block.shopify_attributes }}>
+        <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
           <div data-type="header">
             <h2 class="eyebrow">
-              <span>{{ config.ingredients.title.before | default: 'Made With' }}</span>
-              {{ config.ingredients.title.main | default: 'Clean, Pure, Premium Ingredients' }}
+              <span>{{ block.title.before | default: 'Made With' }}</span>
+              {{ block.title.main | default: 'Clean, Pure, Premium Ingredients' }}
             </h2>
-            <h4>{{ config.ingredients.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h4>
+            <h4>{{ block.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h4>
           </div>
           <div data-type="cols">
             <div data-type="text">
 
               <div class="ghd--accordion">
-                {% for detail in config.ingredients.items %}
+                {% for detail in block.items %}
                 <div>
                   <input type="radio"
                          data-ingredient-image='{{ detail.image }}'
@@ -196,24 +196,24 @@
           {% endif %}
         </div>
       {% when 'impact' %}
-      {% if config.impact.title %}
-      <div class="ghd--block--impact ghd--block" {{ block.shopify_attributes }}>
+      {% if block.title %}
+      <div class="ghd--block--impact ghd--block">
         <div data-type="cols">
           <div data-type="text">
             <div class="mw">
               <h2 class="eyebrow">
-                <span>{{ config.impact.title.before | default: 'The Impact' }}</span>
-                {{ config.impact.title.main }}
+                <span>{{ block.title.before | default: 'The Impact' }}</span>
+                {{ block.title.main }}
               </h2>
-              <h4>{{ config.impact.title.after }}</h4>
-              <div>{{ config.impact.content }}</div>
+              <h4>{{ block.title.after }}</h4>
+              <div>{{ block.content }}</div>
             </div>
           </div>
           <div data-type="image">
             <picture>
-              <source media="(min-width: 750px)" srcset="{{ config.impact.image.desktop }}">
-              <source media="(max-width: 749px)" srcset="{{ config.impact.image.mobile }}">
-              <img src="{{ config.impact.image.desktop }}" alt=""  loading="lazy">
+              <source media="(min-width: 750px)" srcset="{{ block.image.desktop }}">
+              <source media="(max-width: 749px)" srcset="{{ block.image.mobile }}">
+              <img src="{{ block.image.desktop }}" alt=""  loading="lazy">
             </picture>
           </div>
         </div>
@@ -231,7 +231,7 @@
       {% endif %}
       {% when 'miron' %}
       {% if product.tags contains "miron" %}
-      <div class="ghd--block--miron ghd--block" {{ block.shopify_attributes }}>
+      <div class="ghd--block--miron ghd--block">
         <div data-type="cols">
           <div data-type="text">
             <div class="mw">
@@ -249,34 +249,34 @@
       </div>
       {% endif %}
       {% when 'faqs' %}
-      <div class="ghd--block--faq ghd--block" {{ block.shopify_attributes }}>
-        <h2 class="eyebrow">{{ config.faqs.title.main | default: 'Frequently Asked Questions' }}</h2>
+      <div class="ghd--block--faq ghd--block">
+        <h2 class="eyebrow">{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
         <input type='radio' name='view-more' id='{{ block.id }}-view-more' hidden>
         <div class="ghd--details mw">
-          {% for detail in config.faqs.items %}
+          {% for detail in block.items %}
             <details>
               <summary>{{ detail.title }}</summary>
               {{ detail.content }}
             </details>
           {% endfor %}
-          {% if config.faqs.items.size > 5 %}
+          {% if block.items.size > 5 %}
             <label for='{{ block.id }}-view-more'>View More</label>
           {% endif %}
         </div>
       </div>
       {% when 'curated' %}
-      {% if product.metafields.globalhealing.curated_collection.value and config.curated_collection.items.size > 0 %}
-      <div class="ghd--block--curated ghd--block" {{ block.shopify_attributes }}>
+      {% if product.metafields.globalhealing.curated_collection.value and block.items.size > 0 %}
+      <div class="ghd--block--curated ghd--block">
         <div data-type="header">
           <h2 class="eyebrow">
-            {{ config.curated_collection.title.main | default: 'Curate Your Collection' }}
+            {{ block.title.main | default: 'Curate Your Collection' }}
           </h2>
-          <h4>{{ config.curated_collection.title.after }}</h4>
+          <h4>{{ block.title.after }}</h4>
         </div>
         <div class='items-container page-width'>
-          <div data-type="items" data-item-count='{{ config.curated_collection.items | size }}'>
+          <div data-type="items" data-item-count='{{ block.items | size }}'>
             {% for p in product.metafields.globalhealing.curated_collection.value %}
-              {% assign curated = config.curated_collection.items[forloop.index0] %}
+              {% assign curated = block.items[forloop.index0] %}
               {% assign v = p.selected_or_first_available_variant %}
               {% assign image = v.featured_image | default: p.featured_image %}
             <div>
@@ -309,8 +309,7 @@
   {% endfor %}
   </div>
 </section>
-{% endif %}
-
+  
 <script>
   {
     let ingredients = document.querySelector('.ghd--block--ingredients');
@@ -362,6 +361,8 @@
   }
 </script>
 
+{% endif %}
+
 {% schema %}
 {
   "name": "Product Content",
@@ -389,62 +390,7 @@
       "default": 52
     }
   ],
-  "blocks": [
-    {
-      "type": "intro",
-      "name": "Intro",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "benefits",
-      "name": "Benefits",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "how_it_works",
-      "name": "How It Works",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "ingredients",
-      "name": "Ingredients",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "impact",
-      "name": "Impact",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "curated",
-      "name": "Curated Collection",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "miron",
-      "name": "Miron Section",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "faqs",
-      "name": "FAQs",
-      "limit": 1,
-      "settings": []
-    },
-    {
-      "type": "blank",
-      "name": "Blank",
-      "limit": 1,
-      "settings": []
-    }
-  ],
+  "blocks": [],
   "presets": [
     {
       "name": "Product Content"
