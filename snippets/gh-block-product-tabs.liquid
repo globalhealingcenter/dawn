@@ -1,7 +1,7 @@
 {% assign has_product_config = false %}
-{% if product and product.metafields.globalhealing.body %}
+{% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
-  {% assign config = product.metafields.globalhealing.body.value %}
+  {% assign config = product.metafields.gh_product.data.value %}
 {% endif %}
 
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
