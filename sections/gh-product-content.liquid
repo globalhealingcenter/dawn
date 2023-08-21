@@ -38,7 +38,7 @@
         </div>
        {% endif %}
       {% when 'intro' %}
-        {% if block.intro %}
+        {% if block.content %}
         <div class="ghd--block--intro ghd--block">
           <div data-type="cols">
             <div data-type="text">
@@ -264,7 +264,7 @@
           {% endif %}
         </div>
       </div>
-      {% when 'curated' %}
+      {% when 'curated_collection' %}
       {% if product.metafields.globalhealing.curated_collection.value and block.items.size > 0 %}
       <div class="ghd--block--curated ghd--block">
         <div data-type="header">
