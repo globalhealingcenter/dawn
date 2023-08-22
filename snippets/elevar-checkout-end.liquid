@@ -143,6 +143,8 @@
       countryCode: {{- customer.default_address.country_code | json -}},
       province: {{- customer.default_address.province | json -}},
       provinceCode: {{- customer.default_address.province_code | json -}},
+      orderCount: "{{- customer.orders_count | json -}}",
+      totalSpent: "{{- customer.total_spent | times: 0.01 | json -}}",
       tags: {{- customer.tags | join: ', ' | json -}}
     }
   {%- endif -%}
