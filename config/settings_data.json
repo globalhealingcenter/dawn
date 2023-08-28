@@ -157,18 +157,18 @@
         "settings": {
         }
       },
-      "6071110790918949010": {
-        "type": "shopify:\/\/apps\/discount-kit\/blocks\/gift\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
-        "disabled": false,
-        "settings": {
-          "auto_remove": true,
-          "refresh": true
-        }
-      },
       "9271244056961380716": {
         "type": "shopify:\/\/apps\/discount-kit\/blocks\/core\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
         "settings": {
+        }
+      },
+      "6071110790918949010": {
+        "type": "shopify:\/\/apps\/discount-kit\/blocks\/gift\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
+        "disabled": true,
+        "settings": {
+          "auto_remove": true,
+          "refresh": true
         }
       }
     },
