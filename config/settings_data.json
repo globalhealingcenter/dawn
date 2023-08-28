@@ -167,7 +167,7 @@
       },
       "9271244056961380716": {
         "type": "shopify:\/\/apps\/discount-kit\/blocks\/core\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
-        "disabled": false,
+        "disabled": true,
         "settings": {
         }
       }
