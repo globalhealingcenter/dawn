@@ -64,8 +64,12 @@ section h3.eyebrow span{
     padding-bottom: 4rem;
 }
 .ghd--banners > div{
-    justify-content: space-between;
-    column-gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.ghd--banners img{
+  display: block;
 }
 .ghd--banners [data-side="right"]{
   justify-content: space-between;
