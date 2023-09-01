@@ -523,8 +523,13 @@ section h3.eyebrow span{
 
 @media (max-width: 700px) {
 
-      .ghd--banners > .ghd--flex > div:first-child{
-          width: 100%;
+    .ghd--banners > .ghd--flex > div:first-child{
+      width: 100%;
+    }
+
+    .ghd--banners [data-side=right]>div {
+        flex: initial;
+        width: 100%;
     }
 
     .ghd--our-process .ghd--flex,
