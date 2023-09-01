@@ -68,8 +68,10 @@ section h3.eyebrow span{
     column-gap: 2rem;
 }
 .ghd--banners [data-side="right"]{
-    flex-direction: column;
-    justify-content: space-between;
+  justify-content: space-between;
+  gap: 1em;
+}
+.ghd--banners [data-side="right"] > div{
     flex: 1;
 }
 .ghd--banners > .ghd--flex > div:first-child{
