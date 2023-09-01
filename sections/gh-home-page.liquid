@@ -46,7 +46,13 @@
             <section class="ghd--banners ghd--bg-white" {{ block.shopify_attributes }}>
                 <div class="page-width">
                     <div data-side="top">
-                        <a href='{{ block.settings.banner_1_url }}'><img src="{{ block.settings.banner_1_image }}?w=1300" srcset="{{ block.settings.banner_1_image }}?w=2600 2x" alt="" loading="lazy"></a>
+                        <a href='{{ block.settings.banner_1_url }}'>
+                          <picture>
+                            <source media="(min-width: 650px)" srcset="{{ block.settings.banner_1_image }}?w=1300">
+                            <source media="(max-width: 649px)" srcset="{{ block.settings.banner_1_image }}?w=700">
+                            <img src="{{ block.settings.banner_1_image }}?w=1300" alt="">
+                          </picture>
+                        </a>
                     </div>
                     <div class="ghd--flex" data-side="right">
                         <div><a href='{{ block.settings.banner_2_url }}'><img src="{{ block.settings.banner_2_image }}?w=600" srcset="{{ block.settings.banner_2_image }}?w=1200 2x" alt="" loading="lazy"></a></div>
