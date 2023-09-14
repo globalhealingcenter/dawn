@@ -132,11 +132,15 @@
                 {{- block.settings.text -}}
               </p>
             {%- when 'title' -%}
+              {% assign title = product.title | escape %}
+              {% if product.metafields.globalhealing.custom_h1 and product.metafields.globalhealing.custom_h1 != '' %}
+                {% assign title = product.metafields.globalhealing.custom_h1 | escape %}
+              {% endif %}
               <div class="product__title" {{ block.shopify_attributes }}>
-                <h1>{{ product.title | escape }}</h1>
+                <h1>{{ title }}</h1>
                 <a href="{{ product.url }}" class="product__title">
                   <h2 class="h1">
-                    {{ product.title | escape }}
+                    {{ title }}
                   </h2>
                 </a>
               </div>
