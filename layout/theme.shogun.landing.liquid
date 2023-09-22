@@ -8,6 +8,15 @@ This file can be re-written at any time.
   
 <head>
   
+
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KJTRKBG');</script>
+<!-- End Google Tag Manager -->
+  {% render 'elevar-head' %}
   <meta name="google-site-verification" content="IxCqVMAA2jMmzyctkD_74jxhXRW48ZM1IsTKXOtzoXo" />
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +24,6 @@ This file can be re-written at any time.
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {% include 'elevar-head' %}
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -256,6 +264,11 @@ This file can be re-written at any time.
       <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
     {%- endunless -%}
 
+    {%- if localization.available_countries.size > 1 or localization.available_languages.size > 1 -%}
+      {{ 'component-localization-form.css' | asset_url | stylesheet_tag: preload: true }}
+      <script src="{{ 'localization-form.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+
     {%- if settings.predictive_search_enabled -%}
       <link
         rel="stylesheet"
@@ -277,6 +290,8 @@ This file can be re-written at any time.
 <!-- Start of LittledataLayer -->
 {% include 'LittledataLayer' %}
 <!-- End of LittledataLayer -->
+
+    {%- render 'vendor-exponea', customer: customer, shop: shop -%}
 
 {% include 'wiser' %}{% include 'wiser_popup' %}
   {% render 'shogun-head' %}
@@ -313,6 +328,15 @@ This file can be re-written at any time.
         unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
       };
 
+      window.quickOrderListStrings = {
+        itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+        itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+        itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+        itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+        viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+        each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+      };
+
       window.accessibilityStrings = {
         imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
         shareSuccess: `{{ 'general.share.success_message' | t }}`,
@@ -321,11 +345,25 @@ This file can be re-written at any time.
       };
     </script>
 <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-<script id="gorgias-chat-widget-install-v3" 
-    src="https://config.gorgias.chat/bundle-loader/01GYCC4SXTAE7H0HA59CSP05YD?source=shopify1click">
-</script>
-<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});
-</script>
+<script>
+      $(document).ready(function () {
+        var wsOldCartCnt = 0;
+        setTimeout(function () {
+          setInterval(function () {
+           var wsCartCnt = $(".cart-count-bubble span:first").text();
+            var wsCountDiv = $(".evm-drawer-main div").children().length;
+            if(wsCountDiv == 0 && wsOldCartCnt != wsCartCnt) {
+              $("cart-drawer").attr("ws-data-drawer", 1);
+              wsOldCartCnt = wsCartCnt
+              window.WISER_INIT("cart", 1);
+              // setTimeout(function () {
+              //   $(".evm-drawer-main").attr("ws-data-drawer", 0);
+              // }, 5000);
+            }
+          }, 200);
+        }, 3000);
+      })
+    </script>
   <style type="text/css">
     body, html {
       width: 100% !important;
