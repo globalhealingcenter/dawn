@@ -264,4 +264,54 @@
     }
 
   })();
+
+
+  let gh_dawn_form = {
+
+      init: (form) => {
+  
+          form.addEventListener('submit', e => {
+              e.preventDefault();
+              gh_dawn_form.submit(form);
+          })
+  
+      },
+  
+      submit: (form) => {
+  
+          let button = form.querySelector('[type="submit"]');
+          let submitted = form.querySelectorAll('.submitted');
+  
+          let data = {
+              action: form.getAttribute('action')
+          };
+  
+          form.querySelectorAll('input,textarea').forEach( i => {
+              let name = i.getAttribute('name');
+              data[name] = i.value;
+          })
+  
+          button.disabled = true;
+  
+          gh_dawn_form.submitForm(data, (d) => {
+              console.log('Form Submitted: ', d);
+              button.innerText = 'Submitted!';
+              submitted.forEach( s => s.classList.remove('hidden'))
+          })
+      },
+  
+      submitForm: (data, cb) => {
+  
+          fetch(data.action, {
+              method: 'post',
+              body: JSON.stringify(data)
+          }).then(function (response) {
+              return response.json();
+          }).then(function (data) {
+              cb(data)
+          });
+  
+      }
+  
+  }
 </script>
