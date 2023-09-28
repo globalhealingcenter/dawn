@@ -71,10 +71,11 @@
     "1f534ab1-3f58-4e78-ba4d-d858cf22e505": {
       "type": "custom-liquid",
       "custom_css": [
-        "a {color: rgba(var(--color-foreground), 0.75);}"
+        "a {color: rgba(var(--color-foreground), 0.75);}",
+        ".gh-have-a-question {padding: 0 15px; text-align: center;}"
       ],
       "settings": {
-        "custom_liquid": "<div style=\"text-align:center\" class=\"footer__collapsible\">\n\tHave a question? We'd love to help! <a href=\"tel:18004760016\">1-800-476-0016<\/a><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>",
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016<\/a><br><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
         "padding_bottom": 52
@@ -83,8 +84,8 @@
     "f2b378ac-331e-49bc-b144-696adb524db9": {
       "type": "custom-liquid",
       "custom_css": [
-        ".disclaimer,.fda {text-align: center; font-size: 14px; max-width: 1250px; margin: 0 auto;}",
-        ".fda {border: 1px solid #ffffff80; padding: 1rem; margin-top: 1rem;}",
+        ".disclaimer,.fda {text-align: center; font-size: 14px; max-width: 1250px; margin: 0 auto; padding: 0 15px;}",
+        ".fda {border: 1px solid #ffffff80; padding: 1rem; margin: 1rem 15px;}",
         "a {color: #fff;}"
       ],
       "settings": {
