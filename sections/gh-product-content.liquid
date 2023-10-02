@@ -282,10 +282,10 @@
         <div class='items-container page-width'>
           <div data-type="items" data-item-count='{{ block.items | size }}'>
             {% for p in product.metafields.globalhealing.curated_collection.value %}
+            <div data-index="{{ forloop.index0 }}">
               {% assign curated = block.items[forloop.index0] %}
               {% assign v = p.selected_or_first_available_variant %}
               {% assign image = v.featured_image | default: p.featured_image %}
-            <div>
               <span class="image">
               <a href="{{ p.url }}">{{ image | image_url: width: 225 | image_tag }}</a></span>
               <h4 class="title"><a class="subtle" href="{{ p.url }}">{{ p.title }}</a></h4>
