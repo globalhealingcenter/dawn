@@ -281,6 +281,11 @@
         </div>
         <div class='items-container page-width'>
           <div data-type="items" data-item-count='{{ block.items | size }}'>
+            <!--
+{{ product.metafields.globalhealing.curated_collection.value | json }}
+        
+        -->
+        
             {% for p in product.metafields.globalhealing.curated_collection.value %}
             <div data-index="{{ forloop.index0 }}">
               {% assign curated = block.items[forloop.index0] %}
