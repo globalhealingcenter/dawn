@@ -85,7 +85,7 @@
       "type": "custom-liquid",
       "custom_css": [
         ".disclaimer,.fda {text-align: center; font-size: 14px; max-width: 1250px; margin: 0 auto; padding: 0 15px;}",
-        ".fda {border: 1px solid #ffffff80; padding: 1rem; margin: 1rem 15px;}",
+        ".fda {border: 1px solid #ffffff80; padding: 1rem; margin: 1rem auto;}",
         "a {color: #fff;}"
       ],
       "settings": {
