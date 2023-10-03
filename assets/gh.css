@@ -26,6 +26,14 @@ body{
 
 @font-face {
     font-family: "Miller Display";
+    font-weight: 700;
+    src:
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/miller-display/700.eot") format("embedded-opentype");
+}
+@font-face {
+    font-family: "Miller Display";
     font-weight: 500;
     src:
       url("https://cdn.globalhealing.com/web/font/miller-display/500.woff2") format("woff2"),
@@ -34,11 +42,12 @@ body{
 }
 @font-face {
     font-family: "Miller Display";
-    font-weight: 700;
+    font-weight: 500;
+    font-style: italic;
     src:
-      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff2") format("woff2"),
-      url("https://cdn.globalhealing.com/web/font/miller-display/700.woff") format("woff"),
-      url("https://cdn.globalhealing.com/web/font/miller-display/700.eot") format("embedded-opentype");
+      url("https://cdn.globalhealing.com/web/font/miller-display-italic/500.woff2") format("woff2"),
+      url("https://cdn.globalhealing.com/web/font/miller-display-italic/500.woff") format("woff"),
+      url("https://cdn.globalhealing.com/web/font/miller-display-italic/500.eot") format("embedded-opentype");
 }
 @font-face {
     font-family: "Proxima Nova";
