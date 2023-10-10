@@ -103,8 +103,8 @@
         {%- endif -%}
         <div class="card__content">
           <div class="card__information">
-            <h3
-              class="card__heading"
+            <span
+              class="h3 card__heading"
               {% if card_product.featured_media == null and settings.card_style == 'standard' %}
                 id="title-{{ section_id }}-{{ card_product.id }}"
               {% endif %}
@@ -117,7 +117,7 @@
               >
                 {{ card_product.title | escape }}
               </a>
-            </h3>
+            </span>
           </div>
           <div class="card__badge {{ settings.badge_position }}">
             {%- if card_product.available == false -%}

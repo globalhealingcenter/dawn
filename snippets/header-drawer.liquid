@@ -145,9 +145,9 @@
                   <noscript>
                     {%- form 'localization', id: 'HeaderCountryMobileFormNoScriptDrawer', class: 'localization-form' -%}
                       <div class="localization-form__select">
-                        <h2 class="visually-hidden" id="HeaderCountryMobileLabelNoScriptDrawer">
+                        <span class="h2 visually-hidden" id="HeaderCountryMobileLabelNoScriptDrawer">
                           {{ 'localization.country_label' | t }}
-                        </h2>
+                        </span>
                         <select
                           class="localization-selector link"
                           name="country_code"
@@ -174,9 +174,9 @@
                   <localization-form class="no-js-hidden">
                     {%- form 'localization', id: 'HeaderCountryMobileForm', class: 'localization-form' -%}
                       <div>
-                        <h2 class="visually-hidden" id="HeaderCountryMobileLabel">
+                        <span class="h2 visually-hidden" id="HeaderCountryMobileLabel">
                           {{ 'localization.country_label' | t }}
-                        </h2>
+                        </span>
                         {%- render 'country-localization', localPosition: 'HeaderCountryMobile' -%}
                       </div>
                     {%- endform -%}
@@ -190,9 +190,9 @@
                       class: 'localization-form'
                     -%}
                       <div class="localization-form__select">
-                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabelNoScriptDrawer">
+                        <span class="h2 visually-hidden" id="HeaderLanguageMobileLabelNoScriptDrawer">
                           {{ 'localization.language_label' | t }}
-                        </h2>
+                        </span>
                         <select
                           class="localization-selector link"
                           name="locale_code"
@@ -219,9 +219,9 @@
                   <localization-form class="no-js-hidden">
                     {%- form 'localization', id: 'HeaderLanguageMobileForm', class: 'localization-form' -%}
                       <div>
-                        <h2 class="visually-hidden" id="HeaderLanguageMobileLabel">
+                        <span class="h2 visually-hidden" id="HeaderLanguageMobileLabel">
                           {{ 'localization.language_label' | t }}
-                        </h2>
+                        </span>
                         {%- render 'language-localization', localPosition: 'HeaderLanguageMobile' -%}
                       </div>
                     {%- endform -%}

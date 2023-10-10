@@ -35,9 +35,9 @@
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
             <div class="facet-filters__field">
-              <h2 class="facet-filters__label caption-large text-body">
+              <span class="facet-filters__label caption-large text-body">
                 <label for="SortBy">{{ 'products.facets.sort_by_label' | t }}</label>
-              </h2>
+              </span>
               <div class="select">
                 {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
                 <select
@@ -68,7 +68,7 @@
           </div>
 
           <div class="product-count-vertical light" role="status">
-            <h2 class="product-count__text text-body">
+            <div class="product-count__text text-body">
               <span id="ProductCountDesktop">
                 {%- if collection.results_count -%}
                   {{
@@ -84,7 +84,7 @@
                   }}
                 {%- endif -%}
               </span>
-            </h2>
+            </div>
             <div class="loading-overlay__spinner">
               <svg
                 aria-hidden="true"
