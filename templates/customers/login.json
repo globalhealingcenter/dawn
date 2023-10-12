@@ -14,10 +14,21 @@
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "settings": {
           }
+        },
+        "82bd0139-c73b-42e8-ada6-53ec736e6b29": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "disabled": true,
+          "settings": {
+            "enabled": true,
+            "id": "112272",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
         }
       },
       "block_order": [
-        "37fa2d02-febf-4dea-95b0-595f0e404c3a"
+        "37fa2d02-febf-4dea-95b0-595f0e404c3a",
+        "82bd0139-c73b-42e8-ada6-53ec736e6b29"
       ],
       "settings": {
         "include_margins": true
