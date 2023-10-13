@@ -359,6 +359,7 @@ h2.eyebrow + h4{
     padding-right: 1em;
     position: relative;
     margin-bottom: 0;
+    font-weight: 500;
 }
 
 .ghd--details details summary:after {
