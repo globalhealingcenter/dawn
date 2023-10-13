@@ -152,7 +152,7 @@
                          id="{{ block.id }}-ingredients-{{ forloop.index }}"
                          {% if forloop.first %}checked{% endif %}
                   hidden />
-                  <label for="{{ block.id }}-ingredients-{{ forloop.index }}">{{ detail.title }}</label>
+                  <label for="{{ block.id }}-ingredients-{{ forloop.index }}"><h3 class="h-inherit">{{ detail.title }}</h3></label>
                   <div>
                     <img class='ghd--hide-desktop' src="{{ detail.image }}?w=600" srcset='{{ detail.image }}?w=1200 2x' alt="" loading='lazy'>
                     {{ detail.content }}
