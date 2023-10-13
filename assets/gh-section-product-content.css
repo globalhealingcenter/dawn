@@ -316,13 +316,15 @@
     display: block;
 }
 
- h2.eyebrow{
+h2.eyebrow,
+.h2.eyebrow{
     font-size: 5rem;
     color: var(--gh-color-green);
     margin-bottom: .5rem;
     margin-top: 0;
 }
-h2.eyebrow span{
+h2.eyebrow span,
+.h2.eyebrow span{
     color: var(--gh-color-gray);
     text-transform: uppercase;
     display: block;
@@ -330,7 +332,8 @@ h2.eyebrow span{
     font-family: var(--gh-font-secondary);
     font-weight: 500;
 }
-h2.eyebrow + h4{
+h2.eyebrow + h4,
+.h2.eyebrow + .h4{
     margin-top: 0;
 }
 
@@ -464,7 +467,8 @@ h2.eyebrow + h4{
     padding-right: 2rem;
   }
   
-  h2.eyebrow{
+  h2.eyebrow,
+  .h2.eyebrow{
     font-size: 4rem;
   }
 
@@ -488,11 +492,13 @@ h2.eyebrow + h4{
         display: none;
     }
 
-    h2.eyebrow, .ghd--block--blank h2 {
+    h2.eyebrow, .ghd--block--blank h2,
+    .h2.eyebrow, .ghd--block--blank .h2{
         font-size: 3rem;
 
     }
-    h2.eyebrow+h4{
+    h2.eyebrow+h4,
+    .h2.eyebrow+.h4{
         font-size: 1.8rem;
     }
     .ghd--block [data-type="header"]{

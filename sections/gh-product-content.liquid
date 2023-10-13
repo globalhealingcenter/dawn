@@ -138,7 +138,7 @@
               <span>{{ block.title.before | default: 'Made With' }}</span>
               {{ block.title.main | default: 'Clean, Pure, Premium Ingredients' }}
             </h2>
-            <h4>{{ block.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h4>
+            <h3 class="h4">{{ block.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h3>
           </div>
           <div data-type="cols">
             <div data-type="text">
@@ -205,7 +205,7 @@
                 <span>{{ block.title.before | default: 'The Impact' }}</span>
                 {{ block.title.main }}
               </h2>
-              <h4>{{ block.title.after }}</h4>
+              <div class="h4">{{ block.title.after }}</div>
               <div>{{ block.content }}</div>
             </div>
           </div>
@@ -274,10 +274,10 @@
       {% if product.metafields.globalhealing.curated_collection.value and block.items.size > 0 %}
       <div class="ghd--block--curated ghd--block">
         <div data-type="header">
-          <h2 class="eyebrow">
+          <div class="eyebrow h2">
             {{ block.title.main | default: 'Curate Your Collection' }}
-          </h2>
-          <h4>{{ block.title.after }}</h4>
+          </div>
+          <div class="h4">{{ block.title.after }}</div>
         </div>
         <div class='items-container page-width'>
           <div data-type="items" data-item-count='{{ block.items | size }}'>
