@@ -288,7 +288,7 @@
             <div>
               <span class="image">
               <a href="{{ p.url }}">{{ image | image_url: width: 225 | image_tag }}</a></span>
-              <h4 class="title"><a class="subtle" href="{{ p.url }}">{{ p.title }}</a></h4>
+              <div class="title h4"><a class="subtle" href="{{ p.url }}">{{ p.title }}</a></div>
               <p class="tagline">{{ curated.tagline }}</p>
               <div class="description">{{ curated.content }}</div>
               <p class="price">{{ v.price | money }}</p>
