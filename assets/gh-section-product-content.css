@@ -337,6 +337,15 @@ h2.eyebrow + h4,
     margin-top: 0;
 }
 
+.h-inherit{
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  color: inherit !important;
+  margin: inherit !important;
+  margin-bottom: inherit !important;
+  font-family: inherit !important;
+}
+
 
 /*
     Details
