@@ -344,6 +344,7 @@ h2.eyebrow + h4,
   margin: inherit !important;
   margin-bottom: inherit !important;
   font-family: inherit !important;
+  line-height: inherit;
 }
 
 
