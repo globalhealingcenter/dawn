@@ -352,6 +352,7 @@ h2.eyebrow + h4{
     border-top: 1px solid var(--gh-color-gray);
 }
 .ghd--details details summary,
+.ghd--details details summary h3,
 .ghd--details > span{
     font-family: var(--gh-font-secondary);
     font-size: 2rem;
@@ -370,6 +371,7 @@ h2.eyebrow + h4{
 }
 
 .ghd--details details[open] summary,
+.ghd--details details[open] summary h3,
 .ghd--details > span{
     color: var(--gh-color-green);
     font-weight: 700;
