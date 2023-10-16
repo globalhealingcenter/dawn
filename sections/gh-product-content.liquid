@@ -162,7 +162,20 @@
 
                 {% unless config.supplement_facts == blank  %}
                 <div>
-                  {%- capture sf_content -%}<img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">{% endcapture %}
+                  {%- capture sf_content -%}
+                    {% if config.supplement_facts_v2 %}
+                        <div class='ghd--details' style='width: 800px; max-width: 100%;'>
+                        {% for sf in config.supplement_facts_v2 %}
+                          <details>
+                            <summary>{{ sf.title }}</summary>
+                            <img src='{{ sf.image }}?w=800' srcset='{{ sf.image }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+                          </details>
+                        {% endfor %}
+                        </div>
+                    {% else %}
+                    <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+                    {% endif %}
+                  {% endcapture %}
                   {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: block.id, content: sf_content %}
                 </div>
                 {% endunless %}
