@@ -106,6 +106,7 @@
     max-width: 750px;
     padding: 1rem 2rem;
 }
+/*
 .ghd--block--ingredients [data-type="text"] details{
     border-top: 1px solid var(--gh-color-gray);
     padding: 1rem 1rem;
@@ -125,6 +126,7 @@
     font-size: 14px;
     font-weight: bold;
 }
+ */
 .ghd--block--ingredients .ghd--dialog--button{
     font-family: var(--gh-font-secondary);
     color: var(--gh-color-gray);
