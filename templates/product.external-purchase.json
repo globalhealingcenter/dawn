@@ -34,7 +34,6 @@
         },
         "price": {
           "type": "price",
-          "disabled": true,
           "settings": {
           }
         },
@@ -44,23 +43,10 @@
             "picker_type": "button"
           }
         },
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c": {
+        "595cb104-8792-4aa9-b722-4b48718338a1": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% unless product.available %}\n\n{% render 'gh-element-out-of-stock-form' product: product %}\n\n{% endunless %}"
-          }
-        },
-        "ordergroove_offer": {
-          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-          "settings": {
-            "location": "{{ product.metafields.ordergroove.pdp_enrollment_code.value }}"
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "custom_liquid": "<a href=\"https:\/\/earthharmony.com\/products\/methylene-blue\" class=\"button button--full-width button--secondary mt3\">Buy on EarthHarmony.com<\/a>"
           }
         }
       },
@@ -70,9 +56,7 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
         "variant_picker",
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
-        "ordergroove_offer",
-        "buy_buttons"
+        "595cb104-8792-4aa9-b722-4b48718338a1"
       ],
       "custom_css": [
 
