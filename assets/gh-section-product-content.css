@@ -318,27 +318,6 @@
     display: block;
 }
 
-h2.eyebrow,
-.h2.eyebrow{
-    font-size: 5rem;
-    color: var(--gh-color-green);
-    margin-bottom: .5rem;
-    margin-top: 0;
-}
-h2.eyebrow span,
-.h2.eyebrow span{
-    color: var(--gh-color-gray);
-    text-transform: uppercase;
-    display: block;
-    font-size: 0.5em;
-    font-family: var(--gh-font-secondary);
-    font-weight: 500;
-}
-h2.eyebrow + h4,
-.h2.eyebrow + .h4{
-    margin-top: 0;
-}
-
 @media (min-width: 750px){
     .ghd--hide-desktop{
         display: none;
