@@ -218,7 +218,7 @@
                 <span>{{ block.title.before | default: 'The Impact' }}</span>
                 {{ block.title.main }}
               </h2>
-              <div class="h4">{{ block.title.after }}</div>
+              <div class="h4 mb3">{{ block.title.after }}</div>
               <div>{{ block.content }}</div>
             </div>
           </div>
@@ -290,7 +290,7 @@
           <div class="eyebrow h2">
             {{ block.title.main | default: 'Curate Your Collection' }}
           </div>
-          <div class="h4">{{ block.title.after }}</div>
+          <div class="h4 mb3">{{ block.title.after }}</div>
         </div>
         <div class='items-container page-width'>
           <div data-type="items" data-item-count='{{ block.items | size }}'>

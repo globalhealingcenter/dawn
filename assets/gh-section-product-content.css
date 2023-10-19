@@ -367,10 +367,6 @@
         font-size: 3rem;
 
     }
-    h2.eyebrow+h4,
-    .h2.eyebrow+.h4{
-        font-size: 1.8rem;
-    }
     .ghd--block [data-type="header"]{
         text-align: left;
     }
