@@ -1,9 +1,9 @@
-{% capture my_subscriptions_link %}
-  {% render 'ordergroove_subscription_interface_link' %}
-{% endcapture %}
-
-{% assign my_subscriptions_link = my_subscriptions_link | replace: '<p><a href="', '' %}
-{% assign my_subscriptions_link = my_subscriptions_link | replace: '" class="btn btn--small">Manage Your Subscriptions</a></p>', '' %}
-{% assign my_subscriptions_link = my_subscriptions_link | strip %}
-
-{{ my_subscriptions_link }}
+{%- liquid
+  capture my_subscriptions_link
+    render 'ordergroove_subscription_interface_link'
+  endcapture
+  assign my_subscriptions_link = my_subscriptions_link | replace: '<p><a href="', ''
+  assign my_subscriptions_link = my_subscriptions_link | replace: '" class="btn btn--small">Manage Your Subscriptions</a></p>', ''
+  assign my_subscriptions_link = my_subscriptions_link | strip
+  echo my_subscriptions_link
+-%}
