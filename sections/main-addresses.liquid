@@ -28,6 +28,10 @@
       {{ 'customer.account.return' | t }}
     </a>
 
+    {% unless section.settings.notice == blank %}
+      <div class="p2 bg-mint">{{ section.settings.notice }}</div>
+    {% endunless %}
+
     <div data-address>
       <button
         type="button"
