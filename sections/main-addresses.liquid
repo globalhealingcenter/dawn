@@ -31,12 +31,14 @@
     {% capture my_subscriptions_link %}{% render 'gh-ordergroove-subscriptions-link' %}{% endcapture %}
 
     {% unless section.settings.notice == blank %}
-      <div class="address-note bg-green-light mt2 pt2 px2 pb1">{{ section.settings.notice | replace: '#view-my-subscriptions', my_subscriptions_link }}</div>
+      <div class="address-note left bg-green-light mt2 pt2 px2 pb1">{{ section.settings.notice | replace: '#view-my-subscriptions', my_subscriptions_link }}</div>
           <style>
             .address-note strong{
               font-weight: bold;
             }
-          
+            .address-note p:last-child{
+              margin-bottom: 0;
+            }
           </style>
     {% endunless %}
 
