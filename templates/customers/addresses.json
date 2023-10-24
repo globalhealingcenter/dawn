@@ -3,7 +3,7 @@
     "main": {
       "type": "main-addresses",
       "settings": {
-        "notice": "<p><strong>Please Note<\/strong>: Changes to the addresses here will NOT update your AutoShip shipping address. <a href=\"#view-my-subscriptions\" title=\"#view-my-subscriptions\"><strong>Click here<\/strong><\/a> to update the shipping address for subscriptions.<\/p>",
+        "notice": "<p><strong>⚠️ Please Note<\/strong>: Changes to the addresses here will NOT update your AutoShip shipping address. <a href=\"#view-my-subscriptions\" title=\"#view-my-subscriptions\"><strong>Click here<\/strong><\/a> to update the shipping address for subscriptions.<\/p>",
         "padding_top": 36,
         "padding_bottom": 12
       }
