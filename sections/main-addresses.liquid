@@ -24,12 +24,12 @@
       </symbol>
     </svg>
     <h1 class="mb0">{{ 'customer.addresses.title' | t }}</h1>
-    <a class="mb1" href="{{ routes.account_url }}">
+    <a href="{{ routes.account_url }}">
       {{ 'customer.account.return' | t }}
     </a>
 
     {% unless section.settings.notice == blank %}
-      <div class="p2 bg-mint">{{ section.settings.notice }}</div>
+      <div class="bg-green-light mt2 pt2 px2 pb1">{{ section.settings.notice }}</div>
     {% endunless %}
 
     <div data-address>
