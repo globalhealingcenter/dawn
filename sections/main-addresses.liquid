@@ -30,6 +30,8 @@
 
     {% capture my_subscriptions_link %}{% render 'gh-ordergroove-subscriptions-link' %}{% endcapture %}
 
+          <!-- subscriptions link {{ my_subscriptions_link }} -->
+
     {% unless section.settings.notice == blank %}
       <div class="bg-green-light mt2 pt2 px2 pb1">{{ section.settings.notice | replace: '#view-my-subscriptions', '#testing' }}</div>
     {% endunless %}
