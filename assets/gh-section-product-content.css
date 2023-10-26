@@ -425,3 +425,12 @@
         --item-count: 4;
     }
 }
+
+.product .rating-star{
+  --letter-spacing: inherit;
+  --font-size: 1.7;
+}
+.ss__autocomplete--target .ss__autocomplete .ss__autocomplete__content__results .ss__results .ss__result .ss__result__details .yotpo .yotpo-bottomline.star-clickable{
+  justify-content: center;
+  width: 100%;
+}
