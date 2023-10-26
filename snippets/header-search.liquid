@@ -28,6 +28,30 @@
         {%- else -%}
           <search-form class="search-modal__form">
         {%- endif -%}
+            {% if settings.ss_enable %}
+              <form action="{{ routes.collections_url }}/{{ settings.ss_collection_handle }}" method="get" role="search" class="search search-modal__form">
+              <div class="field">
+                <input class="search__input field__input"
+                  id="{{ input_id }}"
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ 'general.search.search' | t }}"
+                >
+                <label class="field__label" for="{{ input_id }}">{{ 'general.search.search' | t }}</label>
+                <button type="reset" class="reset__button field__button{% if search.terms == blank %} hidden{% endif %}" aria-label="{{ 'general.search.reset' | t }}">
+                  <svg class="icon icon-close" aria-hidden="true" focusable="false">
+                    <use xlink:href="#icon-reset">
+                  </svg>
+                </button>
+                <button class="search__button field__button" aria-label="{{ 'general.search.search' | t }}">
+                  <svg class="icon icon-search" aria-hidden="true" focusable="false">
+                    <use href="#icon-search">
+                  </svg>
+                </button>
+              </div>
+            </form>
+            {% else %}
             <form action="{{ routes.search_url }}" method="get" role="search" class="search search-modal__form">
               <div class="field">
                 <input class="search__input field__input"
@@ -75,6 +99,7 @@
                 <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span>
               {%- endif -%}
             </form>
+            {%- endif -%}
           {%- if settings.predictive_search_enabled -%}
             </predictive-search>
           {%- else -%}

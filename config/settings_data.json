@@ -117,7 +117,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
-    "ss_enable": false,
+    "ss_enable": true,
     "checkout_logo_image": "shopify:\/\/shop_images\/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
@@ -139,21 +139,17 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "7570552984445421165": {
         "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/settings\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "9271244056961380716": {
         "type": "shopify:\/\/apps\/discount-kit\/blocks\/core\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
-        "settings": {
-        }
+        "settings": {}
       },
       "6071110790918949010": {
         "type": "shopify:\/\/apps\/discount-kit\/blocks\/gift\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
