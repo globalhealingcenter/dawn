@@ -389,8 +389,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       })
     </script>
     
-{% render 'rebuy-cart-template' %} 
-{% render 'rebuy-extensions' %} 
+<!-- Rebuy START -->
+{% render 'rebuy-extensions' %}
+{% render 'rebuy-cart-template' %}
+
+<script>
+   document.querySelector("#cart-icon-bubble").style.pointerEvents = "none"
+  setTimeout(()=> {
+    document.querySelector("#cart-icon-bubble").style.pointerEvents = "initial"
+    console.log("pointer events back")
+  },3500)
+</script>
+<!-- Rebuy END -->
+    
 
   {% if settings.ss_enable %}
 	{% render 'ss-intellisuggest' %}
