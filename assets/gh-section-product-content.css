@@ -426,6 +426,10 @@
     }
 }
 
+.product #MainContent .shopify-section:nth-child(5) {
+    overflow: hidden;
+}
+
 .product .rating-star{
   --letter-spacing: inherit;
   --font-size: 1.7;
