@@ -18,10 +18,12 @@
 	<link rel="canonical" href="{{ canonical_url }}">
 {% endif %}
 
+{% comment %}
 <!-- searchspring -->
 {% if settings.ss_enable %}
     {% render 'vendor_searchspring_script', customer: customer, collection: collection, template: template, settings: settings, current_tags: current_tags %}
 {% endif %}
+{% endcomment %}
 
 <!-- fortawesome -->
 <!-- <script async src="https://use.fortawesome.com/50a7ad91.js"></script> -->
