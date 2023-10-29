@@ -57,9 +57,9 @@
 <script src="https://cmp.osano.com/AzyjYPTMeGpxU5ypb/57396f93-7ef3-4b03-80ca-21fa163f6934/osano.js" defer></script>
 
 <!-- glidejs for sliders -->
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-<link href="https://unpkg.com/@glidejs/glide@3.6.0/dist/css/glide.core.min.css" rel="stylesheet" />
-<link href="https://unpkg.com/@glidejs/glide@3.6.0/dist/css/glide.theme.min.css" rel="stylesheet" />
+<script src="{{ 'vendor-glide-v3.6.0.js' | asset_url }}" defer="defer"></script>
+{{ 'vendor-glide-v3.6.0.core.css' | asset_url | stylesheet_tag }}
+{{ 'vendor-glide-v3.6.0.theme.css' | asset_url | stylesheet_tag }}
 
 <!-- yotpo -->
 <script type="text/javascript">(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/63EcnfHVSENo8yIBbBSY9uqxQxPZztn6xa7YvxGC/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();</script>
