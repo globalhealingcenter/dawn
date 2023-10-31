@@ -19,7 +19,7 @@
 <style>
 <script>
 document.querySelectorAll(".rebuy-product-actions .checkbox-label").forEach(label => {
-  label.textContent = label.textContent.replace("Upgrade to Autoship and", "AutoShip and");
+  label.textContent = label.textContent.replace("Upgrade to Autoship &", "AutoShip &");
 })
 </script>
 .rebuy-widget .flickity-button:focus{
@@ -97,7 +97,6 @@ text-transform: uppercase !important;
 </style>
 
 <!-- Dynamic Bundle Widget BELOW -->
-
 {% raw %}
 <script id="rebuy-widget-108412" type="text/template">
   <div class="rebuy-widget"
@@ -252,7 +251,7 @@ text-transform: uppercase !important;
                     class="rebuy-button"
                     v-on:click="addSelectedProductsToCart()"
                     type="button">
-                        <span v-html="buttonWidgetLabel()"></span>
+                        <span>Add to Cart</span>
                 </button>
                 <button class="rebuy-accordian-dropdown">
 
@@ -267,7 +266,10 @@ text-transform: uppercase !important;
 {% endraw %}
 
 <style>
-@media(min-width: 1000px){
+@media(min-width: 800px){
+  #rebuy-widget-108412 .rebuy-bundle__actions {
+    margin-bottom: 55px;
+  }
   .rebuy-accordian-dropdown{
     display: none;
   }
@@ -368,6 +370,7 @@ line-height: normal;
   text-transform: capitalize;
   margin-bottom: 0px;
 }
+
 #rebuy-widget-108412 .rebuy-bundle__actions {
   display: flex;
   flex-direction: column;
@@ -424,7 +427,7 @@ line-height: normal;
     background-image: none;
     width: auto;
     max-width: 220px;
-    font-size: 14px
+    font-size: 14px;
     font-weight: normal;
     color: #7b7e97;
     background-color: rgb(255, 255, 255);
@@ -445,7 +448,7 @@ line-height: normal;
 
 
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 800px) {
   .rebuy-bundle__image-divider-desktop{
     display: none;
 }
@@ -573,7 +576,7 @@ line-height: normal;
 }
 
   /* Tablet View */
-  @media(min-width: 600px) and (max-width: 999px){
+  @media(min-width: 600px) and (max-width: 800px){
     #rebuy-widget-108412 .rebuy-bundle__images{
       justify-content: center;
     }
@@ -588,6 +591,32 @@ line-height: normal;
       margin: auto !important;
     } */
   }
+
+   @media(min-width: 801px) and (max-width: 975px){
+
+#rebuy-widget-108412 .rebuy-bundle__actions{
+  width: 70%;
+}
+#rebuy-widget-108412 .rebuy-bundle__items{
+  width: 70%;
+  margin: auto;
+  gap: 0%;
+}
+#rebuy-widget-108412 .rebuy-product-block img{
+width: 150px;
+height: 150px;
+margin: auto;
+}
+#rebuy-widget-108412{
+  transform: scale(.8);
+}
+#rebuy-widget-108412 .rebuy-bundle__image-divider-desktop {
+    position: relative;
+    top: 35%;
+    left: -15%;
+    font-size: 20px;
+}
+   }
 </style>
 
 
@@ -770,7 +799,7 @@ line-height: normal;
 
 <!-- Complete the Look Widget BELOW -->
 {% raw %}
-<script id="rebuy-widget-108415" type="text/template">
+<script id="rebuy-widget-115516" type="text/template">
  <div class="rebuy-widget"
         v-cloak
         v-on:click="stopPropagation($event)"
@@ -1172,11 +1201,12 @@ line-height: normal;
                     <div class="rebuy-product-block" v-for="(product, product_index) in products" v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]">
     
                         <div class="rebuy-product-media" style="position: relative;">
-                             <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
-                                <img class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
-                                <img v-if="product?.images?.[1]" class="secondary-image" v-bind:src="sizeImage(product?.images[1]?.src, '400x400')" v-bind:alt="'View ' + product.title">
-                                <img v-else class="secondary-image" v-bind:src="sizeImage(product?.images[0]?.src, '400x400')" v-bind:alt="'View ' + product.title">
-                            </a>
+                            <a class="rebuy-product-image" tabindex="-1" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles"
+                v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
+                <img v-bind:loading="product_index > 1 ? 'lazy' : 'eager'"
+                  v-bind:src="itemImage(product, product.selected_variant, '400x400')"
+                  v-bind:alt="itemImageAlt(product, product.selected_variant)">
+              </a>
     <button
                                 class="rebuy-button"
                                 v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
@@ -1208,7 +1238,30 @@ line-height: normal;
                                     <span class="rebuy-money" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
                                 </div>
                             </div>
-                            <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+    
+                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                                <label class="rebuy-checkbox-label">
+                                    <input
+                                        class="checkbox-input rebuy-checkbox"
+                                        v-model="product.subscription"
+                                        v-on:change="toggleSubscription(product)"
+                                        type="checkbox" />
+                                    <span class="checkbox-label" v-html="upgradeToSubscriptionLabel(product)"></span>
+                                </label>
+                            </div>
+    
+                            <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
+                                <select
+                                  class="rebuy-select"
+                                  v-model="product.subscription_frequency"
+                                  v-on:change="updateSubscriptionFrequency(product)"
+                                >
+                                  <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">
+                                    {{ frequencyLabel(frequency, product.subscription_interval).replace('Get 10% off today and all future orders.', '') }}
+                                  </option>
+                                </select>
+                            </div>
+                            <!-- <div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div> -->
                         </div>
                         <div class="rebuy-product-options" v-if="showVariantSelect(product)">
                             <select
@@ -1256,7 +1309,7 @@ line-height: normal;
                         </div>
                         <div class="rebuy-product-actions">
     
-                            <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
+                            <!-- <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
                                 <label class="rebuy-checkbox-label">
                                     <input
                                         class="checkbox-input rebuy-checkbox"
@@ -1269,15 +1322,15 @@ line-height: normal;
     
                             <div class="subscription-frequency" v-if="showSubscriptionFrequency(product)">
                                 <select
-  class="rebuy-select"
-  v-model="product.subscription_frequency"
-  v-on:change="updateSubscriptionFrequency(product)"
->
-  <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">
-    {{ frequencyLabel(frequency, product.subscription_interval).replace('Get 10% off today and all future orders.', '') }}
-  </option>
-</select>
-                            </div>
+                                  class="rebuy-select"
+                                  v-model="product.subscription_frequency"
+                                  v-on:change="updateSubscriptionFrequency(product)"
+                                >
+                                  <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">
+                                    {{ frequencyLabel(frequency, product.subscription_interval).replace('Get 10% off today and all future orders.', '') }}
+                                  </option>
+                                </select>
+                            </div> -->
     
                             <div class="product-quantity" v-if="hasQuantityInputEnabled()">
                                 <div class="rebuy-select-wrapper">
@@ -1325,11 +1378,7 @@ line-height: normal;
     </div>
 </script>
 {% endraw %}
-<style>
-.rebuy-product-media .secondary-image { display: none !important; }
-.rebuy-product-media:hover .primary-image { display: none !important; }
-.rebuy-product-media:hover .secondary-image { display: block !important; }
-</style>
+
 
 <!-- PRODUCT UPSELL POP-UP Widget BELOW -->
 {% raw %}
@@ -1359,7 +1408,7 @@ line-height: normal;
 
               <h3 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h3>
 
-              <h4 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h4>
+              <h4 class="primary-header-title">Our Detox Programs target specific wellness goals, ensuring you receive the exact support your body needs.</h4>
 
               <div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
 
@@ -1501,7 +1550,7 @@ line-height: normal;
                               class="rebuy-button decline"
                               v-on:click="declineOffer(product)"
                               type="button">
-                                  <span v-html="declineLabel(product)"></span>
+                                  <span>No thanks</span>
                           </button>
 
                       </div>
