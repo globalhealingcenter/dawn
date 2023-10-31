@@ -84,17 +84,6 @@
                     {% endif %}
                   {% endfor %}
                 </div>
-                {% comment %}
-                <div class="ghd--accordion">
-                  {% for detail in block.items %}
-                    <div>
-                      <input type="radio" name="{{ block.id }}-benefits" id="{{ block.id }}-benefits-{{ forloop.index }}" {% if forloop.first %}checked{% endif %} hidden />
-                      <label for="{{ block.id }}-benefits-{{ forloop.index }}">{{ detail.title }}</label>
-                      <div>{{ detail.content }}</div>
-                    </div>
-                  {% endfor %}
-                </div>
-                {% endcomment %}
               </div>
             </div>
           </div>
@@ -236,24 +225,31 @@
       {% endif %}
       {% endif %}
       {% when 'miron' %}
-      {% if product.tags contains "miron" %}
+
+      {% capture miron_default %}
+        <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
+      {% endcapture %}
+
+      {% capture video_link %}
+        <iframe src="{{ block.video_link | default: 'https://player.vimeo.com/video/405459325' }}?h=3aa1cbbf06&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      {% endcapture %}
+
+      {% capture video_button %}{{ block.video_button | default: 'Watch the Video' }}{% endcapture %}
+
       <div class="ghd--block--miron ghd--block">
         <div data-type="cols">
           <div data-type="text">
             <div class="mw">
-              <h2>Preserving the Essence of Natural Ingredients</h2>
-              <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
-
-              {% render 'gh-element-dialog', button_text: 'Watch the Video', button_class: 'button', id: block.id, content: '<iframe src="https://player.vimeo.com/video/405459325?h=3aa1cbbf06&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>' %}
-              <!--<p><a href='https://vimeo.com/405459325' target='_blank'>Watch the Video</a></p>-->
+              <h2>{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
+              {{ block.content | default: miron_default }}
+              {% render 'gh-element-dialog', button_text: video_button, button_class: 'button', id: block.id, content: video_link %}
             </div>
           </div>
           <div data-type="image">
-            <img src='https://cdn.globalhealing.com/products/pages/all/v2/miron-bottle.png' alt='' loading='lazy'>
+            <img src='{{ block.image | default: 'https://cdn.globalhealing.com/products/pages/all/v2/miron-bottle.png' }}' alt='' loading='lazy'>
           </div>
         </div>
       </div>
-      {% endif %}
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block">
         <h2 class="eyebrow">{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
