@@ -137,11 +137,11 @@
                 <div>
                   <input type="radio"
                          data-ingredient-image='{{ detail.image }}'
-                         name="{{ block.id }}-ingredients"
-                         id="{{ block.id }}-ingredients-{{ forloop.index }}"
+                         name="product-ingredients"
+                         id="product-ingredients-{{ forloop.index }}"
                          {% if forloop.first %}checked{% endif %}
                   hidden />
-                  <label for="{{ block.id }}-ingredients-{{ forloop.index }}"><h3 class="h-inherit">{{ detail.title }}</h3></label>
+                  <label for="product-ingredients-{{ forloop.index }}"><h3 class="h-inherit">{{ detail.title }}</h3></label>
                   <div>
                     <img class='ghd--hide-desktop' src="{{ detail.image }}?w=600" srcset='{{ detail.image }}?w=1200 2x' alt="" loading='lazy'>
                     {{ detail.content }}
@@ -152,7 +152,7 @@
                 {% unless config.supplement_facts == blank  %}
                 <div>
                   {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
-                  {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: block.id, content: sf_content %}
+                  {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content %}
                 </div>
                 {% endunless %}
               </div>
@@ -163,7 +163,7 @@
           </div>
           {% if product.tags contains 'prop65' %}
           <div data-type="ghd--prop65-warning">
-            {% assign prop65_id = 'prop65-' | append: block.id %}
+            {% assign prop65_id = 'prop65-product-content' %}
             {% render
               'gh-element-dialog',
               button_text: "<b>WARNING</b> - California's Proposition 65",
@@ -242,7 +242,7 @@
             <div class="mw">
               <h2>{{ block.title.main | default: 'Preserving the Essence of Natural Ingredients' }}</h2>
               {{ block.content | default: miron_default }}
-              {% render 'gh-element-dialog', button_text: video_button, button_class: 'button mt3', id: block.id, content: video_link %}
+              {% render 'gh-element-dialog', button_text: video_button, button_class: 'button mt3', id: 'miron-view-video', content: video_link %}
             </div>
           </div>
           <div data-type="image">
@@ -253,7 +253,7 @@
       {% when 'faqs' %}
       <div class="ghd--block--faq ghd--block">
         <h2 class="eyebrow">{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
-        <input type='radio' name='view-more' id='{{ block.id }}-view-more' hidden>
+        <input type='radio' name='view-more' id='product-faq-view-more' hidden>
         <div class="ghd--details mw">
           {% for detail in block.items %}
             <details>
@@ -262,7 +262,7 @@
             </details>
           {% endfor %}
           {% if block.items.size > 5 %}
-            <label for='{{ block.id }}-view-more'>View More</label>
+            <label for='product-faq-view-more'>View More</label>
           {% endif %}
         </div>
       </div>
@@ -272,6 +272,7 @@
         <div data-type="header">
           <div class="eyebrow h2">
             {{ block.title.main | default: 'Curate Your Collection' }}
+          </div>
           </div>
           <div class="h4 mb3">{{ block.title.after }}</div>
         </div>
@@ -289,7 +290,7 @@
               <div class="description">{{ curated.content }}</div>
               <p class="price">{{ v.price | money }}</p>
 
-              {%- assign product_form_id = 'product-form-' | append: v.id | append: block.id -%}
+              {%- assign product_form_id = 'product-form-' | append: v.id  -%}
               {% capture buy_buttons %}
               {%- render 'buy-buttons',
                   block: block,
