@@ -23,7 +23,7 @@
           <p><a href='{{ config.instructions }}'>View Instructions</a></p>
         {% endif %}
 
-        {%- capture sf_content -%}{% render 'gh-product-supplement-facts' %}{% endcapture %}
+        {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
         {% assign sf_content = sf_content | strip %}
         {% unless sf_content == ''  %}
           {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: 'Supplement Facts', id: 'full-ingredients-header', content: sf_content %}
