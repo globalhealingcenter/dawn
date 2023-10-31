@@ -1,12 +1,18 @@
-{% if config.supplement_facts_v2 and config.supplement_facts_v2.size > 1 %}
-    <div class='ghd--details' style='width: 800px; max-width: 100%;'>
-        {% for sf in config.supplement_facts_v2 %}
-            <details>
-                <summary>{{ sf.title }}</summary>
-                <img src='{{ sf.image }}?w=800' srcset='{{ sf.image }}?w=1600 2x' alt='supplement facts!' loading="lazy">
-            </details>
-        {% endfor %}
-    </div>
+{% if config.supplement_facts_v2 and config.supplement_facts_v2.size > 0 %}
+    {% if config.supplement_facts_v2.size > 1 %}
+        <div class='ghd--details' style='width: 800px; max-width: 100%;'>
+            {% for sf in config.supplement_facts_v2 %}
+                <details>
+                    <summary>{{ sf.title }}</summary>
+                    <img src='{{ sf.image }}?w=800' srcset='{{ sf.image }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+                </details>
+            {% endfor %}
+        </div>
+    {% else %}
+        <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+    {% endif %}
 {% else %}
-    <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+    {% if config.supplement_facts contains 'https' %}
+        <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+    {% endif %}
 {% endif %}
