@@ -28,6 +28,8 @@
         {% unless sf_content == ''  %}
           {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: 'Supplement Facts', id: 'full-ingredients-header', content: sf_content %}
         {% endunless %}
+
+      {% endif %}
     </div>
     <div data-tab="2">{{ product.metafields.globalhealing.who_its_for }}</div>
     <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
