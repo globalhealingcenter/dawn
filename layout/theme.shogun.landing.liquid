@@ -297,11 +297,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   {% render 'shogun-head' %}
 {%- render 'ordergroove_static_asset' -%}
 
+{% if settings.ss_enable %}
+	{% render 'ss-script' %}
+{% endif %}
+
 </head>
 
 
   
-<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }}">
+<body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
   
   
   {{ content_for_layout }}
@@ -364,6 +368,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }, 3000);
       })
     </script>
+<script>
+   document.querySelector("#cart-icon-bubble").style.pointerEvents = "none"
+  setTimeout(()=> {
+    document.querySelector("#cart-icon-bubble").style.pointerEvents = "initial"
+    console.log("pointer events back")
+  },3500)
+</script>
   <style type="text/css">
     body, html {
       width: 100% !important;
