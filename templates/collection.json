@@ -41,18 +41,20 @@
         "2bed0655-ee62-4c42-8aef-309aeff436e5": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_recent\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "disabled": true,
-          "settings": {}
+          "settings": {
+          }
         },
         "1df73fd0-0878-4251-a1b9-a457a2346389": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "disabled": true,
-          "settings": {}
+          "settings": {
+          }
         },
         "b948b429-b643-4b8d-97a4-44db6ed0211f": {
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
-            "id": "111554",
+            "id": "116559",
             "product_id_enabled": true,
             "collection_id_enabled": false
           }
