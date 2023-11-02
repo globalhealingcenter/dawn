@@ -141,6 +141,7 @@
         },
         "95ee949c-43b2-4796-8118-c4b3cedb9437": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_fbt\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "disabled": true,
           "settings": {
           }
         }
