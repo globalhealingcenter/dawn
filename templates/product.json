@@ -2,18 +2,21 @@
   "sections": {
     "shogun-helper": {
       "type": "shogun-helper",
-      "settings": {}
+      "settings": {
+      }
     },
     "shogun-above": {
       "type": "shogun-above",
-      "settings": {}
+      "settings": {
+      }
     },
     "main": {
       "type": "main-product",
       "blocks": {
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+          }
         },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
           "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
@@ -32,7 +35,8 @@
         "price": {
           "type": "price",
           "disabled": true,
-          "settings": {}
+          "settings": {
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -70,7 +74,9 @@
         "ordergroove_offer",
         "buy_buttons"
       ],
-      "custom_css": [],
+      "custom_css": [
+
+      ],
       "settings": {
         "enable_sticky_info": true,
         "media_size": "small",
@@ -124,18 +130,26 @@
         "207c93dd-9c3f-4251-93b9-c5fa0d1e7dfe": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "disabled": true,
-          "settings": {}
+          "settings": {
+          }
         },
         "61dba370-031d-4686-9cf4-83ad1ed887b5": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_browsing\/3f966edc-9a4a-465c-a4df-436d2a39160d",
           "disabled": true,
-          "settings": {}
+          "settings": {
+          }
+        },
+        "95ee949c-43b2-4796-8118-c4b3cedb9437": {
+          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_fbt\/3f966edc-9a4a-465c-a4df-436d2a39160d",
+          "settings": {
+          }
         }
       },
       "block_order": [
         "25085916-2810-44e8-9e6d-866a06af66f3",
         "207c93dd-9c3f-4251-93b9-c5fa0d1e7dfe",
-        "61dba370-031d-4686-9cf4-83ad1ed887b5"
+        "61dba370-031d-4686-9cf4-83ad1ed887b5",
+        "95ee949c-43b2-4796-8118-c4b3cedb9437"
       ],
       "settings": {
         "include_margins": true
@@ -143,7 +157,8 @@
     },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {}
+      "settings": {
+      }
     },
     "169838059718b5ce0c": {
       "type": "apps",
