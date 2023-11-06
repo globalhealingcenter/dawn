@@ -89,7 +89,7 @@
         "hide_variants": true,
         "enable_video_looping": false,
         "padding_top": 52,
-        "padding_bottom": 8
+        "padding_bottom": 52
       }
     },
     "169838059718b5ce0c": {
@@ -107,6 +107,9 @@
       },
       "block_order": [
         "3c43f1d2-5fe4-4b3b-8039-c945317de191"
+      ],
+      "custom_css": [
+
       ],
       "settings": {
         "include_margins": true
