@@ -11,12 +11,12 @@
 {% if template.name == "index" %}
 <!-- Home Page Widget -->  <div data-rebuy-id="108417" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
-<style>
 <script>
 document.querySelectorAll(".rebuy-product-actions .checkbox-label").forEach(label => {
   label.textContent = label.textContent.replace("Upgrade to Autoship &", "AutoShip &");
 })
 </script>
+<style>
 .rebuy-widget .flickity-button:focus{
   box-shadow: 0 0 0 5px #21472D !important;
 }
