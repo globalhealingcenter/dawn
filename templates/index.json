@@ -13,8 +13,7 @@
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
           "type": "logos",
-          "settings": {
-          }
+          "settings": {}
         },
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
@@ -52,8 +51,8 @@
         },
         "0353913e-ce5a-4823-b72c-7d0b126eb112": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
+          "disabled": true,
+          "settings": {}
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "type": "foundation",
@@ -135,8 +134,8 @@
       "blocks": {
         "898be88a-3a74-46c6-88cf-30e877d68acf": {
           "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
+          "disabled": true,
+          "settings": {}
         }
       },
       "block_order": [
