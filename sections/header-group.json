@@ -4,11 +4,26 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
+      "blocks": {
+        "778775ac-0fd5-4070-8198-2dec1665d8fc": {
+          "type": "announcement",
+          "settings": {
+            "text": "One Day Only — 2X Points on Oxy-Powder",
+            "link": "shopify:\/\/products\/oxy-powder"
+          }
+        }
+      },
+      "block_order": [
+        "778775ac-0fd5-4070-8198-2dec1665d8fc"
+      ],
       "settings": {
         "color_scheme": "accent-2",
         "show_line_separator": true,
+        "show_social": false,
         "auto_rotate": false,
-        "change_slides_speed": 5
+        "change_slides_speed": 5,
+        "enable_country_selector": false,
+        "enable_language_selector": false
       }
     },
     "header": {
