@@ -13,14 +13,15 @@
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
           "type": "logos",
-          "settings": {}
+          "settings": {
+          }
         },
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
           "settings": {
-            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/desktop.v2.jpg",
-            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/mobile.v2.jpg",
-            "banner_1_url": "shopify:\/\/pages\/gut-health",
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/as\/desktop.jpg",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/as\/mobile.jpg",
+            "banner_1_url": "https:\/\/globalhealing.com\/pages\/black-friday",
             "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
             "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
             "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
@@ -48,11 +49,6 @@
             "link_list_heading": "SHOP BY HEALTH GOALS",
             "link_list": "homepage-menu"
           }
-        },
-        "0353913e-ce5a-4823-b72c-7d0b126eb112": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "disabled": true,
-          "settings": {}
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "type": "foundation",
@@ -108,7 +104,6 @@
         "ee09762d-26e5-443b-8985-8a77f1574932",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
-        "0353913e-ce5a-4823-b72c-7d0b126eb112",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
@@ -131,16 +126,6 @@
     },
     "1687779425f103d894": {
       "type": "apps",
-      "blocks": {
-        "898be88a-3a74-46c6-88cf-30e877d68acf": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_topselling\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "disabled": true,
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "898be88a-3a74-46c6-88cf-30e877d68acf"
-      ],
       "settings": {
         "include_margins": true
       }
