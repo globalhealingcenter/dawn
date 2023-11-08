@@ -16,6 +16,9 @@
       "block_order": [
         "778775ac-0fd5-4070-8198-2dec1665d8fc"
       ],
+      "custom_css": [
+        ".announcement-bar__message{font-size: 14px;}"
+      ],
       "settings": {
         "color_scheme": "accent-2",
         "show_line_separator": true,
