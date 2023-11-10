@@ -32,6 +32,12 @@
             "tab_3_title": "Suggested Use"
           }
         },
+        "9367b6f8-f376-428c-bdb1-c215da684ae8": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<button class=\"button button--full-width disabled\">Out of Stock<\/button>"
+          }
+        },
         "price": {
           "type": "price",
           "disabled": true,
@@ -49,30 +55,16 @@
           "settings": {
             "custom_liquid": "{% unless product.available %}\n\n{% render 'gh-element-out-of-stock-form' product: product %}\n\n{% endunless %}"
           }
-        },
-        "ordergroove_offer": {
-          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-          "settings": {
-            "location": "{{ product.metafields.ordergroove.pdp_enrollment_code.value }}"
-          }
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
         }
       },
       "block_order": [
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
+        "9367b6f8-f376-428c-bdb1-c215da684ae8",
         "price",
         "variant_picker",
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
-        "ordergroove_offer",
-        "buy_buttons"
+        "eda5c980-a9b2-45de-90dd-01201d8c4a1c"
       ],
       "custom_css": [
 
