@@ -11,10 +11,28 @@
             "text": "✨  One Day Only — 2X Points on Nutrition products ✨",
             "link": "https:\/\/globalhealing.com\/collections\/nutrition?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
           }
+        },
+        "0dd1c408-d534-4fad-bc2c-9ae13c7527c3": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "✨  One Day Only — 3X Points on Supercharged C60  ✨",
+            "link": "https:\/\/globalhealing.com\/products\/supercharged-c60?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
+          }
+        },
+        "6cae7e74-8692-43ab-bea9-44e85d65be4e": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "🤩 One Day Only — FREE Oxy Powder Travel packs on orders $125+ SHOP NOW",
+            "link": "https:\/\/globalhealing.com\/collections\/best-sellers?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
+          }
         }
       },
       "block_order": [
-        "778775ac-0fd5-4070-8198-2dec1665d8fc"
+        "778775ac-0fd5-4070-8198-2dec1665d8fc",
+        "0dd1c408-d534-4fad-bc2c-9ae13c7527c3",
+        "6cae7e74-8692-43ab-bea9-44e85d65be4e"
       ],
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
