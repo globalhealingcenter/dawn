@@ -7,6 +7,7 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "✨ One Day Only — 2X Points on Nutrition Products ✨",
             "link": "https:\/\/globalhealing.com\/collections\/nutrition?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
@@ -14,7 +15,6 @@
         },
         "0dd1c408-d534-4fad-bc2c-9ae13c7527c3": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "✨  One Day Only — 3X Points on Supercharged C60  ✨",
             "link": "https:\/\/globalhealing.com\/products\/supercharged-c60?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
