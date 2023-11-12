@@ -15,7 +15,6 @@
         },
         "0dd1c408-d534-4fad-bc2c-9ae13c7527c3": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "✨  One Day Only — 3X Points on Supercharged C60  ✨",
             "link": "https:\/\/globalhealing.com\/products\/supercharged-c60?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
@@ -23,6 +22,7 @@
         },
         "6cae7e74-8692-43ab-bea9-44e85d65be4e": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "🤩 One Day Only — FREE Oxy Powder Travel packs on orders $125+ SHOP NOW",
             "link": "https:\/\/globalhealing.com\/collections\/best-sellers?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
