@@ -502,6 +502,7 @@
 <script>
   gh.shopify.customer = {
     isLoggedIn: {% if customer %} true {% else %} false {% endif %},
+    id: {{ customer.id | default: '' }},
     getInfo: () => {
       return {
           {% if customer %}
