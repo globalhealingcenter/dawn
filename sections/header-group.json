@@ -31,6 +31,7 @@
         },
         "fa6754db-1087-4d17-8cb6-ab0bccac233b": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "✨  Invest in YOU | Annual Sale | Up to 20% Off!  ✨",
             "link": "https:\/\/globalhealing.com\/pages\/black-friday?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
