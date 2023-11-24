@@ -109,7 +109,7 @@
         "3c43f1d2-5fe4-4b3b-8039-c945317de191"
       ],
       "custom_css": [
-
+        ".fbt_disc_msg,.rebuy-bundle__actions-price {display: none !important;}"
       ],
       "settings": {
         "include_margins": true
