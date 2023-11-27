@@ -7,6 +7,7 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "💥  20% Off $100+ THESE Best Sellers. No Promo Code Needed. 💥",
             "link": "shopify:\/\/pages\/black-friday"
@@ -14,10 +15,9 @@
         },
         "0dd1c408-d534-4fad-bc2c-9ae13c7527c3": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
-            "text": "✨  One Day Only — 3X Points on Supercharged C60  ✨",
-            "link": "https:\/\/globalhealing.com\/products\/supercharged-c60?icn_ghc=black_friday_campaign&ici_ghc=TopNotice"
+            "text": "🌟 Last Chance for Our Biggest Savings — 20% Off $150+ (No Promo Code Needed)",
+            "link": "shopify:\/\/pages\/black-friday"
           }
         },
         "6cae7e74-8692-43ab-bea9-44e85d65be4e": {
