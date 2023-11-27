@@ -19,9 +19,9 @@
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
           "settings": {
-            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/bf\/desktop.v2.jpg",
-            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/bf\/mobile.jpg",
-            "banner_1_url": "https:\/\/globalhealing.myshopify.com\/pages\/black-friday?icn_ghc=bf_campaign&ici_ghc=HomePageBanner",
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/cm\/desktop.jpg",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/11\/bfcm\/cm\/mobile.jpg",
+            "banner_1_url": "https:\/\/globalhealing.com\/pages\/black-friday?icn_ghc=cm_campaign&ici_ghc=HomePageBanner",
             "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
             "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
             "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
