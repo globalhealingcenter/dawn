@@ -28,6 +28,19 @@
             "banner_3_url": "https:\/\/globalhealinginstitute.org\/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
           }
         },
+        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
+          "type": "banners",
+          "disabled": true,
+          "settings": {
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/desktop.v2.jpg",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/mobile.v2.jpg",
+            "banner_1_url": "https:\/\/globalhealing.com\/collections\/gut-health?icn_ghc=homepage&ici_ghc=HomePageBanner",
+            "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
+            "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
+            "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
+            "banner_3_url": "https:\/\/globalhealinginstitute.org\/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
+          }
+        },
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
           "type": "quality",
           "settings": {
@@ -102,6 +115,7 @@
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc",
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0",
         "ee09762d-26e5-443b-8985-8a77f1574932",
+        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
