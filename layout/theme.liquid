@@ -369,25 +369,6 @@
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KJTRKBG"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<script>
-  $(document).ready(function () {
-    var wsOldCartCnt = 0;
-    setTimeout(function () {
-      setInterval(function () {
-        var wsCartCnt = $(".cart-count-bubble span:first").text();
-        var wsCountDiv = $(".evm-drawer-main div").children().length;
-        if(wsCountDiv == 0 && wsOldCartCnt != wsCartCnt) {
-          $("cart-drawer").attr("ws-data-drawer", 1);
-          wsOldCartCnt = wsCartCnt
-          window.WISER_INIT("cart", 1);
-          // setTimeout(function () {
-          //   $(".evm-drawer-main").attr("ws-data-drawer", 0);
-          // }, 5000);
-        }
-      }, 200);
-    }, 3000);
-  })
-</script>
 
 <!-- Rebuy START -->
 {% render 'rebuy-extensions' %}
