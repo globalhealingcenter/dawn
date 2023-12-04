@@ -18,6 +18,7 @@
         },
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "type": "banners",
+          "disabled": true,
           "settings": {
             "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/desktop.v2.jpg",
             "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/09\/gut-health\/mobile.v2.jpg",
@@ -30,7 +31,6 @@
         },
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
-          "disabled": true,
           "settings": {
             "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/12\/gift-guide\/desktop.jpg",
             "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2023\/12\/gift-guide\/mobile.jpg",
