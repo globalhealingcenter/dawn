@@ -56,18 +56,18 @@
             "location": "{{ product.metafields.ordergroove.pdp_enrollment_code.value }}"
           }
         },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
-          }
-        },
         "14bad82e-ab8f-4993-9000-6f5588d43ebf": {
           "type": "text_conditional",
           "settings": {
             "url_contains": "utm_campaign=Browse-Abandon",
             "text": "Buy $100 and get a free gift!"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
           }
         }
       },
@@ -79,8 +79,8 @@
         "variant_picker",
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "ordergroove_offer",
-        "buy_buttons",
-        "14bad82e-ab8f-4993-9000-6f5588d43ebf"
+        "14bad82e-ab8f-4993-9000-6f5588d43ebf",
+        "buy_buttons"
       ],
       "custom_css": [
 
