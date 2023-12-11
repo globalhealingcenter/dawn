@@ -60,8 +60,8 @@
           "type": "text_conditional",
           "settings": {
             "url_contains": "utm_campaign=Browse-Abandon",
-            "class": "bold p2 bg-white center",
-            "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+."
+            "class": "bold p2 color-white bg-green center",
+            "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
         "buy_buttons": {
