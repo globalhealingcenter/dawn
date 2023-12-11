@@ -131,6 +131,17 @@
               >
                 {{- block.settings.text -}}
               </p>
+            {%- when 'text_conditional' -%}
+              <p class="product_text_conditional product__text inline-richtext caption-with-letter-spacing subtitle hidden" data-id="{{ block.id }}" {{ block.shopify_attributes }}>
+                {{- block.settings.text -}}
+              </p>
+              <script>
+                {
+                  if( window.location.href.includes(`{{ block.settings.url_contains }}`) ){
+                      document.querySelector('.product_text_conditional[data-id="{{ block.id }}"]').classList.remove('hidden');
+                  }
+                }
+              </script>
             {%- when 'title' -%}
               {% assign title = product.title | escape %}
               {% if product.metafields.globalhealing.custom_h1 and product.metafields.globalhealing.custom_h1 != '' %}
