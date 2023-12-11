@@ -13,6 +13,9 @@
     {% else %}
         <link rel="canonical" href="{{ canonical_url }}">
     {% endif %}
+
+{% elsif template contains 'collection' %}
+    <link rel="canonical" href="{{ shop.url }}{{ collection.url }}" />
 {% else %}
     <link rel="canonical" href="{{ canonical_url }}">
 {% endif %}
