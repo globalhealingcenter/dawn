@@ -132,7 +132,7 @@
                 {{- block.settings.text -}}
               </p>
             {%- when 'text_conditional' -%}
-              <p class="product_text_conditional hidden" data-id="{{ block.id }}" {{ block.shopify_attributes }}>
+              <p class="product_text_conditional hidden {{ block.settings.class }}" data-id="{{ block.id }}" {{ block.shopify_attributes }}>
                 {{- block.settings.text -}}
               </p>
               <script>
