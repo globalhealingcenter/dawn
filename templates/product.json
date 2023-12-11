@@ -60,7 +60,7 @@
           "type": "text_conditional",
           "settings": {
             "url_contains": "utm_campaign=Browse-Abandon",
-            "text": "Buy $100 and get a free gift!"
+            "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+."
           }
         },
         "buy_buttons": {
