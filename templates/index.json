@@ -111,6 +111,15 @@
             "row_3_img": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/reviews-award-winning.v2.svg",
             "row_3_text": "<p>Our knowledgeable, compassionate team is always here to guide you and answer your questions so you get the right products for your wellness journey. <\/p>"
           }
+        },
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "128545",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
         }
       },
       "block_order": [
@@ -124,7 +133,8 @@
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
         "90d53a3e-607e-44cf-81c0-4d063ee2042c",
-        "b871651f-c308-4034-8741-ebbb3f7989ed"
+        "b871651f-c308-4034-8741-ebbb3f7989ed",
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed"
       ],
       "settings": {
         "padding_top": 0,
@@ -142,6 +152,20 @@
     },
     "1687779425f103d894": {
       "type": "apps",
+      "blocks": {
+        "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "128545",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6"
+      ],
       "settings": {
         "include_margins": true
       }
