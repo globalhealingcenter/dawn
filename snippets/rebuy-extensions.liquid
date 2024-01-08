@@ -1574,7 +1574,9 @@ margin: auto;
                                   aria-label="subscription frequency"
                                   v-model="product.subscription_frequency"
                                   v-on:change="updateSubscriptionFrequency(product)">
-                                  <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">{{ frequencyLabel(frequency, product.subscription_interval) }}</option>
+                                                                   <option v-for="frequency in product.subscription_frequencies" v-bind:value="frequency">
+                                    {{ frequencyLabel(frequency, product.subscription_interval).replace('Get 10% off today and all future orders.', '') }}
+                                  </option>
                               </select>
                           </div>
 
