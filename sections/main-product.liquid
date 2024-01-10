@@ -148,7 +148,12 @@
                 {% assign title = product.metafields.globalhealing.custom_h1 | escape %}
               {% endif %}
               <div class="product__title" {{ block.shopify_attributes }}>
-                <h1>{{ title }}</h1>
+                <h1>
+                  {% if product.vendor != 'Global Healing' %} 
+                    <span style="font-size: 2rem;display: block;text-transform: uppercase;">{{ product.vendor }}</span> 
+                  {% endif %}
+                  {{ title }}
+                </h1>
                 <a href="{{ product.url }}" class="product__title">
                   <h2 class="h1">
                     {{ title }}
