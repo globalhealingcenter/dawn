@@ -19,11 +19,11 @@
   {% assign config = product.metafields.gh_product.data.value %}
 {% endif %}
 
+{{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
+
 {% if has_product_config %}
 
 <section class="gh--product-content section-{{ section.id }}-padding">
-  
-  {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
   
   <div class="ghd--product-container">
     
