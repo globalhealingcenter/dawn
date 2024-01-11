@@ -1,3 +1,7 @@
+.color-white{
+  color: #fff;
+}
+
 section a{
     color: var(--gh-color-green);
 }
