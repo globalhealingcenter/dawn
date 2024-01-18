@@ -156,7 +156,6 @@
       "blocks": {
         "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6": {
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "128545",
