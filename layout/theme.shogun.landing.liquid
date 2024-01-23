@@ -354,25 +354,6 @@ This file can be re-written at any time.
 </script>
 <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
 <script>
-  $(document).ready(function () {
-    var wsOldCartCnt = 0;
-    setTimeout(function () {
-      setInterval(function () {
-        var wsCartCnt = $(".cart-count-bubble span:first").text();
-        var wsCountDiv = $(".evm-drawer-main div").children().length;
-        if(wsCountDiv == 0 && wsOldCartCnt != wsCartCnt) {
-          $("cart-drawer").attr("ws-data-drawer", 1);
-          wsOldCartCnt = wsCartCnt
-          window.WISER_INIT("cart", 1);
-          // setTimeout(function () {
-          //   $(".evm-drawer-main").attr("ws-data-drawer", 0);
-          // }, 5000);
-        }
-      }, 200);
-    }, 3000);
-  })
-</script>
-<script>
   document.querySelector("#cart-icon-bubble").style.pointerEvents = "none"
   setTimeout(()=> {
     document.querySelector("#cart-icon-bubble").style.pointerEvents = "initial"
