@@ -2580,7 +2580,9 @@ margin: auto;
                         <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
                                 <img class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
                                 <!-- <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="secondary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title"> -->
+                                <!-- <img v-else class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title"> -->
                                 <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
+                            </a>
                             </a>
      <!-- Beauty Shot Image Code END -->
     
