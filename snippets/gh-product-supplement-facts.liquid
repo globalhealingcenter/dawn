@@ -9,7 +9,9 @@
             {% endfor %}
         </div>
     {% else %}
+        {% if config.supplement_facts contains 'https' %}
         <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy">
+        {% endif %}
     {% endif %}
 {% else %}
     {% if config.supplement_facts contains 'https' %}
