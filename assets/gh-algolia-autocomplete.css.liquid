@@ -225,8 +225,16 @@
         flex-wrap: wrap;
     }
 
-    .aa-Source[data-autocomplete-source-id='products'] .aa-Item{
-        padding: 2px;
-        width: 50%;
+    .aa-Panel .aa-Source[data-autocomplete-source-id='products'] .aa-List{
+        gap: 5px;
+    }
+
+    .aa-Panel .aa-Source[data-autocomplete-source-id='products'] .aa-Item{
+        padding: 0;
+        width: calc(50% - 3px);
+    }
+
+    .aa-Panel [data-autocomplete-source-id='gh_articles'] .aa-List .aa-Item{
+        padding: 0;
     }
 }
