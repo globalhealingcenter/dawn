@@ -23,22 +23,6 @@
         "padding_bottom": 36
       }
     },
-    "170680953170228795": {
-      "type": "apps",
-      "blocks": {
-        "algolia_search_and_discovery_instantsearch_cRiNKj": {
-          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "algolia_search_and_discovery_instantsearch_cRiNKj"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
     "17049976778130237d": {
       "type": "apps",
       "blocks": {
@@ -62,7 +46,6 @@
   },
   "order": [
     "main",
-    "170680953170228795",
     "17049976778130237d"
   ]
 }
