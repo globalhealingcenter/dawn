@@ -7,7 +7,7 @@
 
 {% assign ss_defer_config = ' defer' %}
 {%- if collection.handle and template contains 'collection' -%}
-  {% assign should_show = false %}
+  
 	{% assign ss_defer_config = '' %}
 	{%- if collection.handle != settings.ss_collection_handle -%}
 		{% capture ss_collection_config %} 
