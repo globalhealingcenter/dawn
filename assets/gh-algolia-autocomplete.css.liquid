@@ -200,3 +200,32 @@
     overflow: hidden;
     display: flex;
 }
+
+@media (min-width: 691px) and (max-width: 1070px ){
+    .aa-Source[data-autocomplete-source-id=products] ul.aa-List{
+        grid-template-columns: repeat(3,1fr);
+    }
+
+    [data-autocomplete-source-id=gh_articles] .aa-List .aa-Item:last-child{
+        display: none;
+    }
+}
+
+@media(max-width: 690px){
+    [data-autocomplete-source-id="collections"]{
+        display: none;
+    }
+
+    .aa-PanelSections .aa-PanelSection--left{
+        order: 2;
+    }
+
+    [data-autocomplete-source-id=gh_articles] .aa-List{
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+
+    .aa-Source[data-autocomplete-source-id='products'] .aa-Item{
+        padding: 2px;
+    }
+}

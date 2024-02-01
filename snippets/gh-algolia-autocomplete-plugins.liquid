@@ -5,7 +5,7 @@
 
       const getAlgoliaResults = algolia.externals.getAlgoliaResults;
 
-      ghArticlesPlugin = {
+      let ghArticlesPlugin = {
         getSources({ query }) {
           return [
             {
@@ -54,7 +54,7 @@
         },
       }
 
-      ghPopularPlugin = {
+      let ghPopularPlugin = {
         getSources({ query }) {
           return [
             {
@@ -72,14 +72,8 @@
                 item(params) {
                   const {item, html, components} = params;
 
-                  console.log('popular', item);
-
                   return html`<a
-                    href="${
-                    window.Shopify.routes.root
-                  }search?q=${
-                    encodeURIComponent(item.query)
-                  }"
+                    href="${window.Shopify.routes.root}search?q=${encodeURIComponent(item.query)}"
                     class="aa-ItemLink aa-ProductItem"
                   >
                     <div class="aa-ItemWrapper">
