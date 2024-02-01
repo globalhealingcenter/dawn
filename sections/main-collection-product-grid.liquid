@@ -32,9 +32,6 @@
     {% comment %} Sort is the first tabbable element when filter type is vertical {% endcomment %}
     {%- if section.settings.enable_sorting and section.settings.filter_type == 'vertical' -%}
       <facet-filters-form class="facets facets-vertical-sort page-width small-hide no-js-hidden">
-        {% if settings.ss_enable %}
-          <div id="searchspring-toolbar"></div>
-        {% else %}
         <form class="facets-vertical-form" id="FacetSortForm">
           <div class="facet-filters sorting caption">
             <div class="facet-filters__field">
@@ -101,7 +98,6 @@
             </div>
           </div>
         </form>
-        {%- endif -%}
       </facet-filters-form>
     {%- endif -%}
 
@@ -115,9 +111,6 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
-        {% if settings.ss_enable %}
-          <div id="searchspring-sidebar"></div>
-        {% else %}
           <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
           {% render 'facets',
             results: collection,
@@ -126,7 +119,6 @@
             filter_type: section.settings.filter_type,
             paginate: paginate
           %}
-        {%- endif -%}
         </aside>
       {%- endif -%}
 
@@ -137,41 +129,7 @@
           data-cascade
         {% endif %}
       >
-    {% if settings.ss_enable %}
-        <div id="searchspring-content"></div>
-        
-      <link href="//globalhealing.com/cdn/shop/t/43/assets/component-rating.css?v=157771854592137137841686246940"
-      	rel="stylesheet" type="text/css" media="all">
-      <link href="//globalhealing.com/cdn/shop/t/43/assets/component-volume-pricing.css?v=56284703641257077881691529948"
-      	rel="stylesheet" type="text/css" media="all">
-      <link href="//globalhealing.com/cdn/shop/t/43/assets/component-pagination.css?v=136206814810731739951686246940"
-      	rel="stylesheet" type="text/css" media="all">
-      <style>
-      	.yotpo.bottomLine.yotpo-small {
-      		padding-top: 3px;
-      	}
 
-      	.yotpo .standalone-bottomline .star-clickable {
-      		flex-wrap: wrap;
-      		gap: 5px;
-      	}
-
-      	.yotpo.bottomLine .yotpo-bottomline .yotpo-stars {
-      		min-width: 6.5em;
-      	}
-
-      	.yotpo .yotpo-icon {
-      		width: 1em !important;
-      	}
-
-      	@media (max-width: 649px) {
-      		.card--card .quick-add {
-      			margin-left: 0;
-      			margin-right: 0;
-      		}
-      	}
-      </style>
-      {% else %}
         {%- if collection.products.size == 0 -%}
           <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
             <div class="loading-overlay gradient"></div>
@@ -229,7 +187,6 @@
               {% render 'pagination', paginate: paginate, anchor: '' %}
             {%- endif -%}
           </div>
-        {%- endif -%}
         {%- endif -%}
       </div>
     </div>
