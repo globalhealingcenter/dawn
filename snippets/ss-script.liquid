@@ -5,7 +5,7 @@
 {%- endif -%}
 
 {% assign ss_defer_config = ' defer' %}
-{% comment %}
+
 {%- if collection.handle and template contains 'collection' -%}
 	{% assign ss_defer_config = '' %}
 	{%- if collection.handle != settings.ss_collection_handle -%}
@@ -14,7 +14,7 @@
 		{% endcapture %}
 	{%- endif -%}	
 {%- endif -%}
-{% endcomment %}
+
 
 {%- if current_tags -%}
 	{% capture ss_tags_config %}
