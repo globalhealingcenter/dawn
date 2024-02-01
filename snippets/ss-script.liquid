@@ -1,3 +1,4 @@
+{% assign should_show = true %}
 {%- if customer -%}
 	{% capture ss_shopper_config %} 
 		shopper = { id: "{{ customer.id }}" };
@@ -5,8 +6,8 @@
 {%- endif -%}
 
 {% assign ss_defer_config = ' defer' %}
-
 {%- if collection.handle and template contains 'collection' -%}
+  {% assign should_show = false %}
 	{% assign ss_defer_config = '' %}
 	{%- if collection.handle != settings.ss_collection_handle -%}
 		{% capture ss_collection_config %} 
@@ -32,7 +33,9 @@
 	format = "{{ shop.money_format }}";
 {% endcapture %}
 
+{% if should_show %}
 {% comment %}Searchspring Script{% endcomment %}
 <script src="https://snapui.searchspring.io/{{ settings.ss_site_id }}/bundle.js" id="searchspring-context"{{ ss_defer_config }}>
 	{{ ss_shopper_config }}{{ ss_collection_config }}{{ ss_tags_config }}{{ ss_template_config }}{{ ss_money_config }}
 </script>
+{% endif %}
