@@ -1,0 +1,13 @@
+<a href="#" class="header__icon header__icon--gh-search link focus-inset">
+    <svg class="icon icon-search" aria-hidden="true" focusable="false">
+        <use href="#icon-search">
+    </svg>
+    <span class="visually-hidden">Search</span>
+</a>
+
+<script>
+  document.querySelector('.header__icon--gh-search').addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector('.aa-DetachedSearchButton').click();
+  });
+</script>

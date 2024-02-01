@@ -1,0 +1,123 @@
+<script>
+  gh_algolia.autocomplete.plugins = {
+
+    getAll( algolia ){
+
+      const getAlgoliaResults = algolia.externals.getAlgoliaResults;
+
+      ghArticlesPlugin = {
+        getSources({ query }) {
+          return [
+            {
+              sourceId: 'gh_articles',
+              getItems() {
+                return getAlgoliaResults({
+                  searchClient: algolia.searchClient,
+                  queries: [
+                    {
+                      indexName: 'wordpress_blog',
+                      query,
+                      params: {
+                        hitsPerPage: 3,
+                        attributesToSnippet: ['content']
+                      },
+                    },
+                  ],
+                });
+              },
+              templates: {
+
+                item(params, itemLink) {
+                  const {item, html, components} = params;
+
+                  return html`
+                  <a href="${item.url}"
+                    class="aa-ItemLink aa-BlogItem">
+                          <span class="aa-ItemImage"><img src="${item.image}" alt="" height="100" /></span>
+                          <span class="aa-ItemContentContainer">
+                              <span class="as-ItemTitle gh-font-secondary bold color-green-dark">${item.title}</span>
+                          </span>
+                      </a>
+                  `;
+                },
+                header(params) {
+                  const {html} = params
+                  return html`
+                  <div class="aa-SourceHeader"><span class="aa-SourceHeaderTitle">Articles & Other Reads</span><div class="aa-SourceHeaderLine"></div></div>`
+                }
+              },
+              getItemUrl({item}) {
+                return item.url;
+              },
+            }
+          ];
+        },
+      }
+
+      ghPopularPlugin = {
+        getSources({ query }) {
+          return [
+            {
+              sourceId: 'gh_popular',
+              getItems() {
+                return [
+                  { query: 'oxy-powder', url: 'https://github.com' },
+                  { query: 'magnesium', url: 'https://github.com' },
+                  { query: 'zinc', url: 'https://github.com' },
+                  { query: 'b12', url: 'https://github.com' },
+                ]
+              },
+              templates: {
+
+                item(params) {
+                  const {item, html, components} = params;
+
+                  console.log('popular', item);
+
+                  return html`<a
+                    href="${
+                    window.Shopify.routes.root
+                  }search?q=${
+                    encodeURIComponent(item.query)
+                  }"
+                    class="aa-ItemLink aa-ProductItem"
+                  >
+                    <div class="aa-ItemWrapper">
+                      <div class="aa-ItemContent">
+                        <div class="aa-ItemIcon aa-ItemIcon--noBorder">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </div>
+                        <div class="aa-ItemContentBody">
+                          <div class="aa-ItemContentTitle">
+                            ${ item.query }
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </a>`
+                },
+                header(params) {
+                  const {html} = params
+                  return html`
+                  <div class="aa-SourceHeader"><span class="aa-SourceHeaderTitle">Popular Searches</span><div class="aa-SourceHeaderLine"></div></div>`
+                }
+              },
+              getItemUrl({item}) {
+                return item.url;
+              },
+            }
+          ];
+        },
+      }
+
+      return [ ghArticlesPlugin, ghPopularPlugin ]
+    }
+  }
+</script>
