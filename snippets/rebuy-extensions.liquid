@@ -836,7 +836,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product.metafields.gh_product?.data.tagline"v-html="product.metafields.gh_product?.data.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-review" v-if="hasProductReviews(product)">
                                 <span class="rebuy-star-rating">
