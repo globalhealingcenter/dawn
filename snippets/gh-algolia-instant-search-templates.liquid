@@ -1,7 +1,7 @@
 <script>
   gh_algolia.instant.templates = {
-    product(defaultTemplate, data){
-      console.log('args',arguments);
+    product(defaultTemplate, data, html, components){
+      console.log('args',html(`<p>Hello</p>`));
       console.log('product',data);
       return defaultTemplate;
     }
