@@ -1,8 +1,6 @@
+<script src="{{ 'gh-algolia-html.js' | asset_url }}"></script>
+
 <script>
-  import { h, render } from 'https://esm.sh/preact';
-  import htm from 'https://esm.sh/htm';
-  const gh_html = htm.bind(h);
-  
   gh_algolia.instant.templates = {
     product(defaultTemplate, hit, html, components){
 
