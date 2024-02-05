@@ -96,7 +96,7 @@
           </div>
       </div>`;
     },
-    main( defaultTemplate, data, html ) {
+    main( defaultTemplate, data ) {
 
       let algolia = algoliaShopify;
       
@@ -121,7 +121,7 @@
               <div class="ais-clear-refinements-container"></div>
               <div class="ais-current-refined-values-container"></div>
               ${data.facets.map( facet =>
-            html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
+            `<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
                   <label for="${facet.escapedName}" class="ais-range-slider--header ais-facet--header ais-header">${facet.title}</label>
                   <input class="ais-dropdown-checkbox" type="checkbox" id="${facet.escapedName}" name="dropdown" />
                   <div class="ais-facet-${facet.escapedName}-container ais-facet-dropdown-container"></div>
@@ -139,8 +139,8 @@
                 </div>
                 <div class="ais-sort">
                   ${data.multipleSortOrders ?
-                    html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
-                    : html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
+                    `${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
+                    : `${algolia.translations.sortBy} ${algolia.translations.relevance}`
                   }
                 </div>
               </div>
