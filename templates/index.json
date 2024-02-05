@@ -18,13 +18,12 @@
         },
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "type": "banners",
-          "disabled": true,
           "settings": {
             "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/01\/cleanse-and-detox\/desktop.jpg",
             "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/01\/cleanse-and-detox\/mobile.jpg",
             "image_is_2x": false,
             "banner_1_url": "https:\/\/globalhealing.com\/pages\/cleanse-detox-supplements?icn_ghc=cleanse_detox_campaign&ici_ghc=HomePageBanner",
-            "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
+            "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/02\/ozonated-activated-charcoal\/featured-banner.jpg",
             "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
             "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
             "banner_3_url": "https:\/\/globalhealinginstitute.org\/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
@@ -32,6 +31,7 @@
         },
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
+          "disabled": true,
           "settings": {
             "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/02\/ozonated-activated-charcoal\/featured-banner.jpg",
             "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/02\/ozonated-activated-charcoal\/featured-banner.jpg",
