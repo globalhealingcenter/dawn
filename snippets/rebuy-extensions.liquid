@@ -211,8 +211,7 @@
 								</div>
 							</div>
 									<div v-if="variantOnSale(product, product.selected_variant)">
-										<span class="rebuy-money sale" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
-										<span class="rebuy-money compare-at" v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+										<span class="rebuy-money " v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
 									</div>
 									<div v-if="!(variantOnSale(product, product.selected_variant))">
 										<span class="rebuy-money" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
@@ -3210,9 +3209,9 @@
   #rebuy-widget-128942 .rebuy-product-label{
   display: none;
   }
-  #rebuy-widget-128942 .rebuy-product-block .rebuy-money.compare-at{
+  /* #rebuy-widget-128942 .rebuy-product-block .rebuy-money.compare-at{
   display: none;
-  }
+  } */
   #rebuy-widget-128942 .rebuy-bundle__actions-price-label{
     border-bottom: 1px solid #545454;
   }
@@ -4187,8 +4186,7 @@
 </script>
 {% endraw %}
 
-
-<!-- Collections +  -->
+<!-- Collections + -->
 {% raw %}
   <script id="rebuy-widget-132905" type="text/template">
 <div class="rebuy-widget"
