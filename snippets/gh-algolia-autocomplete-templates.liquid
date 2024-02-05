@@ -3,6 +3,7 @@
 
     mainTemplate(_defaultTemplate, templateOptions, elements, displaySuggestions){
       const { html, state } = templateOptions;
+      window['gh_algolia_html'] = html;
       return html `<div class="aa-PanelLayout aa-Panel--scrollable">
         <div class="aa-PanelSection--top">
           ${displaySuggestions &&
