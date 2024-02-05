@@ -96,7 +96,10 @@
           </div>
       </div>`;
     },
-    main( html, data ) {
+    main( defaultTemplate, data, html ) {
+
+      let algolia = algoliaShopify;
+      
       return html `<div class="ais-page">
 
         <div class="ais-page--header">
