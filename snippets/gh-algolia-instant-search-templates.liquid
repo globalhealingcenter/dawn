@@ -1,9 +1,100 @@
 <script>
   gh_algolia.instant.templates = {
-    product(defaultTemplate, data, html, components){
-      console.log('args',html(`<p>Hello</p>`));
-      console.log('product',data);
-      return defaultTemplate;
+    product(defaultTemplate, hit, html, components){
+
+      let algolia = algoliaShopify;
+
+      let reviews = { count: 0, average: 0 }
+      if( hit.meta.globalhealing && hit.meta.globalhealing.reviews_average && hit.meta.globalhealing.reviews_count ){
+        reviews.average = hit.meta.globalhealing.reviews_average;
+        reviews.count = hit.meta.globalhealing.reviews_count;
+      }
+
+      let reviews_width = 0;
+      if( reviews.average > 1 ){
+        reviews_width = (100 / 5) * reviews.average
+      }
+
+      return html `<div 
+        class="ais-hit-gh ais-product" 
+        data-algolia-index="${hit.index}" 
+        data-algolia-position="${hit.productPosition}" 
+        data-algolia-queryid="${hit.queryID}" 
+        data-algolia-objectid="${hit.objectID}" 
+        data-handle="${hit.handle}" 
+        data-variant-id="${hit.objectID}" 
+        data-distinct="${hit._distinct}"
+      >
+        <div class="ais-hit-gh--picture">
+          <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
+        </div>
+
+        <div class="ais-hit-gh--details">
+          <p class="ais-hit-gh--title">
+            <a data-algolia-index="${hit.index}"
+              data-algolia-position="${hit.productPosition}"
+              data-algolia-queryid="${hit.queryID}"
+              data-algolia-objectid="${hit.objectID}"
+              href="${algolia.helpers.instantsearchLink(hit)}"
+              onclick="void(0)"
+              title="${algolia.helpers.fullTitle(hit.title, hit._distinct, hit.variant_title)}"
+              class="gh-font-primary"
+            >
+              ${components.Highlight({ attribute: 'title', hit })}
+              ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
+            </a>
+          </p>
+          <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
+            ${components.Highlight({ attribute: 'product_type', hit })}
+            ${hit.vendor && html`<span> ${algolia.translations.by} </span>`}
+            ${hit.vendor && components.Highlight({ attribute: 'vendor', hit })}
+          </p>
+          <p class="ais-hit-gh--reviews">
+            <span class="as-ItemReviews flex align-items-center justify-center flex-column py1">
+            <div class="center">
+              <div class="gh-review-stars">
+                  <span class="gh-review-stars--full" style="width: ${reviews_width}%">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                  </span>
+                  <span class="gh-review-stars--empty">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                  </span>
+              </div>
+              </div>
+            <div class="aa-ItemReviewCount color-gold">${reviews.count} Review(s)</div>
+            </span>
+          </p>
+          <p class="ais-hit-gh--price">
+            <b>${algolia.helpers.displayPrice(hit, hit._distinct)}</b>
+            ${!hit._distinct && html`<span class="ais-hit--price-striked"><span>${algolia.helpers.displayStrikedPrice(hit.price, hit.compare_at_price, hit.currency)}</span></span>`}
+            ${!hit._distinct && html`<span class="ais-hit--price-discount">${algolia.helpers.displayDiscount(hit.price, hit.compare_at_price, hit.price_ratio)}</span>`}
+          </p>
+          
+          ${!hit._distinct && html`
+            <form id="algolia-add-to-cart-${hit.objectID}" style="" action="/cart/add" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="${hit.objectID}" />
+              <p class="ais-hit--cart">
+                ${hit.can_order ? html`
+                  <button type="submit" class="ais-hit--cart-button" data-form-id="algolia-add-to-cart-${hit.objectID}">
+                    ${ algolia.translations.addToCart }
+                  </button>`
+                : html`
+                  <button class="ais-hit--cart-button ais-hit--cart-button__disabled" disabled>
+                    ${ algolia.translations.outOfStock }
+                  </button>`}
+              </p>
+            </form>`}
+            
+          </div>
+      </div>`;
     }
   }
 </script>
