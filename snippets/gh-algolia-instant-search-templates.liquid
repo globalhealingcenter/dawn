@@ -106,11 +106,10 @@ window['gh_html'] = html
     main( defaultTemplate, data ) {
 
       console.log('maybe', window['gh_html']);
-      return gh_html`<div class="ais-page"><h1>Welcome</h1></div>`;
 
       let algolia = algoliaShopify;
       
-      return `<div class="ais-page">
+      return gh_html`<div class="ais-page">
 
         <div class="ais-page--header">
           <h1 class="ais-h2">${algolia.translations.searchTitle} !!</h1>
@@ -131,7 +130,7 @@ window['gh_html'] = html
               <div class="ais-clear-refinements-container"></div>
               <div class="ais-current-refined-values-container"></div>
               ${data.facets.map( facet =>
-            html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
+            gh_html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
                   <label for="${facet.escapedName}" class="ais-range-slider--header ais-facet--header ais-header">${facet.title}</label>
                   <input class="ais-dropdown-checkbox" type="checkbox" id="${facet.escapedName}" name="dropdown" />
                   <div class="ais-facet-${facet.escapedName}-container ais-facet-dropdown-container"></div>
@@ -149,8 +148,8 @@ window['gh_html'] = html
                 </div>
                 <div class="ais-sort">
                   ${data.multipleSortOrders ?
-                    html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
-                    : html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
+                    gh_html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
+                    : gh_html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
                   }
                 </div>
               </div>
