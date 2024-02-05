@@ -1,4 +1,8 @@
 <script>
+  import { h, render } from 'https://esm.sh/preact';
+  import htm from 'https://esm.sh/htm';
+  const gh_html = htm.bind(h);
+  
   gh_algolia.instant.templates = {
     product(defaultTemplate, hit, html, components){
 
@@ -98,7 +102,7 @@
     },
     main( defaultTemplate, data ) {
 
-      return `<div class="ais-page"><h1>Welcome</h1></div>`
+      return gh_html`<div class="ais-page"><h1>Welcome</h1></div>`;
 
       let algolia = algoliaShopify;
       
