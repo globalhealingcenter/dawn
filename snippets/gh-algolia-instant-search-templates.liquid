@@ -106,7 +106,7 @@ window['gh_html'] = html
     main( defaultTemplate, data ) {
       let algolia = algoliaShopify;
       
-      return gh_html`<div class="ais-page">
+      return gh_html`<div class="ais-page"><div id="gh-ais-hits-article"></div>
 
         <div class="ais-page--header">
           <h1 class="color-green-dark">${algolia.translations.searchTitle}s</h1>
@@ -154,7 +154,7 @@ window['gh_html'] = html
                 </div>
               </div>
               <div class="ais-hits-container ais-results-as-block"></div>
-              <div id="gh-ais-hits-article"></div>
+            
             </div>
             <div class="ais-pagination-container"></div>
           </div>
