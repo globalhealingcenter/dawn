@@ -3,33 +3,30 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
-    let widget = {
-        init(){
-            let hits = algolia.externals.widgets.hits({
-                container: '#gh-ais-hits-article',
-                templates: {
-                    item(hit, { html, components, sendEvent }) {
-                        return html`
-              <div class="center">
-                <span class="article-image" style="background-image:url(${hit.image})"> </span><!--<img src="${hit.image}" height="200" />-->
-                <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
-                <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
-              </div>
-            `;
-                    }
-                },
-            });
+ 
+    let hits = algolia.externals.widgets.hits({
+        container: '#gh-ais-hits-article',
+        templates: {
+            item(hit, { html, components, sendEvent }) {
+                return html`
+      <div class="center">
+        <span class="article-image" style="background-image:url(${hit.image})"> </span><!--<img src="${hit.image}" height="200" />-->
+        <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
+        <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
+      </div>
+    `;
+            }
+        },
+    });
 
-            let configure = algolia.externals.widgets.configure({
-                attributesToSnippet: ['content'],
-            });
+    let configure = algolia.externals.widgets.configure({
+        attributesToSnippet: ['content'],
+    });
 
-            let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
-            index.addWidgets([hits, configure])
+    let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
+    index.addWidgets([hits, configure])
 
-            instant.search.addWidgets([index]);
-        }
-    }
+    return instant.search.addWidgets([index]);
 
     return instant.search.addWidgets([widget]);;
 
