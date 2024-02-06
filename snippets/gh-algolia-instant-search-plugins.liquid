@@ -6,7 +6,7 @@ gh_algolia.instant.init = ( options, algolia ) => {
 
   let instant = options;
   
-  const { hits, index } = instantsearch.widgets;
+  const { hits, index, configure } = instantsearch.widgets;
 
   instant.search.addWidgets([
       index({indexName: 'wordpress_blog'})
