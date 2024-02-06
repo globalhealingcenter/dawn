@@ -2,36 +2,31 @@
 
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
-
-    const { hits, index, configure } = instantsearch.widgets;
-
-    let subWidget = [
-        hits({
-            container: '#gh-ais-hits-article',
-            templates: {
-                item(hit, { html, components, sendEvent }) {
-                    return html`
+    
+    let hits = instantsearch.widgets.hits({
+        container: '#gh-ais-hits-article',
+        templates: {
+            item(hit, { html, components, sendEvent }) {
+                return html`
                   <div class="center">
                     <span class="article-image" style="background-image:url(${hit.image})"> </span><!--<img src="${hit.image}" height="200" />-->
                     <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
                     <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
                   </div>
                 `;
-                }
-            },
-        }),
-        configure({
-            attributesToSnippet: ['content'],
-        })
-    ];
+            }
+        },
+    });
+    
+    let configure = instantsearch.widgets.configure({
+        attributesToSnippet: ['content'],
+    });
+    
+    let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
+    index.addWidgets([hits, configure])
 
-    let widget = [
-        index({indexName: 'wordpress_blog'})
-        .addWidgets(subWidget)
-    ]
-
-    instant.search.addWidgets(subWidget);
+    instant.search.addWidgets([index]);
+    
     return instant;
-
 }
 </script>
