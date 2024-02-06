@@ -3,6 +3,8 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
+  console.log('instant search main');
+
     let hits = instantsearch.widgets.hits({
         container: '#gh-ais-hits-article',
         templates: {
