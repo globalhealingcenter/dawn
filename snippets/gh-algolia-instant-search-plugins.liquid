@@ -1,33 +1,30 @@
 <script>
+gh_algolia.instant.init = ( options, algolia ) => {
 
- gh_algolia.instant.plugins = {
+  let instantsearch = algolia.externals.instantsearch;
+  let instant = options;
 
-   getAll( algolia ){
-     let plugins = [];
+  instant.search.addWidgets([
+      instantsearch.widgets
+          .index({indexName: 'wordpress_blog'})
+          .addWidgets([
+              instantsearch.widgets.hits({
+                  container: '#article-results',
+                  templates: {
+                      item(hit, { html, components, sendEvent }) {
+                          console.log(hit);
+                          return html`
+                            <img src="${hit.image}" />
+                            <h2>${components.Highlight({ hit, attribute: 'title' })}</h2>
+                            <p>${components.Snippet({ hit, attribute: 'content' })}</p>
+                          `;
+                      },
+                  },
+              }),
+          ])
+  ]);
 
-      instant.search.addWidgets([
-        instantsearch.widgets
-        .index({indexName: 'wordpress_blog'})
-        .addWidgets([
-          instantsearch.widgets.hits({
-            container: '#article-results',
-            templates: {
-              item(hit, { html, components, sendEvent }) {
-                console.log(hit);
-                return html`
-                  <img src="${hit.image}" />
-                  <h2>${components.Highlight({ hit, attribute: 'title' })}</h2>
-                  <p>${components.Snippet({ hit, attribute: 'content' })}</p>
-                `;
-              },
-            },
-          }),
-        ])
-      ]);
+  return options;
 
-     return plugins;
-   }
-   
- }
-  
+}
 </script>
