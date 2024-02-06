@@ -1,37 +1,37 @@
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.64.2/dist/instantsearch.production.min.js" integrity="sha256-/DLulTBQ8KQ7xGOs8mrQ6FgKsknJpjCGAjFhjfjc8yo=" crossorigin="anonymous"></script>
 
-
 <script>
-gh_algolia.instant.init = ( options, algolia ) => {
+gh_algolia.instant.init = ( instant, algolia ) => {
 
-  let instant = options;
-  
-  const { hits, index, configure } = instantsearch.widgets;
+    const { hits, index, configure } = instantsearch.widgets;
 
-  instant.search.addWidgets([
-      index({indexName: 'wordpress_blog'})
-        .addWidgets([
-            hits({
-                container: '#gh-ais-hits-article',
-                templates: {
-                    item(hit, { html, components, sendEvent }) {
-                        return html`
-                          <div class="center">
-                            <span class="article-image" style="background-image:url(${hit.image})"> </span><!--<img src="${hit.image}" height="200" />-->
-                            <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
-                            <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
-                          </div>
-                        `;
-                    }
-                },
-            }),
-            configure({
-                attributesToSnippet: ['content'],
-            })
-        ])
-  ]);
+    let subWidget = [
+        hits({
+            container: '#gh-ais-hits-article',
+            templates: {
+                item(hit, { html, components, sendEvent }) {
+                    return html`
+                  <div class="center">
+                    <span class="article-image" style="background-image:url(${hit.image})"> </span><!--<img src="${hit.image}" height="200" />-->
+                    <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
+                    <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
+                  </div>
+                `;
+                }
+            },
+        }),
+        configure({
+            attributesToSnippet: ['content'],
+        })
+    ];
 
-  return options;
+    let widget = [
+        index({indexName: 'wordpress_blog'})
+        .addWidgets(subWidget)
+    ]
+
+    instant.search.addWidgets(widget);
+    return options;
 
 }
 </script>
