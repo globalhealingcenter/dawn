@@ -12,7 +12,7 @@ gh_algolia.instant.init = ( options, algolia ) => {
       index({indexName: 'wordpress_blog'})
         .addWidgets([
             hits({
-                container: '.gh-ais-hits-article',
+                container: '#shopify-section-template--16522094018760__17049976778130237d',
                 templates: {
                     item(hit, { html, components, sendEvent }) {
                         return html`
