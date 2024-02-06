@@ -1,5 +1,8 @@
 {{ 'gh-algolia-autocomplete.css' | asset_url | stylesheet_tag }}
+
+{% if template.name == 'search' %}
 {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
 <script>
   let gh_algolia = {
