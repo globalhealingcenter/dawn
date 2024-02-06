@@ -31,7 +31,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
   }
 
   instant.search.addWidgets([{
-    init(){ console.log('init') }
+    init(){ window['gh_algolia_instant_init']() }
   }]);
 
     return instant;
