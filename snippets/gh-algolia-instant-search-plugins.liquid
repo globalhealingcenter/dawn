@@ -3,7 +3,7 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
-    let hits = () => { instantsearch.widgets.hits({
+    let hits = instantsearch.widgets.hits({
         container: '#gh-ais-hits-article',
         templates: {
             item(hit, { html, components, sendEvent }) {
@@ -16,7 +16,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 `;
             }
         },
-    }) };
+    });
 
     let configure = instantsearch.widgets.configure({
         attributesToSnippet: ['content'],
@@ -28,5 +28,6 @@ gh_algolia.instant.init = ( instant, algolia ) => {
     instant.search.addWidgets([index]);
 
     return instant;
+    
 }
 </script>
