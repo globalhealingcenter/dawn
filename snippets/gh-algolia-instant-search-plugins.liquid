@@ -20,7 +20,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 },
             });
 
-            let configure = instantsearch.widgets.configure({
+            let configure = algolia.externals.widgets.configure({
                 attributesToSnippet: ['content'],
             });
 
