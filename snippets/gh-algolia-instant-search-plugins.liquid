@@ -1,7 +1,9 @@
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.64.2/dist/instantsearch.production.min.js" integrity="sha256-/DLulTBQ8KQ7xGOs8mrQ6FgKsknJpjCGAjFhjfjc8yo=" crossorigin="anonymous"></script>
+
+
 <script>
 gh_algolia.instant.init = ( options, algolia ) => {
 
-  let instantsearch = algolia.externals.instantsearch;
   let instant = options;
   
   const { hits } = instantsearch.widgets;
