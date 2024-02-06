@@ -28,7 +28,7 @@
     });
 
     algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
-      console.log(options);
+      return gh_algolia.instant.init(options, algoliaShopify);
     });
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
