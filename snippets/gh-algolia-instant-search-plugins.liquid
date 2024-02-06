@@ -11,7 +11,7 @@
                         item(hit, { html, components, sendEvent }) {
                             return html`
               <div class="ais-hit-gh center">
-                <div style="background-image:(${hit.image})">&nbsp;</div>
+                <div style="background-image:(${hit.image})"></div>
                 <div>
                   <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
                   <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
