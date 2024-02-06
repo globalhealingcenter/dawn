@@ -12,8 +12,10 @@
                             return html`
               <div class="ais-hit-gh center">
                 <div><img src="${hit.image}" height="200" /></div>
-                <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
-                <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
+                <div>
+                  <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
+                  <span class="block">${components.Snippet({ hit, attribute: 'content' })}</span>
+                </div>
               </div>
             `;
                         }
