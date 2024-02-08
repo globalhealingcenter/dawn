@@ -1,40 +1,44 @@
 <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.64.2/dist/instantsearch.production.min.js" integrity="sha256-/DLulTBQ8KQ7xGOs8mrQ6FgKsknJpjCGAjFhjfjc8yo=" crossorigin="anonymous"></script>
 
 <script>
-    gh_algolia.instant.init = ( instant, algolia ) => {
+gh_algolia.instant.init = ( instant, algolia ) => {
 
-        let widget = {
-            init(){
-                let hits = algolia.externals.widgets.hits({
-                    container: '#gh-ais-hits-article',
-                    templates: {
-                        item(hit, { html, components, sendEvent }) {
-                            return html`
-              <div class="ais-hit-gh center">
-                <div style="background-image:url(${hit.image})"></div>
-                <div>
-                  <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
-                  <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'content' })}</span>
-                </div>
-              </div>
-            `;
-                        }
+    let widget = {
+        init(){
+            let hits = algolia.externals.widgets.hits({
+                container: '#gh-ais-hits-article',
+                templates: {
+                    item(hit, { html, components, sendEvent }) {
+                        return html`
+                            <div class="ais-hit-gh center">
+                              <div style="background-image:url(${hit.image})"></div>
+                              <div>
+                                <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.4">${hit.title}</span>
+                                <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'content' })}</span>
+                              </div>
+                            </div>
+                          `;
                     },
-                });
+                    header(params){
+                        const { html } = params
+                        return html`<div class="aa-section-header gh-font-secondary color-green-dark">Recommended Products</div>`
+                    },
+                },
+            });
 
-                let configure = algolia.externals.widgets.configure({
-                    attributesToSnippet: ['content'],
-                });
+            let configure = algolia.externals.widgets.configure({
+                attributesToSnippet: ['content'],
+            });
 
-                let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
-                index.addWidgets([hits, configure])
+            let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
+            index.addWidgets([hits, configure])
 
-                instant.search.addWidgets([index]);
-            }
+            instant.search.addWidgets([index]);
         }
-
-        instant.search.addWidgets([widget]);
-        return instant;
-
     }
+
+    instant.search.addWidgets([widget]);
+    return instant;
+
+}
 </script>
