@@ -164,6 +164,9 @@ window['gh_html'] = html
           </div>
         </div>
       </div>`
+    },
+    noResult(defaultTemplate, html){
+       return html`<div><br/><br/>No products found for <strong class="color-green-dark">${results.query}</strong></p>`;
     }
   }
 </script>
