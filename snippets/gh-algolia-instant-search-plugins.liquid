@@ -20,7 +20,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                           `;
                     },
                     empty(results, { html }) {
-                        return html`<div><br/><br/>No articles found for <strong class="color-green-dark">${results.query}</strong></p>`;
+                        return html`<br/><br/><div class="center">No articles found for <strong class="color-green-dark">${results.query}</strong></div><br/><br/>`;
                     },
                 },
             });
