@@ -52,7 +52,7 @@ window['gh_html'] = html
             </a>
           </p>
           <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
-            ${components.Highlight({ attribute: 'product_type', hit })}
+            ${hit.meta.globalhealing.product_tagline}
             ${hit.vendor && html`<span> ${algolia.translations.by} </span>`}
             ${hit.vendor && components.Highlight({ attribute: 'vendor', hit })}
           </p>
