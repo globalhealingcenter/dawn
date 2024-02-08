@@ -19,9 +19,8 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                             </div>
                           `;
                     },
-                    header(params){
-                        const { html } = params
-                        return html`<div class="aa-section-header gh-font-secondary color-green-dark">Recommended Products</div>`
+                    empty(results, { html }) {
+                        return html`No articles found for <strong class="color-green-dark">${results.query}</strong>`;
                     },
                 },
             });
