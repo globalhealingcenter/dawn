@@ -152,7 +152,12 @@
 }
 
 [data-autocomplete-source-id="products"] .aa-ItemImage{
-    max-width: 125px
+    max-width: 125px;
+  transition: transform ease-in-out .25s;
+}
+
+[data-autocomplete-source-id="products"] .aa-ItemLink:hover .aa-ItemImage{
+  transform: scale(1.1);
 }
 
 [data-autocomplete-source-id="products"] .aa-footer{
