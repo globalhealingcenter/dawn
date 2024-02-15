@@ -12,12 +12,12 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                         return html`
                             <div class="ais-hit-gh">
                               <div style="background-image:url(${hit.image})"></div>
-                              <div class="left-align">
+                              <div class="article-hit-content left-align">
                                 <span class="gh-font-primary bold mb0 color-green-dark block mb1" style="line-height: 1.5">${hit.title}</span>
                                 <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'content' })}</span>
                               </div>
                               <div class="arrow">
-                                <img width="30" src="https://cdn.globalhealing.com/web/v2/icon/arrow-right.svg" />
+                                <img width="20" src="https://cdn.globalhealing.com/web/v2/icon/arrow-right.svg" />
                               </div>
                             </div>
                           `;
