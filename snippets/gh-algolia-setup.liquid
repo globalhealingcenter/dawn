@@ -37,6 +37,9 @@
     algoliaShopify.hooks.registerHook('beforeInstantSearchNoResultTemplate', gh_algolia.instant.templates.noResult );
     algoliaShopify.hooks.registerHook('beforeInstantSearchProductTemplate', gh_algolia.instant.templates.product );
     algoliaShopify.hooks.registerHook('beforeInstantSearchMainTemplate', gh_algolia.instant.templates.main );
+    algoliaShopify.hooks.registerHook('afterInstantSearchHitClickAction', (_, hit) => {
+      console.log(_, hit)
+    });
 
   });
 
