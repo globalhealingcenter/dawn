@@ -51,9 +51,7 @@ window['gh_html'] = html
               ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
             </a>
           </p>
-          <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
-            ${hit.meta.globalhealing.product_tagline}
-          </p>
+          
           <p class="ais-hit-gh--reviews">
             <span class="as-ItemReviews flex align-items-center justify-center flex-column py1">
             <div class="center">
@@ -77,6 +75,11 @@ window['gh_html'] = html
             <div class="aa-ItemReviewCount color-gold">${reviews.count} Review(s)</div>
             </span>
           </p>
+
+          <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
+            ${hit.meta.globalhealing.product_tagline}
+          </p>
+          
           <p class="ais-hit-gh--price">
             <b>${algolia.helpers.displayPrice(hit, hit._distinct)}</b>
             ${!hit._distinct && html`<span class="ais-hit--price-striked"><span>${algolia.helpers.displayStrikedPrice(hit.price, hit.compare_at_price, hit.currency)}</span></span>`}
