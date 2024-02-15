@@ -121,10 +121,15 @@
     background-color: transparent;
 }
 
+.aa-ItemLink{
+  transition: .3s ease-in-out border-color, .3s ease-in-out box-shadow, background-position ease-in-out .2s;
+}
+
 [data-autocomplete-source-id='querySuggestionsPlugin'] .aa-Item[aria-selected='true'] .aa-ItemLink,
 [data-autocomplete-source-id='products'] .aa-Item[aria-selected='true'] .aa-ItemLink,
 [data-autocomplete-source-id='gh_articles'] .aa-Item[aria-selected='true'] .aa-ItemLink{
-    border-color: var(--gh-color-green-dark);
+  border-color: var(--gh-color-green-dark);
+  box-shadow: var(--gh-color-green-light) 0 0 12px;
 }
 
 [data-autocomplete-source-id="products"] .aa-ItemLink{
