@@ -59,6 +59,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
       let configure = algolia.externals.widgets.configure({
         attributesToSnippet: ['body_html_safe'],
+        hitsPerPage: 3
       });
 
       let index = instantsearch.widgets.index({indexName: 'shopify_pages'});
