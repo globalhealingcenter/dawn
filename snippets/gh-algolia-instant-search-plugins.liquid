@@ -39,7 +39,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
   let pages_widget = {
     init(){
       let hits = algolia.externals.widgets.hits({
-        container: '#gh-ais-hits-pages',
+        container: '#gh-ais-hits-page',
         templates: {
           item(hit, { html, components, sendEvent }) {
             return html`
