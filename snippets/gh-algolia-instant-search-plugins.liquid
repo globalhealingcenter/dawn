@@ -29,6 +29,10 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 attributesToSnippet: ['content'],
             });
 
+            let pagination = algolia.externals.widgets.pagination({
+              container: '#gh-ais-hits-article-pagination'
+            }); 
+
             let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
             index.addWidgets([hits, configure])
 
