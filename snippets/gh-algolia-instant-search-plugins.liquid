@@ -45,14 +45,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
             return html`
                 <a class="ais-hit-gh" href="https://globalhealing.com/pages/${hit.handle}">
                   <span class="article-hit-content left-align">
-                    <span class="flex mb1 items-center" style="line-height: 1.5; gap: 5px;">
-                      <span>
-                        <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-file-green.png?w=32px" width="16" />
-                      </span>
-                      <span class="gh-font-primary bold color-green-dark">
-                        ${hit.title}
-                      </span>
-                    </span>
+                    <span class="gh-font-primary bold mb0 color-green-dark block mb1" style="line-height: 1.5">${hit.title}</span>
                     <span class="block gh-ais-page-content">${components.Snippet({ hit, attribute: 'body_html_safe' })}</span>
                   </div>
                 </div>
