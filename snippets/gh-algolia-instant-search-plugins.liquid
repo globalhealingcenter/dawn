@@ -3,7 +3,7 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
-    let widget = {
+    let articles_widget = {
         init(){
             let hits = algolia.externals.widgets.hits({
                 container: '#gh-ais-hits-article',
@@ -36,7 +36,39 @@ gh_algolia.instant.init = ( instant, algolia ) => {
         }
     }
 
-    instant.search.addWidgets([widget]);
+  let pages_widget = {
+    init(){
+      let hits = algolia.externals.widgets.hits({
+        container: '#gh-ais-hits-pages',
+        templates: {
+          item(hit, { html, components, sendEvent }) {
+            return html`
+                <a class="ais-hit-gh" href="https://globalhealing.com/pages/${hit.handle}">
+                  <div class="article-hit-content left-align">
+                    <span class="gh-font-primary bold mb0 color-green-dark block mb1" style="line-height: 1.5">${hit.title}</span>
+                    <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'body_html' })}</span>
+                  </div>
+                </div>
+              `;
+          },
+          empty(results, { html }) {
+            return html`<br/><br/><div class="center">No pages found. Try clearing the filters or changing your query.</div><br/><br/>`;
+          },
+        },
+      });
+
+      let configure = algolia.externals.widgets.configure({
+        attributesToSnippet: ['body_html'],
+      });
+
+      let index = instantsearch.widgets.index({indexName: 'shopify_pages'});
+      index.addWidgets([hits, configure])
+
+      instant.search.addWidgets([index]);
+    }
+  }
+
+    instant.search.addWidgets([articles_widget]);
     return instant;
 
 }
