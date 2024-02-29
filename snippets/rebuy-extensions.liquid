@@ -9,8 +9,12 @@
   <!-- Home Page Widget -->
   <div data-rebuy-id="131965" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
+
+  <!-- Product Page Widget -->
 {% if product %}
   <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+
+<!-- Add-on Widget -->
   <div data-rebuy-id="115516" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
 <script>
@@ -18,6 +22,7 @@
     label.textContent = label.textContent.replace("Upgrade to Autoship &", "AutoShip &");
   })
 </script>
+
 <style>
   .rebuy-widget .flickity-button:focus{
     box-shadow: 0 0 0 5px #21472D !important;
@@ -1014,16 +1019,16 @@
                   v-bind:alt="itemImageAlt(product, product.selected_variant)">
               </a> -->
 
-    <!-- Beauty Shot Image Code START -->
-    
-                       <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
-                                <img class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
-                                <!-- <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="secondary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title"> -->
-                                <!-- <img v-else class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title"> -->
-                                <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
-                            </a>
-    
-    <!-- Beauty Shot Image Code END -->
+!-- Beauty Shot Image Code START -->
+
+                  <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
+                  <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="primary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title">
+                  <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
+                  <img v-else class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
+                  <!-- <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title"> -->
+                  </a>
+
+<!-- Beauty Shot Image Code END -->
     
     <button
                                 class="rebuy-button"
