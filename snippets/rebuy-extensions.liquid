@@ -1019,7 +1019,7 @@
                   v-bind:alt="itemImageAlt(product, product.selected_variant)">
               </a> -->
 
-!-- Beauty Shot Image Code START -->
+<!-- Beauty Shot Image Code START -->
 
                   <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
                   <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="primary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title">
