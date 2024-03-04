@@ -8,7 +8,7 @@
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
           "settings": {
-            "text": "Get a free Liver Health with purchases $100+",
+            "text": "Get a FREE Liver Health with purchases $100+",
             "link": ""
           }
         }
@@ -16,7 +16,6 @@
       "block_order": [
         "778775ac-0fd5-4070-8198-2dec1665d8fc"
       ],
-      "disabled": true,
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
       ],
