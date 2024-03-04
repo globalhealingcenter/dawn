@@ -7,6 +7,7 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "LIMITED TIME - Get a FREE Liver Health with purchases $100+",
             "link": ""
