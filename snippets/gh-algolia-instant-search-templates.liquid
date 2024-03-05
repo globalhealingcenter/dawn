@@ -22,7 +22,7 @@ window['gh_html'] = html
         reviews_width = (100 / 5) * reviews.average
       }
 
-      return html `<div 
+      return html `<a 
         class="ais-hit ais-hit-gh ais-product" 
         data-algolia-index="${hit.index}" 
         data-algolia-position="${hit.productPosition}" 
@@ -31,6 +31,8 @@ window['gh_html'] = html
         data-handle="${hit.handle}" 
         data-variant-id="${hit.objectID}" 
         data-distinct="${hit._distinct}"
+        onclick="void(0)"
+        href="${algolia.helpers.instantsearchLink(hit)}"
       >
         <div class="ais-hit-gh--picture">
           <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
