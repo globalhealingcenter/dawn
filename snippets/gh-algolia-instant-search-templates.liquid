@@ -47,7 +47,7 @@ window['gh_html'] = html
               title="${algolia.helpers.fullTitle(hit.title, hit._distinct, hit.variant_title)}"
               class="gh-font-primary"
             >
-              ${components.Highlight({ attribute: 'title', hit })}
+              ${hit.title}
               ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
             </a>
           </p>
