@@ -44,7 +44,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
           item(hit, { html, components, sendEvent }) {
             return html`
                 <a class="ais-hit-gh" href="https://globalhealing.com/pages/${hit.handle}">
-                  <div style="background-image: url(https://cdn.globalhealing.com/web/v2/img/logos/global-healing/seal-gold.png);"></div>
+                  <div class="ais-hit-gh--image"></div>
                   <span class="article-hit-content left-align">
                     <span class="gh-font-primary bold mb0 color-green-dark block mb1" style="line-height: 1.5">${hit.title}</span>
                     <!--<span class="block gh-ais-page-content">${components.Snippet({ hit, attribute: 'body_html_safe' })}</span>-->
