@@ -95,7 +95,21 @@
 
     autocompleteNoResultsTemplate(defaultTemplate, templateOptions){
       const { html } = templateOptions;
-      return html `<h3 class="green">No Results :( </h3>`;
+      return html `<div>
+    <h2 class="green">Sorry! No results for <span class="green">"asdsaadads"</span>.</h2>
+    
+    <p class="bold">Have you tried...</p>
+    <ul>
+        <li>Broadening your search term?</li>
+        <li>Searching for a different term?</li>
+        <li>
+            Or visit our top categories —
+            <a href="/collections/supplements/" style="text-decoration: none;">Supplements</a> ,
+            <a href="/collections/detox/" style="text-decoration: none;">Detox &amp; Cleansing</a> , or
+            <a href="/collections/collections" style="text-decoration: none;">All Products</a>.
+        </li>
+    </ul>
+</div>`;
     }
 
   }
