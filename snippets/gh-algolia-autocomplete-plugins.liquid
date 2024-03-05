@@ -44,7 +44,10 @@
                   const {html} = params
                   return html`
                   <div class="aa-SourceHeader"><span class="aa-SourceHeaderTitle">Articles & Other Reads</span><div class="aa-SourceHeaderLine"></div></div>`
-                }
+                },
+                empty(results, { html }) {
+                    return html`<br/><br/><div class="center">No articles found. Try clearing the filters or changing your query.</div><br/><br/>`;
+                },
               },
               getItemUrl({item}) {
                 return item.url;
