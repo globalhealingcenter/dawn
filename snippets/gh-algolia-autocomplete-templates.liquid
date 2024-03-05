@@ -91,6 +91,10 @@
           ${components.Highlight({hit: item, attribute: 'query'})}
         </span>
       </a>`
+    },
+
+    autocompleteNoResultsTemplate(defaultTemplate, templateOptions){
+      return '<h3 class="green">No Results :( </h3>'
     }
 
   }
