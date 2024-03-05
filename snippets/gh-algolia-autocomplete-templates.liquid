@@ -94,7 +94,8 @@
     },
 
     autocompleteNoResultsTemplate(defaultTemplate, templateOptions){
-      return '<h3 class="green">No Results :( </h3>'
+      const { html } = templateOptions;
+      return html '<h3 class="green">No Results :( </h3>';
     }
 
   }
