@@ -40,18 +40,10 @@ window['gh_html'] = html
 
         <div class="ais-hit-gh--details">
           <p class="ais-hit-gh--title">
-            <a data-algolia-index="${hit.index}"
-              data-algolia-position="${hit.productPosition}"
-              data-algolia-queryid="${hit.queryID}"
-              data-algolia-objectid="${hit.objectID}"
-              href="${algolia.helpers.instantsearchLink(hit)}"
-              onclick="void(0)"
-              title="${algolia.helpers.fullTitle(hit.title, hit._distinct, hit.variant_title)}"
-              class="gh-font-primary"
-            >
+            <span class="gh-font-primary">
               ${hit.title}
               ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
-            </a>
+            </span>
           </p>
           
           <p class="ais-hit-gh--reviews">
