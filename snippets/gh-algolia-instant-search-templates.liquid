@@ -22,7 +22,7 @@ window['gh_html'] = html
         reviews_width = (100 / 5) * reviews.average
       }
 
-      return html `<a 
+      return html `<div 
         class="ais-hit ais-hit-gh ais-product" 
         data-algolia-index="${hit.index}" 
         data-algolia-position="${hit.productPosition}" 
@@ -40,7 +40,7 @@ window['gh_html'] = html
 
         <div class="ais-hit-gh--details">
           <p class="ais-hit-gh--title">
-            <span class="gh-font-primary">
+            <span class="gh-font-primary bold">
               ${hit.title}
               ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
             </span>
