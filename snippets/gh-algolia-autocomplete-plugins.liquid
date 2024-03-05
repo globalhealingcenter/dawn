@@ -64,11 +64,13 @@
               sourceId: 'gh_popular',
               getItems() {
                 return [
-                  { query: 'oxy-powder', url: 'https://globalhealing.com/search?q=oxy-powder' },
-                  { query: 'magnesium', url: 'https://globalhealing.com/search?q=magnesium' },
-                  { query: 'zinc', url: 'https://globalhealing.com/search?q=zinc' },
-                  { query: 'b12', url: 'https://globalhealing.com/search?q=b12' },
-                ]
+                  { label: 'oxy-powder', url: 'https://globalhealing.com/search?q=oxy-powder' },
+                  { label: 'magnesium', url: 'https://globalhealing.com/search?q=magnesium' },
+                  { label: 'zinc', url: 'https://globalhealing.com/search?q=zinc' },
+                  { label: 'b12', url: 'https://globalhealing.com/search?q=b12' },
+                ].filter(({ label }) =>
+                  label.toLowerCase().includes(query.toLowerCase())
+                );
               },
               templates: {
 
@@ -76,7 +78,7 @@
                   const {item, html, components} = params;
 
                   return html`<a
-                    href="${window.Shopify.routes.root}search?q=${encodeURIComponent(item.query)}"
+                    href="${window.Shopify.routes.root}search?q=${encodeURIComponent(item.label)}"
                     class="aa-ItemLink aa-ProductItem"
                   >
                     <div class="aa-ItemWrapper">
@@ -93,7 +95,7 @@
                         </div>
                         <div class="aa-ItemContentBody">
                           <div class="aa-ItemContentTitle">
-                            ${ item.query }
+                            ${ item.label }
                           </div>
                         </div>
                       </div>
