@@ -118,7 +118,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
-    "ss_enable": true,
+    "ss_enable": false,
     "checkout_logo_image": "shopify:\/\/shop_images\/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
