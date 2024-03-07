@@ -1,4 +1,5 @@
 {{ 'gh.css' | asset_url | stylesheet_tag }}
+{% render 'gh-algolia-setup' %}
 
 <!-- robots -->
 {% if product and product.tags contains 'no-index' %}
