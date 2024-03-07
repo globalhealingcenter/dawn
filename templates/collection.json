@@ -16,7 +16,8 @@
       "custom_css": [
         ".card__heading {font-weight: 700; color: #545454; margin-top: 10px; font-size: 16px;}",
         ".price {color: var(--gh-color-green); font-weight: bold; font-size: 13px;}",
-        ".card--standard > .card__content {padding: 0 10px 10px 10px; border: 2px solid #eee; border-radius: 0 0 10px 10px; border-top: 0;}"
+        ".card--standard > .card__content {padding: 0 10px 10px 10px; border: 2px solid #eee; border-radius: 0 0 10px 10px; border-top: 0;}",
+        ".facet-filters{padding-bottom: 2em;}"
       ],
       "settings": {
         "products_per_page": 16,
