@@ -1,0 +1,115 @@
+<script>
+  gh_algolia.autocomplete.templates = {
+
+    mainTemplate(_defaultTemplate, templateOptions, elements, displaySuggestions){
+      const { html, state } = templateOptions;
+      return html `<div class="aa-PanelLayout aa-Panel--scrollable">
+        <div class="aa-PanelSection--top">
+          ${displaySuggestions &&
+      html`<div class="aa-SourceHeader"><span class="aa-SourceHeaderTitle">${algoliaShopify.translations.suggestions}</span></div>${elements.querySuggestionsPlugin}`}
+        </div>
+        <div class="aa-PanelSections">
+          <div class="aa-PanelSection--left">
+            ${elements.gh_popular}
+            ${elements.pages}
+            ${elements.collections}
+            ${elements.articles}
+          </div>
+          <div class="aa-PanelSection--right">
+            ${elements.products}
+            ${elements.gh_articles}
+          </div>
+        </div>
+      </div>`
+    },
+
+    productsTemplate(defaultTemplate, templateOptions, distinct, itemLink){
+
+      const { html, item, components } = templateOptions;
+
+      let reviews = { count: 0, average: 0 }
+      if( item.meta.globalhealing && item.meta.globalhealing.reviews_average && item.meta.globalhealing.reviews_count ){
+        reviews.average = item.meta.globalhealing.reviews_average;
+        reviews.count = item.meta.globalhealing.reviews_count;
+      }
+
+      let reviews_width = 0;
+      if( reviews.average > 1 ){
+        reviews_width = (100 / 5) * reviews.average
+      }
+
+      return html `<a
+        href="${itemLink}"
+        class="aa-ItemLink aa-ProductItem">
+        <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
+
+        <span class="as-ItemTitle gh-font-primary bold color-green-dark">
+        <span>
+          ${components.Highlight({ hit: item, attribute: 'title' })}
+          <span class="algolia-variant">
+            ${algoliaShopify.helpers.variantTitleAddition (item, distinct)}
+          </span>
+          </span>
+        </span>
+
+        <span class="as-ItemReviews flex align-items-center justify-center flex-column py1">
+            <div class="center">
+              <div class="gh-review-stars">
+                  <span class="gh-review-stars--full" style="width: ${reviews_width}%">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                  </span>
+                  <span class="gh-review-stars--empty">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                  </span>
+              </div>
+              </div>
+            <div class="aa-ItemReviewCount color-gold">${reviews.count} Reviews</div>
+            </span>
+
+        <span class="aa-ItemPrice bold">${algoliaShopify.helpers.displayPrice(item, distinct)}</span>
+      </a>`
+
+    },
+
+    suggestionsTemplate(defaultTemplate, templateOptions){
+
+      const { html, item, components } = templateOptions;
+
+      return html `<a
+        class="aa-ItemLink aa-ItemWrapper gh-font-secondary"
+        href="${window.Shopify.routes.root}search?q=${encodeURIComponent(item.query)}"
+      >
+        <span class="">
+          ${components.Highlight({hit: item, attribute: 'query'})}
+        </span>
+      </a>`
+    },
+
+    autocompleteNoResultsTemplate(defaultTemplate, templateOptions){
+      const { html, state } = templateOptions;
+      console.log(templateOptions);
+      return html `<div class="col-10 mx-auto py4">
+    <h3 class="color-green">Sorry! No results for <span class="green">"${state.query}"</span>.</h3>
+    
+    <p class="bold">Have you tried...</p>
+    <ul>
+        <li class="mb1">Broadening your search term?</li>
+        <li class="mb1">Searching for a different term?</li>
+        <li>
+            Or visit our top categories —
+            <a href="/collections/supplements/" style="text-decoration: none;">Supplements</a>, <a href="/collections/detox/" style="text-decoration: none;">Detox & Cleansing</a>, or <a href="/collections/collections" style="text-decoration: none;">All Products</a>.
+        </li>
+    </ul>
+</div>`;
+    }
+
+  }
+</script>

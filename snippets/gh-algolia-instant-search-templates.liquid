@@ -1,0 +1,168 @@
+<script type="module">
+import { h, render } from 'https://esm.sh/preact';
+import htm from 'https://esm.sh/htm';
+const html = htm.bind(h);
+window['gh_html'] = html
+</script>
+
+<script>
+  gh_algolia.instant.templates = {
+    product(defaultTemplate, hit, html, components){
+
+      let algolia = algoliaShopify;
+
+      let reviews = { count: 0, average: 0 }
+      if( hit.meta.globalhealing && hit.meta.globalhealing.reviews_average && hit.meta.globalhealing.reviews_count ){
+        reviews.average = hit.meta.globalhealing.reviews_average;
+        reviews.count = hit.meta.globalhealing.reviews_count;
+      }
+
+      let reviews_width = 0;
+      if( reviews.average > 1 ){
+        reviews_width = (100 / 5) * reviews.average
+      }
+
+      return html `<a 
+        class="ais-hit ais-hit-gh ais-product" 
+        data-algolia-index="${hit.index}" 
+        data-algolia-position="${hit.productPosition}" 
+        data-algolia-queryid="${hit.queryID}" 
+        data-algolia-objectid="${hit.objectID}" 
+        data-handle="${hit.handle}" 
+        data-variant-id="${hit.objectID}" 
+        data-distinct="${hit._distinct}"
+        onclick="void(0)"
+        href="${algolia.helpers.instantsearchLink(hit)}"
+      >
+        <div class="ais-hit-gh--picture">
+          <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
+        </div>
+
+        <div class="ais-hit-gh--details">
+          <p class="ais-hit-gh--title">
+            <span class="gh-font-primary bold color-green">
+              ${hit.title}
+              ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
+            </span>
+          </p>
+          
+          <p class="ais-hit-gh--reviews">
+            <span class="as-ItemReviews">
+            <div class="center">
+              <div class="gh-review-stars">
+                  <span class="gh-review-stars--full" style="width: ${reviews_width}%">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+                  </span>
+                  <span class="gh-review-stars--empty">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+                  </span>
+              </div>
+              </div>
+            <div class="aa-ItemReviewCount color-gold">${reviews.count} Reviews</div>
+            </span>
+          </p>
+
+          <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
+            ${hit.meta.globalhealing.product_tagline}
+          </p>
+          
+          <p class="ais-hit-gh--price">
+            <b>${algolia.helpers.displayPrice(hit, hit._distinct)}</b>
+            ${!hit._distinct && html`<span class="ais-hit--price-striked"><span>${algolia.helpers.displayStrikedPrice(hit.price, hit.compare_at_price, hit.currency)}</span></span>`}
+            ${!hit._distinct && html`<span class="ais-hit--price-discount">${algolia.helpers.displayDiscount(hit.price, hit.compare_at_price, hit.price_ratio)}</span>`}
+          </p>
+          
+          ${!hit._distinct && html`
+            <form id="algolia-add-to-cart-${hit.objectID}" style="" action="/cart/add" method="post" enctype="multipart/form-data">
+              <input type="hidden" name="id" value="${hit.objectID}" />
+              <p class="ais-hit--cart">
+                ${hit.can_order ? html`
+                  <button type="submit" class="ais-hit--cart-button" data-form-id="algolia-add-to-cart-${hit.objectID}">
+                    ${ algolia.translations.addToCart }
+                  </button>`
+                : html`
+                  <button class="ais-hit--cart-button ais-hit--cart-button__disabled" disabled>
+                    ${ algolia.translations.outOfStock }
+                  </button>`}
+              </p>
+            </form>`}
+            
+          </div>
+      </div>`;
+    },
+    main( defaultTemplate, data ) {
+      let algolia = algoliaShopify;
+      
+      return gh_html`<div class="ais-page">
+
+        <div class="ais-page--header">
+          <h1 class="color-green-dark">${algolia.translations.searchTitle}s</h1>
+          <div>
+            <div class="ais-input">
+              <div class="ais-search-box-container"></div>
+              <div class="ais-input-button">
+                <div class="ais-clear-input-icon"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ais-page--body">
+          <div class="ais--facets-container">
+            <div class="gh-ais-section-header">Filters</div>
+            <div class="ais-facets-button">
+              Show filters
+            </div>
+            <div class="ais-facets">
+              <div class="ais-clear-refinements-container"></div>
+              <div class="ais-current-refined-values-container"></div>
+              ${data.facets.map( facet =>
+            gh_html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
+                  <label for="${facet.escapedName}" class="ais-range-slider--header ais-facet--header ais-header">${facet.title}</label>
+                  <input class="ais-dropdown-checkbox" type="checkbox" id="${facet.escapedName}" name="dropdown" />
+                  <div class="ais-facet-${facet.escapedName}-container ais-facet-dropdown-container"></div>
+                </div>`
+            )}
+            </div>
+          </div>
+          <div class="ais--results-container">
+            <div class="ais-block">
+              <div class="ais-search-header">
+                <div class="ais-stats-container"></div>
+                <div class="ais-change-display">
+                  <span class="ais-change-display-block ais-change-display-selected"><i class="fa fa-th-large"></i></span>
+                  <span class="ais-change-display-list"><i class="fa fa-th-list"></i></span>
+                </div>
+                <div class="ais-sort">
+                  ${data.multipleSortOrders ?
+                    gh_html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
+                    : gh_html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
+                  }
+                </div>
+              </div>
+              <div class="color-green-dark gh-ais-section-header gh-font-secondary uppercase" data-results-title="products">Products</div>
+              <div class="ais-hits-container ais-results-as-block"></div>
+              <div class="ais-pagination-container"></div>
+              <div class="ais-hits-article-container">
+                <div class="color-green-dark gh-ais-section-header gh-font-secondary uppercase" data-results-title="articles">Content</div>
+                <div id="gh-ais-hits-page"></div>
+                <div id="gh-ais-hits-article"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`
+    },
+    noResult(defaultTemplate, templateOptions){
+       return html`<br/><br/><div class="center">No products found. Try clearing the filters or changing your input</div><br/><br/>`;
+    }
+  }
+</script>

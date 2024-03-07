@@ -1,0 +1,47 @@
+{{ 'gh-algolia-autocomplete.css' | asset_url | stylesheet_tag }}
+
+{% if template.name == 'search' %}
+{{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<script>
+  let gh_algolia = {
+    autocomplete: {},
+    instant: {}
+  }
+</script>
+
+{% render 'gh-algolia-autocomplete-plugins' %}
+{% render 'gh-algolia-autocomplete-templates' %}
+{% render 'gh-algolia-instant-search-templates' %}
+{% render 'gh-algolia-instant-search-plugins' %}
+
+<script>
+
+  document.addEventListener('algolia.hooks.initialize', function() {
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteOptions', function(options) {
+      gh_algolia.autocomplete.plugins.getAll( algoliaShopify ).forEach( p => options.plugins.push(p) );
+      options.openOnFocus = true;
+      options.detachedMediaQuery = '';
+      return options;
+    });
+
+    algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
+      return gh_algolia.instant.init(options, algoliaShopify);
+    });
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
+    algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
+    algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate );
+    algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', gh_algolia.autocomplete.templates.productsTemplate );
+    algoliaShopify.hooks.registerHook('beforeInstantSearchNoResultTemplate', gh_algolia.instant.templates.noResult );
+    algoliaShopify.hooks.registerHook('beforeInstantSearchProductTemplate', gh_algolia.instant.templates.product );
+    algoliaShopify.hooks.registerHook('beforeInstantSearchMainTemplate', gh_algolia.instant.templates.main );
+    algoliaShopify.hooks.registerHook('afterInstantSearchHitClickAction', (_, hit) => {
+      console.log(_, hit)
+    });
+
+  });
+
+</script>

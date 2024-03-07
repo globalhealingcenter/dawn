@@ -1,0 +1,77 @@
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.64.2/dist/instantsearch.production.min.js" integrity="sha256-/DLulTBQ8KQ7xGOs8mrQ6FgKsknJpjCGAjFhjfjc8yo=" crossorigin="anonymous"></script>
+
+<script>
+gh_algolia.instant.init = ( instant, algolia ) => {
+
+    let articles_widget = {
+        init(){
+            let hits = algolia.externals.widgets.hits({
+                container: '#gh-ais-hits-article',
+                templates: {
+                    item(hit, { html, components, sendEvent }) {
+                        return html`
+                            <a class="ais-hit-gh" href="${hit.url}">
+                              <div style="background-image:url(${hit.image})"></div>
+                              <div class="article-hit-content left-align">
+                                <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.5">${hit.title}</span>
+                                <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'content' })}</span>
+                              </div>
+                            </div>
+                          `;
+                    },
+                    empty(results, { html }) {
+                        return html`<br/><br/><div class="center">No articles found. Try clearing the filters or changing your query.</div><br/><br/>`;
+                    },
+                },
+            });
+
+            let configure = algolia.externals.widgets.configure({
+                attributesToSnippet: ['content'],
+            });
+
+            let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
+            index.addWidgets([hits, configure])
+
+            instant.search.addWidgets([index]);
+        }
+    }
+
+  let pages_widget = {
+    init(){
+      let hits = algolia.externals.widgets.hits({
+        container: '#gh-ais-hits-page',
+        templates: {
+          item(hit, { html, components, sendEvent }) {
+            return html`
+                <a class="ais-hit-gh" href="https://globalhealing.com/pages/${hit.handle}">
+                  <div class="ais-hit-gh--image"></div>
+                  <span class="article-hit-content left-align">
+                    <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.5">${hit.title}</span>
+                    <!--<span class="block gh-ais-page-content">${components.Snippet({ hit, attribute: 'body_html_safe' })}</span>-->
+                  </span>
+                </div>
+              `;
+          },
+          empty(results, { html }) {
+            return html``;
+          },
+        },
+      });
+
+      let configure = algolia.externals.widgets.configure({
+        attributesToSnippet: ['body_html_safe'],
+        hitsPerPage: 3
+      });
+
+      let index = instantsearch.widgets.index({indexName: 'shopify_pages'});
+      index.addWidgets([hits, configure])
+
+      instant.search.addWidgets([index]);
+    }
+  }
+
+    instant.search.addWidgets([articles_widget,pages_widget]);
+    return instant;
+
+}
+</script>

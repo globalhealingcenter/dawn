@@ -1,0 +1,463 @@
+.ais-page .ais-change-display,
+.ais-page .ais-search-header .ais-stats-container{
+    display: none;
+}
+
+.ais-facets .ais-facet-dropdown-wrapper{
+    border-bottom: 1px solid #eee;
+}
+
+.ais-page .ais-facets .ais-RefinementList-item{
+
+}
+
+.ais-page .ais-facets .ais-RefinementList-item--selected,
+.ais-page .ais-facets .ais-facet--item:hover{
+    border-left: 0;
+    margin-left: 0;
+    padding-left: inherit;
+    padding-right: inherit;
+    color: #000;
+}
+
+.ais-facets .ais-facet--item:hover .ais-facet--label{
+    width: auto;
+    text-decoration: underline;
+}
+
+.ais-facets .ais-RefinementList-item--selected:hover .ais-facet--label{
+    text-decoration: line-through;
+}
+
+
+#MainContent > .shopify-section:first-child > .page-width{
+    max-width: 100%;
+    padding: 0 0;
+}
+
+.ais-page .ais-page--header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 2.5rem 1rem 4rem 1rem;
+    background: #fff;
+}
+
+.ais-page .ais-page--header h1{
+    font-size: 30px;
+    margin-bottom: 6px;
+    text-transform: capitalize;
+}
+
+.ais-page .ais-page--header > div:last-child{
+    width: 600px;
+    max-width: 100%;
+}
+
+.ais-page .ais-page--header .ais-input{
+    border-color: var(--gh-color-green);
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 100%;
+}
+
+.ais-page .ais-page--header .ais-SearchBox-input{
+    color: var(--gh-color-green-dark);
+    font-family: var(--gh-font-primary);
+    font-size: 21px;
+    background: transparent;
+}
+
+.ais-page .ais-page--header .ais-SearchBox-submitIcon{
+    fill:  var(--gh-color-green);
+}
+
+.ais-results-size-lg .ais-page{
+    max-width: 100%;
+    margin:0;
+    padding: 0;
+}
+
+.ais-page .ais-page--body{
+    max-width: var(--page-width);
+    margin: 30px auto;
+    padding: 0 1.5rem;
+    display: flex;
+    gap: 22px;
+}
+
+.ais-page .ais--facets-container{
+    width: 25%;
+    background: #fff;
+    padding: 17px;
+}
+
+.ais--facets-container .gh-ais-section-header{
+    font-size: 2.4rem;
+    border-bottom: 1px solid var(--gh-color-green-dark);
+    padding: 1rem 0 1.5rem 0;
+    margin-bottom: 3rem;
+}
+
+.ais--results-container .gh-ais-section-header{
+    border-bottom: 1px solid var(--gh-color-green-dark);
+    padding: 1rem 0 1rem 1rem;
+}
+
+.ais-page .ais-facets .ais-facet--header{
+    background: transparent;
+    font-family: 'Proxima Nova';
+    text-transform: uppercase;
+    color: var(--gh-color-green);
+    font-weight: 500;
+    font-size: 1.8rem;
+}
+
+.ais-page .ais--results-container{
+    flex: 1;
+    background: #fff;
+    padding: 0 17px 20px 17px;
+}
+
+.ais-page .ais--results-container .ais-block{
+    padding-left: 0;
+}
+
+#algolia-shopify-instantsearch .ais-facets{
+    background: #fff;
+    width: 100%;
+    float: none;
+}
+
+#algolia-shopify-instantsearch .ais-block{
+    background: #fff;
+    width: 100%;
+    float: none;
+}
+
+.ais-page .ais-Hits-list{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+}
+
+.ais-page .ais-Hits-item{
+    padding: 10px;
+    width: calc( 100% / 3 );
+}
+
+#algolia-shopify-instantsearch .ais-page .ais-page--body .ais-block .ais-hit-gh{
+    cursor: pointer;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    padding: 20px 10px;
+    height: 100%;
+    width: 100%;
+    float: none;
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    transition: .3s ease-in-out border-color, .3s ease-in-out box-shadow, background-position ease-in-out .2s;
+    color: inherit;
+}
+
+#algolia-shopify-instantsearch .ais-page .ais-page--body .ais-block .ais-hit-gh:hover{
+    border-color: var(--gh-color-green-dark);
+    box-shadow: var(--gh-color-green-light) 0 0 12px;
+    text-decoration: none;
+}
+
+.ais-page .ais-hit-gh--picture{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.ais-page .ais-hit-gh--picture{
+
+}
+
+.ais-page .ais-hit-gh--picture img{
+    width: 150px;
+    transition: transform ease-in-out .25s;
+}
+
+.ais-page .ais-hit-gh:hover .ais-hit-gh--picture img{
+    transform: scale(1.1);
+}
+
+.ais-page .ais-hit-gh--title{
+
+}
+
+.ais-page .ais-hit-gh--title a,
+.ais-page a, .ais-page .ais-hit-gh--title a:hover{
+    color: var(--gh-color-green-dark);
+    font-weight: 700;
+    font-size: 17px;
+    text-decoration: none;
+}
+
+.ais-page a, .ais-page .ais-hit-gh--title a:hover{
+
+}
+
+.ais-page .ais-Hits-list span{
+    font-size: inherit;
+}
+
+.ais-page .ais-hit-gh--title{
+    line-height: 1.4;
+}
+
+.ais-page .ais-hit-gh--subtitle{
+    line-height: 1.5;
+}
+
+.ais-page .ais-hit-gh--price{
+
+}
+
+.ais-hit-gh--details{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#algolia-shopify-instantsearch .ais-page .ais-page--body .ais-block #gh-ais-hits-article .ais-hit-gh,
+#algolia-shopify-instantsearch .ais-page .ais-page--body .ais-block #gh-ais-hits-page .ais-hit-gh
+{
+    padding: 0;
+  text-decoration: none;
+}
+
+#gh-ais-hits-article .ais-hit-gh > div:first-child{
+    display: block;
+    height: 200px;
+    background-size: cover;
+    background-position: center center;
+}
+
+#gh-ais-hits-page .ais-hit-gh > .ais-hit-gh--image{
+    display: block;
+    height: 150px;
+    background: var(--gh-color-cream) url(https://cdn.globalhealing.com/web/v2/img/logos/global-healing/seal-gold.png) no-repeat center center;
+    background-size: 40%;
+    position: relative;
+}
+
+#gh-ais-hits-page .ais-hit-gh > .ais-hit-gh--image:after{
+  content: "";
+  background: url(https://cdn.globalhealing.com/web/v2/icon/iconmonstr-file-green.png) no-repeat;
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: 98% 96%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#gh-ais-hits-page .ais-hit-gh{
+  text-decoration: none;
+}
+
+#gh-ais-hits-article .ais-hit-gh > .article-hit-content,
+#gh-ais-hits-page .ais-hit-gh > .article-hit-content{
+    padding: 20px 10px;
+}
+
+#gh-ais-hits-article .gh-ais-article-content,
+#gh-ais-hits-page .gh-ais-article-content{
+    line-height: 1.5;
+    margin-top: 7px;
+}
+
+#gh-ais-hits-article .ais-Snippet-highlighted,
+#gh-ais-hits-page .ais-Snippet-highlighted{
+    background: none;
+}
+
+span.ais-Snippet-nonHighlighted {
+    opacity: .7;
+}
+
+#gh-ais-hits-article .ais-hit-gh{
+    background-image: url(https://cdn.globalhealing.com/web/v2/icon/arrow-right.svg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 118% 98%;
+}
+
+#gh-ais-hits-article .ais-hit-gh:hover{
+    background-position: 96.5% 98%;
+}
+
+.as-ItemReviews{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+}
+
+.ais-results-size-xs .ais-page,
+.ais-results-size-sm .ais-page,
+.ais-results-size-md .ais-page{
+    margin: 0;
+    padding: 0;
+}
+
+.ais-results-size-xs .ais-page .ais--results-container{
+    padding: 0 9px 30px 9px;
+}
+
+.ais-results-size-xs .ais-page .ais-page--body,
+.ais-results-size-sm .ais-page .ais-page--body{
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+    margin-top: 5px;
+}
+
+.ais-results-size-md .ais-page .ais--facets-container{
+    width: 33%;
+}
+
+.ais-results-size-xs .ais-page .ais--facets-container,
+.ais-results-size-xs .ais-page .ais--results-container,
+.ais-results-size-sm .ais-page .ais--facets-container,
+.ais-results-size-sm .ais-page .ais--results-container
+{
+    width: 100%;
+}
+
+.ais-results-size-xs .ais-page .ais--facets-container,
+.ais-results-size-sm .ais-page .ais--facets-container{
+    background: transparent;
+    padding: 10px;
+}
+.ais-results-size-xs .ais--facets-container .gh-ais-section-header,
+.ais-results-size-sm .ais--facets-container .gh-ais-section-header{
+    display: none;
+}
+.ais-results-size-xs .ais-page .ais-facets-button,
+.ais-results-size-sm .ais-page .ais-facets-button{
+    margin: 0;
+    background: #fff;
+}
+.ais-results-size-xs  .ais-facets .ais-facet-dropdown-wrapper,
+.ais-results-size-sm  .ais-facets .ais-facet-dropdown-wrapper{
+    margin-top: 5px;
+    padding: 10px 8px;
+}
+.ais-results-size-xs .ais-page .ais-page--header,
+.ais-results-size-sm .ais-page .ais-page--header{
+    padding: 1rem 1rem 2rem;
+    gap: 0;
+}
+.ais-results-size-xs .ais-page .ais-page--header h1,
+.ais-results-size-sm .ais-page .ais-page--header h1{
+    font-size: 23px;
+}
+
+.ais-results-size-xs .ais-page .ais-search-header,
+.ais-results-size-sm .ais-page .ais-search-header{
+  display: flex;
+  justify-content: end;
+}
+
+.ais-results-size-xs .as-ItemReviews,
+.ais-results-size-sm .as-ItemReviews,
+.ais-results-size-md .as-ItemReviews{
+    flex-direction: column;
+}
+
+.ais-results-size-xs .ais-page .ais-Hits-item,
+.ais-results-size-sm .ais-page .ais-Hits-item,
+.ais-results-size-md .ais-page .ais-Hits-item{
+    width: calc(100% / 2);
+}
+
+.ais-results-size-xs .ais-page .ais-Hits-item,
+.ais-results-size-sm .ais-page .ais-Hits-item{
+    padding: 0 0 10px 0;
+}
+
+.ais-results-size-xs .ais-page .ais-Hits-item:nth-child(odd),
+.ais-results-size-sm .ais-page .ais-Hits-item:nth-child(odd){
+    padding-right: 10px;
+}
+
+.ais-results-size-xs .ais-page .ais-hit-gh--picture img{
+    width: 80px;
+}
+
+.ais-results-size-xs .ais-page .ais-hit-gh--subtitle{
+    font-size: 14px;
+    line-height: 1.3;
+}
+
+.ais-results-size-xs .aa-ItemReviewCount,
+.ais-results-size-xs .ais-hit-gh--price,
+.ais-results-size-xs .ais-page .gh-ais-article-content{
+    font-size: 14px;
+}
+
+#gh-ais-hits-page .gh-ais-page-content{
+  padding-top: 5px;
+  line-height: 1.5;
+}
+
+.ais-page .ais-Pagination-item{
+  /* border-color: var(--gh-color-cream); */
+}
+
+.ais-page .ais-Pagination-item .ais-Pagination-link{
+  /* background: var(--gh-color-cream); */
+}
+
+.ais-page .ais-Pagination-item.ais-Pagination-item--selected
+{
+  border-color: var(--gh-color-green);
+}
+
+.ais-page .ais-Pagination-item--selected .ais-Pagination-link{
+  background: var(--gh-color-green);
+  color: #fff;
+  text-decoration: none;
+  cursor: initial;
+}
+
+.ais-root.ais-current-refined-values.ais-facet{
+  display: none;
+}
+
+.ais-page .ais-facets .ais-RefinementList-item--selected, 
+.ais-page .ais-facets .ais-facet--item:hover{
+
+}
+
+.ais-page .ais-facets .ais-RefinementList-item--selected,
+.ais-page .ais-facets .ais-RefinementList-item--selected:hover{
+  background: url(https://cdn.globalhealing.com/web/v2/icon/iconmonstr-x-mark-circle-filled-green-dark.png) center left no-repeat;
+  background-size: 18px;
+  padding-left: 21px;
+  background-position: 0% 45%;
+}
+
+.ais-facets .ais-RefinementList-item--selected:hover .ais-facet--label{
+  text-decoration: none;
+  opacity: .8;
+}
+
+.ais-page .ais-facets .ais-RefinementList-item--selected input{
+  display: none;
+}
+
+@media (max-width:500px){
+
+}
