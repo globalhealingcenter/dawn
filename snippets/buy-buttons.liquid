@@ -73,7 +73,6 @@
               assign quantity_rule_soldout = true
             endif
           -%}
-          <!-- default -->
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
@@ -83,18 +82,20 @@
               disabled
             {% endif %}
           >
-            <!-- default 2 -->
-            <span>
-              <!-- default 3 -->
+            <span class='add-to-cart-default-text'>
               {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
-                <!-- default 4 -->
-                <span class='add-to-cart-subscribe-text'>Subscribe Now</span>
-                <span class='add-to-cart-default-text'>{{ 'products.product.add_to_cart' | t }}</span>
+                {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
-            <!-- default 5 -->
+            <span class='add-to-cart-subscribe-text'>
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                Subscribe Now
+              {%- endif -%}
+            </span>
             <div class="loading-overlay__spinner hidden">
               <svg
                 aria-hidden="true"
@@ -107,7 +108,6 @@
               </svg>
             </div>
           </button>
-          <!-- dynamic -->
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
@@ -117,7 +117,6 @@
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
-        <!-- sold out -->
         <button
           type="submit"
           name="add"
