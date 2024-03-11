@@ -76,7 +76,7 @@
         <span class="aa-ItemPrice bold">${algoliaShopify.helpers.displayPrice(item, distinct)}</span>
       </span>`
 
-      defaultTemplate.children = template;
+      defaultTemplate.props.children = template;
 
       return defaultTemplate;
     },
