@@ -73,6 +73,7 @@
               assign quantity_rule_soldout = true
             endif
           -%}
+          <!-- default -->
           <button
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
@@ -102,6 +103,7 @@
               </svg>
             </div>
           </button>
+          <!-- dynamic -->
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
@@ -111,6 +113,7 @@
   {%- else -%}
     <div class="product-form">
       <div class="product-form__buttons form">
+        <!-- sold out -->
         <button
           type="submit"
           name="add"
