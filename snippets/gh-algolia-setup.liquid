@@ -27,6 +27,10 @@
       return options;
     });
 
+    algoliaShopify.hooks.registerHook('afterAutocompleteProductClickAction', function(undefined, line_item) {
+      console.log('click', arguments);
+    })
+
     algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
       return gh_algolia.instant.init(options, algoliaShopify);
     });
