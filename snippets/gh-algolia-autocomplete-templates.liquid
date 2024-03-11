@@ -39,7 +39,17 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
-      let template = `<span>
+      return html `<a
+        class="aa-ItemLink aa-ProductItem"
+        data-algolia-index="${item.index}"
+        data-algolia-position="${item.productPosition}"
+        data-algolia-queryid="${item.queryID}"
+        data-algolia-objectid="${item.objectID}"
+        data-handle="${item.handle}"
+        data-variant-id="${item.objectID}"
+        data-distinct="${item._distinct}"
+        href="${itemLink}"
+      >
         <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
 
         <span class="as-ItemTitle gh-font-primary bold color-green-dark">
@@ -74,11 +84,8 @@
             </span>
 
         <span class="aa-ItemPrice bold">${algoliaShopify.helpers.displayPrice(item, distinct)}</span>
-      </span>`
+      </a>`
 
-      defaultTemplate.props.children = template;
-
-      return defaultTemplate;
     },
 
     suggestionsTemplate(defaultTemplate, templateOptions){
