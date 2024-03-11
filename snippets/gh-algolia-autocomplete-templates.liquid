@@ -47,7 +47,7 @@
         data-handle="${item.handle}"
         data-variant-id="${item.objectID}"
         data-distinct="${item._distinct}"
-        onclick="void(0)"
+        onclick="${defaultTemplate.props.onClick}"
         href="${itemLink}"
       >
         <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
