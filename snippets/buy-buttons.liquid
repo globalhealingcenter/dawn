@@ -83,14 +83,18 @@
               disabled
             {% endif %}
           >
+            <!-- default 2 -->
             <span>
+              <!-- default 3 -->
               {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
                 {{ 'products.product.sold_out' | t }}
               {%- else -%}
+                <!-- default 4 -->
                 <span class='add-to-cart-subscribe-text'>Subscribe Now</span>
                 <span class='add-to-cart-default-text'>{{ 'products.product.add_to_cart' | t }}</span>
               {%- endif -%}
             </span>
+            <!-- default 5 -->
             <div class="loading-overlay__spinner hidden">
               <svg
                 aria-hidden="true"
