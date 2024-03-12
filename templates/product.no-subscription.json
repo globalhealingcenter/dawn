@@ -19,7 +19,7 @@
           }
         },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
-          "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
             "product": "{{product}}"
           }
@@ -41,12 +41,6 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
-          }
-        },
-        "ordergroove_offer": {
-          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-          "settings": {
-            "location": "{{ product.metafields.ordergroove.pdp_enrollment_code.value }}"
           }
         },
         "buy_buttons": {
@@ -77,7 +71,6 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
         "variant_picker",
-        "ordergroove_offer",
         "buy_buttons",
         "fd07f90a-d072-4889-9f15-50599ae59cfd",
         "86dcf870-60e1-4a4d-b38b-2ae9e1ed5141"
@@ -110,77 +103,8 @@
         "padding_bottom": 52
       }
     },
-    "1683650930059df865": {
-      "type": "apps",
-      "disabled": true,
-      "blocks": {
-        "634ff065-04f9-46ca-91ab-a55eb5232cf5": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_fbt\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "634ff065-04f9-46ca-91ab-a55eb5232cf5"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241": {
       "type": "gh-product-content",
-      "blocks": {
-        "548032bb-09fa-46e9-a7fe-590e948b73a7": {
-          "type": "intro",
-          "settings": {
-          }
-        },
-        "f337cad7-73f6-4357-9195-8e40138d9780": {
-          "type": "benefits",
-          "settings": {
-          }
-        },
-        "99d44ae2-8420-494e-ae15-c50949303594": {
-          "type": "how_it_works",
-          "settings": {
-          }
-        },
-        "76fbc246-177e-499e-a484-0a06dbaacafc": {
-          "type": "ingredients",
-          "settings": {
-          }
-        },
-        "09cb2b2a-d327-41c1-8c96-bfbdc5c78b20": {
-          "type": "impact",
-          "settings": {
-          }
-        },
-        "5c03b9c3-0d35-48cc-9700-e77d1f3a932c": {
-          "type": "curated",
-          "settings": {
-          }
-        },
-        "62939461-ed1c-4168-b23a-0b4cf3da94d3": {
-          "type": "miron",
-          "settings": {
-          }
-        },
-        "87d2a586-3c28-400d-989d-8836299e6efc": {
-          "type": "faqs",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "548032bb-09fa-46e9-a7fe-590e948b73a7",
-        "f337cad7-73f6-4357-9195-8e40138d9780",
-        "99d44ae2-8420-494e-ae15-c50949303594",
-        "76fbc246-177e-499e-a484-0a06dbaacafc",
-        "09cb2b2a-d327-41c1-8c96-bfbdc5c78b20",
-        "5c03b9c3-0d35-48cc-9700-e77d1f3a932c",
-        "62939461-ed1c-4168-b23a-0b4cf3da94d3",
-        "87d2a586-3c28-400d-989d-8836299e6efc"
-      ],
       "settings": {
         "padding_top": 40,
         "padding_bottom": 52
@@ -209,7 +133,7 @@
       "type": "apps",
       "blocks": {
         "25085916-2810-44e8-9e6d-866a06af66f3": {
-          "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
             "product": "{{product}}"
           }
@@ -224,22 +148,6 @@
     },
     "1687770021657df7cc": {
       "type": "apps",
-      "blocks": {
-        "f1ce1112-f8a2-470c-be5a-3e6af8836361": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
-        },
-        "0c5b410f-8a7d-4fc2-9643-1a54a568a1d3": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_browsing\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "f1ce1112-f8a2-470c-be5a-3e6af8836361",
-        "0c5b410f-8a7d-4fc2-9643-1a54a568a1d3"
-      ],
       "settings": {
         "include_margins": true
       }
@@ -255,7 +163,6 @@
     "shogun-above",
     "main",
     "53b760f3-79fb-4c05-9926-a95158273dc9",
-    "1683650930059df865",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
     "1686083501cc540fa5",
