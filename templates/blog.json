@@ -11,26 +11,9 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "1687779755f9478b18": {
-      "type": "apps",
-      "blocks": {
-        "a1fc4447-6895-4313-ae84-5e530e6c6930": {
-          "type": "shopify:\/\/apps\/wiser-product-recommendations\/blocks\/wiser_featured\/3f966edc-9a4a-465c-a4df-436d2a39160d",
-          "settings": {
-          }
-        }
-      },
-      "block_order": [
-        "a1fc4447-6895-4313-ae84-5e530e6c6930"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
-    "main",
-    "1687779755f9478b18"
+    "main"
   ]
 }
