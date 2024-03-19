@@ -25,6 +25,8 @@
 
         {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
         {% assign sf_content = sf_content | strip %}
+        {% assign button_text = 'Supplement Facts' %}
+        <!-- {{ product.type | json }} -->
         {% unless sf_content == ''  %}
           {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: 'Supplement Facts', id: 'full-ingredients-header', content: sf_content %}
         {% endunless %}
