@@ -24,7 +24,6 @@
     },
 
     productsTemplate(defaultTemplate, templateOptions, distinct, itemLink){
-      window.defaultProductsTemplate=defaultTemplate;
 
       const { html, item, components } = templateOptions;
 
@@ -39,8 +38,6 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
-      let onclick = defaultTemplate.props.onClick;
-      
       return html `<a
         class="aa-ItemLink aa-ProductItem"
         data-algolia-index="${item.index}"
@@ -50,7 +47,7 @@
         data-handle="${item.handle}"
         data-variant-id="${item.objectID}"
         data-distinct="${item._distinct}"
-        onclick="${onclick}"
+        onclick="${defaultTemplate.props.onClick}"
         href="${itemLink}"
       >
         <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
@@ -84,7 +81,7 @@
               </div>
               </div>
             <div class="aa-ItemReviewCount color-gold">${reviews.count} Reviews</div>
-        </span>
+            </span>
 
         <span class="aa-ItemPrice bold">${algoliaShopify.helpers.displayPrice(item, distinct)}</span>
       </a>`
