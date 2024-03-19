@@ -47,8 +47,8 @@
 .aa-Panel .aa-SourceHeaderTitle{
     color: var(--gh-color-green-dark);
     text-transform: uppercase;
-    font-family: 'Proxima Nova';
-    font-weight: 300;
+    font-family: var(--gh-font-secondary);
+    font-weight: 400;
 }
 
 .aa-Panel .aa-SourceHeaderLine{
@@ -130,7 +130,7 @@
 }
 
 .aa-ItemLink{
-  transition: .3s ease-in-out border-color, .3s ease-in-out box-shadow, background-position ease-in-out .2s;
+  transition: .3s ease-in-out border-color, .3s ease-in-out box-shadow, .2s ease-in-out background-position;
 }
 
 [data-autocomplete-source-id='querySuggestionsPlugin'] .aa-Item[aria-selected='true'] .aa-ItemLink,
