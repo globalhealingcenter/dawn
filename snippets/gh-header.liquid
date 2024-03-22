@@ -1,5 +1,10 @@
 {{ 'gh.css' | asset_url | stylesheet_tag }}
 {% render 'gh-algolia-setup' %}
+<style>
+  .og-toast.og-toast-success {
+    background: var(--gh-color-green);
+  }
+</style>
 
 <!-- robots -->
 {% if product and product.tags contains 'no-index' %}
