@@ -461,5 +461,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".og-toast.og-toast-success {background: var(--gh-color-green);}"
+    ]
   }
 }
