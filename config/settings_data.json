@@ -164,14 +164,6 @@
           "refresh": true
         }
       },
-      "8962992520437913685": {
-        "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/loader-app-embed-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-        "disabled": true,
-        "settings": {
-          "inject_modules_loader": true,
-          "inject_sdk_loader": false
-        }
-      },
       "17428600031447253342": {
         "type": "shopify:\/\/apps\/attentive\/blocks\/attn-tag\/8df62c72-8fe4-407e-a5b3-72132be30a0d",
         "disabled": false,
@@ -188,6 +180,14 @@
         "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/autocomplete\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
         "settings": {
+        }
+      },
+      "8962992520437913685": {
+        "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/loader-app-embed-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+        "disabled": false,
+        "settings": {
+          "inject_modules_loader": true,
+          "inject_sdk_loader": false
         }
       }
     },
