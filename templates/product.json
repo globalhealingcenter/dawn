@@ -70,6 +70,12 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L": {
+          "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/stories-block\/06fa8282-42ff-403e-b67c-1936776aed11",
+          "settings": {
+            "publishId": "5ded4xh85pays"
+          }
         }
       },
       "block_order": [
@@ -81,7 +87,8 @@
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
-        "buy_buttons"
+        "buy_buttons",
+        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
       "custom_css": [
 
