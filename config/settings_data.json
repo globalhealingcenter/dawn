@@ -189,6 +189,12 @@
           "inject_modules_loader": true,
           "inject_sdk_loader": false
         }
+      },
+      "4705145147225299685": {
+        "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/widget-block\/06fa8282-42ff-403e-b67c-1936776aed11",
+        "disabled": false,
+        "settings": {
+        }
       }
     },
     "color_schemes": {
