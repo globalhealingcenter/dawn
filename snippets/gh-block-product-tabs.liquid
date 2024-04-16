@@ -26,7 +26,7 @@
         {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
         {% assign sf_content = sf_content | strip %}
         {% assign button_text = 'Supplement Facts' %}
-        {% if product.type == 'Facial Cleansers' %} {% assign button_text = 'View Label' %}{% endif %}
+        {% if product.type == 'Facial Cleansers' or product.type == 'Skin Care' %} {% assign button_text = 'View Label' %}{% endif %}
         <!-- {{ product.type | json }} -->
         {% unless sf_content == ''  %}
           {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: button_text, id: 'full-ingredients-header', content: sf_content %}
