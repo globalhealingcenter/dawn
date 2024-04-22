@@ -91,7 +91,7 @@
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
       "custom_css": [
-
+        "1.shopify-block > .yotpo-widget-instance:first-child:empty {min-height: 18px; background: #0000001;}"
       ],
       "settings": {
         "enable_sticky_info": true,
