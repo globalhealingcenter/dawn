@@ -91,7 +91,7 @@
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
       "custom_css": [
-        ".shopify-block > .yotpo-widget-instance:first-child{min-height: 18px; }"
+        ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -113,7 +113,6 @@
       "blocks": {
         "3c43f1d2-5fe4-4b3b-8039-c945317de191": {
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "128942",
