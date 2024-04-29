@@ -33,10 +33,10 @@
           "type": "banners",
           "disabled": true,
           "settings": {
-            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/04\/earth-day\/desktop.gif",
-            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/04\/earth-day\/mobile.gif",
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/05\/womens-health\/desktop.png",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/05\/womens-health\/mobile.png",
             "image_is_2x": true,
-            "banner_1_url": "https:\/\/globalhealing.com\/pages\/earth-day?icn_ghc=earth_day_campaign&ici_ghc=HomePageBanner",
+            "banner_1_url": "https:\/\/globalhealing.com\/pages\/womens-health?icn_ghc=womens_health_campaign&ici_ghc=HomePageBanner",
             "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
             "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
             "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
