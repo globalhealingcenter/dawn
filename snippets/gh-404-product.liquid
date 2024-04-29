@@ -494,7 +494,11 @@
       <h1 class='mb2'>${product.name}</h1>
       <span class="bold color-green">${product.tagline}</span>
       ${product.short_description}
-      <h4 class='pb2'>Unfortunately this product is not yet available for purchase in your country.</h4>
+
+        {%- capture sf_content -%}<img src="${product.images[1]}" alt="" />{% endcapture %}
+        {% render 'gh-element-dialog', button_text: 'Supplement Facts', id: 'product-supplement-facts-body', content: sf_content %}
+
+      <h4 class='pb2'>Unfortunately this product is not yet available to ship to your country. Subscribe below to stay in the loop for future product updates.</h4>
       <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
     </div>
   </div>
