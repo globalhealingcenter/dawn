@@ -485,15 +485,16 @@
       replace_container.classList.add('hide');
 
       new_container.innerHTML = `
-<div class="flex">
-    <div class='col-6'>
+<div class="flex items-center justify-center">
+    <div class='col-4 p3'>
        <img src="${product.images[0].src}" alt="" />
     </div>
-  <div class='col-6'>
+  <div class='col-5'>
     <div class="product__title">
-      <h1>${product.name}</h1>
-      <span>${product.tagline}</span>
+      <h1 class='mb2'>${product.name}</h1>
+      <span class="bold color-green">${product.tagline}</span>
       ${product.short_description}
+      <h4 class='center'>Unfortunately this product is not yet available for purchase in your market.</h4>
     </div>
   </div>
 </div>
