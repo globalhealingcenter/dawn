@@ -1,3 +1,4 @@
+<div id='content-container-404'></div>
 <script>
 
   let gh_products =         {
@@ -468,8 +469,9 @@
 
   let gh_404 = (() => {
 
-    let url = new URL(window.location);
-    let replace_container = document.querySelector('.template-404');
+    const url = new URL(window.location);
+    const replace_container = document.querySelector('.template-404');
+    const new_container = document.getElementById('content-container-404');
 
     let init = () => {
 
@@ -480,8 +482,22 @@
       const product = gh_products[product_url];
       if( !product ) return;
 
-      replace_container.querySelector('.title').innerHTML = `${product.name} not available in your market.`;
-      replace_container.querySelector('p:first-child').classList.add('hide')
+      replace_container.classList.add('hide');
+
+      new_container.innerHTML = `
+<div class="flex">
+    <div class='col-6'>
+       <img src="${product.images[0].src}" alt="" />
+    </div>
+  <div class='col-6'>
+    <div class="product__title">
+      <h1>${product.name}</h1>
+      <span>${product.tagline}</span>
+      ${product.short_description}
+    </div>
+  </div>
+</div>
+      `
 
     }
 
