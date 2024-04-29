@@ -8,7 +8,9 @@ let gh_404 = (() => {
     let init = () => {
 
       if( !url.path.includes('products/') ) return;
-      replace_container.innerHTML = '';
+
+      replace_container.querySelector('.title').innerHTML = 'Product not available in your market.';
+      replace_container.querySelector('p:first-child').classList.add('hide')
 
     }
 
