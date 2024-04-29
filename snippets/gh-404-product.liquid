@@ -475,7 +475,7 @@
 
       if( !url.pathname.includes('products/') ) return;
 
-      const product_url = url.pathname.replace('/products/');
+      const product_url = url.pathname.replace('/products/', '').replace('/', '');
 
       const product = gh_products[product_url];
       if( !product ) return;
