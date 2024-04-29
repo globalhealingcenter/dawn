@@ -4,17 +4,16 @@ let gh_404 = (() => {
 
     let url = new URL(window.location);
     let replace_container = document.querySelector('.template-404');
-    replace_container.innerHTML = '';
 
     let init = () => {
 
       if( !url.path.includes('products/') ) return;
-
       replace_container.innerHTML = '';
 
     }
 
   return { init };
+
 })();
 
 </script>
