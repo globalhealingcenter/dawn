@@ -502,6 +502,12 @@
 </div>
       `
 
+      fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
+        .then( d => d.text())
+        .then( h => {
+            console.log(h)
+          })
+
     }
 
   return { init };
