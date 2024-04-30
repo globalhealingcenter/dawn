@@ -505,7 +505,7 @@
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
-            console.log(h)
+            new_container.innerHTML += h
           })
 
     }
@@ -522,3 +522,4 @@ gh_404.init();
   // {{shop.url | append: share_permalink}}
 
 </script>
+{{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
