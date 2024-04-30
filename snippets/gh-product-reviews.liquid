@@ -1,0 +1,29 @@
+{% comment %}
+    Requires 2 props:
+    average: float 4.3
+    count: int 103
+{% endcomment %}
+
+{% assign width = ( 100 / 5) * average %}
+
+<span class="as-ItemReviews flex align-items-center justify-center flex-column py1">
+    <div class="center">
+    <div class="gh-review-stars">
+        <span class="gh-review-stars--full" style="width: {{ width }}%">
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16" />
+        </span>
+        <span class="gh-review-stars--empty">
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+            <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
+        </span>
+    </div>
+    </div>
+    <div class="aa-ItemReviewCount color-gold">{{ count }} Reviews</div>
+</span>
