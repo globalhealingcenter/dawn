@@ -505,6 +505,22 @@
         })
 
         setActiveImage();
+
+      let modal = document.getElementById('dialog-product-supplement-facts-body');
+      modal.addEventListener('click', e => {
+        let inner = modal.querySelector('.ghd--dialog--inner');
+        if( !inner.contains(e.target) ) modal.close();
+      })
+
+      document.querySelectorAll('[data-dialog="dialog-product-supplement-facts-body"]').forEach(d => {
+        d.addEventListener('click', function(e) {
+          if (modal.open) {
+            modal.close();
+          } else {
+            modal.showModal()
+          }
+        });
+      })
     }
 
     let init = () => {
