@@ -164,7 +164,9 @@
             {% if show_rating %}
               <!-- 
               {{ card_product.metafields.globalhealing.reviews_count }}
-              {{ card_product.metafields.globalhealing.reviews_average }} -->
+              {{ card_product.metafields.globalhealing.reviews_average }} 
+              {% render 'gh-product-reviews' average:card_product.metafields.globalhealing.reviews_average, count: card_product.metafields.globalhealing.reviews_count %}
+              -->
               <div class="yotpo bottomLine" data-domain="globalhealing.myshopify.com" data-product-id="{{ card_product.id }}" data-product-models="{{ card_product.id }}" data-name="{{ card_product.title }}"></div>
               <style>
               .yotpo.bottomLine.yotpo-small {
