@@ -473,6 +473,40 @@
     const replace_container = document.querySelector('.template-404');
     const new_container = document.getElementById('content-container-404');
 
+    let img = () => {
+          let ingredients = document.querySelector('.ghd--block--ingredients');
+          let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+          let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+
+          function setActiveImage(){
+          ingredients_inputs.forEach( i => {
+          if(!i.checked) return;
+          ingredients_img.classList.add('loading');
+
+          ingredients_img.src = i.getAttribute('data-ingredient-image') + '?w=600'
+          ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
+
+          if(ingredients_img.complete){
+          ingredients_img.classList.remove('loading');
+        }
+
+          ingredients_img.addEventListener('load', () => {
+          ingredients_img.classList.remove('loading');
+        })
+
+        })
+        }
+
+        ingredients_inputs.forEach( i => {
+            i.addEventListener('change', e => {
+                if( !i.checked ) return;
+                setActiveImage()
+            })
+        })
+
+        setActiveImage();
+    }
+
     let init = () => {
 
       if( !url.pathname.includes('products/') ) return;
@@ -507,6 +541,7 @@
         .then( h => {
             new_container.innerHTML += '<br><br><br>';
             new_container.innerHTML += h;
+            img();
           })
 
     }
