@@ -516,6 +516,7 @@
       const product = gh_products[product_url];
       if( !product ) return;
 
+      document.title = product.name + ' | Global Healing';
       replace_container.classList.add('hide');
 
       new_container.innerHTML = `
