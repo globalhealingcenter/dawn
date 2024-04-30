@@ -505,7 +505,8 @@
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
-            new_container.innerHTML += h
+            new_container.innerHTML += '<br><br><br>';
+            new_container.innerHTML += h;
           })
 
     }
