@@ -6,7 +6,7 @@
 
 {% assign width = 20 | times: average %}
 
-<span class="aa-ItemReviews flex align-items-center justify-center flex-column py1">
+<span class="gh-product-reviews flex align-items-center justify-center flex-column py1">
     <div class="center">
     <div class="gh-review-stars">
         <span class="gh-review-stars--full" style="width: {{ width }}%">
@@ -27,3 +27,12 @@
     </div>
     <div class="aa-ItemReviewCount color-gold">{{ count }} Reviews</div>
 </span>
+
+<style>
+  .gh-product-reviews{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+  }
+</style>
