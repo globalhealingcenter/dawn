@@ -185,6 +185,15 @@
       "type": "shogun-below",
       "settings": {
       }
+    },
+    "custom_liquid_kweCXJ": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>\n\n<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -195,6 +204,7 @@
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
     "1686083501cc540fa5",
-    "shogun-below"
+    "shogun-below",
+    "custom_liquid_kweCXJ"
   ]
 }
