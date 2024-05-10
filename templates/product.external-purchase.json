@@ -48,7 +48,7 @@
         "595cb104-8792-4aa9-b722-4b48718338a1": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<a href=\"https:\/\/earthharmony.com\/products\/methylene-blue\" class=\"button button--full-width button--secondary mt3\">Buy on EarthHarmony.com<\/a>"
+            "custom_liquid": "<a href=\"{{ product.metafields.globalhealing.external_purchase_url }}\" class=\"button button--full-width button--secondary mt3\">\n\t{{ product.metafields.globalhealing.external_purchase_title }}\n<\/a>"
           }
         }
       },
