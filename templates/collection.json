@@ -63,7 +63,7 @@
         "template--16067869081800__94a50d09-d564-4967-97aa-bcb0b9d99f43-text-1": {
           "type": "text",
           "settings": {
-            "text": "{{ collection.metafields.globalhealing[\"content-bottom\"] | metafield_tag }}"
+            "text": ""
           }
         }
       },
