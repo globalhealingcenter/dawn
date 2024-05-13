@@ -7,6 +7,7 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "🌸 Supplements for Inner & Outer Radiance - Learn More",
             "link": "https:\/\/globalhealing.com\/pages\/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
@@ -15,7 +16,7 @@
         "announcement_GGCHez": {
           "type": "announcement",
           "settings": {
-            "text": "Free Detoxadine on Orders $100+",
+            "text": "🌸 Free Detoxadine on Orders $100+",
             "link": "https:\/\/globalhealing.com\/pages\/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
           }
         }
