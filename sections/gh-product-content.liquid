@@ -211,25 +211,7 @@
       {% if product.metafields.globalhealing.impact_bg %}
         <style>.ghd--block--impact{background: {{ product.metafields.globalhealing.impact_bg }}}</style>
       {% endif %}
-      
-      {% if product.tags contains 'impact-yellow' %}
-      <style>.ghd--block--impact{background: #feebd5}</style>
-      {% endif %}
-      {% if product.tags contains 'impact-white' %}
-      <style>.ghd--block--impact{background: #efeae7}</style>
-      {% endif %}
-      {% if product.tags contains 'impact-cream' %}
-      <style>.ghd--block--impact{background: #F6E6D6}</style>
-      {% endif %}
-      {% if product.tags contains 'impact-brown' %}
-      <style>
-        .ghd--block--impact{background: #a46f5c; color: #fff}
-        .ghd--block--impact h2.eyebrow{ color: var(--gh-color-gold) }
-        .ghd--block--impact h2.eyebrow+h4,
-        .ghd--block--impact h2.eyebrow span
-        { color: #fff }
-      </style>
-      {% endif %}
+ 
       {% endif %}
       {% when 'miron' %}
 
