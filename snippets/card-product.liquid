@@ -56,7 +56,7 @@
           <div class="card__media{% if image_shape and image_shape != 'default' %} shape--{{ image_shape }} color-{{ settings.card_color_scheme }} gradient{% endif %}">
             <div class="media media--transparent media--hover-effect">
               {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
-              {% if card_product.metafields.globalhealing.beauty_shot_url %}
+              {% if false %}
                 <img
                 src="{{ card_product.metafields.globalhealing.beauty_shot_url }}"
                 alt="{{ card_product.featured_media.alt | escape }}"
