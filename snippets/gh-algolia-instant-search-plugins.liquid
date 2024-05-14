@@ -28,13 +28,17 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 },
             });
 
+            let stats = algolia.externals.widgets.stats({
+              container: '#article-stats',
+            });
+
             let configure = algolia.externals.widgets.configure({
                 attributesToSnippet: ['content'],
                 hitsPerPage: 9
             });
 
             let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
-            index.addWidgets([hits, configure])
+            index.addWidgets([hits, configure, stats])
 
             instant.search.addWidgets([index]);
         }
