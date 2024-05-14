@@ -3,6 +3,9 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
+    const article_initial_results = 6;
+    const article_results = 9;
+  
     let articles_widget = {
         init(){
             let hits = algolia.externals.widgets.hits({
@@ -33,7 +36,9 @@ gh_algolia.instant.init = ( instant, algolia ) => {
               templates: {
                 text(data, { html }) {
                   let hits_count = data.nbHits;
-                  console.log('hits count', hits_count);
+                  if( hits_count <= article_initial_results ) document.getElementById('content-show-max-results-button').classList.add('hide');
+                  else document.getElementById('content-show-max-results-button').classList.remove('hide');
+                  
                   return html`<span>${hits_count}</span>`;
                 },
               }
@@ -41,7 +46,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
             let configure = algolia.externals.widgets.configure({
                 attributesToSnippet: ['content'],
-                hitsPerPage: 9
+                hitsPerPage: article_results
             });
 
             let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
