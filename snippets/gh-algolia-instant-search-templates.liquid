@@ -156,9 +156,10 @@ window['gh_html'] = html
                   <span>Content</span>
                 </div>
                 <div class="hide" id="article-stats"></div>
+                <input type="radio" name="view-more-pages-radio" id="view-more-pages-radio" hidden />
                 <div id="gh-ais-hits-page"></div>
-                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="content-show-max-results-container">
-                  <label class="gh-ais-view-more mr1" for="view-more-articles-radio">Show More Results</label>
+                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="view-more-pages-container">
+                  <label class="gh-ais-view-more mr1" for="view-more-pages-radio">Show More Results</label>
                 </div>
                 <input type="radio" name="view-more-articles-radio" id="view-more-articles-radio" hidden />
                 <div id="gh-ais-hits-article"></div>
@@ -183,13 +184,16 @@ window['gh_html'] = html
       text-decoration: underline;
       cursor: pointer;
     }
-    .ais-hits-article-container #gh-ais-hits-article li:nth-child(n+7){
+    .ais-hits-article-container #gh-ais-hits-article li:nth-child(n+7),
+    .ais-hits-article-container #gh-ais-hits-page li:nth-child(n+4){
       display: none;
     }
-    .ais-hits-article-container [name='view-more-articles-radio']:checked + #gh-ais-hits-article li:nth-child(n+7){
+    .ais-hits-article-container [name='view-more-articles-radio']:checked + #gh-ais-hits-article li:nth-child(n+7),
+    .ais-hits-article-container [name='view-more-pages-radio']:checked + #gh-ais-hits-page li:nth-child(n+4){
       display: block;
     }
-    .ais-hits-article-container [name='view-more-articles-radio']:checked + div + #view-more-articles-container{
+    .ais-hits-article-container [name='view-more-articles-radio']:checked + div + #view-more-articles-container,
+    .ais-hits-article-container [name='view-more-pages-radio']:checked + div + #view-more-pages-container{
       display: none;
     }
 </style>
