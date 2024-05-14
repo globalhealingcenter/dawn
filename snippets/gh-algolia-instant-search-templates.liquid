@@ -157,10 +157,10 @@ window['gh_html'] = html
                 </div>
                 <div class="hide" id="article-stats"></div>
                 <div id="gh-ais-hits-page"></div>
-                <input type="radio" name="view-more" id="content-show-max-results" hidden />
+                <input type="radio" name="view-more-articles-radio" id="view-more-articles-radio" hidden />
                 <div id="gh-ais-hits-article"></div>
-                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="content-show-max-results-button">
-                  <label class="gh-is-view-more mr1" for="content-show-max-results">
+                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="content-show-max-results-container">
+                  <label class="gh-is-view-more mr1" for="view-more-articles-radio">
                     Show More Results
                   </label>
                 </div>
@@ -185,10 +185,10 @@ window['gh_html'] = html
     .ais-hits-article-container #gh-ais-hits-article li:nth-child(n+7){
       display: none;
     }
-    .ais-hits-article-container [name='view-more']:checked + #gh-ais-hits-article li:nth-child(n+7){
+    .ais-hits-article-container [name='view-more-articles-radio']:checked + #gh-ais-hits-article li:nth-child(n+7){
       display: block;
     }
-    .ais-hits-article-container [name='view-more']:checked + div + #content-show-max-results-button{
+    .ais-hits-article-container [name='view-more-articles-radio']:checked + div + #content-show-max-results-container{
       display: none;
     }
 </style>
