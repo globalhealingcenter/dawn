@@ -20,7 +20,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                           `;
                     },
                     banner(){
-                      return html`<span class="hide">End of Articles</span>`;
+                      return html`<span class="hide end-of-articles">End of Articles</span>`;
                     },
                     empty(results, { html }) {
                         return html`<br/><br/><div class="center">No articles found. Try clearing the filters or changing your query.</div><br/><br/>`;
