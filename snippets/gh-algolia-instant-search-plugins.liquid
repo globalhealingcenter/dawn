@@ -5,6 +5,9 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
     const article_initial_results = 6;
     const article_results = 50;
+
+    const page_initial_results = 3;
+    const page_results = 9;
   
     let articles_widget = {
         init(){
@@ -80,11 +83,24 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
       let configure = algolia.externals.widgets.configure({
         attributesToSnippet: ['body_html_safe'],
-        hitsPerPage: 3
+        hitsPerPage: page_initial_results
+      });
+
+      let stats = algolia.externals.widgets.stats({
+        container: '#page-stats',
+        templates: {
+          text(data, { html }) {
+            let hits_count = data.nbHits;
+            if( hits_count <= page_results ) document.getElementById('view-more-pages-container').classList.add('hide');
+            else document.getElementById('view-more-pages-container').classList.remove('hide');
+            
+            return html`<span>${hits_count}</span>`;
+          },
+        }
       });
 
       let index = instantsearch.widgets.index({indexName: 'shopify_pages'});
-      index.addWidgets([hits, configure])
+      index.addWidgets([hits, configure, stats])
 
       instant.search.addWidgets([index]);
     }
