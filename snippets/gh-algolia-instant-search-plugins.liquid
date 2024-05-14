@@ -30,6 +30,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
             let configure = algolia.externals.widgets.configure({
                 attributesToSnippet: ['content'],
+                hitsPerPage: 9
             });
 
             let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
