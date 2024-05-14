@@ -154,7 +154,7 @@ window['gh_html'] = html
               <div class="ais-hits-article-container">
                 <div class="color-green-dark gh-ais-section-header gh-font-secondary uppercase flex justify-between" data-results-title="articles">
                   <span>Content</span>
-                  <label class="hide" style="font-size: 14px;text-transform: capitalize;text-decoration: underline;cursor: pointer;" for="content-show-max-results">
+                  <label class="gh-is-view-more hide">
                     Show More Results
                   </label>
                 </div>
@@ -172,3 +172,17 @@ window['gh_html'] = html
     }
   }
 </script>
+<style>
+  .gh-is-view-more{
+      font-size: 14px;
+      text-transform: capitalize;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .ais-hits-article-container #gh-ais-hits-article li:nth-child(n+7){
+      display: none;
+    }
+    .ais-hits-article-container [name='view-more']:checked + #gh-ais-hits-article li:nth-child(n+7){
+      display: block;
+    }
+</style>
