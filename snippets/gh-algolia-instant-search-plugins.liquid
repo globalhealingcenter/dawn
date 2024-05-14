@@ -30,6 +30,13 @@ gh_algolia.instant.init = ( instant, algolia ) => {
 
             let stats = algolia.externals.widgets.stats({
               container: '#article-stats',
+              templates: {
+                text(data, { html }) {
+                  let hits_count = data.nbHits;
+                  console.log('hits count', hits_count);
+                  return html`<span>${hits_count}</span>`;
+                },
+              }
             });
 
             let configure = algolia.externals.widgets.configure({
