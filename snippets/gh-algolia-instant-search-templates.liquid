@@ -152,8 +152,14 @@ window['gh_html'] = html
               <div class="ais-hits-container ais-results-as-block"></div>
               <div class="ais-pagination-container"></div>
               <div class="ais-hits-article-container">
-                <div class="color-green-dark gh-ais-section-header gh-font-secondary uppercase" data-results-title="articles">Content</div>
+                <div class="color-green-dark gh-ais-section-header gh-font-secondary uppercase flex justify-between" data-results-title="articles">
+                  <span>Content</span>
+                  <label class="hide" style="font-size: 14px;text-transform: capitalize;text-decoration: underline;cursor: pointer;" for="content-show-max-results">
+                    Show More Results
+                  </label>
+                </div>
                 <div id="gh-ais-hits-page"></div>
+                <input type="radio" name="view-more" id="content-show-max-results" hidden>
                 <div id="gh-ais-hits-article"></div>
               </div>
             </div>
