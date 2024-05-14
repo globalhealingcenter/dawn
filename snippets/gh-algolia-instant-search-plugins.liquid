@@ -36,8 +36,8 @@ gh_algolia.instant.init = ( instant, algolia ) => {
               templates: {
                 text(data, { html }) {
                   let hits_count = data.nbHits;
-                  if( hits_count <= article_initial_results ) document.getElementById('content-show-max-results-container').classList.add('hide');
-                  else document.getElementById('content-show-max-results-container').classList.remove('hide');
+                  if( hits_count <= article_initial_results ) document.getElementById('view-more-articles-container').classList.add('hide');
+                  else document.getElementById('view-more-articles-container').classList.remove('hide');
                   
                   return html`<span>${hits_count}</span>`;
                 },

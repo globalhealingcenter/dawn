@@ -157,9 +157,12 @@ window['gh_html'] = html
                 </div>
                 <div class="hide" id="article-stats"></div>
                 <div id="gh-ais-hits-page"></div>
+                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="content-show-max-results-container">
+                  <label class="gh-ais-view-more mr1" for="view-more-articles-radio">Show More Results</label>
+                </div>
                 <input type="radio" name="view-more-articles-radio" id="view-more-articles-radio" hidden />
                 <div id="gh-ais-hits-article"></div>
-                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="content-show-max-results-container">
+                <div class="color-green-dark gh-font-secondary uppercase flex justify-end pr1 hide" id="view-more-articles-container">
                   <label class="gh-ais-view-more mr1" for="view-more-articles-radio">Show More Results</label>
                 </div>
               </div>
@@ -186,7 +189,7 @@ window['gh_html'] = html
     .ais-hits-article-container [name='view-more-articles-radio']:checked + #gh-ais-hits-article li:nth-child(n+7){
       display: block;
     }
-    .ais-hits-article-container [name='view-more-articles-radio']:checked + div + #content-show-max-results-container{
+    .ais-hits-article-container [name='view-more-articles-radio']:checked + div + #view-more-articles-container{
       display: none;
     }
 </style>
