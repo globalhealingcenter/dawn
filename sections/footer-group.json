@@ -75,7 +75,7 @@
         ".gh-have-a-question {padding: 0 15px; text-align: center;}"
       ],
       "settings": {
-        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\nOur operations have been temporarily suspended due to severe weather until May 20th. We will resume normal service soon. Thank you for your patience.\n\n\n<br><br>\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016<\/a><br><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>",
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016<\/a><br><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
         "padding_bottom": 52
