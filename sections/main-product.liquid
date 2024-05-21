@@ -254,7 +254,9 @@
                 <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span> {{- product.selected_or_first_available_variant.sku -}}
               </p>
             {%- when 'gh_out_of_stock_form' -%}
-              {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message, force_show: block.settings.force_show %}
+              {% unless product.available or block.settings.force_show %}
+                {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
+              {% endunless %}
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
             {%- when 'collapsible_tab' -%}
