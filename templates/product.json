@@ -69,11 +69,12 @@
           "type": "gh_out_of_stock_form",
           "settings": {
             "message": "Get notified when this product is back in stock.",
-            "force_show": true
+            "force_show": false
           }
         },
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "{% unless product.available %}\n\n{% render 'gh-element-out-of-stock-form' product: product %}\n\n{% endunless %}"
           }
