@@ -37,22 +37,22 @@
             "tab_3_title": "Suggested Use"
           }
         },
-        "9367b6f8-f376-428c-bdb1-c215da684ae8": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<button class=\"button button--full-width disabled\">Out of Stock<\/button>"
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
           }
         },
+        "9367b6f8-f376-428c-bdb1-c215da684ae8": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<button class=\"button button--full-width disabled\">Out of Stock<\/button>"
+          }
+        },
         "gh_out_of_stock_form_bCNL4b": {
           "type": "gh_out_of_stock_form",
           "settings": {
-            "message": "<p>Get Notified!<\/p>",
+            "message": "<p><strong>Sorry we’re out of stock.<\/strong><\/p><p>Because of the high demand for Global Healing products worldwide, this product is temporarily out of stock. Global Healing products contain only the finest organic and wildcrafted raw materials and ingredients available. Sometimes the ingredients we source do not meet our high quality standards and have to be rejected. This process may also cause delays until we find quality replacements that we are proud to put in our products.<\/p><p>Get notified when this product is back in stock.<\/p>",
             "success_message": "<p>Success! You'll be receiving an email shortly.<\/p>",
             "force_show": true
           }
@@ -63,8 +63,8 @@
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "price",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
-        "9367b6f8-f376-428c-bdb1-c215da684ae8",
         "variant_picker",
+        "9367b6f8-f376-428c-bdb1-c215da684ae8",
         "gh_out_of_stock_form_bCNL4b"
       ],
       "custom_css": [
