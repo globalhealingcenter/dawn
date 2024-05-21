@@ -125,6 +125,15 @@
       "type": "shogun-below",
       "settings": {
       }
+    },
+    "custom_liquid_4qRrBc": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div id=\"pdp-four-sixty-before\"><\/div>\n\n<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 30px; margin-bottom: 30px;\">Explore our Instagram<\/h2><\/a>\n\n<script src=\"\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-open-links-in-same-page=\"true\" data-cell-size=\"20%\"><\/script>\n<style>.fs-has-links::after { padding:5px 7.5px;background-color:#ffffff;color:rgba(0, 0, 0, 0.8);content:\"LEARN MORE\"; } .fs-wrapper { height:auto; } .fs-slider_v2_5  .fs-entry-container { height:0 !important;width:20%!important;padding-top:20%!important; } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:Times New Roman, serif;font-style:normal;font-weight:normal;font-size:14px; } div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:14px; } .fs-wrapper div.fs-text-container * { color:#ffffff; } .fs-wrapper div.fs-text-container { background-color:rgba(0, 0, 0, 0.8);margin:0px; } div.fs-entry-date { display:none; } div.fs-entry-title { display:none; } .fs-slider_v2_5 .fs-wrapper div.fs-timeline-entry { margin:1px; } <\/style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -134,6 +143,7 @@
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
     "17102784031f6b0a3f",
-    "shogun-below"
+    "shogun-below",
+    "custom_liquid_4qRrBc"
   ]
 }
