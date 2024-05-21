@@ -52,7 +52,8 @@
         "gh_out_of_stock_form_bCNL4b": {
           "type": "gh_out_of_stock_form",
           "settings": {
-            "message": "Get notified when this product is back in stock.",
+            "message": "<p>Get Notified!<\/p>",
+            "success_message": "<p>Success! You'll be receiving an email shortly.<\/p>",
             "force_show": true
           }
         }
