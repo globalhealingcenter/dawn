@@ -49,10 +49,11 @@
             "picker_type": "button"
           }
         },
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c": {
-          "type": "custom_liquid",
+        "gh_out_of_stock_form_bCNL4b": {
+          "type": "gh_out_of_stock_form",
           "settings": {
-            "custom_liquid": "{% render 'gh-element-out-of-stock-form' product: product %}"
+            "message": "Get notified when this product is back in stock.",
+            "force_show": true
           }
         }
       },
@@ -63,7 +64,7 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "9367b6f8-f376-428c-bdb1-c215da684ae8",
         "variant_picker",
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c"
+        "gh_out_of_stock_form_bCNL4b"
       ],
       "custom_css": [
 
