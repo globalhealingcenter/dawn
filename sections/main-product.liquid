@@ -1022,10 +1022,16 @@
       "name": "Out of Stock Form",
       "settings": [
         {
-          "type": "textarea",
+          "type": "richtext",
           "id": "message",
           "label": "Message",
-          "default": "Get notified when this product is back in stock."
+          "default": "<p>Get notified when this product is back in stock.</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "success_message",
+          "label": "Success Message",
+          "default": "<p>Success! You'll be receiving an email shortly.</p>"
         },
         {
           "type": "checkbox",
