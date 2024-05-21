@@ -65,6 +65,13 @@
             "show_gift_card_recipient": true
           }
         },
+        "gh_out_of_stock_form_dAeEPR": {
+          "type": "gh_out_of_stock_form",
+          "settings": {
+            "message": "Get notified when this product is back in stock.",
+            "force_show": true
+          }
+        },
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c": {
           "type": "custom_liquid",
           "settings": {
@@ -87,6 +94,7 @@
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
+        "gh_out_of_stock_form_dAeEPR",
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
