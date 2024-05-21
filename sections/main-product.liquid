@@ -256,11 +256,12 @@
             {%- when 'gh_out_of_stock_form' -%}
                           
               <div class="" {{ block.shopify_attributes }}>
-              {% unless product.available %}
-                {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
-              {% endunless %}
               {% if block.settings.force_show %}
                 {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
+              {% else %}
+                {% unless product.available %}
+                  {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
+                {% endunless %}
               {% endif %}
               </div>
             
