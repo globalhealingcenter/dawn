@@ -18,10 +18,9 @@
           "settings": {
           }
         },
-        "custom_liquid_TNPNF9": {
-          "type": "custom_liquid",
+        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97": {
+          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {
-            "custom_liquid": "<div class=\"yotpo-widget-instance\" data-yotpo-instance-id=\"736910\" data-yotpo-product-id=\"{{product.id}}\" data-yotpo-variant-id=\"{{ product.selected_or_first_available_variant.id }}\" data-yotpo-product-variants=\"{{ product.variants | json | url_encode }}\" data-yotpo-product-collections=\"{{product.collections | json | url_encode}}\" data-yotpo-product-tags=\"{{ product.tags | json | url_encode }}\" data-yotpo-product-type=\"{{ product.type | json | url_encode }}\"><\/div>"
           }
         },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
@@ -86,7 +85,7 @@
       },
       "block_order": [
         "title",
-        "custom_liquid_TNPNF9",
+        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
