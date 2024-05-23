@@ -64,11 +64,6 @@
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
-        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL": {
-          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -81,6 +76,12 @@
           "settings": {
             "publishId": "5ded4xh85pays"
           }
+        },
+        "custom_liquid_TNPNF9": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div class=\"yotpo-widget-instance\" data-yotpo-instance-id=\"736910\" data-yotpo-product-id=\"{{product.id}}\" data-yotpo-variant-id=\"{{ product.selected_or_first_available_variant.id }}\" data-yotpo-product-variants=\"{{ product.variants | json | url_encode }}\" data-yotpo-product-collections=\"{{product.collections | json | url_encode}}\" data-yotpo-product-tags=\"{{ product.tags | json | url_encode }}\" data-yotpo-product-type=\"{{ product.type | json | url_encode }}\"><\/div>"
+          }
         }
       },
       "block_order": [
@@ -92,9 +93,9 @@
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
-        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL",
         "buy_buttons",
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
+        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L",
+        "custom_liquid_TNPNF9"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
@@ -166,6 +167,11 @@
     "1686083501cc540fa5": {
       "type": "apps",
       "blocks": {
+        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd": {
+          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {
+          }
+        },
         "25085916-2810-44e8-9e6d-866a06af66f3": {
           "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
@@ -177,17 +183,12 @@
           "settings": {
             "publishId": "publishId"
           }
-        },
-        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd": {
-          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {
-          }
         }
       },
       "block_order": [
+        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd",
         "25085916-2810-44e8-9e6d-866a06af66f3",
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky",
-        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd"
+        "tolstoy_shoppable_video_ugc_stories_block_zkXxky"
       ],
       "settings": {
         "include_margins": true
