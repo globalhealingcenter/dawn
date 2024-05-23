@@ -64,6 +64,11 @@
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
+        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL": {
+          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -76,11 +81,6 @@
           "settings": {
             "publishId": "5ded4xh85pays"
           }
-        },
-        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL": {
-          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {
-          }
         }
       },
       "block_order": [
@@ -92,9 +92,9 @@
         "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
+        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL",
         "buy_buttons",
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L",
-        "yotpo_loyalty_rewards_product_points_module_app_block_EPbYKL"
+        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
