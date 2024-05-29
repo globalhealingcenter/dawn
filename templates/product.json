@@ -18,11 +18,6 @@
           "settings": {
           }
         },
-        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97": {
-          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {
-          }
-        },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
           "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
@@ -76,6 +71,11 @@
             "show_gift_card_recipient": true
           }
         },
+        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97": {
+          "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {
+          }
+        },
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L": {
           "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/stories-block\/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
@@ -85,7 +85,6 @@
       },
       "block_order": [
         "title",
-        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
@@ -94,6 +93,7 @@
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
+        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97",
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
       "custom_css": [
