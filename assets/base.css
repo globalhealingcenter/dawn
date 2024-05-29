@@ -3516,3 +3516,16 @@ details-disclosure > details {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+/* Blog Styles */
+@media screen and (min-width: 750px){
+.blog-articles {
+    grid-template-columns: 1fr 1fr 1fr 1fr !important;
+}
+.blog-articles--collage>*:nth-child(4n + 1){
+    grid-column: span 1 !important;
+}
+}
+
+.blog-articles h3.card__heading.h2 {
+    font-size: 26px;
+}
