@@ -444,7 +444,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-
+      ".article-template__content img {float: right; max-width: 374px !important;}"
     ]
   }
 }
