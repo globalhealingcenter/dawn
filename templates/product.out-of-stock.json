@@ -52,7 +52,7 @@
         "gh_out_of_stock_form_bCNL4b": {
           "type": "gh_out_of_stock_form",
           "settings": {
-            "message": "<p><strong>Sorry we’re out of stock.<\/strong><\/p><p>Because of the high demand for Global Healing products worldwide, this product is temporarily out of stock. Global Healing products contain only the finest organic and wildcrafted raw materials and ingredients available. Sometimes the ingredients we source do not meet our high quality standards and have to be rejected. This process may also cause delays until we find quality replacements that we are proud to put in our products.<\/p><p>Get notified when this product is back in stock.<\/p>",
+            "message": "<p><strong>Sorry we’re out of stock.<\/strong><\/p><p>At Global Healing, we are committed to using only the finest organic and wildcrafted raw materials and ingredients in our products. Occasionally, the ingredients we source do not meet our stringent quality standards and must be rejected. We've been finding adulterants, fillers, high levels of heavy metals, high microbial counts, and materials that fail to meet identity verification. It's sad that this is happening in our industry, more than we've ever experienced before. As a result, this process may cause delays until we find quality replacements that we are proud to put in our products. We appreciate your patience.<\/p><p>Get notified when this product is back in stock.<\/p>",
             "success_message": "<p>Success! You'll be receiving an email shortly.<\/p>",
             "force_show": true
           }
