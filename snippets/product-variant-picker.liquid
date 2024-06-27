@@ -39,10 +39,11 @@
             out_of_stocks.push('{{ variant.sku }}');
           {% endif %}
         {% endfor %}
-        parsed.forEach( variant => {
+        parsed.forEach( (variant, i) => {
           if( !out_of_stocks.includes(variant.sku) ) return;
           variant.available = false;
           variant.modified = true;
+          delete parsed[i];
         });
         variant_json.innerHTML = JSON.stringify(parsed);
         console.log('GH / product set to out of stock', out_of_stocks, parsed);
