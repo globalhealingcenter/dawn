@@ -56,6 +56,8 @@
     endfor
   -%}
 
+  {% assign option_in_frontend_out_of_stock = frontend_out_of_stock_products | contains: value %}
+  
   {%- if block.settings.picker_type == 'button' -%}
     <input
       type="radio"
@@ -74,7 +76,7 @@
       {{ value -}}
       <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
     </label>
-    <script>// <!-- {{ option | json }} --> <!-- out of stock here {{ frontend_out_of_stock_products | json }} --></script>
+    <script>// would be disabled: {{ option_in_frontend_out_of_stock }} --></script>
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
