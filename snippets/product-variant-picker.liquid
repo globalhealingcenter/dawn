@@ -46,15 +46,14 @@
         });
         variant_json.innerHTML = JSON.stringify(parsed);
         console.log('GH / product set to out of stock', out_of_stocks, parsed);
-        if( out_of_stocks.length ){
-          let radios = document.getElementById('variant-radios-{{ section.id }}');
-          radios.querySelectorAll('input[type="radio"]').forEach( radio => {
-            console.log('found radio', radio);
-            radio.addEventListener('change', e => {
-              console.log('changed!', radio.checked);
-            })
+        
+        let radios = document.getElementById('variant-radios-{{ section.id }}');
+        radios.querySelectorAll('input[type="radio"]').forEach( radio => {
+          console.log('found radio', radio);
+          radio.addEventListener('change', e => {
+            console.log('changed!', radio.checked);
           })
-        }
+        })
       </script>
     </variant-radios>
   {%- else -%}
