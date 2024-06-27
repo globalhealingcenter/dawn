@@ -44,8 +44,8 @@
           variant.available = false;
           variant.modified = true;
         });
-        console.log('parsed', parsed);
-        console.log('out_of_stocks', out_of_stocks);
+        variant_json.innerHTML = JSON.stringify(parsed);
+        console.log('GH / product set to out of stock', out_of_stocks, parsed);
       </script>
     </variant-radios>
   {%- else -%}
