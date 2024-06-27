@@ -23,6 +23,21 @@
   assign product_form_id = 'product-form-' | append: section.id
 -%}
 
+{% assign frontend_out_of_stock = false %}
+{% assign frontend_out_of_stock_products = '' %}
+
+{% for variant in product.variants %}
+  {% if variant.metafields.globalhealing.frontend_out_of_stock %}
+    {% assign frontend_out_of_stock_products = frontend_out_of_stock_products | append: variant.title | append: ',' %}
+  {% endif %}
+{% endfor %}
+
+{% assign frontend_out_of_stock_products = frontend_out_of_stock_products | split: ',' %}
+
+<script>
+  // out of stock {{ frontend_out_of_stock_products | json }}
+</script>
+
 {%- for value in option.values -%}
   {%- liquid
     assign option_disabled = true
