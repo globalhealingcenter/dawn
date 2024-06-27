@@ -61,8 +61,13 @@
         </div>
       {%- endfor -%}
 
-      <script type="application/json">
+      <script type="application/json" id="variant-selects-json-{{ section.id }}">
         {{ product.variants | json }}
+      </script>
+      <script>
+        let variant_json = document.getElementById('variant-selects-json-{{ section.id }}');
+        let parsed = JSON.parse(variant_json.innerHTML.trim());
+        console.log('parsed', parsed);
       </script>
     </variant-selects>
   {%- endif -%}
