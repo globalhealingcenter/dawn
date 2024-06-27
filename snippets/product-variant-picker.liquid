@@ -39,6 +39,11 @@
             out_of_stocks.push('{{ variant.sku }}');
           {% endif %}
         {% endfor %}
+        parsed.forEach( variant => {
+          if( !out_of_stocks.includes(variant.sku) ) return;
+          variant.available = false;
+          variant.modified = true;
+        });
         console.log('parsed', parsed);
         console.log('out_of_stocks', out_of_stocks);
       </script>
