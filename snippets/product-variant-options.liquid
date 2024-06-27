@@ -55,8 +55,6 @@
       endcase
     endfor
   -%}
-
-  {% assign option_in_frontend_out_of_stock = false %}
   
   {%- if block.settings.picker_type == 'button' -%}
     <input
@@ -68,7 +66,7 @@
       {% if option.selected_value == value %}
         checked
       {% endif %}
-      {% if option_disabled %}
+      {% if option_disabled or frontend_out_of_stock_products contains value %}
         class="disabled"
       {% endif %}
     >
