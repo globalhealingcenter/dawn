@@ -33,7 +33,14 @@
       <script>
         let variant_json = document.getElementById('variant-selects-json-{{ section.id }}');
         let parsed = JSON.parse(variant_json.innerHTML.trim());
+        let out_of_stocks = [];
+        {% for variant in product.variants %}
+          {% if variant.metafields.globalhealing.frontend_out_of_stock %}
+            out_of_stocks.push('{{ variant.sku }}');
+          {% endif %}
+        {% endfor %}
         console.log('parsed', parsed);
+        console.log('out_of_stocks', out_of_stocks);
       </script>
     </variant-radios>
   {%- else -%}
