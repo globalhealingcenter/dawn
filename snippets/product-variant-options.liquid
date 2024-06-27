@@ -74,7 +74,7 @@
       {{ value -}}
       <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
     </label>
-    <script>// <!-- {{ option | json }} --> <!-- {{ frontend_out_of_stock_products | json }} --></script>
+    <script>// <!-- {{ option | json }} --> <!-- out of stock here {{ frontend_out_of_stock_products | json }} --></script>
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
