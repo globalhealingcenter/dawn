@@ -56,7 +56,7 @@
     endfor
   -%}
 
-  {% assign option_in_frontend_out_of_stock = frontend_out_of_stock_products contains value %}
+  {% assign option_in_frontend_out_of_stock = false %}
   
   {%- if block.settings.picker_type == 'button' -%}
     <input
