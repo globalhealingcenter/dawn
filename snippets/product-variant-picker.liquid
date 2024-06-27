@@ -50,9 +50,9 @@
         if( out_of_stocks.length > 0 ){
           let radios = document.getElementById('variant-radios-{{ section.id }}');
           radios.querySelectorAll('input[type="radio"]').forEach( radio => {
-            console.log('found radio', radio);
             radio.addEventListener('change', e => {
-              console.log('changed!', radio.checked);
+              if( radio.checked !== true || !radio.classList.contains('disabled') ) return;
+              document.getElementById('shopify-block-ordergroove_offer').classList.add('hide');
             })
           })
         }
