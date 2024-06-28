@@ -70,6 +70,9 @@
       {% if option_disabled or frontend_out_of_stock_products contains value %}
         class="disabled"
       {% endif %}
+      {% if frontend_out_of_stock_products contains value %}
+        disabled="disabled"
+      {% endif %}
     >
     <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
       {{ value -}}
