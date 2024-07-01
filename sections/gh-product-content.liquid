@@ -74,8 +74,8 @@
               <div data-type="image">
                 {% if block.image.desktop %}
                 <picture>
-                  <source media="(min-width: 900px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}">
-                  <source media="(max-width: 899px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
+                  <source media="(min-width: 900px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?w=400">
+                  <source media="(max-width: 899px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?w=400">
                   <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
                 </picture>
                 {% endif %}
