@@ -60,6 +60,29 @@
           </div>
         </div>
         {% endif %}
+      {% when 'story' %}
+        {% if block.content %}
+          <div class="ghd--block--story ghd--block bg-cream-dark">
+            <div data-type="cols">
+              <div data-type="text">
+                <h2 class="eyebrow pb1">
+                  <span>{{ block.title.before | default: 'BEHIND THE ALCHEMY' }}</span>
+                  {{ block.title.main }}
+                </h2>
+                {{ block.content }}
+              </div>
+              <div data-type="image">
+                {% if block.image.desktop %}
+                <picture>
+                  <source media="(min-width: 900px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}">
+                  <source media="(max-width: 899px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
+                  <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
+                </picture>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
       {% when 'benefits' %}
         <div class="ghd--block--benefits ghd--block">
           <div data-type="cols">
