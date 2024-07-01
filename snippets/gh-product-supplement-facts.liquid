@@ -11,7 +11,7 @@
     {% else %}
         {% if config.supplement_facts contains 'https' %}
           <img class='gh--modal-product-supplement-facts-loader' src='https://cdn.globalhealing.com/web/img/loading/leaf.gif' width='114' height='114' alt='' />
-        <img class='hide gh--modal-product-supplement-facts-image' src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy" onload="document.querySelectorAll('.gh--modal-product-supplement-facts-loader').forEach( l => l.classList.add('hide')); this.classList.remove('hide')">
+        <img src='{{ config.supplement_facts }}?w=800' srcset='{{ config.supplement_facts }}?w=1600 2x' alt='supplement facts!' loading="lazy" onload="document.querySelectorAll('.gh--modal-product-supplement-facts-loader').forEach( l => l.classList.add('hide'))">
         {% endif %}
     {% endif %}
 {% else %}
