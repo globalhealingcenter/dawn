@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "current": {
     "logo": "shopify:\/\/shop_images\/seal-white.png",
@@ -444,7 +453,11 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".article-template__content img {float: right; width: 374px !important;}"
+      ".article-template__content img {float: right; width: 374px !important;}",
+      ".youtube-video {display: none;}",
+      "#wp_rp_first {\/* display: none; *\/}",
+      "ul.related_post.wp_rp {display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0; }",
+      "ul.related_post.wp_rp li {flex: 1 1 20%; box-sizing: border-box; padding: 10px; text-align: center; }"
     ]
   }
 }
