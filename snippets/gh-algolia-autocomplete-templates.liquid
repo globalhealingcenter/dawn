@@ -27,6 +27,10 @@
 
       const { html, item, components } = templateOptions;
 
+      if( itemLink.slice(-1) === '/' ) {
+        itemLink = itemLink.substring(0, itemLink.length - 1);
+      }
+
       let reviews = { count: 0, average: 0 }
       if( item.meta.globalhealing && item.meta.globalhealing.reviews_average && item.meta.globalhealing.reviews_count ){
         reviews.average = item.meta.globalhealing.reviews_average;
