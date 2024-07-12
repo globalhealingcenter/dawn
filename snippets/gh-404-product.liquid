@@ -551,7 +551,7 @@
     </div>
   </div>
 </div>
-      `
+      `;
 
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
@@ -573,6 +573,7 @@ gh_404.init();
   // {{ request.origin }} 
   // {{ template }}
   // {{shop.url | append: share_permalink}}
+  // {{ localization.country.name }}
 
 </script>
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
