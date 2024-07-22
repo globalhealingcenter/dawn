@@ -3516,3 +3516,7 @@ details-disclosure > details {
     --border-offset: 0px; /* Prevent the border from growing on buttons when this effect is on. */
   }
 }
+
+.shopify-policy__container {
+    padding-top: 40px;
+}
