@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "current": {
     "logo": "shopify:\/\/shop_images\/seal-white.png",
@@ -192,6 +201,12 @@
       },
       "4705145147225299685": {
         "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/widget-block\/06fa8282-42ff-403e-b67c-1936776aed11",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "6628239160433917566": {
+        "type": "shopify:\/\/apps\/littledata-revenue-tracking\/blocks\/LittledataLayer\/45a35ed8-a2b2-46c3-84fa-6f58497c5345",
         "disabled": false,
         "settings": {
         }
