@@ -66,15 +66,16 @@
         </header>
 
       {%- when 'content' -%}
+      <div class="custom-article-layout">  
         <div
-          class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          itemprop="articleBody"
-          {{ block.shopify_attributes }}
-        >
-          {{ article.content }}
-        </div>
+            class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+            itemprop="articleBody"
+            {{ block.shopify_attributes }}
+          >
+            {{ article.content }}
+          </div>
       <!-- Begin Sidebar -->
-      <div id="sidebar" class="col col-12 md-col-4 md-pl2 lg-col-3 xs-hide">
+      <div id="sidebar" class="custom-sidebar">
 		
     <div id="secondary" class="xs-hide widget-area">
     
@@ -166,6 +167,7 @@
       </div>
       
     </div>
+  </div>   
       <!-- End Sidebar -->
       {%- when 'share' -%}
         <div
