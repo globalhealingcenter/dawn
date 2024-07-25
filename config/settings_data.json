@@ -461,6 +461,7 @@
       "\/* NEW BLOG CSS *\/\/* General styles for the layout *\/.custom-article-layout {display: flex; flex-wrap: wrap; gap: 20px; max-width: 1300px; margin: 0 auto;}",
       ".custom-article-content {flex: 1; min-width: 300px; max-width: 70%; padding-left: 122px;}",
       ".custom-sidebar {flex: 0 0 300px; max-width: 300px;}",
+      ".custom-article-content.rte img {float: right;}",
       "\/* Styles for mobile responsiveness *\/@media (max-width: 768px) {.custom-article-layout {flex-direction: column; } .custom-article-content, .custom-sidebar {max-width: 100%; padding-right: 50px; padding-left: 50px; }}",
       "\/* NEW BLOG CSS END *\/"
     ]
