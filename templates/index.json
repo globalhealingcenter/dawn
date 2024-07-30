@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493": {
@@ -62,7 +71,7 @@
             "link_2_text": "TAKE OUR QUIZ",
             "link_2": "shopify:\/\/pages\/colon-health-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
-            "link_list": "homepage-menu"
+            "link_list": ""
           }
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
@@ -114,7 +123,6 @@
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "128545",
@@ -156,7 +164,6 @@
       "blocks": {
         "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6": {
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "128545",
