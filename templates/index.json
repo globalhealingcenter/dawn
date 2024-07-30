@@ -105,7 +105,7 @@
         "90d53a3e-607e-44cf-81c0-4d063ee2042c": {
           "type": "mission",
           "settings": {
-            "heading": "Global Healing<br> is Our Mission",
+            "heading": "Global Healing is Our Mission",
             "intro_text": "<p>Since 1998, our mission has been to empower people to take control of their health naturally and restore their body’s self-healing abilities.<br\/><a href=\"\/pages\/our-story\" title=\"Our Healing Mission & Story\"><strong>OUR STORY<\/strong><\/a><br\/>                        <\/p>"
           }
         },
@@ -125,7 +125,7 @@
           "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
-            "id": "128545",
+            "id": "105517",
             "product_id_enabled": true,
             "collection_id_enabled": false
           }
