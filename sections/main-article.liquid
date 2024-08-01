@@ -117,8 +117,8 @@
           Get helpful articles, health tips, &amp; natural health remedies straight to your inbox.
         </p>
     
-        <div class="ghc-form" id="sidebar_signup" data-form-url="https://hooks.zapier.com/hooks/catch/1153851/o2ylden/">
-    
+        <form class="ghc-form" id="sidebar_signup" data-form-url="https://hooks.zapier.com/hooks/catch/1153851/o2ylden/">
+  
           <!-- rss -->
           <input type="hidden" value="1" name="group[17433][1]" id="mce-group[17433]-17433-0">
           <input type="hidden" value="4" name="group[17437][4]" id="mce-group[17437]-17437-0">
@@ -143,7 +143,7 @@
             document.getElementById('gdpr-date').setAttribute( 'value', eu_date );
           </script>
     
-          <div class="ghc-form__signup ghc-form">
+          <div class="ghc-form__signup">
             <div class="eu-only mt1" style="font-size: 14px;">
               <label class="regular">
                 <input id="sidebar_signup_eu" data-form="#sidebar_signup" class="eu-agree-checkbox" name="CheckBox.GDPRExistingSubscriberConsent.GDPRCheck" type="checkbox" value="1">
@@ -160,7 +160,10 @@
           </div>
     
           <div class="ghc-form__success bold center">Success! You'll be receiving an email shortly.</div>
-        </div>
+        </form>
+        <script>
+          gh.form.create(document.getElementById('sidebar_signup'));
+        </script>
       </div>
     
           
