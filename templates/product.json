@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "shogun-helper": {
@@ -182,12 +191,22 @@
           "settings": {
             "publishId": "publishId"
           }
+        },
+        "rebuy_personalization_engine_rebuy_widget_MCbLYn": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "105025",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
         }
       },
       "block_order": [
         "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd",
         "25085916-2810-44e8-9e6d-866a06af66f3",
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky"
+        "tolstoy_shoppable_video_ugc_stories_block_zkXxky",
+        "rebuy_personalization_engine_rebuy_widget_MCbLYn"
       ],
       "settings": {
         "include_margins": true
