@@ -164,6 +164,31 @@
         <script>
           gh.form.create(document.getElementById('sidebar_signup'));
         </script>
+        <style>
+          .ghc-form__loader, .ghc-form__loader--inline, .ghc-form__success, .ghc-form__error, .ghc-form__input__error {
+              display: none
+          }
+          
+          .ghc-form.loading .ghc-form__loader {
+              display: block
+          }
+          
+          .ghc-form.loading .ghc-form__loader--inline {
+              display: inline-block
+          }
+          
+          .ghc-form.success .ghc-form__signup {
+              display: none
+          }
+          
+          .ghc-form.success .ghc-form__success {
+              display: block
+          }
+          
+          .ghc-form__input.error .ghc-form__input__error {
+              display: block
+          }
+        </style>
       </div>
     
           
