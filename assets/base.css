@@ -3517,6 +3517,72 @@ details-disclosure > details {
   }
 }
 /* Blog Styles */
+#sidebar .newsletter-signup {
+    padding: 15px 14px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+#sidebar .btn-orange {
+    background-color: #f15d26;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+#sidebar .newsletter-signup {
+    padding: 15px 14px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+#sidebar .rounded {
+    border-radius: 3px;
+}
+#sidebar .btn {
+    font-family: inherit;
+    font-size: .8rem;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: .64rem 1rem;
+    margin: 0;
+    height: auto;
+    border: 1px solid transparent;
+    vertical-align: middle;
+    -webkit-appearance: none;
+    color: #fff;
+    background-color: transparent;
+    box-sizing: border-box;
+    line-height: 1.563;
+    padding-block-start: 10.24px;
+    padding-bottom: 10.24px;
+    padding-inline-end: 16px;
+    padding-inline-start: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 10.24px;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+#sidebar .btn-orange {
+    background-color: #f15d26;
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+#sidebar input#email {
+    padding: 10.24px;
+    line-height: 1.563;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-size: 11px;
+    border: 1px solid #ccc;
+}
+#sidebar input#email::placeholder {
+    font-size: 13px;
+}
+#sidebar .newsletter-signup h3.center.green {
+    margin-bottom: 0px;
+}
 @media screen and (min-width: 750px){
 .blog-articles {
     grid-template-columns: 1fr 1fr 1fr 1fr !important;
