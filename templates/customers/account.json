@@ -1,3 +1,12 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
 {
   "sections": {
     "0a5c7c21-802d-4186-be62-a4c68b0b882c": {
@@ -5,6 +14,7 @@
       "blocks": {
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0": {
           "type": "heading",
+          "disabled": true,
           "settings": {
             "heading": "My Account",
             "heading_size": "h1"
@@ -12,6 +22,7 @@
         },
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-1": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p><a href=\"https:\/\/globalhealing.com\/apps\/subscriptions\/manage\/\" title=\"https:\/\/globalhealing.com\/apps\/subscriptions\/manage\/\">My Subscribe & Save<\/a><\/p><p><a href=\"\/pages\/live-healthy-rewards-terms\" title=\"Live Healthy Rewards Program Terms & Conditions\">My Rewards<\/a><\/p><p><a href=\"\/pages\/my-preferences\" title=\"My Preferences\">My Preferences<\/a><\/p><p><a href=\"\/pages\/my-courses\" title=\"My Courses\">My Courses<\/a><\/p><p><a href=\"https:\/\/globalhealing.com\/pages\/my-courses\" title=\"https:\/\/globalhealing.com\/pages\/my-courses\">My Downloads<\/a><\/p><p><a href=\"\/account\/logout\" title=\"Logout\">Logout<\/a><\/p>"
           }
@@ -21,7 +32,6 @@
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-0",
         "template--16057686491336__0a5c7c21-802d-4186-be62-a4c68b0b882c-1684777290466bff84-1"
       ],
-      "disabled": true,
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "left",
@@ -29,6 +39,32 @@
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 52
+      }
+    },
+    "16877798907f42cf35": {
+      "type": "apps",
+      "blocks": {
+        "ordergroove_subscriptions_smi_block_nQRKHG": {
+          "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/smi-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+          "settings": {
+          }
+        },
+        "3b85833f-2d84-476e-820a-e66f15ca5ec2": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "112272",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "ordergroove_subscriptions_smi_block_nQRKHG",
+        "3b85833f-2d84-476e-820a-e66f15ca5ec2"
+      ],
+      "settings": {
+        "include_margins": true
       }
     },
     "main": {
@@ -44,31 +80,11 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
-    },
-    "16877798907f42cf35": {
-      "type": "apps",
-      "blocks": {
-        "3b85833f-2d84-476e-820a-e66f15ca5ec2": {
-          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "settings": {
-            "enabled": true,
-            "id": "112272",
-            "product_id_enabled": true,
-            "collection_id_enabled": false
-          }
-        }
-      },
-      "block_order": [
-        "3b85833f-2d84-476e-820a-e66f15ca5ec2"
-      ],
-      "settings": {
-        "include_margins": true
-      }
     }
   },
   "order": [
     "0a5c7c21-802d-4186-be62-a4c68b0b882c",
-    "main",
-    "16877798907f42cf35"
+    "16877798907f42cf35",
+    "main"
   ]
 }
