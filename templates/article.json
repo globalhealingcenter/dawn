@@ -36,13 +36,21 @@
           "type": "content",
           "settings": {
           }
+        },
+        "authorcraft_author_box_Aq6JhD": {
+          "type": "shopify:\/\/apps\/authorcraft\/blocks\/author_box\/362b7802-1d5b-41dc-a60c-8ff8f6e81869",
+          "settings": {
+            "author_box_text_color": "#000",
+            "author_box_background_color": "#e2e2e2"
+          }
         }
       },
       "block_order": [
         "featured_image",
         "title",
         "share",
-        "content"
+        "content",
+        "authorcraft_author_box_Aq6JhD"
       ],
       "settings": {
       }
