@@ -58,7 +58,7 @@
     "custom_liquid_tXtMAK": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "{% for tag in article.tags %}\n<p><a href=\"\/blogs\/blog\/tagged\/{{ tag }}\">{{ tag }}<\/a><\/p>\n{% endfor %}",
+        "custom_liquid": "{% for tag in article.tags %}\n<p><a href=\"\/blogs\/blog\/tagged\/{{ tag | handleize }}\">{{ tag }}<\/a><\/p>\n{% endfor %}",
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
