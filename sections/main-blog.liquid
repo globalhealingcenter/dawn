@@ -22,9 +22,9 @@
     
     <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       {% if current_tags.size > 0 %}
-        {{ current_tags[0] }}
+        Articles tagged with "{{ current_tags[0] }}"
       {% else %}
-          {{ blog.title | escape }}
+        {{ blog.title | escape }}
       {% endif %}
     </h1>
 
