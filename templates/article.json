@@ -37,6 +37,11 @@
           "settings": {
           }
         },
+        "tags_UGhmDq": {
+          "type": "tags",
+          "settings": {
+          }
+        },
         "authorcraft_author_box_Aq6JhD": {
           "type": "shopify:\/\/apps\/authorcraft\/blocks\/author_box\/362b7802-1d5b-41dc-a60c-8ff8f6e81869",
           "settings": {
@@ -50,23 +55,14 @@
         "title",
         "share",
         "content",
+        "tags_UGhmDq",
         "authorcraft_author_box_Aq6JhD"
       ],
       "settings": {
       }
-    },
-    "custom_liquid_tXtMAK": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<p> Posted in:\n{% for tag in article.tags %}\n    {% if tag contains \"Category\" %}\n        <a href=\"\/blogs\/blog\/tagged\/{{ tag | handleize }}\">\n            {{ tag | replace: \"Category_\", \"\" }} \n        <\/a>\n    {% endif %}\n{% endfor %}\n<\/p>",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
     }
   },
   "order": [
-    "main",
-    "custom_liquid_tXtMAK"
+    "main"
   ]
 }
