@@ -12,13 +12,6 @@
     "main": {
       "type": "main-article",
       "blocks": {
-        "featured_image": {
-          "type": "featured_image",
-          "disabled": true,
-          "settings": {
-            "image_height": "adapt"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -26,7 +19,7 @@
             "blog_show_author": true
           }
         },
-        "share": {
+        "share_gLGrTy": {
           "type": "share",
           "disabled": true,
           "settings": {
@@ -52,9 +45,8 @@
         }
       },
       "block_order": [
-        "featured_image",
         "title",
-        "share",
+        "share_gLGrTy",
         "content",
         "tags_UGhmDq",
         "authorcraft_author_box_Aq6JhD"
