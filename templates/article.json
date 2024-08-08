@@ -40,7 +40,7 @@
         "authorcraft_author_box_Aq6JhD": {
           "type": "shopify:\/\/apps\/authorcraft\/blocks\/author_box\/362b7802-1d5b-41dc-a60c-8ff8f6e81869",
           "settings": {
-            "author_box_text_color": "#000",
+            "author_box_text_color": "#000000",
             "author_box_background_color": "#e2e2e2"
           }
         }
@@ -54,9 +54,19 @@
       ],
       "settings": {
       }
+    },
+    "custom_liquid_tXtMAK": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% for tag in article.tags %}\n<p>{{ tag }}<\/p>\n{% endfor %}",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_liquid_tXtMAK"
   ]
 }
