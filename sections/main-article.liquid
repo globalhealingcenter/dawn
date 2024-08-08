@@ -14,9 +14,7 @@
               Posted in:
               {% for tag in article.tags %}
                   {% if tag contains "Category" %}
-                      <a href="/blogs/blog/tagged/{{ tag | handleize }}">
-                          {{ tag | replace: "Category_", "" | replace: ">"," > " | strip }}
-                      </a>, 
+                      <a href="/blogs/blog/tagged/{{ tag | handleize }}">{{ tag | replace: "Category_", "" | replace: ">"," > " | strip }}</a>, 
                   {% endif %}
               {% endfor %}
             </p>
