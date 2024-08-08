@@ -9,15 +9,18 @@
         </div>
       {%- when 'tags' -%}
         <div class=" {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}" {{ block.shopify_attributes }}>
-          <p> Posted in:
-          {% for tag in article.tags %}
-              {% if tag contains "Category" %}
-                  <a href="/blogs/blog/tagged/{{ tag | handleize }}">
-                      {{ tag | replace: "Category_", "" }} 
-                  </a>
-              {% endif %}
-          {% endfor %}
-          </p>
+          <div class="page-width page-width--narrow">
+            <p> 
+              Posted in:
+              {% for tag in article.tags %}
+                  {% if tag contains "Category" %}
+                      <a href="/blogs/blog/tagged/{{ tag | handleize }}">
+                          {{ tag | replace: "Category_", "" }} 
+                      </a>
+                  {% endif %}
+              {% endfor %}
+            </p>
+          </div>
         </div>
       {%- when 'featured_image' -%}
         {%- if article.image -%}
