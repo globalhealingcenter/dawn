@@ -57,11 +57,11 @@
 
       {%- when 'title' -%}
         <header
-          class="page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          class="pb4 page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
           <h1
-            class="article-template__title h2 color-green"
+            class="article-template__title color-green"
             itemprop="headline"
           >
             {{ article.title | escape }}
