@@ -78,8 +78,6 @@
           {%- endif -%}
         </header>
 
-      <div class="sharethis-inline-share-buttons"></div>
-
       {%- when 'content' -%}
         <div class="page-width gh-article-layout">
         	<div class="flex">
@@ -88,6 +86,7 @@
         		  itemprop="articleBody"
         		  {{ block.shopify_attributes }}
         		>
+                  <div class="sharethis-inline-share-buttons"></div>
         			{{ article.content }}
         		</div>
         		<!-- Begin Sidebar -->
