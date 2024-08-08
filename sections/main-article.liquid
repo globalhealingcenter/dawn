@@ -79,7 +79,7 @@
         </header>
 
       {%- when 'content' -%}
-      <div class="page-width">
+        <div class="page-width gh-article-layout">
         	<div class="flex">
         		<div
         		  class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
@@ -94,6 +94,14 @@
         		</div>
         	</div>
         </div>
+      <style>
+        .gh-article-layout .flex{
+          gap: 30px;
+        }
+        .custom-article-content{
+          padding-left: 0;
+        }
+      </style>
 
       {%- when 'share' -%}
         <div
