@@ -1,0 +1,511 @@
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<div id="gh-category-navigation"></div>
+
+<script type="text/template" id="gh-category-navigation-template">
+    {{#each categories}}
+    <details class="">
+        <summary class="h5 py2">> {{ title }} {{#if active}} ACTIVE {{/if}}</summary>
+        <div class="pl1">
+
+            {{#each children}}
+
+            {{#if children}}
+            <details>
+                <summary>> {{ title }} {{#if active}} ACTIVE {{/if}}</summary>
+                {{#each children}}
+                <div class="pl1">
+                    <a href="#{{ slug }}">{{ title }} {{#if active}} ACTIVE {{/if}}</a>
+                </div>
+                {{/each}}
+            </details>
+            {{/if}}
+
+            {{#unless children}}
+            <div>
+                <a href="#{{ slug }}">{{ title }} {{#if active}} ACTIVE {{/if}}</a>
+            </div>
+            {{/unless}}
+
+            {{/each}}
+
+        </div>
+    </details>
+    {{/each}}
+</script>
+
+<script>
+	let categories = [
+		{
+			"title": "Health",
+			"slug": "",
+			"children": [
+				{
+					"title": "Gut and Digestive Health",
+					"slug": "gut-and-digestive-health",
+					"children": [
+						{
+							"title": "Digestive Issues",
+							"slug": "digestive-issues",
+							"children": [],
+						},
+						{
+							"title": "Gut Flora",
+							"slug": "gut-flora",
+							"children": [],
+						},
+						{
+							"title": "Laxatives",
+							"slug": "laxatives/",
+							"children": [],
+						},
+						{
+							"title": "Constipation",
+							"slug": "constipation/",
+							"children": [],
+						},
+						{
+							"title": "Bloating",
+							"slug": "bloating/",
+							"children": [],
+						},
+						{
+							"title": "",
+							"slug": "hemorrhoids/",
+							"children": [],
+						}
+					]
+				},
+				{
+					"title": "Whole Body Wellness",
+					"slug": "whole-body-wellness",
+					"children": [
+						{
+							"title": "Liver and Gallbladder",
+							"slug": "liver-and-gallbladder",
+							"children": []
+						},
+						{
+							"title": "Immune System",
+							"slug": "immune-system",
+							"children": []
+						},
+						{
+							"title": "Endocrine and Hormone",
+							"slug": "endocrine-and-hormone",
+							"children": []
+						},
+						{
+							"title": "Cardiovascular Health",
+							"slug": "cardiovascular-health",
+							"children": []
+						},
+						{
+							"title": "Circulatory",
+							"slug": "circulatory/",
+							"children": []
+						},
+						{
+							"title": "Respiratory",
+							"slug": "respiratory/",
+							"children": []
+						},
+						{
+							"title": "Bones and Muscles",
+							"slug": "bones-and-muscle",
+							"children": []
+						},
+						{
+							"title": "Kidney and Urinary",
+							"slug": "kidney-and-urinary",
+							"children": []
+						},
+						{
+							"title": "Hair and Skin",
+							"slug": "hair-and-skin",
+							"children": []
+						},
+						{
+							"title": "Teeth and Gums",
+							"slug": "teeth-and-gums",
+							"children": []
+						},
+						{
+							"title": "Appendix",
+							"slug": "appendix/",
+							"children": []
+						},
+						{
+							"title": "Brain Health",
+							"slug": "brain-health",
+							"children": []
+						},
+						{
+							"title": "Sexual Health",
+							"slug": "sexual-health",
+							"children": []
+						},
+						{
+							"title": "Energy",
+							"slug": "energy/",
+							"children": []
+						},
+						{
+							"title": "Sleep",
+							"slug": "sleep/",
+							"children": []
+						},
+					]
+				},
+				{
+					"title": "Men's Health",
+					"slug": "mens-health",
+					"children": []
+				},
+				{
+					"title": "Women's Health",
+					"slug": "womens-health",
+					"children": []
+				},
+				{
+					"title": "Children's Health",
+					"slug": "childrens-health",
+					"children": []
+				}
+			]
+		},
+		{
+			"title": "Nutrition",
+			"slug": "nutrition",
+			"children": [
+				{
+					"title": "Foods",
+					"slug": "/foods/",
+					"children": [{
+						"title": "Healthy Foods",
+						"slug": "/healthy-foods/",
+						"children": []
+					},
+						{
+							"title": "Foods to Avoid",
+							"slug": "/foods-to-avoid/",
+							"children": []
+						},
+						{
+							"title": "Water and Hydration",
+							"slug": "/water-and-hydration/",
+							"children": []
+						},
+						{
+							"title": "Nutrient Deficiencies",
+							"slug": "/nutrient-deficiencies/",
+							"children": []
+						},
+						{
+							"title": "Micronutrients",
+							"slug": "/micronutrients/",
+							"children": []
+						},
+						{
+							"title": "Macronutrients",
+							"slug": "/macronutrients/",
+							"children": []
+						},
+						{
+							"title": "Healthy Probiotic Foods",
+							"slug": "/healthy-probiotic-foods/",
+							"children": []
+						},
+					]
+				},
+				{
+					"title": "Diet",
+					"slug": "/diet/",
+					"children": [{
+						"title": "Body Cleansing Diet",
+						"slug": "/body-cleansing-diet/",
+						"children": []
+					},
+						{
+							"title": "Fasting Diet",
+							"slug": "/fasting-diet/",
+							"children": []
+						},
+						{
+							"title": "Vegan Diet",
+							"slug": "/vegan-diet/",
+							"children": []
+						},
+						{
+							"title": "Vegetarian Diet",
+							"slug": "/vegetarian-diet/",
+							"children": []
+						},
+						{
+							"title": "Raw Food Diet",
+							"slug": "/raw-food-diet/",
+							"children": []
+						},
+						{
+							"title": "Gluten Free Diet",
+							"slug": "/gluten-free-diet/",
+							"children": []
+						},
+						{
+							"title": "Alkaline Diet",
+							"slug": "/alkaline-diet/",
+							"children": []
+						},
+					]
+				},
+				{
+					"title": "Supplements",
+					"slug": "/supplements/",
+					"children": [{
+						"title": "Vitamins",
+						"slug": "/vitamins/",
+						"children": []
+					},
+						{
+							"title": "Minerals",
+							"slug": "/minerals/",
+							"children": []
+						},
+						{
+							"title": "Enzymes",
+							"slug": "/enzymes/",
+							"children": []
+						},
+						{
+							"title": "Probiotics",
+							"slug": "/probiotics/",
+							"children": []
+						},
+						{
+							"title": "Antioxidants",
+							"slug": "/antioxidants/",
+							"children": []
+						},
+					]
+				},
+				{
+					"title": "Plants for Health",
+					"slug": "/plants-for-health/",
+					"children": [{
+						"title": "Herbs",
+						"slug": "/herbs/",
+						"children": []
+					},
+						{
+							"title": "Spices",
+							"slug": "/spices/",
+							"children": []
+						},
+						{
+							"title": "Essential Oils",
+							"slug": "/essential-oils/",
+							"children": []
+						},
+						{
+							"title": "Trace Minerals",
+							"slug": "/trace-minerals/",
+							"children": []
+						},
+						{
+							"title": "Phytochemicals",
+							"slug": "/phytochemicals/",
+							"children": []
+						},
+						{
+							"title": "Growing Your Own",
+							"slug": "/grow-your-own/",
+							"children": []
+						},
+					]
+				},
+				{
+					"title": "Recipes",
+					"slug": "/recipes/",
+					"children": [{
+						"title": "Vegan Recipes",
+						"slug": "/vegan-recipes/",
+						"children": []
+					},
+						{
+							"title": "Vegetarian Recipes",
+							"slug": "/vegetarian-recipes/",
+							"children": []
+						},
+						{
+							"title": "Gluten Free Recipes",
+							"slug": "/gluten-free-recipes/",
+							"children": []
+						},
+						{
+							"title": "Drink Recipes",
+							"slug": "/drink-recipes/",
+							"children": []
+						},
+					]
+				},
+			]
+		},
+		{
+			"title": "Cleansing",
+			"slug": "cleansing",
+			"children": [
+				{
+					"title": "Whole Body Cleanse",
+					"slug": "whole-body-cleanse",
+					"children": []
+				},
+				{
+					"title": "Colon Cleanse",
+					"slug": "colon-cleanse",
+					"children": []
+				},
+				{
+					"title": "Liver Cleanse",
+					"slug": "liver-cleanse",
+					"children": []
+				},
+				{
+					"title": "Kidney Cleanse",
+					"slug": "kidney-cleanse",
+					"children": []
+				},
+				{
+					"title": "Lung Cleanse",
+					"slug": "lung-cleanse",
+					"children": []
+				},
+				{
+					"title": "Harmful Organism Cleanse",
+					"slug": "harmful-organism-cleanse",
+					"children": []
+				},
+				{
+					"title": "Toxic Metal Cleanse",
+					"slug": "toxic-metal-cleanse",
+					"children": []
+				},
+				{
+					"title": "Cleansing Herbs",
+					"slug": "cleansing-herbs",
+					"children": []
+				},
+			]
+		},
+		{
+			"title": "Mind and Body",
+			"slug": "",
+			"children": [
+				{
+					"title": "Weight Loss",
+					"slug": "weight-loss",
+					"children": []
+				},
+				{
+					"title": "Mental Wellness",
+					"slug": "mental-wellness",
+					"children": []
+				},
+				{
+					"title": "Exercise",
+					"slug": "exercise",
+					"children": []
+				},
+				{
+					"title": "Stress",
+					"slug": "stress",
+					"children": []
+				},
+				{
+					"title": "Meditation",
+					"slug": "meditation",
+					"children": []
+				},
+				{
+					"title": "Longevity",
+					"slug": "longevity",
+					"children": []
+				},
+				{
+					"title": "Integrated Care",
+					"slug": "integrated-care",
+					"children": []
+				},
+				{
+					"title": "Beauty",
+					"slug": "beauty",
+					"children": [
+						{
+							"title": "Skin Care",
+							"slug": "skin-care",
+							"children": []
+						},
+						{
+							"title": "Hair Care",
+							"slug": "hair-care",
+							"children": []
+						},
+						{
+							"title": "Cosmetics",
+							"slug": "cosmetics",
+							"children": []
+						},
+						{
+							"title": "Sunscreen",
+							"slug": "sunscreen",
+							"children": []
+						},
+						{
+							"title": "Personal Care Products",
+							"slug": "personal-care-products",
+							"children": []
+						}
+					]
+				},
+			]
+		}
+	];
+
+	function activateCurrent( current ) {
+		categories.forEach(c1 => {
+			if (c1.slug === current) c1.active = true;
+			let c2_active = false;
+
+			c1.children.forEach(c2 => {
+				let c3_active = false;
+
+				if (c2.slug === current) {
+					c2.active = true;
+					c2_active = true;
+				}
+
+				c2.children.forEach(c3 => {
+					if (c3.slug === current) {
+						c3.active = true;
+						c3_active = true;
+					}
+				})
+
+				if( c3_active ) {
+					c2.active = true;
+					c2_active = true;
+				}
+			})
+
+			if( c2_active ) c1.active = true;
+		})
+	}
+
+	activateCurrent('/foods-to-avoid/');
+
+	let container = document.getElementById('gh-category-navigation');
+	let text_template = document.getElementById('gh-category-navigation-template').innerText;
+	let template = Handlebars.compile(text_template);
+	container.innerHTML = template({
+		categories
+	})
+</script>
