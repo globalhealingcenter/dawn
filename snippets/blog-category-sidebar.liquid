@@ -502,7 +502,9 @@
 		})
 	}
 
-	activateCurrent('/foods-to-avoid/');
+  {% if current_tags.size > 0 %}
+      activateCurrent('{{current_tags[0]}}');
+  {% endif %}
 
 	let container = document.getElementById('gh-category-navigation');
 	let text_template = document.getElementById('gh-category-navigation-template').innerText;
