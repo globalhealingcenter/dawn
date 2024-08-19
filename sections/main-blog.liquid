@@ -19,8 +19,8 @@
 {%- paginate blog.articles by 12 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
 
-    <div class="flex">
-      <div style="width: 300px">
+    <div class="flex" style="gap: 20px">
+      <div class="bg-green-light p2" style="width: 300px">
         {% render 'blog-category-sidebar' %}
       </div>
       
