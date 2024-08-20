@@ -21,16 +21,18 @@
   </div>
 
   <div style="flex: 1;">
-    <h3 class="h4 mb1">
+    <h3 class="h4 mb0">
       <a href="{{ article.url }}" class="muted">
         {{ article.title | truncate: 50 | escape }}
       </a>
     </h3>
   
-    <p class="">
-      <span>By {{ article.author }}</span>
-      | 
-      <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+    <p class="mb1">
+      <small>
+        <span>By {{ article.author }}</span>
+        | 
+        <span>{{ article.published_at | time_tag: format: 'date' }}</span>
+      </small>
     </p>
   
     {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
