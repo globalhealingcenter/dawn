@@ -5,14 +5,14 @@
 {% raw %}
 <script type="text/template" id="gh-category-navigation-template">
     {{#each categories}}
-    <details class="{{#if active}}active{{/if}}">
+    <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
         <summary class="h5 py2>> {{ title }}</summary>
         <div class="pl1">
 
             {{#each children}}
 
             {{#if children}}
-            <details class="{{#if active}}active{{/if}}">
+            <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
                 <summary>> {{ title }}</summary>
                 {{#each children}}
                 <div class="pl1">
