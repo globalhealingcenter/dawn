@@ -1,6 +1,6 @@
 <div class="flex" style="gap: 20px;">
 
-  <div>
+  <div class="col-3">
     <img
       srcset="
         {%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
@@ -20,7 +20,7 @@
     >
   </div>
 
-  <div>
+  <div style="flex: 1;">
     <h3 class="h4 mb1">
       <a href="{{ article.url }}" class="muted">
         {{ article.title | truncate: 50 | escape }}
