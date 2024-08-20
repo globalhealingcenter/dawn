@@ -5,18 +5,18 @@
 {% raw %}
 <script type="text/template" id="gh-category-navigation-template">
     {{#each categories}}
-    <details class="">
-        <summary class="h5 py2">> {{ title }} {{#if active}} ACTIVE {{/if}}</summary>
+    <details class="{{#if active}}active{{/if}}">
+        <summary class="h5 py2>> {{ title }}</summary>
         <div class="pl1">
 
             {{#each children}}
 
             {{#if children}}
-            <details>
-                <summary>> {{ title }} {{#if active}} ACTIVE {{/if}}</summary>
+            <details class="{{#if active}}active{{/if}}">
+                <summary>> {{ title }}</summary>
                 {{#each children}}
                 <div class="pl1">
-                    <a href="#{{ slug }}">{{ title }} {{#if active}} ACTIVE {{/if}}</a>
+                    <a href="#{{ slug }}" class="{{#if active}}active{{/if}}">{{ title }}</a>
                 </div>
                 {{/each}}
             </details>
@@ -24,7 +24,7 @@
 
             {{#unless children}}
             <div>
-                <a href="#{{ slug }}">{{ title }} {{#if active}} ACTIVE {{/if}}</a>
+                <a href="#{{ slug }}" class="{{#if active}}active{{/if}}">{{ title }}</a>
             </div>
             {{/unless}}
 
