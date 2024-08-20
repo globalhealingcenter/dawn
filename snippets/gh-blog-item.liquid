@@ -27,9 +27,10 @@
       </a>
     </h3>
   
-    <div>
-        <span>{{ article.published_at | time_tag: format: 'date' }}</span>
-        <span>{{ article.author }}</span>
+    <div class="">
+      <span>By {{ article.author }}</span>
+      | 
+      <span>{{ article.published_at | time_tag: format: 'date' }}</span>
     </div>
   
     {%- if article.excerpt.size > 0 or article.content.size > 0 -%}
