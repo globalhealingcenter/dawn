@@ -13,5 +13,12 @@
     "market": "ca"
   },
   "sections": {
+    "header": {
+      "settings": {
+        "menu": "main-menu-canada"
+      },
+      "blocks": {
+      }
+    }
   }
 }
