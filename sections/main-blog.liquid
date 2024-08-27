@@ -41,7 +41,6 @@
           {%- endfor -%}
         </div>
 
-        {% comment %}
         <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
           {%- for article in blog.articles -%}
             <div
@@ -63,7 +62,6 @@
             </div>
           {%- endfor -%}
         </div>
-        {% endcomment %}
         
         {%- if paginate.pages > 1 -%}
           {%- render 'pagination', paginate: paginate -%}
