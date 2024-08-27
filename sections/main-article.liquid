@@ -84,7 +84,7 @@
 
       {%- when 'title' -%}
         <header
-          class="pb4 page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          class="pb1 {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
           {%- if block.settings.blog_show_date -%}
@@ -98,12 +98,10 @@
             </span>
           {%- endif -%}
 
-          <h1
-            class="article-template__title color-green h2"
-            itemprop="headline"
-          >
+          <h1 class="article-template__title color-green h2" itemprop="headline">
             {{ article.title | escape }}
           </h1>
+          
           <div class="sharethis-inline-share-buttons"></div>
         </header>
 
@@ -313,12 +311,12 @@
   {%- endif -%}
 </article>
 
-        </div>
+      </div>
 
-    <!-- Begin Sidebar -->
-    <div id="sidebar" class="custom-sidebar bg-green-light custom-sidebar p2 mb4">
-      {% render 'blog-sidebar' %}
-    </div>
+      <!-- Begin Sidebar -->
+      <div id="sidebar" class="custom-sidebar bg-green-light custom-sidebar p2 mb4">
+        {% render 'blog-sidebar' %}
+      </div>
         
     </div>
 </div>
