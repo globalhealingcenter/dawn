@@ -16,7 +16,11 @@
                 <summary>> {{ title }}</summary>
                 {{#each children}}
                 <div class="pl1">
-                    <a href="#{{ slug }}" class="{{#if active}}active{{/if}}">{{ title }}</a>
+                    {{#if active}}
+                      <span class="active">{{ title }}</span>
+                    {{else}}
+                      <a href="#{{ slug }}">{{ title }}</a>
+                    {{/if}}
                 </div>
                 {{/each}}
             </details>
