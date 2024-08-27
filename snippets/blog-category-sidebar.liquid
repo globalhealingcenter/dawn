@@ -14,15 +14,15 @@
             {{#if children}}
             <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
                 <summary>> {{ title }}</summary>
-                {{#each children}}
                 <div class="pl1">
-                    {{#if active}}
-                      <span class="active">{{ title }}</span>
-                    {{else}}
-                      <a href="#{{ slug }}">{{ title }}</a>
-                    {{/if}}
+                  {{#each children}}
+                      {{#if active}}
+                        <span class="active">{{ title }}</span>
+                      {{else}}
+                        <a href="#{{ slug }}">{{ title }}</a>
+                      {{/if}}
+                  {{/each}}
                 </div>
-                {{/each}}
             </details>
             {{/if}}
 
@@ -536,5 +536,9 @@
   #gh-category-navigation > details[open] > summary{
     font-weight: bold;
     color: var(--gh-color-green);
+  }
+
+  #gh-category-navigation > details[open] > summary > details[open] > div{
+    background: red;
   }
 </style>
