@@ -19,14 +19,7 @@
 {%- paginate blog.articles by 12 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
 
-    <div class="flex" style="gap: 30px">
-      <div class="bg-green-light p2" style="width: 250px">
-        {% render 'blog-category-sidebar' %}
-      </div>
-      
-      <div style="flex: 1;">
-        
-        <h2 class="color-green mt0 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <h2 class="color-green mt0 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
           {% if current_tags.size > 0 %}
             {% assign tag = current_tags[0] | replace: "Category_", "" | replace: ">", " > " %}
             {{ tag}}
@@ -35,6 +28,13 @@
           {% endif %}
         </h2>
 
+    <div class="flex" style="gap: 30px">
+      <div class="bg-green-light p2" style="width: 250px">
+        {% render 'blog-category-sidebar' %}
+      </div>
+      
+      <div style="flex: 1;">
+        
         <div class="gh-blog-articles pt3">
           {%- for article in blog.articles -%}
             {% render 'gh-blog-item', article: article %}
