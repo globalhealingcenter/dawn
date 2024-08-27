@@ -1,6 +1,9 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
  <style>
+   .gh-article-layout{
+     
+   }
   .gh-article-layout > .flex{
     gap: 40px;
   }
@@ -23,7 +26,7 @@
    }
 </style>
 
-<div class="page-width gh-article-layout">
+<div class="page-width gh-article-layout pt4">
   <div class="flex">
       <div
         class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
