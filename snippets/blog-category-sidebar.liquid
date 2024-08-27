@@ -14,7 +14,7 @@
             {{#if children}}
             <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
                 <summary>> {{ title }}</summary>
-                <div class="pl1">
+                <div class="">
                   {{#each children}}
                     <div>
                       {{#if active}}
@@ -541,6 +541,8 @@
   }
 
   #gh-category-navigation details[open] details[open] > div{
-    background: red;
+    background: #00000020;
+    padding: .5em 1em;
+    margin-bottom: 5px;
   }
 </style>
