@@ -1,5 +1,32 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
+ <style>
+  .gh-article-layout > .flex{
+    gap: 40px;
+  }
+  .custom-article-content{
+    padding-left: 0 !important;
+    max-width: initial !important;
+  }
+  h2{
+    font-size: 4rem;
+  }
+  h3{
+    font-size: 3rem;
+  }
+  h2,h3,h4,h5{
+    margin-top: 1em;
+  }
+</style>
+
+<div class="page-width gh-article-layout">
+  <div class="flex">
+      <div
+        class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        itemprop="articleBody"
+        {{ block.shopify_attributes }}
+      >
+
 <article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
@@ -81,39 +108,7 @@
         </header>
 
       {%- when 'content' -%}
-        <div class="page-width gh-article-layout">
-        	<div class="flex">
-        		<div
-        		  class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-        		  itemprop="articleBody"
-        		  {{ block.shopify_attributes }}
-        		>
-        			{{ article.content }}
-        		</div>
-        		<!-- Begin Sidebar -->
-        		<div id="sidebar" class="custom-sidebar bg-green-light custom-sidebar p2 mb4">
-                  {% render 'blog-sidebar' %}
-        		</div>
-        	</div>
-        </div>
-      <style>
-        .gh-article-layout > .flex{
-          gap: 40px;
-        }
-        .custom-article-content{
-          padding-left: 0 !important;
-          max-width: initial !important;
-        }
-        h2{
-          font-size: 4rem;
-        }
-        h3{
-          font-size: 3rem;
-        }
-        h2,h3,h4,h5{
-          margin-top: 1em;
-        }
-      </style>
+          {{ article.content }}
 
       {%- when 'share' -%}
         <div
@@ -317,6 +312,16 @@
     </div>
   {%- endif -%}
 </article>
+
+        </div>
+
+    <!-- Begin Sidebar -->
+    <div id="sidebar" class="custom-sidebar bg-green-light custom-sidebar p2 mb4">
+      {% render 'blog-sidebar' %}
+    </div>
+        
+    </div>
+</div>
 
 <script type="application/ld+json">
   {
