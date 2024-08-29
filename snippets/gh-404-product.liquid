@@ -5,11 +5,17 @@
 
     </div>
     <div id='gh-product-header--right' class='lg-col-5'>
+      <div class="product__title">
 
-      <div id='gh-localization-form'>
-        {% render 'gh-localization-form' %}
+        <div id='gh-product-header--right-header'></div>
+  
+        <div id='gh-localization-form'>
+          {% render 'gh-localization-form' %}
+        </div>
+  
+        <div id='gh-product-header--right-footer'></div>
+        
       </div>
-
     </div>
   </div>
 
@@ -491,7 +497,8 @@
     const replace_container = document.querySelector('.template-404');
     const new_container = document.getElementById('content-container-404');
     const product_header_left = document.getElementById('gh-product-header--left');
-    const product_header_right = document.getElementById('gh-product-header--right');
+    const product_header_right_header = document.getElementById('gh-product-header--right-header');
+    const product_header_right_footer = document.getElementById('gh-product-header--right-footer');
     const product_content_container = document.getElementById('gh-product-content-container-404');
     const localization_form = document.getElementById('gh-localization-form');
 
@@ -560,19 +567,19 @@
       product_header_left.innerHTML +=
         `<img src="${product.images[0].src}" width='400' alt="" />`;
 
-      product_header_right.innerHTML = `
-        <div class="product__title">
-          <h1 class='mb2 h2 md-h1'>${product.name}</h1>
-          <span class="bold color-green">${product.tagline}</span>
-          ${product.short_description}
+      product_header_right_header.innerHTML += `
+        <h1 class='mb2 h2 md-h1'>${product.name}</h1>
+        <span class="bold color-green">${product.tagline}</span>
+        ${product.short_description}
 
-          <h4 class='pb2'>Unfortunately this product is not yet available to ship to {{ localization.country.name }}.</h4>
+        <h4 class='pb2'>Unfortunately this product is not yet available to ship to {{ localization.country.name }}.</h4>
 
-          <h4 class='pb2'>Or use the country/region dropdown <a href="#shopify-section-sections--16067868819656__footer">near the bottom of the page</a> to update your shipping location.</h4>
+        <h4 class='pb2'>Or use the country/region dropdown <a href="#shopify-section-sections--16067868819656__footer">near the bottom of the page</a> to update your shipping location.</h4>
+      `
 
+      product_header_right_footer.innerHTML = `
           <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
-        </div>
-      ` + product_header_right.innerHTML;
+      `
 
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
