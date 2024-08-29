@@ -13,6 +13,15 @@
   .ais-page .ais-page--header{
     display: none;
   }
+  .ais-page--body{
+    display: flex;
+  }
+  .ais--facets-container{
+    width: 30%;
+  }
+  .ais--results-container{
+    flex: 1;
+  }
 </style>
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
