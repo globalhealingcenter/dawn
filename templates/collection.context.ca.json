@@ -17,7 +17,7 @@
       "type": "apps",
       "disabled": false,
       "custom_css": [
-        "> div .ais-pag{display: none;}"
+        "h1{display: none;}"
       ],
       "settings": {
         "include_margins": true
