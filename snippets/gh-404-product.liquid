@@ -1,9 +1,10 @@
+<div id='content-container-404' class='pt4 px2'></div>
 
 <div id='gh-localization-form' class="hide">
   {% render 'gh-localization-form' %}
 </div>
 
-<div id='content-container-404' class='py4 px2'></div> 
+<div id='gh-product-content-container-404' class='pb4 px2'></div>
 
 <script>
 
@@ -478,14 +479,15 @@
     const url = new URL(window.location);
     const replace_container = document.querySelector('.template-404');
     const new_container = document.getElementById('content-container-404');
+    const product_content_container = document.getElementById('gh-product-content-container-404');
 
     let img = () => {
-          let ingredients = document.querySelector('.ghd--block--ingredients');
-          let ingredients_img = ingredients.querySelector('[data-type="image"] img');
-          let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+      let ingredients = document.querySelector('.ghd--block--ingredients');
+      let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+      let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
 
-          function setActiveImage(){
-          ingredients_inputs.forEach( i => {
+      function setActiveImage(){
+        ingredients_inputs.forEach( i => {
           if(!i.checked) return;
           ingredients_img.classList.add('loading');
 
@@ -493,24 +495,24 @@
           ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
 
           if(ingredients_img.complete){
-          ingredients_img.classList.remove('loading');
-        }
+            ingredients_img.classList.remove('loading');
+          }
 
           ingredients_img.addEventListener('load', () => {
-          ingredients_img.classList.remove('loading');
-        })
+            ingredients_img.classList.remove('loading');
+          })
 
         })
-        }
+      }
 
-        ingredients_inputs.forEach( i => {
-            i.addEventListener('change', e => {
-                if( !i.checked ) return;
-                setActiveImage()
-            })
+      ingredients_inputs.forEach( i => {
+        i.addEventListener('change', e => {
+          if( !i.checked ) return;
+          setActiveImage()
         })
+      })
 
-        setActiveImage();
+      setActiveImage();
 
       let modal = document.getElementById('dialog-product-supplement-facts-body');
       modal.addEventListener('click', e => {
@@ -565,18 +567,18 @@
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
-            new_container.innerHTML += '<br><br><br>';
-            new_container.innerHTML += h;
-            img();
-          })
+          product_content_container.innerHTML += '<br><br><br>';
+          product_content_container.innerHTML += h;
+          img();
+        })
 
     }
 
-  return { init };
+    return { init };
 
-})();
+  })();
 
-gh_404.init();
+  gh_404.init();
 
   // logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }} 
   // {{ request.origin }} 
@@ -585,4 +587,5 @@ gh_404.init();
   // {{ localization.country.name }}
 
 </script>
+
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
