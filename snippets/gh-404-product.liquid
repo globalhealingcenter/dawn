@@ -11,9 +11,12 @@
 
         <div id='' class='bg-green-light p3'>
           <h4 class='pb2'>Unfortunately this product is not yet available to ship to {{ localization.country.name }}.</h4>
-          <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
+
+          <h4 class='pt3'>
+            <a href='https://globalhealing.com/collections/collections'>Shop available products</a> 
+            or use the country/region dropdown to update your shipping location.
+          </h4>
           
-          <h4 class='pt3'>Or use the country/region dropdown to update your shipping location.</h4>
           <div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
         </div>
 
@@ -574,7 +577,7 @@
         <span class="bold color-green">${product.tagline}</span>
         ${product.short_description}
       `;
-      
+
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
 
