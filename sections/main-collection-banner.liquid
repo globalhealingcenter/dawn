@@ -9,52 +9,6 @@
   }
 {%- endstyle -%}
 
-<style>
-  .ais-page .ais-page--header{
-    display: none;
-  }
-  .ais-page--body{
-    display: flex;
-  }
-  .ais--facets-container{
-    width: 30%;
-  }
-    .ais-page .ais-facets{
-      float:none;
-      width: auto;
-      padding-right: 0;
-    }
-  
-  .ais--results-container{
-    flex: 1;
-  }
-  .ais-page .ais-block{
-    float: none;
-    width: auto;
-    paddding-left: 0;
-  }
-  .ais-Hits-list{
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .ais-Hits-item{
-    width: 33%;
-  }
-  .ais-results-size-lg .ais-page .ais-results-as-block .ais-hit{
-    width: auto;
-    margin-left: 0;
-  }
-  .ais-hit-gh--picture img{
-    height: 150px;
-  }
-  .ais-hit-gh--details{
-    text-align: left;
-  }
-  .ais-hit--subtitle{
-    display: none;
-  }
-</style>
-
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
   <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     <div class="collection-hero__text-wrapper">
