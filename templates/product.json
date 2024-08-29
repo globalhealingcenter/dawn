@@ -53,12 +53,6 @@
             "picker_type": "button"
           }
         },
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "{% unless product.available %}\n\n{% render 'gh-element-out-of-stock-form' product: product %}\n\n{% endunless %}"
-          }
-        },
         "ordergroove_offer": {
           "type": "shopify:\/\/apps\/ordergroove-subscriptions\/blocks\/pdp-offer-block\/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
           "settings": {
@@ -106,7 +100,6 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "price",
         "variant_picker",
-        "eda5c980-a9b2-45de-90dd-01201d8c4a1c",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
