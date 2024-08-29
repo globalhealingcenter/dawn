@@ -16,6 +16,9 @@
     "172494903484609398": {
       "type": "apps",
       "disabled": false,
+      "custom_css": [
+        "> div .ais-pag{display: none;}"
+      ],
       "settings": {
         "include_margins": true
       },
@@ -24,9 +27,9 @@
           "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
           "disabled": false,
           "settings": {
-            "header-6854c47042edba25ba0c960b7979443d": null,
-            "header-640ba9efa562049408166166ae8cb639": null,
-            "header-10b520a378134cd33dccc88d9ff15f38": null,
+            "header-cbfa07d506cce96572bc3f4670ff0c00": null,
+            "header-ebc2c938fcfcc085729bd93b702d25d6": null,
+            "header-8a6953a22629fb3f26ca5b8196946bca": null,
             "disable_skeleton_loader": false,
             "custom_skeleton_mockup": ""
           }
