@@ -24,7 +24,6 @@ window['gh_html'] = html
 
       return html `<a 
         class="ais-hit ais-hit-gh ais-product" 
-        data-algolia-env="prod"
         data-algolia-index="${hit.index}" 
         data-algolia-position="${hit.productPosition}" 
         data-algolia-queryid="${hit.queryID}" 
@@ -36,13 +35,14 @@ window['gh_html'] = html
         href="${algolia.helpers.instantsearchLink(hit)}"
       >
         <div class="ais-hit-gh--picture">
-          
+          <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
         </div>
 
         <div class="ais-hit-gh--details">
           <p class="ais-hit-gh--title">
             <span class="gh-font-primary bold color-green">
               ${hit.title}
+              ${algolia.helpers.variantTitleAddition (hit, hit._distinct)}
             </span>
           </p>
           
