@@ -560,7 +560,7 @@
       product_header_left.innerHTML +=
         `<img src="${product.images[0].src}" width='400' alt="" />`;
 
-      product_header_right.innerHTML += `
+      product_header_right.innerHTML = `
         <div class="product__title">
           <h1 class='mb2 h2 md-h1'>${product.name}</h1>
           <span class="bold color-green">${product.tagline}</span>
@@ -572,7 +572,7 @@
 
           <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
         </div>
-      `;
+      ` + product_header_right.innerHTML;
 
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
