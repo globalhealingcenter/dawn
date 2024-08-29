@@ -27,14 +27,12 @@
   }
 </style>
 
-{% render 'dawn-localization-form', localization: localization %}
-
-<div class="out-of-stock-form-signup">
-  <p>Get notified when this product is back in stock.</p>
+<div class="out-of-stock-form-signup pt2 px2 bg-green-light">
+  {{ message }}
   <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
     <div class="input-group pre-submit">
       <input type="email" placeholder="Enter Your Email" name="email" required>
-      <button class="button button--secondary" type="submit">Sign Up</button>
+      <button class="button button--black" type="submit">Sign Up</button>
     </div>
     <div class="success hide">
       Success! You'll be receiving an email shortly.
@@ -74,3 +72,5 @@
     }
   </script>
 </div>
+
+{% render 'dawn-localization-form', localization: localization %}
