@@ -33,6 +33,17 @@
     width: auto;
     paddding-left: 0;
   }
+  .ais-Hits-list{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .ais-Hits-item{
+    width: 25%;
+  }
+  .ais-results-size-lg .ais-page .ais-results-as-block .ais-hit{
+    width: auto;
+    margin-left: 0;
+  }
 </style>
 
 <div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
