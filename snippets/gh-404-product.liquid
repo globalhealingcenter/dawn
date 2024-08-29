@@ -5,7 +5,7 @@
 
     </div>
     <div id='gh-product-header--right' class='lg-col-5'>
-      <div class="product__title">
+      <div class="product__title pb3">
 
         <div id='gh-product-header--right-header'></div>
 
@@ -586,7 +586,7 @@
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
-          product_content_container.innerHTML += '<br><br><br>';
+          product_content_container.innerHTML += '<br>';
           product_content_container.innerHTML += h;
           img();
         })
