@@ -70,6 +70,15 @@ window['gh_html'] = html
             </span>
           </p>
 
+          <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
+            ${hit.meta.globalhealing.product_tagline}
+          </p>
+          
+          <p class="ais-hit-gh--price">
+            <b>${algolia.helpers.displayPrice(hit, hit._distinct)}</b>
+            ${!hit._distinct && html`<span class="ais-hit--price-striked"><span>${algolia.helpers.displayStrikedPrice(hit.price, hit.compare_at_price, hit.currency)}</span></span>`}
+            ${!hit._distinct && html`<span class="ais-hit--price-discount">${algolia.helpers.displayDiscount(hit.price, hit.compare_at_price, hit.price_ratio)}</span>`}
+          </p>
           
           ${!hit._distinct && html`
             <form id="algolia-add-to-cart-${hit.objectID}" style="" action="/cart/add" method="post" enctype="multipart/form-data">
