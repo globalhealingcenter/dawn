@@ -1,6 +1,6 @@
 {{ 'gh-algolia-autocomplete.css' | asset_url | stylesheet_tag }}
 
-{% if template.name == 'search' %}
+{% if template.name == 'search' or template.name == 'collection' %}
 {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
