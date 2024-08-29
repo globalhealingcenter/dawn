@@ -80,6 +80,14 @@
             "show_gift_card_recipient": true
           }
         },
+        "gh_out_of_stock_form_nDyWFK": {
+          "type": "gh_out_of_stock_form",
+          "settings": {
+            "message": "<p><strong>Sorry we’re out of stock.<\/strong><\/p><p>At Global Healing, we are committed to using only the finest organic and wildcrafted raw materials and ingredients in our products. Occasionally, the ingredients we source do not meet our stringent quality standards and must be rejected. We've been finding adulterants, fillers, high levels of heavy metals, high microbial counts, and materials that fail to meet identity verification. It's sad that this is happening in our industry, more than we've ever experienced before. As a result, this process may cause delays until we find quality replacements that we are proud to put in our products. We appreciate your patience.<\/p><p>Get notified when this product is back in stock.<\/p>",
+            "success_message": "<p>Success! You'll be receiving an email shortly.<\/p>",
+            "force_show": false
+          }
+        },
         "yotpo_loyalty_rewards_product_points_module_app_block_gfef97": {
           "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/product-points-module-app-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {
@@ -102,6 +110,7 @@
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
+        "gh_out_of_stock_form_nDyWFK",
         "yotpo_loyalty_rewards_product_points_module_app_block_gfef97",
         "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
       ],
