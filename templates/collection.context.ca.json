@@ -13,5 +13,74 @@
     "market": "ca"
   },
   "sections": {
-  }
+    "172494903484609398": {
+      "type": "apps",
+      "disabled": false,
+      "settings": {
+        "include_margins": true
+      },
+      "blocks": {
+        "algolia_search_and_discovery_instantsearch_Pxi3i": {
+          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+          "disabled": false,
+          "settings": {
+            "header-6854c47042edba25ba0c960b7979443d": null,
+            "header-640ba9efa562049408166166ae8cb639": null,
+            "header-10b520a378134cd33dccc88d9ff15f38": null,
+            "disable_skeleton_loader": false,
+            "custom_skeleton_mockup": ""
+          }
+        }
+      },
+      "block_order": [
+        "algolia_search_and_discovery_instantsearch_Pxi3i"
+      ]
+    },
+    "shogun-helper": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "shogun-above": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "product-grid": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "shogun-below": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "shogun-optimizer": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "172494903484609398",
+    "shogun-helper",
+    "shogun-above",
+    "product-grid",
+    "168777948032aeb944",
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43",
+    "shogun-below",
+    "shogun-optimizer"
+  ]
 }
