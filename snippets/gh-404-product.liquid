@@ -1,4 +1,36 @@
-<div id='content-container-404' class='py4 px2'></div>
+<div id='content-container-404' class='pt4 px2 hide'>
+
+  <div class="lg-flex items-center justify-center">
+    <div id='gh-product-header--left' class='lg-col-4 p3 center'>
+
+    </div>
+    <div id='gh-product-header--right' class='lg-col-5'>
+      <div class="product__title pb3">
+
+        <div id='gh-product-header--right-header'></div>
+
+        <button class="button button--full-width disabled mb3">Not Available in Your Region</button>
+
+        <div id='' class='bg-green-light p3'>
+          <h4><i class='fa fa-exclamation-circle'></i> Not yet available to ship to {{ localization.country.name }}.</h4>
+
+          <h5 class='line-height-4'>
+            <a href='https://globalhealing.com/collections/collections'>Shop available products</a>
+            or use the country/region dropdown to update your shipping location.
+          </h5>
+
+          <div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
+        </div>
+
+        <div id='gh-product-header--right-footer'></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id='gh-product-content-container-404' class='pb4 px2'></div>
+
 <script>
 
   let gh_products =         {
@@ -472,14 +504,18 @@
     const url = new URL(window.location);
     const replace_container = document.querySelector('.template-404');
     const new_container = document.getElementById('content-container-404');
+    const product_header_left = document.getElementById('gh-product-header--left');
+    const product_header_right_header = document.getElementById('gh-product-header--right-header');
+    const product_content_container = document.getElementById('gh-product-content-container-404');
+    const localization_form = document.getElementById('gh-localization-form');
 
     let img = () => {
-          let ingredients = document.querySelector('.ghd--block--ingredients');
-          let ingredients_img = ingredients.querySelector('[data-type="image"] img');
-          let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+      let ingredients = document.querySelector('.ghd--block--ingredients');
+      let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+      let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
 
-          function setActiveImage(){
-          ingredients_inputs.forEach( i => {
+      function setActiveImage(){
+        ingredients_inputs.forEach( i => {
           if(!i.checked) return;
           ingredients_img.classList.add('loading');
 
@@ -487,24 +523,24 @@
           ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
 
           if(ingredients_img.complete){
-          ingredients_img.classList.remove('loading');
-        }
+            ingredients_img.classList.remove('loading');
+          }
 
           ingredients_img.addEventListener('load', () => {
-          ingredients_img.classList.remove('loading');
-        })
+            ingredients_img.classList.remove('loading');
+          })
 
         })
-        }
+      }
 
-        ingredients_inputs.forEach( i => {
-            i.addEventListener('change', e => {
-                if( !i.checked ) return;
-                setActiveImage()
-            })
+      ingredients_inputs.forEach( i => {
+        i.addEventListener('change', e => {
+          if( !i.checked ) return;
+          setActiveImage()
         })
+      })
 
-        setActiveImage();
+      setActiveImage();
 
       let modal = document.getElementById('dialog-product-supplement-facts-body');
       modal.addEventListener('click', e => {
@@ -535,44 +571,40 @@
       document.title = product.name + ' | Global Healing';
       replace_container.classList.add('hide');
 
-      new_container.innerHTML = `
-<div class="lg-flex items-center justify-center">
-    <div class='lg-col-4 p3 center'>
-       <img src="${product.images[0].src}" width='400' alt="" />
-    </div>
-  <div class='lg-col-5'>
-    <div class="product__title">
-      <h1 class='mb2 h2 md-h1'>${product.name}</h1>
-      <span class="bold color-green">${product.tagline}</span>
-      ${product.short_description}
+      product_header_left.innerHTML +=
+        `<img src="${product.images[0].src}" width='400' alt="" />`;
 
-      <h4 class='pb2'>Unfortunately this product is not yet available to ship to your country. Subscribe below to stay in the loop for future product updates.</h4>
-      <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
-    </div>
-  </div>
-</div>
-      `
+      product_header_right_header.innerHTML += `
+        <h1 class='mb2 h2 md-h1'>${product.name}</h1>
+        <span class="bold color-green">${product.tagline}</span>
+        ${product.short_description}
+      `;
+
+      localization_form.classList.remove('hide');
+      new_container.classList.remove('hide');
 
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
-            new_container.innerHTML += '<br><br><br>';
-            new_container.innerHTML += h;
-            img();
-          })
+          product_content_container.innerHTML += '<br>';
+          product_content_container.innerHTML += h;
+          img();
+        })
 
     }
 
-  return { init };
+    return { init };
 
-})();
+  })();
 
-gh_404.init();
+  gh_404.init();
 
-  // logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }} 
-  // {{ request.origin }} 
+  // logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }}
+  // {{ request.origin }}
   // {{ template }}
   // {{shop.url | append: share_permalink}}
+  // {{ localization.country.name }}
 
 </script>
+
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
