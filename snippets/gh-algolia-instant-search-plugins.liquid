@@ -3,6 +3,12 @@
 <script>
 gh_algolia.instant.init = ( instant, algolia ) => {
 
+    const article_initial_results = 6;
+    const article_results = 50;
+
+    const page_initial_results = 3;
+    const page_results = 9;
+  
     let articles_widget = {
         init(){
             let hits = algolia.externals.widgets.hits({
@@ -19,18 +25,35 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                             </div>
                           `;
                     },
+                    banner({ banner }, { html }) {
+                      return html`<span class="hide"></span>`;
+                    },
                     empty(results, { html }) {
                         return html`<br/><br/><div class="center">No articles found. Try clearing the filters or changing your query.</div><br/><br/>`;
                     },
                 },
             });
 
+            let stats = algolia.externals.widgets.stats({
+              container: '#article-stats',
+              templates: {
+                text(data, { html }) {
+                  let hits_count = data.nbHits;
+                  if( hits_count <= article_initial_results ) document.getElementById('view-more-articles-container').classList.add('hide');
+                  else document.getElementById('view-more-articles-container').classList.remove('hide');
+                  
+                  return html`<span>${hits_count}</span>`;
+                },
+              }
+            });
+
             let configure = algolia.externals.widgets.configure({
                 attributesToSnippet: ['content'],
+                hitsPerPage: article_results
             });
 
             let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
-            index.addWidgets([hits, configure])
+            index.addWidgets([hits, configure, stats])
 
             instant.search.addWidgets([index]);
         }
@@ -53,18 +76,31 @@ gh_algolia.instant.init = ( instant, algolia ) => {
               `;
           },
           empty(results, { html }) {
-            return html``;
+            return html`<span></span>`;
           },
         },
       });
 
       let configure = algolia.externals.widgets.configure({
         attributesToSnippet: ['body_html_safe'],
-        hitsPerPage: 3
+        hitsPerPage: page_results
+      });
+
+      let stats = algolia.externals.widgets.stats({
+        container: '#page-stats',
+        templates: {
+          text(data, { html }) {
+            let hits_count = data.nbHits;
+            if( hits_count <= page_initial_results ) document.getElementById('view-more-pages-container').classList.add('hide');
+            else document.getElementById('view-more-pages-container').classList.remove('hide');
+            
+            return html`<span>${hits_count}</span>`;
+          },
+        }
       });
 
       let index = instantsearch.widgets.index({indexName: 'shopify_pages'});
-      index.addWidgets([hits, configure])
+      index.addWidgets([hits, configure, stats])
 
       instant.search.addWidgets([index]);
     }
