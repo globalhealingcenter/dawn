@@ -10,7 +10,10 @@
         <div id='gh-product-header--right-header'></div>
 
         <div id='' class='bg-green-light p3'>
-          <h4>Or use the country/region dropdown to update your shipping location.</h4>
+          <h4 class='pb2'>Unfortunately this product is not yet available to ship to {{ localization.country.name }}.</h4>
+          <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
+          
+          <h4 class='pt3'>Or use the country/region dropdown to update your shipping location.</h4>
           <div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
         </div>
 
@@ -498,7 +501,6 @@
     const new_container = document.getElementById('content-container-404');
     const product_header_left = document.getElementById('gh-product-header--left');
     const product_header_right_header = document.getElementById('gh-product-header--right-header');
-    const product_header_right_footer = document.getElementById('gh-product-header--right-footer');
     const product_content_container = document.getElementById('gh-product-content-container-404');
     const localization_form = document.getElementById('gh-localization-form');
 
@@ -571,16 +573,8 @@
         <h1 class='mb2 h2 md-h1'>${product.name}</h1>
         <span class="bold color-green">${product.tagline}</span>
         ${product.short_description}
-
-        <h4 class='pb2'>Unfortunately this product is not yet available to ship to {{ localization.country.name }}.</h4>
-
-        <a href="https://globalhealing.com/collections/collections" class="button">Shop Available Products</a>
-      `
-
-      product_header_right_footer.innerHTML = `
-
-      `
-
+      `;
+      
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
 
