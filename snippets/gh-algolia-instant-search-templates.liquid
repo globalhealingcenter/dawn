@@ -22,6 +22,8 @@ window['gh_html'] = html
         reviews_width = (100 / 5) * reviews.average
       }
 
+      let tagline = ( hit.meta.globalhealing && hit.meta.globalhealing.product_tagline ? hit.meta.globalhealing.product_tagline : '' )  ;
+
       return html `<a 
         class="ais-hit ais-hit-gh ais-product" 
         data-algolia-index="${hit.index}" 
@@ -71,7 +73,7 @@ window['gh_html'] = html
           </p>
 
           <p class="ais-hit-gh--subtitle" title="${hit.product_type}${algolia.translation_helpers.by(hit.vendor)}">
-            ${hit.meta.globalhealing.product_tagline || ''}
+            ${tagline}
           </p>
           
           <p class="ais-hit-gh--price">
