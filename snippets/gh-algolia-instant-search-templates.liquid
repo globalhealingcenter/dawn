@@ -8,6 +8,7 @@ window['gh_html'] = html
 <script>
   gh_algolia.instant.templates = {
     product(defaultTemplate, hit, html, components){
+      console.log('trying here');
 
       let algolia = algoliaShopify;
 
@@ -23,7 +24,7 @@ window['gh_html'] = html
       }
 
       return html `<a 
-        class="" 
+        class="ais-hit ais-hit-gh ais-product" 
         data-algolia-index="${hit.index}" 
         data-algolia-position="${hit.productPosition}" 
         data-algolia-queryid="${hit.queryID}" 
