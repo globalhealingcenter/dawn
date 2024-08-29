@@ -27,6 +27,8 @@
   }
 </style>
 
+{% render 'dawn-localization-form', localization: localization %}
+
 <div class="out-of-stock-form-signup pt2 px2 bg-green-light">
   {{ message }}
   <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
@@ -72,5 +74,3 @@
     }
   </script>
 </div>
-
-{% render 'dawn-localization-form', localization: localization %}
