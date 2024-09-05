@@ -19,17 +19,18 @@
             "image_height": "adapt"
           }
         },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        },
         "title": {
           "type": "title",
           "settings": {
             "blog_show_date": true,
             "blog_show_author": false
-          }
-        },
-        "share": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share"
           }
         },
         "content": {
@@ -45,8 +46,8 @@
       },
       "block_order": [
         "featured_image",
-        "title",
         "share",
+        "title",
         "content",
         "author_anBdkJ"
       ],
