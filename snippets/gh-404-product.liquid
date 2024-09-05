@@ -563,12 +563,12 @@
 
       matches: {
         canada: {
-          'oxy-powder': gh_products['oxy-powder-canada'],
-          'calcium-magnesium': gh_products['calcium-magnesium-canada'],
-          'detoxadine': gh_products['organic-nascent-iodine-canada'],
-          'turmeric': gh_products['turmeric-canada'],
-          'vitamin-b12': gh_products['vitamin-b12-canada'],
-          'vitamin-d': gh_products['vitamin-d-canada']
+          'oxy-powder': 'oxy-powder-canada',
+          'calcium-magnesium': 'calcium-magnesium-canada',
+          'detoxadine': 'organic-nascent-iodine-canada',
+          'turmeric': 'turmeric-canada',
+          'vitamin-b12': 'vitamin-b12-canada',
+          'vitamin-d': 'vitamin-d-canada'
         }
       },
 
@@ -587,7 +587,7 @@
 
       const product = gh_products[product_url];
       if( !product ) return;
-      
+
       markets.goToMatchedProduct(product_url);
 
       document.title = product.name + ' | Global Healing';
