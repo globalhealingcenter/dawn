@@ -1,11 +1,83 @@
 {{ 'section-blog-post.css' | asset_url | stylesheet_tag }}
 
+ <style>
+   .gh-article-layout{
+     
+   }
+  .gh-article-layout > .flex{
+    gap: 40px;
+    align-items: start;
+  }
+  .custom-article-content{
+    padding-left: 0 !important;
+    max-width: initial !important;
+  }
+   .article-template{
+     background: #ffffff85;
+     padding: 2em;
+     box-shadow: 1px 3px 4px #00000020;
+   }
+  h2{
+    font-size: 4rem;
+  }
+  h3{
+    font-size: 3rem;
+  }
+  h2,h3,h4,h5{
+    margin-top: 1em;
+  }
+
+   .article-template>*:first-child:not(.article-template__hero-container){
+     margin-top: 0;
+   }
+
+  .article-menu{
+    border-top-style: solid;
+    border-top-width: var(--border-width);
+    padding-top: var(--space-1);
+    border-color: var(--gh-color-green);
+    margin-bottom: 3rem;
+   }
+
+   a.atoc-link{
+     position: relative;
+     padding-left: 14px;
+   }
+   
+   a.atoc-link:before{
+    content: "›";
+    position: absolute;
+    left: 0;
+   }
+</style>
+
+<div class="page-width gh-article-layout pt4 pb4">
+  <div class="flex">
+      <div
+        class="custom-article-content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+        itemprop="articleBody"
+        {{ block.shopify_attributes }}
+      >
+
 <article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {%- when '@app' -%}
-        <div class="page-width page-width--narrow">
+        <div class="">
           {% render block %}
+        </div>
+      {%- when 'tags' -%}
+        <div class=" {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}" {{ block.shopify_attributes }}>
+          <div class="">
+            <p> 
+              Posted in:
+              {% for tag in article.tags %}
+                  {% if tag contains "Category" %}
+                      <a href="/blogs/blog/tagged/{{ tag | handleize }}">{{ tag | replace: "Category_", "" | replace: ">"," > " | strip }}</a>, 
+                  {% endif %}
+              {% endfor %}
+            </p>
+          </div>
         </div>
       {%- when 'featured_image' -%}
         {%- if article.image -%}
@@ -44,15 +116,9 @@
 
       {%- when 'title' -%}
         <header
-          class="page-width page-width--narrow{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
+          class="pb1 mt0 {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}"
           {{ block.shopify_attributes }}
         >
-          <h1
-            class="article-template__title"
-            itemprop="headline"
-          >
-            {{ article.title | escape }}
-          </h1>
           {%- if block.settings.blog_show_date -%}
             <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated pubdate datePublished">
               {{- article.published_at | time_tag: format: 'date' -}}
@@ -63,16 +129,16 @@
               <span itemprop="name">{{ article.author }}</span>
             </span>
           {%- endif -%}
+
+          <h1 class="article-template__title color-green h2" itemprop="headline">
+            {{ article.title | escape }}
+          </h1>
+          
+          <div class="sharethis-inline-share-buttons"></div>
         </header>
 
       {%- when 'content' -%}
-        <div
-          class="article-template__content page-width page-width--narrow rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          itemprop="articleBody"
-          {{ block.shopify_attributes }}
-        >
           {{ article.content }}
-        </div>
 
       {%- when 'share' -%}
         <div
@@ -277,6 +343,16 @@
   {%- endif -%}
 </article>
 
+      </div>
+
+      <!-- Begin Sidebar -->
+      <div id="sidebar" class="custom-sidebar bg-green-light custom-sidebar p2 mb4">
+        {% render 'blog-sidebar' %}
+      </div>
+        
+    </div>
+</div>
+
 <script type="application/ld+json">
   {
     "@context": "http://schema.org",
@@ -367,6 +443,11 @@
           "label": "t:sections.main-article.blocks.title.settings.blog_show_author.label"
         }
       ]
+    },
+    {
+      "type": "tags",
+      "name": "Tags",
+      "limit": 1
     },
     {
       "type": "content",

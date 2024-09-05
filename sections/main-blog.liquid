@@ -14,39 +14,76 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .gh-blog-article-item{
+    gap: 30px;
+    background: #ffffff90;
+    margin-bottom: 2rem;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 1px 3px 4px #00000020;
+    transition: transform .3s ease-in-out;
+  }
+  .gh-blog-article-item:hover {
+    transform: translate(0, -5px);
+    cursor: pointer;
+  }
 {%- endstyle -%}
 
-{%- paginate blog.articles by 6 -%}
+{%- paginate blog.articles by 12 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ blog.title | escape }}
-    </h1>
 
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
-        <div
-          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
+    <h2 class="color-green mt0 pl2 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+          {% if current_tags.size > 0 %}
+            {% assign tag = current_tags[0] | replace: "Category_", "" | replace: ">", " > " %}
+            {{ tag}}
+          {% else %}
+            {{ blog.title | escape }}
           {% endif %}
-        >
-          {%- render 'article-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true
-          -%}
-        </div>
-      {%- endfor -%}
-    </div>
+        </h2>
 
-    {%- if paginate.pages > 1 -%}
-      {%- render 'pagination', paginate: paginate -%}
-    {%- endif -%}
+    <div class="flex items-start" style="gap: 30px">
+      <div class="bg-green-light px2" style="width: 250px">
+        {% render 'blog-category-sidebar' %}
+      </div>
+      
+      <div style="flex: 1;">
+        
+        <div class="gh-blog-articles">
+          {%- for article in blog.articles -%}
+            {% render 'gh-blog-item', article: article %}
+          {%- endfor -%}
+        </div>
+
+        {% comment %}
+        <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
+          {%- for article in blog.articles -%}
+            <div
+              class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+              {% if settings.animations_reveal_on_scroll %}
+                data-cascade
+                style="--animation-order: {{ forloop.index }};"
+              {% endif %}
+            >
+              {%- render 'article-card',
+                article: article,
+                media_height: section.settings.image_height,
+                media_aspect_ratio: article.image.aspect_ratio,
+                show_image: section.settings.show_image,
+                show_date: section.settings.show_date,
+                show_author: section.settings.show_author,
+                show_excerpt: true
+              -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        {% endcomment %}
+        
+        {%- if paginate.pages > 1 -%}
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endif -%}
+      </div>
+    </div>
   </div>
 {%- endpaginate -%}
 
