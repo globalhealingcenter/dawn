@@ -19,7 +19,7 @@
             or use the country/region dropdown to update your shipping location.
           </h5>
 
-          <div id='gh-localization-form'>{% render 'dawn-localization-form' %}</div>
+          <div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
         </div>
 
         <div id='gh-product-header--right-footer'></div>
@@ -557,6 +557,26 @@
           }
         });
       })
+    }
+
+    let markets = {
+
+      matches: {
+        canada: {
+          'oxy-powder': gh_products['oxy-powder-canada'],
+          'calcium-magnesium': gh_products['calcium-magnesium-canada'],
+          'detoxadine': gh_products['organic-nascent-iodine-canada'],
+          'turmeric': gh_products['turmeric-canada'],
+          'vitamin-b12': gh_products['vitamin-b12-canada'],
+          'vitamin-d': gh_products['vitamin-d-canada']
+        }
+      },
+
+      goToMatchedProduct(slug){
+        let country = '{{ localization.country.name }}'.toLowerCase();
+        if( !markets.matches[country] || !markets.matches[country][slug] ) return false;
+        window.location = '/products/' + markets.matches[country][slug];
+      }
     }
 
     let init = () => {
