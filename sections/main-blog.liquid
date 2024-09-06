@@ -28,6 +28,12 @@
     transform: translate(0, -5px);
     cursor: pointer;
   }
+
+  @media (max-width: 780px){
+     .main-blog .flex .blog-sidebar{
+      display: none;
+    } 
+  }
 {%- endstyle -%}
 
 {%- paginate blog.articles by 12 -%}
@@ -43,7 +49,7 @@
         </h2>
 
     <div class="flex items-start" style="gap: 30px">
-      <div class="bg-green-light px2" style="width: 250px">
+      <div class="blog-sidebar bg-green-light px2" style="width: 250px">
         {% render 'gh-blog-category-sidebar' %}
       </div>
       
