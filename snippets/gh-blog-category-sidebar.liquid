@@ -1,4 +1,49 @@
-[
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+<div id="gh-category-navigation"></div>
+
+{% raw %}
+<script type="text/template" id="gh-category-navigation-template">
+    {{#each categories}}
+    <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
+        <summary class="h5 py2">{{ title }}</summary>
+        <div class="pl1">
+
+            {{#each children}}
+
+            {{#if children}}
+            <details class="{{#if active}}active{{/if}}" {{#if active}}open{{/if}}>
+                <summary>{{ title }}</summary>
+                <div class="">
+                  {{#each children}}
+                    <div>
+                      {{#if active}}
+                        <span class="active">{{ title }}</span>
+                      {{else}}
+                        <a href="#{{ slug }}">{{ title }}</a>
+                      {{/if}}
+                    </div>
+                  {{/each}}
+                </div>
+            </details>
+            {{/if}}
+
+            {{#unless children}}
+            <div>
+                <a href="#{{ slug }}" class="{{#if active}}active{{/if}}">{{ title }}</a>
+            </div>
+            {{/unless}}
+
+            {{/each}}
+
+        </div>
+    </details>
+    {{/each}}
+</script>
+{% endraw %}
+
+<script>
+	let categories = [
   {
     "title": "Health",
     "slug": "category_health",
@@ -115,7 +160,7 @@
           },
           {
             "title": "Sleep",
-            "slug": "category_health-whole-body-wellness-sleep",
+            "slug": "category_health-whole-body-wellness-sleep/",
             "children": []
           },
         ]
@@ -431,4 +476,84 @@
       },
     ]
   }
-]
+];
+
+	function activateCurrent( current ) {
+		categories.forEach(c1 => {
+			if (c1.slug === current) c1.active = true;
+			let c2_active = false;
+
+			c1.children.forEach(c2 => {
+				let c3_active = false;
+
+				if (c2.slug === current) {
+					c2.active = true;
+					c2_active = true;
+				}
+
+				c2.children.forEach(c3 => {
+					if (c3.slug === current) {
+						c3.active = true;
+						c3_active = true;
+					}
+				})
+
+				if( c3_active ) {
+					c2.active = true;
+					c2_active = true;
+				}
+			})
+
+			if( c2_active ) c1.active = true;
+		})
+	}
+
+  {% if current_tags.size > 0 %}
+      // activateCurrent('{{ current_tags[0] | downcase }}');
+      activateCurrent('/micronutrients/')
+
+  {% endif %}
+
+	let container = document.getElementById('gh-category-navigation');
+	let text_template = document.getElementById('gh-category-navigation-template').innerText;
+	let template = Handlebars.compile(text_template);
+	container.innerHTML = template({
+		categories
+	})
+</script>
+<style>
+  details span.active{
+    font-weight: bold;
+    color: var(--gh-color-green);
+  }
+
+  #gh-category-navigation > details{
+    border-bottom: 1px solid var(--gh-color-green);
+  }
+
+  #gh-category-navigation > details:last-child{
+    border-bottom-width: 0;
+  }
+  
+  #gh-category-navigation > details[open]{
+    padding-bottom: 15px;
+  }
+  
+  #gh-category-navigation > details[open] > summary,
+  #gh-category-navigation > details[open] details[open] summary{
+    font-weight: bold;
+    color: var(--gh-color-green);
+  }
+
+  #gh-category-navigation details[open] details[open] > div{
+    /* background: #00000020; */
+    padding: .5em 1em;
+    margin-bottom: 5px;
+  }
+  #gh-category-navigation a{
+    text-decoration: none;
+  }
+  #gh-category-navigation a:hover{
+    text-decoration: underline;
+  }
+</style>
