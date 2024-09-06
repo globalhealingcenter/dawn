@@ -38,6 +38,11 @@
           "settings": {
           }
         },
+        "tags_TbqTVD": {
+          "type": "tags",
+          "settings": {
+          }
+        },
         "author_anBdkJ": {
           "type": "author",
           "settings": {
@@ -49,6 +54,7 @@
         "share",
         "title",
         "content",
+        "tags_TbqTVD",
         "author_anBdkJ"
       ],
       "settings": {
