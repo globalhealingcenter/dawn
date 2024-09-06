@@ -509,7 +509,7 @@
 	}
 
   {% if current_tags.size > 0 %}
-      activateCurrent('{{ current_tags[0] | downcase }}');
+      activateCurrent('{{ current_tags[0] | handleize }}');
       //activateCurrent('/micronutrients/')
 
   {% endif %}
