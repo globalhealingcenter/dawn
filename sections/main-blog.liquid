@@ -33,6 +33,14 @@
     width: 25%;
   }
 
+  #tag-title span:not(:last-child):after{
+    content: " > "
+  }
+
+  #tag-title span:not(:last-child) {
+      opacity: .5;
+  }
+
   @media (max-width: 780px){
      .main-blog .flex .blog-sidebar{
       display: none;
