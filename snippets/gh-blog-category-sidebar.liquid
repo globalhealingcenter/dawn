@@ -30,7 +30,11 @@
 
             {{#unless children}}
             <div>
-                <a href="/blogs/education/tagged/{{ slug }}" class="{{#if active}}active{{/if}}">{{ title }}</a>
+                {{#if active}}
+                  <span class="active">{{ title }}</span>
+                {{else}}
+                  <a href="/blogs/education/tagged/{{ slug }}">{{ title }}</a>
+                {{/if}}
             </div>
             {{/unless}}
 
