@@ -29,6 +29,10 @@
     cursor: pointer;
   }
 
+  .main-blog .flex .blog-sidebar{
+    min-width: 300px;
+  }
+
   @media (max-width: 780px){
      .main-blog .flex .blog-sidebar{
       display: none;
@@ -49,7 +53,7 @@
         </h2>
 
     <div class="flex items-start" style="gap: 30px">
-      <div class="blog-sidebar bg-green-light px2" style="width: 250px">
+      <div class="blog-sidebar bg-green-light px2">
         {% render 'gh-blog-category-sidebar' %}
       </div>
       
