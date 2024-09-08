@@ -46,7 +46,7 @@
     <h2 class="color-green mt0 pl2 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
           {% if current_tags.size > 0 %}
             
-            {% assign tag = current_tags[0] | replace: "Category_", "" | replace: ">", " > " %}
+            {% assign tag = current_tags[0] | replace: "Category_", "" %}
             <span id="tag-title"></span>
             <script>
               let title = document.getElementById('tag-title');
