@@ -24,6 +24,7 @@
     box-shadow: 1px 3px 4px #00000020;
     transition: transform .3s ease-in-out;
   }
+  
   .gh-blog-article-item:hover {
     transform: translate(0, -5px);
     cursor: pointer;
@@ -45,6 +46,12 @@
      .main-blog .flex .blog-sidebar{
       display: none;
     } 
+    .gh-blog-article-item{
+      flex-wrap: wrap
+    }
+    .gh-blog-article-item [data-image]{
+     width: 100%;
+    }
   }
 {%- endstyle -%}
 
