@@ -54,7 +54,6 @@
               let parts = tag.split('>');
               parts.forEach( t => title.innerHTML += `<span>${t}</span`);
             </script>
-            {{ tag}}
           {% else %}
             {{ blog.title | escape }}
           {% endif %}
