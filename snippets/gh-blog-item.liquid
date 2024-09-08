@@ -1,5 +1,5 @@
 <div class="flex pb4 gh-blog-article-item" onclick="window.location = '{{ article.url }}'">
-  <div style="flex: 1;">
+  <div style="flex: 1;" data-content>
     <h3 class="mb0 h4"> <!--  gh-font-primary bold -->
       <a href="{{ article.url }}" style="text-decoration: none;">
         {{ article.title }}
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="col-3">
+  <div class="col-3" data-image>
     <img
       srcset="
         {%- if article.image.src.width >= 165 -%}{{ article.image.src | image_url: width: 165 }} 165w,{%- endif -%}
