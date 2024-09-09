@@ -19,6 +19,11 @@
             "blog_show_author": true
           }
         },
+        "sharethis_C7xbic": {
+          "type": "sharethis",
+          "settings": {
+          }
+        },
         "content": {
           "type": "content",
           "settings": {
@@ -37,6 +42,7 @@
       },
       "block_order": [
         "title",
+        "sharethis_C7xbic",
         "content",
         "tags_TbqTVD",
         "author_anBdkJ"
