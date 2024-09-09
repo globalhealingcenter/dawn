@@ -71,6 +71,8 @@
    }
 </style>
 
+<script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=66df1aa5d43faf001a475ced&product=inline-share-buttons&source=platform" async="async"></script>
+
 <div class="page-width gh-article-layout pt2 md-pt3 pb4">
   <div class="flex">
       <div
@@ -82,6 +84,8 @@
 <article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
+      {% when 'sharethis' %}
+        <div class="sharethis-inline-share-buttons"></div>
       {%- when 'author' -%}
         <div class="p2 bg-green-light" style="border-radius: 15px;" {{ block.shopify_attributes }}>
           <div class="flex gap-2 items-center">
@@ -487,6 +491,11 @@
     {
       "type": "content",
       "name": "t:sections.main-article.blocks.content.name",
+      "limit": 1
+    },
+    {
+      "type": "sharethis",
+      "name": "ShareThis",
       "limit": 1
     },
     {
