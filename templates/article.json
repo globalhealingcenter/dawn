@@ -21,6 +21,7 @@
         },
         "sharethis_C7xbic": {
           "type": "sharethis",
+          "disabled": true,
           "settings": {
           }
         },
