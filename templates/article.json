@@ -12,20 +12,6 @@
     "main": {
       "type": "main-article",
       "blocks": {
-        "featured_image": {
-          "type": "featured_image",
-          "disabled": true,
-          "settings": {
-            "image_height": "adapt"
-          }
-        },
-        "share": {
-          "type": "share",
-          "disabled": true,
-          "settings": {
-            "share_label": "Share"
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -50,8 +36,6 @@
         }
       },
       "block_order": [
-        "featured_image",
-        "share",
         "title",
         "content",
         "tags_TbqTVD",
