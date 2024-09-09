@@ -559,6 +559,26 @@
       })
     }
 
+    let markets = {
+
+      matches: {
+        canada: {
+          'oxy-powder': 'oxy-powder-canada',
+          'calcium-magnesium': 'calcium-magnesium-canada',
+          'detoxadine': 'organic-nascent-iodine-canada',
+          'turmeric': 'turmeric-canada',
+          'vitamin-b12': 'vitamin-b12-canada',
+          'vitamin-d': 'vitamin-d-canada'
+        }
+      },
+
+      goToMatchedProduct(slug){
+        let country = '{{ localization.country.name }}'.toLowerCase();
+        if( !markets.matches[country] || !markets.matches[country][slug] ) return false;
+        window.location = '/products/' + markets.matches[country][slug];
+      }
+    }
+
     let init = () => {
 
       if( !url.pathname.includes('products/') ) return;
@@ -567,6 +587,8 @@
 
       const product = gh_products[product_url];
       if( !product ) return;
+
+      markets.goToMatchedProduct(product_url);
 
       document.title = product.name + ' | Global Healing';
       replace_container.classList.add('hide');
