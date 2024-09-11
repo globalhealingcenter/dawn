@@ -16,11 +16,11 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 templates: {
                     item(hit, { html, components, sendEvent }) {
                         return html`
-                            <a class="ais-hit-gh" href="${hit.url}">
+                            <a class="ais-hit-gh" href="https://globalhealing.com/blogs/education/${hit.url}">
                               <div style="background-image:url(${hit.image})"></div>
                               <div class="article-hit-content left-align">
                                 <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.5">${hit.title}</span>
-                                <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'content' })}</span>
+                                <span class="block gh-ais-article-content">${components.Snippet({ hit, attribute: 'body_html_safe' })}</span>
                               </div>
                             </div>
                           `;
@@ -48,11 +48,11 @@ gh_algolia.instant.init = ( instant, algolia ) => {
             });
 
             let configure = algolia.externals.widgets.configure({
-                attributesToSnippet: ['content'],
+                attributesToSnippet: ['body_html_safe'],
                 hitsPerPage: article_results
             });
 
-            let index = instantsearch.widgets.index({indexName: 'wordpress_blog'});
+            let index = instantsearch.widgets.index({indexName: 'shopify_articles'});
             index.addWidgets([hits, configure, stats])
 
             instant.search.addWidgets([index]);
