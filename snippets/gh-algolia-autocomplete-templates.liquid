@@ -92,6 +92,21 @@
 
     },
 
+    articlesTemplate(_defaultTemplate, templateOptions, itemLink){
+
+      const { item, html, components } = templateOptions;
+
+      return html`
+        <a href="${itemLink}" class="aa-ItemLink aa-BlogItem">
+              <span class="aa-ItemImage"><img src="${item.image}" alt="" height="100" /></span>
+              <span class="aa-ItemContentContainer">
+                  <span class="as-ItemTitle gh-font-secondary bold color-green-dark">${item.title}</span>
+              </span>
+          </a>
+      `;
+      
+    },
+
     suggestionsTemplate(defaultTemplate, templateOptions){
 
       const { html, item, components } = templateOptions;
@@ -105,6 +120,7 @@
         </span>
       </a>`
     },
+
 
     autocompleteNoResultsTemplate(defaultTemplate, templateOptions){
       const { html, state } = templateOptions;
