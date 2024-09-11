@@ -16,7 +16,7 @@ gh_algolia.instant.init = ( instant, algolia ) => {
                 templates: {
                     item(hit, { html, components, sendEvent }) {
                         return html`
-                            <a class="ais-hit-gh" href="https://globalhealing.com/blogs/education/${hit.url}">
+                            <a class="ais-hit-gh" href="https://globalhealing.com/blogs/education/${hit.handle}">
                               <div style="background-image:url(${hit.image})"></div>
                               <div class="article-hit-content left-align">
                                 <span class="gh-font-primary bold mb0 color-green block mb1" style="line-height: 1.5">${hit.title}</span>
