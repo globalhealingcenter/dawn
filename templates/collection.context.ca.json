@@ -13,32 +13,6 @@
     "market": "ca"
   },
   "sections": {
-    "172494903484609398": {
-      "type": "apps",
-      "disabled": false,
-      "custom_css": [
-        "h1{display: none;}"
-      ],
-      "settings": {
-        "include_margins": true
-      },
-      "blocks": {
-        "algolia_search_and_discovery_instantsearch_Pxi3i": {
-          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
-          "disabled": false,
-          "settings": {
-            "header-cbfa07d506cce96572bc3f4670ff0c00": null,
-            "header-ebc2c938fcfcc085729bd93b702d25d6": null,
-            "header-8a6953a22629fb3f26ca5b8196946bca": null,
-            "disable_skeleton_loader": false,
-            "custom_skeleton_mockup": ""
-          }
-        }
-      },
-      "block_order": [
-        "algolia_search_and_discovery_instantsearch_Pxi3i"
-      ]
-    },
     "shogun-helper": {
       "disabled": true,
       "settings": {
@@ -54,7 +28,7 @@
       }
     },
     "product-grid": {
-      "disabled": true,
+      "disabled": false,
       "settings": {
       },
       "blocks": {
@@ -77,7 +51,6 @@
   },
   "order": [
     "banner",
-    "172494903484609398",
     "shogun-helper",
     "shogun-above",
     "product-grid",
