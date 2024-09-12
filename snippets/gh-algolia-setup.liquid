@@ -4,7 +4,9 @@
 {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
-<!-- template is {{ template.name }} -->
+{% if collection %}
+<!-- is collection and template is {{ collection.template_suffix }} -->
+{% endif %}
 
 <script>
   let gh_algolia = {
