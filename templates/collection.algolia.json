@@ -1,0 +1,125 @@
+/*
+* ------------------------------------------------------------
+* IMPORTANT: The contents of this file are auto-generated.
+*
+* This file may be updated by the Shopify admin theme editor
+* or related systems. Please exercise caution as any changes
+* made to this file may be overwritten.
+* ------------------------------------------------------------
+*/
+{
+  "sections": {
+    "banner": {
+      "type": "main-collection-banner",
+      "custom_css": [
+        "h1 {color: var(--gh-color-green); font-size: 6rem;}"
+      ],
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": false,
+        "color_scheme": "background-1"
+      }
+    },
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [
+        ".card__heading {font-weight: 700; color: #545454; margin-top: 10px; font-size: 16px;}",
+        ".price {color: var(--gh-color-green); font-weight: bold; font-size: 13px;}",
+        ".card--standard > .card__content {padding: 0 10px 10px 10px; border: 2px solid #eee; border-radius: 0 0 10px 10px; border-top: 0;}",
+        ".facet-filters {padding-bottom: 2em;}",
+        ".facets-container{padding-bottom: 2em;}"
+      ],
+      "settings": {
+        "products_per_page": 16,
+        "columns_desktop": 3,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": true,
+        "enable_quick_add": false,
+        "enable_filtering": true,
+        "filter_type": "vertical",
+        "enable_sorting": true,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "168777948032aeb944": {
+      "type": "apps",
+      "blocks": {
+        "b948b429-b643-4b8d-97a4-44db6ed0211f": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "132905",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "b948b429-b643-4b8d-97a4-44db6ed0211f"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16067869081800__94a50d09-d564-4967-97aa-bcb0b9d99f43-text-1": {
+          "type": "text",
+          "settings": {
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "template--16067869081800__94a50d09-d564-4967-97aa-bcb0b9d99f43-text-1"
+      ],
+      "custom_css": [
+        ".rich-text__blocks {max-width: 100%;}"
+      ],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {
+      }
+    },
+    "shogun-below": {
+      "type": "shogun-below",
+      "settings": {
+      }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {
+      }
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "shogun-above",
+    "banner",
+    "product-grid",
+    "168777948032aeb944",
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43",
+    "shogun-below",
+    "shogun-optimizer"
+  ]
+}
