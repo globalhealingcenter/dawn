@@ -15,7 +15,11 @@
           <h4><i class='fa fa-exclamation-circle'></i> Not yet available to ship to {{ localization.country.name }}.</h4>
 
           <h5 class='line-height-4'>
-            <a href='https://globalhealing.com/collections/collections'>Shop available products</a>
+            {% if localization.country.name == 'Canada' %}
+              <a href='https://globalhealing.com/collections/canadian-products'>Shop available products</a>
+            {% else %}
+              <a href='https://globalhealing.com/collections/collections'>Shop available products</a>
+            {% endif %}
             or use the country/region dropdown to update your shipping location.
           </h5>
 
