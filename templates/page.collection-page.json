@@ -18,7 +18,8 @@
     "main": {
       "type": "main-page",
       "custom_css": [
-        "h1{color: var(--gh-color-green);}"
+        "h1 {color: var(--gh-color-green); display: none;}",
+        "h3{color: var(--gh-color-green);}"
       ],
       "settings": {
         "padding_top": 28,
