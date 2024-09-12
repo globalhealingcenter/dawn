@@ -13,5 +13,60 @@
     "market": "canada"
   },
   "sections": {
-  }
+    "shogun-helper": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "shogun-above": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "product-grid": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "1726161498b222e17b": {
+      "type": "apps",
+      "disabled": false,
+      "settings": {
+        "include_margins": true
+      },
+      "blocks": {
+        "algolia_search_and_discovery_instantsearch_9Tf9P": {
+          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+          "disabled": false,
+          "settings": {
+            "header-ef77e43bb80951ceba47a47549f8313b": null,
+            "header-33e71eaa0815e1853297101fefc409db": null,
+            "header-90907ec546d7c3ed533d13c6a888e178": null,
+            "disable_skeleton_loader": false,
+            "custom_skeleton_mockup": ""
+          }
+        }
+      },
+      "block_order": [
+        "algolia_search_and_discovery_instantsearch_9Tf9P"
+      ]
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "shogun-above",
+    "banner",
+    "product-grid",
+    "1726161498b222e17b",
+    "168777948032aeb944",
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43",
+    "shogun-below",
+    "shogun-optimizer"
+  ]
 }
