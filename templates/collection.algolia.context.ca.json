@@ -13,5 +13,60 @@
     "market": "ca"
   },
   "sections": {
-  }
+    "shogun-above": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "shogun-helper": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "product-grid": {
+      "disabled": true,
+      "settings": {
+      },
+      "blocks": {
+      }
+    },
+    "172616063091153f8a": {
+      "type": "apps",
+      "disabled": false,
+      "settings": {
+        "include_margins": true
+      },
+      "blocks": {
+        "algolia_search_and_discovery_instantsearch_xwEzF": {
+          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+          "disabled": false,
+          "settings": {
+            "header-420c1b12a3fd9e468989786fddc18878": null,
+            "header-f2d8d8e803375a0cc41ed6b7ea553184": null,
+            "header-a6bb87074379fa0e2a24c004d063eb84": null,
+            "disable_skeleton_loader": false,
+            "custom_skeleton_mockup": ""
+          }
+        }
+      },
+      "block_order": [
+        "algolia_search_and_discovery_instantsearch_xwEzF"
+      ]
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "shogun-above",
+    "banner",
+    "product-grid",
+    "172616063091153f8a",
+    "168777948032aeb944",
+    "94a50d09-d564-4967-97aa-bcb0b9d99f43",
+    "shogun-below",
+    "shogun-optimizer"
+  ]
 }
