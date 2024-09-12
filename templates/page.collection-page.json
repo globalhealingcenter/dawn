@@ -17,6 +17,9 @@
     },
     "main": {
       "type": "main-page",
+      "custom_css": [
+        "h1{color: var(--gh-color-green);}"
+      ],
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
