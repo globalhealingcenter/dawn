@@ -570,9 +570,11 @@
       },
       redirectUrl(){
         let data = sessionStorage.getItem(storage.key);
+        console.log('found storage', data);
         if( !data ) return
 
         sessionStorage.removeItem(storage.key);
+        console.log('redirecting to', data);
         window.location.url = data;
       }
     }
