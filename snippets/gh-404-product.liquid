@@ -594,6 +594,7 @@
         let country = '{{ localization.country.name }}'.toLowerCase();
         if( !markets.matches[country] || !markets.matches[country][slug] ) return false;
         window.location = '/products/' + markets.matches[country][slug];
+        return true;
       }
     }
 
@@ -609,7 +610,10 @@
       const product = gh_products[product_url];
       if( !product ) return;
 
-      markets.goToMatchedProduct(product_url);
+      let matched = markets.goToMatchedProduct(product_url);
+      if( matched ) return;
+
+      storage.storeUrl(product_url);
 
       document.title = product.name + ' | Global Healing';
       replace_container.classList.add('hide');
