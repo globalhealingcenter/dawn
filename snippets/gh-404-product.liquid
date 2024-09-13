@@ -563,6 +563,20 @@
       })
     }
 
+    let storage = {
+      key: 'gh_404_redirect',
+      storeUrl( handle ){
+        sessionStorage.setItem(storage.key, `https://globalhealing.com/products/${handle}`);
+      },
+      redirectUrl(){
+        let data = sessionStorage.getItem(storage.key);
+        if( !data ) return
+
+        sessionStorage.removeItem(storage.key);
+        window.location.url = data;
+      }
+    }
+
     let markets = {
 
       matches: {
@@ -585,7 +599,10 @@
 
     let init = () => {
 
-      if( !url.pathname.includes('products/') ) return;
+      if( !url.pathname.includes('products/') ){
+        storage.redirectUrl();
+        return;
+      }
 
       const product_url = url.pathname.replace('/products/', '').replace('/', '');
 
