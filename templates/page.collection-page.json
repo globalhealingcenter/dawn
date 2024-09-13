@@ -34,6 +34,7 @@
     },
     "featured_collection_KYWja9": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "",
         "heading_size": "h1",
