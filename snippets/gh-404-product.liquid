@@ -152,7 +152,7 @@
       short_description: "<p>The liver, a vital organ of our body, serves as the ultimate detoxifier, eliminating harmful substances and toxins from our system. As such, it's crucial to nourish this powerhouse with the best care possible. Our Liver Health supplement is an exquisite blend of potent herbs meticulously selected for their exceptional antioxidant properties and other beneficial compounds. The nutrients contained in this exceptional Raw Herbal Extract&trade; work in perfect harmony to naturally detoxify, flush, and purify the liver of unwanted deposits, built-up toxins, and other impurities. This unique formula also helps safeguard against the detrimental effects of poor dietary habits, processed foods, and daily stress. Experience the delightful taste of our liquid formula, making it a breeze to incorporate into your wellness routine and elevate your liver health to new heights.<\/p>",
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
     },
-    "vitamin-d-canada": {
+    "vitamin-d3-canada": {
       name: "Vitamin D3 Canada",
       tagline: "Strong Bones, Brain, and Immune System",
       short_description: "<p>Experience the power of the sun with our premium vitamin D supplement. It&rsquo;s plant-based, derived from organic lichen and contains cholecalciferol&ndash; the biologically active vitamin D your body produces when you enjoy natural sunlight. Our vegan-friendly formula delivers the biologically active form of vitamin D that supports strong bones, immune function, and optimal brain activity. With so many people worldwide lacking sufficient vitamin D levels, our formula is the perfect choice for anyone seeking a premium, plant-based source of this vital nutrient.<\/p>",
@@ -308,7 +308,7 @@
       short_description: "<p>Experience the power of nature's most nutrient-dense plant with our premium Moringa supplement. Packed with vitalizing antioxidants and nutrients, our formula is derived from fresh Moringa leaves using our cutting-edge Raw Herbal Extract&trade; technology, enhanced with Ormus Supercharged Minerals for maximum potency and absorption. Elevate your wellness with this green superfood, renowned for its restorative properties that promote energy, calm inflammatory responses, and support deep, restful sleep. Discover the transformative benefits of Moringa and unlock your full potential with every dose.<\/p>",
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
     },
-    "mustard-seed": {
+    "mustard-seed-canada": {
       name: "Mustard Seed Canada",
       tagline: "Vegan Selenium Made From Organic Mustard Seed",
       short_description: "<p>Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable.<\/p>",
@@ -379,12 +379,6 @@
       tagline: "Nurture Your Mind, Nourish Your Mood",
       short_description: "<p>Manage stress, support mood, and improve cognitive function with our powerful formula. Combining traditional and modern ingredients like Organic Banana Peel, Organic Poria Mushroom, SAMe, and Lithium Orotate, our stress relief supplement provides an effective solution to help you find calm and enhance your overall well-being.<\/p>",
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "mustard-seed-canada": {
-      name: "Mustard Seed Canada",
-      tagline: "Plant-Based Selenium from Organic Mustard Seed",
-      short_description: "<p>Discover the exceptional power of our organic selenium supplement, carefully crafted to support optimal health and vitality. This essential trace mineral plays a vital role in promoting a healthy thyroid, boosting immune function, maintaining cardiovascular health, and supporting efficient metabolism. Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable, ensuring optimal absorption and utilization of this powerful antioxidant to support several critical body functions.<\/p>",
-      images: []
     },
     "colon-cleanse-program": {
       name: "Colon Cleanse Program",
@@ -618,6 +612,7 @@
       fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
+          if( h === 'undefined' ) return;
           product_content_container.innerHTML += '<br>';
           product_content_container.innerHTML += h;
           img();
