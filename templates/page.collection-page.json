@@ -40,7 +40,7 @@
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "{{ page.metafields.globalhealing.collection.value }}",
+        "collection": "canadian-products",
         "products_to_show": 10,
         "columns_desktop": 4,
         "full_width": false,
