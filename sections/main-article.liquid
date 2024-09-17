@@ -213,7 +213,7 @@
         </header>
 
       {%- when 'content' -%}
-        {% assign image_url = product.metafields.globalhealing.featured_image %}
+        {% assign image_url = article.metafields.globalhealing.featured_image %}
         {% if image_url != blank %}
             <img title="{{ article.title }}" src="{{ image_url.value | image_url }}" decoding="async" class="col-12 sm-col-5 mb2 block ml-auto mr-auto sm-right sm-ml2 border wp-image-39910" alt="">
         {% else %}
