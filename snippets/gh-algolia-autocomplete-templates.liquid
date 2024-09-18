@@ -42,8 +42,6 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
-      console.log('a', algoliaShopify.helpers.compactImage(item))
-
       return html `<a
         class="aa-ItemLink aa-ProductItem"
         data-algolia-index="${item.index}"
@@ -56,7 +54,7 @@
         onclick="${defaultTemplate.props.onClick}"
         href="${itemLink}"
       >
-        <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
+        <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item).src}" alt="${item.title}" /></span>
 
         <span class="as-ItemTitle gh-font-primary bold color-green-dark">
         <span>
