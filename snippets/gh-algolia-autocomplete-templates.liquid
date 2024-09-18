@@ -42,6 +42,8 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
+      console.log('a', algoliaShopify.helpers.compactImage(item))
+
       return html `<a
         class="aa-ItemLink aa-ProductItem"
         data-algolia-index="${item.index}"
