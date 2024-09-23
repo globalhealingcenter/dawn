@@ -9,9 +9,9 @@
 */
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/seal-white.png",
+    "logo": "shopify://shop_images/seal-white.png",
     "logo_width": 60,
-    "favicon": "shopify:\/\/shop_images\/favicon2023.svg",
+    "favicon": "shopify://shop_images/favicon2023.svg",
     "type_header_font": "serif",
     "heading_scale": 100,
     "type_body_font": "sans-serif",
@@ -108,15 +108,15 @@
     "sale_badge_color_scheme": "accent-2",
     "sold_out_badge_color_scheme": "inverse",
     "brand_headline": "",
-    "brand_description": "<p><\/p>",
+    "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "https:\/\/www.facebook.com\/globalhealingofficial",
-    "social_instagram_link": "https:\/\/www.instagram.com\/globalhealingofficial\/",
-    "social_youtube_link": "http:\/\/ghc.us\/sub-yt",
-    "social_tiktok_link": "https:\/\/www.tiktok.com\/@globalhealing?",
-    "social_twitter_link": "https:\/\/twitter.com\/ghchealth",
+    "social_facebook_link": "https://www.facebook.com/globalhealingofficial",
+    "social_instagram_link": "https://www.instagram.com/globalhealingofficial/",
+    "social_youtube_link": "http://ghc.us/sub-yt",
+    "social_tiktok_link": "https://www.tiktok.com/@globalhealing?",
+    "social_twitter_link": "https://twitter.com/ghchealth",
     "social_snapchat_link": "",
-    "social_pinterest_link": "https:\/\/www.pinterest.com\/ghchealth\/",
+    "social_pinterest_link": "https://www.pinterest.com/ghchealth/",
     "social_tumblr_link": "",
     "social_vimeo_link": "",
     "predictive_search_enabled": false,
@@ -128,7 +128,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "ss_enable": false,
-    "checkout_logo_image": "shopify:\/\/shop_images\/Logo-Seal.svg",
+    "checkout_logo_image": "shopify://shop_images/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
     "checkout_body_background_color": "#ffffff",
@@ -153,20 +153,14 @@
 
     ],
     "blocks": {
-      "7570552984445421165": {
-        "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/settings\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
-        "disabled": false,
-        "settings": {
-        }
-      },
       "9271244056961380716": {
-        "type": "shopify:\/\/apps\/discount-kit\/blocks\/core\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
+        "type": "shopify://apps/discount-kit/blocks/core/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
         "settings": {
         }
       },
       "6071110790918949010": {
-        "type": "shopify:\/\/apps\/discount-kit\/blocks\/gift\/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
+        "type": "shopify://apps/discount-kit/blocks/gift/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
         "settings": {
           "auto_remove": true,
@@ -174,39 +168,31 @@
         }
       },
       "11945366711752539959": {
-        "type": "shopify:\/\/apps\/zendesk\/blocks\/zendesk_web_widget\/c0b417b1-b90b-4754-baaf-f55627e6acd4",
+        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
         "disabled": false,
         "settings": {
         }
       },
       "11735689235857492391": {
-        "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/autocomplete\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+        "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
         "settings": {
-        }
-      },
-      "8962992520437913685": {
-        "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/loader-app-embed-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-        "disabled": false,
-        "settings": {
-          "inject_modules_loader": true,
-          "inject_sdk_loader": false
         }
       },
       "4705145147225299685": {
-        "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/widget-block\/06fa8282-42ff-403e-b67c-1936776aed11",
+        "type": "shopify://apps/tolstoy-shoppable-video-ugc/blocks/widget-block/06fa8282-42ff-403e-b67c-1936776aed11",
         "disabled": false,
         "settings": {
         }
       },
       "6628239160433917566": {
-        "type": "shopify:\/\/apps\/littledata-revenue-tracking\/blocks\/LittledataLayer\/45a35ed8-a2b2-46c3-84fa-6f58497c5345",
+        "type": "shopify://apps/littledata-revenue-tracking/blocks/LittledataLayer/45a35ed8-a2b2-46c3-84fa-6f58497c5345",
         "disabled": false,
         "settings": {
         }
       },
       "7079518687644006178": {
-        "type": "shopify:\/\/apps\/checkout-blocks\/blocks\/app-embed\/b0024ca5-9de8-4bf0-a92f-cd0783877ae2",
+        "type": "shopify://apps/checkout-blocks/blocks/app-embed/b0024ca5-9de8-4bf0-a92f-cd0783877ae2",
         "disabled": true,
         "settings": {
           "utm_id": true,
@@ -218,14 +204,28 @@
         }
       },
       "17428600031447253342": {
-        "type": "shopify:\/\/apps\/attentive\/blocks\/attn-tag\/8df62c72-8fe4-407e-a5b3-72132be30a0d",
+        "type": "shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d",
         "disabled": false,
         "settings": {
         }
       },
       "1248957848723945065": {
-        "type": "shopify:\/\/apps\/mntn\/blocks\/tracking-pixel\/d40b5b2f-bf84-4a06-b576-832ad24a8652",
+        "type": "shopify://apps/mntn/blocks/tracking-pixel/d40b5b2f-bf84-4a06-b576-832ad24a8652",
         "disabled": false,
+        "settings": {
+        }
+      },
+      "8962992520437913685": {
+        "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+        "disabled": true,
+        "settings": {
+          "inject_modules_loader": true,
+          "inject_sdk_loader": false
+        }
+      },
+      "7570552984445421165": {
+        "type": "shopify://apps/yotpo-product-reviews-ugc/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "disabled": true,
         "settings": {
         }
       }
@@ -466,7 +466,7 @@
       "sale_badge_color_scheme": "accent-2",
       "sold_out_badge_color_scheme": "inverse",
       "brand_headline": "",
-      "brand_description": "<p><\/p>",
+      "brand_description": "<p></p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
