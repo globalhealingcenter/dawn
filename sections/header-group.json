@@ -16,8 +16,9 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
-            "text": "🎉 Earn 2x Points on Liquid Gold, Ashwagandha, and Omega 3•6•7•9 Until 9\/23",
+            "text": "🎉 Earn 2x Points on Liquid Gold, Ashwagandha, and Omega 3•6•7•9 Until 9/23",
             "link": ""
           }
         },
@@ -26,7 +27,7 @@
           "disabled": true,
           "settings": {
             "text": "✨ Introducing Biophotonic Liquid Gold",
-            "link": "https:\/\/globalhealing.com\/products\/biophotonic-liquid-gold?icn_ghc=biophotonic_liquid_gold_campaign&ici_ghc=TopNotice"
+            "link": "https://globalhealing.com/products/biophotonic-liquid-gold?icn_ghc=biophotonic_liquid_gold_campaign&ici_ghc=TopNotice"
           }
         }
       },
