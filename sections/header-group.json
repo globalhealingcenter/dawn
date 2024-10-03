@@ -24,7 +24,6 @@
         },
         "announcement_GGCHez": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "✨ Introducing Biophotonic Liquid Gold",
             "link": "https://globalhealing.com/products/biophotonic-liquid-gold?icn_ghc=biophotonic_liquid_gold_campaign&ici_ghc=TopNotice"
