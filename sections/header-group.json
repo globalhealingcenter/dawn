@@ -54,8 +54,8 @@
       ],
       "settings": {
         "logo_position": "middle-left",
-        "menu": "main-menu-v2",
-        "menu_type_desktop": "dropdown",
+        "menu": "main-menu-v3",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "none",
         "show_line_separator": true,
         "color_scheme": "accent-1",
