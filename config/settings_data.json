@@ -179,15 +179,15 @@
           "inject_sdk_loader": true
         }
       },
-      "2997326909215316540": {
-        "type": "shopify://apps/ang-extra-menu/blocks/embed-app/ec904fae-fd98-4243-8db5-01051f1af95f",
-        "disabled": false,
+      "14006543868794036723": {
+        "type": "shopify://apps/ang-extra-menu/blocks/metadata/ec904fae-fd98-4243-8db5-01051f1af95f",
+        "disabled": true,
         "settings": {
         }
       },
-      "14006543868794036723": {
-        "type": "shopify://apps/ang-extra-menu/blocks/metadata/ec904fae-fd98-4243-8db5-01051f1af95f",
-        "disabled": false,
+      "2997326909215316540": {
+        "type": "shopify://apps/ang-extra-menu/blocks/embed-app/ec904fae-fd98-4243-8db5-01051f1af95f",
+        "disabled": true,
         "settings": {
         }
       }
