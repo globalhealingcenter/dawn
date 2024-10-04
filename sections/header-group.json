@@ -19,14 +19,14 @@
           "disabled": true,
           "settings": {
             "text": "🌸 Supplements for Inner & Outer Radiance - Learn More",
-            "link": "https:\/\/globalhealing.com\/pages\/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
+            "link": "https://globalhealing.com/pages/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
           }
         },
         "announcement_GGCHez": {
           "type": "announcement",
           "settings": {
             "text": "🌸 Complimentary Detoxadine on Orders $100+",
-            "link": "https:\/\/globalhealing.com\/pages\/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
+            "link": "https://globalhealing.com/pages/womens-health?icn_ghc=womens_health_campaign&ici_ghc=TopNotice"
           }
         }
       },
@@ -49,10 +49,14 @@
     },
     "header": {
       "type": "header",
+      "custom_css": [
+        ".mega-menu__list {gap: 10rem 3rem;}",
+        ".mega-menu__list {grid-template-columns: repeat(5, minmax(0px, 1fr));}"
+      ],
       "settings": {
         "logo_position": "middle-left",
         "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
+        "menu_type_desktop": "mega",
         "sticky_header_type": "none",
         "show_line_separator": true,
         "color_scheme": "accent-1",
@@ -60,7 +64,7 @@
         "enable_language_selector": false,
         "mobile_logo_position": "center",
         "margin_bottom": 0,
-        "padding_top": 8,
+        "padding_top": 12,
         "padding_bottom": 8
       }
     }
