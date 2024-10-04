@@ -52,7 +52,7 @@
       "custom_css": [
         ".mega-menu__list {gap: 10rem 3rem;}",
         ".mega-menu__list {grid-template-columns: repeat(5, minmax(0px, 1fr));}",
-        ".mega-menu__link--level-2:not(:only-child) {font-size: 16px; font-weight: 600px; line-height: 20px; line-spacing: 0.6em;}"
+        ".mega-menu__link--level-2:not(:only-child) {font-size: 17px; font-weight: 600; line-height: 20px; line-spacing: 0.6em;}"
       ],
       "settings": {
         "logo_position": "middle-left",
