@@ -52,7 +52,9 @@
       "custom_css": [
         ".mega-menu__list {gap: 10rem 3rem;}",
         ".mega-menu__list {grid-template-columns: repeat(5, minmax(0px, 1fr));}",
-        ".mega-menu__link--level-2:not(:only-child) {font-size: 17px; font-weight: 600; line-height: 20px; line-spacing: 0.6em;}"
+        ".mega-menu__link--level-2:not(:only-child) {font-size: 17px; font-weight: 600; line-height: 20px;}",
+        "#HeaderMenu-shop-cleanse-detox {font-size: 17px; margin-bottom: 0;}",
+        "#HeaderMenu-shop-cleanse-detox-skin-care {font-size: 17px; margin-bottom: 0;}"
       ],
       "settings": {
         "logo_position": "middle-left",
