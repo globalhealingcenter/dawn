@@ -9,9 +9,9 @@
 */
 {
   "current": {
-    "logo": "shopify:\/\/shop_images\/seal-white.png",
+    "logo": "shopify://shop_images/seal-white.png",
     "logo_width": 60,
-    "favicon": "shopify:\/\/shop_images\/favicon2023.svg",
+    "favicon": "shopify://shop_images/favicon2023.svg",
     "type_header_font": "serif",
     "heading_scale": 100,
     "type_body_font": "sans-serif",
@@ -108,15 +108,15 @@
     "sale_badge_color_scheme": "accent-2",
     "sold_out_badge_color_scheme": "inverse",
     "brand_headline": "",
-    "brand_description": "<p><\/p>",
+    "brand_description": "<p></p>",
     "brand_image_width": 100,
-    "social_facebook_link": "https:\/\/www.facebook.com\/globalhealingofficial",
-    "social_instagram_link": "https:\/\/www.instagram.com\/globalhealingofficial\/",
-    "social_youtube_link": "http:\/\/ghc.us\/sub-yt",
-    "social_tiktok_link": "https:\/\/www.tiktok.com\/@globalhealing?",
-    "social_twitter_link": "https:\/\/twitter.com\/ghchealth",
+    "social_facebook_link": "https://www.facebook.com/globalhealingofficial",
+    "social_instagram_link": "https://www.instagram.com/globalhealingofficial/",
+    "social_youtube_link": "http://ghc.us/sub-yt",
+    "social_tiktok_link": "https://www.tiktok.com/@globalhealing?",
+    "social_twitter_link": "https://twitter.com/ghchealth",
     "social_snapchat_link": "",
-    "social_pinterest_link": "https:\/\/www.pinterest.com\/ghchealth\/",
+    "social_pinterest_link": "https://www.pinterest.com/ghchealth/",
     "social_tumblr_link": "",
     "social_vimeo_link": "",
     "predictive_search_enabled": false,
@@ -128,7 +128,7 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "ss_enable": false,
-    "checkout_logo_image": "shopify:\/\/shop_images\/Logo-Seal.svg",
+    "checkout_logo_image": "shopify://shop_images/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
     "checkout_body_background_color": "#ffffff",
@@ -154,29 +154,41 @@
     ],
     "blocks": {
       "7570552984445421165": {
-        "type": "shopify:\/\/apps\/yotpo-product-photo-reviews\/blocks\/settings\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+        "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
         "settings": {
         }
       },
       "11735689235857492391": {
-        "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/autocomplete\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+        "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
         "settings": {
         }
       },
       "4705145147225299685": {
-        "type": "shopify:\/\/apps\/tolstoy-shoppable-video-ugc\/blocks\/widget-block\/06fa8282-42ff-403e-b67c-1936776aed11",
+        "type": "shopify://apps/tolstoy-shoppable-video-ugc/blocks/widget-block/06fa8282-42ff-403e-b67c-1936776aed11",
         "disabled": false,
         "settings": {
         }
       },
       "8962992520437913685": {
-        "type": "shopify:\/\/apps\/yotpo-loyalty-rewards\/blocks\/loader-app-embed-block\/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+        "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
         "disabled": false,
         "settings": {
           "inject_modules_loader": true,
           "inject_sdk_loader": true
+        }
+      },
+      "2997326909215316540": {
+        "type": "shopify://apps/ang-extra-menu/blocks/embed-app/ec904fae-fd98-4243-8db5-01051f1af95f",
+        "disabled": false,
+        "settings": {
+        }
+      },
+      "14006543868794036723": {
+        "type": "shopify://apps/ang-extra-menu/blocks/metadata/ec904fae-fd98-4243-8db5-01051f1af95f",
+        "disabled": false,
+        "settings": {
         }
       }
     },
@@ -416,7 +428,7 @@
       "sale_badge_color_scheme": "accent-2",
       "sold_out_badge_color_scheme": "inverse",
       "brand_headline": "",
-      "brand_description": "<p><\/p>",
+      "brand_description": "<p></p>",
       "brand_image_width": 100,
       "social_twitter_link": "",
       "social_facebook_link": "",
@@ -455,15 +467,15 @@
     "custom_css": [
       ".article-template__content img {float: right; width: 374px !important;}",
       ".youtube-video {display: none;}",
-      "#wp_rp_first {\/* display: none; *\/}",
+      "#wp_rp_first {/* display: none; */}",
       "ul.related_post.wp_rp {display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0;}",
       "ul.related_post.wp_rp li {flex: 1 1 20%; box-sizing: border-box; padding: 10px; text-align: center;}",
-      "\/* NEW BLOG CSS *\/\/* General styles for the layout *\/.custom-article-layout {display: flex; flex-wrap: wrap; gap: 20px; max-width: 1300px; margin: 0 auto;}",
+      " /* NEW BLOG CSS */ /* General styles for the layout */.custom-article-layout {display: flex; flex-wrap: wrap; gap: 20px; max-width: 1300px; margin: 0 auto;}",
       ".custom-article-content {flex: 1; min-width: 300px; max-width: 70%; padding-left: 122px;}",
       ".custom-sidebar {flex: 0 0 300px; max-width: 300px;}",
       ".custom-article-content.rte img {float: right;}",
-      "\/* Styles for mobile responsiveness *\/@media (max-width: 768px) {.custom-article-layout {flex-direction: column; } .custom-article-content, .custom-sidebar {max-width: 100%; padding-right: 50px; padding-left: 50px; }}",
-      "\/* NEW BLOG CSS END *\/"
+      " /* Styles for mobile responsiveness */@media (max-width: 768px) {.custom-article-layout {flex-direction: column; } .custom-article-content, .custom-sidebar {max-width: 100%; padding-right: 50px; padding-left: 50px; }}",
+      " /* NEW BLOG CSS END */"
     ]
   }
 }
