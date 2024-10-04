@@ -187,7 +187,7 @@
       },
       "2997326909215316540": {
         "type": "shopify://apps/ang-extra-menu/blocks/embed-app/ec904fae-fd98-4243-8db5-01051f1af95f",
-        "disabled": false,
+        "disabled": true,
         "settings": {
         }
       }
