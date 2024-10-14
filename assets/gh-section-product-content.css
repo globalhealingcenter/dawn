@@ -3,7 +3,7 @@
 }
 
 .product__title h1 {
-  font-size: 6rem;
+  font-size: 5rem;
 }
 
 .product__title h1 span{
@@ -407,6 +407,7 @@
   }
 }
 
+
 @media (min-width: 750px) and (max-width: 1070px){
 
   #MainContent > section:first-child > section.page-width:first-child{
@@ -437,6 +438,10 @@
 @media (max-width: 749px){
     .ghd--hide-mobile{
         display: none;
+    }
+
+    .product__title h1 {
+        font-size: 3.5rem;
     }
 
     h2.eyebrow, .ghd--block--blank h2,
