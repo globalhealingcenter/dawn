@@ -1,0 +1,190 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493": {
+      "type": "gh-home-page",
+      "blocks": {
+        "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
+          "type": "hero",
+          "settings": {
+            "image": "https:\/\/cdn.globalhealing.com\/m\/2024\/03\/proprietary-technologies\/desktop.jpg",
+            "image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/03\/proprietary-technologies\/mobile.jpg",
+            "url": "https:\/\/globalhealing.com\/pages\/our-proprietary-technologies?icn_ghc=proprietary_technologies_campaign&ici_ghc=HomePageBanner"
+          }
+        },
+        "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
+          "type": "logos",
+          "settings": {
+          }
+        },
+        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
+          "type": "banners",
+          "settings": {
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/09\/glutathione\/desktop.jpg",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/09\/glutathione\/mobile.jpg",
+            "image_is_2x": false,
+            "banner_1_url": "https:\/\/globalhealing.com\/products\/glutathione?icn_ghc=glutathione_campaign&ici_ghc=HomePageBanner",
+            "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
+            "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
+            "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
+            "banner_3_url": "https:\/\/globalhealinginstitute.org\/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
+          }
+        },
+        "ee09762d-26e5-443b-8985-8a77f1574932": {
+          "type": "banners",
+          "disabled": true,
+          "settings": {
+            "banner_1_image": "https:\/\/cdn.globalhealing.com\/m\/2024\/08\/kava-calm\/desktop.jpg",
+            "banner_1_image_mobile": "https:\/\/cdn.globalhealing.com\/m\/2024\/08\/kava-calm\/mobile.jpg",
+            "image_is_2x": true,
+            "banner_1_url": "https:\/\/globalhealing.com\/products\/kava-calm?icn_ghc=kava_calm_campaign&ici_ghc=HomePageBanner",
+            "banner_2_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-blog.png",
+            "banner_2_url": "https:\/\/explore.globalhealing.com\/gut-cleanse\/",
+            "banner_3_image": "https:\/\/cdn.globalhealing.com\/m\/2023\/07\/home\/featured-spotlight.png",
+            "banner_3_url": "https:\/\/globalhealinginstitute.org\/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
+          }
+        },
+        "e10c7322-7eab-438a-a4fb-087f5dca4764": {
+          "type": "quality",
+          "settings": {
+            "heading": "The Quality & Purity<br> Your Body Deserves",
+            "link_text": "OUR PROCESS",
+            "link": "\/pages\/quality-purity"
+          }
+        },
+        "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
+          "type": "journey",
+          "settings": {
+            "heading": "Products Uniquely Made With You in Mind",
+            "left_col_heading": "Start Your Journey",
+            "left_col_text": "<p>Find the right product for you. If you need help, our quiz can help you find the right products for you.<\/p>",
+            "link_1_text": "SHOP OUR COLLECTION",
+            "link_1": "shopify:\/\/collections\/collections",
+            "link_2_text": "TAKE OUR QUIZ",
+            "link_2": "https:\/\/globalhealing.com\/pages\/getting-started-quiz",
+            "link_list_heading": "SHOP BY HEALTH GOALS",
+            "link_list": "homepage-menu"
+          }
+        },
+        "f6b3c029-5d02-4e58-b13b-d168889906a5": {
+          "type": "foundation",
+          "settings": {
+            "heading": "<span>THE FOUNDATION OF WELLNESS<\/span>                             Healing Starts <br>From the Inside Out",
+            "text": "<p><strong>Live a more natural, toxin-free life.<\/strong> Regular cleansing and detoxification practices help eliminate toxins, supporting optimal organ function, boosting energy levels, and promoting overall well-being.<\/p>",
+            "link_1_text": "SHOP CLEANSES & DETOX",
+            "link_1": "shopify:\/\/collections\/detox",
+            "link_2_text": "ULTIMATE DETOX GUIDE",
+            "link_2": "shopify:\/\/pages\/detox-guide"
+          }
+        },
+        "8bb9f77b-9600-4aa3-aaea-c66afd3693ea": {
+          "type": "autoship",
+          "settings": {
+            "image": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/subscription.png",
+            "image_mobile": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/subscription-mobile.png",
+            "heading": "<span>AUTOSHIP PROGRAM<\/span> Stay Committed <br>to Wellness",
+            "text": "<p>Even the most potent and pure supplements take time to be effective. Consistency is key when it comes to healing your body from within. Our Autoship program helps support your commitment to a lifelong wellness journey by ensuring you always have the products you need.<\/p>",
+            "link_text": "SEE ALL PERKS",
+            "link": "https:\/\/globalhealing.com\/pages\/autoship"
+          }
+        },
+        "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98": {
+          "type": "br",
+          "settings": {
+            "image_one": "Products Uniquely Made With You in Mind"
+          }
+        },
+        "90d53a3e-607e-44cf-81c0-4d063ee2042c": {
+          "type": "mission",
+          "settings": {
+            "heading": "Global Healing<br> is Our Mission",
+            "intro_text": "<p>Since 1998, our mission has been to empower people to take control of their health naturally and restore their body’s self-healing abilities.<br\/><a href=\"\/pages\/our-story\" title=\"Our Healing Mission & Story\"><strong>OUR STORY<\/strong><\/a><br\/>                        <\/p>"
+          }
+        },
+        "b871651f-c308-4034-8741-ebbb3f7989ed": {
+          "type": "reviews",
+          "settings": {
+            "review": "<p>“I have been making protein smoothies for over 30 years now ~ I was always 'on the hunt' for the best protein powder with the purest of ingredients~ well I think I have finally found it ~ Vanilla Pure plant protein is my new breakfast fave ~ blends very well and I love that it has a probiotic and prebiotic blend. Taste wonderful, no clumping, very filling.”<\/p><p><strong>Linda S.<\/strong><\/p>",
+            "row_1_img": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/reviews-free-shipping.v2.svg",
+            "row_1_text": "<p>For U.S. Addresses on Orders $100+ <br\/><a href=\"\/pages\/shipping\" title=\"Domestic & International Shipping Information\">LEARN MORE<\/a><\/p>",
+            "row_2_img": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/reviews-1-year.v3.svg",
+            "row_2_text": "<p>We’re so sure you’ll love the way our products work for you that we give you a full year to try them. If you’re not completely satisfied, we’ll refund your money.<\/p>",
+            "row_3_img": "https:\/\/cdn.globalhealing.com\/pages\/v2\/home\/reviews-award-winning.v2.svg",
+            "row_3_text": "<p>Our knowledgeable, compassionate team is always here to guide you and answer your questions so you get the right products for your wellness journey. <\/p>"
+          }
+        },
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "disabled": true,
+          "settings": {
+            "enabled": true,
+            "id": "128545",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "a12c25e5-0dd7-40ea-8981-205f8eac2fcc",
+        "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0",
+        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be",
+        "ee09762d-26e5-443b-8985-8a77f1574932",
+        "e10c7322-7eab-438a-a4fb-087f5dca4764",
+        "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
+        "f6b3c029-5d02-4e58-b13b-d168889906a5",
+        "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
+        "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
+        "90d53a3e-607e-44cf-81c0-4d063ee2042c",
+        "b871651f-c308-4034-8741-ebbb3f7989ed",
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 52
+      }
+    },
+    "4a534389-073e-4980-a2fd-d7304e59caec": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram<\/h2><\/a>\n\n<script src=\"https:\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"><\/script>",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "1687779425f103d894": {
+      "type": "apps",
+      "blocks": {
+        "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6": {
+          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "disabled": true,
+          "settings": {
+            "enabled": true,
+            "id": "128545",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "b6660c1e-1ccd-4d98-a0cb-85d6fe1f2af6"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493",
+    "4a534389-073e-4980-a2fd-d7304e59caec",
+    "1687779425f103d894"
+  ]
+}
