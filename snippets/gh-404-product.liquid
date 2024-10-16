@@ -1,35 +1,35 @@
 <div id='content-container-404' class='pt4 px2 hide'>
 
-  <div class="lg-flex items-center justify-center">
-    <div id='gh-product-header--left' class='lg-col-4 p3 center'>
+	<div class="lg-flex items-center justify-center">
+		<div id='gh-product-header--left' class='lg-col-4 p3 center'>
 
-    </div>
-    <div id='gh-product-header--right' class='lg-col-5'>
-      <div class="product__title pb3">
+		</div>
+		<div id='gh-product-header--right' class='lg-col-5'>
+			<div class="product__title pb3">
 
-        <div id='gh-product-header--right-header'></div>
+				<div id='gh-product-header--right-header'></div>
 
-        <button class="button button--full-width disabled mb3">Not Available in Your Region</button>
+				<button class="button button--full-width disabled mb3">Not Available in Your Region</button>
 
-        <div id='' class='bg-green-light p3'>
-          <h4><i class='fa fa-exclamation-circle'></i> Not yet available to ship to {{ localization.country.name }}.</h4>
+				<div id='' class='bg-green-light p3'>
+					<h4><i class='fa fa-exclamation-circle'></i> Not yet available to ship to {{ localization.country.name }}.</h4>
 
-          <h5 class='line-height-4'>
-            {% if localization.country.name == 'Canada' %}
-              <a href='https://globalhealing.com/collections/canadian-products'>Shop available products</a>
-            {% else %}
-              <a href='https://globalhealing.com/collections/collections'>Shop available products</a>
-            {% endif %}
-            or use the country/region dropdown to update your shipping location.
-          </h5>
+					<h5 class='line-height-4'>
+						{% if localization.country.name == 'Canada' %}
+						<a href='https://globalhealing.com/collections/canadian-products'>Shop available products</a>
+						{% else %}
+						<a href='https://globalhealing.com/collections/collections'>Shop available products</a>
+						{% endif %}
+						or use the country/region dropdown to update your shipping location.
+					</h5>
 
-          <div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
-        </div>
+					<div id='gh-localization-form'>{% render 'gh-localization-form' %}</div>
+				</div>
 
-        <div id='gh-product-header--right-footer'></div>
-      </div>
-    </div>
-  </div>
+				<div id='gh-product-header--right-footer'></div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
@@ -37,635 +37,641 @@
 
 <script>
 
-  let gh_products =         {
-    "multivitamin": {
-      name: "Organic Multivitamin with Minerals",
-      tagline: "30+ Vitamins & Minerals",
-      short_description: "<p>At the heart of our philosophy lies the recognition that our diets often fall short of providing the recommended daily value of essential nutrients. With over 30 vital vitamins and minerals, complemented by a potent antioxidant blend, our meticulously formulated multivitamin empowers you to achieve your wellness goals without unnecessary additives that offer no benefit. Certified organic and crafted with plant-based ingredients, our formula prioritizes purity by omitting coatings, and fillers. Experience the power of pure and straightforward nutrition, filling in the gaps, enhancing well-being, and elevating your overall health.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/multivitamin\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/multivitamin\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "elderberry-echinacea": {
-      name: "Elderberry & Echinacea",
-      tagline: "Natural Immune Boost",
-      short_description: "<p>Elderberry and echinacea provide a time-honored herbal combination known to support a healthy immune system and provide your body with a potent antioxidant. Our vegan blend of highly bioavailable, organic elderberry and echinacea is designed to defend against harmful organisms and seasonal distress. It also tastes great, is easy to use, and is safe for kids. A trusted and effective way to provide the support your body needs during periods of seasonal illness &mdash; especially the winter months!<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/elderberry-echinacea\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/elderberry-echinacea\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "gut-health-bundle": {
-      name: "Gut Health Bundle",
-      tagline: "Specialized Thyroid Nutrition",
-      short_description: "<p>You&rsquo;ve probably heard about the importance of gut health lately, and with good reason. Your gut is the core of your digestive system, immune system, and mental health &ndash; the powerful force that keeps your body running. It&rsquo;s important to ensure your gut is as healthy and efficient as possible. Our Gut Health Bundle is designed for just that. Reset and balance from the inside out. Features include essential supplements for digestive support, including Oxy-Powder&reg;, Ultimate Probiotic, Ultimate Enzymes, and Aloe Vera. Stimulate your gut microbiota, enhance your digestion, and lay the foundation for strong digestive health.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/gut-health-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/label\/3000w.png?w=1000"}]
-    },
-    "mens-hormone-support": {
-      name: "Men's Hormone Support",
-      tagline: "Superior Vitality & Performance",
-      short_description: "<p>As men age, they face the challenge of sustaining their physical and mental abilities, including their endurance, energy levels, sexual drive, and overall wellness. The consequences of decreased vitality can significantly impact their daily lives, from hindered performance to lowered confidence and self-esteem. But there is a solution - Men's Hormone Support. With our powerful and specially formulated liquid formula, men can enjoy superior vitality, increase their energy, enhance their stamina, and invigorate their sexual potency naturally. Don't let aging slow you down - choose Men's Hormone Support and unlock your full potential.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/mens-hormone-support\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/mens-hormone-support\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "boron": {
-      name: "Boron",
-      tagline: "Trace Mineral for Total Body Wellness",
-      short_description: "<p>Boron is a naturally occurring trace mineral found in fresh fruits and vegetables proven to play a crucial role in bone growth and maintenance, wound healing, hormone function, inflammation response, brain health, and longevity. Our revolutionary, high-vibrational Liquid Boron supplement is an effortless way to ensure your body has enough of this essential micronutrient to enjoy its incredible range of therapeutic benefits.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/boron\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/boron\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "vitamin-b12-canada": {
-      name: "Vitamin B12 Canada",
-      tagline: "5,000 mcg from Methyl and Adenosyl",
-      short_description: "",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/vitamin-b12-canada/2-fl-oz/default/3000w.png?w=1000"}]
-    },
-    "selenium": {
-      name: "Selenium",
-      tagline: "Plant-Based Selenium from Organic Mustard Seed",
-      short_description: "<p>Discover the exceptional power of our organic selenium supplement, carefully crafted to support optimal health and vitality. This essential trace mineral plays a vital role in promoting a healthy thyroid, boosting immune function, maintaining cardiovascular health, and supporting efficient metabolism. Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable, ensuring optimal absorption and utilization of this powerful antioxidant to support several critical body functions.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "oxy-powder-canada": {
-      name: "Oxy-Powder Canada",
-      tagline: "The Natural Colon Cleanse",
-      short_description: "<p>Experience the ultimate digestive tune-up with Oxy-Powder, crafted to alleviate the discomfort of gas, bloating, and occasional constipation. Formulated to counteract the harmful effects of toxins that permeate our daily lives, this natural solution utilizes oxygen to gently and effectively dissolve compacted feces from your intestinal tract while creating a safe space for probiotics to flourish. As an effortless way to promote regularity and support a healthy lifestyle, Oxy-Powder is an essential addition to any wellness regimen.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/oxypowder-60-ca\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/60-count\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "veganzyme": {
-      name: "Ultimate Enzymes",
-      tagline: "Advanced Digestive & Systemic Support",
-      short_description: "<p>A balanced diet doesn&rsquo;t always mean your body is balanced in how it digests food. Enter our Ultimate Enzymes supplement, which offers an advanced, full-spectrum blend of powerful enzymes that support optimal digestion, boost your immune system, and encourage a functional balance throughout your entire body. A robust blend of systemic enzymes supports your body&rsquo;s many processes, and a comprehensive collection of digestive enzymes help break down fats, carbohydrates and proteins. Enjoy happier, healthier digestion and less gas and bloating with Ultimate Enzymes.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "valerian": {
-      name: "Valerian",
-      tagline: "Restful Sleep and Relaxation",
-      short_description: "<p>Sleep is a critical component of our overall health and well-being, yet many struggle to achieve restful shut-eye. For those seeking a natural solution to restless sleep and difficulty falling asleep, Valerian Raw Herbal Extract&trade; offers a liquid herbal supplement designed to promote relaxation and support restful sleep. Our premium formula works to soothe mental and physical tension, helping you achieve the deep, restorative sleep you need without feeling groggy or sluggish the next day. Experience the pure and potent benefits of valerian and discover a natural way to fall asleep faster, stay asleep longer, and wake up feeling refreshed and rejuvenated. <\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/valerian\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/valerian\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "calcium-magnesium": {
-      name: "Calcium & Magnesium",
-      tagline: "Bone and Muscle Support",
-      short_description: "<p>Unleash the boundless potential of calcium and magnesium to fortify your bones and teeth, especially as time progresses, through the introduction of our extraordinary formula. Experience unrivaled absorption and unmatched benefits with our potent blend, meticulously crafted in a 2:1 ratio of calcium orotate and magnesium orotate. This remarkable combination supports the maintenance of normal bone density and aids in preserving optimal muscular function. It also helps maintain adequate levels of calcium in your body so you can have a strong skeletal system. Inspired by the pioneering work of Dr. Hans Nieper, our formula harnesses the exceptional molecular structure of calcium orotate, penetrating cell membranes with ease to precisely target the areas of the body that crave its nourishing expertise.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-magnesium\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-magnesium\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "aloe-vera": {
-      name: "Aloe Vera",
-      tagline: "Made With Inner Leaf Gel",
-      short_description: "<p>Discover the luxurious power of nature's wonder plant with our premium organic freeze-dried inner-leaf aloe vera, renowned for its unmatched bioavailability. Meticulously harvested by hand and concentrated to yield the most significant amount of acemannan, the active ingredient that supports digestive health, boosts immunity, and soothes stressed tissue, our aloe vera capsules capture the extraordinary potential of natural remedies. For over 4,000 years, aloe vera has been a revered staple in the world of wellness, admired for its gut-nourishing and immune-boosting properties. Elevate your health and wellbeing with the most concentrated and potent form of this \"miracle plant\" through our exclusive aloe vera capsules.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "ormus-earth-minerals": {
-      name: "ORMUS Earth Minerals",
-      tagline: "Etheric Vibrational State",
-      short_description: "<p>Unlock the power of ORMUS (Orbitally Rearranged Monoatomic Elements) &ndash; pure, high-spin elements meticulously extracted from their natural structure. These free-floating essences effortlessly assimilate into your body, promoting superconductivity and optimal energy transfer, resulting in advanced quantum vitality, a higher vibrational state, and conscious clarity. Experience a harmonious state of being, heightened vibrational energy, and rejuvenated cellular health. Seamlessly incorporate ORMUS Earth Minerals into your daily routine &ndash; easy to take and even perfect for enhancing your water, ensuring continuous nourishment for your cells.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ormus-earth-minerals\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ormus-earth-minerals\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "wheatgrass": {
-      name: "Wheatgrass",
-      tagline: "Single-Ingredient Superfood to Nourish, Detox, and Energize",
-      short_description: "<p>NutraGrass&trade;, our source for young wheatgrass sprouts, is uniquely potent in chlorophyll, amino acids, vitamins, and minerals. A daily dose of an Organic Wheatgrass supplement delivers powerful micronutrients essential for reducing oxidative stress, detoxifying the body, boosting energy, and supporting immune function. The vibrant green color, invigorating &ldquo;green&rdquo; aroma, and fresh flavor make a scoop of Organic Wheatgrass a simple and harmonious addition to your daily wellness routine.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/wheatgrass\/6.3-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/wheatgrass\/6.3-oz\/supplement-facts\/3000w.jpg?w=1000"}]
-    },
-    "activated-charcoal": {
-      name: "Ozonated Activated Charcoal",
-      tagline: "Detoxification and Digestive Health",
-      short_description: "<p>Take the benefits of activated charcoal to the next level with the power of ozone! Ozonating activated charcoal greatly enhances its surface chemistry, making it 10X more effective at absorbing toxins. This can make it even more powerful at absorbing substances that produce gas to help keep your gut healthy and improve digestion.&nbsp; Plus, ozonated activated charcoal helps trap toxins to stop absorption into the body, while supporting healthy cholesterol levels and kidney function.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ozonated-activated-charcoal\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ozonated-activated-charcoal\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "lithium-orotate": {
-      name: "Lithium Orotate",
-      tagline: "Mood Balance & Calm Mind",
-      short_description: "<p>Discover the profound impact of a balanced and calm mind on your overall wellness. Lithium, a natural trace mineral with a rich history of therapeutic use, plays a pivotal role in supporting a healthy mood and mental well-being. Our Lithium Orotate supplement combines lithium with orotic acid, offering specialized nourishment that promotes a joyful mood, a resilient stress response, and optimal cognitive function. Embrace tranquility and bid farewell to irritability and frustration. Each vegetarian capsule delivers 10 mg of elemental lithium.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lithium-orotate\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lithium-orotate\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "heavy-metal-chemical-cleanse": {
-      name: "Heavy Metal & Chemical Binder",
-      tagline: "Advanced Cleanse Support",
-      short_description: "<p>With heavy metals and chemicals posing a constant threat to our health, our premium Heavy Metal &amp; Chemical Binder formula provides a remarkable level of protection against these unwanted substances. It supports the body's natural ability to attract, bind, and cleanse heavy metals and chemicals, effectively minimizing your exposure to their harmful effects. But the benefits don't stop there. This potent blend of nine detoxifying ingredients can help you achieve optimal health by rejuvenating your energy levels, enhancing your mental clarity, and boosting your overall well-being. This blend is formulated with our proprietary Raw Herbal Extract&trade; technology to preserve the plant's essence, creating a potent, bioavailable liquid extract without heat, alcohol, or harsh chemicals.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "vitamin-c": {
-      name: "Vitamin C",
-      tagline: "Immune System Support",
-      short_description: "<p>Our Vitamin C supplement is derived from plant-based sources, specifically amla extract and black currant. These natural ingredients provide rich and potent vitamin C. With our supplement, you can enjoy the benefits of vitamin C, including immune support, antioxidant protection, and collagen synthesis. Choose our plant-based Vitamin C supplement for a natural and effective way to support your overall health and well-being.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "liver-health": {
-      name: "Liver Health",
-      tagline: "Liver & Gallbladder Detox Support",
-      short_description: "<p>The liver, a vital organ of our body, serves as the ultimate detoxifier, eliminating harmful substances and toxins from our system. As such, it's crucial to nourish this powerhouse with the best care possible. Our Liver Health supplement is an exquisite blend of potent herbs meticulously selected for their exceptional antioxidant properties and other beneficial compounds. The nutrients contained in this exceptional Raw Herbal Extract&trade; work in perfect harmony to naturally detoxify, flush, and purify the liver of unwanted deposits, built-up toxins, and other impurities. This unique formula also helps safeguard against the detrimental effects of poor dietary habits, processed foods, and daily stress. Experience the delightful taste of our liquid formula, making it a breeze to incorporate into your wellness routine and elevate your liver health to new heights.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "vitamin-d-canada": {
-      name: "Vitamin D3 Canada",
-      tagline: "Strong Bones, Brain, and Immune System",
-      short_description: "<p>Experience the power of the sun with our premium vitamin D supplement. It&rsquo;s plant-based, derived from organic lichen and contains cholecalciferol&ndash; the biologically active vitamin D your body produces when you enjoy natural sunlight. Our vegan-friendly formula delivers the biologically active form of vitamin D that supports strong bones, immune function, and optimal brain activity. With so many people worldwide lacking sufficient vitamin D levels, our formula is the perfect choice for anyone seeking a premium, plant-based source of this vital nutrient.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d-canada\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d-canada\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "skin-therapy": {
-      name: "Skin Therapy",
-      tagline: "Oxygen-Infused Skin Care",
-      short_description: "<p>You know a moisturizer is as fresh as it can possibly be when you need to keep it refrigerated to preserve the natural ingredients. Our Skin Therapy is just that &ndash; an antioxidant-rich balm crafted with organic ozonated olive oil. Uniquely crafted by bubbling ozone through organic olive oil to saturate it with oxygen, Skin Therapy moisturizes like nothing else. Whether you suffer from dry, cracked skin or need a little love for itches and scratches, Skin Therapy can be used for just about any skin-related need. It also boosts your skin down deep for a clearer complexion. Our rich balm is unscented and perfect for all skin types. Use morning or night as part of your skincare routine or for any cut, scrape, bug bite, or scratch. <\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/skin-therapy\/1.5-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/skin-therapy\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/skin-therapy\/1.5-fl-oz\/label\/3000x3000.png?w=1000"}]
-    },
-    "biotin": {
-      name: "Biotin",
-      tagline: "Healthy Hair, Skin, & Nails",
-      short_description: "<p>Experience the power of nature's beauty secret with our premium Biotin (2,500 mcg per serving). Also known as vitamin B7, vitamin H, and coenzyme R, this essential vitamin works at the cellular level to promote healthy hair, strong nails, and optimal metabolism. Our biotin is meticulously extracted from organic Sesbania, a plant known for its exceptional nutrient profile and sustainability. But we don't stop there &mdash; we also include natural cofactors and co-nutrients to improve the bioavailability of Biotin. This means your body can better absorb and utilize the essential vitamin for improved results. Unlock your full beauty potential with this superior and luxurious experience.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/biotin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/biotin\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "detoxadine": {
-      name: "Detoxadine",
-      tagline: "Healthy Thyroid, Detox, and Hormone Balance",
-      short_description: "<p>Experience a premium, organic supplementation for optimal thyroid function, hormone balance, and metabolism with Detoxadine. Our certified organic nascent iodine is created from salt deposits located more than 7,000 feet below the earth's surface, ensuring the purest and most concentrated form of iodine. With unparalleled nourishment for your thyroid, Detoxadine provides 650 micrograms of iodine in a glycerin base for rapid, gentle absorption. Our premium formula keeps your metabolism humming and your energy levels high, delivering essential nutrition for a healthy thyroid and balanced hormones. Each bottle contains a six-month supply when used as directed, making Detoxadine the ultimate investment in your health and wellness.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "latero-flora": {
-      name: "Latero-Flora",
-      tagline: "Cleansing Probiotic for Candida and Yeast Balance",
-      short_description: "<p>Introducing Latero-Flora&trade; &ndash; the ultimate solution for a balanced and healthy gut. This revolutionary supplement harnesses the power of <em>Brevibacillus laterosporus<\/em> BOD strain, a rare and potent form of probiotic that goes above and beyond to support your digestive system. This powerfully concentrated product cleanses harmful organisms like Candida that cause an imbalance in your gut, while also replenishing it with beneficial ones. The formula is also enhanced with organic gum acacia, a natural prebiotic fiber that promotes the growth of good bacteria. Don't settle for average probiotics &ndash; indulge in the premium quality and efficacy of Latero-Flora.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "prostate-health": {
-      name: "Prostate Health",
-      tagline: "Urinary Health and Prostate Function",
-      short_description: "<p>Taking care of prostate health is important for men because the prostate gland plays a vital role in urinary and sexual function. As men age, the prostate can become enlarged or inflamed, leading to difficulty urinating, frequent urination, urinary tract infections, and even sexual dysfunction. Our Prostate Health supplement is specially formulated with an advanced blend of organic herbs and all-natural ingredients, carefully selected for their proven benefits in promoting a normal prostate size and function. With our proprietary Raw Herbal Extract&trade; technology, we concentrate the essence of these ingredients for maximum potency and effectiveness. Don't settle for anything less than the best &mdash; choose Prostate Health for premium prostate support as you age.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/prostate-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/prostate-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "turmeric": {
-      name: "Turmeric",
-      tagline: "Inflammatory Response and Joint Health",
-      short_description: "<p>Experience the unparalleled potency of turmeric in its four powerful forms: traditional powder, nutrient-rich freeze-dried, potent concentrate, and pure CO2 extract. Our formula offers a comprehensive approach to joint health and tissue support, amplified by black pepper for optimized absorption. Crafted with our unique Raw Herbal Extract&trade; technology and sourced from the freshest picks, this supplement is tailored to support a robust inflammatory response and maintain joint well-being. Choose our multi-source turmeric blend and step into a life of vitality and comfort.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "quercetin": {
-      name: "Plant-Based Quercetin",
-      tagline: "Histamine & Allergen Response",
-      short_description: "<p>Quercetin, a remarkable antioxidant, is designed with highly bioavailable ingredients to support your body's normal response to allergens, inflammation, and histamines. Utilizing phytosome technology for enhanced absorption, our advanced formula effectively delivers the natural immune and allergen support your body requires. Experience an immune system boost, relief from allergy symptoms, and protection for your respiratory health with this potent, naturally-occurring antioxidant.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "tulsi": {
-      name: "Tulsi/Holy Basil",
-      tagline: "The ​​Calming Adaptogen",
-      short_description: "<p>Discover the transformative power of an ancient Ayurvedic remedy with our premium tulsi supplement. For thousands of years, holy basil (<em>Ocimum sanctum<\/em>) has been prized for its ability to soothe the body, mind, and spirit, promote mental balance, support a healthy response to stress, and foster full-body wellness. This sacred herb has been used in Ayurvedic medicine for centuries, and its therapeutic properties have been praised by practitioners and healers alike. Our premium tulsi supplement offers the purest and most potent form of this time-honored remedy, carefully sourced and expertly formulated to deliver maximum benefits. Embrace the transformative power of tulsi and rediscover a sense of balance.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/tulsi-holy-basil\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/tulsi-holy-basil\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "oregano-oil": {
-      name: "Oregano Oil",
-      tagline: "Powerful Immune Defense",
-      short_description: "<p>With a rich history spanning thousands of years, Oregano has been revered as a potent ally, empowering your immune, digestive, and respiratory systems while fortifying your body's defenses against harmful intruders. Our unique concoction merges the organic virtues of Mediterranean oregano oil, cold-pressed extra virgin olive oil, refreshing peppermint oil, and fiery cayenne extract. The outcome is a quick-acting vegetable capsule, offering you the convenience of harnessing the curative prowess of this robust herb, no matter where you are. Embrace the Oregano Oil Liquid Capsules as a constant in your wellness arsenal, conveniently stowed in your go-bag or pantry for a comprehensive, year-round health routine.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "vitamin-d": {
-      name: "Vitamin D3",
-      tagline: "Strong Bones, Brain, and Immune System",
-      short_description: "<p>Experience the power of the sun with our premium vitamin D supplement. It&rsquo;s plant-based, derived from organic lichen and contains cholecalciferol&ndash; the biologically active vitamin D your body produces when you enjoy natural sunlight. Our vegan-friendly formula delivers the biologically active form of vitamin D that supports strong bones, immune function, and optimal brain activity. With so many people worldwide lacking sufficient vitamin D levels, our formula is the perfect choice for anyone seeking a premium, plant-based source of this vital nutrient.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "thyroid-health-bundle": {
-      name: "Thyroid Health Bundle",
-      tagline: "Specialized Thyroid Nutrition",
-      short_description: "<p>Consider your thyroid the command center for your metabolism. This small-but-mighty organ facilitates many important functions in your body. But when it becomes sluggish, most people aren&rsquo;t even aware. Low energy, mental fog, and difficulty losing weight can all result from a thyroid that is out of balance. Change course and support your thyroid completely and naturally with our Thyroid Health Bundle &ndash; complete, specialized nutrition to support normal thyroid function, stimulate metabolism, and promote healthy hormone balance. The 60-day plan includes vitamin B12, selenium, and iodine &mdash; essential nutrients that optimize your thyroid to experience more energy, a better mood, and overall well-being.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/thyroid-health-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/1-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "foreign-protein-cleanse": {
-      name: "Foreign Protein Cleanse",
-      tagline: "Healthy Spike Response",
-      short_description: "<p>Welcome to the future of advanced nutraceuticals! We bring you a groundbreaking innovation. We proudly announce the next generation of rapid delivery, enhanced bioavailability supplementation with our raw, energy-enhanced, cold-processed Acoustic MicroSomal&trade; Technology! Over 25 years of research and development brings you an advanced technology that is more effective and bioavailable than standard Liposomal products on the market.<\/p><p><\/p><p>Formulated by Dr. Ed Group and Dr. Bryan Ardis, Foreign Protein Cleanse is a potent cleansing formula containing advanced ingredients. This product targets and detoxes spike proteins in the body, which can disrupt the body's natural inflammatory response. This complete blend is particularly useful for individuals experiencing persistent symptoms often linked to bioweapon-based ongoing health challenges. By working from the inside out, Foreign Protein Cleanse aims to enhance immunity, improve respiratory health, and support a balanced inflammatory response.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/foreign-protein-cleanse\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/foreign-protein-cleanse\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "candida-support-bundle": {
-      name: "Candida Support Bundle",
-      tagline: "Regulate Candida Naturally",
-      short_description: "<p>Your body's digestive system plays a crucial role in maintaining a balanced and healthy state for Candida, a type of fungus and yeast. A harmonious gut environment is essential for overall well-being. However, various factors can hinder your journey toward optimal health. The foods you consume, underlying health conditions, and exposure to toxins can trigger an overgrowth of Candida, disrupting the beneficial bacteria in your gut. This overgrowth can lead to symptoms like fatigue, compromised gut health, and changes in the skin. Prioritizing your well-being is paramount, so we've created our Candida Support Bundle. Specifically designed to promote a healthy balance of Candida, this powerful bundle includes Oxy-Powder&reg;, Ultimate Enzymes, Latero-Flora&trade;, and Candida Balance. Rest assured, we have you covered, ensuring your health remains resilient and at its peak yearly performance.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-support-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/label\/3000w.png?w=1000"}]
-    },
-    "glow": {
-      name: "Glow",
-      tagline: "Hydrating Mist for Face and Body",
-      short_description: "<p>The name says it all for our aromatic botanical mist that refreshes and hydrates the skin. Our certified organic Glow utilizes plant hydrosols like jasmine and rose to soothe, refresh, and soften anytime. We&rsquo;ve also included botanicals with aromatherapeutic benefits, going beyond skin health to help you feel calm and relaxed. ORMUS Supercharged Minerals enhance the energetic frequency. Use Glow on a bare face, after makeup, or to rehydrate mid-day. Packaged in an ultra-luxe MIRON Violet glass jar to preserve the delicate, natural plant-based ingredients. <\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/glow/6.6-fl-oz/default/3000w.png?w=1000"}]
-    },
-    "immune-boost-bundle": {
-      name: "Immune Support Bundle",
-      tagline: "Complete Immune Boost",
-      short_description: "<p>Ensuring a strong immune system is crucial year-round, and while strategies like exercise, stress reduction, and a nutrient-rich diet are valuable, they may not always be sufficient. That's why we've created our Immune Support Bundle, featuring Zinc, Quercetin, Vitamin C, and Vitamin D3, to provide comprehensive support for your immune health. By incorporating these supplements, we aim to help you maintain a resilient immune system and optimal health throughout the year, regardless of the season.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/immune-boost-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "oxy-powder": {
-      name: "Oxy-Powder",
-      tagline: "The Natural Colon Cleanse",
-      short_description: "<p>Experience the ultimate digestive tune-up with Oxy-Powder, crafted to alleviate the discomfort of gas, bloating, and occasional constipation. Formulated to counteract the harmful effects of toxins that permeate our daily lives, this natural solution utilizes oxygen to gently and effectively dissolve compacted feces from your intestinal tract while creating a safe space for probiotics to flourish. As an effortless way to promote regularity and support a healthy lifestyle, Oxy-Powder is an essential addition to any wellness regimen.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "earth-harmony-liquid-multivitamin": {
-      name: "Earth Harmony Liquid Multivitamin",
-      tagline: "30+ Essential Vitamins and Minerals",
-      short_description: "<p>Our&nbsp;liquid multivitamin&nbsp;uses over 15 organic fruits&nbsp;without any toxic ingredients.&nbsp;It is vegan-friendly, GMO-free, and only sourced from the best places. With a diverse array of nutrients in a single formula, liquid multivitamins can help fill potential gaps in your diet, ensuring that you receive a well-rounded foundation of essential nutrients that support various aspects of your health, including immune function, bone health, energy production, and more.<\/p><ul><li><strong>Enhanced Absorption<\/strong>: Liquid multivitamins are typically absorbed more efficiently by the body compared to traditional encapsulated forms. Since the nutrients in liquid form are already in a dissolved state, they can be readily absorbed without the need for extensive digestion, ensuring that your body can access and utilize the vitamins and minerals quickly and effectively.<\/li><li><strong>Easy to Take<\/strong>: Liquid multivitamins are often preferred by individuals who have difficulty swallowing pills or capsules. The liquid format is easy to ingest and can be a convenient option for children, seniors, and anyone who may find it challenging to take traditional supplements. This ease of administration makes it more accessible to a wider range of individuals.<\/li><\/ul>",
-      images: [{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/left\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "mycozil": {
-      name: "Candida Balance",
-      tagline: "Targeted Yeast & Fungal Cleanse",
-      short_description: "<p>Candida Balance is an exceptional, meticulously crafted formula tailored to restore harmony to the delicate balance of yeast and fungal organisms within the body. If you grapple with candida overgrowth, our Candida Balance formula is designed to restore equilibrium to your system. Expertly formulated with a synergy of wildcrafted and organic herbs and enzymes, this gentle yet potent formula works harmoniously with your body's natural defenses, providing effective relief without adverse side effects. Experience the transformative effects of fungal detoxification, restored candida balance, and improved skin health. Empower your body's internal defense against candida overgrowth, yeast imbalances, and diverse fungal strains with the unrivaled power of our carefully selected wildcrafted, organic herbs and enzymes.<\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/candida-balance/120-count/default/3000w.png?w=1000"}]
-    },
-    "organic-nascent-iodine-canada": {
-      name: "Organic Nascent Iodine",
-      tagline: "Healthy Thyroid, Detox, and Hormone Balance",
-      short_description: "<p>Experience a premium, organic supplementation for optimal thyroid function, hormone balance, and metabolism with Organic Nascent Iodine. Our certified organic nascent iodine is created from salt deposits located more than 7,000 feet below the earth's surface, ensuring the purest and most concentrated form of iodine. With unparalleled nourishment for your thyroid, Organic Nascent Iodine provides 650 micrograms of iodine in a glycerin base for rapid, gentle absorption. Our premium formula keeps your metabolism humming and your energy levels high, delivering essential nutrition for a healthy thyroid and balanced hormones. Each bottle contains a six-month supply when used as directed, making Organic Nascent Iodine the ultimate investment in your health and wellness.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/detoxadine-ca\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "relief-serum": {
-      name: "Relief Serum",
-      tagline: "Joint and Muscle Therapy",
-      short_description: "<p>When you&rsquo;re living with joint and muscle discomfort, you want fast, targeted relief you can count on to get you back to enjoying the things you love. That&rsquo;s why we formulated Relief Serum, the latest addition to our skincare line, to deliver a soothing blend of natural and organic oils that penetrate quickly, soothe irritation, and provide deep-down relief.  The perfect harmony of nature and science, Relief Serum takes a comprehensive approach to skin health, incorporating joint and muscle calming powerhouses with potent moisturizing ingredients.  <\/p><p><\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/relief-serum\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/relief-serum\/1-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "paratrex": {
-      name: "Paratrex",
-      tagline: "Targeted Cleanse",
-      short_description: "<p>Transform your health with Paratrex - the ultimate supplement for supporting your gut microbiome, and boosting your immune system. Our premium formula is specially designed to support an inhospitable environment for unwanted organisms while promoting natural cleansing of the body and enhancing immune function. Crafted with the highest-quality ingredients, Paratrex supports optimal drainage and detox pathways, support removal of toxins and waste from the intestines and promote a natural sense of vitality and well-being. <\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "heavy-metal-chemical-cleanse-program": {
-      name: "Heavy Metal & Chemical Cleanse Program",
-      tagline: "Advanced Detox",
-      short_description: "<p>The truth is you&rsquo;re most likely exposed to toxic chemicals and metals on a near-daily basis, and once in your body, they can multiply the production of harmful free radicals that impair cell and organ function, leading to health concerns. These body pollutants are tough to avoid, so it&rsquo;s important to cleanse your body when they become problematic. Our 30-day Heavy Metal &amp; Chemical Cleanse Program gives your health and wellness a much-needed boost, detoxing chemicals, and heavy metals, helping you beat fatigue, and encouraging mental wellness. Your free VIP support session with our Customer Satisfaction Team is a great way to start!<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/chemical-heavy-metal-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/label-back\/3000w.png?w=1000"}]
-    },
-    "turmeric-canada": {
-      name: "Turmeric Canada",
-      tagline: "Inflammatory Response and Joint Health",
-      short_description: "<p>Experience the unparalleled potency of turmeric in its four powerful forms: traditional powder, nutrient-rich freeze-dried, potent concentrate, and pure CO2 extract. Our formula offers a comprehensive approach to joint health and tissue support, amplified by black pepper for optimized absorption. Crafted with our unique Raw Herbal Extract&trade; technology and sourced from the freshest picks, this supplement is tailored to support a robust inflammatory response and maintain joint well-being. Choose our multi-source turmeric blend and step into a life of vitality and comfort.<\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/turmeric-canada/2-fl-oz/default/3000w.png?w=1000"}]
-    },
-    "protein-powder": {
-      name: "Protein Powder",
-      tagline: "20gs of Protein Per Scoop",
-      short_description: "<p>Indulge in the perfection of our pure plant protein, an excellent way to maintain and build lean muscle while supporting post-workout recovery. When following a plant-based diet, getting enough protein has never been easier - or tastier! Our deliciously smooth protein blends in Vanilla and Chocolate provide flavorful and effortless ways to incorporate clean, plant-based, certified organic protein into your diet and an impressive 20 grams of protein per serving. Enriched with digestive enzymes and probiotics, these blends ensure enhanced digestion and absorption for optimal benefits. They are keto-friendly, organic, and blend well, catering to various dietary needs and preferences. Experience the irresistible taste, smooth texture, and nutrient-rich profile of our plant-based protein blends, elevating your nourishment and fitness journey to new heights with every sip.<\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/pure-plant-protein/vanilla/default/3000w.png?w=1000"}]
-    },
-    "moringa": {
-      name: "Moringa",
-      tagline: "Superfood for Total Wellness",
-      short_description: "<p>Experience the power of nature's most nutrient-dense plant with our premium Moringa supplement. Packed with vitalizing antioxidants and nutrients, our formula is derived from fresh Moringa leaves using our cutting-edge Raw Herbal Extract&trade; technology, enhanced with Ormus Supercharged Minerals for maximum potency and absorption. Elevate your wellness with this green superfood, renowned for its restorative properties that promote energy, calm inflammatory responses, and support deep, restful sleep. Discover the transformative benefits of Moringa and unlock your full potential with every dose.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "mustard-seed-canada": {
-      name: "Mustard Seed Canada",
-      tagline: "Vegan Selenium Made From Organic Mustard Seed",
-      short_description: "<p>Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable.<\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/mustard-seed-canada/120-count/default/3000w.png?w=1000"}]
-    },
-    "copper-1": {
-      name: "Bio-Active Copper",
-      tagline: "Essential Trace Mineral",
-      short_description: "<p>Introducing Bio-Active Copper &ndash; the premium solution for your copper needs. Copper, an essential trace mineral, is vital for maintaining optimal health. Unlike other copper supplements, Bio-Active Copper offers highly bioavailable micro-activated Copper 1, ensuring optimal absorption and utilization by your body. It not only supports cellular energy but also provides protection against free radical damage, making it the ultimate defense for your well-being. Our advanced micro-activated formula even amplifies the copper&rsquo;s detoxification power, ensuring a thorough cleanse. Each capsule contains .9 mg of copper I &ndash; precisely the recommended daily amount &ndash; ensuring you receive the ideal dose for maintaining peak performance. Bio-Active Copper goes beyond basic supplementation. It actively promotes and maintains cellular health, rejuvenating your body from within. <\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/bio-active-copper\/30-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/bio-active-copper\/30-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "probiotic": {
-      name: "Ultimate Probiotic",
-      tagline: "The Daily, Full-Spectrum Probiotic",
-      short_description: "<p>Created with 24 probiotic strains, 12 soil-based microorganism strains, and an advanced probiotic blend with 100 billion CFUs per serving, Ultimate Probiotic is your go-to tool for a stronger digestive system, gut health, and immunity. While your digestive system works hard to keep things running smoothly, it can also be disrupted daily by the foods we eat or our environment. Our Ultimate Probiotic boosts digestion and nutrient absorption, promotes a strong immune system, and can elevate your mood. It&rsquo;s a simple way to ensure your gut stays repopulated with healthy probiotics.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "lung-health": {
-      name: "Lung Health",
-      tagline: "Allergen Support Spray",
-      short_description: "<p>Nurturing our lungs and respiratory systems is an excellent way to ensure we&rsquo;re maximizing oxygen intake and breathing easy. Whether you&rsquo;re under the weather and need relief, or just want natural, everyday aid to keep your lungs feeling strong and healthy, Lung Health is an excellent solution. Our formula is an organic, natural respiratory support product that uses a powerful blend of herbs and essential oils to cleanse and open your airways. Use it anytime &ndash; morning, afternoon, in the evening before bed, or when you crave a full, fresh breath of air. <\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lung-health\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lung-health\/1-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "vein-health": {
-      name: "Plant-Based Vein Health",
-      tagline: "Spider Veins & Overall Circulation",
-      short_description: "<p>Healthy circulation relies on strong, durable blood vessels, but our modern lifestyle can often take a toll on our vein and artery health. Prolonged sitting or standing and lack of exercise can compromise the integrity of our blood vessels and increase the appearance of unsightly spider veins on the skin's surface. To support optimal circulatory health and promote normal vein durability, our all-natural Vein Health formula harnesses the power of organic Raw Herbal Extract&trade;, with a blend of natural herbs that can help to reduce swelling and minimize the appearance of spider veins. By encouraging normal blood flow and promoting healthy circulation, Vein Health can help to improve the overall health and appearance of your veins and promote optimal cardiovascular wellness.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vein-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vein-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "iron": {
-      name: "Iron",
-      tagline: "High Absorption & Plant-Based",
-      short_description: "<p>Obtaining sufficient iron through diet alone can be challenging, particularly for non-red meat eaters. Enter our extraordinary Iron supplement &mdash; a plant-based formula meticulously crafted with iron extracted from curry tree leaves and expertly blended with organic thyme and echinacea root. This premium blend ensures optimal iron absorption and utilization, while offering the added benefit of gentle digestive support. This formidable essential nutrient fuels red blood cell production, sustains energy levels, and optimizes oxygen utilization.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/iron\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/iron\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "womens-hormone-balance": {
-      name: "Women's Hormone Balance",
-      tagline: "Vibrant Energy & Healthy Libido",
-      short_description: "<p>As women mature gracefully, they may encounter a natural deceleration in vitality, energy, and sexual drive due to the intricate interplay of hormones. Introducing Women's Hormone Balance, a remarkable liquid formula meticulously crafted to deliver exceptional results. This exquisite elixir harmonizes a distinct fusion of premium ingredients, meticulously selected to restore and maintain optimal hormone balance, invigorate female vitality, and enhance libido. Elevate your energy levels, bolster your stamina, and embrace a flourishing sexual drive, all through the nurturing power of nature. With its cutting-edge formulation, this exceptional elixir even stimulates a vibrant metabolism, bestows boundless energy, and enhances libido, allowing you to relish life's pleasures to the fullest.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/womens-hormone-balance\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/womens-hormone-balance\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "supercharged-c60": {
-      name: "Supercharged C60",
-      tagline: "100,000x More Powerful Than C60",
-      short_description: "<p>Supercharged C60 represents a breakthrough in the realm of antioxidant supplements, boasting a specialized composition of multi-layered fullerene nano-carbon structures. This unique formulation unleashes a potency that surpasses that of standard C60 by at least tenfold. By harnessing its remarkable power, Supercharged C60 supports detoxification processes, fortifies the body's defenses against aging, bolsters the immune system, and optimizes cellular function. This extraordinary vegan and non-GMO antioxidant operates on a cellular level, shielding cells from oxidative stress and profoundly enhancing overall bodily well-being.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/supercharged-c60\/30-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/supercharged-c60\/30-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "harmful-organism-cleanse-program": {
-      name: "Harmful Organism Cleanse Program",
-      tagline: "Advanced Detox",
-      short_description: "<p>A healthy dose of germs can boost our immune systems, but excessive exposure to harmful organisms can significantly impact our overall health. They can hinder nutrient absorption, weaken vital organs, introduce waste into our bodies, and impair the immune system. To combat this, our comprehensive 40-day Harmful Organism Cleanse Program provides the tools needed to cleanse your body effectively. By combining Paratrex, Latero-Flora, Oregano Oil, and Candida Balance, this powerful combination detoxifies harmful organisms, supports gut health, and strengthens the immune system, preventing future unwelcome invaders from taking hold.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/harmful-organism-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/label\/3000w.png?w=1000"}]
-    },
-    "kidney-support-bundle": {
-      name: "Kidney Support Bundle",
-      tagline: "4 Days to Better Kidney Health",
-      short_description: "<p>Your kidneys are an essential component of your body's waste management system. Although these mighty organs are self-cleansing, things like dehydration, nutritional deficiencies, and environmental toxins affect their performance. We designed our Kidney Support Bundle to detoxify, flush, and purge the kidneys of built-up toxins. This bundle includes Plant-Based Kidney Health, our all-natural, kidney-support formula, Oxy-Powder to facilitate toxin removal, and Turmeric for antioxidant support. Along with colon and liver cleansing, it is one of the most essential cleansing protocols for your health! And to help you get started, our Customer Satisfaction Team is available for a free support session to answer your questions and get you on your way to happier kidney health!<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/kidney-support-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/label\/3000w.png?w=1000"}]
-    },
-    "ashwagandha": {
-      name: "Ashwagandha",
-      tagline: "Adaptogenic Stress Relief",
-      short_description: "<p>In today's fast-paced world, where 84% of the US population is affected by stress, it's more important than ever to find a greater sense of balance and calm. Experience a new level of stress relief with our cutting-edge ashwagandha supplement. Ashwagandha is a wonder herb that's been used for centuries to elevate mental well-being. Research has shown that Ashwagandha can reduce cortisol, the primary stress hormone in the body. Our formula contains a concentrated blend of KSM-66&reg;, a clinically proven ashwagandha root extract, and CO2 extract for maximum potency. Trust in the power of nature and experience the difference for yourself.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ashwagandha\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ashwagandha\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "stress-relief": {
-      name: "Stress Relief",
-      tagline: "Nurture Your Mind, Nourish Your Mood",
-      short_description: "<p>Manage stress, support mood, and improve cognitive function with our powerful formula. Combining traditional and modern ingredients like Organic Banana Peel, Organic Poria Mushroom, SAMe, and Lithium Orotate, our stress relief supplement provides an effective solution to help you find calm and enhance your overall well-being.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "colon-cleanse-program": {
-      name: "Colon Cleanse Program",
-      tagline: "6 Days to Better Gut Health",
-      short_description: "<p>An imbalance in your gut health can disrupt your life, especially since your gut is a critical player in energy optimization and nutrient absorption. Global Healing's Colon Cleanse Program, formulated with Oxy-Powder&reg; and Latero-Flora&trade;, provides a gentle, scientific approach to detoxify and rejuvenate your digestive tract. In just six days, it targets bloating, occasional constipation, gas, and discomfort, facilitating a more comfortable life. If these issues reflect your experience, it's time to turn to a natural, effective solution. Unsure of starting? Our Colon Cleanse Program offers a free VIP support session with our dedicated team, ensuring a confident beginning.<\/p>",
-      images: [{"src": "https://cdn.globalhealing.com/products/images/colon-cleanse-program/default/default/3000w.png"}]
-    },
-    "thyroid-health-kit": {
-      name: "Thyroid Health Kit",
-      tagline: "Specialized Thyroid Nutrition",
-      short_description: "<p>Consider your thyroid the command center for your metabolism. This small-but-mighty organ facilitates many important functions in your body. But when it becomes sluggish, most people aren&rsquo;t even aware. Low energy, mental fog, and difficulty losing weight can all result from a thyroid that is out of balance. Change course and support your thyroid completely and naturally with our Thyroid Health Kit &ndash; complete, specialized nutrition to support normal thyroid function, stimulate metabolism, and promote healthy hormone balance. The 60-day plan includes vitamin B12, selenium, and iodine &mdash; essential nutrients that optimize your thyroid to experience more energy, a better mood, and overall well-being.<\/p>",
-      images: []
-    },
-    "glutathione": {
-      name: "Glutathione",
-      tagline: "Powerful Antioxidant",
-      short_description: "<p>Glutathione is a molecule made up of three amino acids: glutamine, cysteine, and glycine. As a powerful antioxidant found in every cell of the human body, it has the ability to directly neutralize free radicals and help maintain cellular health. Glutathione also supports proper liver function by protecting liver cells from damage caused by exposure to stressors. Our formula is made with an active form of glutathione and MicroSomal™ Technology to ensure maximum bioavailability and absorption.</p>",
-      images: [{"src": "https://cdn.globalhealing.com/products/images/glutathione/2-fl-oz/default/3000w.png"}]
-    },
-    "biophotonic-liquid-gold": {
-      name: "Biophotonic Liquid Gold",
-      tagline: "Enlightened Mind, Body & Soul",
-      short_description: "<p>Tap into the power of gold nanoparticles and biophotonic technology to give your body exactly what it needs. Liquid Gold helps boost brain function, detoxifies your system, fights oxidative stress, and supports overall holistic wellness.</p>",
-      images: [{"src": "https://cdn.globalhealing.com/products/images/liquid-gold/1-fl-oz/default/3000w.png"}]
-    },
-    "kidney-cleanse-program": {
-      name: "Kidney Cleanse Program",
-      tagline: "4 Days to Better Kidney Health",
-      short_description: "<p>Your kidneys are an essential component of your body's waste management system. Although these mighty organs are self-cleansing, things like dehydration, nutritional deficiencies, and environmental toxins affect their performance. We designed our Kidney Cleanse Program to detoxify, flush, and purge the kidneys of built-up toxins. The four-day program includes Plant-Based Kidney Health, our all-natural, kidney-support formula, Oxy-Powder to facilitate toxin removal, and Turmeric for antioxidant support. Along with colon and liver cleansing, it is one of the most essential cleansing protocols for your health! And to help you get started, our Customer Satisfaction Team is available for a free support session to answer your questions and get you on your way to happier kidney health!<\/p>",
-      images: []
-    },
-    "complete-body-cleanse-program": {
-      name: "Complete Body Cleanse Program",
-      tagline: "Advanced Detox",
-      short_description: "<p>Life, the environment surrounding you, and the day-to-day grind can take their toll on your overall well-being, inside and out. If it&rsquo;s time to give your body a full system reboot, our Complete Body Cleanse Program provides everything you need to rid your body of the harmful elements that can slow it down. The program includes a complete colon cleanse, a series of three liver cleanses, a harmful organism cleanse, and a chemical and toxic metal cleanse.&nbsp;<\/p><p>Nourish and cleanse your most important organs and systems. Provide your body with the ultimate support and baseline for a healthy lifestyle. Boost overall well-being. A full-body cleanse can make you feel lighter, stronger, and better, and ours includes a free VIP support session with our Customer Satisfaction Team!<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/complete-body-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/olive-oil\/6-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/epsom-salt\/1-tbsp\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"}]
-    },
-    "zinc": {
-      name: "Zinc",
-      tagline: "Trace Mineral for Immune Support",
-      short_description: "<p>From your immune system to hormone balance, zinc affects hundreds of essential biological functions. Global Healing Zinc helps you meet your daily requirement of this important nutrient, and even goes a few key steps farther. Our liquid formula contains zinc derived from guava leaves, enhanced with Ormus Supercharged Minerals for increased bioavailability, and is all-natural and gentle on your stomach. Unlike most zinc supplements, which are made with synthetic forms of the mineral, the zinc in this formula is naturally bound to plant proteins and amino acids so your body can use it efficiently. Invigorate your immune system, encourage hormone balance, and fend off premature aging with a daily dose of zinc.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "calcium-magnesium-canada": {
-      name: "Calcium & Magnesium Canada",
-      tagline: "Bone and Muscle Support",
-      short_description: "<p>Unleash the boundless potential of calcium and magnesium to fortify your bones and teeth, especially as time progresses, through the introduction of our extraordinary formula. Experience unrivaled absorption and unmatched benefits with our potent blend, meticulously crafted in a 2:1 ratio of calcium orotate and magnesium orotate. This remarkable combination supports the maintenance of normal bone density and aids in preserving optimal muscular function. It also helps maintain adequate levels of calcium in your body so you can have a strong skeletal system. Inspired by the pioneering work of Dr. Hans Nieper, our formula harnesses the exceptional molecular structure of calcium orotate, penetrating cell membranes with ease to precisely target the areas of the body that crave its nourishing expertise.<\/p>",
-      images: [{"src":"https://cdn.globalhealing.com/products/images/calcium-magnesium-canada/120-count/default/3000w.png?w=1000"}]
-    },
-    "vitamin-b12": {
-      name: "Vitamin B12",
-      tagline: "5,000 mcg from Methyl, Adenosyl, and Hydroxo",
-      short_description: "<p>Unlock your body's full potential with our premium Vitamin B12 supplement. Sustainably sourced and organically grown, our vegan-friendly formula delivers a perfect balance of B12 forms for maximum efficacy and vitality. With a mighty 5,000 mcg per serving, our supplement supports normal energy levels, cardiovascular health, and optimal nervous system function. Our cutting-edge formula is specially designed for rapid absorption, ensuring that every dose contributes to your total well-being, increased oxygen intake, and mental clarity.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/1-fl-oz\/supplement-facts\/3000.png?w=1000"}]
-    },
-    "ginseng": {
-      name: "Ginseng",
-      tagline: "Adaptogen for Energy",
-      short_description: "<p>Revitalize your energy levels and enhance your overall well-being with our premium organic Ginseng. Our Raw Herbal Extract blend features Panax ginseng and other specialized, adaptogenic herbs to provide a natural energy boost, promote brain function, and support a healthy response to daily stress. Unlike coffee or energy drinks that can cause crashes and adrenal fatigue, our Ginseng offers a safe and effective solution to help you tackle life's demands with ease. Tune up your energy levels and attitude with our organic Ginseng today.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ginseng\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ginseng\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "coq10-biopqq": {
-      name: "CoQ10 & BioPQQ® with Shilajit",
-      tagline: "Focus, Memory, and Heart Health",
-      short_description: "<p>A robust and vibrant heart, as well as a sharp and agile mind, lie at the core of your longevity and holistic well-being. Whether you aspire to maintain an active lifestyle in your golden years or seek to amplify productivity as a young professional, possessing ample energy to embrace the life you desire is paramount for a truly gratifying existence. Enter our revolutionary blend of antioxidants&nbsp; CoQ10 &amp; BioPQQ&reg;, meticulously crafted to safeguard the vitality of your mitochondria&mdash;those miniature energy generators nestled within your cells. These remarkable powerhouses not only fortify heart health and elevate cognitive function but also maximize the production of vital energy. In this potent formulation, we have thoughtfully included shilajit, unlocking heightened bioavailability and offering a harmonious symphony of nourishment for your well-being. CoQ10 &amp; BioPQQ with Himalayan Shilajit: Your conduit to safeguarded mitochondria, longevity, and profound vitality.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/coq10-biopqq-with-shilajit\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/coq10-biopqq-with-shilajit\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "ultimate-cellular-health": {
-      name: "Ultimate Cellular Health",
-      tagline: "Cellular Repair &  DNA Telomere Support",
-      short_description: "<p>As we age, the accumulation of free radicals in the body can lead to oxidative stress, primarily contributing to the physical effects commonly associated with aging. However, a solution exists. Global Healing's Ultimate Cellular Health offers a comprehensive formula that promotes NAD+ production, safeguards DNA and telomeres, and incorporates potent ingredients. By utilizing Ultimate Cellular Health, you can actively support healthy aging, heart health, the nervous system, cognitive function, cellular nourishment, and energy enhancement.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-cellular-health\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-cellular-health\/60-count\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "brain-health": {
-      name: "Brain Health",
-      tagline: "Inspired By Sayer Ji",
-      short_description: "<p>Turmerones promote the formation of new brain neurons (neurogenesis) and brain function. Brain Health is an advanced, full-spectrum Raw Herbal Extract&trade; formula with various turmeric forms, which helps ensure the maximum levels and absorption of aromatic turmerones, curcumins, and other phytonutrients. These specialized ingredients are clinically shown to promote optimal brain and nervous system function, support a healthy response to brain inflammation, improve focus, and support the body&rsquo;s resistance to brain degeneration. Made with advanced cold-stabilized nano-glycerospheric technology, Brain Health is here to enhance your brain power.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "calcium-disodium-edta": {
-      name: "Calcium Disodium EDTA",
-      tagline: "Detox & Immune Support",
-      short_description: "<p>Provide powerful support for your body&rsquo;s natural ability to detox from heavy metals and mineral overload with Calcium Disodium EDTA. Specifically formulated to promote cardiovascular and immune health, the formula uses advanced MicroSomal&trade; technology to boost effectiveness and bioavailability, so that you can grab more benefits from your daily chelation regimen.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "foot-pads": {
-      name: "Dr. Group's Foot Pads",
-      tagline: "Traditional & Holistic Detox Pads",
-      short_description: "<p>Elevate your wellbeing by liberating your body from the pervasive toxins, chemicals, and heavy metals that lurk within our food, water, air, and environment. Our premium Cleansing Foot Pads, meticulously crafted through years of dedicated medical research in Japan, encapsulate an elite blend of organic bamboo extracts, hand-selected herbs, and precious gemstones. This harmonious fusion promotes the natural cleansing of impurities, providing a detoxifying experience par excellence while you indulge in restful sleep. Made exclusively with all-natural, non-GMO, organic ingredients, these foot patches assure a safe and tranquil experience, fostering the perfect ambiance for nocturnal cleansing. Simply attach a pad to each foot as an integral part of your nighttime ritual, and awaken to a heightened sense of vitality and profound inner cleanliness.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000x3000px.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/label\/3000w.png?w=1000"}]
-    },
-    "mushroom-blend": {
-      name: "Organic Mushroom Blend",
-      tagline: "9 Raw, Powerful Mushrooms",
-      short_description: "<p>Harness the remarkable healing capabilities of nature's treasures: mushrooms. Discover a meticulously crafted Organic Mushroom Blend, sourced from nine scientifically studied, 100% raw, whole-food mushroom powders. This premium blend is rich in macro and micronutrients, antioxidants, and gut-friendly elements, offering comprehensive support for daily wellness, athletic performance, gut health, recovery, and cognition. Elevate your well-being routine with our 100% organic, clean mushroom powder&mdash;an unwavering commitment to purity and efficacy you can rely on.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-mushroom-blend\/9.5-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-mushroom-blend\/9.5-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "kidney-health": {
-      name: "Plant-Based Kidney Health",
-      tagline: "Complete Urinary Tract Support",
-      short_description: "<p>Your kidneys are essential for eliminating waste from your body, so it's crucial to keep them clean, healthy, and functioning smoothly. Plant-Based Kidney Health is a premium supplement that contains an enhanced blend of potent, natural herbs, antioxidants, and other nutrients that promote optimal kidney function and support waste elimination. Bioactive, antioxidant-rich herbs that cleanse and support kidney, bladder, and urinary health make Plant-Based Kidney Health a powerful solution for maintaining optimal health and vitality. This blend is formulated with our proprietary Raw Herbal Extract&trade; technology to preserve the plant's essence, creating a potent, bioavailable liquid extract without heat, alcohol, or harsh chemicals.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "luminous": {
-      name: "Luminous",
-      tagline: "Hydrating Daily Moisturizer",
-      short_description: "<p>Treat your skin with a creamy-rich moisturizer that deeply nurtures a smooth, even complexion. This lightweight, non-greasy cream is enriched with antioxidants and exotic botanicals to support healthy-looking skin. Day or night, this clean, plant-based face and neck moisturizer will leave your skin supple, healthy, and fully hydrated. Packaged in an ultra-luxe MIRON Violetglass jar to preserve the delicate, natural plant-based ingredients.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/luminous\/1.5-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/luminous\/1.5-fl-oz\/label\/3000x3000w.png?w=1000"}]
-    },
-    "liver-cleanse-program": {
-      name: "Liver Cleanse Program",
-      tagline: "6 Days to Better Liver Health",
-      short_description: "<p>Your liver, the body's primary detoxification organ, can greatly benefit from a revitalizing reset to function at its best. That's where the Liver Cleanse Program steps in, providing an all-natural, 6-day regimen designed to cleanse and rejuvenate your liver and gallbladder. This comprehensive plan involves adhering to a healthful diet and liver-supporting supplements, stimulating your liver and softening buildup, followed by a detoxifying flush to eliminate toxins. What's more, the program includes a complimentary VIP support session with our dedicated Customer Satisfaction Team, ready to answer your queries and guide you through the initiation of your cleanse. Prepare to be amazed by the transformation - a surge of energy, enhanced well-being, and streamlined digestion await!<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/olive-oil\/6-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/epsom-salt\/1-tbsp\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"}]
-    },
-    "greens-powder": {
-      name: "Organic Super Greens",
-      tagline: "Nutrient-Packed Sprouts & Superfoods",
-      short_description: "<p>Sprouts are nature's vibrant treasure trove of health and vitality, surpassing the benefits of mature greens. Bursting with life, they boast elevated levels of enzymes, vitamins, minerals, and antioxidants. These concentrated nutrients are readily absorbed, promoting optimal digestion, bolstering immune function, and nurturing overall well-being. Introducing Organic Super Greens, a greens powder like no other, enriched with 15 raw, freeze-dried sprouts and two superfood blends tailored for energy and digestion. Elevate your health effortlessly with this potent source of vitamins, minerals, and essential antioxidants. Embrace a harmonious gut microbiome, improved digestion, and sustained vitality through our invigorating clean energy blend. Experience the transformative power of Super Greens and embrace a radiant, energized you throughout the day.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-super-greens\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-super-greens\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "omega": {
-      name: "Omega 3•6•7•9",
-      tagline: "Quadruple Strength Vegan Formula",
-      short_description: "<p>Promote whole-body wellness with our exceptional Omega fatty acid formula. Packed with a powerful combination of Omega-3, Omega-6, Omega-7, and Omega-9, it provides comprehensive benefits for heart health, brain health, eye health, skin health, boosted immunity, and weight regulation. Not only is our formula highly effective, but it is also organic, plant-based, and non-GMO certified. We believe in harnessing the goodness of nature without any synthetic additives or genetically modified ingredients. Say goodbye to any fishy aftertaste, as our formula is infused with refreshing organic lemon oil. Experience the pure Omegas that benefit your entire body in one convenient solution.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/omega-3-6-7-9\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/omega-3-6-7-9\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-    "acid-reflux": {
-      name: "Acid Reflux Relief",
-      tagline: "Natural Heartburn Relief",
-      short_description: "<p>Indulge in the ultimate relief for your heartburn with our exclusive Acid Reflux Relief. Carefully crafted with a premium blend of organic ingredients, including the revered apple cider vinegar and six other time-honored herbs, our solution provides unparalleled soothing for occasional heartburn, indigestion, and digestive irritation. You deserve the very best, and that's why our formula supports your body's natural defense against digestive inflammation by promoting a healthy stomach pH. Unlike many chewable over-the-counter options, our solution offers a liquid base of organic glycerin that increases bioavailability without causing further indigestion, delivering an unmatched and convenient experience.<\/p>",
-      images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/acid-reflux-relief\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/acid-reflux-relief\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
-    },
-  };
+	let gh_products =         {
+		"multivitamin": {
+			name: "Organic Multivitamin with Minerals",
+			tagline: "30+ Vitamins & Minerals",
+			short_description: "<p>At the heart of our philosophy lies the recognition that our diets often fall short of providing the recommended daily value of essential nutrients. With over 30 vital vitamins and minerals, complemented by a potent antioxidant blend, our meticulously formulated multivitamin empowers you to achieve your wellness goals without unnecessary additives that offer no benefit. Certified organic and crafted with plant-based ingredients, our formula prioritizes purity by omitting coatings, and fillers. Experience the power of pure and straightforward nutrition, filling in the gaps, enhancing well-being, and elevating your overall health.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/multivitamin\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/multivitamin\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"elderberry-echinacea": {
+			name: "Elderberry & Echinacea",
+			tagline: "Natural Immune Boost",
+			short_description: "<p>Elderberry and echinacea provide a time-honored herbal combination known to support a healthy immune system and provide your body with a potent antioxidant. Our vegan blend of highly bioavailable, organic elderberry and echinacea is designed to defend against harmful organisms and seasonal distress. It also tastes great, is easy to use, and is safe for kids. A trusted and effective way to provide the support your body needs during periods of seasonal illness &mdash; especially the winter months!<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/elderberry-echinacea\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/elderberry-echinacea\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"gut-health-bundle": {
+			name: "Gut Health Bundle",
+			tagline: "Specialized Thyroid Nutrition",
+			short_description: "<p>You&rsquo;ve probably heard about the importance of gut health lately, and with good reason. Your gut is the core of your digestive system, immune system, and mental health &ndash; the powerful force that keeps your body running. It&rsquo;s important to ensure your gut is as healthy and efficient as possible. Our Gut Health Bundle is designed for just that. Reset and balance from the inside out. Features include essential supplements for digestive support, including Oxy-Powder&reg;, Ultimate Probiotic, Ultimate Enzymes, and Aloe Vera. Stimulate your gut microbiota, enhance your digestion, and lay the foundation for strong digestive health.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/gut-health-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/label\/3000w.png?w=1000"}]
+		},
+		"mens-hormone-support": {
+			name: "Men's Hormone Support",
+			tagline: "Superior Vitality & Performance",
+			short_description: "<p>As men age, they face the challenge of sustaining their physical and mental abilities, including their endurance, energy levels, sexual drive, and overall wellness. The consequences of decreased vitality can significantly impact their daily lives, from hindered performance to lowered confidence and self-esteem. But there is a solution - Men's Hormone Support. With our powerful and specially formulated liquid formula, men can enjoy superior vitality, increase their energy, enhance their stamina, and invigorate their sexual potency naturally. Don't let aging slow you down - choose Men's Hormone Support and unlock your full potential.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/mens-hormone-support\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/mens-hormone-support\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"boron": {
+			name: "Boron",
+			tagline: "Trace Mineral for Total Body Wellness",
+			short_description: "<p>Boron is a naturally occurring trace mineral found in fresh fruits and vegetables proven to play a crucial role in bone growth and maintenance, wound healing, hormone function, inflammation response, brain health, and longevity. Our revolutionary, high-vibrational Liquid Boron supplement is an effortless way to ensure your body has enough of this essential micronutrient to enjoy its incredible range of therapeutic benefits.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/boron\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/boron\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"vitamin-b12-canada": {
+			name: "Vitamin B12 Canada",
+			tagline: "5,000 mcg from Methyl and Adenosyl",
+			short_description: "",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/vitamin-b12-canada/2-fl-oz/default/3000w.png?w=1000"}]
+		},
+		"selenium": {
+			name: "Selenium",
+			tagline: "Plant-Based Selenium from Organic Mustard Seed",
+			short_description: "<p>Discover the exceptional power of our organic selenium supplement, carefully crafted to support optimal health and vitality. This essential trace mineral plays a vital role in promoting a healthy thyroid, boosting immune function, maintaining cardiovascular health, and supporting efficient metabolism. Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable, ensuring optimal absorption and utilization of this powerful antioxidant to support several critical body functions.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"oxy-powder-canada": {
+			name: "Oxy-Powder Canada",
+			tagline: "The Natural Colon Cleanse",
+			short_description: "<p>Experience the ultimate digestive tune-up with Oxy-Powder, crafted to alleviate the discomfort of gas, bloating, and occasional constipation. Formulated to counteract the harmful effects of toxins that permeate our daily lives, this natural solution utilizes oxygen to gently and effectively dissolve compacted feces from your intestinal tract while creating a safe space for probiotics to flourish. As an effortless way to promote regularity and support a healthy lifestyle, Oxy-Powder is an essential addition to any wellness regimen.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/oxypowder-60-ca\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/60-count\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder-canada\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"veganzyme": {
+			name: "Ultimate Enzymes",
+			tagline: "Advanced Digestive & Systemic Support",
+			short_description: "<p>A balanced diet doesn&rsquo;t always mean your body is balanced in how it digests food. Enter our Ultimate Enzymes supplement, which offers an advanced, full-spectrum blend of powerful enzymes that support optimal digestion, boost your immune system, and encourage a functional balance throughout your entire body. A robust blend of systemic enzymes supports your body&rsquo;s many processes, and a comprehensive collection of digestive enzymes help break down fats, carbohydrates and proteins. Enjoy happier, healthier digestion and less gas and bloating with Ultimate Enzymes.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"valerian": {
+			name: "Valerian",
+			tagline: "Restful Sleep and Relaxation",
+			short_description: "<p>Sleep is a critical component of our overall health and well-being, yet many struggle to achieve restful shut-eye. For those seeking a natural solution to restless sleep and difficulty falling asleep, Valerian Raw Herbal Extract&trade; offers a liquid herbal supplement designed to promote relaxation and support restful sleep. Our premium formula works to soothe mental and physical tension, helping you achieve the deep, restorative sleep you need without feeling groggy or sluggish the next day. Experience the pure and potent benefits of valerian and discover a natural way to fall asleep faster, stay asleep longer, and wake up feeling refreshed and rejuvenated. <\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/valerian\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/valerian\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"calcium-magnesium": {
+			name: "Calcium & Magnesium",
+			tagline: "Bone and Muscle Support",
+			short_description: "<p>Unleash the boundless potential of calcium and magnesium to fortify your bones and teeth, especially as time progresses, through the introduction of our extraordinary formula. Experience unrivaled absorption and unmatched benefits with our potent blend, meticulously crafted in a 2:1 ratio of calcium orotate and magnesium orotate. This remarkable combination supports the maintenance of normal bone density and aids in preserving optimal muscular function. It also helps maintain adequate levels of calcium in your body so you can have a strong skeletal system. Inspired by the pioneering work of Dr. Hans Nieper, our formula harnesses the exceptional molecular structure of calcium orotate, penetrating cell membranes with ease to precisely target the areas of the body that crave its nourishing expertise.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-magnesium\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-magnesium\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"aloe-vera": {
+			name: "Aloe Vera",
+			tagline: "Made With Inner Leaf Gel",
+			short_description: "<p>Discover the luxurious power of nature's wonder plant with our premium organic freeze-dried inner-leaf aloe vera, renowned for its unmatched bioavailability. Meticulously harvested by hand and concentrated to yield the most significant amount of acemannan, the active ingredient that supports digestive health, boosts immunity, and soothes stressed tissue, our aloe vera capsules capture the extraordinary potential of natural remedies. For over 4,000 years, aloe vera has been a revered staple in the world of wellness, admired for its gut-nourishing and immune-boosting properties. Elevate your health and wellbeing with the most concentrated and potent form of this \"miracle plant\" through our exclusive aloe vera capsules.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/aloe-vera\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"ormus-earth-minerals": {
+			name: "ORMUS Earth Minerals",
+			tagline: "Etheric Vibrational State",
+			short_description: "<p>Unlock the power of ORMUS (Orbitally Rearranged Monoatomic Elements) &ndash; pure, high-spin elements meticulously extracted from their natural structure. These free-floating essences effortlessly assimilate into your body, promoting superconductivity and optimal energy transfer, resulting in advanced quantum vitality, a higher vibrational state, and conscious clarity. Experience a harmonious state of being, heightened vibrational energy, and rejuvenated cellular health. Seamlessly incorporate ORMUS Earth Minerals into your daily routine &ndash; easy to take and even perfect for enhancing your water, ensuring continuous nourishment for your cells.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ormus-earth-minerals\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ormus-earth-minerals\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"wheatgrass": {
+			name: "Wheatgrass",
+			tagline: "Single-Ingredient Superfood to Nourish, Detox, and Energize",
+			short_description: "<p>NutraGrass&trade;, our source for young wheatgrass sprouts, is uniquely potent in chlorophyll, amino acids, vitamins, and minerals. A daily dose of an Organic Wheatgrass supplement delivers powerful micronutrients essential for reducing oxidative stress, detoxifying the body, boosting energy, and supporting immune function. The vibrant green color, invigorating &ldquo;green&rdquo; aroma, and fresh flavor make a scoop of Organic Wheatgrass a simple and harmonious addition to your daily wellness routine.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/wheatgrass\/6.3-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/wheatgrass\/6.3-oz\/supplement-facts\/3000w.jpg?w=1000"}]
+		},
+		"activated-charcoal": {
+			name: "Ozonated Activated Charcoal",
+			tagline: "Detoxification and Digestive Health",
+			short_description: "<p>Take the benefits of activated charcoal to the next level with the power of ozone! Ozonating activated charcoal greatly enhances its surface chemistry, making it 10X more effective at absorbing toxins. This can make it even more powerful at absorbing substances that produce gas to help keep your gut healthy and improve digestion.&nbsp; Plus, ozonated activated charcoal helps trap toxins to stop absorption into the body, while supporting healthy cholesterol levels and kidney function.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ozonated-activated-charcoal\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ozonated-activated-charcoal\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"lithium-orotate": {
+			name: "Lithium Orotate",
+			tagline: "Mood Balance & Calm Mind",
+			short_description: "<p>Discover the profound impact of a balanced and calm mind on your overall wellness. Lithium, a natural trace mineral with a rich history of therapeutic use, plays a pivotal role in supporting a healthy mood and mental well-being. Our Lithium Orotate supplement combines lithium with orotic acid, offering specialized nourishment that promotes a joyful mood, a resilient stress response, and optimal cognitive function. Embrace tranquility and bid farewell to irritability and frustration. Each vegetarian capsule delivers 10 mg of elemental lithium.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lithium-orotate\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lithium-orotate\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"heavy-metal-chemical-cleanse": {
+			name: "Heavy Metal & Chemical Binder",
+			tagline: "Advanced Cleanse Support",
+			short_description: "<p>With heavy metals and chemicals posing a constant threat to our health, our premium Heavy Metal &amp; Chemical Binder formula provides a remarkable level of protection against these unwanted substances. It supports the body's natural ability to attract, bind, and cleanse heavy metals and chemicals, effectively minimizing your exposure to their harmful effects. But the benefits don't stop there. This potent blend of nine detoxifying ingredients can help you achieve optimal health by rejuvenating your energy levels, enhancing your mental clarity, and boosting your overall well-being. This blend is formulated with our proprietary Raw Herbal Extract&trade; technology to preserve the plant's essence, creating a potent, bioavailable liquid extract without heat, alcohol, or harsh chemicals.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"vitamin-c": {
+			name: "Vitamin C",
+			tagline: "Immune System Support",
+			short_description: "<p>Our Vitamin C supplement is derived from plant-based sources, specifically amla extract and black currant. These natural ingredients provide rich and potent vitamin C. With our supplement, you can enjoy the benefits of vitamin C, including immune support, antioxidant protection, and collagen synthesis. Choose our plant-based Vitamin C supplement for a natural and effective way to support your overall health and well-being.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"liver-health": {
+			name: "Liver Health",
+			tagline: "Liver & Gallbladder Detox Support",
+			short_description: "<p>The liver, a vital organ of our body, serves as the ultimate detoxifier, eliminating harmful substances and toxins from our system. As such, it's crucial to nourish this powerhouse with the best care possible. Our Liver Health supplement is an exquisite blend of potent herbs meticulously selected for their exceptional antioxidant properties and other beneficial compounds. The nutrients contained in this exceptional Raw Herbal Extract&trade; work in perfect harmony to naturally detoxify, flush, and purify the liver of unwanted deposits, built-up toxins, and other impurities. This unique formula also helps safeguard against the detrimental effects of poor dietary habits, processed foods, and daily stress. Experience the delightful taste of our liquid formula, making it a breeze to incorporate into your wellness routine and elevate your liver health to new heights.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"vitamin-d-canada": {
+			name: "Vitamin D3 Canada",
+			tagline: "Strong Bones, Brain, and Immune System",
+			short_description: "<p>Experience the power of the sun with our premium vitamin D supplement. It&rsquo;s plant-based, derived from organic lichen and contains cholecalciferol&ndash; the biologically active vitamin D your body produces when you enjoy natural sunlight. Our vegan-friendly formula delivers the biologically active form of vitamin D that supports strong bones, immune function, and optimal brain activity. With so many people worldwide lacking sufficient vitamin D levels, our formula is the perfect choice for anyone seeking a premium, plant-based source of this vital nutrient.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d-canada\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d-canada\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"skin-therapy": {
+			name: "Skin Therapy",
+			tagline: "Oxygen-Infused Skin Care",
+			short_description: "<p>You know a moisturizer is as fresh as it can possibly be when you need to keep it refrigerated to preserve the natural ingredients. Our Skin Therapy is just that &ndash; an antioxidant-rich balm crafted with organic ozonated olive oil. Uniquely crafted by bubbling ozone through organic olive oil to saturate it with oxygen, Skin Therapy moisturizes like nothing else. Whether you suffer from dry, cracked skin or need a little love for itches and scratches, Skin Therapy can be used for just about any skin-related need. It also boosts your skin down deep for a clearer complexion. Our rich balm is unscented and perfect for all skin types. Use morning or night as part of your skincare routine or for any cut, scrape, bug bite, or scratch. <\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/skin-therapy\/1.5-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/skin-therapy\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/skin-therapy\/1.5-fl-oz\/label\/3000x3000.png?w=1000"}]
+		},
+		"biotin": {
+			name: "Biotin",
+			tagline: "Healthy Hair, Skin, & Nails",
+			short_description: "<p>Experience the power of nature's beauty secret with our premium Biotin (2,500 mcg per serving). Also known as vitamin B7, vitamin H, and coenzyme R, this essential vitamin works at the cellular level to promote healthy hair, strong nails, and optimal metabolism. Our biotin is meticulously extracted from organic Sesbania, a plant known for its exceptional nutrient profile and sustainability. But we don't stop there &mdash; we also include natural cofactors and co-nutrients to improve the bioavailability of Biotin. This means your body can better absorb and utilize the essential vitamin for improved results. Unlock your full beauty potential with this superior and luxurious experience.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/biotin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/biotin\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"detoxadine": {
+			name: "Detoxadine",
+			tagline: "Healthy Thyroid, Detox, and Hormone Balance",
+			short_description: "<p>Experience a premium, organic supplementation for optimal thyroid function, hormone balance, and metabolism with Detoxadine. Our certified organic nascent iodine is created from salt deposits located more than 7,000 feet below the earth's surface, ensuring the purest and most concentrated form of iodine. With unparalleled nourishment for your thyroid, Detoxadine provides 650 micrograms of iodine in a glycerin base for rapid, gentle absorption. Our premium formula keeps your metabolism humming and your energy levels high, delivering essential nutrition for a healthy thyroid and balanced hormones. Each bottle contains a six-month supply when used as directed, making Detoxadine the ultimate investment in your health and wellness.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"latero-flora": {
+			name: "Latero-Flora",
+			tagline: "Cleansing Probiotic for Candida and Yeast Balance",
+			short_description: "<p>Introducing Latero-Flora&trade; &ndash; the ultimate solution for a balanced and healthy gut. This revolutionary supplement harnesses the power of <em>Brevibacillus laterosporus<\/em> BOD strain, a rare and potent form of probiotic that goes above and beyond to support your digestive system. This powerfully concentrated product cleanses harmful organisms like Candida that cause an imbalance in your gut, while also replenishing it with beneficial ones. The formula is also enhanced with organic gum acacia, a natural prebiotic fiber that promotes the growth of good bacteria. Don't settle for average probiotics &ndash; indulge in the premium quality and efficacy of Latero-Flora.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"prostate-health": {
+			name: "Prostate Health",
+			tagline: "Urinary Health and Prostate Function",
+			short_description: "<p>Taking care of prostate health is important for men because the prostate gland plays a vital role in urinary and sexual function. As men age, the prostate can become enlarged or inflamed, leading to difficulty urinating, frequent urination, urinary tract infections, and even sexual dysfunction. Our Prostate Health supplement is specially formulated with an advanced blend of organic herbs and all-natural ingredients, carefully selected for their proven benefits in promoting a normal prostate size and function. With our proprietary Raw Herbal Extract&trade; technology, we concentrate the essence of these ingredients for maximum potency and effectiveness. Don't settle for anything less than the best &mdash; choose Prostate Health for premium prostate support as you age.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/prostate-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/prostate-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"turmeric": {
+			name: "Turmeric",
+			tagline: "Inflammatory Response and Joint Health",
+			short_description: "<p>Experience the unparalleled potency of turmeric in its four powerful forms: traditional powder, nutrient-rich freeze-dried, potent concentrate, and pure CO2 extract. Our formula offers a comprehensive approach to joint health and tissue support, amplified by black pepper for optimized absorption. Crafted with our unique Raw Herbal Extract&trade; technology and sourced from the freshest picks, this supplement is tailored to support a robust inflammatory response and maintain joint well-being. Choose our multi-source turmeric blend and step into a life of vitality and comfort.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"quercetin": {
+			name: "Plant-Based Quercetin",
+			tagline: "Histamine & Allergen Response",
+			short_description: "<p>Quercetin, a remarkable antioxidant, is designed with highly bioavailable ingredients to support your body's normal response to allergens, inflammation, and histamines. Utilizing phytosome technology for enhanced absorption, our advanced formula effectively delivers the natural immune and allergen support your body requires. Experience an immune system boost, relief from allergy symptoms, and protection for your respiratory health with this potent, naturally-occurring antioxidant.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"tulsi": {
+			name: "Tulsi/Holy Basil",
+			tagline: "The ​​Calming Adaptogen",
+			short_description: "<p>Discover the transformative power of an ancient Ayurvedic remedy with our premium tulsi supplement. For thousands of years, holy basil (<em>Ocimum sanctum<\/em>) has been prized for its ability to soothe the body, mind, and spirit, promote mental balance, support a healthy response to stress, and foster full-body wellness. This sacred herb has been used in Ayurvedic medicine for centuries, and its therapeutic properties have been praised by practitioners and healers alike. Our premium tulsi supplement offers the purest and most potent form of this time-honored remedy, carefully sourced and expertly formulated to deliver maximum benefits. Embrace the transformative power of tulsi and rediscover a sense of balance.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/tulsi-holy-basil\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/tulsi-holy-basil\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"oregano-oil": {
+			name: "Oregano Oil",
+			tagline: "Powerful Immune Defense",
+			short_description: "<p>With a rich history spanning thousands of years, Oregano has been revered as a potent ally, empowering your immune, digestive, and respiratory systems while fortifying your body's defenses against harmful intruders. Our unique concoction merges the organic virtues of Mediterranean oregano oil, cold-pressed extra virgin olive oil, refreshing peppermint oil, and fiery cayenne extract. The outcome is a quick-acting vegetable capsule, offering you the convenience of harnessing the curative prowess of this robust herb, no matter where you are. Embrace the Oregano Oil Liquid Capsules as a constant in your wellness arsenal, conveniently stowed in your go-bag or pantry for a comprehensive, year-round health routine.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"vitamin-d": {
+			name: "Vitamin D3",
+			tagline: "Strong Bones, Brain, and Immune System",
+			short_description: "<p>Experience the power of the sun with our premium vitamin D supplement. It&rsquo;s plant-based, derived from organic lichen and contains cholecalciferol&ndash; the biologically active vitamin D your body produces when you enjoy natural sunlight. Our vegan-friendly formula delivers the biologically active form of vitamin D that supports strong bones, immune function, and optimal brain activity. With so many people worldwide lacking sufficient vitamin D levels, our formula is the perfect choice for anyone seeking a premium, plant-based source of this vital nutrient.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"thyroid-health-bundle": {
+			name: "Thyroid Health Bundle",
+			tagline: "Specialized Thyroid Nutrition",
+			short_description: "<p>Consider your thyroid the command center for your metabolism. This small-but-mighty organ facilitates many important functions in your body. But when it becomes sluggish, most people aren&rsquo;t even aware. Low energy, mental fog, and difficulty losing weight can all result from a thyroid that is out of balance. Change course and support your thyroid completely and naturally with our Thyroid Health Bundle &ndash; complete, specialized nutrition to support normal thyroid function, stimulate metabolism, and promote healthy hormone balance. The 60-day plan includes vitamin B12, selenium, and iodine &mdash; essential nutrients that optimize your thyroid to experience more energy, a better mood, and overall well-being.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/thyroid-health-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/selenium\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/1-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"foreign-protein-cleanse": {
+			name: "Foreign Protein Cleanse",
+			tagline: "Healthy Spike Response",
+			short_description: "<p>Welcome to the future of advanced nutraceuticals! We bring you a groundbreaking innovation. We proudly announce the next generation of rapid delivery, enhanced bioavailability supplementation with our raw, energy-enhanced, cold-processed Acoustic MicroSomal&trade; Technology! Over 25 years of research and development brings you an advanced technology that is more effective and bioavailable than standard Liposomal products on the market.<\/p><p><\/p><p>Formulated by Dr. Ed Group and Dr. Bryan Ardis, Foreign Protein Cleanse is a potent cleansing formula containing advanced ingredients. This product targets and detoxes spike proteins in the body, which can disrupt the body's natural inflammatory response. This complete blend is particularly useful for individuals experiencing persistent symptoms often linked to bioweapon-based ongoing health challenges. By working from the inside out, Foreign Protein Cleanse aims to enhance immunity, improve respiratory health, and support a balanced inflammatory response.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/foreign-protein-cleanse\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/foreign-protein-cleanse\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"candida-support-bundle": {
+			name: "Candida Support Bundle",
+			tagline: "Regulate Candida Naturally",
+			short_description: "<p>Your body's digestive system plays a crucial role in maintaining a balanced and healthy state for Candida, a type of fungus and yeast. A harmonious gut environment is essential for overall well-being. However, various factors can hinder your journey toward optimal health. The foods you consume, underlying health conditions, and exposure to toxins can trigger an overgrowth of Candida, disrupting the beneficial bacteria in your gut. This overgrowth can lead to symptoms like fatigue, compromised gut health, and changes in the skin. Prioritizing your well-being is paramount, so we've created our Candida Support Bundle. Specifically designed to promote a healthy balance of Candida, this powerful bundle includes Oxy-Powder&reg;, Ultimate Enzymes, Latero-Flora&trade;, and Candida Balance. Rest assured, we have you covered, ensuring your health remains resilient and at its peak yearly performance.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-support-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-enzymes\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/label\/3000w.png?w=1000"}]
+		},
+		"glow": {
+			name: "Glow",
+			tagline: "Hydrating Mist for Face and Body",
+			short_description: "<p>The name says it all for our aromatic botanical mist that refreshes and hydrates the skin. Our certified organic Glow utilizes plant hydrosols like jasmine and rose to soothe, refresh, and soften anytime. We&rsquo;ve also included botanicals with aromatherapeutic benefits, going beyond skin health to help you feel calm and relaxed. ORMUS Supercharged Minerals enhance the energetic frequency. Use Glow on a bare face, after makeup, or to rehydrate mid-day. Packaged in an ultra-luxe MIRON Violet glass jar to preserve the delicate, natural plant-based ingredients. <\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/glow/6.6-fl-oz/default/3000w.png?w=1000"}]
+		},
+		"immune-boost-bundle": {
+			name: "Immune Support Bundle",
+			tagline: "Complete Immune Boost",
+			short_description: "<p>Ensuring a strong immune system is crucial year-round, and while strategies like exercise, stress reduction, and a nutrient-rich diet are valuable, they may not always be sufficient. That's why we've created our Immune Support Bundle, featuring Zinc, Quercetin, Vitamin C, and Vitamin D3, to provide comprehensive support for your immune health. By incorporating these supplements, we aim to help you maintain a resilient immune system and optimal health throughout the year, regardless of the season.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/immune-boost-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-quercetin\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-d\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vitamin-c\/2-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"oxy-powder": {
+			name: "Oxy-Powder",
+			tagline: "The Natural Colon Cleanse",
+			short_description: "<p>Experience the ultimate digestive tune-up with Oxy-Powder, crafted to alleviate the discomfort of gas, bloating, and occasional constipation. Formulated to counteract the harmful effects of toxins that permeate our daily lives, this natural solution utilizes oxygen to gently and effectively dissolve compacted feces from your intestinal tract while creating a safe space for probiotics to flourish. As an effortless way to promote regularity and support a healthy lifestyle, Oxy-Powder is an essential addition to any wellness regimen.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"earth-harmony-liquid-multivitamin": {
+			name: "Earth Harmony Liquid Multivitamin",
+			tagline: "30+ Essential Vitamins and Minerals",
+			short_description: "<p>Our&nbsp;liquid multivitamin&nbsp;uses over 15 organic fruits&nbsp;without any toxic ingredients.&nbsp;It is vegan-friendly, GMO-free, and only sourced from the best places. With a diverse array of nutrients in a single formula, liquid multivitamins can help fill potential gaps in your diet, ensuring that you receive a well-rounded foundation of essential nutrients that support various aspects of your health, including immune function, bone health, energy production, and more.<\/p><ul><li><strong>Enhanced Absorption<\/strong>: Liquid multivitamins are typically absorbed more efficiently by the body compared to traditional encapsulated forms. Since the nutrients in liquid form are already in a dissolved state, they can be readily absorbed without the need for extensive digestion, ensuring that your body can access and utilize the vitamins and minerals quickly and effectively.<\/li><li><strong>Easy to Take<\/strong>: Liquid multivitamins are often preferred by individuals who have difficulty swallowing pills or capsules. The liquid format is easy to ingest and can be a convenient option for children, seniors, and anyone who may find it challenging to take traditional supplements. This ease of administration makes it more accessible to a wider range of individuals.<\/li><\/ul>",
+			images: [{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/left\/3000w.png?w=1000"},{"src":"https:\/\/eh-cdn.globalhealing.com\/products\/images\/liquid-multivitamin\/32-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"mycozil": {
+			name: "Candida Balance",
+			tagline: "Targeted Yeast & Fungal Cleanse",
+			short_description: "<p>Candida Balance is an exceptional, meticulously crafted formula tailored to restore harmony to the delicate balance of yeast and fungal organisms within the body. If you grapple with candida overgrowth, our Candida Balance formula is designed to restore equilibrium to your system. Expertly formulated with a synergy of wildcrafted and organic herbs and enzymes, this gentle yet potent formula works harmoniously with your body's natural defenses, providing effective relief without adverse side effects. Experience the transformative effects of fungal detoxification, restored candida balance, and improved skin health. Empower your body's internal defense against candida overgrowth, yeast imbalances, and diverse fungal strains with the unrivaled power of our carefully selected wildcrafted, organic herbs and enzymes.<\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/candida-balance/120-count/default/3000w.png?w=1000"}]
+		},
+		"organic-nascent-iodine-canada": {
+			name: "Organic Nascent Iodine",
+			tagline: "Healthy Thyroid, Detox, and Hormone Balance",
+			short_description: "<p>Experience a premium, organic supplementation for optimal thyroid function, hormone balance, and metabolism with Organic Nascent Iodine. Our certified organic nascent iodine is created from salt deposits located more than 7,000 feet below the earth's surface, ensuring the purest and most concentrated form of iodine. With unparalleled nourishment for your thyroid, Organic Nascent Iodine provides 650 micrograms of iodine in a glycerin base for rapid, gentle absorption. Our premium formula keeps your metabolism humming and your energy levels high, delivering essential nutrition for a healthy thyroid and balanced hormones. Each bottle contains a six-month supply when used as directed, making Organic Nascent Iodine the ultimate investment in your health and wellness.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/pages\/v2\/detoxadine-ca\/new-look.jpg?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-nascent-iodine-canada\/1-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"relief-serum": {
+			name: "Relief Serum",
+			tagline: "Joint and Muscle Therapy",
+			short_description: "<p>When you&rsquo;re living with joint and muscle discomfort, you want fast, targeted relief you can count on to get you back to enjoying the things you love. That&rsquo;s why we formulated Relief Serum, the latest addition to our skincare line, to deliver a soothing blend of natural and organic oils that penetrate quickly, soothe irritation, and provide deep-down relief.  The perfect harmony of nature and science, Relief Serum takes a comprehensive approach to skin health, incorporating joint and muscle calming powerhouses with potent moisturizing ingredients.  <\/p><p><\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/relief-serum\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/relief-serum\/1-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"paratrex": {
+			name: "Paratrex",
+			tagline: "Targeted Cleanse",
+			short_description: "<p>Transform your health with Paratrex - the ultimate supplement for supporting your gut microbiome, and boosting your immune system. Our premium formula is specially designed to support an inhospitable environment for unwanted organisms while promoting natural cleansing of the body and enhancing immune function. Crafted with the highest-quality ingredients, Paratrex supports optimal drainage and detox pathways, support removal of toxins and waste from the intestines and promote a natural sense of vitality and well-being. <\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"heavy-metal-chemical-cleanse-program": {
+			name: "Heavy Metal & Chemical Cleanse Program",
+			tagline: "Advanced Detox",
+			short_description: "<p>The truth is you&rsquo;re most likely exposed to toxic chemicals and metals on a near-daily basis, and once in your body, they can multiply the production of harmful free radicals that impair cell and organ function, leading to health concerns. These body pollutants are tough to avoid, so it&rsquo;s important to cleanse your body when they become problematic. Our 30-day Heavy Metal &amp; Chemical Cleanse Program gives your health and wellness a much-needed boost, detoxing chemicals, and heavy metals, helping you beat fatigue, and encouraging mental wellness. Your free VIP support session with our Customer Satisfaction Team is a great way to start!<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/chemical-heavy-metal-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/label-back\/3000w.png?w=1000"}]
+		},
+		"turmeric-canada": {
+			name: "Turmeric Canada",
+			tagline: "Inflammatory Response and Joint Health",
+			short_description: "<p>Experience the unparalleled potency of turmeric in its four powerful forms: traditional powder, nutrient-rich freeze-dried, potent concentrate, and pure CO2 extract. Our formula offers a comprehensive approach to joint health and tissue support, amplified by black pepper for optimized absorption. Crafted with our unique Raw Herbal Extract&trade; technology and sourced from the freshest picks, this supplement is tailored to support a robust inflammatory response and maintain joint well-being. Choose our multi-source turmeric blend and step into a life of vitality and comfort.<\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/turmeric-canada/2-fl-oz/default/3000w.png?w=1000"}]
+		},
+		"protein-powder": {
+			name: "Protein Powder",
+			tagline: "20gs of Protein Per Scoop",
+			short_description: "<p>Indulge in the perfection of our pure plant protein, an excellent way to maintain and build lean muscle while supporting post-workout recovery. When following a plant-based diet, getting enough protein has never been easier - or tastier! Our deliciously smooth protein blends in Vanilla and Chocolate provide flavorful and effortless ways to incorporate clean, plant-based, certified organic protein into your diet and an impressive 20 grams of protein per serving. Enriched with digestive enzymes and probiotics, these blends ensure enhanced digestion and absorption for optimal benefits. They are keto-friendly, organic, and blend well, catering to various dietary needs and preferences. Experience the irresistible taste, smooth texture, and nutrient-rich profile of our plant-based protein blends, elevating your nourishment and fitness journey to new heights with every sip.<\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/pure-plant-protein/vanilla/default/3000w.png?w=1000"}]
+		},
+		"moringa": {
+			name: "Moringa",
+			tagline: "Superfood for Total Wellness",
+			short_description: "<p>Experience the power of nature's most nutrient-dense plant with our premium Moringa supplement. Packed with vitalizing antioxidants and nutrients, our formula is derived from fresh Moringa leaves using our cutting-edge Raw Herbal Extract&trade; technology, enhanced with Ormus Supercharged Minerals for maximum potency and absorption. Elevate your wellness with this green superfood, renowned for its restorative properties that promote energy, calm inflammatory responses, and support deep, restful sleep. Discover the transformative benefits of Moringa and unlock your full potential with every dose.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/moringa\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"mustard-seed-canada": {
+			name: "Mustard Seed Canada",
+			tagline: "Vegan Selenium Made From Organic Mustard Seed",
+			short_description: "<p>Our premium supplement is expertly extracted from the potent mustard seed plant, and is vegan-friendly and highly bioavailable.<\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/mustard-seed-canada/120-count/default/3000w.png?w=1000"}]
+		},
+		"copper-1": {
+			name: "Bio-Active Copper",
+			tagline: "Essential Trace Mineral",
+			short_description: "<p>Introducing Bio-Active Copper &ndash; the premium solution for your copper needs. Copper, an essential trace mineral, is vital for maintaining optimal health. Unlike other copper supplements, Bio-Active Copper offers highly bioavailable micro-activated Copper 1, ensuring optimal absorption and utilization by your body. It not only supports cellular energy but also provides protection against free radical damage, making it the ultimate defense for your well-being. Our advanced micro-activated formula even amplifies the copper&rsquo;s detoxification power, ensuring a thorough cleanse. Each capsule contains .9 mg of copper I &ndash; precisely the recommended daily amount &ndash; ensuring you receive the ideal dose for maintaining peak performance. Bio-Active Copper goes beyond basic supplementation. It actively promotes and maintains cellular health, rejuvenating your body from within. <\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/bio-active-copper\/30-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/bio-active-copper\/30-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"probiotic": {
+			name: "Ultimate Probiotic",
+			tagline: "The Daily, Full-Spectrum Probiotic",
+			short_description: "<p>Created with 24 probiotic strains, 12 soil-based microorganism strains, and an advanced probiotic blend with 100 billion CFUs per serving, Ultimate Probiotic is your go-to tool for a stronger digestive system, gut health, and immunity. While your digestive system works hard to keep things running smoothly, it can also be disrupted daily by the foods we eat or our environment. Our Ultimate Probiotic boosts digestion and nutrient absorption, promotes a strong immune system, and can elevate your mood. It&rsquo;s a simple way to ensure your gut stays repopulated with healthy probiotics.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-probiotic\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"lung-health": {
+			name: "Lung Health",
+			tagline: "Allergen Support Spray",
+			short_description: "<p>Nurturing our lungs and respiratory systems is an excellent way to ensure we&rsquo;re maximizing oxygen intake and breathing easy. Whether you&rsquo;re under the weather and need relief, or just want natural, everyday aid to keep your lungs feeling strong and healthy, Lung Health is an excellent solution. Our formula is an organic, natural respiratory support product that uses a powerful blend of herbs and essential oils to cleanse and open your airways. Use it anytime &ndash; morning, afternoon, in the evening before bed, or when you crave a full, fresh breath of air. <\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lung-health\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/lung-health\/1-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"vein-health": {
+			name: "Plant-Based Vein Health",
+			tagline: "Spider Veins & Overall Circulation",
+			short_description: "<p>Healthy circulation relies on strong, durable blood vessels, but our modern lifestyle can often take a toll on our vein and artery health. Prolonged sitting or standing and lack of exercise can compromise the integrity of our blood vessels and increase the appearance of unsightly spider veins on the skin's surface. To support optimal circulatory health and promote normal vein durability, our all-natural Vein Health formula harnesses the power of organic Raw Herbal Extract&trade;, with a blend of natural herbs that can help to reduce swelling and minimize the appearance of spider veins. By encouraging normal blood flow and promoting healthy circulation, Vein Health can help to improve the overall health and appearance of your veins and promote optimal cardiovascular wellness.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vein-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-vein-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"iron": {
+			name: "Iron",
+			tagline: "High Absorption & Plant-Based",
+			short_description: "<p>Obtaining sufficient iron through diet alone can be challenging, particularly for non-red meat eaters. Enter our extraordinary Iron supplement &mdash; a plant-based formula meticulously crafted with iron extracted from curry tree leaves and expertly blended with organic thyme and echinacea root. This premium blend ensures optimal iron absorption and utilization, while offering the added benefit of gentle digestive support. This formidable essential nutrient fuels red blood cell production, sustains energy levels, and optimizes oxygen utilization.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/iron\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/iron\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"womens-hormone-balance": {
+			name: "Women's Hormone Balance",
+			tagline: "Vibrant Energy & Healthy Libido",
+			short_description: "<p>As women mature gracefully, they may encounter a natural deceleration in vitality, energy, and sexual drive due to the intricate interplay of hormones. Introducing Women's Hormone Balance, a remarkable liquid formula meticulously crafted to deliver exceptional results. This exquisite elixir harmonizes a distinct fusion of premium ingredients, meticulously selected to restore and maintain optimal hormone balance, invigorate female vitality, and enhance libido. Elevate your energy levels, bolster your stamina, and embrace a flourishing sexual drive, all through the nurturing power of nature. With its cutting-edge formulation, this exceptional elixir even stimulates a vibrant metabolism, bestows boundless energy, and enhances libido, allowing you to relish life's pleasures to the fullest.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/womens-hormone-balance\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/womens-hormone-balance\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"supercharged-c60": {
+			name: "Supercharged C60",
+			tagline: "100,000x More Powerful Than C60",
+			short_description: "<p>Supercharged C60 represents a breakthrough in the realm of antioxidant supplements, boasting a specialized composition of multi-layered fullerene nano-carbon structures. This unique formulation unleashes a potency that surpasses that of standard C60 by at least tenfold. By harnessing its remarkable power, Supercharged C60 supports detoxification processes, fortifies the body's defenses against aging, bolsters the immune system, and optimizes cellular function. This extraordinary vegan and non-GMO antioxidant operates on a cellular level, shielding cells from oxidative stress and profoundly enhancing overall bodily well-being.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/supercharged-c60\/30-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/supercharged-c60\/30-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"harmful-organism-cleanse-program": {
+			name: "Harmful Organism Cleanse Program",
+			tagline: "Advanced Detox",
+			short_description: "<p>A healthy dose of germs can boost our immune systems, but excessive exposure to harmful organisms can significantly impact our overall health. They can hinder nutrient absorption, weaken vital organs, introduce waste into our bodies, and impair the immune system. To combat this, our comprehensive 40-day Harmful Organism Cleanse Program provides the tools needed to cleanse your body effectively. By combining Paratrex, Latero-Flora, Oregano Oil, and Candida Balance, this powerful combination detoxifies harmful organisms, supports gut health, and strengthens the immune system, preventing future unwelcome invaders from taking hold.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/harmful-organism-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/label\/3000w.png?w=1000"}]
+		},
+		"kidney-support-bundle": {
+			name: "Kidney Support Bundle",
+			tagline: "4 Days to Better Kidney Health",
+			short_description: "<p>Your kidneys are an essential component of your body's waste management system. Although these mighty organs are self-cleansing, things like dehydration, nutritional deficiencies, and environmental toxins affect their performance. We designed our Kidney Support Bundle to detoxify, flush, and purge the kidneys of built-up toxins. This bundle includes Plant-Based Kidney Health, our all-natural, kidney-support formula, Oxy-Powder to facilitate toxin removal, and Turmeric for antioxidant support. Along with colon and liver cleansing, it is one of the most essential cleansing protocols for your health! And to help you get started, our Customer Satisfaction Team is available for a free support session to answer your questions and get you on your way to happier kidney health!<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/kidney-support-bundle\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/label\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/label\/3000w.png?w=1000"}]
+		},
+		"ashwagandha": {
+			name: "Ashwagandha",
+			tagline: "Adaptogenic Stress Relief",
+			short_description: "<p>In today's fast-paced world, where 84% of the US population is affected by stress, it's more important than ever to find a greater sense of balance and calm. Experience a new level of stress relief with our cutting-edge ashwagandha supplement. Ashwagandha is a wonder herb that's been used for centuries to elevate mental well-being. Research has shown that Ashwagandha can reduce cortisol, the primary stress hormone in the body. Our formula contains a concentrated blend of KSM-66&reg;, a clinically proven ashwagandha root extract, and CO2 extract for maximum potency. Trust in the power of nature and experience the difference for yourself.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ashwagandha\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ashwagandha\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"stress-relief": {
+			name: "Stress Relief",
+			tagline: "Nurture Your Mind, Nourish Your Mood",
+			short_description: "<p>Manage stress, support mood, and improve cognitive function with our powerful formula. Combining traditional and modern ingredients like Organic Banana Peel, Organic Poria Mushroom, SAMe, and Lithium Orotate, our stress relief supplement provides an effective solution to help you find calm and enhance your overall well-being.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/stress-relief\/120-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"colon-cleanse-program": {
+			name: "Colon Cleanse Program",
+			tagline: "6 Days to Better Gut Health",
+			short_description: "<p>An imbalance in your gut health can disrupt your life, especially since your gut is a critical player in energy optimization and nutrient absorption. Global Healing's Colon Cleanse Program, formulated with Oxy-Powder&reg; and Latero-Flora&trade;, provides a gentle, scientific approach to detoxify and rejuvenate your digestive tract. In just six days, it targets bloating, occasional constipation, gas, and discomfort, facilitating a more comfortable life. If these issues reflect your experience, it's time to turn to a natural, effective solution. Unsure of starting? Our Colon Cleanse Program offers a free VIP support session with our dedicated team, ensuring a confident beginning.<\/p>",
+			images: [{"src": "https://cdn.globalhealing.com/products/images/colon-cleanse-program/default/default/3000w.png"}]
+		},
+		"thyroid-health-kit": {
+			name: "Thyroid Health Kit",
+			tagline: "Specialized Thyroid Nutrition",
+			short_description: "<p>Consider your thyroid the command center for your metabolism. This small-but-mighty organ facilitates many important functions in your body. But when it becomes sluggish, most people aren&rsquo;t even aware. Low energy, mental fog, and difficulty losing weight can all result from a thyroid that is out of balance. Change course and support your thyroid completely and naturally with our Thyroid Health Kit &ndash; complete, specialized nutrition to support normal thyroid function, stimulate metabolism, and promote healthy hormone balance. The 60-day plan includes vitamin B12, selenium, and iodine &mdash; essential nutrients that optimize your thyroid to experience more energy, a better mood, and overall well-being.<\/p>",
+			images: []
+		},
+		"glutathione": {
+			name: "Glutathione",
+			tagline: "Powerful Antioxidant",
+			short_description: "<p>Glutathione is a molecule made up of three amino acids: glutamine, cysteine, and glycine. As a powerful antioxidant found in every cell of the human body, it has the ability to directly neutralize free radicals and help maintain cellular health. Glutathione also supports proper liver function by protecting liver cells from damage caused by exposure to stressors. Our formula is made with an active form of glutathione and MicroSomal™ Technology to ensure maximum bioavailability and absorption.</p>",
+			images: [{"src": "https://cdn.globalhealing.com/products/images/glutathione/2-fl-oz/default/3000w.png"}]
+		},
+		"biophotonic-liquid-gold": {
+			name: "Biophotonic Liquid Gold",
+			tagline: "Enlightened Mind, Body & Soul",
+			short_description: "<p>Tap into the power of gold nanoparticles and biophotonic technology to give your body exactly what it needs. Liquid Gold helps boost brain function, detoxifies your system, fights oxidative stress, and supports overall holistic wellness.</p>",
+			images: [{"src": "https://cdn.globalhealing.com/products/images/liquid-gold/1-fl-oz/default/3000w.png"}]
+		},
+		"kidney-cleanse-program": {
+			name: "Kidney Cleanse Program",
+			tagline: "4 Days to Better Kidney Health",
+			short_description: "<p>Your kidneys are an essential component of your body's waste management system. Although these mighty organs are self-cleansing, things like dehydration, nutritional deficiencies, and environmental toxins affect their performance. We designed our Kidney Cleanse Program to detoxify, flush, and purge the kidneys of built-up toxins. The four-day program includes Plant-Based Kidney Health, our all-natural, kidney-support formula, Oxy-Powder to facilitate toxin removal, and Turmeric for antioxidant support. Along with colon and liver cleansing, it is one of the most essential cleansing protocols for your health! And to help you get started, our Customer Satisfaction Team is available for a free support session to answer your questions and get you on your way to happier kidney health!<\/p>",
+			images: []
+		},
+		"complete-body-cleanse-program": {
+			name: "Complete Body Cleanse Program",
+			tagline: "Advanced Detox",
+			short_description: "<p>Life, the environment surrounding you, and the day-to-day grind can take their toll on your overall well-being, inside and out. If it&rsquo;s time to give your body a full system reboot, our Complete Body Cleanse Program provides everything you need to rid your body of the harmful elements that can slow it down. The program includes a complete colon cleanse, a series of three liver cleanses, a harmful organism cleanse, and a chemical and toxic metal cleanse.&nbsp;<\/p><p>Nourish and cleanse your most important organs and systems. Provide your body with the ultimate support and baseline for a healthy lifestyle. Boost overall well-being. A full-body cleanse can make you feel lighter, stronger, and better, and ours includes a free VIP support session with our Customer Satisfaction Team!<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/complete-body-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/latero-flora\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/olive-oil\/6-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/epsom-salt\/1-tbsp\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/paratrex\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/candida-balance\/120-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oregano-oil\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/heavy-metal-and-chemical-binder\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detoxadine\/2-fl-oz\/default\/3000w.png?w=1000"}]
+		},
+		"zinc": {
+			name: "Zinc",
+			tagline: "Trace Mineral for Immune Support",
+			short_description: "<p>From your immune system to hormone balance, zinc affects hundreds of essential biological functions. Global Healing Zinc helps you meet your daily requirement of this important nutrient, and even goes a few key steps farther. Our liquid formula contains zinc derived from guava leaves, enhanced with Ormus Supercharged Minerals for increased bioavailability, and is all-natural and gentle on your stomach. Unlike most zinc supplements, which are made with synthetic forms of the mineral, the zinc in this formula is naturally bound to plant proteins and amino acids so your body can use it efficiently. Invigorate your immune system, encourage hormone balance, and fend off premature aging with a daily dose of zinc.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/zinc\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"calcium-magnesium-canada": {
+			name: "Calcium & Magnesium Canada",
+			tagline: "Bone and Muscle Support",
+			short_description: "<p>Unleash the boundless potential of calcium and magnesium to fortify your bones and teeth, especially as time progresses, through the introduction of our extraordinary formula. Experience unrivaled absorption and unmatched benefits with our potent blend, meticulously crafted in a 2:1 ratio of calcium orotate and magnesium orotate. This remarkable combination supports the maintenance of normal bone density and aids in preserving optimal muscular function. It also helps maintain adequate levels of calcium in your body so you can have a strong skeletal system. Inspired by the pioneering work of Dr. Hans Nieper, our formula harnesses the exceptional molecular structure of calcium orotate, penetrating cell membranes with ease to precisely target the areas of the body that crave its nourishing expertise.<\/p>",
+			images: [{"src":"https://cdn.globalhealing.com/products/images/calcium-magnesium-canada/120-count/default/3000w.png?w=1000"}]
+		},
+		"vitamin-b12": {
+			name: "Vitamin B12",
+			tagline: "5,000 mcg from Methyl, Adenosyl, and Hydroxo",
+			short_description: "<p>Unlock your body's full potential with our premium Vitamin B12 supplement. Sustainably sourced and organically grown, our vegan-friendly formula delivers a perfect balance of B12 forms for maximum efficacy and vitality. With a mighty 5,000 mcg per serving, our supplement supports normal energy levels, cardiovascular health, and optimal nervous system function. Our cutting-edge formula is specially designed for rapid absorption, ensuring that every dose contributes to your total well-being, increased oxygen intake, and mental clarity.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/1-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/vitamin-b12\/1-fl-oz\/supplement-facts\/3000.png?w=1000"}]
+		},
+		"ginseng": {
+			name: "Ginseng",
+			tagline: "Adaptogen for Energy",
+			short_description: "<p>Revitalize your energy levels and enhance your overall well-being with our premium organic Ginseng. Our Raw Herbal Extract blend features Panax ginseng and other specialized, adaptogenic herbs to provide a natural energy boost, promote brain function, and support a healthy response to daily stress. Unlike coffee or energy drinks that can cause crashes and adrenal fatigue, our Ginseng offers a safe and effective solution to help you tackle life's demands with ease. Tune up your energy levels and attitude with our organic Ginseng today.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ginseng\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ginseng\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"coq10-biopqq": {
+			name: "CoQ10 & BioPQQ® with Shilajit",
+			tagline: "Focus, Memory, and Heart Health",
+			short_description: "<p>A robust and vibrant heart, as well as a sharp and agile mind, lie at the core of your longevity and holistic well-being. Whether you aspire to maintain an active lifestyle in your golden years or seek to amplify productivity as a young professional, possessing ample energy to embrace the life you desire is paramount for a truly gratifying existence. Enter our revolutionary blend of antioxidants&nbsp; CoQ10 &amp; BioPQQ&reg;, meticulously crafted to safeguard the vitality of your mitochondria&mdash;those miniature energy generators nestled within your cells. These remarkable powerhouses not only fortify heart health and elevate cognitive function but also maximize the production of vital energy. In this potent formulation, we have thoughtfully included shilajit, unlocking heightened bioavailability and offering a harmonious symphony of nourishment for your well-being. CoQ10 &amp; BioPQQ with Himalayan Shilajit: Your conduit to safeguarded mitochondria, longevity, and profound vitality.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/coq10-biopqq-with-shilajit\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/coq10-biopqq-with-shilajit\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"ultimate-cellular-health": {
+			name: "Ultimate Cellular Health",
+			tagline: "Cellular Repair &  DNA Telomere Support",
+			short_description: "<p>As we age, the accumulation of free radicals in the body can lead to oxidative stress, primarily contributing to the physical effects commonly associated with aging. However, a solution exists. Global Healing's Ultimate Cellular Health offers a comprehensive formula that promotes NAD+ production, safeguards DNA and telomeres, and incorporates potent ingredients. By utilizing Ultimate Cellular Health, you can actively support healthy aging, heart health, the nervous system, cognitive function, cellular nourishment, and energy enhancement.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-cellular-health\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/ultimate-cellular-health\/60-count\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"brain-health": {
+			name: "Brain Health",
+			tagline: "Inspired By Sayer Ji",
+			short_description: "<p>Turmerones promote the formation of new brain neurons (neurogenesis) and brain function. Brain Health is an advanced, full-spectrum Raw Herbal Extract&trade; formula with various turmeric forms, which helps ensure the maximum levels and absorption of aromatic turmerones, curcumins, and other phytonutrients. These specialized ingredients are clinically shown to promote optimal brain and nervous system function, support a healthy response to brain inflammation, improve focus, and support the body&rsquo;s resistance to brain degeneration. Made with advanced cold-stabilized nano-glycerospheric technology, Brain Health is here to enhance your brain power.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"calcium-disodium-edta": {
+			name: "Calcium Disodium EDTA",
+			tagline: "Detox & Immune Support",
+			short_description: "<p>Provide powerful support for your body&rsquo;s natural ability to detox from heavy metals and mineral overload with Calcium Disodium EDTA. Specifically formulated to promote cardiovascular and immune health, the formula uses advanced MicroSomal&trade; technology to boost effectiveness and bioavailability, so that you can grab more benefits from your daily chelation regimen.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"foot-pads": {
+			name: "Dr. Group's Foot Pads",
+			tagline: "Traditional & Holistic Detox Pads",
+			short_description: "<p>Elevate your wellbeing by liberating your body from the pervasive toxins, chemicals, and heavy metals that lurk within our food, water, air, and environment. Our premium Cleansing Foot Pads, meticulously crafted through years of dedicated medical research in Japan, encapsulate an elite blend of organic bamboo extracts, hand-selected herbs, and precious gemstones. This harmonious fusion promotes the natural cleansing of impurities, providing a detoxifying experience par excellence while you indulge in restful sleep. Made exclusively with all-natural, non-GMO, organic ingredients, these foot patches assure a safe and tranquil experience, fostering the perfect ambiance for nocturnal cleansing. Simply attach a pad to each foot as an integral part of your nighttime ritual, and awaken to a heightened sense of vitality and profound inner cleanliness.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/default\/3000x3000px.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/detox-foot-pads\/10-count\/label\/3000w.png?w=1000"}]
+		},
+		"mushroom-blend": {
+			name: "Organic Mushroom Blend",
+			tagline: "9 Raw, Powerful Mushrooms",
+			short_description: "<p>Harness the remarkable healing capabilities of nature's treasures: mushrooms. Discover a meticulously crafted Organic Mushroom Blend, sourced from nine scientifically studied, 100% raw, whole-food mushroom powders. This premium blend is rich in macro and micronutrients, antioxidants, and gut-friendly elements, offering comprehensive support for daily wellness, athletic performance, gut health, recovery, and cognition. Elevate your well-being routine with our 100% organic, clean mushroom powder&mdash;an unwavering commitment to purity and efficacy you can rely on.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-mushroom-blend\/9.5-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-mushroom-blend\/9.5-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"kidney-health": {
+			name: "Plant-Based Kidney Health",
+			tagline: "Complete Urinary Tract Support",
+			short_description: "<p>Your kidneys are essential for eliminating waste from your body, so it's crucial to keep them clean, healthy, and functioning smoothly. Plant-Based Kidney Health is a premium supplement that contains an enhanced blend of potent, natural herbs, antioxidants, and other nutrients that promote optimal kidney function and support waste elimination. Bioactive, antioxidant-rich herbs that cleanse and support kidney, bladder, and urinary health make Plant-Based Kidney Health a powerful solution for maintaining optimal health and vitality. This blend is formulated with our proprietary Raw Herbal Extract&trade; technology to preserve the plant's essence, creating a potent, bioavailable liquid extract without heat, alcohol, or harsh chemicals.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/plant-based-kidney-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"luminous": {
+			name: "Luminous",
+			tagline: "Hydrating Daily Moisturizer",
+			short_description: "<p>Treat your skin with a creamy-rich moisturizer that deeply nurtures a smooth, even complexion. This lightweight, non-greasy cream is enriched with antioxidants and exotic botanicals to support healthy-looking skin. Day or night, this clean, plant-based face and neck moisturizer will leave your skin supple, healthy, and fully hydrated. Packaged in an ultra-luxe MIRON Violetglass jar to preserve the delicate, natural plant-based ingredients.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/luminous\/1.5-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/luminous\/1.5-fl-oz\/label\/3000x3000w.png?w=1000"}]
+		},
+		"liver-cleanse-program": {
+			name: "Liver Cleanse Program",
+			tagline: "6 Days to Better Liver Health",
+			short_description: "<p>Your liver, the body's primary detoxification organ, can greatly benefit from a revitalizing reset to function at its best. That's where the Liver Cleanse Program steps in, providing an all-natural, 6-day regimen designed to cleanse and rejuvenate your liver and gallbladder. This comprehensive plan involves adhering to a healthful diet and liver-supporting supplements, stimulating your liver and softening buildup, followed by a detoxifying flush to eliminate toxins. What's more, the program includes a complimentary VIP support session with our dedicated Customer Satisfaction Team, ready to answer your queries and guide you through the initiation of your cleanse. Prepare to be amazed by the transformation - a surge of energy, enhanced well-being, and streamlined digestion await!<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-cleanse-program\/default\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/liver-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/oxy-powder\/60-count\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/olive-oil\/6-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/epsom-salt\/1-tbsp\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/turmeric\/2-fl-oz\/default\/3000w.png?w=1000"}]
+		},
+		"greens-powder": {
+			name: "Organic Super Greens",
+			tagline: "Nutrient-Packed Sprouts & Superfoods",
+			short_description: "<p>Sprouts are nature's vibrant treasure trove of health and vitality, surpassing the benefits of mature greens. Bursting with life, they boast elevated levels of enzymes, vitamins, minerals, and antioxidants. These concentrated nutrients are readily absorbed, promoting optimal digestion, bolstering immune function, and nurturing overall well-being. Introducing Organic Super Greens, a greens powder like no other, enriched with 15 raw, freeze-dried sprouts and two superfood blends tailored for energy and digestion. Elevate your health effortlessly with this potent source of vitamins, minerals, and essential antioxidants. Embrace a harmonious gut microbiome, improved digestion, and sustained vitality through our invigorating clean energy blend. Experience the transformative power of Super Greens and embrace a radiant, energized you throughout the day.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-super-greens\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/organic-super-greens\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"omega": {
+			name: "Omega 3•6•7•9",
+			tagline: "Quadruple Strength Vegan Formula",
+			short_description: "<p>Promote whole-body wellness with our exceptional Omega fatty acid formula. Packed with a powerful combination of Omega-3, Omega-6, Omega-7, and Omega-9, it provides comprehensive benefits for heart health, brain health, eye health, skin health, boosted immunity, and weight regulation. Not only is our formula highly effective, but it is also organic, plant-based, and non-GMO certified. We believe in harnessing the goodness of nature without any synthetic additives or genetically modified ingredients. Say goodbye to any fishy aftertaste, as our formula is infused with refreshing organic lemon oil. Experience the pure Omegas that benefit your entire body in one convenient solution.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/omega-3-6-7-9\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/omega-3-6-7-9\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"acid-reflux": {
+			name: "Acid Reflux Relief",
+			tagline: "Natural Heartburn Relief",
+			short_description: "<p>Indulge in the ultimate relief for your heartburn with our exclusive Acid Reflux Relief. Carefully crafted with a premium blend of organic ingredients, including the revered apple cider vinegar and six other time-honored herbs, our solution provides unparalleled soothing for occasional heartburn, indigestion, and digestive irritation. You deserve the very best, and that's why our formula supports your body's natural defense against digestive inflammation by promoting a healthy stomach pH. Unlike many chewable over-the-counter options, our solution offers a liquid base of organic glycerin that increases bioavailability without causing further indigestion, delivering an unmatched and convenient experience.<\/p>",
+			images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/acid-reflux-relief\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/acid-reflux-relief\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
+		},
+		"glucose-oxidase": {
+			name: "Glucose Oxidase",
+			tagline: "Blood Sugar Balance Supplement",
+			short_description: "<p>Glucose Oxidase (also called notatin) is an enzyme that converts glucose into hydrogen peroxide and gluconic acid – compounds the body uses to fight pathogens and produce energy at the cellular level. We isolated this enzyme and combined it with Raw Honey and Raw Bee Pollen, which are both high-quality sources of Glucose Oxidase. Together, these ingredients create a potent glucose control supplement that harnesses natural antibacterial, antioxidant, and health-boosting properties.</p>",
+			images: [{"src": "https://cdn.globalhealing.com/products/images/glucose-oxidase/2-fl-oz/default/3000w.png"}]
+		}
+	};
 
 
-  let gh_404 = (() => {
+	let gh_404 = (() => {
 
-    const url = new URL(window.location);
-    const replace_container = document.querySelector('.template-404');
-    const new_container = document.getElementById('content-container-404');
-    const product_header_left = document.getElementById('gh-product-header--left');
-    const product_header_right_header = document.getElementById('gh-product-header--right-header');
-    const product_content_container = document.getElementById('gh-product-content-container-404');
-    const localization_form = document.getElementById('gh-localization-form');
+		const url = new URL(window.location);
+		const replace_container = document.querySelector('.template-404');
+		const new_container = document.getElementById('content-container-404');
+		const product_header_left = document.getElementById('gh-product-header--left');
+		const product_header_right_header = document.getElementById('gh-product-header--right-header');
+		const product_content_container = document.getElementById('gh-product-content-container-404');
+		const localization_form = document.getElementById('gh-localization-form');
 
-    let img = () => {
-      let ingredients = document.querySelector('.ghd--block--ingredients');
-      let ingredients_img = ingredients.querySelector('[data-type="image"] img');
-      let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+		let img = () => {
+			let ingredients = document.querySelector('.ghd--block--ingredients');
+			let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+			let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
 
-      function setActiveImage(){
-        ingredients_inputs.forEach( i => {
-          if(!i.checked) return;
-          ingredients_img.classList.add('loading');
+			function setActiveImage(){
+				ingredients_inputs.forEach( i => {
+					if(!i.checked) return;
+					ingredients_img.classList.add('loading');
 
-          ingredients_img.src = i.getAttribute('data-ingredient-image') + '?w=600'
-          ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
+					ingredients_img.src = i.getAttribute('data-ingredient-image') + '?w=600'
+					ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?w=1200 2x' );
 
-          if(ingredients_img.complete){
-            ingredients_img.classList.remove('loading');
-          }
+					if(ingredients_img.complete){
+						ingredients_img.classList.remove('loading');
+					}
 
-          ingredients_img.addEventListener('load', () => {
-            ingredients_img.classList.remove('loading');
-          })
+					ingredients_img.addEventListener('load', () => {
+						ingredients_img.classList.remove('loading');
+					})
 
-        })
-      }
+				})
+			}
 
-      ingredients_inputs.forEach( i => {
-        i.addEventListener('change', e => {
-          if( !i.checked ) return;
-          setActiveImage()
-        })
-      })
+			ingredients_inputs.forEach( i => {
+				i.addEventListener('change', e => {
+					if( !i.checked ) return;
+					setActiveImage()
+				})
+			})
 
-      setActiveImage();
+			setActiveImage();
 
-      let modal = document.getElementById('dialog-product-supplement-facts-body');
-      modal.addEventListener('click', e => {
-        let inner = modal.querySelector('.ghd--dialog--inner');
-        if( !inner.contains(e.target) ) modal.close();
-      })
+			let modal = document.getElementById('dialog-product-supplement-facts-body');
+			modal.addEventListener('click', e => {
+				let inner = modal.querySelector('.ghd--dialog--inner');
+				if( !inner.contains(e.target) ) modal.close();
+			})
 
-      document.querySelectorAll('[data-dialog="dialog-product-supplement-facts-body"]').forEach(d => {
-        d.addEventListener('click', function(e) {
-          if (modal.open) {
-            modal.close();
-          } else {
-            modal.showModal()
-          }
-        });
-      })
-    }
+			document.querySelectorAll('[data-dialog="dialog-product-supplement-facts-body"]').forEach(d => {
+				d.addEventListener('click', function(e) {
+					if (modal.open) {
+						modal.close();
+					} else {
+						modal.showModal()
+					}
+				});
+			})
+		}
 
-    let storage = {
-      key: 'gh_404_redirect',
-      storeUrl( handle ){
-        sessionStorage.setItem(storage.key, `https://globalhealing.com/products/${handle}`);
-      },
-      redirectUrl(){
-        let data = sessionStorage.getItem(storage.key);
-        console.log('found storage', data);
-        if( !data ) return
+		let storage = {
+			key: 'gh_404_redirect',
+			storeUrl( handle ){
+				sessionStorage.setItem(storage.key, `https://globalhealing.com/products/${handle}`);
+			},
+			redirectUrl(){
+				let data = sessionStorage.getItem(storage.key);
+				console.log('found storage', data);
+				if( !data ) return
 
-        sessionStorage.removeItem(storage.key);
-        console.log('redirecting to', data);
-        window.location = data;
-      }
-    }
+				sessionStorage.removeItem(storage.key);
+				console.log('redirecting to', data);
+				window.location = data;
+			}
+		}
 
-    let markets = {
+		let markets = {
 
-      matches: {
-        canada: {
-          'oxy-powder': 'oxy-powder-canada',
-          'calcium-magnesium': 'calcium-magnesium-canada',
-          'detoxadine': 'organic-nascent-iodine-canada',
-          'turmeric': 'turmeric-canada',
-          'vitamin-b12': 'vitamin-b12-canada',
-          'vitamin-d': 'vitamin-d-canada'
-        }
-      },
+			matches: {
+				canada: {
+					'oxy-powder': 'oxy-powder-canada',
+					'calcium-magnesium': 'calcium-magnesium-canada',
+					'detoxadine': 'organic-nascent-iodine-canada',
+					'turmeric': 'turmeric-canada',
+					'vitamin-b12': 'vitamin-b12-canada',
+					'vitamin-d': 'vitamin-d-canada'
+				}
+			},
 
-      goToMatchedProduct(slug){
-        let country = '{{ localization.country.name }}'.toLowerCase();
-        if( !markets.matches[country] || !markets.matches[country][slug] ) return false;
-        window.location = '/products/' + markets.matches[country][slug];
-        return true;
-      }
-    }
+			goToMatchedProduct(slug){
+				let country = '{{ localization.country.name }}'.toLowerCase();
+				if( !markets.matches[country] || !markets.matches[country][slug] ) return false;
+				window.location = '/products/' + markets.matches[country][slug];
+				return true;
+			}
+		}
 
-    let init = () => {
+		let init = () => {
 
-      if( !url.pathname.includes('products/') ){
-        storage.redirectUrl();
-        return;
-      }
+			if( !url.pathname.includes('products/') ){
+				storage.redirectUrl();
+				return;
+			}
 
-      const product_url = url.pathname.replace('/products/', '').replace('/', '');
+			const product_url = url.pathname.replace('/products/', '').replace('/', '');
 
-      const product = gh_products[product_url];
-      if( !product ) return;
+			const product = gh_products[product_url];
+			if( !product ) return;
 
-      let matched = markets.goToMatchedProduct(product_url);
-      if( matched ) return;
+			let matched = markets.goToMatchedProduct(product_url);
+			if( matched ) return;
 
-      storage.storeUrl(product_url);
+			storage.storeUrl(product_url);
 
-      document.title = product.name + ' | Global Healing';
-      replace_container.classList.add('hide');
+			document.title = product.name + ' | Global Healing';
+			replace_container.classList.add('hide');
 
-      product_header_left.innerHTML +=
-        `<img src="${product.images[0].src}" width='400' alt="" />`;
+			product_header_left.innerHTML +=
+				`<img src="${product.images[0].src}" width='400' alt="" />`;
 
-      product_header_right_header.innerHTML += `
+			product_header_right_header.innerHTML += `
         <h1 class='mb2 h2 md-h1'>${product.name}</h1>
         <span class="bold color-green">${product.tagline}</span>
         ${product.short_description}
       `;
 
-      localization_form.classList.remove('hide');
-      new_container.classList.remove('hide');
+			localization_form.classList.remove('hide');
+			new_container.classList.remove('hide');
 
-      fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
-        .then( d => d.text())
-        .then( h => {
-          if( h === 'undefined' ) return;
-          product_content_container.innerHTML += '<br>';
-          product_content_container.innerHTML += h;
-          img();
-        })
+			fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
+				.then( d => d.text())
+				.then( h => {
+					if( h === 'undefined' ) return;
+					product_content_container.innerHTML += '<br>';
+					product_content_container.innerHTML += h;
+					img();
+				})
 
-    }
+		}
 
-    return { init };
+		return { init };
 
-  })();
+	})();
 
-  gh_404.init();
+	gh_404.init();
 
-  // logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }}
-  // {{ request.origin }}
-  // {{ template }}
-  // {{shop.url | append: share_permalink}}
-  // {{ localization.country.name }}
+	// logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }}
+	// {{ request.origin }}
+	// {{ template }}
+	// {{shop.url | append: share_permalink}}
+	// {{ localization.country.name }}
 
 </script>
 
