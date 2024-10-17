@@ -237,7 +237,7 @@
       },
       "1373006865992778634": {
         "type": "shopify://apps/impact-com/blocks/utt/adac1a7f-d17f-4936-8a12-45628cdd8add",
-        "disabled": true,
+        "disabled": false,
         "settings": {
         }
       }
