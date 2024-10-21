@@ -670,8 +670,8 @@
       if( matched ) preloaded = true;
     }
 
-    let init = () => {
-
+    function init()
+    {
       if( preloaded ) return;
 
       const product_url = url.pathname.replace('/products/', '').replace('/', '');
