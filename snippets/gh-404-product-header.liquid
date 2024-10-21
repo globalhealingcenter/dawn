@@ -675,6 +675,7 @@
       if( preloaded ) return;
 
       const product_url = url.pathname.replace('/products/', '').replace('/', '');
+      const product = gh_products[product_url];
 
       storage.storeUrl(product_url);
 
