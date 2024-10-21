@@ -560,12 +560,12 @@
   let gh_404 = (() => {
 
     const url = new URL(window.location);
-    const replace_container = document.querySelector('.template-404');
-    const new_container = document.getElementById('content-container-404');
-    const product_header_left = document.getElementById('gh-product-header--left');
-    const product_header_right_header = document.getElementById('gh-product-header--right-header');
-    const product_content_container = document.getElementById('gh-product-content-container-404');
-    const localization_form = document.getElementById('gh-localization-form');
+    let replace_container;
+    let new_container;
+    let product_header_left;
+    let product_header_right_header;
+    let product_content_container;
+    let localization_form;
 
     let img = () => {
       let ingredients = document.querySelector('.ghd--block--ingredients');
@@ -673,6 +673,13 @@
     function init()
     {
       if( preloaded ) return;
+
+      replace_container = document.querySelector('.template-404');
+      new_container = document.getElementById('content-container-404');
+      product_header_left = document.getElementById('gh-product-header--left');
+      product_header_right_header = document.getElementById('gh-product-header--right-header');
+      product_content_container = document.getElementById('gh-product-content-container-404');
+      localization_form = document.getElementById('gh-localization-form');
 
       const product_url = url.pathname.replace('/products/', '').replace('/', '');
       const product = gh_products[product_url];
