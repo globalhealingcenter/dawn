@@ -26,8 +26,8 @@
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "✨ 15% Off 2+ Products",
-            "link": "https://globalhealing.com/collections/collections"
+            "text": "✨ 15% off 2 or More Products",
+            "link": "https://globalhealing.com/collections/collections?icn_ghc=as_campaign&ici_ghc=TopNotice"
           }
         }
       },
