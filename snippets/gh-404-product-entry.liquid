@@ -3,7 +3,7 @@
 <script>
 gh_products['{{ product.handle }}'] = { 
   name: "{{ product.title }}",
-  variant: '{{ product.selected_variant.id }}',
+  id: '{{ product.id }}',
   tagline: "{{ product.metafields.globalhealing.product_tagline }}",
   short_description: {{ product.description | json }},
   images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
