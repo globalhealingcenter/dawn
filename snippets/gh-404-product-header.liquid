@@ -721,6 +721,7 @@
 
   })();
 
-  // {{ template }}
+  {% if template == '404' %}
   gh_404.preLoad();
+  {% endif %}
 </script>
