@@ -38,7 +38,7 @@
 <script>
 	gh_404.init();
 
-	// logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }}
+	// logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.metafields.globalhealing.product_tagline }}
 	// {{ request.origin }}
 	// {{ template }}
 	// {{shop.url | append: share_permalink}}
@@ -48,7 +48,7 @@
   {% if product.type == 'Non-Public' %}
     //is not public ->
   {% endif %}
-  // {{ product.handle }}
+  // {{ product.handle }}, type: {{ public.type }}
   
 {% endfor %}
   
