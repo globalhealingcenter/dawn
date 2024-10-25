@@ -45,6 +45,9 @@
 	// {{ localization.country.name }}
 
 {% for product in collections.all.products %}
+  {% if product.type == 'Non-Public' %}
+    //is not public ->
+  {% endif %}
   // {{ product.handle }}
   
 {% endfor %}
