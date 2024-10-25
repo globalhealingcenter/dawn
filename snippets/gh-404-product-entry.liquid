@@ -2,8 +2,8 @@
 
 <script>
 gh_products['{{ product.handle }}'] = { 
-  name: "{{ product.title }}",
-  id: '{{ product.id }}',
+  name: "{{ product.title | json }}",
+  id: {{ product.id | json }},
   tagline: "{{ product.metafields.globalhealing.product_tagline }}",
   short_description: {{ product.description | json }},
   images: [
