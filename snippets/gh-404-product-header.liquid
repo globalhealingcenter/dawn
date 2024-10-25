@@ -425,10 +425,10 @@
       short_description: "<p>Turmerones promote the formation of new brain neurons (neurogenesis) and brain function. Brain Health is an advanced, full-spectrum Raw Herbal Extract&trade; formula with various turmeric forms, which helps ensure the maximum levels and absorption of aromatic turmerones, curcumins, and other phytonutrients. These specialized ingredients are clinically shown to promote optimal brain and nervous system function, support a healthy response to brain inflammation, improve focus, and support the body&rsquo;s resistance to brain degeneration. Made with advanced cold-stabilized nano-glycerospheric technology, Brain Health is here to enhance your brain power.<\/p>",
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/brain-health\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
     },
-    "calcium-disodium-edta": {
-      name: "{{ shop.metaobjects.product['calcium-disodium-edta'].product.value.title }}",
-      tagline: "{{ shop.metaobjects.product['calcium-disodium-edta'].product.value.metafields.globalhealing.product_tagline }}",
-      short_description: "<p>Provide powerful support for your body&rsquo;s natural ability to detox from heavy metals and mineral overload with Calcium Disodium EDTA. Specifically formulated to promote cardiovascular and immune health, the formula uses advanced MicroSomal&trade; technology to boost effectiveness and bioavailability, so that you can grab more benefits from your daily chelation regimen.<\/p>",
+    "calcium-disodium-edta": { {% assign product = shop.metaobjects.product['calcium-disodium-edta'].product.value %}
+      name: "{{ product.title }}",
+      tagline: "{{ product.metafields.globalhealing.product_tagline }}",
+      short_description: "{{ product.description }}",
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
     },
     "foot-pads": {
