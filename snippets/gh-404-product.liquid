@@ -42,16 +42,7 @@
 	// {{ request.origin }}
 	// {{ template }}
 	// {{shop.url | append: share_permalink}}
-	// {{ localization.country.name }}
-
-{% for product in collections.all.products %}
-  {% if product.type == 'Non-Public' %}
-    //is not public ->
-  {% endif %}
-  // {{ product.handle }}, type: {{ public.type }}
-  
-{% endfor %}
-  
+	// {{ localization.country.name }}  
 </script>
 
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
