@@ -8,7 +8,7 @@ gh_products['{{ product.handle }}'] = {
   short_description: {{ product.description | json }},
   images: [
     {% for image in product.images %}
-      {"src": "{{ image | image_url: width: 600 }}"}
+      {"src": "{{ image | image_url: width: 600 }}"},
     {% endfor %}}
   ]
 }
