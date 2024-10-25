@@ -428,7 +428,7 @@
     "calcium-disodium-edta": { {% assign product = shop.metaobjects.product['calcium-disodium-edta'].product.value %}
       name: "{{ product.title }}",
       tagline: "{{ product.metafields.globalhealing.product_tagline }}",
-      short_description: "{{ product.description | json }}",
+      short_description: {{ product.description | json }},
       images: [{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/default\/3000w.png?w=1000"},{"src":"https:\/\/cdn.globalhealing.com\/products\/images\/calcium-disodium-edta\/2-fl-oz\/supplement-facts\/3000w.png?w=1000"}]
     },
     "foot-pads": {
