@@ -1,8 +1,9 @@
 {% assign product = shop.metaobjects.product[handle].product.value %}
 
+{% if product %}
 <script>
 gh_products['{{ product.handle }}'] = { 
-  name: "{{ product.title | json }}",
+  name: {{ product.title | json }},
   id: {{ product.id | json }},
   tagline: "{{ product.metafields.globalhealing.product_tagline }}",
   short_description: {{ product.description | json }},
@@ -13,3 +14,4 @@ gh_products['{{ product.handle }}'] = {
   ]
 }
 </script>
+{% endif %}
