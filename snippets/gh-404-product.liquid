@@ -43,6 +43,12 @@
 	// {{ template }}
 	// {{shop.url | append: share_permalink}}
 	// {{ localization.country.name }}
+
+{% for product in collections.all.products %}
+  // {{ product.handle }}
+  
+{% endfor %}
+  
 </script>
 
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
