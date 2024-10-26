@@ -15,7 +15,7 @@
             id: {{ product.id | json }},
             tagline: "{{ product.metafields.globalhealing.product_tagline }}",
             short_description: {{ product.description | json }},
-            tabs: {{ tabs | json }},
+            tabs: `{{ tabs }}`,
             images: [
               {% for image in product.images %}
                 {"src": "{{ image | image_url: width: 600 }}"},
