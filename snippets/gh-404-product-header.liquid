@@ -5,12 +5,9 @@
 
 {% paginate shop.metaobjects.product.values by 250 %}
   {% assign products = shop.metaobjects.product.values %}
-
   {% if products %}
       {%- for entry in products %}
-
         {% assign product = entry.product.value %}
-
         <script>
           gh_products['{{ product.handle }}'] = { 
             name: {{ product.title | json }},
@@ -24,15 +21,11 @@
             ]
           }
       </script>
-
-        
       {%- endfor -%}
   {% endif %}
 {% endpaginate %}
 
 <script>
-
-
   let gh_404 = (() => {
 
     const url = new URL(window.location);
