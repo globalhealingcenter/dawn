@@ -1,3 +1,4 @@
+{% comment %} Moved to gh-404-product-header {% endcomment %}
 {% assign product = shop.metaobjects.product[handle].product.value %}
 
 {% if product %}
@@ -17,13 +18,3 @@ gh_products['{{ product.handle }}'] = {
 {% else %}
   <!-- not found: {{ handle }} -->
 {% endif %}
-
-{% paginate shop.metaobjects.product.values by 250 %}
-  {% assign colors = shop.metaobjects.product.values %}
-
-  {% if colors %}
-      {%- for color_entry in colors %}
-        <!-- {{ color_entry.system.handle }} -->
-      {%- endfor -%}
-  {% endif %}
-{% endpaginate %}
