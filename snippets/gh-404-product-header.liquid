@@ -8,7 +8,7 @@
   {% if products %}
       {%- for entry in products %}
         {% assign product = entry.product.value %}
-        {% capture tabs %}{% render 'gh-block-product-tabs', product: product, tab_title_1: 'About', tab_title_2: "Who It's For", tab_title_3: 'Suggested Use' %}{% endcapture %}
+        {% capture tabs %}{% render 'gh-block-product-tabs', product: product, manual_titles: true %}{% endcapture %}
         <script>
           gh_products['{{ product.handle }}'] = { 
             name: {{ product.title | json }},
