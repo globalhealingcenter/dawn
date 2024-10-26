@@ -14,4 +14,6 @@ gh_products['{{ product.handle }}'] = {
   ]
 }
 </script>
+{% else %}
+  // not found: {{ handle }}
 {% endif %}
