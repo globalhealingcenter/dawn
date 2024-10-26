@@ -171,10 +171,7 @@
         product_header_right_header.innerHTML += 
           `<div class="yotpo-widget-instance" data-yotpo-instance-id="465432" data-yotpo-product-id="${product.id}"data-yotpo-section-id="product"></div>`;
 
-      product_header_right_header.innerHTML += `
-        <span class="bold color-green">${product.tagline}</span>
-        ${product.short_description}
-      `;
+      product_header_right_header.innerHTML += `${product.tabs}`;
 
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
