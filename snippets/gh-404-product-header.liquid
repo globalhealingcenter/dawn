@@ -10,7 +10,9 @@
   {% assign products = shop.metaobjects.product.values %}
 
   {% if products %}
-      {%- for product in products %}
+      {%- for entry in products %}
+
+        {% assign product = entry.product.value %}
 
       <script>
         gh_products['{{ product.handle }}'] = { 
