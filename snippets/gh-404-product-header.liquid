@@ -1,8 +1,5 @@
-
 <script>
-
   let preloaded = false;
-
   let gh_products = {}
 </script>
 
@@ -14,18 +11,18 @@
 
         {% assign product = entry.product.value %}
 
-      <script>
-        gh_products['{{ product.handle }}'] = { 
-          name: {{ product.title | json }},
-          id: {{ product.id | json }},
-          tagline: "{{ product.metafields.globalhealing.product_tagline }}",
-          short_description: {{ product.description | json }},
-          images: [
-            {% for image in product.images %}
-              {"src": "{{ image | image_url: width: 600 }}"},
-            {% endfor %}
-          ]
-        }
+        <script>
+          gh_products['{{ product.handle }}'] = { 
+            name: {{ product.title | json }},
+            id: {{ product.id | json }},
+            tagline: "{{ product.metafields.globalhealing.product_tagline }}",
+            short_description: {{ product.description | json }},
+            images: [
+              {% for image in product.images %}
+                {"src": "{{ image | image_url: width: 600 }}"},
+              {% endfor %}
+            ]
+          }
       </script>
 
         
