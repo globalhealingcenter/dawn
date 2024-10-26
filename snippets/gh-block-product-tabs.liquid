@@ -50,6 +50,7 @@
     <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
   </div>
 </div>
+{% unless manual_titles %}
 <script>
   let all_tabs = document.querySelectorAll('.info-tabs__content > div');
   let all_links = document.querySelectorAll('.info-tabs__links a');
@@ -65,6 +66,7 @@
     })
   })
 </script>
+{% endunless %}
 <style>
   .product__info-tabs {
     padding-bottom: 1rem;
