@@ -10,10 +10,10 @@
 {% assign tab_three_title = config.tab_3_title | default: block.settings.tab_3_title %}
 
 <!-- manual title 1: {{ tab_title_1 }} -->
-{% if tab_title_1 %}
-  {% assign tab_one_title = tab_title_1 %}
-  {% assign tab_two_title = tab_title_2 %}
-  {% assign tab_three_title = tab_title_3 %}
+{% if manual_titles %}
+  {% assign tab_one_title = 'About' %}
+  {% assign tab_two_title = "Who It's For" %}
+  {% assign tab_three_title = 'Suggested Use' %}
 {% endif %}
 
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
