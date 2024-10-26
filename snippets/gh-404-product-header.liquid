@@ -8,12 +8,14 @@
   {% if products %}
       {%- for entry in products %}
         {% assign product = entry.product.value %}
+        {% capture tabs %}{% render 'gh-block-product-tabs', product: product %}{% endcapture %}
         <script>
           gh_products['{{ product.handle }}'] = { 
             name: {{ product.title | json }},
             id: {{ product.id | json }},
             tagline: "{{ product.metafields.globalhealing.product_tagline }}",
             short_description: {{ product.description | json }},
+            tabs: {{ tabs | json }},
             images: [
               {% for image in product.images %}
                 {"src": "{{ image | image_url: width: 600 }}"},
