@@ -158,10 +158,11 @@
       })
       
       let modal = document.getElementById('dialog-full-ingredients-header');
-      modal.addEventListener('click', e => {
-        let inner = modal.querySelector('.ghd--dialog--inner');
-        if( !inner.contains(e.target) ) modal.close();
-      })
+      if( modal )
+        modal.addEventListener('click', e => {
+          let inner = modal.querySelector('.ghd--dialog--inner');
+          if( !inner.contains(e.target) ) modal.close();
+        })
   
       document.querySelectorAll('[data-dialog="dialog-full-ingredients-header"]').forEach(d => {
         d.addEventListener('click', function(e) {
