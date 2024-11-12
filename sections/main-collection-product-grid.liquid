@@ -210,7 +210,7 @@
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
                 
-                {% if section.settings.sidebar_banner != '' and forloop.index == 3 %}
+                {% if section.settings.sidebar_banner and section.settings.sidebar_banner != '' and forloop.index == 3 %}
                   <li class="grid__item"><div><img src="{{ section.settings.sidebar_banner }}?w=600" alt=""></div></li>
                 {% endif %}
                 
