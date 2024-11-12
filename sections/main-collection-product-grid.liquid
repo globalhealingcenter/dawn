@@ -107,6 +107,10 @@
 
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+
+      {% if section.settings.sidebar_banner %}
+        <img src="{{ section.settings.sidebar_banner }}" alt="">
+      {% endif %}
       
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
