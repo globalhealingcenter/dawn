@@ -108,9 +108,7 @@
     <div class="{% if section.settings.filter_type == 'vertical' %} facets-vertical page-width{% endif %}">
       {{ 'component-facets.css' | asset_url | stylesheet_tag }}
 
-      {% if section.settings.sidebar_banner %}
-        <img src="{{ section.settings.sidebar_banner }}?w=510" alt="" width="260">
-      {% endif %}
+    
       
       {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
         <aside
@@ -119,6 +117,9 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
+           {% if section.settings.sidebar_banner %}
+        <img src="{{ section.settings.sidebar_banner }}?w=510" alt="" width="260">
+      {% endif %}
         {% if settings.ss_enable %}
           <div id="searchspring-sidebar"></div>
         {% else %}
