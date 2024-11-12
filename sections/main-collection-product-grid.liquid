@@ -203,18 +203,14 @@
                 grid--{{ section.settings.columns_desktop }}-col-desktop
               "
             >
-              {%- assign loaded_banner = false %}
-              {% unless section.settings.sidebar_banner -%}
-                {%- assign loaded_banner = true -%}
-              {% endunless %}
-              
+
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
                 
-                {% if loaded_banner == false and forloop.index == 3 %}
+                {% if section.settings.sidebar_banner and forloop.index == 3 %}
                   <li class="grid__item"><div><img src="{{ section.settings.sidebar_banner }}?w=600" alt=""></div></li>
                 {% endif %}
                 
