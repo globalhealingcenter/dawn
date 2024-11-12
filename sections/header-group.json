@@ -26,8 +26,8 @@
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "✨ 15% off 2 or More Products",
-            "link": "https://globalhealing.com/collections/collections?icn_ghc=as_campaign&ici_ghc=TopNotice"
+            "text": "✨ 15% Off 2 or More Products",
+            "link": "https://globalhealing.com/collections/collections?icn_ghc=as_campaign&ici_ghc=TopNotice?icn_ghc=as_campaign&ici_ghc=TopNotice"
           }
         }
       },
@@ -50,9 +50,7 @@
     },
     "header": {
       "type": "header",
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "logo_position": "middle-left",
         "menu": "main-menu-v2",
