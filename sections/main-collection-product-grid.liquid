@@ -211,7 +211,7 @@
                 {%- endif -%}
                 
                 {% if section.settings.sidebar_banner and section.settings.sidebar_banner != '' and forloop.index == 3 %}
-                  <li class="grid__item"><div><img src="{{ section.settings.sidebar_banner }}?w=600" alt=""></div></li>
+                  <li class="grid__item"><div><a href="{{ section.settings.sidebar_banner_link }}"><img src="{{ section.settings.sidebar_banner }}?w=600" alt=""></a></div></li>
                 {% endif %}
                 
                 <li
@@ -429,6 +429,11 @@
       "type": "text",
       "id": "sidebar_banner",
       "label": "Sidebar Banner (CDN)"
+    },
+    {
+      "type": "text",
+      "id": "sidebar_banner_link",
+      "label": "Sidebar Banner Link"
     },
     {
       "type": "range",
