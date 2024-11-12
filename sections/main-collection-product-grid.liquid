@@ -117,9 +117,7 @@
           id="main-collection-filters"
           data-id="{{ section.id }}"
         >
-           {% if section.settings.sidebar_banner %}
-        <img src="{{ section.settings.sidebar_banner }}?w=510" alt="" width="260">
-      {% endif %}
+        
         {% if settings.ss_enable %}
           <div id="searchspring-sidebar"></div>
         {% else %}
@@ -132,6 +130,10 @@
             paginate: paginate
           %}
         {%- endif -%}
+
+          {% if section.settings.sidebar_banner %}
+        <img src="{{ section.settings.sidebar_banner }}?w=510" alt="" width="260">
+      {% endif %}
         </aside>
       {%- endif -%}
 
