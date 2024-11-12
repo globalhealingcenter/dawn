@@ -131,9 +131,7 @@
           %}
         {%- endif -%}
 
-          {% if section.settings.sidebar_banner %}
-        <img src="{{ section.settings.sidebar_banner }}?w=510" alt="" width="260">
-      {% endif %}
+      
         </aside>
       {%- endif -%}
 
@@ -205,11 +203,21 @@
                 grid--{{ section.settings.columns_desktop }}-col-desktop
               "
             >
+              {%- assign loaded_banner = false %}
+              {% unless section.settings.sidebar_banner -%}
+                {%- assign loaded_banner = true -%}
+              {% endunless %}
+              
               {%- for product in collection.products -%}
                 {% assign lazy_load = false %}
                 {%- if forloop.index > 2 -%}
                   {%- assign lazy_load = true -%}
                 {%- endif -%}
+                
+                {% if loaded_banner == false and forloop.index == 3 %}
+                  <img src="{{ section.settings.sidebar_banner }}?w=600" alt="">
+                {% endif %}
+                
                 <li
                   class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                   {% if settings.animations_reveal_on_scroll %}
