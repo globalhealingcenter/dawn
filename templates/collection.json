@@ -1,14 +1,21 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shogun-helper": {
       "type": "shogun-helper",
-      "settings": {
-      }
+      "settings": {}
     },
     "shogun-above": {
       "type": "shogun-above",
-      "settings": {
-      }
+      "settings": {}
     },
     "banner": {
       "type": "main-collection-banner",
@@ -43,6 +50,8 @@
         "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "2",
+        "sidebar_banner": "https://cdn.globalhealing.com/m/2024/11/bfcm/as/category.jpg",
+        "sidebar_banner_link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=cm_campaign&ici_ghc=CategoryBanner",
         "padding_top": 36,
         "padding_bottom": 36
       }
@@ -51,7 +60,7 @@
       "type": "apps",
       "blocks": {
         "b948b429-b643-4b8d-97a4-44db6ed0211f": {
-          "type": "shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
             "id": "132905",
@@ -94,13 +103,11 @@
     },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {
-      }
+      "settings": {}
     },
     "shogun-optimizer": {
       "type": "shogun-optimizer",
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [
