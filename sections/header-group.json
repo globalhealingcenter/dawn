@@ -28,19 +28,11 @@
             "text": "✨ 15% Off Orders of 2 or More Products",
             "link": "https://globalhealing.com/collections/collections?icn_ghc=as_campaign&ici_ghc=TopNotice?icn_ghc=as_campaign&ici_ghc=TopNotice"
           }
-        },
-        "announcement_QcBrf3": {
-          "type": "announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": ""
-          }
         }
       },
       "block_order": [
         "778775ac-0fd5-4070-8198-2dec1665d8fc",
-        "announcement_GGCHez",
-        "announcement_QcBrf3"
+        "announcement_GGCHez"
       ],
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
