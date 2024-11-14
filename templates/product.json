@@ -225,12 +225,30 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "d6916c423a9f8f228617": {
+      "type": "apps",
+      "blocks": {
+        "558fd9b2-cef6-4114-bca9-62bac086c045": {
+          "type": "shopify://apps/yotpo-product-reviews-ugc/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "558fd9b2-cef6-4114-bca9-62bac086c045"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "shogun-helper",
     "shogun-above",
     "main",
+    "d6916c423a9f8f228617",
     "3cf97e59c2a3d23033fa",
     "169838059718b5ce0c",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
