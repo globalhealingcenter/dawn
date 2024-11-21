@@ -50,8 +50,8 @@
         "filter_type": "vertical",
         "enable_sorting": true,
         "columns_mobile": "2",
-        "sidebar_banner": "https://cdn.globalhealing.com/m/2024/11/bfcm/as/category.jpg",
-        "sidebar_banner_link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=cm_campaign&ici_ghc=CategoryBanner",
+        "sidebar_banner": "",
+        "sidebar_banner_link": "",
         "padding_top": 36,
         "padding_bottom": 36
       }
