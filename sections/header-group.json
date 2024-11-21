@@ -24,6 +24,7 @@
         },
         "announcement_GGCHez": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "✨ 15% Off Orders of 2 or More Products",
             "link": "https://globalhealing.com/collections/collections?icn_ghc=as_campaign&ici_ghc=TopNotice"
