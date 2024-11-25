@@ -149,15 +149,12 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "9271244056961380716": {
         "type": "shopify://apps/discount-kit/blocks/core/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
-        "settings": {
-        }
+        "settings": {}
       },
       "6071110790918949010": {
         "type": "shopify://apps/discount-kit/blocks/gift/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
@@ -170,26 +167,22 @@
       "11945366711752539959": {
         "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "11735689235857492391": {
         "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "4705145147225299685": {
         "type": "shopify://apps/tolstoy-shoppable-video-ugc/blocks/widget-block/06fa8282-42ff-403e-b67c-1936776aed11",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "6628239160433917566": {
         "type": "shopify://apps/littledata-revenue-tracking/blocks/LittledataLayer/45a35ed8-a2b2-46c3-84fa-6f58497c5345",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "7079518687644006178": {
         "type": "shopify://apps/checkout-blocks/blocks/app-embed/b0024ca5-9de8-4bf0-a92f-cd0783877ae2",
@@ -206,20 +199,17 @@
       "17428600031447253342": {
         "type": "shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "1248957848723945065": {
         "type": "shopify://apps/mntn/blocks/tracking-pixel/d40b5b2f-bf84-4a06-b576-832ad24a8652",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-reviews-ugc/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "8962992520437913685": {
         "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
@@ -232,14 +222,17 @@
       "855628211100114053": {
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "1373006865992778634": {
         "type": "shopify://apps/impact-com/blocks/utt/adac1a7f-d17f-4936-8a12-45628cdd8add",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
+      },
+      "1173261918193615741": {
+        "type": "shopify://apps/geo-pro-geolocation/blocks/geopro/16fc5313-7aee-4e90-ac95-f50fc7c8b657",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
@@ -514,8 +507,6 @@
     }
   },
   "platform_customizations": {
-    "custom_css": [
-
-    ]
+    "custom_css": []
   }
 }
