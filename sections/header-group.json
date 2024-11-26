@@ -18,15 +18,15 @@
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "🎉 Earn 2x Points on Liquid Gold, Ashwagandha, and Omega 3•6•7•9 Until 9/23",
-            "link": ""
+            "text": "🎉 Cyber Monday - 15% Off on Orders $100+",
+            "link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=bf_campaign&ici_ghc=TopNotice"
           }
         },
         "announcement_GGCHez": {
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "✨ 20% Off | Free Gift on Orders $100+*",
+            "text": "✨ Black Friday - 20% Off | Free Gift on Orders $100+*",
             "link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=bf_campaign&ici_ghc=TopNotice"
           }
         }
