@@ -24,6 +24,7 @@
         },
         "announcement_GGCHez": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "✨ Black Friday - 20% Off | Free Glass Shaker on Orders $100+*",
             "link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=bf_campaign&ici_ghc=TopNotice"
