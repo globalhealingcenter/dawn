@@ -160,7 +160,6 @@
         "type": "shopify://apps/discount-kit/blocks/gift/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
         "disabled": true,
         "settings": {
-          "auto_remove": true,
           "refresh": true
         }
       },
