@@ -758,6 +758,7 @@ section h3.eyebrow span{
         }
         .sh-hero-video--video{
 			height: auto;
+          min-height: 200px;
 		}
         .sh-hero-video--video video{
 			width: 105%;
