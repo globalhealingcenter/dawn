@@ -24,6 +24,38 @@
         {%- case block.type -%}
         {%- when '@app' -%}
             {% render block %}
+        {% when 'video-hero' %}
+          <section class="sh-hero-video">
+            	<div class="sh-hero-video--video">
+            		<div class="sh-hero-video--video--video-container">
+            			<div>
+            				<video class="video--desktop" loop="loop" muted="" autoplay="autoplay" playsinline="">
+            					<source type="video/mp4" src="{{ block.settings.video }}">
+            					Your browser does not support the video tag.
+            				</video>
+            				<video class="video--mobile" loop="loop" muted="" autoplay="autoplay" playsinline="">
+            					<source type="video/mp4" src="{{ block.settings.video_mobile }}">
+            					Your browser does not support the video tag.
+            				</video>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="sh-hero-video--content page-width">
+            		<div>
+            			<h1>
+            				Your Body<br>
+            				<span>is the</span> Medicine
+            			</h1>
+            			<div class="flex">
+            				<a class="gh-font-secondary" href="{{ block.settings.url }}">Learn More</a>
+            				<h4>
+            					Teach Your Body to<br>
+            					Heal Itself, <em>Naturally</em>.
+            				</h4>
+            			</div>
+            		</div>
+            	</div>
+            </section>
         {% when 'hero' %}
             <section class="ghd--hero" {{ block.shopify_attributes }}>
               <a href="{{ block.settings.url }}">
@@ -282,6 +314,30 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "video-hero",
+      "name": "Video Hero",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "video",
+          "default": "https://...",
+          "label": "Video Link"
+        },
+        {
+          "type": "text",
+          "id": "video_mobile",
+          "default": "https://...",
+          "label": "Video Link (mobile)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        }
+      ]
     },
     {
       "type": "hero",
