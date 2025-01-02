@@ -623,6 +623,7 @@ section h3.eyebrow span{
 
 .sh-hero-video {
         position: relative;
+        background: #000;
     }
     .sh-hero-video .video--mobile {
 		display: none;
