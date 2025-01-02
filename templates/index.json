@@ -12,6 +12,15 @@
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493": {
       "type": "gh-home-page",
       "blocks": {
+        "video_hero_yDmxn3": {
+          "type": "video-hero",
+          "disabled": true,
+          "settings": {
+            "video": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video.mp4",
+            "video_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video-mobile.mp4",
+            "url": "shopify://pages/self-healing"
+          }
+        },
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
           "settings": {
@@ -132,6 +141,7 @@
         }
       },
       "block_order": [
+        "video_hero_yDmxn3",
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc",
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0",
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be",
