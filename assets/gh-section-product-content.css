@@ -320,7 +320,7 @@
     max-width: 650px;
 }
 .ghd--block--miron h2{
-    color: #000;
+    color: var(--gh-color-green);
     margin-top: 0;
 }
 .ghd--block--miron [data-type="cols"]{
