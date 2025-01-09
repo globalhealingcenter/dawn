@@ -20,7 +20,7 @@
                             <p class="left">A naturally-occurring trace mineral found in plant foods, boron is your secret to supporting total body wellness on a daily basis.</p>
                         </div>
                         <div>
-                            <p class="flex-auto price">{{ product.price }}</p>
+                            <p class="flex-auto price">{{ product.price | money }}</p>
                             <a type="submit" href="https://globalhealing.com/cart/{{ product.variants.first.id }}:1" class="button button--full-width button--primary">Add to cart</a>
                         </div>
                     </div>
