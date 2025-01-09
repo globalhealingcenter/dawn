@@ -1,9 +1,10 @@
 {% comment %}
     Needs {{ products }} which should be an array of Liquid Shopify Products
+    Needs {{ id }} which should be an id for use with the slider
 {% endcomment %}
 
 <!-- start GH product recommendations -->
-
+<div class="gh-element-product-recommendations--container" id="{{ id }}">
     <div class="gh-element-product-recommendations glide">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
@@ -41,9 +42,10 @@
             </div>
         </div>
     </div>
+</div>
 
 <style>
-    .gh-element-product-recommendations--section {
+    .gh-element-product-recommendations--container {
         padding-top: 5rem;
         padding-bottom: 4rem;
     }
@@ -69,3 +71,24 @@
         text-align: left;
     }
 </style>
+<script>
+  gh.glide.create('#{{ id }} .glide', {
+    type: 'carousel',
+    startAt: 0,
+    perView: 4,
+
+    breakpoints: {
+      800: {
+        perView: 3,
+      },
+      600: {
+        perView: 2,
+      },
+      450: {
+        perView: 1,
+        peek: 60,
+        type: 'slider'
+      }
+    }
+  });
+</script>
