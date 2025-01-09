@@ -123,7 +123,7 @@
           {% render 'share-button', block: block, share_link: share_url %}
         </div>
 
-      {%- when 'gh_product_recommendations' -%}
+      {%- when 'gh_product_recoms' -%}
         {% if blog.metafields.globalhealing.product_recommendations %}
             {% render 'gh-element-product-recommendations' %}
         {% endif %}
@@ -441,7 +441,7 @@
       "limit": 1
     },
     {
-      "type": "gh_product_recommendations",
+      "type": "gh_product_recoms",
       "name": "Product Recommendations (GH)",
       "limit": 1
     },
