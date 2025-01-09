@@ -37,10 +37,10 @@
           "type": "banners",
           "disabled": true,
           "settings": {
-            "banner_1_image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-1-self-healing/desktop.jpg",
-            "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-1-self-healing/mobile.jpg",
+            "banner_1_image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-3-digestive-system/desktop.jpg",
+            "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-3-digestive-system/mobile.jpg",
             "image_is_2x": false,
-            "banner_1_url": "https://globalhealing.com/blogs/education/your-body-is-the-medicine-an-overview-of-self-healing?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner",
+            "banner_1_url": "https://globalhealing.com/blogs/education/how-your-digestive-system-affects-whole-body-health?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner",
             "banner_2_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-blog.png",
             "banner_2_url": "https://explore.globalhealing.com/gut-cleanse/",
             "banner_3_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-spotlight.png",
