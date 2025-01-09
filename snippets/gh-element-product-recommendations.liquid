@@ -12,7 +12,7 @@
             <ul class="glide__slides">
 
                 {% for product in products %}
-                  {% assign product_count = product_count | plus: 1 %}
+                    {% assign product_count = product_count | plus: 1 %}
                     <li class="glide__slide">
                         <div class="flex flex-column">
                             <div class="center mb2">
@@ -92,29 +92,51 @@
     .gh-element-product-recommendations--container .gh-element-product-recommendations .button--primary{
         color: rgb(var(--color-button-text));
     }
-  
+
 
     #{{ id }} ul{
-        padding-left: 0;
-        list-style: none;
-    }
+                  padding-left: 0;
+                  list-style: none;
+              }
 </style>
 <script>
-  // {{ product_count }}
+  {% if product_count < 3 %}
   gh.glide.create('#{{ id }} .glide', {
     type: 'slider',
     startAt: 0,
     peek: 60,
+    gap: 60,
     perView: 2,
 
     breakpoints: {
       800: {
         perView: 2,
+        gap: 10,
       },
       450: {
         perView: 1,
-        peek: 60,
+        peek: 30,
       }
     }
   });
+  {% else %}
+  gh.glide.create('#{{ id }} .glide', {
+    type: 'slider',
+    startAt: 0,
+    peek: 60,
+    gap: 20,
+    perView: 3,
+
+    breakpoints: {
+      800: {
+        perView: 2,
+        gap: 10,
+      },
+      450: {
+        perView: 1,
+        peek: 30,
+      }
+    }
+  });
+  {% endif %}
 </script>
