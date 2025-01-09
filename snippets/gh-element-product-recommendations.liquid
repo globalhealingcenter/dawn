@@ -11,7 +11,7 @@
 
                 {% for product in products %}
                     <li class="glide__slide">
-                        <div class="flex flex-column px3">
+                        <div class="flex flex-column">
                             <div class="center mb2">
                                 {{ product.featured_image |  image_url: width: 600 | image_tag }}
                             </div>
@@ -51,7 +51,7 @@
     }
 
     .gh-element-product-recommendations{
-        padding: 2rem 1rem;
+        padding: 2rem 0;
         justify-content: center;
     }
 
