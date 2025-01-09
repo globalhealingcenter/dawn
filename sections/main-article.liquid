@@ -126,11 +126,13 @@
       {%- when 'gh_product_recoms' -%}
         <!-- attempt -->
         {% if article.metafields.globalhealing.product_recommendations and article.metafields.globalhealing.product_recommendations.value %}
-           {% if block.settings.title and block.settings.title != '' %}
-            <h4 class="text-center">Recommended Products</h4>
-          {% endif %}
+          <div {{ block.shopify_attributes }}>
+            {% if block.settings.title and block.settings.title != '' %}
+              <h4 class="text-center">Recommended Products</h4>
+            {% endif %}
           
-          {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value, id: 'article-recommender' %}
+            {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value, id: 'article-recommender' %}
+          </div>
         {% endif %}
     {%- endcase -%}
   {%- endfor -%}
