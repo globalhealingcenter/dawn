@@ -126,7 +126,7 @@
       {%- when 'gh_product_recoms' -%}
         <!-- attempt -->
         {% if article.metafields.globalhealing.product_recommendations and article.metafields.globalhealing.product_recommendations.value %}
-           {% if block.settings.title %}
+           {% if block.settings.title and block.settings.title != '' %}
             <h4 class="text-center">Recommended Products</h4>
           {% endif %}
           
