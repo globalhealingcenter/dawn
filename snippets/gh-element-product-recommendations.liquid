@@ -13,7 +13,7 @@
                     <li class="glide__slide">
                         <div class="flex flex-column px3">
                             <div class="center mb2">
-                                <img src="https://cdn.globalhealing.com/products/images/boron/2-fl-oz/default/3000w.png?w=600" class="col-8" alt="">
+                                {{ product.featured_image |  image_url: width: 600 | image_tag }}
                             </div>
                             <div class="flex-auto">
                                 <a class="h4 gh-font-primary color-green text-decoration-none mb1" href="/products/{{ product.handle }}">{{ product.title }}</a>
