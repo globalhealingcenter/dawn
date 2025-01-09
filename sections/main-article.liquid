@@ -126,6 +126,10 @@
       {%- when 'gh_product_recoms' -%}
         <!-- attempt -->
         {% if article.metafields.globalhealing.product_recommendations and article.metafields.globalhealing.product_recommendations.value %}
+           {% if block.settings.title %}
+            <h4 class="text-center">Recommended Products</h4>
+          {% endif %}
+          
           {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value, id: 'article-recommender' %}
         {% endif %}
     {%- endcase -%}
@@ -444,7 +448,14 @@
     {
       "type": "gh_product_recoms",
       "name": "Product Recommender (GH)",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+        },
+      ]
     },
     {
       "type": "author",
