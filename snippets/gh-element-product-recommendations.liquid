@@ -12,7 +12,7 @@
             <ul class="glide__slides">
 
                 {% for product in products %}
-                  {% assign product_count = product_count + 1 %}
+                  {% assign product_count = product_count | plus: 1 %}
                     <li class="glide__slide">
                         <div class="flex flex-column">
                             <div class="center mb2">
