@@ -7,7 +7,7 @@
 
 <!-- start GH product recommendations -->
 <div class="gh-element-product-recommendations--container" id="{{ id }}">
-    <div class="gh-element-product-recommendations glide"> 
+    <div class="gh-element-product-recommendations glide">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
 
@@ -55,6 +55,10 @@
 
     .gh-element-product-recommendations{
         padding: 0;
+    }
+    
+    .gh-element-product-recommendations .glide__arrows button {
+        background: transparent;
     }
 
     .gh-element-product-recommendations  h4 {
@@ -124,7 +128,7 @@
       }
     }
   });
-  {% else %} 
+  {% else %}
   gh.glide.create('#{{ id }} .glide', {
     type: 'slider',
     startAt: 0,
