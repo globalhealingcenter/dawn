@@ -1,0 +1,115 @@
+.gh-article-layout{
+
+}
+.gh-article-layout > .flex{
+    gap: 30px;
+    align-items: start;
+}
+.custom-article-content{
+    padding-left: 0 !important;
+    max-width: initial !important;
+}
+.article-template{
+    background: #ffffff85;
+    padding: 2em;
+    box-shadow: 1px 3px 4px #00000020;
+    border-radius: 10px;
+}
+h2{
+    font-size: 4rem;
+}
+h3{
+    font-size: 3rem;
+}
+h2,h3,h4,h5{
+    margin-top: 1em;
+}
+
+.article-template>*:first-child:not(.article-template__hero-container){
+    margin-top: 0;
+}
+
+.article-menu{
+    border-top-style: solid;
+    border-top-width: var(--border-width);
+    padding-top: var(--space-1);
+    border-color: var(--gh-color-green);
+    margin-bottom: 3rem;
+}
+
+a.atoc-link{
+    position: relative;
+    padding-left: 14px;
+}
+
+a.atoc-link:before{
+    content: "›";
+    position: absolute;
+    left: 0;
+}
+
+.amp-disabled,
+p+.border.clearfix{
+    display: none;
+}
+
+.gh-article-layout .article-template blockquote {
+    display: block;
+}
+
+@media (max-width: 700px){
+    .article-template__title{
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 1000px){
+    .gh-article-layout > .flex #sidebar{
+        display: none;
+    }
+    .custom-article-content{
+        padding-right: 0;
+    }
+    .article-template{
+        padding: 2rem;
+    }
+    table{
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+article .flex .button{
+    background: transparent;
+}
+.related_articles_section .pb_image_wrapper{
+    --image-size: 200px;
+    max-width: var(--image-size);
+    max-height: var(--image-size);
+    margin: 0 auto;
+}
+.related_articles_section img{
+    max-width: var(--image-size);
+    max-height: var(--image-size);
+    display: block;
+    margin: 0 auto;
+}
+.related_articles_section .pb-text-title, .related_articles_section .pb-text-excerpt, .related_articles_section .pb-text-title-header{
+    text-align: left !important;
+}
+.pb-text-title-header{
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: var(--gh-font-primary);
+    color: var(--gh-color-green);
+}
+
+/* https://globalhealing.com/blogs/education/the-top-15-supplements-vitamins-for-stress-relief */
+.clearfix.mb2.relative{
+    display: none;
+}
+
+#references a{
+    word-wrap: break-word;
+}
