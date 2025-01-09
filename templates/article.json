@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -22,26 +22,26 @@
         "sharethis_C7xbic": {
           "type": "sharethis",
           "disabled": true,
-          "settings": {
-          }
+          "settings": {}
         },
         "content": {
           "type": "content",
-          "settings": {
-          }
+          "settings": {}
+        },
+        "gh_product_recoms_iHQxUm": {
+          "type": "gh_product_recoms",
+          "settings": {}
         },
         "tags_TbqTVD": {
           "type": "tags",
-          "settings": {
-          }
+          "settings": {}
         },
         "author_anBdkJ": {
           "type": "author",
-          "settings": {
-          }
+          "settings": {}
         },
         "pro_blogger_pb_post_related_posts_kkNpNf": {
-          "type": "shopify:\/\/apps\/pro-blogger\/blocks\/pb_post_related_posts\/edf01a04-3374-4cc5-afca-2e583da0c869",
+          "type": "shopify://apps/pro-blogger/blocks/pb_post_related_posts/edf01a04-3374-4cc5-afca-2e583da0c869",
           "settings": {
             "pb_related_posts_title": "Related Posts",
             "pb_related_posts_title_style": "H5",
@@ -73,12 +73,12 @@
         "title",
         "sharethis_C7xbic",
         "content",
+        "gh_product_recoms_iHQxUm",
         "tags_TbqTVD",
         "author_anBdkJ",
         "pro_blogger_pb_post_related_posts_kkNpNf"
       ],
-      "settings": {
-      }
+      "settings": {}
     }
   },
   "order": [
