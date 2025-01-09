@@ -133,7 +133,7 @@
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
-            "id": "128545",
+            "id": "131965",
             "product_id_enabled": true,
             "collection_id_enabled": false
           }
@@ -175,7 +175,7 @@
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
-            "id": "128545",
+            "id": "131965",
             "product_id_enabled": true,
             "collection_id_enabled": false
           }
