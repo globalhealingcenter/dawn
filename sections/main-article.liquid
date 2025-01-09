@@ -126,7 +126,7 @@
       {%- when 'gh_product_recoms' -%}
         <!-- attempt -->
         {% if article.metafields.globalhealing.product_recommendations %}
-            {% render 'gh-element-product-recommendations' %}
+            {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value %}
         {% endif %}
     {%- endcase -%}
   {%- endfor -%}
