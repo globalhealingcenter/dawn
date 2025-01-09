@@ -125,10 +125,8 @@
 
       {%- when 'gh_product_recoms' -%}
         <!-- attempt -->
-        {% if article.metafields.globalhealing.product_recommendations %}
-          {% if article.metafields.globalhealing.product_recommendations.value %}
-            {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value %}
-          {% endif %}
+        {% if article.metafields.globalhealing.product_recommendations and article.metafields.globalhealing.product_recommendations.value %}
+          {% render 'gh-element-product-recommendations', products: article.metafields.globalhealing.product_recommendations.value %}
         {% endif %}
     {%- endcase -%}
   {%- endfor -%}
