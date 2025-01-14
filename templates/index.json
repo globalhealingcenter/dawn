@@ -82,6 +82,15 @@
             "link_list": "homepage-menu"
           }
         },
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "131965",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "type": "foundation",
           "settings": {
@@ -128,16 +137,6 @@
             "row_3_img": "https://cdn.globalhealing.com/pages/v2/home/reviews-award-winning.v2.svg",
             "row_3_text": "<p>Our knowledgeable, compassionate team is always here to guide you and answer your questions so you get the right products for your wellness journey. </p>"
           }
-        },
-        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
-          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
-          "settings": {
-            "enabled": true,
-            "id": "131965",
-            "product_id_enabled": true,
-            "collection_id_enabled": false
-          }
         }
       },
       "block_order": [
@@ -148,12 +147,12 @@
         "ee09762d-26e5-443b-8985-8a77f1574932",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98",
         "90d53a3e-607e-44cf-81c0-4d063ee2042c",
-        "b871651f-c308-4034-8741-ebbb3f7989ed",
-        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed"
+        "b871651f-c308-4034-8741-ebbb3f7989ed"
       ],
       "settings": {
         "padding_top": 0,
