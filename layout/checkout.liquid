@@ -1,4 +1,3 @@
-{% include 'shogun-content-handler' %}
 <!DOCTYPE html>
 <html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
   <head>
@@ -12,10 +11,6 @@
     {{ content_for_header }}
     {{ checkout_stylesheets }}
     {{ checkout_scripts }}
-
-  {% render 'shogun-head' %}
-
-    
 </head>
   <body>
     {{ skip_to_content_link }}
@@ -49,7 +44,6 @@
           <div class="sidebar__content">
             {{ content_for_order_summary }}
           </div>
-          <div class="yotpo-widget-instance" data-yotpo-instance-id="38319"></div>
         </aside>
       </div>
     </div>
