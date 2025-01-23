@@ -23,6 +23,11 @@
     <ul id="{{ localPosition }}List" role="list" class="disclosure__list list-unstyled">
       {%- for country in localization.available_countries -%}
 
+        {% if allowedCountries %}
+          {% unless allowedCountries contains country.iso_code %}
+            {% continue %}
+          {% endunless %}
+        {% endif %}
 
         <li class="disclosure__item" tabindex="-1">
           <a
@@ -33,11 +38,32 @@
             {% endif %}
             data-value="{{ country.iso_code }}"
           >
+            {% unless hidePrices == true %}
             <span class="localization-form__currency">
               {{- country.currency.iso_code }}
               {{ country.currency.symbol }} |</span
             >
-            {{ country.name }}
+            {% endunless %}
+
+            {% if countryRenames %}
+
+              {% assign matched = false %}
+              {% for rename in countryRenames %}
+                {% if rename contains country.iso_code %}
+                  {% assign matched = true %}
+                {% endif %}
+              {% endfor %}
+
+              {% if matched %}
+                {% assign info = rename | split: '=' %}
+                {{ info[1] }}
+              {% else %}
+                {{ country.name }}
+              {% endif %}
+
+            {% else %}
+              {{ country.name }}
+            {% endif %}
           </a>
         </li>
       {%- endfor -%}
