@@ -15,7 +15,26 @@
   >
     <span>
       {{- localization.country.currency.iso_code }}
-      {{ localization.country.currency.symbol }} | {{ localization.country.name -}}
+      {{ localization.country.currency.symbol }} |
+
+      {% if countryRenames %}
+        {% assign matched = false %}
+        {% for rename in countryRenames %}
+          {% if rename contains localization.country.iso_code %}
+            {% assign matched = rename %}
+          {% endif %}
+        {% endfor %}
+
+        {% if matched %}
+          {% assign info = matched | split: '=' %}
+          {{ info[1] }}
+        {% else %}
+          {{ localization.country.name }}
+        {% endif %}
+
+      {% else %}
+        {{ localization.country.name }}
+      {% endif %}
     </span>
     {% render 'icon-caret' %}
   </button>
