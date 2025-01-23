@@ -1,4 +1,5 @@
-{% assign allowed_countries = 'us,aus,ca,uk,eu,international' | split: ',' %}
+{% assign allowed_countries = 'US,AUS,CA,UK' | split: ',' %}
+{% assign renames = 'EU, INTERNATIONAL' %}
 
 <noscript>
   {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
