@@ -56,7 +56,7 @@
 
               {% if matched %}
                 {% assign info = rename | split: '=' %}
-                {{ info | json }}
+                {{ rename | json }}
               {% else %}
                 {{ country.name }}
               {% endif %}
