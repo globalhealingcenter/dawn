@@ -50,13 +50,13 @@
               {% assign matched = false %}
               {% for rename in countryRenames %}
                 {% if rename contains country.iso_code %}
-                  {% assign matched = true %}
+                  {% assign matched = rename %}
                 {% endif %}
               {% endfor %}
 
               {% if matched %}
-                {% assign info = rename | split: '=' %}
-                {{ rename | json }}
+                {% assign info = matched | split: '=' %}
+                {{ info[0] }}
               {% else %}
                 {{ country.name }}
               {% endif %}
