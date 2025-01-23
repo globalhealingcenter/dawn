@@ -55,7 +55,8 @@
               {% endfor %}
 
               {% if matched %}
-                {{ rename }}
+                {% assign info = rename | split: '=' %}
+                {{ info[1] }}
               {% else %}
                 {{ country.name }}
               {% endif %}
