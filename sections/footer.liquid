@@ -285,7 +285,9 @@
             {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
               <div class="no-js-hidden">
                 <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+                {% assign allowed_countries = 'US,AU,CA,GB,SE,NO' | split: ',' %}
+                {% assign renames = 'SE=EU,NO=Other' | split: ','  %}
+                {%- render 'country-localization', localPosition: 'FooterCountry', allowedCountries: allowed_countries, hideCurrency: true, countryRenames: renames -%}
               </div>
             {%- endform -%}
           </localization-form>
