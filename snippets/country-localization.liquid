@@ -56,7 +56,7 @@
 
               {% if matched %}
                 {% assign info = matched | split: '=' %}
-                {{ info[0] }}
+                {{ info[1] }}
               {% else %}
                 {{ country.name }}
               {% endif %}
