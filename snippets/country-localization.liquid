@@ -38,7 +38,7 @@
             {% endif %}
             data-value="{{ country.iso_code }}"
           >
-            {% unless hidePrices == true %}
+            {% unless hideCurrency == true %}
             <span class="localization-form__currency">
               {{- country.currency.iso_code }}
               {{ country.currency.symbol }} |</span
