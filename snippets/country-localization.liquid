@@ -23,11 +23,7 @@
     <ul id="{{ localPosition }}List" role="list" class="disclosure__list list-unstyled">
       {%- for country in localization.available_countries -%}
 
-        {% if allowedCountries %}
-          {% unless allowedCountries contains country.iso_code %}
-            {% continue %}
-          {% endunless %}
-        {% endif %}
+
 
         <li class="disclosure__item" tabindex="-1">
           <a
