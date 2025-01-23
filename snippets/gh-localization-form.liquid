@@ -1,3 +1,5 @@
+{% assign allowed_countries = 'us,aus,ca,uk,eu,international' | split: ',' %}
+
 <noscript>
   {%- form 'localization', id: 'FooterCountryFormNoScript', class: 'localization-form' -%}
     <div class="localization-form__select">
@@ -28,7 +30,7 @@
   {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
     <div class="no-js-hidden">
       <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-      {%- render 'country-localization', localPosition: 'FooterCountry' -%}
+      {%- render 'country-localization', localPosition: 'FooterCountry', allowedCountries: allowed_countries -%}
     </div>
   {%- endform -%}
 </localization-form>
