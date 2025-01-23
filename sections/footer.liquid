@@ -286,7 +286,7 @@
               <div class="no-js-hidden">
                 <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
                 {% assign allowed_countries = 'US,AU,CA,GB,SE,NO' | split: ',' %}
-                {% assign renames = 'SE=EU,NO=Other' | split: ','  %}
+                {% assign renames = 'SE=EU,NO=International' | split: ','  %}
                 {%- render 'country-localization', localPosition: 'FooterCountry', allowedCountries: allowed_countries, hideCurrency: true, countryRenames: renames -%}
               </div>
             {%- endform -%}
