@@ -24,9 +24,9 @@
           "type": "hero",
           "disabled": true,
           "settings": {
-            "image": "https://cdn.globalhealing.com/m/2024/03/proprietary-technologies/desktop.jpg",
-            "image_mobile": "https://cdn.globalhealing.com/m/2024/03/proprietary-technologies/mobile.jpg",
-            "url": "https://globalhealing.com/pages/our-proprietary-technologies?icn_ghc=proprietary_technologies_campaign&ici_ghc=HomePageBanner"
+            "image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/desktop.jpg",
+            "image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/mobile.jpg",
+            "url": "https://globalhealing.com/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner"
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
@@ -35,7 +35,6 @@
         },
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "type": "banners",
-          "disabled": true,
           "settings": {
             "banner_1_image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-3-digestive-system/desktop.jpg",
             "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-3-digestive-system/mobile.jpg",
@@ -49,6 +48,7 @@
         },
         "ee09762d-26e5-443b-8985-8a77f1574932": {
           "type": "banners",
+          "disabled": true,
           "settings": {
             "banner_1_image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-4-immune-system/desktop.jpg",
             "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-4-immune-system/mobile.jpg",
