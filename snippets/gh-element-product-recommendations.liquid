@@ -101,11 +101,16 @@
         color: rgb(var(--color-button-text));
     }
 
+    .gh-element-product-recommendations .glide__slide {
+        flex-grow: 1;
+        display: flex;
+        height: auto;
+    }
 
     #{{ id }} ul{
-                  padding-left: 0;
-                  list-style: none;
-              }
+      padding-left: 0;
+      list-style: none;
+    }
 </style>
 <script>
   {% if product_count < 3 %}
