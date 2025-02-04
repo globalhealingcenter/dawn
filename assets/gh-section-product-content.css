@@ -577,6 +577,15 @@
     display: block;
 }
 
+@media (min-width:1400px) {
+    .ghd--block--rb [data-type=cols]{
+        max-width: 1600px;
+    }
+    .ghd--block--rb [data-type=text]{
+        padding: 13rem 0 14rem 0;
+    }
+}
+
 @media (max-width: 1100px) {
     .ghd--block--rb{
         background-image: url(https://cdn.globalhealing.com/products/pages/all/v2/raw-brilliance-bg-mobile.png);
