@@ -91,7 +91,7 @@
     let storage = {
       key: 'gh_404_redirect',
       storeUrl( handle ){
-        sessionStorage.setItem(storage.key, `https://globalhealing.com/products/${handle}`);
+        sessionStorage.setItem(storage.key, `${window.location.origin}/products/${handle}`);
       },
       redirectUrl(){
         let data = sessionStorage.getItem(storage.key);
