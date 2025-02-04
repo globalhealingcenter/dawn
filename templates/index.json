@@ -17,7 +17,7 @@
           "settings": {
             "video": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video.mp4",
             "video_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video-mobile.mp4",
-            "url": "https://globalhealing.com/pages/self-healing?icn_ghc=your_body_is_the_medicine_campaign&ici_ghc=HomePageBanner"
+            "url": "/pages/self-healing?icn_ghc=your_body_is_the_medicine_campaign&ici_ghc=HomePageBanner"
           }
         },
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
