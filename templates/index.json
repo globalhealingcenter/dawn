@@ -63,7 +63,7 @@
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
           "type": "quality",
           "settings": {
-            "heading": "The Quality & Purity<br> Your Body Deserves",
+            "heading": "The Quality & Purity Your Body Deserves",
             "link_text": "OUR PROCESS",
             "link": "/pages/quality-purity"
           }
@@ -77,7 +77,7 @@
             "link_1_text": "SHOP OUR COLLECTION",
             "link_1": "shopify://collections/collections",
             "link_2_text": "TAKE OUR QUIZ",
-            "link_2": "https://globalhealing.com/pages/getting-started-quiz",
+            "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
             "link_list": "homepage-menu"
           }
