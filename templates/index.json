@@ -26,7 +26,7 @@
           "settings": {
             "image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/desktop.jpg",
             "image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/mobile.jpg",
-            "url": "https://globalhealing.com/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner"
+            "url": "/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner"
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
@@ -39,9 +39,9 @@
             "banner_1_image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/desktop.jpg",
             "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/mobile.jpg",
             "image_is_2x": false,
-            "banner_1_url": "https://globalhealing.com/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=your_body_is_the_medicine_campaign&ici_ghc=HomePageBanner",
+            "banner_1_url": "/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=your_body_is_the_medicine_campaign&ici_ghc=HomePageBanner",
             "banner_2_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-blog.png",
-            "banner_2_url": "https://globalhealing.com/blogs/education/the-overactive-immune-system-strategies-for-restoring-natural-function?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner",
+            "banner_2_url": "/blogs/education/the-overactive-immune-system-strategies-for-restoring-natural-function?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner",
             "banner_3_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-spotlight.png",
             "banner_3_url": "https://globalhealinginstitute.org/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
           }
