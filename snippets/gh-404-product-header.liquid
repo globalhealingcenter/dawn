@@ -4,7 +4,7 @@
 </script>
 
 <script>
-  let gh_products_2 = {{ metaobjects['configuration']['all-active-products'].json.value }}
+  let gh_products_2 = {{ metaobjects['configuration']['all-active-products'].json.value | json }}
 </script>
 
 {% paginate shop.metaobjects.product.values by 250 %}
