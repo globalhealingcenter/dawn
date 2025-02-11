@@ -38,43 +38,6 @@
 <script>
 	gh_404.init();
 
-	// product tabs
-	let all_tabs = document.querySelectorAll('.info-tabs__content > div');
-	let all_links = document.querySelectorAll('.info-tabs__links a');
-
-	all_links.forEach( t => {
-		t.addEventListener('click', e => {
-			e.preventDefault();
-			all_links.forEach( c => c.classList.remove('active') );
-			all_tabs.forEach( c => c.classList.remove('active') );
-			let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
-			target.classList.add('active');
-			t.classList.add('active');
-		})
-	})
-	// end product-tabs
-
-	// dialog
-	let modal = document.getElementById('dialog-full-ingredients-header');
-	if( modal ){
-		modal.addEventListener('click', e => {
-			let inner = modal.querySelector('.ghd--dialog--inner');
-			if( !inner.contains(e.target) ) modal.close();
-		})
-		document.querySelectorAll('[data-dialog="dialog-full-ingredients-header"]').forEach(d => {
-			d.addEventListener('click', function(e) {
-				if (modal.open) {
-					modal.close();
-				} else {
-					modal.showModal()
-				}
-			});
-		})
-	} else {
-		console.log('no modal', modal);
-	}
-	// end dialog
-
 	// logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.metafields.globalhealing.product_tagline }}
 	// {{ request.origin }}
 	// {{ template }}
