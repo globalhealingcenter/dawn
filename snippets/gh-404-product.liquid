@@ -38,6 +38,22 @@
 <script>
 	gh_404.init();
 
+	// product tabs
+	let all_tabs = document.querySelectorAll('.info-tabs__content > div');
+	let all_links = document.querySelectorAll('.info-tabs__links a');
+
+	all_links.forEach( t => {
+		t.addEventListener('click', e => {
+			e.preventDefault();
+			all_links.forEach( c => c.classList.remove('active') );
+			all_tabs.forEach( c => c.classList.remove('active') );
+			let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
+			target.classList.add('active');
+			t.classList.add('active');
+		})
+	})
+	// end product-tabs
+
 	// logging: {{ shop.metaobjects.product['calcium-disodium-edta'].product.value.metafields.globalhealing.product_tagline }}
 	// {{ request.origin }}
 	// {{ template }}
