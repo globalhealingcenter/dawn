@@ -1,35 +1,10 @@
 <script>
   let preloaded = false;
-  let gh_products = {}
 </script>
 
 <script>
-  let gh_products_2 = {{ metaobjects['configuration']['all-active-products'].json.value | json }}
+  let gh_products = {{ metaobjects['configuration']['all-active-products'].json.value | json }}
 </script>
-
-{% paginate shop.metaobjects.product.values by 250 %}
-  {% assign products = shop.metaobjects.product.values %}
-  {% if products %}
-      {%- for entry in products %}
-        {% assign product = entry.product.value %}
-        {% capture tabs %}{% render 'gh-block-product-tabs', product: product, manual_titles: true %}{% endcapture %}
-        <script>
-          gh_products['{{ product.handle }}'] = { 
-            name: {{ product.title | json }},
-            id: {{ product.id | json }},
-            tagline: "{{ product.metafields.globalhealing.product_tagline }}",
-            short_description: {{ product.description | json }},
-            tabs: {{ tabs | json }},
-            images: [
-              {% for image in product.images %}
-                {"src": "{{ image | image_url: width: 600 }}"},
-              {% endfor %}
-            ]
-          }
-      </script>
-      {%- endfor -%}
-  {% endif %}
-{% endpaginate %}
 
 <script>
   let gh_404 = (() => {
@@ -212,10 +187,22 @@
           `<div class="yotpo-widget-instance" data-yotpo-instance-id="465432" data-yotpo-product-id="${product.id}"data-yotpo-section-id="product"></div>`;
 
       product_header_right_header.innerHTML +=
-              `<span class="gh-color-green"> ${product.tagline} </span>
-                ${product.short_description}
-
-              `;
+              `<div class="product__info-tabs">
+  <div class="info-tabs__links">
+    <a href="#" data-tab="1" class="active"><h3 class="h-inherit">About</h3></a>
+    <a href="#" data-tab="2" class=""><h3 class="h-inherit">Who It's For</h3></a>
+    <a href="#" data-tab="3"><h3 class="h-inherit">Suggested Use</h3></a>
+  </div>
+  <div class="info-tabs__content">
+    <div data-tab="1" class="active">
+      <span>${product.tagline}</span>
+      ${product.short_description}
+    </div>
+    <div data-tab="2">${product.who_its_for}</div>
+    <div data-tab="3">${product.suggested_use}</div>
+  </div>
+</div>
+`;
 
       runContentScripts();
 
