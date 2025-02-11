@@ -182,8 +182,8 @@
         <div class="product__title"><h1 class='mb2 h2 md-h1'>${product.name}</h1></div>
       `;
 
-      if( product.id )
-        product_header_right_header.innerHTML += 
+      if( product.id ){
+        product_header_right_header.innerHTML +=
           `
           <div class="gh-product-reviews flex items-center" style='gap: 5px;'>
             <div class="gh-review-stars">
@@ -206,23 +206,55 @@
         </div>
           `;
 
+        let has_sf = false;
+        let sf_content = `<div class="ghd--details" style="width: 800px; max-width: 100%;">`;
+        product.cdn_images.forEach( variant => {
+          if( variant.images['supplement-facts'] ){
+            sf_content +=
+              `<details>
+                    <summary>${variant.name}</summary>
+                    <img src="${variant.images['supplement-facts']}?w=800" srcset="${variant.images['supplement-facts']}?w=1600 2x" alt="supplement facts!" loading="lazy">
+                  </details>`;
+            has_sf = true;
+          }
+        })
+        sf_content += `</div>`;
+
+        let supplement_facts = `<button class="button--text-link text-bold" data-dialog="dialog-full-ingredients-header">Supplement Facts</button>
+            <dialog class="ghd--dialog" id="dialog-full-ingredients-header">
+              <div class='ghd--dialog--inner'>
+                <div class='text--right'><button class='button--link' data-dialog="dialog-full-ingredients-header">Close</button></div>
+                <div>
+                  <br>
+                  <div class='ghd--dialog-content'>
+                    ${sf_content}
+                  </div>
+                </div>
+              </div>
+            </dialog>`
+
+        if( has_sf ) product_header_right_header.innerHTML += supplement_facts;
+
       product_header_right_header.innerHTML +=
               `<div class="product__info-tabs">
-  <div class="info-tabs__links">
-    <a href="#" data-tab="1" class="active"><h3 class="h-inherit">About</h3></a>
-    <a href="#" data-tab="2" class=""><h3 class="h-inherit">Who It's For</h3></a>
-    <a href="#" data-tab="3"><h3 class="h-inherit">Suggested Use</h3></a>
-  </div>
-  <div class="info-tabs__content">
-    <div data-tab="1" class="active">
-      <span>${product.tagline}</span>
-      ${product.short_description}
-    </div>
-    <div data-tab="2">${product.who_its_for}</div>
-    <div data-tab="3">${product.suggested_use}</div>
-  </div>
-</div>
-`;
+              <div class="info-tabs__links">
+                <a href="#" data-tab="1" class="active"><h3 class="h-inherit">About</h3></a>
+                <a href="#" data-tab="2" class=""><h3 class="h-inherit">Who It's For</h3></a>
+                <a href="#" data-tab="3"><h3 class="h-inherit">Suggested Use</h3></a>
+              </div>
+              <div class="info-tabs__content">
+                <div data-tab="1" class="active">
+                  <span>${product.tagline}</span>
+                  ${product.short_description}
+                  ${has_sf ? supplement_facts : ''}
+                </div>
+                <div data-tab="2">${product.who_its_for}</div>
+                <div data-tab="3">${product.suggested_use}</div>
+              </div>
+            </div>
+            `;
+      }
+
 
       runContentScripts();
 
