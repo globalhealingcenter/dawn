@@ -1,0 +1,28 @@
+{#
+    Required Variables:
+
+    rating: 4.5
+    count: 6234
+#}
+
+{% assign width =  rating | times 20 %}
+
+<div class="gh-product-reviews flex items-center" style='gap: 5px;'>
+    <div class="gh-review-stars">
+                <span class="gh-review-stars--full" style="width: {{ width }}%">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold.png" alt="" width="16">
+                </span>
+        <span class="gh-review-stars--empty">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16">
+                    <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16">
+                </span>
+    </div>
+    <div class="gh-product-reviews--count gh-font-secondary color-gold" style='padding-top: 2px;'>{{ count }} Review(s)</div>
+</div>
