@@ -207,6 +207,9 @@
           </div>
           {% endif %}
         </div>
+        {% if product.metafields.globalhealing.technology contains 'Raw Herbal Extract'  %}
+          <!-- raw herbal extract -->
+        {% endif %}
       {% when 'impact' %}
       {% if block.title %}
       <div class="ghd--block--impact ghd--block">
