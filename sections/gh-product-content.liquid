@@ -207,10 +207,49 @@
           </div>
           {% endif %}
         </div>
-      <!-- end ingredients -->
-      {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract'  %}
-        <!-- raw herbal extract -->
-      {% endif %}
+
+        {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract'  %}
+          <div class="ghd--block--rb ghd--block">
+            <div data-type="cols">
+
+              <div data-type="image">
+                &nbsp;
+              </div>
+
+              <div data-type="text">
+
+                <div class="mw">
+
+                  <h2 class="eyebrow">
+                    Raw Brilliance
+                  </h2>
+                  <p class="mb3">Through our Raw Herbal Extract® technology, we preserve the full-spectrum benefits of natural botanicals. This meticulous process maximizes potency while delivering bold herbal flavors and unique variations in aroma, color, and texture—all hallmarks of authenticity.</p>
+
+                  <div class="ghd--details">
+                    <details open="">
+                      <summary class="h3">Flavor</summary>
+                      <p class="mb0">Bold, natural tastes reflect seasonality and harvest conditions.</p>
+                    </details>
+                    <details>
+                      <summary class="h3">Color</summary>
+                      <p class="mb0">Color variations reflect ingredients' natural hues and unique qualities.</p>
+                    </details>
+                    <details>
+                      <summary class="h3">Texture</summary>
+                      <p class="mb0">Texture differences arise due to the absence of synthetic stabilizers.</p>
+                    </details>
+                    <details>
+                      <summary class="h3">Smell</summary>
+                      <p class="mb0">Slight scent shifts reflect our ingredients’ natural aromatic profiles.</p>
+                    </details>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        {% endif %}
       {% when 'impact' %}
       {% if block.title %}
       <div class="ghd--block--impact ghd--block">
@@ -240,49 +279,6 @@
       {% endif %}
 
       {% endif %}
-
-      {% when 'raw_brilliance' %}
-
-      <div class="ghd--block--rb ghd--block">
-        <div data-type="cols">
-
-          <div data-type="image">
-            &nbsp;
-          </div>
-
-          <div data-type="text">
-
-            <div class="mw">
-
-              <h2 class="eyebrow">
-                Raw Brilliance
-              </h2>
-              <p class="mb3">Through our Raw Herbal Extract® technology, we preserve the full-spectrum benefits of natural botanicals. This meticulous process maximizes potency while delivering bold herbal flavors and unique variations in aroma, color, and texture—all hallmarks of authenticity.</p>
-
-              <div class="ghd--details">
-                <details open="">
-                  <summary class="h3">Flavor</summary>
-                  <p class="mb0">Bold, natural tastes reflect seasonality and harvest conditions.</p>
-                </details>
-                <details>
-                  <summary class="h3">Color</summary>
-                  <p class="mb0">Color variations reflect ingredients' natural hues and unique qualities.</p>
-                </details>
-                <details>
-                  <summary class="h3">Texture</summary>
-                  <p class="mb0">Texture differences arise due to the absence of synthetic stabilizers.</p>
-                </details>
-                <details>
-                  <summary class="h3">Smell</summary>
-                  <p class="mb0">Slight scent shifts reflect our ingredients’ natural aromatic profiles.</p>
-                </details>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
 
       {% when 'miron' %}
 
