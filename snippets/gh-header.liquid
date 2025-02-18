@@ -85,34 +85,23 @@
     t.parentNode.insertBefore(e, t);
   })();</script>
 
-<!-- amazon advertising tag -->
-<script> !function(w, d, s, t, a) {
-    if (w.amzn) return;
-    w.amzn = a = function() {
-      w.amzn.q.push([arguments, (new Date).getTime()]);
-    };
-    a.q = [];
-    a.version = '0.0';
-    s = d.createElement('script');
-    s.src = 'https://c.amazon-adsystem.com/aat/amzn.js';
-    s.id = 'amzn-pixel';
-    s.async = true;
-    t = d.getElementsByTagName('script')[0];
-    t.parentNode.insertBefore(s, t);
-  }(window, document);
-  amzn('setRegion', 'NA');
-  amzn('addTag', '4a2c9c67-d281-4933-8c02-92458790202b');
-  amzn('trackEvent', 'PageView'); </script>
-<noscript><img src="https://s.amazon-adsystem.com/iu3?pid=4a2c9c67-d281-4933-8c02-92458790202b&event=PageView" width="1"
-               height="1" border="0"></noscript>
-
-<!-- amazon advertising tag 2nd entity -->
+<!-- impact radius setting cookie -->
 <script>
-       !function(w,d,s,t,a){if(w.amzn)return;w.amzn=a=function(){w.amzn.q.push([arguments,(new Date).getTime()])};a.q=[];a.version="0.0";s=d.createElement("script");s.src="https://c.amazon-adsystem.com/aat/amzn.js";s.id="amzn-pixel";s.async=true;t=d.getElementsByTagName("script")[0];t.parentNode.insertBefore(s,t)}(window,document);
-       amzn("setRegion", "NA");
-       amzn("addTag", "4a2c9c67-d281-4933-8c02-92458790202b");
-       amzn("trackEvent", "PageView");
- </script>
- <noscript>
-   <img src="https://s.amazon-adsystem.com/iu3?pid=4a2c9c67-d281-4933-8c02-92458790202b&event=PageView" width="1" height="1" border="0">
- </noscript>
+  let cookieName = "irclickid"; // Name of your affiliate cookie
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const paramValue = urlParams.get(cookieName);
+
+  if( paramValue ){
+      let cookieValue = paramValue; // Sets your unique affiliate visit ID
+      let expirationTime = 2592000; // Expiration date - one month in seconds
+      expirationTime = expirationTime * 1000; // Converts expirationtime to milliseconds
+      let date = new Date();
+      let dateTimeNow = date.getTime();
+
+      date.setTime(dateTimeNow + expirationTime); // Sets expiration time (Time now + one month)
+      date = date.toUTCString(); // Converts milliseconds to UTC time string
+      document.cookie = cookieName+"="+cookieValue+"; expires="+date+"; path=/; domain=." + location.hostname.replace(/^www\./i, ""); // Sets cookie for all subdomains
+  }
+</script>
