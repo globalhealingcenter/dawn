@@ -10,8 +10,6 @@
   }
 </style>
 
-<script src="https://rapid-cdn.yottaa.com/rapid/lib/_5HXEZdieCNFSg.js"></script>
-
 <!-- robots -->
 {% if product and product.tags contains 'no-index' %}
     <meta name="robots" content="noindex">
@@ -76,14 +74,6 @@
 <!-- glidejs for sliders -->
 {{ 'vendor-glide-v3.6.0.core.css' | asset_url | stylesheet_tag }}
 {{ 'vendor-glide-v3.6.0.theme.css' | asset_url | stylesheet_tag }}
-
-<!-- yotpo -->
-<script type="text/javascript">(function e() {
-    var e = document.createElement('script');
-    e.type = 'text/javascript', e.async = true, e.src = '//staticw2.yotpo.com/63EcnfHVSENo8yIBbBSY9uqxQxPZztn6xa7YvxGC/widget.js';
-    var t = document.getElementsByTagName('script')[0];
-    t.parentNode.insertBefore(e, t);
-  })();</script>
 
 <!-- impact radius setting cookie -->
 <script>
