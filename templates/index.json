@@ -94,7 +94,7 @@
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "type": "foundation",
           "settings": {
-            "heading": "THE FOUNDATION OF WELLNESS                             Healing Starts From the Inside Out",
+            "heading": "<span>HE FOUNDATION OF WELLNESS</span>                             Healing Starts From the Inside Out",
             "text": "<p><strong>Live a more natural, toxin-free life.</strong> Regular cleansing and detoxification practices help eliminate toxins, supporting optimal organ function, boosting energy levels, and promoting overall well-being.</p>",
             "link_1_text": "SHOP CLEANSES & DETOX",
             "link_1": "shopify://collections/detox",
@@ -107,7 +107,7 @@
           "settings": {
             "image": "https://cdn.globalhealing.com/pages/v2/home/subscription.png",
             "image_mobile": "https://cdn.globalhealing.com/pages/v2/home/subscription-mobile.png",
-            "heading": "AUTOSHIP PROGRAM Stay Committed to Wellness",
+            "heading": "<span>AUTOSHIP PROGRAM</span> Stay Committed to Wellness",
             "text": "<p>Even the most potent and pure supplements take time to be effective. Consistency is key when it comes to healing your body from within. Our Autoship program helps support your commitment to a lifelong wellness journey by ensuring you always have the products you need.</p>",
             "link_text": "SEE ALL PERKS",
             "link": "shopify://pages/autoship"
