@@ -149,7 +149,7 @@
                             	<a class="rebuy-bundle__image-item bundle-single-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '' ]">
 									<img v-bind:src="itemImage(product, product.selected_variant)" v-bind:alt="product.title">
 								</a>
-                                <div class="rebuy-product-checkbox">
+                                <div v-if="!bundleRequiresAllItems()" class="rebuy-product-checkbox">
                                     <label class="rebuy-checkbox-label">
                                         <input
                                             class="checkbox-input rebuy-checkbox"
