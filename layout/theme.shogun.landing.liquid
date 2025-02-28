@@ -280,9 +280,9 @@ This file can be re-written at any time.
     }
   </script>
   <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
-  <!-- Start of LittledataLayer -->
+  <!-- Start of LittleDataLayer -->
   {% include 'LittledataLayer' %}
-  <!-- End of LittledataLayer -->
+  <!-- End of LittleDataLayer -->
 
   {%- render 'vendor-exponea', customer: customer, shop: shop -%}
 
@@ -340,7 +340,7 @@ This file can be re-written at any time.
     playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
   };
 </script>
-<script src="{{%20'predictive-search.js'%20|%20asset_url%20}}" defer></script>
+<script src="{{ 'predictive-search.js' | asset_url }}" defer></script>
 <script>
   document.querySelector("#cart-icon-bubble").style.pointerEvents = "none"
   setTimeout(()=> {
@@ -348,7 +348,7 @@ This file can be re-written at any time.
     console.log("pointer events back")
   },3500)
 </script>
-    <style type="text/css">
+    <style>
       body, html {
         width: 100% !important;
         background: white !important;
