@@ -1,25 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "shogun-helper": {
       "type": "shogun-helper",
-      "settings": {
-      }
+      "settings": {}
     },
     "shogun-above": {
       "type": "shogun-above",
-      "settings": {
-      }
+      "settings": {}
     },
     "main": {
       "type": "main-product",
       "blocks": {
         "title": {
           "type": "title",
-          "settings": {
-          }
+          "settings": {}
         },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/star-rating\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
             "product": "{{product}}"
           }
@@ -34,8 +40,7 @@
         },
         "price": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -48,6 +53,14 @@
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
+          }
+        },
+        "gh_out_of_stock_form_f4Aq77": {
+          "type": "gh_out_of_stock_form",
+          "settings": {
+            "message": "<p><strong>Sorry we’re out of stock.</strong></p><p>At Global Healing, we’re picky about ingredients (in the best way). Every batch goes through strict testing, and if something does not meet our standards, we send it back. Lately, we’ve been running into more suppliers who are not meeting our quality requirements, which is causing delays. We’d rather take our time than compromise on what we manufacture.</p><p>We’re actively sourcing high-quality ingredients and will restock as soon as we find a supplier that meets our standards.</p>",
+            "success_message": "<p>Success! You'll be receiving an email shortly.</p>",
+            "force_show": false
           }
         },
         "fd07f90a-d072-4889-9f15-50599ae59cfd": {
@@ -65,11 +78,10 @@
         "price",
         "variant_picker",
         "buy_buttons",
+        "gh_out_of_stock_form_f4Aq77",
         "fd07f90a-d072-4889-9f15-50599ae59cfd"
       ],
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "enable_sticky_info": true,
         "media_size": "small",
@@ -115,7 +127,7 @@
       "type": "apps",
       "blocks": {
         "25085916-2810-44e8-9e6d-866a06af66f3": {
-          "type": "shopify:\/\/apps\/yotpo-product-reviews-ugc\/blocks\/reviews\/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
             "product": "{{product}}"
           }
@@ -130,13 +142,12 @@
     },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {
-      }
+      "settings": {}
     },
     "custom_liquid_rJcfFk": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<div id=\"pdp-four-sixty-before\"><\/div>\n\n<a href=\"\/pages\/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 30px; margin-bottom: 30px;\">Explore our Instagram<\/h2><\/a>\n\n<script src=\"\/\/foursixty.com\/media\/scripts\/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-open-links-in-same-page=\"true\" data-cell-size=\"20%\"><\/script>\n<style>.fs-has-links::after { padding:5px 7.5px;background-color:#ffffff;color:rgba(0, 0, 0, 0.8);content:\"LEARN MORE\"; } .fs-wrapper { height:auto; } .fs-slider_v2_5  .fs-entry-container { height:0 !important;width:20%!important;padding-top:20%!important; } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:Times New Roman, serif;font-style:normal;font-weight:normal;font-size:14px; } div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:14px; } .fs-wrapper div.fs-text-container * { color:#ffffff; } .fs-wrapper div.fs-text-container { background-color:rgba(0, 0, 0, 0.8);margin:0px; } div.fs-entry-date { display:none; } div.fs-entry-title { display:none; } .fs-slider_v2_5 .fs-wrapper div.fs-timeline-entry { margin:1px; } <\/style>",
+        "custom_liquid": "<div id=\"pdp-four-sixty-before\"></div>\n\n<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 30px; margin-bottom: 30px;\">Explore our Instagram</h2></a>\n\n<script src=\"//foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-open-links-in-same-page=\"true\" data-cell-size=\"20%\"></script>\n<style>.fs-has-links::after { padding:5px 7.5px;background-color:#ffffff;color:rgba(0, 0, 0, 0.8);content:\"LEARN MORE\"; } .fs-wrapper { height:auto; } .fs-slider_v2_5  .fs-entry-container { height:0 !important;width:20%!important;padding-top:20%!important; } .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:Times New Roman, serif;font-style:normal;font-weight:normal;font-size:14px; } div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { font-family:Helvetica Neue, Helvetica, Arial, sans-serif;font-style:normal;font-weight:normal;font-size:14px; } .fs-wrapper div.fs-text-container * { color:#ffffff; } .fs-wrapper div.fs-text-container { background-color:rgba(0, 0, 0, 0.8);margin:0px; } div.fs-entry-date { display:none; } div.fs-entry-title { display:none; } .fs-slider_v2_5 .fs-wrapper div.fs-timeline-entry { margin:1px; } </style>",
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
