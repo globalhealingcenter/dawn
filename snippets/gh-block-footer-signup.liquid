@@ -1,0 +1,84 @@
+<style>
+    .gh-footer-newsletter-form{
+        display: flex;
+        justify-content: center;
+        gap: 5%;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0 2rem;
+    }
+    .gh-footer-newsletter-form > form{
+        min-width: 300px;
+    }
+    .gh-footer-newsletter-form .input-group{
+        display: flex;
+        gap: 10px;
+        margin-bottom: 1rem;
+    }
+    .gh-footer-newsletter-form input[type="email"]{
+        border: 1px solid #fff;
+        padding: 10px 15px;
+        background: transparent;
+        color: #fff;
+    }
+    .gh-footer-newsletter-form label{
+        font-size: 14px;
+    }
+    .gh-footer-newsletter-form a{
+        color: #fff
+    }
+    @media (max-width: 768px) {
+        .gh-footer-newsletter-form input[type="email"]{
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class='gh-footer-newsletter-form' id='gh-footer-newsletter-form'>
+    <p class='h4 my2'>Your journey to health starts here.</p>
+    <form id="footer-newsletter-form" method="post" data-action="https://hooks.zapier.com/hooks/catch/1153851/byx96rz/">
+        <div class="pre-submit">
+            <div class="input-group">
+                <input type="email" placeholder="Enter Your Email" name="email" required="">
+                <button class="button button--secondary" type="submit">Sign Up</button>
+            </div>
+            <label style="margin-top: 10px">
+                <input type="checkbox" name="GDPR" value="1" required=""> I agree to receive marketing emails. <a style="text-decoration: underline" href="https://globalhealing.com/pages/privacy-policy">View Privacy Policy</a>.
+            </label>
+        </div>
+        <div class="success hide">
+            Success! You'll be receiving an email shortly.
+        </div>
+    </form>
+</div>
+
+<script>
+  {
+    let newsletter_form = document.getElementById('footer-newsletter-form');
+    let preSubmit = newsletter_form.querySelector('.pre-submit');
+    let success = newsletter_form.querySelector('.success');
+    let button = newsletter_form.querySelector('button');
+
+    newsletter_form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let email = newsletter_form.querySelector('[name="email"]').value;
+      let url = newsletter_form.getAttribute('data-action');
+
+      button.classList.add('btn--loading');
+
+      fetch(url, {
+        method: 'post',
+        body: JSON.stringify({
+          email: email,
+          GDPR: 1
+        })
+      }).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        console.log(data);
+        preSubmit.classList.add('hide');
+        success.classList.remove('hide');
+      });
+    })
+  }
+</script>
