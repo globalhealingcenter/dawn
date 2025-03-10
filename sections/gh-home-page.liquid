@@ -152,7 +152,10 @@
 
                 <div class="ghd--flex">
                     <div data-type="text">
-                        <h2 class="eyebrow">{{ block.settings.heading }}</h2>
+                        <h2 class="eyebrow">
+                            <span>{{ block.settings.pre_heading }}</span>
+                            {{ block.settings.heading }}
+                        </h2>
                         {{ block.settings.text }}
                         <p><a class="button button--gold" href="{{ block.settings.link_1 }}">{{ block.settings.link_1_text }}</a></p>
                         <p><a class="button button--gold-outline-white" href="{{ block.settings.link_2 }}">{{ block.settings.link_2_text }}</a></p>
@@ -234,6 +237,7 @@
                     </div>
                     <div data-type="text">
                         <h2 class="eyebrow">
+                            <span>{{ block.settings.pre_heading }}</span>
                             {{ block.settings.heading }}
                         </h2>
                         {{ block.settings.text }}
@@ -505,6 +509,11 @@
       "settings": [
         {
           "type": "text",
+          "id": "pre_heading",
+          "label": "Pre-Heading"
+        },
+        {
+          "type": "text",
           "id": "heading",
           "label": "Heading"
         },
@@ -549,6 +558,11 @@
           "type": "text",
           "id": "image_mobile",
           "label": "Image Mobile"
+        },
+        {
+          "type": "text",
+          "id": "pre_heading",
+          "label": "Pre-Heading"
         },
         {
           "type": "text",
