@@ -1,3 +1,11 @@
+{% assign should_show_manual_form = false %}
+
+{% for variant in product.variants %}
+    {% if variant.available %}
+      {% assign should_show_manual_form = true %}
+    {% endif %}
+{% endfor %}
+
 <style>
   .out-of-stock-form-signup{
       display: flex;
@@ -33,7 +41,7 @@
   <div id='out-of-stock-form-signup' class='pb3'></div>
 
   <!-- hidden while we use klaviyo's out of stock -->
-  <div class='hide'>
+  <div class='{% unless should_show_manual_form %}hide{% endunless %}'>
     <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
       <div class="input-group pre-submit">
         <input type="email" placeholder="Enter Your Email" name="email" required>
