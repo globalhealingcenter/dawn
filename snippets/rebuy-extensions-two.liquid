@@ -1,4 +1,80 @@
+<!-- Rebuy Speed Load Script -->
+<script async src="https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}"></script>
 
+<style>
+  .rebuy-widget .flickity-button:focus{
+    box-shadow: 0 0 0 5px #21472D !important;
+  }
+  @media(max-width: 800px){
+    .rebuy-cart__flyout-item-price div{
+      display: flex;
+      flex-direction: column;
+      margin-left: auto;
+    }
+  }
+   /* #rebuy-widget-108414 .rebuy-button:first-child{
+  text-transform: uppercase !important;
+  }
+     #rebuy-widget-108414 .rebuy-button::first-letter{
+       text-transform: lowercase !important;
+     } */
+  .rebuy-product-actions .checkbox-label{
+    font-size: 12px !important;
+  }
+  .rebuy-cart__flyout-item-subscription{
+    border-radius: 0px;
+  }
+  .rebuy-widget .rebuy-product-grid:focus-visible {
+      outline: none !important;
+      outline-offset: 0 !important;
+      box-shadow: none !important;
+  }
+  .rebuy-widget .subscription-checkbox{
+    overflow: visible;
+  }
+  .rebuy-cart__progress-bar-meter{
+    background: #ffffff !important
+  }
+  .rebuy-cart__flyout-item-subscription button{
+    background: transparent !important;
+    border-radius: 0px !important;
+  }
+  .rebuy-select.muted, select.rebuy-select.muted{
+    border-color: var(--gh-color-green) !important;
+    border-width: 2px !important;
+    color: var(--gh-color-green) !important;
+  }
+  .rebuy-cart__flyout-item-subscription select{
+    background: white !important;
+    border-radius: 0px;
+    border:1px solid #545454;
+    border-color: #545454 !important;
+    text-align: center !important;
+    font-weight: normal !important;
+    /* text-transform: lowercase !important; */
+    appearance: auto;
+    font-weight: bold !important;
+    font-size: .9em;
+  }
+  .rebuy-cart__flyout-item-subscription select:first-letter{
+  text-transform: uppercase !important;
+  }
+  .rebuy-accordion-toggle{
+    border:1px solid #21472D;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .rebuy-accordion-toggle svg path{
+    fill: #21472D !important;
+  }
+  .rebuy-accordion-toggle:hover  svg path {
+    fill: #ffffff !important;
+  }
+</style>
 
 <!-- OP Legacy -->
 {% raw %}
