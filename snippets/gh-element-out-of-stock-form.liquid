@@ -1,10 +1,12 @@
-{% assign should_show_manual_form = false %}
+{% liquid
+    assign should_show_manual_form = false
 
-{% for variant in product.variants %}
-    {% if variant.available %}
-      {% assign should_show_manual_form = true %}
-    {% endif %}
-{% endfor %}
+    for variant in product.variants
+        if variant.available
+            assign should_show_manual_form = true
+        endif
+    endfor
+%}
 
 <style>
   .out-of-stock-form-signup{
