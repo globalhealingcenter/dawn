@@ -156,13 +156,6 @@
         "disabled": true,
         "settings": {}
       },
-      "6071110790918949010": {
-        "type": "shopify://apps/discount-kit/blocks/gift/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
-        "disabled": true,
-        "settings": {
-          "refresh": true
-        }
-      },
       "11945366711752539959": {
         "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
         "disabled": false,
