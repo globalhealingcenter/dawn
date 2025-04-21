@@ -14,6 +14,7 @@
       "blocks": {
         "video_hero_yDmxn3": {
           "type": "video-hero",
+          "disabled": true,
           "settings": {
             "video": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video.mp4",
             "video_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/home-banner-video-mobile.mp4",
@@ -22,11 +23,10 @@
         },
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
-          "disabled": true,
           "settings": {
-            "image": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/desktop.jpg",
-            "image_mobile": "https://cdn.globalhealing.com/m/2025/01/self-healing/series-5-neurons/mobile.jpg",
-            "url": "/blogs/education/neuroplasticity-wire-your-mind-for-healing?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner"
+            "image": "https://cdn.globalhealing.com/m/2025/04/earth-day/desktop.jpg",
+            "image_mobile": "https://cdn.globalhealing.com/m/2025/04/earth-day/mobile.jpg",
+            "url": "https://globalhealing.com/pages/earth-day?icn_ghc=earth_day_campaign&ici_ghc=HomePageBanner"
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
