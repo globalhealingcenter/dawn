@@ -16,7 +16,6 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "🌿 Just Launched- Our New Vitamin E Formula – Radiance in Every Drop! Shop Now",
             "link": "https://globalhealing.com/products/vitamin-e"
@@ -26,8 +25,8 @@
           "type": "announcement",
           "disabled": true,
           "settings": {
-            "text": "✨ Black Friday - 20% Off | Free Glass Shaker on Orders $100+*",
-            "link": "https://globalhealing.com/pages/bfcm-2024?icn_ghc=bf_campaign&ici_ghc=TopNotice"
+            "text": "🌎 Celebrate Earth Day: Get 20% Off When You Spend $100 or More!",
+            "link": "https://globalhealing.com/pages/earth-day?icn_ghc=earth_day_campaign&ici_ghc=TopNotice"
           }
         }
       },
