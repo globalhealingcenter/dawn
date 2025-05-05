@@ -119,9 +119,9 @@
               <summary class='h5 color-green'>References</summary>
               <div>
                 <ol>
-                  {% for item in block.items %}
+                {% for item in block.items %}
                   <li id='references-{{ forloop.index }}'>{{ item.reference }}</li>
-                  {% endfor %}
+                {% endfor %}
                 </ol>
               </div>
             </details>
