@@ -111,6 +111,23 @@
             </div>
           </div>
         </div>
+       {%- when 'references' -%}
+        {% if block.items %}
+        <div class="ghd--block--references ghd--block">
+          <div class="page-width">
+            <details>
+              <summary class='h4 color-green'>References</summary>
+              <div>
+                <ol>
+                {% for item in block.items %}
+                  <li>{{ item.reference }}</li>
+                {% endfor %}
+                </ol>
+              </div>
+            </details>
+          </div>
+        </div>
+        {% endif %}
       {% when 'how_it_works' %}
       {% if block.items.size > 0 %}
         <div class="ghd--block--benefits ghd--block--how-it-works ghd--block" data-video>
