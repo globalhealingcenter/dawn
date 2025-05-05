@@ -582,7 +582,7 @@
 .ghd--block--references summary{
     list-style-type: disclosure-closed;
 }
-.ghd--block--references[open] summary{
+.ghd--block--references details[open] summary{
     list-style-type: disclosure-open;
 }
 
