@@ -115,12 +115,12 @@
         {% if block.items.size > 0 %}
         <div class="ghd--block--references ghd--block">
           <div class="page-width">
-            <details id='references'>
+            <details id='references-details'>
               <summary class='h5 color-green'>References</summary>
               <div>
                 <ol>
                   {% for item in block.items %}
-                  <li>{{ item.reference }}</li>
+                  <li id='references-{{ forloop.index }}'>{{ item.reference }}</li>
                   {% endfor %}
                 </ol>
               </div>
