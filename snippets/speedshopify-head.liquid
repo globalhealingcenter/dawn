@@ -1,0 +1,9 @@
+{% capture key %}
+  {% render 'speedshopify' %}
+{% endcapture %}
+{% assign key = key | strip %}
+{% unless template contains 'cart' %}
+<link rel="preconnect" href="https://speedshopify.pages.dev" crossorigin="anonymous">
+<link rel="preload" href="https://speedshopify.pages.dev/customers/{{ key }}/head.js" as="script" crossorigin="anonymous">
+<script data-cfasync="false" src="https://speedshopify.pages.dev/customers/{{ key }}/head.js" crossorigin="anonymous"></script>
+{% endunless %}

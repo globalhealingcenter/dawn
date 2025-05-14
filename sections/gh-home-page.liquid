@@ -62,7 +62,7 @@
                 <picture>
                   <source media="(min-width: 650px)" srcset="{{ block.settings.image }}">
                   <source media="(max-width: 649px)" srcset="{{ block.settings.image_mobile }}">
-                  <img src="{{ block.settings.image }}" alt="">
+                 <img style='height:auto;width:100%;' src="{{ block.settings.image }}" alt="" width='700' height='560'>
                 </picture>
               </a>
             </section>
@@ -161,7 +161,17 @@
                         <p><a class="button button--gold-outline-white" href="{{ block.settings.link_2 }}">{{ block.settings.link_2_text }}</a></p>
                     </div>
                     <div data-type="image">
-                        <img src="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=760" srcset="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=1520 2x" alt="" loading="lazy">
+                        <!-- <img src="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=760" srcset="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=1520 2x" alt="" loading="lazy">
+                    -->
+                       <picture>
+
+                            <source media="(min-width: 750px)" srcset="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=1520 2x">
+
+                            <source media="(max-width: 749px)" srcset="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=760">
+
+                            <img style='height:auto;' src="https://cdn.globalhealing.com/pages/v2/home/foundation.png?w=760" alt="" width='1520' height='1358'>
+
+                          </picture>
                     </div>
                 </div>
 

@@ -1,8 +1,1 @@
-{
-  "parent": "index.json",
-  "context": {
-    "market": "australia"
-  },
-  "sections": {
-  }
-}
+{"parent":"index.json","context":{"market":"australia"},"sections":{}}

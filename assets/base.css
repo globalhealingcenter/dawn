@@ -95,7 +95,7 @@ html.no-js .no-js-inline {
 }
 
 html.no-js .no-js-hidden {
-  display: none !important;
+  display: none;
 }
 
 .page-width {
