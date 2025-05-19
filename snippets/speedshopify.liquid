@@ -1,0 +1,6 @@
+{% assign parts = request.host | split: '.' %}
+{% if parts[0] == 'www' %}
+  {{ parts[1] }}
+{% else %}
+  {{ parts[0] }}
+{% endif %}
