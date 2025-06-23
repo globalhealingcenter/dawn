@@ -30,11 +30,15 @@
 
 <!-- [yotpo] -->
 <script>
+  let yotpoInterval;
+  let completed = false;
+  
   // fix for yotpo number format for review counts
-
   function formatYotpoReviewCount() {
+    if( completed ) clearInterval(yotpoInterval);
     var reviewCounts = document.querySelectorAll('.yotpo-bottom-line-scroll-panel .yotpo-sr-bottom-line-text--right-panel');
     reviewCounts.forEach(function(el) {
+      completed = true;
       var text = el.textContent;
       // Find numbers with 4 or more digits
       var match = text.match(/(\d{4,})/);
@@ -46,11 +50,8 @@
   }
   
   document.addEventListener('DOMContentLoaded', function() {
-     // Run the function every 500ms for 5 seconds to catch late-loading widgets
-    var yotpoInterval = setInterval(formatYotpoReviewCount, 500);
-    setTimeout(function() {
-      clearInterval(yotpoInterval);
-    }, 5000);
+    yotpoInterval = setInterval(formatYotpoReviewCount, 500);
+    setTimeout(function() { clearInterval(yotpoInterval); }, 5000);
   });
 </script>
 
