@@ -32,7 +32,7 @@
 <script>
   // fix for yotpo number format for review counts
   document.addEventListener('DOMContentLoaded', function() {
-    var reviewCounts = document.querySelectorAll('.yotpo-bottomline .yotpo-bottomline-text');
+    var reviewCounts = document.querySelectorAll('.yotpo-bottom-line-scroll-panel .yotpo-sr-bottom-line-text--right-panel');
     reviewCounts.forEach(function(el) {
       var text = el.textContent;
       var match = text.match(/(\d{4,})/);
