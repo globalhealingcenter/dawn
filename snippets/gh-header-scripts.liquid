@@ -323,5 +323,17 @@
       console.log('loaded');
     },2000);
   });
+  // fix for yotpo number format for review counts
+  document.addEventListener('DOMContentLoaded', function() {
+    var reviewCounts = document.querySelectorAll('.yotpo-bottomline .yotpo-bottomline-text');
+    reviewCounts.forEach(function(el) {
+      var text = el.textContent;
+      var match = text.match(/(\d{4,})/);
+      if (match) {
+        var formatted = match[1].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        el.textContent = text.replace(match[1], formatted);
+      }
+    });
+  });
 </script>
 
