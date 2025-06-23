@@ -31,16 +31,26 @@
 <!-- [yotpo] -->
 <script>
   // fix for yotpo number format for review counts
-  document.addEventListener('DOMContentLoaded', function() {
+
+  function formatYotpoReviewCount() {
     var reviewCounts = document.querySelectorAll('.yotpo-bottom-line-scroll-panel .yotpo-sr-bottom-line-text--right-panel');
     reviewCounts.forEach(function(el) {
       var text = el.textContent;
+      // Find numbers with 4 or more digits
       var match = text.match(/(\d{4,})/);
       if (match) {
         var formatted = match[1].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         el.textContent = text.replace(match[1], formatted);
       }
     });
+  }
+  
+  document.addEventListener('DOMContentLoaded', function() {
+     // Run the function every 500ms for 5 seconds to catch late-loading widgets
+    var yotpoInterval = setInterval(formatYotpoReviewCount, 500);
+    setTimeout(function() {
+      clearInterval(yotpoInterval);
+    }, 5000);
   });
 </script>
 
