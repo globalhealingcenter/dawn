@@ -763,6 +763,7 @@
 {% comment %}
 ===== For adding Yotpo Review commas via CSS === 
 {% endcomment %}
+<!-- reviews comment -->
 {% assign reviews_count = product.metafields.globalhealing.reviews_count %}
 {% if reviews_count > 999 %}
   {% assign money_count = reviews_count | times: 100 | money | replace: "$", "" | replace: ".00", "" %}
