@@ -28,33 +28,6 @@
 </script>
 <!-- [/osano] -->
 
-<!-- [yotpo] -->
-<script>
-  let yotpoInterval;
-  let completed = false;
-  
-  // fix for yotpo number format for review counts
-  function formatYotpoReviewCount() {
-    if( completed ) clearInterval(yotpoInterval);
-    var reviewCounts = document.querySelectorAll('.yotpo-bottom-line-scroll-panel .yotpo-sr-bottom-line-text--right-panel');
-    reviewCounts.forEach(function(el) {
-      completed = true;
-      var text = el.textContent;
-      // Find numbers with 4 or more digits
-      var match = text.match(/(\d{4,})/);
-      if (match) {
-        var formatted = match[1].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        el.textContent = text.replace(match[1], formatted);
-      }
-    });
-  }
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    yotpoInterval = setInterval(formatYotpoReviewCount, 500);
-    setTimeout(function() { clearInterval(yotpoInterval); }, 5000);
-  });
-</script>
-
 <!-- gh_dawn_forms -->
 <script>
   if( typeof gh_dawn_form !== 'undefined' )
