@@ -37,6 +37,8 @@
         reviews.count = item.meta.globalhealing.reviews_count;
       }
 
+      reviews.count_formatted = parseInt(reviews.count).toLocaleString();
+
       let reviews_width = 0;
       if( reviews.average > 1 ){
         reviews_width = (100 / 5) * reviews.average
@@ -84,7 +86,7 @@
                   </span>
               </div>
               </div>
-            <div class="aa-ItemReviewCount color-gold">${reviews.count} Reviews</div>
+            <div class="aa-ItemReviewCount color-gold">${reviews.count_formatted} Reviews</div>
             </span>
 
         <span class="aa-ItemPrice bold">${algoliaShopify.helpers.displayPrice(item, distinct)}</span>
