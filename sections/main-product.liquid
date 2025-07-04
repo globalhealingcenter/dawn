@@ -760,6 +760,32 @@
   </script>
 </section>
 
+{% comment %}
+===== For adding Yotpo Review commas via CSS === 
+{% endcomment %}
+{% assign reviews_count = product.metafields.globalhealing.reviews_count %}
+{% if reviews_count > 999 %}
+  {% assign money_count = reviews_count | times: 100 | money | replace: "$", "" | replace: ".00", "" %}
+  <style>
+    .span.yotpo-sr-bottom-line-right-panel:after{
+      content: "{{ money_count }} Reviews";
+      display: block;
+      white-space: nowrap;
+      font-size: 16px;
+      text-align: start;
+      font-family: "Proxima Nova";
+      font-style: normal;
+      color: rgb(44, 44, 44);
+      padding-top: 2px;
+      line-height: 28px;
+      cursor: pointer;
+  }
+  .span.yotpo-sr-bottom-line-text.yotpo-sr-bottom-line-text--right-panel{
+      display: none
+  }
+  </style>
+{% endif %}
+
 {% schema %}
 {
   "name": "t:sections.main-product.name",
