@@ -4,7 +4,7 @@
     count: int 103
 {% endcomment %}
 
-{% assign money_count = count | times: 100 | money %}
+{% assign money_count = count | times: 100 | money | replace: "$", "" | replace: ".00", "" %}
 {% assign width = 20 | times: average %}
 
 <span class="gh-product-reviews">
