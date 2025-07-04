@@ -4,7 +4,7 @@
     count: int 103
 {% endcomment %}
 
-{% assign money_count = count | times: 100 %}
+{% assign money_count = count | times: 100 | money %}
 {% assign width = 20 | times: average %}
 
 <span class="gh-product-reviews">
@@ -24,7 +24,7 @@
             <img src="https://cdn.globalhealing.com/web/v2/icon/iconmonstr-star-gold-empty.png" alt="" width="16" />
         </span>
     </div>
-    <div class="gh-product-reviews--count gh-font-secondary color-gold">{{ money_count | money }} Reviews</div>
+    <div class="gh-product-reviews--count gh-font-secondary color-gold">{{ money_count }} Reviews</div>
 </span>
 
 <style>
