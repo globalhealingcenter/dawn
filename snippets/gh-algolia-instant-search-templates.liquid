@@ -16,6 +16,7 @@ window['gh_html'] = html
         reviews.average = hit.meta.globalhealing.reviews_average;
         reviews.count = hit.meta.globalhealing.reviews_count;
       }
+      reviews.count_formatted = parseInt(reviews.count).toLocaleString();
 
       let reviews_width = 0;
       if( reviews.average > 1 ){
@@ -66,7 +67,7 @@ window['gh_html'] = html
                   </span>
               </div>
               </div>
-            <div class="aa-ItemReviewCount color-gold">${reviews.count} Reviews</div>
+            <div class="aa-ItemReviewCount color-gold">${reviews.count_formatted} Reviews</div>
             </span>
           </p>
 
