@@ -38,12 +38,12 @@
           "settings": {
             "banner_1_image_obj": "shopify://shop_images/vitamin-e-desktop-july-2025-banner.jpg",
             "banner_1_image_mobile_obj": "shopify://shop_images/vitamin-e-mobile-july-2025-banner.jpg",
-            "banner_1_image": "https://cdn.globalhealing.com/m/2025/06/affirmation/desktop.jpg",
-            "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/06/affirmation/mobile.jpg",
             "image_is_2x": false,
             "banner_1_url": "shopify://products/vitamin-e",
+            "banner_2_image_obj": "shopify://shop_images/featured-blog.png",
             "banner_2_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-blog.png",
             "banner_2_url": "/blogs/education/the-overactive-immune-system-strategies-for-restoring-natural-function?icn_ghc=self-healing_campaign&ici_ghc=HomePageBanner",
+            "banner_3_image_obj": "shopify://shop_images/featured-spotlight.png",
             "banner_3_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-spotlight.png",
             "banner_3_url": "https://globalhealinginstitute.org/?utm_source=globalhealing.com&utm_medium=referral&utm_campaign=HomeBanner_BecomeCoach"
           }
@@ -61,8 +61,6 @@
           "type": "banners",
           "disabled": true,
           "settings": {
-            "banner_1_image": "https://cdn.globalhealing.com/m/2025/04/earth-day/desktop.jpg",
-            "banner_1_image_mobile": "https://cdn.globalhealing.com/m/2025/04/earth-day/mobile.jpg",
             "image_is_2x": true,
             "banner_1_url": "https://globalhealing.com/pages/earth-day?icn_ghc=earth_day_campaign&ici_ghc=HomePageBanner",
             "banner_2_image": "https://cdn.globalhealing.com/m/2023/07/home/featured-blog.png",
