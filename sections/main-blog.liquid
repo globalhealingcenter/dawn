@@ -72,21 +72,18 @@
 {%- paginate blog.articles by 12 -%}
   <div class="main-blog page-width section-{{ section.id }}-padding">
 
-    <h5 class="bold gh-font-primary md-h3 color-green mt0 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <h1 class="bold gh-font-primary md-h3 color-green mt0 title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
           {% if current_tags.size > 0 %}
             
             {% assign tag = current_tags[0] | replace: "Category_", "" %}
-            <span id="tag-title"></span>
-            <script>
-              let title = document.getElementById('tag-title');
-              let tag = `{{ tag }}`;
-              let parts = tag.split('>');
-              parts.forEach( t => title.innerHTML += `<span>${t}</span`);
-            </script>
+            {% assign tag_parts = tag | split: ">" %}
+            <span id="tag-title">
+              {% for part in tag_parts %}<span>{{ part }}</span>{% endfor %}
+            </span>
           {% else %}
             {{ blog.title | escape }}
           {% endif %}
-        </h5>
+        </h1>
 
     <div class="flex items-start" style="gap: 30px">
       <div class="blog-sidebar bg-green-light px2">
