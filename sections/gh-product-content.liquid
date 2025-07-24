@@ -128,9 +128,9 @@
             </div>
             <div data-type="image">
               <picture>
-                <source media="(min-width: 750px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}">
-                <source media="(max-width: 749px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}">
-                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
+                <source media="(min-width: 750px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?width=1000">
+                <source media="(max-width: 749px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?width=800">
+                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png?width=1000' }}" alt="" loading="lazy">
               </picture>
             </div>
           </div>
@@ -358,9 +358,9 @@
           </div>
           <div data-type="image">
             <picture>
-              <source media="(min-width: 750px)" srcset="{{ block.image.desktop }}">
-              <source media="(max-width: 749px)" srcset="{{ block.image.mobile }}">
-              <img src="{{ block.image.desktop }}" alt=""  loading="lazy">
+              <source media="(min-width: 750px)" srcset="{{ block.image.desktop }}?width=1000">
+              <source media="(max-width: 749px)" srcset="{{ block.image.mobile }}?width=800">
+              <img src="{{ block.image.desktop }}?width=1000" alt=""  loading="lazy">
             </picture>
           </div>
         </div>
