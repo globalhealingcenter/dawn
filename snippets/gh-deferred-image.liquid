@@ -1,0 +1,43 @@
+{% comment %}
+
+{string} image: url to image to render
+{string} aspect_ratio: CSS string format of aspect ration (ex: 16/9)
+
+{% endcomment %}
+
+<span class="gh-deferred-image">
+    <span class='gh-deferred-image-placeholder'>
+        <img src='' alt=''>
+    </span>
+</span>
+
+<style>
+    .gh-deferred-image {
+        display: flex;
+    }
+    .gh-deferred-image-placeholder {
+        aspect-ratio: {{ aspect_ratio }};
+        background: #eee;
+        flex-grow: 1;
+        display: block;
+    }
+    .gh-deferred-image.loaded,
+    .gh-deferred-image.loaded .gh-deferred-image-placeholder{
+        display: inline;
+        aspect-ratio: initial;
+        background: initial;
+        flex-grow: initial;
+    }
+</style>
+<script>
+  {
+    let src = '{{ image }}';
+    let img = new Image();
+    img.src = src;
+    img.onload = function() {
+        let placeholder = document.querySelector('.gh-deferred-image');
+        placeholder.classList.add('loaded');
+        placeholder.querySelector('img').src = src;
+    }
+  }
+</script>
