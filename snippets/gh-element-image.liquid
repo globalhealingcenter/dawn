@@ -1,0 +1,26 @@
+{% comment %}
+
+Attributes:
+
+{string} image: url to desktop 1x image
+{string} image_2x: url to 2x version of image
+{string} image_mobile: url to mobile image (optional)
+
+{% endcomment %}
+
+{% if image_mobile %}
+
+    <picture>
+        <source media="(min-width: 750px)" srcset="{{ image }}">
+        <source media="(max-width: 749px)" srcset="{{ image_mobile }}">
+        <img src="{{ image }}" alt="" loading="lazy">
+    </picture>
+
+{% else %}
+
+    <img alt=""
+        src="{{ image }}"
+        srcset='{{ image }} 1x, {{ image_2x }} 2x'
+        loading="lazy">
+
+{% endif %}
