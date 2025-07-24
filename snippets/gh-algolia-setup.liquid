@@ -4,8 +4,10 @@
 {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
-{% if collection and collection.template_suffix == 'canada-algolia' %}
-{{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
+{% if collection %}
+  {% if collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international' %}
+    {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
+  {% endif %}
 {% endif %}
 
 <script>
