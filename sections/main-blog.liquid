@@ -78,7 +78,7 @@
             {% assign tag = current_tags[0] | replace: "Category_", "" %}
             {% assign tag_parts = tag | split: ">" %}
             <span id="tag-title">
-              {% for part in tag_parts %}<span>{{ part }}</span>{% endfor %}
+              {% for part in tag_parts %}<span>{{ part }}</span>&nbsp;{% endfor %}
             </span>
           {% else %}
             {{ blog.title | escape }}
