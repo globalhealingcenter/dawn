@@ -38,6 +38,11 @@
         flex-grow: 1;
         display: block;
     }
+
+    {% if aspect_ratio_mobile %}
+    .gh-deferred-image-placeholder.isMobile .gh-deferred-image-placeholder{aspect-ratio: {{ aspect_ratio_mobile }};}
+    {% endif %}
+
     .gh-deferred-image.loaded,
     .gh-deferred-image.loaded .gh-deferred-image-placeholder{
         background: none;
@@ -51,18 +56,19 @@
 <script>
   {
     let src = '{{ image }}';
+    let placeholder = document.querySelector('.gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
     if (isMobile.matches) {
       src = '{{ image_mobile }}';
+      placeholder.classList.add('isMobile');
     }
     {% endif %}
 
     let img = new Image();
     img.src = src;
     img.onload = function() {
-        let placeholder = document.querySelector('.gh-deferred-image');
         placeholder.classList.add('loaded');
         placeholder.querySelector('img').src = src;
     }
