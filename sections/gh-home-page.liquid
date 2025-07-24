@@ -62,7 +62,9 @@
             {% assign img_mobile = block.settings.image_mobile_obj | image_url: width: 800 %}
 
             {% if localization.country.name == 'Canada' %}
-                {% render 'gh-deferred-image', image: img, aspect_ratio: '3/1', image_mobile: img_mobile, aspect_ratio_mobile: '583/327' %}
+                <!-- block.settings.image_obj.width -->
+                <!-- block.settings.image_obj.height -->
+                {% render 'gh-deferred-image', image: img, aspect_ratio: '3/1', image_mobile: img_mobile, aspect_ratio_mobile: '25/14' %}
             {% else %}
                 <section class="ghd--hero" {{ block.shopify_attributes }}>
                   <a href="{{ block.settings.url }}">
