@@ -8,14 +8,30 @@
 
 <span class="gh-deferred-image">
     <span class='gh-deferred-image-placeholder'>
-        <img src='' alt=''>
+        <img src='' alt='' class='block'>
     </span>
 </span>
 
 <style>
     .gh-deferred-image {
         display: flex;
+
+        background: linear-gradient(-45deg, #eee, #ddd, #ccc, #bbb);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
     }
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
     .gh-deferred-image-placeholder {
         aspect-ratio: {{ aspect_ratio }};
         background: #eee;
@@ -24,6 +40,8 @@
     }
     .gh-deferred-image.loaded,
     .gh-deferred-image.loaded .gh-deferred-image-placeholder{
+        background: none;
+        animation: none;
         display: inline;
         aspect-ratio: initial;
         background: initial;
