@@ -58,16 +58,18 @@
             </section>
         {% when 'hero' %}
 
+            {% assign img = block.settings.image_obj | image_url: width: 3000 %}
+            {% assign img_mobile = block.settings.image_mobile_obj | image_url: width: 800 %}
+
             {% if localization.country.name == 'Canada' %}
-                {% assign img = block.settings.image_obj | image_url: width: 3000 %}
-                {% render 'gh-deferred-image', image: img, aspect_ratio: '3/1' %}
+                {% render 'gh-deferred-image', image: img, aspect_ratio: '3/1', image_mobile: img_mobile, aspect_ratio_mobile: '583/327' %}
             {% else %}
                 <section class="ghd--hero" {{ block.shopify_attributes }}>
                   <a href="{{ block.settings.url }}">
                     <picture>
-                      <source media="(min-width: 650px)" srcset="{{ block.settings.image_obj | image_url: width: 3000 }}">
-                      <source media="(max-width: 649px)" srcset="{{ block.settings.image_mobile_obj | image_url: width: 800 }}">
-                     <img style='height:auto;width:100%;' src="{{ block.settings.image | image_url: width: 800 }}" alt="" width='700' height='560'>
+                      <source media="(min-width: 650px)" srcset="{{ img }}">
+                      <source media="(max-width: 649px)" srcset="{{ img_mobile }}">
+                     <img style='height:auto;width:100%;' src="{{ img }}" alt="" width='700' height='560'>
                     </picture>
                   </a>
                 </section>

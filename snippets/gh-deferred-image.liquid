@@ -1,6 +1,7 @@
 {% comment %}
 
 {string} image: url to image to render
+{string} image_mobile: url to image to render for mobile
 {string} aspect_ratio: CSS string format of aspect ration (ex: 16/9)
 
 {% endcomment %}
@@ -32,6 +33,14 @@
 <script>
   {
     let src = '{{ image }}';
+
+    {% if image_mobile %}
+    const isMobile = window.matchMedia("(max-width: 749px)");
+    if (isMobile.matches) {
+      src = '{{ image_mobile }}';
+    }
+    {% endif %}
+
     let img = new Image();
     img.src = src;
     img.onload = function() {
