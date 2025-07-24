@@ -11,14 +11,17 @@
   "sections": {
     "shogun-helper": {
       "type": "shogun-helper",
+      "disabled": true,
       "settings": {}
     },
     "shogun-above": {
       "type": "shogun-above",
+      "disabled": true,
       "settings": {}
     },
     "banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "custom_css": [
         "h1 {color: var(--gh-color-green); font-size: 6rem;}"
       ],
@@ -30,6 +33,7 @@
     },
     "product-grid": {
       "type": "main-collection-product-grid",
+      "disabled": true,
       "custom_css": [
         ".card__heading {font-weight: 700; color: #545454; margin-top: 10px; font-size: 16px;}",
         ".price {color: var(--gh-color-green); font-weight: bold; font-size: 13px;}",
@@ -54,6 +58,24 @@
         "sidebar_banner_link": "https://globalhealing.com/pages/pure-transparency?icn_ghc=pure_transparency_campaign&ici_ghc=CategoryBanner",
         "padding_top": 36,
         "padding_bottom": 36
+      }
+    },
+    "17533330209e637b28": {
+      "type": "apps",
+      "blocks": {
+        "algolia_ai_search_discovery_instantsearch_X6YBVN": {
+          "type": "shopify://apps/algolia-ai-search-discovery/blocks/instantsearch/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+          "settings": {
+            "disable_skeleton_loader": false,
+            "custom_skeleton_mockup": ""
+          }
+        }
+      },
+      "block_order": [
+        "algolia_ai_search_discovery_instantsearch_X6YBVN"
+      ],
+      "settings": {
+        "include_margins": true
       }
     },
     "168777948032aeb944": {
@@ -115,6 +137,7 @@
     "shogun-above",
     "banner",
     "product-grid",
+    "17533330209e637b28",
     "168777948032aeb944",
     "94a50d09-d564-4967-97aa-bcb0b9d99f43",
     "shogun-below",
