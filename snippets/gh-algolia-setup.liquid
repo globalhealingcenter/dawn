@@ -1,5 +1,5 @@
 {{ 'gh-algolia-autocomplete.css' | asset_url | stylesheet_tag }}
-{{ 'gh-algolia-autocomplete.css' | inline_asset_content }}
+<style>{{ 'gh-algolia-autocomplete.css' | inline_asset_content }}</style>
 
 {% if template.name == 'search' %}
 {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
