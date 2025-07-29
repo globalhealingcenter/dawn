@@ -20,9 +20,10 @@
 {% render 'gh-algolia-autocomplete-plugins' %}
 {% render 'gh-algolia-autocomplete-templates' %}
 
-<!-- template: {{ template.name }} -->
-{% render 'gh-algolia-instant-search-templates' %}
-{% render 'gh-algolia-instant-search-plugins' %}
+{% if template.name == 'search' %}
+  {% render 'gh-algolia-instant-search-templates' %}
+  {% render 'gh-algolia-instant-search-plugins' %}
+{% endif %}
 
 <script>
 
@@ -35,21 +36,23 @@
       return options;
     });
 
-    algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
-      return gh_algolia.instant.init(options, algoliaShopify);
-    });
-
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', gh_algolia.autocomplete.templates.productsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteArticlesTemplate', gh_algolia.autocomplete.templates.articlesTemplate );
+
+    {% if template.name == 'search' %}
+    algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
+      return gh_algolia.instant.init(options, algoliaShopify);
+    });
     algoliaShopify.hooks.registerHook('beforeInstantSearchNoResultTemplate', gh_algolia.instant.templates.noResult );
     algoliaShopify.hooks.registerHook('beforeInstantSearchProductTemplate', gh_algolia.instant.templates.product );
     algoliaShopify.hooks.registerHook('beforeInstantSearchMainTemplate', gh_algolia.instant.templates.main );
     algoliaShopify.hooks.registerHook('afterInstantSearchHitClickAction', (_, hit) => {
       console.log(_, hit)
     });
+    {% endif %}
 
   });
 
