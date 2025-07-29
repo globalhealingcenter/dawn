@@ -1,4 +1,4 @@
-{{ 'gh.css' | asset_url | stylesheet_tag }}
+<style>{{ 'gh.css' | inline_asset_content }}</style>
 {% render 'gh-algolia-setup' %}
 
 <!-- osano -->
