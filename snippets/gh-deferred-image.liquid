@@ -72,7 +72,7 @@
 <script>
   {
     let src = '{{ image }}';
-    let placeholder = document.querySelector('{{ id }} .gh-deferred-image');
+    let placeholder = document.querySelector('{{ css_id }} .gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
