@@ -6,20 +6,25 @@
 
 {% endcomment %}
 
-<span class="gh-deferred-image isDesktop">
-    <span class='gh-deferred-image-placeholder'>
-        <img src='' alt='' class='block'>
+{% assign handle = image | handleize %}
+{% assign id = 'gdi-' |  append: handle %}
+
+<span id='{{ id }}'>
+    <span class="gh-deferred-image isDesktop">
+        <span class='gh-deferred-image-placeholder'>
+            <img src='' alt='' class='block'>
+        </span>
     </span>
 </span>
 
 <style>
     .gh-deferred-image {
         display: flex;
-
         background: linear-gradient(-45deg, #fff, var(--gh-color-green-light), #fff, var(--gh-color-green-light));
         background-size: 400% 400%;
         animation: gradient 2s ease infinite;
     }
+    
     @keyframes gradient {
         0% {
             background-position: 0% 50%;
@@ -32,18 +37,18 @@
         }
     }
 
-    .gh-deferred-image-placeholder {
+    #{{ id }} .gh-deferred-image-placeholder {
         aspect-ratio: {{ aspect_ratio }};
         flex-grow: 1;
         display: block;
     }
 
-    .gh-deferred-image.isDesktop .gh-deferred-image-placeholder{
+    #{{ id }} .gh-deferred-image.isDesktop .gh-deferred-image-placeholder{
         aspect-ratio: {{ aspect_ratio }};
     }
 
     {% if aspect_ratio_mobile %}
-    .gh-deferred-image.isMobile .gh-deferred-image-placeholder{
+    #{{ id }} .gh-deferred-image.isMobile .gh-deferred-image-placeholder{
         aspect-ratio: {{ aspect_ratio_mobile }};
     }
     {% endif %}
@@ -61,7 +66,7 @@
 <script>
   {
     let src = '{{ image }}';
-    let placeholder = document.querySelector('.gh-deferred-image');
+    let placeholder = document.querySelector('#{{ id }} .gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
