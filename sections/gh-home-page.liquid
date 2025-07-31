@@ -105,7 +105,7 @@
                         </a>
                     </div>
                     <div class="ghd--flex" data-side="right">
-                        <div><a href='{{ block.settings.banner_2_url }}'>{% render 'gh-deferred-image', image: banner_2, aspect_ratio: '600/307' %}</a></div>
+                        <div><a href='{{ block.settings.banner_2_url }}'>{% render 'gh-deferred-image', image: banner_2, aspect_ratio: '600/307', io: block.settings.banner_2_image_obj %}</a></div>
                         <div><a href='{{ block.settings.banner_3_url }}'>{% render 'gh-deferred-image', image: banner_3, aspect_ratio: '600/307' %}</a></div>
                     </div>
                 </div>

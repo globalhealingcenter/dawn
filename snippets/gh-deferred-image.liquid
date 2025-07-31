@@ -1,13 +1,21 @@
 {% comment %}
 
+{image} io: liquid image object
 {string} image: url to image to render
 {string} image_mobile: url to image to render for mobile
 {string} aspect_ratio: CSS string format of aspect ration (ex: 16/9)
+{string} aspect_ratio_mobile: CSS string format of aspect ration (ex: 16/9)
 
 {% endcomment %}
 
+
+
 {% assign handle = image | handleize %}
 {% assign id = 'gdi-' |  append: handle %}
+
+{% if io %}
+<!-- width: io.width -->
+{% endif %}
 
 <span id='{{ id }}'>
     <span class="gh-deferred-image isDesktop">
