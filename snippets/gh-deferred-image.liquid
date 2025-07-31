@@ -2,6 +2,8 @@
 
 {image} image: url to image to render
 {image} image_mobile: url to image to render for mobile
+{string} width: width to render 1x image at
+{string} width_mobile: width to render 1x mobile at
 
 {% endcomment %}
 
@@ -65,13 +67,13 @@
 </style>
 <script>
   {
-    let src = '{{ image | image_url: width: 1300 }}';
+    let src = '{{ image | image_url: width: width }}';
     let placeholder = document.querySelector('{{ css_id }} .gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
     if (isMobile.matches) {
-      src = '{{ image_mobile | image_url: width: 1300 }}';
+      src = '{{ image_mobile | image_url: width: width_mobile }}';
       placeholder.classList.add('isMobile');
       placeholder.classList.remove('isDesktop');
     }
