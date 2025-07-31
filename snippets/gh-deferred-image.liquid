@@ -5,12 +5,6 @@
 
 {% endcomment %}
 
-{% assign aspect_ratio = image.width | append: '/' | append: image.height %}
-{% if image_mobile %}
-    {% assign aspect_ratio = image_mobile.width | append: '/' | append: image_mobile.height %}
-{% endif %}
-
-
 {% assign handle = image | handleize %}
 {% assign id = 'gdi-' |  append: handle %}
 {% assign css_id = '#' | append: id %}
@@ -44,7 +38,7 @@
     }
 
     {{ css_id }} .gh-deferred-image-placeholder {
-        aspect-ratio: {{ aspect_ratio }};
+        aspect-ratio: {{ image.width }} / {{ image.height }};
         flex-grow: 1;
         display: block;
     }
@@ -53,9 +47,9 @@
         aspect-ratio: {{ image.width }} / {{ image.height }};
     }
 
-    {% if aspect_ratio_mobile %}
+    {% if image_mobile %}
     {{ css_id }} .gh-deferred-image.isMobile .gh-deferred-image-placeholder{
-        aspect-ratio: {{ aspect_ratio_mobile }};
+        aspect-ratio: {{ image_mobile.width }} / {{ image_mobile.height }};
     }
     {% endif %}
 
