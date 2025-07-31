@@ -71,13 +71,13 @@
 </style>
 <script>
   {
-    let src = '{{ image }}';
+    let src = '{{ image | image_url: width: 1300 }}';
     let placeholder = document.querySelector('{{ css_id }} .gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
     if (isMobile.matches) {
-      src = '{{ image_mobile }}';
+      src = '{{ image_mobile | image_url: width: 1300 }}';
       placeholder.classList.add('isMobile');
       placeholder.classList.remove('isDesktop');
     }
