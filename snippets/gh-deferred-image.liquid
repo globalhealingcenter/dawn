@@ -1,19 +1,13 @@
 {% comment %}
 
-{image} image: url to image to render
-{image} image_mobile: url to image to render for mobile
+{string} image: url to image to render
+{string} image_mobile: url to image to render for mobile
+{string} aspect_ratio: CSS string format of aspect ration (ex: 16/9)
 
 {% endcomment %}
 
-{% assign aspect_ratio = image.width | append: '/' | append: image.height %}
-{% if image_mobile %}
-    {% assign aspect_ratio = image_mobile.width | append: '/' | append: image_mobile.height %}
-{% endif %}
-
-
 {% assign handle = image | handleize %}
 {% assign id = 'gdi-' |  append: handle %}
-{% assign css_id = '#' | append id %}
 
 <span id='{{ id }}'>
     <span class="gh-deferred-image isDesktop">
@@ -43,18 +37,18 @@
         }
     }
 
-    {{ css_id }} .gh-deferred-image-placeholder {
+    #{{ id }} .gh-deferred-image-placeholder {
         aspect-ratio: {{ aspect_ratio }};
         flex-grow: 1;
         display: block;
     }
 
-    {{ css_id }} .gh-deferred-image.isDesktop .gh-deferred-image-placeholder{
+    #{{ id }} .gh-deferred-image.isDesktop .gh-deferred-image-placeholder{
         aspect-ratio: {{ aspect_ratio }};
     }
 
     {% if aspect_ratio_mobile %}
-    {{ css_id }} .gh-deferred-image.isMobile .gh-deferred-image-placeholder{
+    #{{ id }} .gh-deferred-image.isMobile .gh-deferred-image-placeholder{
         aspect-ratio: {{ aspect_ratio_mobile }};
     }
     {% endif %}
@@ -72,7 +66,7 @@
 <script>
   {
     let src = '{{ image }}';
-    let placeholder = document.querySelector('{{ css_id }} .gh-deferred-image');
+    let placeholder = document.querySelector('#{{ id }} .gh-deferred-image');
 
     {% if image_mobile %}
     const isMobile = window.matchMedia("(max-width: 749px)");
