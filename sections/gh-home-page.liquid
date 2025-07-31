@@ -64,7 +64,7 @@
             {% if localization.country.name == 'Canada' %}
                 <!-- block.settings.image_obj.width -->
                 <!-- block.settings.image_obj.height -->
-                {% render 'gh-deferred-image', image: block.settings.image_obj, image_mobile: lock.settings.image_mobile_obj %}
+                {% render 'gh-deferred-image', image: block.settings.image_obj, image_mobile: block.settings.image_mobile_obj, width: 3000, width_mobile: 800 %}
             {% else %}
                 <section class="ghd--hero" {{ block.shopify_attributes }}>
                   <a href="{{ block.settings.url }}">
