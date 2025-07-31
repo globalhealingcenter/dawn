@@ -105,8 +105,8 @@
                         </a>
                     </div>
                     <div class="ghd--flex" data-side="right">
-                        <div><a href='{{ block.settings.banner_2_url }}'><img src="{{ block.settings.banner_2_image_obj | image_url: width: 600 }}" srcset="{{ block.settings.banner_2_image_obj | image_url: width: 600 }} 1x, {{ block.settings.banner_2_image_obj | image_url: width: 1200 }} 2x" alt="" loading="lazy"></a></div>
-                        <div><a href='{{ block.settings.banner_3_url }}'><img src="{{ block.settings.banner_3_image_obj | image_url: width: 600 }}" alt="" loading="lazy"></a></div>
+                        <div><a href='{{ block.settings.banner_2_url }}'>{% render 'gh-deferred-image', image: banner_2, aspect_ratio: '600/307' %}</a></div>
+                        <div><a href='{{ block.settings.banner_3_url }}'>{% render 'gh-deferred-image', image: banner_3, aspect_ratio: '600/307' %}</a></div>
                     </div>
                 </div>
             </section>
