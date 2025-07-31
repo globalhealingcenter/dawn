@@ -106,12 +106,12 @@
                 <div class="page-width">
                     <div data-side="top">
                         <a href='{{ block.settings.banner_1_url }}'>
-                            {% render 'gh-deferred-image', image: banner_1, image_mobile: banner_1_mobile %}
+                            {% render 'gh-deferred-image', image: banner_1, image_mobile: banner_1_mobile, width: 1300 %}
                         </a>
                     </div>
                     <div class="ghd--flex" data-side="right">
-                        <div><a href='{{ block.settings.banner_2_url }}'>{% render 'gh-deferred-image', image: banner_2 %}</a></div>
-                        <div><a href='{{ block.settings.banner_3_url }}'>{% render 'gh-deferred-image', image: banner_3 %}</a></div>
+                        <div><a href='{{ block.settings.banner_2_url }}'>{% render 'gh-deferred-image', image: banner_2, width: 600 %}</a></div>
+                        <div><a href='{{ block.settings.banner_3_url }}'>{% render 'gh-deferred-image', image: banner_3, width: 600 %}</a></div>
                     </div>
                 </div>
             </section>
