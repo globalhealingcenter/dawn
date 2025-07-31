@@ -98,14 +98,6 @@
                 <div class="page-width">
                     <div data-side="top">
                         <a href='{{ block.settings.banner_1_url }}'>
-                          <!--
-                          <picture loading='lazy'>
-                            <source media="(min-width: 650px)" srcset="{{ block.settings.banner_1_image_obj | image_url: width: 1300 }} 1x{% if block.settings.image_is_2x %}, {{ block.settings.banner_1_image_obj | image_url: width: 2600 }} 2x{% endif %}">
-                            <source media="(max-width: 649px)" srcset="{{ block.settings.banner_1_image_mobile_obj | image_url: width: 650 }} 1x, {{ block.settings.banner_1_image_mobile_obj | image_url: width: 1300 }} 2x">
-                            <img src="{{ block.settings.banner_1_image_obj | image_url: width: 1300 }}" alt="" loading='lazy'>
-                          </picture>
-                          -->
-
                             {% render 'gh-deferred-image', image: banner_1, aspect_ratio: '1300/433', image_mobile: banner_1_mobile, aspect_ratio_mobile: '25/14' %}                            -->
                         </a>
                     </div>
