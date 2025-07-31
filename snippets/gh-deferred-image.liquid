@@ -50,8 +50,7 @@
     }
 
     {{ css_id }} .gh-deferred-image.isDesktop .gh-deferred-image-placeholder{
-        aspect-ratio: {{ aspect_ratio }};
-        /* {{ image.width }} */
+        aspect-ratio: {{ image.width }} / {{ image.height }};
     }
 
     {% if aspect_ratio_mobile %}
