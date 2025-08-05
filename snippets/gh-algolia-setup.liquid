@@ -1,13 +1,13 @@
 <style>{{ 'gh-algolia-autocomplete.css' | inline_asset_content }}</style>
 
-{% if template.name == 'search' %}
-{{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
+{% assign should_load_instant_search = false %}
+{% if template.name == 'search' or collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international' %}
+  {% assign should_load_instant_search  = true %}
 {% endif %}
 
-{% if collection %}
-  {% if collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international' %}
-    {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
-  {% endif %}
+
+{% if should_load_instant_search %}
+  {{ 'gh-algolia-instant-search.css' | asset_url | stylesheet_tag }}
 {% endif %}
 
 <script>
@@ -20,7 +20,7 @@
 {% render 'gh-algolia-autocomplete-plugins' %}
 {% render 'gh-algolia-autocomplete-templates' %}
 
-{% if template.name == 'search' or collection.template_suffix == 'international' or collection.template_suffix == 'canada-algolia' %}
+{% if should_load_instant_search %}
   {% render 'gh-algolia-instant-search-templates' %}
   {% render 'gh-algolia-instant-search-plugins' %}
 {% endif %}
@@ -42,7 +42,7 @@
     algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', gh_algolia.autocomplete.templates.productsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteArticlesTemplate', gh_algolia.autocomplete.templates.articlesTemplate );
 
-    {% if template.name == 'search' %}
+    {% if should_load_instant_search %}
     algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
       return gh_algolia.instant.init(options, algoliaShopify);
     });
