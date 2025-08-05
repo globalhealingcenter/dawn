@@ -14,7 +14,17 @@
 <span id='{{ id }}'>
     <span class="gh-deferred-image isDesktop">
         <span class='gh-deferred-image-placeholder'>
-            <img src='' alt='' class='block'>
+
+            {% if image_mobile %}
+                <picture class='block'>
+                    <source class='desktop-version' media="(min-width: 750px)" srcset="">
+                    <source class='mobile-version' media="(max-width: 749px)" srcset="">
+                    <img class='block' src="" alt="">
+                </picture>
+            {% else %}
+                <img src='' alt='' class='block'>
+            {% endif %}
+
         </span>
     </span>
 </span>
@@ -70,20 +80,45 @@
     let src = '{{ image | image_url: width: width }}';
     let placeholder = document.querySelector('{{ css_id }} .gh-deferred-image');
 
-    {% if image_mobile %}
-    const isMobile = window.matchMedia("(max-width: 749px)");
-    if (isMobile.matches) {
-      src = '{{ image_mobile | image_url: width: width_mobile }}';
-      placeholder.classList.add('isMobile');
-      placeholder.classList.remove('isDesktop');
+    let desktopOnLoad = function(desktop_src) {
+      placeholder.classList.add('loaded');
+      placeholder.querySelector('img').src = desktop_src;
     }
-    {% endif %}
+
+    let mobileOnLoad = function(desktop_src, mobile_src) {
+      placeholder.classList.add('loaded');
+      placeholder.querySelector('img').src = desktop_src;
+      placeholder.querySelector('.mobile-version').src = mobile_src;
+      placeholder.querySelector('.desktop-version').src = desktop_src;
+    }
 
     let img = new Image();
-    img.src = src;
-    img.onload = function() {
-        placeholder.classList.add('loaded');
-        placeholder.querySelector('img').src = src;
-    }
+
+    {% if image_mobile %}
+
+        const isMobile = window.matchMedia("(max-width: 749px)");
+        let preloadURL = src;
+        let mobile_src = '{{ image_mobile | image_url: width: width_mobile }}';
+
+        if (isMobile.matches) {
+          preloadURL = mobile_src;
+          placeholder.classList.add('isMobile');
+          placeholder.classList.remove('isDesktop');
+        }
+
+        img.src = preloadURL;
+        img.onload = function() {
+          mobileOnLoad(src, mobile_src);
+        }
+
+    {% else %}
+
+        img.src = src;
+        img.onload = function() {
+          desktopOnLoad(src);
+        }
+
+    {% endif %}
+
   }
 </script>
