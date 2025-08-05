@@ -58,22 +58,7 @@
             </section>
         {% when 'hero' %}
 
-            {% assign img = block.settings.image_obj | image_url: width: 3000 %}
-            {% assign img_mobile = block.settings.image_mobile_obj | image_url: width: 800 %}
-
-            {% if localization.country.name == 'Canada' %}
-                {% render 'gh-deferred-image', image: block.settings.image_obj, image_mobile: block.settings.image_mobile_obj, width: 3000, width_mobile: 800 %}
-            {% else %}
-                <section class="ghd--hero" {{ block.shopify_attributes }}>
-                  <a href="{{ block.settings.url }}">
-                    <picture>
-                      <source media="(min-width: 650px)" srcset="{{ img }}">
-                      <source media="(max-width: 649px)" srcset="{{ img_mobile }}">
-                     <img style='height:auto;width:100%;' src="{{ img }}" alt="" width='700' height='560'>
-                    </picture>
-                  </a>
-                </section>
-            {% endif %}
+            {% render 'gh-deferred-image', image: block.settings.image_obj, image_mobile: block.settings.image_mobile_obj, width: 3000, width_mobile: 800 %}
 
         {% when 'logos' %}
             <section class="ghd--logos ghd--bg-white" {{ block.shopify_attributes }}>
