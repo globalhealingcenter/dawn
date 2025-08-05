@@ -20,7 +20,7 @@
 {% render 'gh-algolia-autocomplete-plugins' %}
 {% render 'gh-algolia-autocomplete-templates' %}
 
-{% if template.name == 'search' or collection.template_suffix == 'international' %}
+{% if template.name == 'search' or collection.template_suffix == 'international' or collection.template_suffix == 'canada-algolia' %}
   {% render 'gh-algolia-instant-search-templates' %}
   {% render 'gh-algolia-instant-search-plugins' %}
 {% endif %}
