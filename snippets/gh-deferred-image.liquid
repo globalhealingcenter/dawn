@@ -88,8 +88,8 @@
     let mobileOnLoad = function(desktop_src, mobile_src) {
       placeholder.classList.add('loaded');
       placeholder.querySelector('img').src = desktop_src;
-      placeholder.querySelector('.mobile-version').src = mobile_src;
-      placeholder.querySelector('.desktop-version').src = desktop_src;
+      placeholder.querySelector('.mobile-version').srcset = mobile_src;
+      placeholder.querySelector('.desktop-version').srcset = desktop_src;
     }
 
     let img = new Image();
