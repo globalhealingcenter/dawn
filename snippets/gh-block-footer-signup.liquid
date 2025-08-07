@@ -76,6 +76,10 @@
         return response.json();
       }).then(function (data) {
         console.log(data);
+        const event = new CustomEvent('gh-event', { detail: {
+          type: 'newsletter-signup',
+        }});
+        document.body.dispatchEvent(event);
         preSubmit.classList.add('hide');
         success.classList.remove('hide');
       });
