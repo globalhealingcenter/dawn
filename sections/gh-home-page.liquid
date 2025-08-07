@@ -58,7 +58,9 @@
             </section>
         {% when 'hero' %}
 
+        <a href="{{ block.settings.url }}">
             {% render 'gh-deferred-image', image: block.settings.image_obj, image_mobile: block.settings.image_mobile_obj, width: 3000, width_mobile: 800 %}
+        </a>
 
         {% when 'logos' %}
             <section class="ghd--logos ghd--bg-white" {{ block.shopify_attributes }}>
