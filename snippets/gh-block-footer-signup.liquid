@@ -76,10 +76,10 @@
         return response.json();
       }).then(function (data) {
         console.log(data);
-        const event = new CustomEvent('gh-event', { detail: {
-          type: 'newsletter-signup',
-        }});
-        window.dispatchEvent(event);
+
+        const event_data = {type: 'newsletter-signup'};
+        Shopify.analytics.publish('gh:event', event_data);
+
         preSubmit.classList.add('hide');
         success.classList.remove('hide');
       });
