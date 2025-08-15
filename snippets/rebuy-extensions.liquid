@@ -1280,7 +1280,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
@@ -2585,7 +2585,7 @@
 <!-- Beauty Shot Image Code START -->
 
                   <a class="rebuy-product-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() ? 'clickable' : '']">
-                  <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="primary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title" data-ver='rebuy-ext'>
+                  <img v-if="product?.metafields?.globalhealing?.beauty_shot_url"class="primary-image" v-bind:src="product?.metafields?.globalhealing?.beauty_shot_url" v-bind:alt="'View ' + product.title">
                   <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
                   <img v-else class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
                   <!-- <img class="secondary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title"> -->
