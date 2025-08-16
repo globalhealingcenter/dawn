@@ -3,7 +3,9 @@
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+<style>
+{{ 'component-list-social.css' | inline_asset_content }}
+</style>
 
 {%- style -%}
   .footer {

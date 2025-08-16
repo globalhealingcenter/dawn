@@ -1,6 +1,6 @@
 <style>
-{{ 'component-slideshow.css'  | inline_asset_content }}
-{{ 'component-slider.css'  | inline_asset_content }}
+{{ 'component-slideshow.css' | inline_asset_content }}
+{{ 'component-slider.css' | inline_asset_content }}
 </style>
 
 {%- liquid
@@ -17,7 +17,7 @@
 -%}
 
 {% if social_icons %}
-  {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+  <style>{{ 'component-list-social.css' | inline_asset_content }}</style>
 {% endif %}
 
 <div
