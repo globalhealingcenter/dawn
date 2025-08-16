@@ -1,5 +1,5 @@
-{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
-{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-slideshow.css'  | inline_asset_content }}
+{{ 'component-slider.css'  | inline_asset_content }}
 
 {%- liquid
   assign social_icons = true
