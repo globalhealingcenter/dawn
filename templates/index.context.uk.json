@@ -21,6 +21,10 @@
             "banner_1_image_obj": null,
             "banner_1_image_mobile_obj": null
           }
+        },
+        "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
+          "disabled": true,
+          "settings": {}
         }
       }
     }
