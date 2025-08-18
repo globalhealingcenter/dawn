@@ -8,15 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "collection.json",
+  "parent": "collection.international.json",
   "context": {
     "market": "uk"
   },
-  "sections": {
-    "168777948032aeb944": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    }
-  }
+  "sections": {}
 }
