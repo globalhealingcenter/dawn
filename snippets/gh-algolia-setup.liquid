@@ -32,9 +32,14 @@
       gh_algolia.autocomplete.plugins.getAll( algoliaShopify ).forEach( p => options.plugins.push(p) );
       options.openOnFocus = true;
       options.detachedMediaQuery = '';
-      console.log('market: {{ market }}')
       return options;
     });
+
+    {% if market == 'United Kingdom' %}
+    algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
+      console.log('default', _defaultFiltersString);
+    });
+    {% endif %}
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
