@@ -3,6 +3,8 @@
   if template.name == 'search' or collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international'
     assign should_load_instant_search  = true
   endif
+
+  assign market = localization.country.name
 %}
 
 <script>
@@ -30,6 +32,7 @@
       gh_algolia.autocomplete.plugins.getAll( algoliaShopify ).forEach( p => options.plugins.push(p) );
       options.openOnFocus = true;
       options.detachedMediaQuery = '';
+      console.log('market: {{ market }}')
       return options;
     });
 
