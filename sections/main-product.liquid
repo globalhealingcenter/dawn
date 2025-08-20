@@ -766,7 +766,7 @@
 <!-- reviews comment -->
 {% assign reviews_count = product.metafields.globalhealing.reviews_count %}
 {% if reviews_count > 999 %}
-  {% assign money_count = reviews_count | times: 100 | money | replace: "$", "" | replace: ".00", "" %}
+  {% assign money_count = reviews_count | times: 100 | money | replace: "$", "" | replace: ".00", "" |  replace: "£", "" %}
   <style>
     .span.yotpo-sr-bottom-line-right-panel:after{
       content: "{{ money_count }} Reviews";
