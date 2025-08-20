@@ -1,3 +1,5 @@
+{%- unless settings.predictive_search_enabled -%}
+
 {% liquid
   assign should_load_instant_search = false
   if template.name == 'search' or collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international'
@@ -54,3 +56,5 @@
   });
 
 </script>
+
+{% endunless %}
