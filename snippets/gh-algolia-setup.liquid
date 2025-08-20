@@ -40,6 +40,16 @@
       console.log('default', _defaultFiltersString);
       return 'tags:available-for-uk'
     });
+    algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
+      let filter = 'tags:available-for-uk';
+
+      if(defaultFilter) {
+        return defaultFilter + ' AND ' + filter
+      }
+      else {
+        return filter
+      }
+    });
     {% endif %}
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
