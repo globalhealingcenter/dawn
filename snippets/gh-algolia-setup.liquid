@@ -42,13 +42,9 @@
     });
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
       let filter = 'tags:available-for-uk';
-
-      if(defaultFilter) {
-        return defaultFilter + ' AND ' + filter
-      }
-      else {
-        return filter
-      }
+      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;)
+      console.log('instant default filter', filter);
+      return filter;
     });
     {% endif %}
 
