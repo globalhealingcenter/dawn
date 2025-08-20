@@ -15,7 +15,7 @@
   "sections": {
     "1f534ab1-3f58-4e78-ba4d-d858cf22e505": {
       "settings": {
-        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"/pages/contact\" title=\"\">Contact Us</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<br>United States</a><br>\n\t\n</div>"
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"/pages/contact\" title=\"\">Contact Us</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX, USA<br>77055</a><br>\n\t\n</div>"
       },
       "blocks": {}
     }
