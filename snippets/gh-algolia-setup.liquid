@@ -38,6 +38,7 @@
     {% if market == 'United Kingdom' %}
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
       console.log('default', _defaultFiltersString);
+      return 'tags:available-for-uk'
     });
     {% endif %}
 
