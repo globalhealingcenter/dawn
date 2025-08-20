@@ -18,6 +18,11 @@
         "menu": "main-menu-uk"
       },
       "blocks": {}
+    },
+    "announcement-bar": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
     }
   }
 }
