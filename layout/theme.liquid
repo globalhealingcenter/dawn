@@ -288,7 +288,7 @@
   {% if settings.ss_enable %}
     {% render 'ss-script' %}
   {% endif %}
-</head>
+ {%- if content_for_header contains "elevateab.app" -%}{%- unless request.design_mode -%} <script>try{window.eab_data={selectors:JSON.parse(`{{shop.metafields.elevateab.select}}`)||{},allTests:JSON.parse(`{{shop.metafields.elevateab.tests}}`)||{},currencyFormat:{% if settings.currency_code_enabled %}"{{ shop.money_with_currency_format}}"{% else %}"{{ shop.money_format}}"{% endif %}};}catch(error){console.log(error);window.eab_data={selectors:{},allTests:{},currencyFormat:{% if settings.currency_code_enabled %}"{{ shop.money_with_currency_format}}"{% else %}"{{ shop.money_format}}"{% endif %}};}</script><script src="https://ds0wlyksfn0sb.cloudfront.net/redirect.js"></script> {%- endunless -%}{%- endif -%} </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
 {% render 'elevar-body-end' %}
