@@ -1,12 +1,12 @@
 /*
-* ------------------------------------------------------------
-* IMPORTANT: The contents of this file are auto-generated.
-*
-* This file may be updated by the Shopify admin theme editor
-* or related systems. Please exercise caution as any changes
-* made to this file may be overwritten.
-* ------------------------------------------------------------
-*/
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "logo": "shopify://shop_images/seal-white.png",
@@ -149,27 +149,22 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-photo-reviews/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "11735689235857492391": {
         "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "4705145147225299685": {
         "type": "shopify://apps/tolstoy-shoppable-video-ugc/blocks/widget-block/06fa8282-42ff-403e-b67c-1936776aed11",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "8962992520437913685": {
         "type": "shopify://apps/yotpo-loyalty-rewards/blocks/loader-app-embed-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
@@ -182,14 +177,17 @@
       "14006543868794036723": {
         "type": "shopify://apps/ang-extra-menu/blocks/metadata/ec904fae-fd98-4243-8db5-01051f1af95f",
         "disabled": true,
-        "settings": {
-        }
+        "settings": {}
       },
       "2997326909215316540": {
         "type": "shopify://apps/ang-extra-menu/blocks/embed-app/ec904fae-fd98-4243-8db5-01051f1af95f",
         "disabled": true,
-        "settings": {
-        }
+        "settings": {}
+      },
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
