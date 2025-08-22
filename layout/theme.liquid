@@ -416,6 +416,10 @@
 <!--   Widget : Gift with Purchase: 5 OP Samples with Best Sellers subscription  -->  
 <!--   <div data-rebuy-id="200547"></div> -->  
 
+{% if template contains 'product' %}
+  <script src="{{ 'og-subscribe-click.js' | asset_url }}" defer></script>
+{% endif %}
+
 {% render 'klaviyo-out-of-stock' %}
 {% render 'osano-shopify' %}
 {% render 'speedshopify-body' %}
