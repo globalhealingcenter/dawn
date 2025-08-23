@@ -1,3 +1,7 @@
+{% comment %}
+  Sticky Add-To-Cart Bar — Global Healing (variant-ID based pricing)
+{% endcomment %}
+
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign tagline_fallback = section.settings.tagline_text | default: 'Gentle, effective cleansing support' %}
 {% assign tagline_from_metafield = product.metafields.custom.tagline.value | default: product.metafields.custom.tagline %}
@@ -5,6 +9,7 @@
 
 <div id="gh-sticky-atc"
      class="gh-sticky-atc{% if section.settings.hide_on_desktop %} gh-sticky-atc--mobile-only{% endif %}{% if section.settings.hide_on_mobile %} gh-sticky-atc--desktop-only{% endif %}"
+     data-initial-variant="{{ selected_variant.id }}"
      style="
        --gh-sticky-bg: {{ section.settings.bg_color }};
        --gh-sticky-border: {{ section.settings.border_color | color_mix: '#ffffff', 88 }};
@@ -55,6 +60,15 @@
   </div>
 </div>
 
+{%- comment -%} Compact variant → price map for JS {%- endcomment -%}
+<script id="gh-sticky-variants-{{ section.id }}" type="application/json">
+[
+{% for v in product.variants %}
+  {"id":{{ v.id }},"price":{{ v.price }},"compare_at_price":{{ v.compare_at_price | default: 0 }},"available":{{ v.available | json }} }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>
+
 <style>
   .gh-sticky-atc {
     position: fixed;
@@ -93,23 +107,20 @@
     overflow: hidden;
     background: #f5f3ef;
   }
-  .gh-sticky-atc__img img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-  }
+  .gh-sticky-atc__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .gh-sticky-atc__name {
-    margin: 0;                     /* no extra gap above/below */
+    margin: 0;
     font-weight: 700;
     color: var(--gh-text);
     font-family: var(--gh-font-primary, inherit);
     line-height: 1.15;
-    font-size: 20px;
   }
   .gh-sticky-atc__tagline {
-    margin: 0;                     /* tight against name */
+    margin: 0;
     font-size: 14px;
     color: #4a6657;
-    line-height: 1.7;
+    line-height: 1.25;
   }
 
   .gh-sticky-atc__action .button {
@@ -131,57 +142,61 @@
 
 <script>
 (function () {
-  var btn = document.getElementById('StickyATCButton');
-  if (!btn) return;
+  var sectionId = {{ section.id | json }};
+  var root = document.getElementById('gh-sticky-atc');
+  var btn  = document.getElementById('StickyATCButton');
+  if (!root || !btn) return;
 
   var priceEl  = btn.querySelector('.gh-sticky-atc__price');
   var addLabel = btn.querySelector('.add-to-cart-default-text');
   var subLabel = btn.querySelector('.add-to-cart-subscribe-text');
 
-  /* ---------- PRICE: read from the page ---------- */
-  function setStickyPriceText(txt) {
-    if (!priceEl) return;
-    priceEl.textContent = ' | ' + (txt || '');
-  }
+  /* ---- Parse variant map from JSON ---- */
+  var variants = [];
+  try {
+    var jsonEl = document.getElementById('gh-sticky-variants-' + sectionId);
+    variants = JSON.parse(jsonEl && jsonEl.textContent || '[]');
+  } catch (e) {}
 
-  function readPagePriceNode() {
-    // Try several common price locations used by Shopify themes
-    var selectors = [
-      '.price__container .price-item--regular',
-      '.price .price-item--regular',
-      '[data-product-price] .price-item',
-      '.product__info-container .price-item--regular',
-      '.product__price .price-item',
-      '.price .price__regular .price-item',
-      '.price .price__current',                 // fallback
-      '.price'                                  // last resort
-    ];
-    for (var i = 0; i < selectors.length; i++) {
-      var el = document.querySelector(selectors[i]);
-      if (el && el.textContent.trim()) return el;
+  function findVariantById(id) {
+    id = parseInt(id, 10);
+    for (var i = 0; i < variants.length; i++) {
+      if (variants[i].id === id) return variants[i];
     }
     return null;
   }
 
-  function updateStickyPrice() {
-    var node = readPagePriceNode();
-    if (node) {
-      setStickyPriceText(node.textContent.trim());
-      return;
-    }
-    // Fallback: try price from selected option data (some themes add it)
-    var sel  = document.querySelector('select[name="id"]');
-    var opt  = sel && sel.selectedOptions && sel.selectedOptions[0];
-    var cents = opt && (opt.dataset.price || opt.getAttribute('data-price'));
-    if (cents) {
-      var formatted = (window.Shopify && Shopify.formatMoney)
-        ? Shopify.formatMoney(parseInt(cents, 10))
-        : ('$' + (parseInt(cents, 10) / 100).toFixed(2));
-      setStickyPriceText(formatted);
+  function formatMoney(cents) {
+    if (window.Shopify && Shopify.formatMoney) return Shopify.formatMoney(cents);
+    try {
+      var currency = (window.Shopify && Shopify.currency && Shopify.currency.active) ? Shopify.currency.active : 'USD';
+      return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency }).format((cents || 0) / 100);
+    } catch (e) {
+      return '$' + ((cents || 0) / 100).toFixed(2);
     }
   }
 
-  /* ---------- SUBSCRIBE LABEL LOGIC ---------- */
+  function setStickyPriceByVariantId(variantId) {
+    if (!priceEl || !variantId) return;
+    var v = findVariantById(variantId);
+    if (v) priceEl.textContent = ' | ' + formatMoney(v.price);
+  }
+
+  function currentVariantId() {
+    // Most themes keep a hidden input [name="id"] inside the /cart/add form
+    var idInput = document.querySelector('form[action*="/cart/add"] [name="id"]');
+    if (idInput && idInput.value) return idInput.value;
+    var sel = document.querySelector('select[name="id"]');
+    if (sel && sel.value) return sel.value;
+    return root.getAttribute('data-initial-variant');
+  }
+
+  function handleVariantChange(overrideId) {
+    var vid = overrideId || currentVariantId();
+    setStickyPriceByVariantId(vid);
+  }
+
+  /* ---- Subscribe label toggle ---- */
   function setSubscribeModeFromSellingPlan() {
     var sp = document.querySelector('[name="selling_plan"], [name="selling_plan[]"], input[name^="selling_plan"], select[name^="selling_plan"]');
     var isSub = false;
@@ -198,7 +213,7 @@
     if (subLabel) subLabel.style.display = isSub ? '' : 'none';
   }
 
-  /* ---------- CLICK: proxy to main PDP Add to Cart ---------- */
+  /* ---- Proxy click to main PDP Add to Cart ---- */
   function clickPrimaryATC() {
     var primaryBtn =
       document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
@@ -212,34 +227,61 @@
   }
   btn.addEventListener('click', clickPrimaryATC);
 
-  /* ---------- INIT ---------- */
-  setSubscribeModeFromSellingPlan();
-  updateStickyPrice();
+  /* ---- Tagline from tabs (your selector) ---- */
+  function setTaglineFromTabs(){
+    var src = document.querySelector('.info-tabs__content [data-tab="1"] > span:first-child');
+    if (!src) return;
+    var txt = (src.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!txt) return;
+    var target = root.querySelector('.gh-sticky-atc__tagline');
+    if (!target) {
+      var info = root.querySelector('.gh-sticky-atc__info');
+      if (!info) return;
+      target = document.createElement('p');
+      target.className = 'gh-sticky-atc__tagline';
+      info.appendChild(target);
+    }
+    target.textContent = txt;
+  }
 
-  /* ---------- LISTENERS ---------- */
-  // Option changes (selects, radios, swatches)
+  /* ---- Init ---- */
+  setSubscribeModeFromSellingPlan();
+  handleVariantChange();
+  setTaglineFromTabs();
+
+  /* ---- Listeners ---- */
   document.addEventListener('change', function (e) {
     var n = (e.target && e.target.name) || '';
     if (n.indexOf('selling_plan') > -1) setSubscribeModeFromSellingPlan();
     if (n === 'id' || n.indexOf('options[') > -1 || n.indexOf('option') > -1) {
-      updateStickyPrice();
+      handleVariantChange();
     }
   });
 
-  // Common custom events used by many themes
+  // Common custom events
   ['variant:change', 'product:variant-change', 'product:variant:change'].forEach(function (evt) {
-    document.addEventListener(evt, updateStickyPrice);
+    document.addEventListener(evt, function (e) {
+      var vid = (e && e.detail && (e.detail.variant && e.detail.variant.id || e.detail.id)) || null;
+      handleVariantChange(vid);
+    });
   });
 
-  // Observe the PDP price box so currency converters/theme scripts keep us in sync
-  var priceNode = readPagePriceNode();
-  if (priceNode) {
-    var mo = new MutationObserver(updateStickyPrice);
-    mo.observe(priceNode.parentNode || priceNode, { childList: true, subtree: true, characterData: true });
+  // Observe hidden input [name="id"] for script-driven updates
+  var idInput = document.querySelector('form[action*="/cart/add"] [name="id"]');
+  if (idInput) {
+    var mo = new MutationObserver(function(){ handleVariantChange(); });
+    mo.observe(idInput, { attributes: true, attributeFilter: ['value'] });
+    idInput.addEventListener('input', handleVariantChange);
+  }
+
+  // Keep tagline synced if tabs load async
+  var tabsRoot = document.querySelector('.info-tabs__content');
+  if (tabsRoot) {
+    var moTabs = new MutationObserver(setTaglineFromTabs);
+    moTabs.observe(tabsRoot, { childList: true, subtree: true, characterData: true });
   }
 })();
 </script>
-
 
 {% schema %}
 {
