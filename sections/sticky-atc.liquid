@@ -223,6 +223,36 @@
         if (raw) setPrice(parseInt(raw, 10));
       });
     }
+
+        /* ---- Tagline: pull from page tabs if present ---- */
+    function setTaglineFromTabs(){
+      var src = document.querySelector('.info-tabs__content [data-tab="1"] > span:first-child');
+      if (!src) return;
+
+      var txt = (src.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!txt) return;
+
+      var target = document.querySelector('#gh-sticky-atc .gh-sticky-atc__tagline');
+      if (!target) {
+        var info = document.querySelector('#gh-sticky-atc .gh-sticky-atc__info');
+        if (!info) return;
+        target = document.createElement('p');
+        target.className = 'gh-sticky-atc__tagline';
+        info.appendChild(target);
+      }
+      target.textContent = txt;
+    }
+
+    // run once after load
+    setTaglineFromTabs();
+
+    // keep it in sync if the tab content renders/changes later
+    var tabsRoot = document.querySelector('.info-tabs__content');
+    if (tabsRoot) {
+      var mo = new MutationObserver(setTaglineFromTabs);
+      mo.observe(tabsRoot, { childList: true, subtree: true, characterData: true });
+    }
+
   })();
 </script>
 
