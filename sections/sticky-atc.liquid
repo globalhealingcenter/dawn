@@ -130,6 +130,34 @@
     .gh-sticky-atc__content { grid-template-columns: 1fr; gap: 12px; }
     .gh-sticky-atc__action .button { width: 100%; }
   }
+
+
+/* 1) Hide the quantity bubble over the thumbnail */
+#sticky-cta .gh-satc__qty,
+#sticky-cta [class*="product-quantity"],
+#sticky-cta .StickyCta_StickyCta__product-image__mArvV > span {
+  display: none !important;
+}
+
+/* 2) Use brand heading font for the product name */
+#sticky-cta .gh-satc__name,
+#sticky-cta [class*="product-name"] {
+  font-family: var(--gh-font-primary, inherit) !important;
+}
+
+/* 3) Reduce space between name and tagline */
+#sticky-cta .gh-satc__name,
+#sticky-cta [class*="product-name"] {
+  margin-bottom: 2px !important;   /* was more */
+  line-height: 1.15;
+}
+
+#sticky-cta .gh-satc__tagline,
+#sticky-cta [class*="product-tagline"] {
+  margin-top: 0 !important;
+  line-height: 1.25;
+}
+
 </style>
 
 <script>
