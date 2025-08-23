@@ -219,7 +219,7 @@
         "padding_bottom": 52
       }
     },
-    "sticky_atc_VkkH4F": {
+    "sticky_atc_WbUPHR": {
       "type": "sticky-atc",
       "name": "Sticky Add To Cart Bar",
       "settings": {
@@ -244,6 +244,6 @@
     "1686083501cc540fa5",
     "shogun-below",
     "custom_liquid_kweCXJ",
-    "sticky_atc_VkkH4F"
+    "sticky_atc_WbUPHR"
   ]
 }
