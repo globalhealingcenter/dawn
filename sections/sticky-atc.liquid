@@ -1,9 +1,3 @@
-{% comment %}
-  Sticky Add To Cart Bar — Global Healing
-  - Add this section to your product template in the Theme Editor
-  - It clicks your main product form's Add to Cart button (no duplicate form)
-{% endcomment %}
-
 {% assign selected_variant = product.selected_or_first_available_variant %}
 {% assign tagline_fallback = section.settings.tagline_text | default: 'Gentle, effective cleansing support' %}
 {% assign tagline_from_metafield = product.metafields.custom.tagline.value | default: product.metafields.custom.tagline %}
@@ -11,13 +5,14 @@
 
 <div id="gh-sticky-atc"
      class="gh-sticky-atc{% if section.settings.hide_on_desktop %} gh-sticky-atc--mobile-only{% endif %}{% if section.settings.hide_on_mobile %} gh-sticky-atc--desktop-only{% endif %}"
-     style="--gh-sticky-bg: {{ section.settings.bg_color }};
-            /* mix 88% white + 12% chosen color ≈ subtle border on light bg */
-            --gh-sticky-border: {{ section.settings.border_color | color_mix: '#ffffff', 88 }};
-            --gh-sticky-shadow: 0 -6px 24px rgba(0,0,0,.06);
-            --gh-btn-bg: {{ section.settings.btn_bg }};
-            --gh-btn-color: {{ section.settings.btn_color }};
-            --gh-text: #21472d;">
+     style="
+       --gh-sticky-bg: {{ section.settings.bg_color }};
+       --gh-sticky-border: {{ section.settings.border_color | color_mix: '#ffffff', 88 }};
+       --gh-sticky-shadow: 0 -6px 24px rgba(0,0,0,.06);
+       --gh-btn-bg: {{ section.settings.btn_bg }};
+       --gh-btn-color: {{ section.settings.btn_color }};
+       --gh-text: #21472d;
+     ">
 
   <div class="gh-sticky-atc__content">
 
@@ -28,7 +23,6 @@
           src="{{ selected_variant.image | default: product.featured_image | img_url: '120x120' }}"
           alt="{{ product.title | escape }}"
           width="64" height="64" loading="lazy">
-        <span class="gh-sticky-atc__qty-bubble" aria-hidden="true">1</span>
       </div>
 
       <div class="gh-sticky-atc__info">
@@ -47,9 +41,7 @@
         <span class="add-to-cart-default-text">Add to cart</span>
         <span class="add-to-cart-subscribe-text" style="display:none;">Subscribe Now</span>
         {% if section.settings.show_price %}
-          <span class="gh-sticky-atc__price">
-            | {{ selected_variant.price | money }}
-          </span>
+          <span class="gh-sticky-atc__price">| {{ selected_variant.price | money }}</span>
         {% endif %}
 
         <div class="loading-overlay__spinner hidden" aria-hidden="true">
@@ -79,6 +71,7 @@
     .gh-sticky-atc--mobile-only { display: block; }
     .gh-sticky-atc--desktop-only { display: none; }
   }
+
   .gh-sticky-atc__content {
     max-width: var(--page-width, 1200px);
     margin: 0 auto;
@@ -100,22 +93,24 @@
     overflow: hidden;
     background: #f5f3ef;
   }
-  .gh-sticky-atc__img img { width:100%; height:100%; object-fit:cover; display:block; }
-  .gh-sticky-atc__qty-bubble {
-    position: absolute; right: -6px; top: -6px;
-    width: 20px; height: 20px; border-radius: 999px;
-    background: #21472d; color:#fff; font-size: 12px; line-height: 20px; text-align:center;
+  .gh-sticky-atc__img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
   }
+
   .gh-sticky-atc__name {
-    margin: 0;
+    margin: 0;                     /* no extra gap above/below */
     font-weight: 700;
     color: var(--gh-text);
+    font-family: var(--gh-font-primary, inherit);
+    line-height: 1.15;
   }
   .gh-sticky-atc__tagline {
-    margin: 2px 0 0 0;
+    margin: 0;                     /* tight against name */
     font-size: 14px;
     color: #4a6657;
+    line-height: 1.25;
   }
+
   .gh-sticky-atc__action .button {
     display: inline-flex; align-items: center; justify-content: center;
     gap: 6px;
@@ -126,38 +121,11 @@
     min-width: 240px;
   }
   .gh-sticky-atc__price { margin-left: 4px; opacity: .95; }
+
   @media (max-width: 640px){
     .gh-sticky-atc__content { grid-template-columns: 1fr; gap: 12px; }
     .gh-sticky-atc__action .button { width: 100%; }
   }
-
-
-/* 1) Hide the quantity bubble over the thumbnail */
-#sticky-cta .gh-satc__qty,
-#sticky-cta [class*="product-quantity"],
-#sticky-cta .StickyCta_StickyCta__product-image__mArvV > span {
-  display: none !important;
-}
-
-/* 2) Use brand heading font for the product name */
-#sticky-cta .gh-satc__name,
-#sticky-cta [class*="product-name"] {
-  font-family: var(--gh-font-primary, inherit) !important;
-}
-
-/* 3) Reduce space between name and tagline */
-#sticky-cta .gh-satc__name,
-#sticky-cta [class*="product-name"] {
-  margin-bottom: 2px !important;   /* was more */
-  line-height: 1.15;
-}
-
-#sticky-cta .gh-satc__tagline,
-#sticky-cta [class*="product-tagline"] {
-  margin-top: 0 !important;
-  line-height: 1.25;
-}
-
 </style>
 
 <script>
@@ -185,7 +153,7 @@
     }
 
     function setSubscribeModeFromSellingPlan(){
-      // Common selectors for selling plan inputs (Ordergroove/ReCharge, etc.)
+      // Works with common selling plan inputs (Ordergroove/ReCharge, etc.)
       var sp = document.querySelector('[name="selling_plan"], [name="selling_plan[]"], input[name^="selling_plan"], select[name^="selling_plan"]');
       var isSub = false;
       if (sp) {
@@ -206,7 +174,7 @@
       }
     }
 
-    // Click = trigger your main product form's Add to Cart
+    // Click = trigger your main product form's ATC
     function clickPrimaryATC(){
       var primaryBtn =
         document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
@@ -219,7 +187,6 @@
         if (form) form.requestSubmit ? form.requestSubmit() : form.submit();
       }
     }
-
     btn.addEventListener('click', clickPrimaryATC);
 
     // Initial states
@@ -246,7 +213,7 @@
       }
     });
 
-    // Fallback: watch the variant select directly
+    // Fallback: watch the variant select directly (if theme doesn’t dispatch events)
     var variantSel = document.querySelector('select[name="id"]');
     if (variantSel) {
       variantSel.addEventListener('change', function(){
@@ -264,9 +231,11 @@
   "settings": [
     { "type": "checkbox", "id": "show_price", "label": "Show price in button", "default": true },
     { "type": "text", "id": "tagline_text", "label": "Fallback tagline", "default": "Gentle, effective cleansing support" },
+
     { "type": "header", "content": "Visibility" },
     { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false },
     { "type": "checkbox", "id": "hide_on_desktop", "label": "Hide on desktop", "default": false },
+
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_color", "label": "Bar background", "default": "#ffffff" },
     { "type": "color", "id": "border_color", "label": "Top border (base color)", "default": "#21472d" },
