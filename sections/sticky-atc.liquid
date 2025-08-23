@@ -1,0 +1,253 @@
+{% comment %}
+  Sticky Add To Cart Bar — Global Healing
+  - Add this section to your product template in the Theme Editor
+  - It clicks your main product form's Add to Cart button (no duplicate form)
+{% endcomment %}
+
+{% assign selected_variant = product.selected_or_first_available_variant %}
+{% assign tagline_fallback = section.settings.tagline_text | default: 'Gentle, effective cleansing support' %}
+{% assign tagline_from_metafield = product.metafields.custom.tagline.value | default: product.metafields.custom.tagline %}
+{% assign tagline = tagline_from_metafield | default: tagline_fallback %}
+
+<div id="gh-sticky-atc"
+     class="gh-sticky-atc{% if section.settings.hide_on_desktop %} gh-sticky-atc--mobile-only{% endif %}{% if section.settings.hide_on_mobile %} gh-sticky-atc--desktop-only{% endif %}"
+     style="--gh-sticky-bg: {{ section.settings.bg_color }};
+            /* mix 88% white + 12% chosen color ≈ subtle border on light bg */
+            --gh-sticky-border: {{ section.settings.border_color | color_mix: '#ffffff', 88 }};
+            --gh-sticky-shadow: 0 -6px 24px rgba(0,0,0,.06);
+            --gh-btn-bg: {{ section.settings.btn_bg }};
+            --gh-btn-color: {{ section.settings.btn_color }};
+            --gh-text: #21472d;">
+
+  <div class="gh-sticky-atc__content">
+
+    <!-- Product (image + name + tagline) -->
+    <div class="gh-sticky-atc__product">
+      <div class="gh-sticky-atc__img">
+        <img
+          src="{{ selected_variant.image | default: product.featured_image | img_url: '120x120' }}"
+          alt="{{ product.title | escape }}"
+          width="64" height="64" loading="lazy">
+        <span class="gh-sticky-atc__qty-bubble" aria-hidden="true">1</span>
+      </div>
+
+      <div class="gh-sticky-atc__info">
+        <p class="gh-sticky-atc__name">{{ product.title }}</p>
+        {% if tagline != blank %}
+          <p class="gh-sticky-atc__tagline">{{ tagline }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Action (button with live price) -->
+    <div class="gh-sticky-atc__action">
+      <button id="StickyATCButton"
+              type="button"
+              class="product-form__submit button button--primary">
+        <span class="add-to-cart-default-text">Add to cart</span>
+        <span class="add-to-cart-subscribe-text" style="display:none;">Subscribe Now</span>
+        {% if section.settings.show_price %}
+          <span class="gh-sticky-atc__price">
+            | {{ selected_variant.price | money }}
+          </span>
+        {% endif %}
+
+        <div class="loading-overlay__spinner hidden" aria-hidden="true">
+          <svg class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  .gh-sticky-atc {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--gh-sticky-bg, #fff);
+    border-top: 1px solid var(--gh-sticky-border, #eaeaea);
+    box-shadow: var(--gh-sticky-shadow);
+    padding: 10px 14px;
+    z-index: 50;
+  }
+  .gh-sticky-atc--mobile-only { display: none; }
+  .gh-sticky-atc--desktop-only { display: block; }
+  @media (max-width: 640px){
+    .gh-sticky-atc--mobile-only { display: block; }
+    .gh-sticky-atc--desktop-only { display: none; }
+  }
+  .gh-sticky-atc__content {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 16px;
+  }
+  .gh-sticky-atc__product {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  .gh-sticky-atc__img {
+    position: relative;
+    width: 64px; height: 64px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f3ef;
+  }
+  .gh-sticky-atc__img img { width:100%; height:100%; object-fit:cover; display:block; }
+  .gh-sticky-atc__qty-bubble {
+    position: absolute; right: -6px; top: -6px;
+    width: 20px; height: 20px; border-radius: 999px;
+    background: #21472d; color:#fff; font-size: 12px; line-height: 20px; text-align:center;
+  }
+  .gh-sticky-atc__name {
+    margin: 0;
+    font-weight: 700;
+    color: var(--gh-text);
+  }
+  .gh-sticky-atc__tagline {
+    margin: 2px 0 0 0;
+    font-size: 14px;
+    color: #4a6657;
+  }
+  .gh-sticky-atc__action .button {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px;
+    background-color: var(--gh-btn-bg, #21472d) !important;
+    color: var(--gh-btn-color, #fff) !important;
+    padding: 12px 18px;
+    border-radius: 6px;
+    min-width: 240px;
+  }
+  .gh-sticky-atc__price { margin-left: 4px; opacity: .95; }
+  @media (max-width: 640px){
+    .gh-sticky-atc__content { grid-template-columns: 1fr; gap: 12px; }
+    .gh-sticky-atc__action .button { width: 100%; }
+  }
+</style>
+
+<script>
+  (function(){
+    var btn = document.getElementById('StickyATCButton');
+    if(!btn) return;
+
+    var priceEl   = btn.querySelector('.gh-sticky-atc__price');
+    var addLabel  = btn.querySelector('.add-to-cart-default-text');
+    var subLabel  = btn.querySelector('.add-to-cart-subscribe-text');
+
+    function moneyFormatCents(cents){
+      if (window.Shopify && Shopify.formatMoney) return Shopify.formatMoney(cents);
+      var currency = (window.Shopify && Shopify.currency && Shopify.currency.active) ? Shopify.currency.active : 'USD';
+      try {
+        return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency }).format((cents||0)/100);
+      } catch(e) {
+        return '$' + ((cents||0)/100).toFixed(2);
+      }
+    }
+
+    function setPrice(cents){
+      if (!priceEl) return;
+      priceEl.textContent = ' | ' + moneyFormatCents(cents);
+    }
+
+    function setSubscribeModeFromSellingPlan(){
+      // Common selectors for selling plan inputs (Ordergroove/ReCharge, etc.)
+      var sp = document.querySelector('[name="selling_plan"], [name="selling_plan[]"], input[name^="selling_plan"], select[name^="selling_plan"]');
+      var isSub = false;
+      if (sp) {
+        if (sp.tagName === 'SELECT') isSub = !!sp.value;
+        else if (sp.type === 'radio' || sp.type === 'checkbox') {
+          var checked = document.querySelector('[name="' + sp.name + '"]:checked');
+          isSub = !!(checked && checked.value);
+        } else {
+          isSub = !!sp.value;
+        }
+      }
+      if (isSub){
+        if (addLabel) addLabel.style.display = 'none';
+        if (subLabel) subLabel.style.display = '';
+      } else {
+        if (addLabel) addLabel.style.display = '';
+        if (subLabel) subLabel.style.display = 'none';
+      }
+    }
+
+    // Click = trigger your main product form's Add to Cart
+    function clickPrimaryATC(){
+      var primaryBtn =
+        document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
+        document.querySelector('[data-type="add-to-cart"]:not(#StickyATCButton)') ||
+        document.querySelector('.product-form__submit:not(#StickyATCButton)');
+      if (primaryBtn) {
+        primaryBtn.click();
+      } else {
+        var form = document.querySelector('form[action*="/cart/add"]');
+        if (form) form.requestSubmit ? form.requestSubmit() : form.submit();
+      }
+    }
+
+    btn.addEventListener('click', clickPrimaryATC);
+
+    // Initial states
+    setSubscribeModeFromSellingPlan();
+
+    // React to selling plan UI changes
+    document.addEventListener('change', function(e){
+      var name = e.target && e.target.name || '';
+      if (name.indexOf('selling_plan') > -1) setSubscribeModeFromSellingPlan();
+    });
+
+    // Update price & image on variant change (Dawn-style event)
+    document.addEventListener('variant:change', function(e){
+      if (e && e.detail && e.detail.variant) {
+        setPrice(e.detail.variant.price);
+        try {
+          var img = document.querySelector('#gh-sticky-atc .gh-sticky-atc__img img');
+          var media = e.detail.variant.featured_media || e.detail.variant.featured_image;
+          if (img && media) {
+            var src = media.src || (media.preview_image && media.preview_image.src);
+            if (src) img.src = src + (src.indexOf('?')>-1 ? '&' : '?') + 'width=120';
+          }
+        } catch(_){}
+      }
+    });
+
+    // Fallback: watch the variant select directly
+    var variantSel = document.querySelector('select[name="id"]');
+    if (variantSel) {
+      variantSel.addEventListener('change', function(){
+        var opt = variantSel.selectedOptions && variantSel.selectedOptions[0];
+        var raw = opt ? (opt.dataset.price || opt.getAttribute('data-price')) : null;
+        if (raw) setPrice(parseInt(raw, 10));
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sticky Add To Cart Bar",
+  "settings": [
+    { "type": "checkbox", "id": "show_price", "label": "Show price in button", "default": true },
+    { "type": "text", "id": "tagline_text", "label": "Fallback tagline", "default": "Gentle, effective cleansing support" },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_on_desktop", "label": "Hide on desktop", "default": false },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Bar background", "default": "#ffffff" },
+    { "type": "color", "id": "border_color", "label": "Top border (base color)", "default": "#21472d" },
+    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#21472d" },
+    { "type": "color", "id": "btn_color", "label": "Button text color", "default": "#ffffff" }
+  ],
+  "blocks": [],
+  "presets": [
+    { "name": "Sticky Add To Cart Bar" }
+  ]
+}
+{% endschema %}
