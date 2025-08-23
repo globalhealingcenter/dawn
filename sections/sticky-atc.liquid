@@ -130,131 +130,116 @@
 </style>
 
 <script>
-  (function(){
-    var btn = document.getElementById('StickyATCButton');
-    if(!btn) return;
+(function () {
+  var btn = document.getElementById('StickyATCButton');
+  if (!btn) return;
 
-    var priceEl   = btn.querySelector('.gh-sticky-atc__price');
-    var addLabel  = btn.querySelector('.add-to-cart-default-text');
-    var subLabel  = btn.querySelector('.add-to-cart-subscribe-text');
+  var priceEl  = btn.querySelector('.gh-sticky-atc__price');
+  var addLabel = btn.querySelector('.add-to-cart-default-text');
+  var subLabel = btn.querySelector('.add-to-cart-subscribe-text');
 
-    function moneyFormatCents(cents){
-      if (window.Shopify && Shopify.formatMoney) return Shopify.formatMoney(cents);
-      var currency = (window.Shopify && Shopify.currency && Shopify.currency.active) ? Shopify.currency.active : 'USD';
-      try {
-        return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency }).format((cents||0)/100);
-      } catch(e) {
-        return '$' + ((cents||0)/100).toFixed(2);
-      }
+  /* ---------- PRICE: read from the page ---------- */
+  function setStickyPriceText(txt) {
+    if (!priceEl) return;
+    priceEl.textContent = ' | ' + (txt || '');
+  }
+
+  function readPagePriceNode() {
+    // Try several common price locations used by Shopify themes
+    var selectors = [
+      '.price__container .price-item--regular',
+      '.price .price-item--regular',
+      '[data-product-price] .price-item',
+      '.product__info-container .price-item--regular',
+      '.product__price .price-item',
+      '.price .price__regular .price-item',
+      '.price .price__current',                 // fallback
+      '.price'                                  // last resort
+    ];
+    for (var i = 0; i < selectors.length; i++) {
+      var el = document.querySelector(selectors[i]);
+      if (el && el.textContent.trim()) return el;
     }
+    return null;
+  }
 
-    function setPrice(cents){
-      if (!priceEl) return;
-      priceEl.textContent = ' | ' + moneyFormatCents(cents);
+  function updateStickyPrice() {
+    var node = readPagePriceNode();
+    if (node) {
+      setStickyPriceText(node.textContent.trim());
+      return;
     }
+    // Fallback: try price from selected option data (some themes add it)
+    var sel  = document.querySelector('select[name="id"]');
+    var opt  = sel && sel.selectedOptions && sel.selectedOptions[0];
+    var cents = opt && (opt.dataset.price || opt.getAttribute('data-price'));
+    if (cents) {
+      var formatted = (window.Shopify && Shopify.formatMoney)
+        ? Shopify.formatMoney(parseInt(cents, 10))
+        : ('$' + (parseInt(cents, 10) / 100).toFixed(2));
+      setStickyPriceText(formatted);
+    }
+  }
 
-    function setSubscribeModeFromSellingPlan(){
-      // Works with common selling plan inputs (Ordergroove/ReCharge, etc.)
-      var sp = document.querySelector('[name="selling_plan"], [name="selling_plan[]"], input[name^="selling_plan"], select[name^="selling_plan"]');
-      var isSub = false;
-      if (sp) {
-        if (sp.tagName === 'SELECT') isSub = !!sp.value;
-        else if (sp.type === 'radio' || sp.type === 'checkbox') {
-          var checked = document.querySelector('[name="' + sp.name + '"]:checked');
-          isSub = !!(checked && checked.value);
-        } else {
-          isSub = !!sp.value;
-        }
-      }
-      if (isSub){
-        if (addLabel) addLabel.style.display = 'none';
-        if (subLabel) subLabel.style.display = '';
+  /* ---------- SUBSCRIBE LABEL LOGIC ---------- */
+  function setSubscribeModeFromSellingPlan() {
+    var sp = document.querySelector('[name="selling_plan"], [name="selling_plan[]"], input[name^="selling_plan"], select[name^="selling_plan"]');
+    var isSub = false;
+    if (sp) {
+      if (sp.tagName === 'SELECT') isSub = !!sp.value;
+      else if (sp.type === 'radio' || sp.type === 'checkbox') {
+        var checked = document.querySelector('[name="' + sp.name + '"]:checked');
+        isSub = !!(checked && checked.value);
       } else {
-        if (addLabel) addLabel.style.display = '';
-        if (subLabel) subLabel.style.display = 'none';
+        isSub = !!sp.value;
       }
     }
+    if (addLabel) addLabel.style.display = isSub ? 'none' : '';
+    if (subLabel) subLabel.style.display = isSub ? '' : 'none';
+  }
 
-    // Click = trigger your main product form's ATC
-    function clickPrimaryATC(){
-      var primaryBtn =
-        document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
-        document.querySelector('[data-type="add-to-cart"]:not(#StickyATCButton)') ||
-        document.querySelector('.product-form__submit:not(#StickyATCButton)');
-      if (primaryBtn) {
-        primaryBtn.click();
-      } else {
-        var form = document.querySelector('form[action*="/cart/add"]');
-        if (form) form.requestSubmit ? form.requestSubmit() : form.submit();
-      }
+  /* ---------- CLICK: proxy to main PDP Add to Cart ---------- */
+  function clickPrimaryATC() {
+    var primaryBtn =
+      document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
+      document.querySelector('[data-type="add-to-cart"]:not(#StickyATCButton)') ||
+      document.querySelector('.product-form__submit:not(#StickyATCButton)');
+    if (primaryBtn) primaryBtn.click();
+    else {
+      var form = document.querySelector('form[action*="/cart/add"]');
+      if (form) (form.requestSubmit ? form.requestSubmit() : form.submit());
     }
-    btn.addEventListener('click', clickPrimaryATC);
+  }
+  btn.addEventListener('click', clickPrimaryATC);
 
-    // Initial states
-    setSubscribeModeFromSellingPlan();
+  /* ---------- INIT ---------- */
+  setSubscribeModeFromSellingPlan();
+  updateStickyPrice();
 
-    // React to selling plan UI changes
-    document.addEventListener('change', function(e){
-      var name = e.target && e.target.name || '';
-      if (name.indexOf('selling_plan') > -1) setSubscribeModeFromSellingPlan();
-    });
-
-    // Update price & image on variant change (Dawn-style event)
-    document.addEventListener('variant:change', function(e){
-      if (e && e.detail && e.detail.variant) {
-        setPrice(e.detail.variant.price);
-        try {
-          var img = document.querySelector('#gh-sticky-atc .gh-sticky-atc__img img');
-          var media = e.detail.variant.featured_media || e.detail.variant.featured_image;
-          if (img && media) {
-            var src = media.src || (media.preview_image && media.preview_image.src);
-            if (src) img.src = src + (src.indexOf('?')>-1 ? '&' : '?') + 'width=120';
-          }
-        } catch(_){}
-      }
-    });
-
-    // Fallback: watch the variant select directly (if theme doesn’t dispatch events)
-    var variantSel = document.querySelector('select[name="id"]');
-    if (variantSel) {
-      variantSel.addEventListener('change', function(){
-        var opt = variantSel.selectedOptions && variantSel.selectedOptions[0];
-        var raw = opt ? (opt.dataset.price || opt.getAttribute('data-price')) : null;
-        if (raw) setPrice(parseInt(raw, 10));
-      });
+  /* ---------- LISTENERS ---------- */
+  // Option changes (selects, radios, swatches)
+  document.addEventListener('change', function (e) {
+    var n = (e.target && e.target.name) || '';
+    if (n.indexOf('selling_plan') > -1) setSubscribeModeFromSellingPlan();
+    if (n === 'id' || n.indexOf('options[') > -1 || n.indexOf('option') > -1) {
+      updateStickyPrice();
     }
+  });
 
-        /* ---- Tagline: pull from page tabs if present ---- */
-    function setTaglineFromTabs(){
-      var src = document.querySelector('.info-tabs__content [data-tab="1"] > span:first-child');
-      if (!src) return;
+  // Common custom events used by many themes
+  ['variant:change', 'product:variant-change', 'product:variant:change'].forEach(function (evt) {
+    document.addEventListener(evt, updateStickyPrice);
+  });
 
-      var txt = (src.textContent || '').replace(/\s+/g, ' ').trim();
-      if (!txt) return;
-
-      var target = document.querySelector('#gh-sticky-atc .gh-sticky-atc__tagline');
-      if (!target) {
-        var info = document.querySelector('#gh-sticky-atc .gh-sticky-atc__info');
-        if (!info) return;
-        target = document.createElement('p');
-        target.className = 'gh-sticky-atc__tagline';
-        info.appendChild(target);
-      }
-      target.textContent = txt;
-    }
-
-    // run once after load
-    setTaglineFromTabs();
-
-    // keep it in sync if the tab content renders/changes later
-    var tabsRoot = document.querySelector('.info-tabs__content');
-    if (tabsRoot) {
-      var mo = new MutationObserver(setTaglineFromTabs);
-      mo.observe(tabsRoot, { childList: true, subtree: true, characterData: true });
-    }
-
-  })();
+  // Observe the PDP price box so currency converters/theme scripts keep us in sync
+  var priceNode = readPagePriceNode();
+  if (priceNode) {
+    var mo = new MutationObserver(updateStickyPrice);
+    mo.observe(priceNode.parentNode || priceNode, { childList: true, subtree: true, characterData: true });
+  }
+})();
 </script>
+
 
 {% schema %}
 {
