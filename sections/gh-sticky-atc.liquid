@@ -1,12 +1,13 @@
 <script>
 (function () {
-  const root = document.getElementById('gh-');
+  const root = document.getElementById('gh-sticky-atc');
   const btn  = document.getElementById('StickyATCButton');
   if (!root || !btn) return;
 
-  const sectionId = root.dataset.sectionId || "{{ section.id }}";
+  // ✅ Pull section.id from attribute
+  const sectionId = root.dataset.sectionId;
   const variantsEl = document.getElementById('gh-sticky-variants-' + sectionId);
-  const priceEl  = btn.querySelector('.gh-__price');
+  const priceEl  = btn.querySelector('.gh-sticky-atc__price');
   const addLabel = btn.querySelector('.add-to-cart-default-text');
   const subLabel = btn.querySelector('.add-to-cart-subscribe-text');
 
@@ -18,7 +19,10 @@
   const formatMoney = cents => {
     try {
       const currency = Shopify?.currency?.active || 'USD';
-      return new Intl.NumberFormat(undefined, { style: 'currency', currency }).format(cents / 100);
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency
+      }).format(cents / 100);
     } catch {
       return `$${(cents / 100).toFixed(2)}`;
     }
@@ -40,15 +44,20 @@
   const updateSubscribeText = () => {
     const sp = document.querySelector('[name^="selling_plan"]');
     const isSub = sp?.tagName === 'SELECT' ? !!sp.value
-      : ['radio', 'checkbox'].includes(sp?.type) ? !!document.querySelector(`[name="${sp.name}"]:checked`)?.value
-      : !!sp?.value;
+      : ['radio', 'checkbox'].includes(sp?.type)
+        ? !!document.querySelector(`[name="${sp.name}"]:checked`)?.value
+        : !!sp?.value;
 
-    addLabel.style.display = isSub ? 'none' : '';
-    subLabel.style.display = isSub ? '' : 'none';
+    if (addLabel) addLabel.style.display = isSub ? 'none' : '';
+    if (subLabel) subLabel.style.display = isSub ? '' : 'none';
   };
 
   const triggerMainATC = () => {
-    const mainBtn = document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)');
+    const mainBtn =
+      document.querySelector('form[action*="/cart/add"] button[type="submit"]:not(#StickyATCButton)') ||
+      document.querySelector('[data-type="add-to-cart"]:not(#StickyATCButton)') ||
+      document.querySelector('.product-form__submit:not(#StickyATCButton)');
+
     if (mainBtn) mainBtn.click();
     else {
       const form = document.querySelector('form[action*="/cart/add"]');
@@ -60,7 +69,9 @@
     document.addEventListener('change', e => {
       const n = e.target?.name || '';
       if (n.includes('selling_plan')) updateSubscribeText();
-      if (['id', 'options[', 'option'].some(prefix => n.startsWith(prefix))) updatePrice(currentVariantId());
+      if (['id', 'options[', 'option'].some(prefix => n.startsWith(prefix))) {
+        updatePrice(currentVariantId());
+      }
     });
 
     ['variant:change', 'product:variant-change', 'product:variant:change'].forEach(evt => {
@@ -78,7 +89,7 @@
     }
   };
 
-  // Init
+  // ✅ Init
   updateSubscribeText();
   updatePrice(currentVariantId());
   attachListeners();
