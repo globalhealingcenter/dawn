@@ -1,12 +1,12 @@
 <script>
 (function () {
-  const root = document.getElementById('gh-sticky-atc');
+  const root = document.getElementById('gh-');
   const btn  = document.getElementById('StickyATCButton');
   if (!root || !btn) return;
 
   const sectionId = root.dataset.sectionId || "{{ section.id }}";
   const variantsEl = document.getElementById('gh-sticky-variants-' + sectionId);
-  const priceEl  = btn.querySelector('.gh-sticky-atc__price');
+  const priceEl  = btn.querySelector('.gh-__price');
   const addLabel = btn.querySelector('.add-to-cart-default-text');
   const subLabel = btn.querySelector('.add-to-cart-subscribe-text');
 
