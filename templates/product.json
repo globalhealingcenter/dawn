@@ -221,17 +221,8 @@
     },
     "sticky_atc_WbUPHR": {
       "type": "sticky-atc",
-      "name": "Sticky Add To Cart Bar",
-      "settings": {
-        "show_price": true,
-        "tagline_text": "Gentle, effective cleansing support",
-        "hide_on_mobile": false,
-        "hide_on_desktop": false,
-        "bg_color": "#ffffff",
-        "border_color": "#21472d",
-        "btn_bg": "#21472d",
-        "btn_color": "#ffffff"
-      }
+      "name": "GH Sticky ATC Bar",
+      "settings": {}
     }
   },
   "order": [
