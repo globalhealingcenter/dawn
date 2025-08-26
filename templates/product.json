@@ -220,7 +220,7 @@
       }
     },
     "sticky_atc_WbUPHR": {
-      "type": "sticky-atc",
+      "type": "gh-sticky-atc",
       "name": "GH Sticky ATC Bar",
       "settings": {}
     }
