@@ -416,6 +416,10 @@
 <!--   Widget : Gift with Purchase: 5 OP Samples with Best Sellers subscription  -->  
 <!--   <div data-rebuy-id="200547"></div> -->  
 
+{% if request.path contains '/pages/influencer' %}
+  <script src="{{ 'gh-countdown.js' | asset_url }}" defer></script>
+{% endif %}
+
 {% if template contains 'product' %}
   <script src="{{ 'og-subscribe-click.js' | asset_url }}" defer></script>
 {% endif %}
