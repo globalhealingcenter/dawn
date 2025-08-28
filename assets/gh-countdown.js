@@ -1,240 +1,232 @@
-/* GH Countdown — bar replacement + scroll popup (Central Time)
-Pages: /pages/influencer, /pages/influencer-test
-Params:
-gh_until=YYYY-MM-DD[THH:MM]  OR  gh_until_date=YYYY-MM-DD & gh_until_time=HH:MM
-gh_name=Name    (for CTA “Shop Name’s Picks”)
-gh_code=CODE    (optional, shown in popup)
-*/
-(function(){
-"use strict";
+/* =========================================================
+   GH Countdown (banner + smart pop-bar)
+   - Central Time (DST aware)
+   - Pop-bar shows only when the banner is not visible
+   - CTA matches brand (gold bg, white text, square corners)
+   - Singular labels (1 DAY, 1 HOUR, etc.)
+   ========================================================= */
 
 /* ---------- Page scope ---------- */
+// PROD (uncomment when launching):
+// var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
+// if (!PATH_OK) return;
 
-/* PROD scope (leave commented until launch)
-var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
-if (!PATH_OK) return;
-*/
-
-/* TEST-ONLY scope (active now) */
+// TEST-ONLY (active now):
 var PATH_OK = /\/pages\/influencer-test(?:\/|$)/i.test(location.pathname);
 if (!PATH_OK) return;
 
+/* ---------- helpers ---------- */
+function ready(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn,{once:true});} else { fn(); } }
+function qsParam(name){ var q=new URLSearchParams(location.search||''); return (q.get(name)||q.get('amp;'+name)||'').trim(); }
+function pad(n){ return ('0'+n).slice(-2); }
 
-// ---------- tiny helpers ----------
-function ready(fn){ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",fn,{once:true});} else { fn(); } }
-function qsp(name){ var q=new URLSearchParams(location.search||""); return (q.get(name)||q.get("amp;"+name)||"").trim(); }
-function pad(n){ return ("0"+n).slice(-2); }
-
-// US Central Time DST helpers
+/* DST helpers (Central Time) */
 function secondSundayInMarch(y){ var d=new Date(Date.UTC(y,2,1)); return 1+((7-d.getUTCDay())%7)+7; }
 function firstSundayInNovember(y){ var d=new Date(Date.UTC(y,10,1)); return 1+((7-d.getUTCDay())%7); }
 function isDST(y,m,d,h){
-if(m<3||m>11) return false;
-if(m>3&&m<11) return true;
-if(m===3){ var s=secondSundayInMarch(y); return d>s || (d===s && h>=2); }
-if(m===11){ var e=firstSundayInNovember(y); return d<e || (d===e && h<2); }
-return false;
+  if(m<3||m>11) return false;
+  if(m>3&&m<11) return true;
+  if(m===3){ var s=secondSundayInMarch(y); if(d<s) return false; if(d>s) return true; return h>=2; }
+  if(m===11){ var e=firstSundayInNovember(y); if(d<e) return true; if(d>e) return false; return h<2; }
+  return false;
 }
+function endMsFromCT(Y,M,D,H,Min){ var off=isDST(Y,M,D,H)?'-05:00':'-06:00'; return Date.parse(Y+'-'+pad(M)+'-'+pad(D)+'T'+pad(H)+':'+pad(Min)+':00'+off); }
 
-function endMsFromCT(Y,M,D,H,Min){
-var off = isDST(Y,M,D,H) ? "-05:00" : "-06:00";
-return Date.parse(Y+"-"+pad(M)+"-"+pad(D)+"T"+pad(H)+":"+pad(Min)+":00"+off);
-}
-
+/* Parse deadline (?gh_until=YYYY-MM-DD[THH:MM] OR gh_until_date + gh_until_time) */
 function parseDeadline(){
-var U=qsp("gh_until"), D=qsp("gh_until_date"), T=qsp("gh_until_time");
-var Y,M,Da,H=23,Mi=59, m;
-if (U){
-m=/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{1,2})(?::?(\d{2}))?)?$/.exec(U);
-if(!m) return null;
-Y=+m[1]; M=+m[2]; Da=+m[3];
-if(m[4]!=null){ H=+m[4]; Mi=+(m[5]||0); }
-} else if (D){
-m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(D);
-if(!m) return null;
-Y=+m[1]; M=+m[2]; Da=+m[3];
-if (T){
-var t=/^(\d{1,2}):(\d{2})$/.exec(T);
-if(!t) return null;
-H=+t[1]; Mi=+t[2];
-}
-} else {
-return null;
-}
-var end=endMsFromCT(Y,M,Da,H,Mi);
-return isFinite(end) ? end : null;
+  var U=qsParam('gh_until'), D=qsParam('gh_until_date'), T=qsParam('gh_until_time');
+  var Y,M,Da,H=23,Mi=59;
+  if(U){
+    var m=/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{1,2})(?::?(\d{2}))?)?$/.exec(U);
+    if(!m) return null; Y=+m[1];M=+m[2];Da=+m[3]; if(m[4]!=null){H=+m[4];Mi=+(m[5]||0);}
+  }else if(D){
+    var d=/^(\d{4})-(\d{2})-(\d{2})$/.exec(D); if(!d) return null; Y=+d[1];M=+d[2];Da=+d[3];
+    if(T){ var t=/^(\d{1,2}):(\d{2})$/.exec(T); if(!t) return null; H=+t[1];Mi=+t[2]; }
+  }else return null;
+  var end=endMsFromCT(Y,M,Da,H,Mi); return isFinite(end)?end:null;
 }
 
+/* ---------- styles (insert once) ---------- */
+function injectCSS(){
+  if(document.getElementById('gh-countdown-css')) return;
+  var css=document.createElement('style'); css.id='gh-countdown-css';
+  css.textContent = `
+    /* Banner */
+    #gh-countdown-wrap{display:grid;gap:.6rem;align-items:center;justify-items:center}
+    #gh-countdown-grid{display:flex;gap:2.25rem;justify-content:center;align-items:flex-end;flex-wrap:wrap}
+    #gh-countdown-grid .cell{display:grid;justify-items:center}
+    #gh-countdown-grid .num{color:#fff;font-weight:800;line-height:1;font-size:clamp(28px,6vw,64px);letter-spacing:.02em}
+    #gh-countdown-grid .lab{color:rgba(255,255,255,.9);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:.25rem}
+    .gh-countdown-cta{margin-top:.25rem}
+    .gh-countdown-cta .gh-btn{
+      background: var(--gh-color-gold, #b88a2b);
+      color: #fff;
+      border: var(--buttons-border-width, 0px) solid transparent;
+      border-radius: 0;
+      padding: calc(12px - var(--buttons-border-width, 0px)) calc(18px - var(--buttons-border-width, 0px));
+      font-weight:800; cursor:pointer
+    }
+    .gh-countdown-cta .gh-btn:hover{filter:brightness(.97)}
+    @media (max-width:480px){ #gh-countdown-grid{gap:1.25rem} }
+
+    /* Pop bar (hidden until banner leaves view) */
+    #gh-popbar{position:fixed;left:0;right:0;bottom:16px;display:none;justify-content:center;z-index:2147483600;pointer-events:none}
+    #gh-popbar.is-open{display:flex}
+    #gh-popbar .card{pointer-events:auto;display:flex;align-items:center;gap:18px;background:#1f4a35;color:#fff;
+      padding:12px 16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:980px;width:calc(100% - 24px)}
+    #gh-popbar .digits{display:flex;gap:1.4rem;align-items:flex-end;flex-wrap:nowrap}
+    #gh-popbar .cell{display:grid;justify-items:center}
+    #gh-popbar .num{font-weight:800;line-height:1;font-size:clamp(22px,4.2vw,40px)}
+    #gh-popbar .lab{opacity:.9;font-weight:700;font-size:9px;letter-spacing:.18em;text-transform:uppercase;margin-top:.25rem}
+    #gh-popbar .spacer{flex:1}
+    #gh-popbar .btn{
+      background: var(--gh-color-gold, #b88a2b);
+      color: #fff;
+      border: var(--buttons-border-width, 0px) solid transparent;
+      border-radius: 0;
+      padding: calc(10px - var(--buttons-border-width, 0px)) calc(14px - var(--buttons-border-width, 0px));
+      font-weight:800; cursor:pointer; white-space:nowrap
+    }
+    #gh-popbar .close{margin-left:6px;background:transparent;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;opacity:.9}
+    @media (max-width:640px){
+      #gh-popbar .card{flex-direction:column;gap:10px}
+      #gh-popbar .spacer{display:none}
+      #gh-popbar .digits{gap:1.1rem}
+    }
+  `;
+  document.head.appendChild(css);
+}
+
+/* ---------- banner ---------- */
+function mountBanner(endMs){
+  var bar = document.getElementById('gh-offer-bar') || document.querySelector('.gh--bar h5');
+  if(!bar){
+    var header = document.querySelector('.gh--header') || document.querySelector('main') || document.body;
+    var sec = document.createElement('section');
+    sec.className = 'gh--bar bg-green py2';
+    sec.innerHTML = '<div class="page-width center"><h5 class="mb0 color-white" id="gh-offer-bar"></h5></div>';
+    header.parentNode.insertBefore(sec, header.nextSibling);
+    bar = sec.querySelector('#gh-offer-bar');
+  }
+  if (bar.dataset.ghBound === '1') return;
+  bar.dataset.ghBound = '1';
+
+  var name = qsParam('gh_name') || 'Influencer';
+  bar.innerHTML = `
+    <div id="gh-countdown-wrap" aria-live="polite" aria-atomic="true">
+      <div id="gh-countdown-grid">
+        <div class="cell"><div class="num" id="gh-b-d">0</div><div class="lab" id="gh-b-ld">DAYS</div></div>
+        <div class="cell"><div class="num" id="gh-b-h">00</div><div class="lab" id="gh-b-lh">HOURS</div></div>
+        <div class="cell"><div class="num" id="gh-b-m">00</div><div class="lab" id="gh-b-lm">MINUTES</div></div>
+        <div class="cell"><div class="num" id="gh-b-s">00</div><div class="lab" id="gh-b-ls">SECONDS</div></div>
+      </div>
+      <div class="gh-countdown-cta">
+        <button type="button" class="gh-btn" id="gh-banner-cta">Shop ${name}'s Picks</button>
+      </div>
+    </div>`;
+
+  var cta = document.getElementById('gh-banner-cta');
+  if(cta){
+    cta.addEventListener('click', function(){
+      var t=document.querySelector('.product-slider')||document.getElementById('gh-products');
+      if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); else location.hash='#gh-products';
+    });
+  }
+}
+
+/* ---------- pop bar ---------- */
+function buildPopBar(){
+  var host=document.createElement('div');
+  host.id='gh-popbar';
+  var name = qsParam('gh_name') || 'Influencer';
+  host.innerHTML =
+    '<div class="card" aria-label="Limited-time offer">'+
+      '<div class="digits" aria-hidden="false">'+
+        '<div class="cell"><div class="num" id="gh-p-d">0</div><div class="lab" id="gh-p-ld">DAYS</div></div>'+
+        '<div class="cell"><div class="num" id="gh-p-h">00</div><div class="lab" id="gh-p-lh">HOURS</div></div>'+
+        '<div class="cell"><div class="num" id="gh-p-m">00</div><div class="lab" id="gh-p-lm">MINUTES</div></div>'+
+        '<div class="cell"><div class="num" id="gh-p-s">00</div><div class="lab" id="gh-p-ls">SECONDS</div></div>'+
+      '</div>'+
+      '<div class="spacer"></div>'+
+      '<div class="actions">'+
+        '<button class="btn" id="gh-pop-cta" type="button">Shop '+name+'\'s Picks</button>'+
+        '<button class="close" id="gh-pop-close" type="button" aria-label="Close">×</button>'+
+      '</div>'+
+    '</div>';
+  document.body.appendChild(host);
+
+  document.getElementById('gh-pop-cta').addEventListener('click', function(){
+    var t=document.querySelector('.product-slider')||document.getElementById('gh-products');
+    if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); else location.hash='#gh-products';
+  });
+  document.getElementById('gh-pop-close').addEventListener('click', function(){ host.remove(); });
+
+  return host;
+}
+
+/* pop visibility (only when banner is off-screen) */
+function wireVisibility(popEl){
+  var banner = document.getElementById('gh-countdown-wrap');
+  if(!banner){
+    function onScroll(){ if(window.scrollY > window.innerHeight*0.25){ popEl.classList.add('is-open'); window.removeEventListener('scroll', onScroll, {passive:true}); } }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    var e = entries[0];
+    if(!e) return;
+    if(e.isIntersecting && e.intersectionRatio > 0.05){
+      popEl.classList.remove('is-open');
+    }else{
+      popEl.classList.add('is-open');
+    }
+  }, {root:null, threshold:[0,0.05,0.1,0.2]});
+  io.observe(banner);
+}
+
+/* ---------- ticking (numbers + singular labels) ---------- */
+function startTicking(endMs){
+  function setDigits(prefix, d,h,m,s){
+    var dE=document.getElementById(prefix+'-d'),
+        hE=document.getElementById(prefix+'-h'),
+        mE=document.getElementById(prefix+'-m'),
+        sE=document.getElementById(prefix+'-s');
+    if(dE) dE.textContent=d;
+    if(hE) hE.textContent=pad(h);
+    if(mE) mE.textContent=pad(m);
+    if(sE) sE.textContent=pad(s);
+
+    // Singularize labels
+    var ld=document.getElementById(prefix+'-ld'),
+        lh=document.getElementById(prefix+'-lh'),
+        lm=document.getElementById(prefix+'-lm'),
+        ls=document.getElementById(prefix+'-ls');
+    if(ld) ld.textContent = (d===1 ? 'DAY'    : 'DAYS');
+    if(lh) lh.textContent = (h===1 ? 'HOUR'   : 'HOURS');
+    if(lm) lm.textContent = (m===1 ? 'MINUTE' : 'MINUTES');
+    if(ls) ls.textContent = (s===1 ? 'SECOND' : 'SECONDS');
+  }
+  function tick(){
+    var left=endMs - Date.now();
+    if(left<=0){ setDigits('gh-b',0,0,0,0); setDigits('gh-p',0,0,0,0); clearInterval(iv); return; }
+    var s=Math.floor(left/1000), d=Math.floor(s/86400),
+        h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60), ss=s%60;
+    setDigits('gh-b',d,h,m,ss);
+    setDigits('gh-p',d,h,m,ss);
+  }
+  tick();
+  var iv=setInterval(tick,1000);
+}
+
+/* ---------------- boot ---------------- */
 var END = parseDeadline();
-if(!END){ return; } // no params → leave the page as-is
-
-// ---------- CSS (once) ----------
-if(!document.getElementById("gh-countdown-css")){
-var css=document.createElement("style");
-css.id="gh-countdown-css";
-css.textContent = `
-/* Bar replacement (big digits) */
-#gh-countdown-wrap{display:grid;gap:.5rem;align-items:center;justify-items:center}
-#gh-countdown-grid{display:flex;gap:2.25rem;justify-content:center;align-items:flex-end;flex-wrap:wrap}
-#gh-countdown-grid .cell{display:grid;justify-items:center}
-#gh-countdown-grid .num{color:#fff;font-weight:800;line-height:1;font-size:clamp(28px,6vw,64px);letter-spacing:.02em}
-#gh-countdown-grid .lab{color:rgba(255,255,255,.9);font-weight:700;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:.25rem}
-.gh-countdown-cta{margin-top:.25rem}
-.gh-countdown-cta .gh-btn{background:#d7dad3;color:#1f4a35;border:0;border-radius:999px;font-weight:800;padding:.55rem 1.1rem;cursor:pointer}
-.gh-countdown-cta .gh-btn:hover{filter:brightness(.95)}
-@media (max-width:480px){ #gh-countdown-grid{gap:1.25rem} }
-
-/* Scroll popup (appears after user scrolls) */
-#gh-popdown{position:fixed;left:0;right:0;bottom:16px;display:none;justify-content:center;z-index:2147483600;pointer-events:none}
-#gh-popdown .card{pointer-events:auto;display:flex;gap:12px;align-items:center;background:#1f4a35;color:#fff;padding:12px 14px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:840px;width:calc(100% - 24px)}
-#gh-popdown .msg{flex:1;line-height:1.25;font-weight:700;font-size:14px}
-#gh-popdown .msg b{font-weight:900}
-#gh-popdown .btn{background:#d7dad3;color:#1f4a35;border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
-#gh-popdown .close{margin-left:4px;background:transparent;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;opacity:.9}
-@media (max-width:480px){ #gh-popdown .msg{font-size:13px} #gh-popdown .btn{padding:9px 12px} }
-`;
-document.head.appendChild(css);
+if(!END){ /* nothing to do without a deadline */ }
+else{
+  injectCSS();
+  ready(function(){
+    mountBanner(END);
+    var pop = buildPopBar();
+    wireVisibility(pop);
+    startTicking(END);
+  });
 }
-
-// ---------- Bar replacement ----------
-function buildBar(name){
-var wrap=document.createElement("div");
-wrap.id="gh-countdown-wrap";
-wrap.setAttribute("aria-live","polite");
-wrap.setAttribute("aria-atomic","true");
-
-var grid=document.createElement("div");
-grid.id="gh-countdown-grid";
-
-function cell(id,label){
-var c=document.createElement("div"); c.className="cell";
-var n=document.createElement("div"); n.className="num"; n.id=id; n.textContent="00";
-var l=document.createElement("div"); l.className="lab"; l.textContent=label;
-c.appendChild(n); c.appendChild(l); return c;
-}
-grid.appendChild(cell("gh-cd-d","DAYS"));
-grid.appendChild(cell("gh-cd-h","HOURS"));
-grid.appendChild(cell("gh-cd-m","MINUTES"));
-grid.appendChild(cell("gh-cd-s","SECONDS"));
-
-var cta=document.createElement("div");
-cta.className="gh-countdown-cta";
-cta.innerHTML = '<button type="button" class="gh-btn" id="gh-countdown-cta">Shop '
-    + (name||"Influencer") + '\'s Picks</button>';
-
-wrap.appendChild(grid);
-wrap.appendChild(cta);
-return wrap;
-}
-
-function startDigits(endMs){
-var dE=document.getElementById("gh-cd-d"),
-hE=document.getElementById("gh-cd-h"),
-mE=document.getElementById("gh-cd-m"),
-sE=document.getElementById("gh-cd-s");
-
-function tick(){
-var left=endMs - Date.now();
-if(left<=0){
-dE.textContent="0"; hE.textContent="00"; mE.textContent="00"; sE.textContent="00";
-clearInterval(iv); return;
-}
-var s=Math.floor(left/1000),
-d=Math.floor(s/86400),
-h=Math.floor((s%86400)/3600),
-m=Math.floor((s%3600)/60),
-ss=s%60;
-dE.textContent=d;
-hE.textContent=pad(h);
-mE.textContent=pad(m);
-sE.textContent=pad(ss);
-}
-tick();
-var iv=setInterval(tick,1000);
-}
-
-function findOrCreateBar(){
-var el = document.getElementById("gh-offer-bar") || document.querySelector(".gh--bar h5");
-if (el) return el;
-// Inject our own bar just beneath the hero if this template is missing one
-var header = document.querySelector(".gh--header") || document.body.firstElementChild || document.body;
-var sec = document.createElement("section");
-sec.className = "gh--bar bg-green py2";
-sec.innerHTML = '<div class="page-width center"><h5 class="mb0 color-white" id="gh-offer-bar"></h5></div>';
-header.parentNode.insertBefore(sec, header.nextSibling);
-return sec.querySelector("#gh-offer-bar");
-}
-
-function mountBar(){
-var bar = findOrCreateBar();
-if (!bar || bar.dataset.ghBound==="1") return;
-
-bar.dataset.ghBound = "1";
-bar.replaceChildren( buildBar(qsp("gh_name")) );
-
-var btn = document.getElementById("gh-countdown-cta");
-if (btn){
-btn.addEventListener("click", function(){
-var t = document.querySelector(".product-slider") || document.getElementById("gh-products");
-if(t && t.scrollIntoView) t.scrollIntoView({behavior:"smooth", block:"start"});
-else location.hash = "#gh-products";
-});
-}
-startDigits(END);
-}
-
-// Initial + resilient re-mount
-ready(function(){
-// Try several times in case theme paints late
-var tries=0;(function again(){
-var bar=document.getElementById("gh-offer-bar")||document.querySelector(".gh--bar h5");
-if(bar){ mountBar(); return; }
-if(++tries<25){ setTimeout(again,120); } else { mountBar(); }
-})();
-});
-var mo = new MutationObserver(function(){
-var bar=document.getElementById("gh-offer-bar")||document.querySelector(".gh--bar h5");
-if(bar && bar.dataset.ghBound!=="1"){ mountBar(); }
-});
-mo.observe(document.documentElement,{childList:true,subtree:true});
-window.addEventListener("shopify:section:load", mountBar);
-
-// ---------- Popup: show ONLY after user scrolls ----------
-ready(function(){
-var host=document.createElement("div");
-host.id="gh-popdown";
-host.innerHTML =
-'<div class="card" aria-label="Limited-time offer">'
-    + '<div class="msg">Ends in <b id="gh-popdown-timer">--:--:--</b> CT'
-        + (qsp("gh_code") ? ' • Use code <b>'+qsp("gh_code")+'</b>' : '')
-        + '</div>'
-    + '<button class="btn" id="gh-popdown-cta" type="button">Shop Picks</button>'
-    + '<button class="close" id="gh-popdown-close" type="button" aria-label="Close">×</button>'
-    + '</div>';
-document.body.appendChild(host);
-
-var shown=false;
-function reveal(){ if(shown) return; shown=true; host.style.display="flex"; window.removeEventListener("scroll", onScroll, {passive:true}); }
-function onScroll(){ if(window.scrollY > window.innerHeight*0.25) reveal(); }
-window.addEventListener("scroll", onScroll, {passive:true});
-
-document.getElementById("gh-popdown-cta").addEventListener("click", function(){
-var t=document.querySelector(".product-slider")||document.getElementById("gh-products");
-if(t && t.scrollIntoView) t.scrollIntoView({behavior:"smooth", block:"start"}); else location.hash="#gh-products";
-});
-document.getElementById("gh-popdown-close").addEventListener("click", function(){ host.remove(); });
-
-var el=document.getElementById("gh-popdown-timer");
-function fmt(ms){
-var s=Math.floor(ms/1000), d=Math.floor(s/86400),
-h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60), ss=s%60;
-return d>0 ? (d+"d "+pad(h)+"h "+pad(m)+"m "+pad(ss)+"s") : (pad(h)+":"+pad(m)+":"+pad(ss));
-}
-function tick(){
-var left=END - Date.now();
-if(left<=0){ el.textContent="00:00:00"; host.querySelector(".msg").innerHTML="Offer <b>expired</b>."; clearInterval(iv); return; }
-el.textContent = fmt(left);
-}
-tick(); var iv=setInterval(tick,1000);
-});
-})();
