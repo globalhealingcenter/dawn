@@ -12,5 +12,15 @@
   "context": {
     "market": "gb"
   },
-  "sections": {}
+  "sections": {
+    "announcement-bar": {
+      "settings": {},
+      "blocks": {
+        "778775ac-0fd5-4070-8198-2dec1665d8fc": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
+    }
+  }
 }

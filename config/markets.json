@@ -8,9 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "product.no-subscription.json",
-  "context": {
-    "market": "gb"
-  },
-  "sections": {}
+  "markets": {
+    "gb": {
+      "parent": "@default"
+    }
+  }
 }

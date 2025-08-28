@@ -12,5 +12,28 @@
   "context": {
     "market": "gb"
   },
-  "sections": {}
+  "sections": {
+    "169838059718b5ce0c": {
+      "settings": {},
+      "blocks": {
+        "3c43f1d2-5fe4-4b3b-8039-c945317de191": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
+    },
+    "main": {
+      "settings": {},
+      "blocks": {
+        "ordergroove_offer": {
+          "disabled": true,
+          "settings": {}
+        },
+        "price": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    }
+  }
 }
