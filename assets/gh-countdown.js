@@ -1,11 +1,23 @@
-/* gh-countdown.js — influencer page countdown + smart popup (CT) */
+/* gh-countdown.js — influencer page countdown + smart popup (CT)
+
+Accepted URL date formats (Central Time input):
+  ?gh_until=2025-08-27                 // 11:59pm default
+  ?gh_until=2025-08-27T17:30           // 5:30pm
+  ?gh_until_date=2025-08-27&gh_until_time=17:30
+  // (Also accepts "YYYY-MM-DD 17:30" for gh_until)
+
+Notes:
+- Timezone is converted to CT (DST-aware) and then to an exact UTC timestamp.
+- The popdown appears only when the hero/banner countdown is not meaningfully visible.
+- To enable on multiple pages, use the “both pages” PATH_OK below.
+*/
 (function(){
   // ---------- Page scope ----------
-  // (Uncomment when going live on both pages)
+  // --- both pages (uncomment when going live on both) ---
   // var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
   // if (!PATH_OK) return;
 
-  // Test page only (current):
+  // --- test page only (current) ---
   var PATH_OK = /\/pages\/(influencer-test)(?:\/|$)/i.test(location.pathname);
   if (!PATH_OK) return;
 
@@ -62,15 +74,23 @@
       }
       .gh-countdown-cta .gh-btn:hover{filter:brightness(.95)}
 
-      /* Popup */
-      #gh-popdown{position:fixed;left:0;right:0;bottom:16px;display:none;justify-content:center;z-index:2147483600;pointer-events:none}
+      /* Popdown shell (gentle reveal via opacity/translate) */
+      #gh-popdown{position:fixed;left:0;right:0;bottom:16px;display:flex;justify-content:center;z-index:2147483600;pointer-events:none}
       #gh-popdown .card{
         pointer-events:auto; background:#1f4a35; color:#fff; border-radius:16px;
         box-shadow:0 20px 50px rgba(0,0,0,.22), 0 6px 18px rgba(0,0,0,.18);
         padding:16px 18px; max-width:1180px; width:calc(100% - 32px);
         display:grid; grid-template-columns:auto 1fr auto; align-items:center; column-gap:1.6rem; row-gap:.75rem;
         position:relative;
+        opacity:0; transform:translateY(12px);
+        transition:opacity .28s ease, transform .28s ease;
       }
+      #gh-popdown[data-visible="1"] .card{opacity:1; transform:translateY(0)}
+      #gh-popdown[data-visible="0"] .card{opacity:0; transform:translateY(12px)}
+      /* also gate clicks when hidden */
+      #gh-popdown[data-visible="0"]{pointer-events:none}
+      #gh-popdown[data-visible="1"]{pointer-events:auto}
+
       #gh-popdown .label{font-weight:800; letter-spacing:.18em; text-transform:uppercase; font-size:12px; opacity:.95}
       #gh-popdown #gh-pop-grid{display:flex; gap:1.6rem; align-items:flex-end; flex-wrap:wrap; justify-content:center}
       #gh-popdown .cell{display:grid; justify-items:center}
@@ -155,6 +175,9 @@
   function mountScrollPopup(endMs, heroAnchor){
     var host=document.createElement('div');
     host.id='gh-popdown';
+    host.setAttribute('data-visible','0'); // start hidden; animate in
+    host.setAttribute('aria-hidden','true');
+
     host.innerHTML =
       '<div class="card" aria-label="Limited-time offer">'+
         '<div class="label">Offer ends in</div>'+
@@ -195,14 +218,19 @@
     }
     fmtTick(); var iv=setInterval(fmtTick,1000);
 
-    // reveal only when banner is NOT visible
+    // reveal only when banner is NOT visible (animate using data-visible)
     function attachObserver(anchor){
-      if(!anchor){ host.style.display='none'; return; }
+      if(!anchor){ host.setAttribute('data-visible','1'); host.setAttribute('aria-hidden','false'); return; }
       var io=new IntersectionObserver(function(entries){
         var e=entries[0];
-        // show when the banner countdown is less than ~5% visible
-        if(e && e.isIntersecting && e.intersectionRatio>0.05){ host.style.display='none'; }
-        else { host.style.display='flex'; }
+        var visible = !!(e && e.isIntersecting && e.intersectionRatio>0.05);
+        if(visible){
+          host.setAttribute('data-visible','0');
+          host.setAttribute('aria-hidden','true');
+        } else {
+          host.setAttribute('data-visible','1');
+          host.setAttribute('aria-hidden','false');
+        }
       },{threshold:[0,0.05,0.1,1]});
       io.observe(anchor);
     }
@@ -217,7 +245,7 @@
     // Build banner timer (and grab its node so popup can watch it)
     var heroNode = mountBarCountdown(end);
 
-    // Build popup & tie its visibility to the banner
+    // Build popup & tie its visibility to the banner with a gentle animation
     mountScrollPopup(end, heroNode);
   });
 })();
