@@ -1,33 +1,31 @@
 /* ============================================================================
   GH Countdown (Influencer / Test)
-  - Central Time aware (US DST)
+  - Central Time (US) aware
   - Replaces the “24 Hours” banner with big-digit countdown + CTA
-  - Gentle popup appears once the banner is out of view
-  - URL params (use any ONE of the first three):
-      gh_until=YYYY-MM-DD                  // date only (ends 23:59 CT)
-      gh_until=YYYY-MM-DDTHH:MM            // date + time (24h) CT
-      gh_until=YYYY-MM-DD HH:MM            // same as above, with space
-      gh_until_date=YYYY-MM-DD&gh_until_time=HH:MM  // split params
-      gh_code=CODE                         // optional; shows in popup text
-      gh_name=Name                         // optional; builds CTA text
+  - Shows a gentle, animated pop-up once the banner isn’t visible
+  - URL params (any one of the first three is required):
+      gh_until=YYYY-MM-DD                // date only, ends 23:59 CT
+      gh_until=YYYY-MM-DDTHH:MM          // date + time (24h) CT
+      gh_until=YYYY-MM-DD HH:MM          // same as above, space instead of "T"
+      gh_until_date=YYYY-MM-DD&gh_until_time=HH:MM   // split params
+      gh_code=CODE                       // optional; shows in popup text
+      gh_name=Name                       // optional; builds “Shop Name’s Picks”
 ============================================================================ */
 
 /* ---------- Page scope ---------- */
-// TEST only (current): just /pages/influencer-test
+// For TEST only (current): runs just on /pages/influencer-test
 var PATH_OK = /\/pages\/(influencer-test)(?:\/|$)/i.test(location.pathname);
 
-// PROD-ready (uncomment when going live):
+// For PROD, enable both pages by using this version instead:
 // var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
 
-if (!PATH_OK) return;
+if (!PATH_OK) { /* hard exit */ return; }
 
-/* ---------- debug helper ---------- */
-var DEBUG = false;
-function dbg(){ if (DEBUG) try{ console.log('[GH-CD]', ...arguments); }catch(e){} }
-
-/* ---------- small utils ---------- */
-function ready(fn){ if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',fn,{once:true}); } else { fn(); } }
-function qsParam(name){ var q=new URLSearchParams(location.search||''); return (q.get(name)||q.get('amp;'+name)||'').trim(); }
+/* ---------- tiny utils ---------- */
+function qsParam(name){
+  var q = new URLSearchParams(location.search || '');
+  return (q.get(name) || q.get('amp;'+name) || '').trim();
+}
 function pad(n){ return ('0'+n).slice(-2); }
 function secondSundayInMarch(y){ var d=new Date(Date.UTC(y,2,1)); return 1+((7-d.getUTCDay())%7)+7; }
 function firstSundayInNovember(y){ var d=new Date(Date.UTC(y,10,1)); return 1+((7-d.getUTCDay())%7); }
@@ -45,30 +43,38 @@ function endMsFromCT(Y,M,D,H,Min){
 
 /* ---------- parse deadline from URL ---------- */
 function parseDeadline(){
-  var U = qsParam('gh_until'), D = qsParam('gh_until_date'), T = qsParam('gh_until_time');
+  var U = qsParam('gh_until');
+  var D = qsParam('gh_until_date');
+  var T = qsParam('gh_until_time');
   var Y,M,Da,H=23,Mi=59;
+
   if (U){
+    // supports "YYYY-MM-DD", "YYYY-MM-DDTHH:MM", or "YYYY-MM-DD HH:MM"
     var m=/^(\d{4})-(\d{2})-(\d{2})(?:[T\s](\d{1,2})(?::?(\d{2}))?)?$/.exec(U);
     if(!m) return null;
-    Y=+m[1]; M=+m[2]; Da=+m[3]; if(m[4]!=null){ H=+m[4]; Mi=+(m[5]||0); }
+    Y=+m[1]; M=+m[2]; Da=+m[3];
+    if(m[4]!=null){ H=+m[4]; Mi=+(m[5]||0); }
   }else if (D){
     var md=/^(\d{4})-(\d{2})-(\d{2})$/.exec(D); if(!md) return null;
     Y=+md[1]; M=+md[2]; Da=+md[3];
-    if (T){ var mt=/^(\d{1,2}):(\d{2})$/.exec(T); if(!mt) return null; H=+mt[1]; Mi=+mt[2]; }
+    if(T){
+      var mt=/^(\d{1,2}):(\d{2})$/.exec(T); if(!mt) return null;
+      H=+mt[1]; Mi=+mt[2];
+    }
   }else{
     return null;
   }
-  var end=endMsFromCT(Y,M,Da,H,Mi);
-  dbg('parsed', {Y,M,Da,H,Mi, endISO:new Date(end).toISOString()});
-  return isFinite(end)?end:null;
+  var end = endMsFromCT(Y,M,Da,H,Mi);
+  return isFinite(end) ? end : null;
 }
 
-/* ---------- CSS (once) ---------- */
+/* ---------- inject CSS once ---------- */
 (function injectCSS(){
   if (document.getElementById('gh-countdown-css')) return;
-  var css=document.createElement('style'); css.id='gh-countdown-css';
+  var css = document.createElement('style');
+  css.id='gh-countdown-css';
   css.textContent = `
-    /* Banner */
+    /* Banner (replaces "Available for 24 Hours") */
     #gh-countdown-wrap{display:grid;gap:1.6rem;align-items:center;justify-items:center}
     #gh-countdown-grid{display:flex;gap:1.6rem;justify-content:center;align-items:flex-end;flex-wrap:wrap}
     #gh-countdown-grid .cell{display:grid;justify-items:center}
@@ -77,32 +83,47 @@ function parseDeadline(){
     .gh-countdown-cta{margin-top:.25rem}
     .gh-countdown-cta .gh-btn{
       background:var(--gh-color-gold,#caa329);
-      color:#fff;border:0;border-radius:0;font-weight:800;padding:.85rem 1.4rem;cursor:pointer
+      color:#fff;border:0;border-radius:0;
+      font-weight:800;padding:.85rem 1.4rem;cursor:pointer
     }
     .gh-countdown-cta .gh-btn:hover{filter:brightness(.97)}
+    @media (max-width:480px){ #gh-countdown-grid{gap:1.25rem} }
 
     /* Popup */
     #gh-popdown{
       position:fixed;left:0;right:0;bottom:16px;
       display:flex;justify-content:center;z-index:2147483600;
-      pointer-events:none;visibility:hidden;opacity:0;transform:translateY(12px);
+      pointer-events:none; /* card will be click-able */
+      visibility:hidden;opacity:0;transform:translateY(12px);
       transition:opacity .32s ease, transform .32s ease;
     }
     #gh-popdown.gh-show{visibility:visible;opacity:1;transform:translateY(0)}
     #gh-popdown .card{
-      pointer-events:auto;position:relative;background:#1f4a35;color:#fff;
-      box-shadow:0 18px 48px rgba(0,0,0,.28);border-radius:18px;
-      max-width:1100px;width:calc(100% - 24px);padding:14px 18px;display:grid;gap:16px;
+      pointer-events:auto;position:relative;
+      background:#1f4a35;color:#fff;box-shadow:0 18px 48px rgba(0,0,0,.28);
+      border-radius:18px;max-width:1100px;width:calc(100% - 24px);
+      padding:14px 18px;display:grid;gap:16px;
+      /* desktop layout: label | numbers | CTA */
       grid-template-columns:auto 1fr auto;align-items:center;
     }
-    #gh-popdown .pre{font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.95;white-space:nowrap}
+    #gh-popdown .pre{
+      font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;opacity:.95;
+      white-space:nowrap;
+    }
     #gh-popdown .cd{display:flex;gap:1.6rem;align-items:flex-end;justify-content:center}
     #gh-popdown .cd .cell{display:grid;justify-items:center}
     #gh-popdown .cd .num{font-weight:800;line-height:1;letter-spacing:.02em;font-size:clamp(20px,4.2vw,40px)}
     #gh-popdown .cd .lab{font-weight:700;opacity:.95;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-top:.2rem}
-    #gh-popdown .btn{background:var(--gh-color-gold,#caa329);color:#fff;border:0;border-radius:0;font-weight:800;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap}
+    #gh-popdown .btn{
+      background:var(--gh-color-gold,#caa329);color:#fff;border:0;border-radius:0;
+      font-weight:800;padding:.75rem 1.25rem;cursor:pointer;white-space:nowrap
+    }
     #gh-popdown .btn:hover{filter:brightness(.97)}
-    #gh-popdown .close{position:static;margin-left:8px;background:transparent;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;opacity:.9}
+    #gh-popdown .close{
+      position:static;margin-left:8px;background:transparent;border:0;color:#fff;
+      font-size:20px;line-height:1;cursor:pointer;opacity:.9
+    }
+    /* Mobile popup: stack, center, put close in top-right of card */
     @media (max-width:768px){
       #gh-popdown .card{grid-template-columns:1fr;row-gap:10px;padding:14px 14px 16px}
       #gh-popdown .pre{text-align:center;order:1}
@@ -114,10 +135,11 @@ function parseDeadline(){
   document.head.appendChild(css);
 })();
 
-/* ---------- banner (bar) ---------- */
+/* ---------- banner (bar) mounting ---------- */
 function findOrCreateBar(){
   var el = document.getElementById('gh-offer-bar') || document.querySelector('.gh--bar h5');
   if (el) return el;
+  // If the section wasn’t included, inject a bar right after hero
   var header = document.querySelector('.gh--header') || document.querySelector('main') || document.body;
   var sec = document.createElement('section');
   sec.className = 'gh--bar bg-green py2';
@@ -129,6 +151,7 @@ function findOrCreateBar(){
 function mountBanner(endMs){
   var bar = findOrCreateBar(); if(!bar || bar.dataset.ghBound==='1') return;
   bar.dataset.ghBound='1';
+
   var name = qsParam('gh_name') || 'Influencer';
   bar.innerHTML = `
     <div id="gh-countdown-wrap" aria-live="polite" aria-atomic="true">
@@ -138,17 +161,24 @@ function mountBanner(endMs){
         <div class="cell"><div class="num" id="gh-cd-m">00</div><div class="lab">MINUTES</div></div>
         <div class="cell"><div class="num" id="gh-cd-s">00</div><div class="lab">SECONDS</div></div>
       </div>
-      <div class="gh-countdown-cta"><button type="button" class="gh-btn" id="gh-countdown-cta">Shop ${name}'s Picks</button></div>
+      <div class="gh-countdown-cta">
+        <button type="button" class="gh-btn" id="gh-countdown-cta">Shop ${name}'s Picks</button>
+      </div>
     </div>`;
-  var cta = document.getElementById('gh-countdown-cta');
-  if(cta){ cta.addEventListener('click', function(){
-    var t=document.querySelector('.product-slider')||document.getElementById('gh-products');
-    if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); else location.hash='#gh-products';
-  }); }
 
-  var dE=document.getElementById('gh-cd-d'), hE=document.getElementById('gh-cd-h'),
-      mE=document.getElementById('gh-cd-m'), sE=document.getElementById('gh-cd-s'),
-      dLab=document.getElementById('gh-cd-dlab');
+  var cta = document.getElementById('gh-countdown-cta');
+  if(cta){
+    cta.addEventListener('click', function(){
+      var t = document.querySelector('.product-slider') || document.getElementById('gh-products');
+      if(t && t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'});
+      else location.hash = '#gh-products';
+    });
+  }
+
+  // tick
+  var dE = document.getElementById('gh-cd-d'),   hE = document.getElementById('gh-cd-h'),
+      mE = document.getElementById('gh-cd-m'),   sE = document.getElementById('gh-cd-s'),
+      dLab = document.getElementById('gh-cd-dlab');
 
   function tick(){
     var left=endMs - Date.now();
@@ -161,10 +191,12 @@ function mountBanner(endMs){
   tick(); var iv=setInterval(tick,1000);
 }
 
-/* ---------- popup (gentle reveal) ---------- */
+/* ---------- popup mounting (gentle reveal) ---------- */
 function mountPopup(endMs){
-  var host=document.createElement('div'); host.id='gh-popdown';
-  var code=qsParam('gh_code'), name=qsParam('gh_name')||'Influencer';
+  var host=document.createElement('div');
+  host.id='gh-popdown';
+  var code = qsParam('gh_code');
+  var name = qsParam('gh_name') || 'Influencer';
   host.innerHTML =
     '<div class="card" aria-label="Limited-time offer">'+
       '<div class="pre">Offer ends in</div>'+
@@ -182,15 +214,18 @@ function mountPopup(endMs){
     '</div>';
   document.body.appendChild(host);
 
+  // CTA click
   document.getElementById('gh-popdown-cta').addEventListener('click', function(){
-    var t=document.querySelector('.product-slider')||document.getElementById('gh-products');
-    if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); else location.hash='#gh-products';
+    var t = document.querySelector('.product-slider') || document.getElementById('gh-products');
+    if(t && t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'});
+    else location.hash = '#gh-products';
   });
   document.getElementById('gh-popdown-close').addEventListener('click', function(){ host.remove(); });
 
-  var dE=document.getElementById('gh-pd'), hE=document.getElementById('gh-ph'),
-      mE=document.getElementById('gh-pm'), sE=document.getElementById('gh-ps'),
-      dLab=document.getElementById('gh-plab');
+  // ticking
+  var dE = document.getElementById('gh-pd'), hE=document.getElementById('gh-ph'),
+      mE = document.getElementById('gh-pm'), sE=document.getElementById('gh-ps'),
+      dLab = document.getElementById('gh-plab');
 
   function tick(){
     var left=endMs - Date.now();
@@ -202,18 +237,24 @@ function mountPopup(endMs){
   }
   tick(); var iv=setInterval(tick,1000);
 
+  // gentle reveal once banner is out of view (or user scrolls a bit)
   function reveal(){ host.classList.add('gh-show'); }
   function hide(){ host.classList.remove('gh-show'); }
 
   var bannerEl = document.getElementById('gh-countdown-wrap');
+  // If we can watch the banner: show popup when it’s NOT intersecting
   if ('IntersectionObserver' in window && bannerEl){
     var io = new IntersectionObserver(function(entries){
-      var e = entries[0]; if(!e) return;
+      var e = entries[0];
+      if (!e) return;
       if (e.isIntersecting) hide(); else reveal();
-    }, {threshold:0.05});
+    }, {threshold: 0.05});
     io.observe(bannerEl);
   }else{
-    function onScroll(){ if(window.scrollY>window.innerHeight*0.33) reveal(); else hide(); }
+    // fallback: simple scroll distance
+    function onScroll(){
+      if (window.scrollY > window.innerHeight*0.33) reveal(); else hide();
+    }
     window.addEventListener('scroll', onScroll, {passive:true});
     onScroll();
   }
@@ -221,11 +262,9 @@ function mountPopup(endMs){
 
 /* ---------- boot ---------- */
 var END = parseDeadline();
-dbg('path ok?', PATH_OK, 'end ms', END);
-if (!END) { dbg('No valid gh_until/gh_until_date+time'); return; }
+if (!END) { /* nothing to do */ return; }
 
-ready(function(){
-  dbg('init');
+document.addEventListener('DOMContentLoaded', function(){
   mountBanner(END);
   mountPopup(END);
 });
