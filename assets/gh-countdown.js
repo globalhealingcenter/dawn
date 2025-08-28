@@ -160,4 +160,89 @@
         '<div class="card" aria-label="Limited-time offer">'+
           '<div class="digits" aria-hidden="false">'+
             '<div class="cell"><div class="num" id="gh-p-d">0</div><div class="lab" id="gh-p-ld">DAYS</div></div>'+
-            '<div class="cell"><div class="num" id="gh-
+            '<div class="cell"><div class="num" id="gh-p-h">00</div><div class="lab" id="gh-p-lh">HOURS</div></div>'+
+            '<div class="cell"><div class="num" id="gh-p-m">00</div><div class="lab" id="gh-p-lm">MINUTES</div></div>'+
+            '<div class="cell"><div class="num" id="gh-p-s">00</div><div class="lab" id="gh-p-ls">SECONDS</div></div>'+
+          '</div>'+
+          '<div class="spacer"></div>'+
+          '<div class="actions">'+
+            '<button class="btn" id="gh-pop-cta" type="button">Shop '+name+'\'s Picks</button>'+
+            '<button class="close" id="gh-pop-close" type="button" aria-label="Close">×</button>'+
+          '</div>'+
+        '</div>';
+      document.body.appendChild(host);
+
+      document.getElementById('gh-pop-cta').addEventListener('click', function(){
+        var t=document.querySelector('.product-slider')||document.getElementById('gh-products');
+        if(t&&t.scrollIntoView) t.scrollIntoView({behavior:'smooth',block:'start'}); else location.hash='#gh-products';
+      });
+      document.getElementById('gh-pop-close').addEventListener('click', function(){ host.remove(); });
+
+      return host;
+    }
+
+    function wireVisibility(popEl){
+      var banner = document.getElementById('gh-countdown-wrap');
+      if(!banner){
+        function onScroll(){ if(window.scrollY > window.innerHeight*0.25){ popEl.classList.add('is-open'); window.removeEventListener('scroll', onScroll, {passive:true}); } }
+        window.addEventListener('scroll', onScroll, {passive:true});
+        return;
+      }
+      var io = new IntersectionObserver(function(entries){
+        var e=entries[0]; if(!e) return;
+        if(e.isIntersecting && e.intersectionRatio > 0.05){ popEl.classList.remove('is-open'); }
+        else{ popEl.classList.add('is-open'); }
+      }, {root:null, threshold:[0,0.05,0.1,0.2]});
+      io.observe(banner);
+    }
+
+    /* ---------- ticker + singular labels ---------- */
+    function startTicking(endMs){
+      function setDigits(prefix, d,h,m,s){
+        var dE=document.getElementById(prefix+'-d'),
+            hE=document.getElementById(prefix+'-h'),
+            mE=document.getElementById(prefix+'-m'),
+            sE=document.getElementById(prefix+'-s');
+        if(dE) dE.textContent=d;
+        if(hE) hE.textContent=pad(h);
+        if(mE) mE.textContent=pad(m);
+        if(sE) sE.textContent=pad(s);
+
+        var ld=document.getElementById(prefix+'-ld'),
+            lh=document.getElementById(prefix+'-lh'),
+            lm=document.getElementById(prefix+'-lm'),
+            ls=document.getElementById(prefix+'-ls');
+        if(ld) ld.textContent = (d===1 ? 'DAY'    : 'DAYS');
+        if(lh) lh.textContent = (h===1 ? 'HOUR'   : 'HOURS');
+        if(lm) lm.textContent = (m===1 ? 'MINUTE' : 'MINUTES');
+        if(ls) ls.textContent = (s===1 ? 'SECOND' : 'SECONDS');
+      }
+      function tick(){
+        var left=endMs - Date.now();
+        if(left<=0){ setDigits('gh-b',0,0,0,0); setDigits('gh-p',0,0,0,0); clearInterval(iv); return; }
+        var s=Math.floor(left/1000), d=Math.floor(s/86400),
+            h=Math.floor((s%86400)/3600), m=Math.floor((s%3600)/60), ss=s%60;
+        setDigits('gh-b',d,h,m,ss);
+        setDigits('gh-p',d,h,m,ss);
+      }
+      tick();
+      var iv=setInterval(tick,1000);
+    }
+
+    /* ---------- boot ---------- */
+    var END = parseDeadlineOrDefault();
+    if(!END){ console.warn('[GH] Countdown: no deadline present and fallback disabled'); return; }
+
+    injectCSS();
+    ready(function(){
+      mountBanner(END);
+      var pop = buildPopBar();
+      wireVisibility(pop);
+      startTicking(END);
+    });
+
+  } catch (err) {
+    console.error('[GH] Countdown crashed:', err);
+    window.__ghLastError = err;
+  }
+})();
