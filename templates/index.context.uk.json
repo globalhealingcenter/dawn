@@ -33,6 +33,12 @@
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "disabled": true,
           "settings": {}
+        },
+        "f6b3c029-5d02-4e58-b13b-d168889906a5": {
+          "settings": {
+            "link_1": "shopify://collections/products-for-uk",
+            "link_1_text": "SHOP PRODUCTS"
+          }
         }
       }
     },
