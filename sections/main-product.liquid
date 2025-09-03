@@ -256,7 +256,7 @@
 
             
              {%- when 'gh_out_of_stock_form' -%}
-                {%- comment -%}          
+                          
               <div class="" {{ block.shopify_attributes }}>
               {% if block.settings.force_show %}
                 {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
@@ -266,97 +266,9 @@
                 {% endunless %}
               {% endif %}
               </div> 
-            {%- endcomment -%}
-
-              <div class="" {{ block.shopify_attributes }}>
-            {%- comment -%}
-              Tag-only control:
-              - Add product tag: "preorder" to show the preorder message
-              - Otherwise show the normal out-of-stock message
-            {%- endcomment -%}
-
-            {%- assign is_preorder = false -%}
-            {%- if product.tags contains 'preorder' -%}
-              {%- assign is_preorder = true -%}
-            {%- endif -%}
-
-            {%- comment -%}
-              If the block has force_show enabled (theme editor preview),
-              we always render one of the messages regardless of product.available.
-            {%- endcomment -%}
-            {% if block.settings.force_show %}
-              {% if is_preorder %}
-                {% render 'gh-element-preorder-form', product: product, message: block.settings.message %}
-              {% else %}
-                {% render 'gh-element-out-of-stock-form', product: product, message: block.settings.message %}
-              {% endif %}
-            {% else %}
-              {%- comment -%}
-                Only show the card when the product is not available.
-                (If you want preorder to show even when available, remove the "unless" wrapper.)
-              {%- endcomment -%}
-              {% unless product.available %}
-                {% if is_preorder %}
-                  {% render 'gh-element-preorder-form', product: product, message: block.settings.message %}
-                {% else %}
-                  {% render 'gh-element-out-of-stock-form', product: product, message: block.settings.message %}
-                {% endif %}
-              {% endunless %}
-            {% endif %}
-            </div>
-
-            {% if product.tags contains 'preorder' %}
-  <style>
-    /* Hide Klaviyo BIS trigger button and any inline prompts */
-    .klaviyo-bis-trigger,
-    [data-klaviyo-bis-trigger],
-    #klaviyo-bis-modal,
-    .klaviyo-bis-notification,
-    .klaviyo-bis-close { display:none !important; }
-  </style>
-{% endif %}
-
-{% if product.tags contains 'preorder' %}
-  <style>
-    /* Hide Klaviyo BIS trigger button and any inline prompts */
-    .klaviyo-bis-trigger,
-    [data-klaviyo-bis-trigger],
-    [aria-controls="klaviyo-bis-modal"],
-    #klaviyo-bis-modal,
-    .klaviyo-bis-notification,
-    .klaviyo-bis-close {
-      display: none !important;
-      visibility: hidden !important;
-      opacity: 0 !important;
-      pointer-events: none !important;
-    }
-  </style>
-
-  <script>
-    (function () {
-      function nukeBIS() {
-        document.querySelectorAll(
-          '.klaviyo-bis-trigger, [data-klaviyo-bis-trigger], [aria-controls="klaviyo-bis-modal"], #klaviyo-bis-modal, .klaviyo-bis-notification, .klaviyo-bis-close'
-        ).forEach(function (el) { el.remove(); });
-      }
-
-      // Run now, on DOM ready, after short delays (to catch late injections)...
-      nukeBIS();
-      document.addEventListener('DOMContentLoaded', nukeBIS);
-      setTimeout(nukeBIS, 400);
-      setTimeout(nukeBIS, 1200);
-
-      // ...and keep watching for newly injected BIS nodes
-      new MutationObserver(nukeBIS).observe(document.documentElement, {
-        childList: true,
-        subtree: true
-      });
-    })();
-  </script>
-{% endif %}
-
-
             
+
+           
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
             {%- when 'collapsible_tab' -%}
