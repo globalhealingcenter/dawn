@@ -8,9 +8,87 @@
     <p>This item is in high demand. Reserve yours now — we’ll ship as soon as it’s ready.</p>
   </div>
 
-  {%- comment -%}
-    If your OOS snippet includes an email capture or “notify me” form,
-    you can paste the same markup/JS here so both experiences match.
-    If not needed, you can keep this as a simple message block.
-  {%- endcomment -%}
+  <div class="out-of-stock-form-signup pt2 px2 bg-green-light">
+  {{ message }}
+  <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
+    <div class="input-group pre-submit">
+      <input type="email" placeholder="Enter Your Email" name="email" required>
+      <button class="button button--black" type="submit">Sign Up</button>
+    </div>
+    <div class="success hide">
+      Success! You'll be receiving an email shortly.
+    </div>
+  </form>
+
+  <script>
+    {
+      let form = document.getElementById('product-out-of-stock-form');
+      let preSubmit = form.querySelector('.pre-submit');
+      let success = form.querySelector('.success');
+      let button = form.querySelector('button');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        let email = form.querySelector('[name="email"]').value;
+        let url = form.getAttribute('action');
+
+        button.classList.add('btn--loading');
+        button.disabled = true;
+
+        fetch(url, {
+          method: 'post',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            context: 'preorder',                      // <— flag for Zapier
+            email: email,
+            product_title: {{ product.title | json }},
+            product_handle: {{ product.handle | json }},
+            shopify_product_id: {{ product.id | json }},
+            sku: {{ product.selected_or_first_available_variant.sku | json }},
+            variant_id: {{ product.selected_or_first_available_variant.id | json }},
+            page_url: location.href
+          })
+        }).then(r => r.json()).then(data => {
+          preSubmit.classList.add('hide');
+          success.classList.remove('hide');
+        }).catch(() => {
+          button.classList.remove('btn--loading');
+          button.disabled = false;
+        });
+      });
+    }
+  </script>
 </div>
+
+</div>
+
+<style>
+  .out-of-stock-form-signup{
+      display: flex;
+      gap: 5%;
+      align-items: center;
+      flex-wrap: wrap;
+  }
+  .out-of-stock-form-signup > form{
+      min-width: 300px;
+      flex: 1;
+  }
+  .out-of-stock-form-signup .input-group{
+      display: flex;
+      gap: 10px;
+      margin-bottom: 1rem;
+  }
+  .out-of-stock-form-signup input[type="email"]{
+      border: 1px solid #00000030;
+      padding: 10px 15px;
+      flex: 1;
+  }
+  .out-of-stock-form-signup label{
+      font-size: 14px;
+  }
+  .out-of-stock-form-signup a{
+      color: #fff
+  }
+</style>
