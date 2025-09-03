@@ -50,22 +50,27 @@
     button.classList.add('btn--loading');
     button.disabled = true;
 
+    // Build payload
+    const payload = {
+      context: 'preorder',
+      email: email,
+      product_title: {{ product.title | json }},
+      product_handle: {{ product.handle | json }},
+      shopify_product_id: {{ product.id | json }},
+      sku: {{ product.selected_or_first_available_variant.sku | json }},
+      variant_id: {{ product.selected_or_first_available_variant.id | json }},
+      page_url: location.href
+    };
+
+    // Send as a SIMPLE request to avoid CORS preflight
     fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        context: 'preorder',
-        email: email,
-        product_title: {{ product.title | json }},
-        product_handle: {{ product.handle | json }},
-        shopify_product_id: {{ product.id | json }},
-        sku: {{ product.selected_or_first_available_variant.sku | json }},
-        variant_id: {{ product.selected_or_first_available_variant.id | json }},
-        page_url: location.href
-      })
+      mode: 'no-cors', // response will be opaque; that's fine
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+      body: new URLSearchParams({ payload: JSON.stringify(payload) })
     })
-    .then(r => r.text())            // <-- don’t parse JSON; just read text
     .then(() => {
+      // Treat as success; we can't read the response in no-cors mode
       preSubmit.classList.add('hide');
       success.classList.remove('hide');
     })
@@ -78,5 +83,6 @@
   });
 }
 </script>
+
 
 </div>
