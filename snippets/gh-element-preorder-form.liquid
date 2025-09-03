@@ -36,56 +36,53 @@ Adds product context as custom fields.
 </div>
 
 <script>
-  const preorderForm = document.getElementById('product-preorder-form');
-  if (preorderForm) {
-    preorderForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
+{
+  const form = document.getElementById('product-preorder-form');
+  const preSubmit = form.querySelector('.pre-submit');
+  const success = form.querySelector('.success');
+  const button = form.querySelector('button');
 
-      const email = preorderForm.querySelector('[name="email"]').value;
-      const button = preorderForm.querySelector('button');
-      const preSubmit = preorderForm.querySelector('.pre-submit');
-      const success = preorderForm.querySelector('.success');
+  const KLAVIYO_SITE_ID = "YeibUN";  // your public site ID
+  const KLAVIYO_LIST_ID = "Vv9u6C";  // your preorder list ID
 
-      button.disabled = true;
-      button.classList.add('btn--loading');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-      try {
-        const response = await fetch('https://a.klaviyo.com/client/subscriptions/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Klaviyo-API-Key {{ site.id | json }}' // or just "YeibUN"
-          },
-          body: JSON.stringify({
-            data: {
-              type: 'subscription',
-              attributes: {
-                list_id: 'Vv9u6C', // <-- your Klaviyo list ID
-                email: email,
-                properties: {
-                  product_title: {{ product.title | json }},
-                  product_handle: {{ product.handle | json }}
-                }
-              }
+    const email = form.querySelector('[name="email"]').value;
+
+    button.classList.add('btn--loading');
+    button.disabled = true;
+
+    try {
+      const res = await fetch("https://a.klaviyo.com/client/subscriptions/?company_id=" + KLAVIYO_SITE_ID, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: {
+            type: "subscription",
+            attributes: {
+              list_id: KLAVIYO_LIST_ID,
+              email: email,
+              custom_source: "Preorder Signup"
             }
-          })
-        });
+          }
+        })
+      });
 
-        if (response.ok) {
-          preSubmit.classList.add('hide');
-          success.classList.remove('hide');
-        } else {
-          const error = await response.json();
-          console.error('Klaviyo error:', error);
-          alert('Something went wrong. Please try again.');
-        }
-      } catch (err) {
-        console.error('Network error:', err);
-        alert('Network error. Please try again.');
-      } finally {
-        button.disabled = false;
-        button.classList.remove('btn--loading');
-      }
-    });
-  }
+      if (!res.ok) throw new Error(await res.text());
+
+      preSubmit.classList.add('hide');
+      success.classList.remove('hide');
+
+    } catch (err) {
+      console.error(err);
+      alert("Something went wrong. Please try again.");
+      button.classList.remove('btn--loading');
+      button.disabled = false;
+    }
+  });
+}
 </script>
