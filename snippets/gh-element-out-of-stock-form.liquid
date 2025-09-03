@@ -6,6 +6,11 @@
             assign should_show_manual_form = true
         endif
     endfor
+
+    assign post_url = "https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/"
+    if form_url
+        assign post_url = form_url
+    endif
 %}
 
 <style>
@@ -44,7 +49,7 @@
 
   <!-- hidden while we use klaviyo's out of stock -->
   <div class='{% unless should_show_manual_form %}hide{% endunless %}'>
-    <form id="product-out-of-stock-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
+    <form id="product-out-of-stock-form" method="post" action="{{ post_url }}" style="margin-bottom:15px">
       <div class="input-group pre-submit">
         <input type="email" placeholder="Enter Your Email" name="email" required>
         <button class="button" type="submit">Notify Me When Available</button>
