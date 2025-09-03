@@ -26,46 +26,49 @@
   </form>
 
   <script>
-  {
-    const form = document.getElementById('product-preorder-form');
-    const preSubmit = form.querySelector('.pre-submit');
-    const success = form.querySelector('.success');
-    const button = form.querySelector('button');
+{
+  const form = document.getElementById('product-preorder-form');
+  const preSubmit = form.querySelector('.pre-submit');
+  const success = form.querySelector('.success');
+  const button = form.querySelector('button');
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      e.stopImmediatePropagation();
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopImmediatePropagation();
 
-      const email = form.querySelector('[name="email"]').value;
-      const url = form.getAttribute('action');
+    const email = form.querySelector('[name="email"]').value;
+    const url = form.getAttribute('action');
 
-      button.classList.add('btn--loading');
-      button.disabled = true;
+    button.classList.add('btn--loading');
+    button.disabled = true;
 
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          context: 'preorder',                                 // <-- distinguish in Zapier
-          email: email,
-          product_title: {{ product.title | json }},
-          product_handle: {{ product.handle | json }},
-          shopify_product_id: {{ product.id | json }},
-          sku: {{ product.selected_or_first_available_variant.sku | json }},
-          variant_id: {{ product.selected_or_first_available_variant.id | json }},
-          page_url: location.href
-        })
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        context: 'preorder',
+        email: email,
+        product_title: {{ product.title | json }},
+        product_handle: {{ product.handle | json }},
+        shopify_product_id: {{ product.id | json }},
+        sku: {{ product.selected_or_first_available_variant.sku | json }},
+        variant_id: {{ product.selected_or_first_available_variant.id | json }},
+        page_url: location.href
       })
-      .then(r => r.json())
-      .then(() => {
-        preSubmit.classList.add('hide');
-        success.classList.remove('hide');
-      })
-      .catch(() => {
-        button.classList.remove('btn--loading');
-        button.disabled = false;
-      });
+    })
+    .then(r => r.text())            // <-- don’t parse JSON; just read text
+    .then(() => {
+      preSubmit.classList.add('hide');
+      success.classList.remove('hide');
+    })
+    .catch((err) => {
+      console.error('Preorder hook error:', err);
+      button.classList.remove('btn--loading');
+      button.disabled = false;
+      alert('Hmm, something went wrong. Please try again.');
     });
-  }
-  </script>
+  });
+}
+</script>
+
 </div>
