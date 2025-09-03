@@ -253,7 +253,8 @@
               >
                 <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span> {{- product.selected_or_first_available_variant.sku -}}
               </p>
-            <!-- {%- when 'gh_out_of_stock_form' -%}
+              {%- comment -%}
+             {%- when 'gh_out_of_stock_form' -%}
                           
               <div class="" {{ block.shopify_attributes }}>
               {% if block.settings.force_show %}
@@ -263,8 +264,9 @@
                   {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
                 {% endunless %}
               {% endif %}
-              </div> -->
-
+              </div> 
+{%- endcomment -%}
+ 
               <div class="" {{ block.shopify_attributes }}>
   {%- comment -%}
     Tag-only control:
