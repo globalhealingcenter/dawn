@@ -3,10 +3,7 @@ GH Preorder form — posts to Klaviyo Public Subscribe endpoint
 Adds product context as custom fields.
 {%- endcomment -%}
 
-{%- assign klaviyo_list_id = 'Vv9u6C' -%}
-
-
- 
+{%- assign klaviyo_list_id = 'Vv9u6C' -%} <!-- Your Klaviyo List ID -->
 
 <style>
   .out-of-stock-form-signup { display:flex; gap:5%; align-items:center; flex-wrap:wrap; }
@@ -42,12 +39,12 @@ Adds product context as custom fields.
   if (!form) return;
 
   const endpoint = 'https://manage.kmail-lists.com/ajax/subscriptions/subscribe';
-  const listId   = {{ KLAVIYO_LIST_ID | json }};
+  const listId = {{ klaviyo_list_id | json }};
 
   const preSubmit = form.querySelector('.pre-submit');
-  const btn       = form.querySelector('button[type="submit"]');
-  const input     = form.querySelector('input[name="email"]');
-  const elError   = document.getElementById('preorder-error');
+  const btn = form.querySelector('button[type="submit"]');
+  const input = form.querySelector('input[name="email"]');
+  const elError = document.getElementById('preorder-error');
   const elSuccess = document.getElementById('preorder-success');
 
   const show = (el) => el.classList.remove('hide');
@@ -56,7 +53,8 @@ Adds product context as custom fields.
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    hide(elError); hide(elSuccess);
+    hide(elError);
+    hide(elSuccess);
 
     const email = (input.value || '').trim();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -72,25 +70,23 @@ Adds product context as custom fields.
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          g: listId,                    // Klaviyo List ID
-          email,                        // subscriber email
-          // Optional: add context for segmentation/flows
+          g: listId,
+          email,
           $fields: {
             context: 'preorder',
-            product_title: {{ product.title  | json }},
+            product_title: {{ product.title | json }},
             product_handle: {{ product.handle | json }},
             product_id: {{ product.id | json }},
             variant_id: {{ product.selected_or_first_available_variant.id | json }},
-            page_url: (typeof location !== 'undefined' ? location.href : '')
+            page_url: location.href
           }
         })
       });
 
-      // Klaviyo returns JSON like: { success: true } OR { success:false, errors:[...] }
       const data = await res.json().catch(() => ({}));
 
       if (res.ok && (data.success === true || !data.errors?.length)) {
-        preSubmit && preSubmit.classList.add('hide');
+        preSubmit.classList.add('hide');
         show(elSuccess);
         form.reset();
       } else {
