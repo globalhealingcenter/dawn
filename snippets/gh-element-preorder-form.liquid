@@ -3,7 +3,9 @@ GH Preorder form — posts to Klaviyo Public Subscribe endpoint
 Adds product context as custom fields.
 {%- endcomment -%}
 
-{%- assign klaviyo_list_id = 'Vv9u6C' -%} <!-- Your Klaviyo List ID -->
+{%- assign klaviyo-list-id = 'Vv9u6C' -%}
+{%- assign klaviyo-public-key = 'YeibUN' -%}
+
 
 <style>
   .out-of-stock-form-signup { display:flex; gap:5%; align-items:center; flex-wrap:wrap; }
@@ -33,74 +35,73 @@ Adds product context as custom fields.
   </form>
 </div>
 
-<script>
-(() => {
-  const form = document.getElementById('product-preorder-form');
-  if (!form) return;
+<script><script>
+  (function(){
+    const form = document.getElementById('product-preorder-form');
+    const input = form.querySelector('[name="email"]');
+    const notice = form.querySelector('.note');
+    const success = form.querySelector('.success');
 
-  const endpoint = 'https://manage.kmail-lists.com/ajax/subscriptions/subscribe';
-  const listId = {{ klaviyo_list_id | json }};
-
-  const preSubmit = form.querySelector('.pre-submit');
-  const btn = form.querySelector('button[type="submit"]');
-  const input = form.querySelector('input[name="email"]');
-  const elError = document.getElementById('preorder-error');
-  const elSuccess = document.getElementById('preorder-success');
-
-  const show = (el) => el.classList.remove('hide');
-  const hide = (el) => el.classList.add('hide');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    hide(elError);
-    hide(elSuccess);
-
-    const email = (input.value || '').trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      elError.textContent = 'Please enter a valid email address.';
-      return show(elError);
+    function showError(msg){
+      if(notice){ notice.textContent = msg; notice.classList.remove('hide'); }
     }
 
-    btn.classList.add('btn--loading');
-    btn.disabled = true;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
 
-    try {
-      const res = await fetch(endpoint, {
+      const email = input.value.trim();
+      if(!email){ showError('Please enter a valid email.'); return; }
+
+      // liquid injects these at render time
+      const listId = {{ klaviyo-list-id | json }};
+      const companyId = {{ klaviyo-public-key | json }};
+
+      // Public Subscribe (Klaviyo “client” API)
+      fetch(`https://a.klaviyo.com/client/subscriptions/?company_id=${encodeURIComponent(companyId)}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'revision': '2023-10-15' // or your account’s recommended latest
+        },
         body: JSON.stringify({
-          g: listId,
-          email,
-          $fields: {
-            context: 'preorder',
-            product_title: {{ product.title | json }},
-            product_handle: {{ product.handle | json }},
-            product_id: {{ product.id | json }},
-            variant_id: {{ product.selected_or_first_available_variant.id | json }},
-            page_url: location.href
+          data: {
+            type: 'subscription',
+            attributes: {
+              list_id: listId,
+              custom_source: 'Preorder form (Shopify PDP)',
+              profile: {
+                email: email,
+                properties: {
+                  // helpful context
+                  preorder: true,
+                  product_title: {{ product.title | json }},
+                  product_handle: {{ product.handle | json }},
+                  product_id: {{ product.id | json }},
+                  variant_id: {{ product.selected_or_first_available_variant.id | json }},
+                  sku: {{ product.selected_or_first_available_variant.sku | json }},
+                  page_url: window.location.href
+                }
+              }
+            }
           }
         })
-      });
+      })
+      .then(async (r) => {
+        const text = await r.text();
+        // Try to parse JSON, but don’t crash on plain text
+        let data; try { data = JSON.parse(text); } catch(_) {}
 
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok && (data.success === true || !data.errors?.length)) {
-        preSubmit.classList.add('hide');
-        show(elSuccess);
-        form.reset();
-      } else {
-        elError.textContent = (data.errors && data.errors[0]) || 'Something went wrong. Please try again.';
-        show(elError);
-      }
-    } catch (err) {
-      console.error('Klaviyo subscribe error:', err);
-      elError.textContent = 'Network error. Please try again.';
-      show(elError);
-    } finally {
-      btn.classList.remove('btn--loading');
-      btn.disabled = false;
-    }
-  });
-})();
+        if (r.ok) {
+          success.classList.remove('hide');
+          form.querySelector('.pre-submit')?.classList.add('hide');
+        } else {
+          // Klaviyo errors often include a detail/code we can show
+          const msg = data?.errors?.[0]?.detail || data?.message || 'List does not exist.';
+          showError(msg);
+        }
+      })
+      .catch(() => showError('Network error — please try again.'));
+    });
+  })();
 </script>
+
