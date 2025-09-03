@@ -1,88 +1,107 @@
-{%- comment -%} GH Preorder form — mirrors OOS but labeled as preorder {%- endcomment -%}
+{%- comment -%}
+GH Preorder form — posts to Klaviyo Public Subscribe endpoint
+Safe for frontend use (no private key). Adds product context as custom fields.
+{%- endcomment -%}
+
+{%- assign KLAVIYO_LIST_ID = 'Vv9u6C' -%} {# <-- your Klaviyo List ID #}
 
 <style>
-
-  /* HIDE KLAVIYO BACK-IN-STOCK */
-  #klaviyo-bis-modal,
-  #klaviyo-bis-container,
-  .klaviyo-bis-trigger {
-    display: none !important;
-  }
-
-  .out-of-stock-form-signup{
-    display:flex; gap:5%; align-items:center; flex-wrap:wrap;
-  }
-  .out-of-stock-form-signup > form{ min-width:300px; flex:1; }
-  .out-of-stock-form-signup .input-group{ display:flex; gap:10px; margin-bottom:1rem; }
-  .out-of-stock-form-signup input[type="email"]{ border:1px solid #00000030; padding:10px 15px; flex:1; }
-  .out-of-stock-form-signup label{ font-size:14px; }
-  .out-of-stock-form-signup a{ color:#fff; }
+  .out-of-stock-form-signup { display:flex; gap:5%; align-items:center; flex-wrap:wrap; }
+  .out-of-stock-form-signup > form { min-width:300px; flex:1; }
+  .out-of-stock-form-signup .input-group { display:flex; gap:10px; margin-bottom:1rem; }
+  .out-of-stock-form-signup input[type="email"] { border:1px solid #00000030; padding:10px 15px; flex:1; }
+  .out-of-stock-form-signup label { font-size:14px; }
+  .out-of-stock-form-signup .note { margin:0.25rem 0 0; font-size:0.9rem; }
+  .out-of-stock-form-signup .error { color:#b00020; }
+  .out-of-stock-form-signup .success { color:#0a7d3b; }
+  .hide { display:none !important; }
 </style>
 
 <div class="out-of-stock-form-signup pt2 px2 bg-green-light">
+  <div class="copy" style="flex:1 1 300px; min-width:300px;">
     <p><strong>Launching soon!</strong></p>
     <p>Sign up for exclusive launch notifications and receive a special, limited-time offer when it arrives.</p>
+  </div>
 
-  <form id="product-preorder-form" method="post" action="https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/" style="margin-bottom:15px">
+  <form id="product-preorder-form" novalidate>
     <div class="input-group pre-submit">
-      <input type="email" placeholder="Enter Your Email" name="email" required>
+      <input type="email" placeholder="Enter Your Email" name="email" autocomplete="email" required>
       <button class="button button--black" type="submit">Sign Up</button>
     </div>
-    <div class="success hide">
-      Success! You'll be receiving an email shortly.
-    </div>
+    <p class="note error hide" id="preorder-error">Something went wrong. Please try again.</p>
+    <p class="note success hide" id="preorder-success">Success! You'll be receiving an email shortly.</p>
   </form>
-
-  <script>
-{
-  const form = document.getElementById('product-preorder-form');
-  const preSubmit = form.querySelector('.pre-submit');
-  const success = form.querySelector('.success');
-  const button = form.querySelector('button');
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-
-    const email = form.querySelector('[name="email"]').value;
-    const url = form.getAttribute('action');
-
-    button.classList.add('btn--loading');
-    button.disabled = true;
-
-    // Build payload
-    const payload = {
-      context: 'preorder',
-      email: email,
-      product_title: {{ product.title | json }},
-      product_handle: {{ product.handle | json }},
-      shopify_product_id: {{ product.id | json }},
-      sku: {{ product.selected_or_first_available_variant.sku | json }},
-      variant_id: {{ product.selected_or_first_available_variant.id | json }},
-      page_url: location.href
-    };
-
-    // Send as a SIMPLE request to avoid CORS preflight
-    fetch(url, {
-      method: 'POST',
-      mode: 'no-cors', // response will be opaque; that's fine
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-      body: new URLSearchParams({ payload: JSON.stringify(payload) })
-    })
-    .then(() => {
-      // Treat as success; we can't read the response in no-cors mode
-      preSubmit.classList.add('hide');
-      success.classList.remove('hide');
-    })
-    .catch((err) => {
-      console.error('Preorder hook error:', err);
-      button.classList.remove('btn--loading');
-      button.disabled = false;
-      alert('Hmm, something went wrong. Please try again.');
-    });
-  });
-}
-</script>
-
-
 </div>
+
+<script>
+(() => {
+  const form = document.getElementById('product-preorder-form');
+  if (!form) return;
+
+  const endpoint = 'https://manage.kmail-lists.com/ajax/subscriptions/subscribe';
+  const listId   = {{ KLAVIYO_LIST_ID | json }};
+
+  const preSubmit = form.querySelector('.pre-submit');
+  const btn       = form.querySelector('button[type="submit"]');
+  const input     = form.querySelector('input[name="email"]');
+  const elError   = document.getElementById('preorder-error');
+  const elSuccess = document.getElementById('preorder-success');
+
+  const show = (el) => el.classList.remove('hide');
+  const hide = (el) => el.classList.add('hide');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    hide(elError); hide(elSuccess);
+
+    const email = (input.value || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      elError.textContent = 'Please enter a valid email address.';
+      return show(elError);
+    }
+
+    btn.classList.add('btn--loading');
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          g: listId,                    // Klaviyo List ID
+          email,                        // subscriber email
+          // Optional: add context for segmentation/flows
+          $fields: {
+            context: 'preorder',
+            product_title: {{ product.title  | json }},
+            product_handle: {{ product.handle | json }},
+            product_id: {{ product.id | json }},
+            variant_id: {{ product.selected_or_first_available_variant.id | json }},
+            page_url: (typeof location !== 'undefined' ? location.href : '')
+          }
+        })
+      });
+
+      // Klaviyo returns JSON like: { success: true } OR { success:false, errors:[...] }
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && (data.success === true || !data.errors?.length)) {
+        preSubmit && preSubmit.classList.add('hide');
+        show(elSuccess);
+        form.reset();
+      } else {
+        elError.textContent = (data.errors && data.errors[0]) || 'Something went wrong. Please try again.';
+        show(elError);
+      }
+    } catch (err) {
+      console.error('Klaviyo subscribe error:', err);
+      elError.textContent = 'Network error. Please try again.';
+      show(elError);
+    } finally {
+      btn.classList.remove('btn--loading');
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
