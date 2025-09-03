@@ -305,6 +305,57 @@
             {% endif %}
             </div>
 
+            {% if product.tags contains 'preorder' %}
+  <style>
+    /* Hide Klaviyo BIS trigger button and any inline prompts */
+    .klaviyo-bis-trigger,
+    [data-klaviyo-bis-trigger],
+    #klaviyo-bis-modal,
+    .klaviyo-bis-notification,
+    .klaviyo-bis-close { display:none !important; }
+  </style>
+{% endif %}
+
+{% if product.tags contains 'preorder' %}
+  <style>
+    /* Hide Klaviyo BIS trigger button and any inline prompts */
+    .klaviyo-bis-trigger,
+    [data-klaviyo-bis-trigger],
+    [aria-controls="klaviyo-bis-modal"],
+    #klaviyo-bis-modal,
+    .klaviyo-bis-notification,
+    .klaviyo-bis-close {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  </style>
+
+  <script>
+    (function () {
+      function nukeBIS() {
+        document.querySelectorAll(
+          '.klaviyo-bis-trigger, [data-klaviyo-bis-trigger], [aria-controls="klaviyo-bis-modal"], #klaviyo-bis-modal, .klaviyo-bis-notification, .klaviyo-bis-close'
+        ).forEach(function (el) { el.remove(); });
+      }
+
+      // Run now, on DOM ready, after short delays (to catch late injections)...
+      nukeBIS();
+      document.addEventListener('DOMContentLoaded', nukeBIS);
+      setTimeout(nukeBIS, 400);
+      setTimeout(nukeBIS, 1200);
+
+      // ...and keep watching for newly injected BIS nodes
+      new MutationObserver(nukeBIS).observe(document.documentElement, {
+        childList: true,
+        subtree: true
+      });
+    })();
+  </script>
+{% endif %}
+
+
             
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
