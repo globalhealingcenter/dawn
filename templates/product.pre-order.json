@@ -57,6 +57,7 @@
         "gh_out_of_stock_form_bCNL4b": {
           "type": "gh_out_of_stock_form",
           "settings": {
+            "form_url": "https://hooks.zapier.com/hooks/catch/1153851/byx1p4t/",
             "message": "<p><strong>Launching Soon!</strong></p><p>Signup for exclusive launch notifications and receive a special, limited-time offer when it arrives.</p>",
             "success_message": "<p>Success! You'll be receiving launch notifications.</p>",
             "force_show": true
