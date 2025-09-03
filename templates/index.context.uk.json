@@ -36,8 +36,14 @@
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "settings": {
-            "link_1": "shopify://collections/products-for-uk",
-            "link_1_text": "SHOP PRODUCTS"
+            "link_1_text": "SHOP PRODUCTS",
+            "link_1": "shopify://collections/products-for-uk"
+          }
+        },
+        "b871651f-c308-4034-8741-ebbb3f7989ed": {
+          "settings": {
+            "row_1_img": "https://cdn.shopify.com/s/files/1/0539/5621/4984/files/premium-ingredients-1.svg",
+            "row_1_text": "<p>Quality above all. We search the world for the best, no matter the cost.</p>"
           }
         }
       }
