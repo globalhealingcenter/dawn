@@ -259,10 +259,10 @@
                           
               <div class="" {{ block.shopify_attributes }}>
               {% if block.settings.force_show %}
-                {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
+                {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message, form_url: block.settings.form_url %}
               {% else %}
                 {% unless product.available %}
-                  {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
+                  {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message, form_url: block.settings.form_url %}
                 {% endunless %}
               {% endif %}
               </div> 
