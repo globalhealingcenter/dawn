@@ -253,7 +253,7 @@
               >
                 <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span> {{- product.selected_or_first_available_variant.sku -}}
               </p>
-            {%- when 'gh_out_of_stock_form' -%}
+            <!-- {%- when 'gh_out_of_stock_form' -%}
                           
               <div class="" {{ block.shopify_attributes }}>
               {% if block.settings.force_show %}
@@ -263,7 +263,45 @@
                   {% render 'gh-element-out-of-stock-form' product: product, message: block.settings.message %}
                 {% endunless %}
               {% endif %}
-              </div>
+              </div> -->
+
+              <div class="" {{ block.shopify_attributes }}>
+  {%- comment -%}
+    Tag-only control:
+    - Add product tag: "preorder" to show the preorder message
+    - Otherwise show the normal out-of-stock message
+  {%- endcomment -%}
+
+  {%- assign is_preorder = false -%}
+  {%- if product.tags contains 'preorder' -%}
+    {%- assign is_preorder = true -%}
+  {%- endif -%}
+
+  {%- comment -%}
+    If the block has force_show enabled (theme editor preview),
+    we always render one of the messages regardless of product.available.
+  {%- endcomment -%}
+  {% if block.settings.force_show %}
+    {% if is_preorder %}
+      {% render 'gh-element-preorder-form', product: product, message: block.settings.message %}
+    {% else %}
+      {% render 'gh-element-out-of-stock-form', product: product, message: block.settings.message %}
+    {% endif %}
+  {% else %}
+    {%- comment -%}
+      Only show the card when the product is not available.
+      (If you want preorder to show even when available, remove the "unless" wrapper.)
+    {%- endcomment -%}
+    {% unless product.available %}
+      {% if is_preorder %}
+        {% render 'gh-element-preorder-form', product: product, message: block.settings.message %}
+      {% else %}
+        {% render 'gh-element-out-of-stock-form', product: product, message: block.settings.message %}
+      {% endif %}
+    {% endunless %}
+  {% endif %}
+</div>
+
             
             {%- when 'custom_liquid' -%}
               {{ block.settings.custom_liquid }}
