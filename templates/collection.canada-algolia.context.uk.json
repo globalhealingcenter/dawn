@@ -12,5 +12,11 @@
   "context": {
     "market": "uk"
   },
-  "sections": {}
+  "sections": {
+    "168777948032aeb944": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    }
+  }
 }
