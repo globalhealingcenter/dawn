@@ -45,6 +45,10 @@
             "row_1_img": "https://cdn.shopify.com/s/files/1/0539/5621/4984/files/premium-ingredients-1.svg",
             "row_1_text": "<p>Quality above all. We search the world for the best, no matter the cost.</p>"
           }
+        },
+        "8bb9f77b-9600-4aa3-aaea-c66afd3693ea": {
+          "disabled": true,
+          "settings": {}
         }
       }
     },
