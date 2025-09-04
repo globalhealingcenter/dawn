@@ -415,7 +415,9 @@
         </div>
       </div>
       {% when 'curated_collection' %}
-      {% if product.metafields.globalhealing.curated_collection.value and product.metafields.globalhealing.curated_collection.value.size > 0 and block.items.size > 0 %}
+        {% assign has_curated = false %}
+       {% for p in product.metafields.globalhealing.curated_collection.value %}{% assign has_curated = true %}{% endfor %}
+      {% if product.metafields.globalhealing.curated_collection.value and has_curated and block.items.size > 0 %}
       <div class="ghd--block--curated ghd--block">
         <div data-type="header">
           <div class="eyebrow h2">
