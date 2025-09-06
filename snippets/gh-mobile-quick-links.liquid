@@ -28,31 +28,37 @@
   </nav>
 
   <style>
-    /* ========= Mobile Quick Links ========= */
+    /* ===== Mobile Quick Links (home + product only) ===== */
     @media (max-width: 749px) {
       .mobile-quicklinks,
       .mobile-quicklinks--inline {
         position: static;
         background: var(--gh-color-green, #21472D);
       }
+
       .mobile-quicklinks .mq-inner {
         display: flex;
         gap: 20px;
+        padding: 10px 12px;              /* requested */
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: none;
-        padding: 6px 12px;
+        overscroll-behavior-x: contain;
+        scroll-behavior: auto !important; /* prevent smooth “swing” */
       }
       .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
 
       .mq-link {
         display: inline-block;
-        font-size: 12px;
-        font-weight: 500;
+        white-space: nowrap;
         color: #fff;
         text-decoration: none;
-        white-space: nowrap;
-        line-height: 1.4;
+
+        /* requested typography */
+        font-size: 1.1rem;
+        line-height: 1.6;
+        letter-spacing: 0.04em;
+        font-weight: 500;
       }
       .mq-link:hover { opacity: .85; }
       .mq-link.is-active {
