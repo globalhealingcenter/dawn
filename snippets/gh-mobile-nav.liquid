@@ -1,5 +1,5 @@
 {%- comment -%}
-  Mobile quick links — show on HOME and PRODUCT pages
+  GH Mobile Nav — quick links for HOME and PRODUCT pages
   Tries handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
 {%- endcomment -%}
 
@@ -28,7 +28,7 @@
   </nav>
 
   <style>
-    /* ===== Mobile Quick Links (home + product only) ===== */
+    /* ===== GH Mobile Nav (home + product only) ===== */
     @media (max-width: 749px) {
       .mobile-quicklinks,
       .mobile-quicklinks--inline {
@@ -38,13 +38,13 @@
 
       .mobile-quicklinks .mq-inner {
         display: flex;
-        gap: 20px;
-        padding: 10px 12px;              /* requested */
+        gap: 16px; /* ← adjusted as requested */
+        padding: 10px 12px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         scroll-snap-type: none;
         overscroll-behavior-x: contain;
-        scroll-behavior: auto !important; /* prevent smooth “swing” */
+        scroll-behavior: auto !important; /* avoid smooth “swing” */
       }
       .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
 
@@ -54,7 +54,7 @@
         color: #fff;
         text-decoration: none;
 
-        /* requested typography */
+        /* Typography */
         font-size: 1.1rem;
         line-height: 1.6;
         letter-spacing: 0.04em;
