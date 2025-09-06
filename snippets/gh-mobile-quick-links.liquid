@@ -102,5 +102,91 @@
   .mq-fade--right { right: 0; background: linear-gradient(270deg, var(--mq-bg) 0%, rgba(249,242,232,0) 100%); }
 }
 
+/* ========= Mobile Quick Links ========= */
+@media (max-width: 749px) {
+  :root {
+    --mq-header-offset: 56px;
+    --mq-bg: var(--gh-color-cream, #F9F2E8);
+    --mq-pill-bg: #fff;
+    --mq-pill-text: var(--gh-color-green-dark, #00260f);
+    --mq-pill-text-active: var(--gh-color-green, #21472D);
+    --mq-pill-border: rgba(0,0,0,.08);
+  }
+
+  /* default sticky mode (if rendered outside header) */
+  .mobile-quicklinks {
+    position: sticky;
+    top: var(--mq-header-offset);
+    z-index: 40;
+    background: var(--mq-bg);
+    border-bottom: 1px solid rgba(0,0,0,.06);
+  }
+
+  /* inline mode (when rendered inside header) */
+  .mobile-quicklinks--inline {
+    position: static;
+    top: auto;
+    background: var(--mq-bg);
+    border-top: 1px solid rgba(0,0,0,.06);
+    border-bottom: 0;
+    z-index: auto;
+  }
+
+  /* inner wrapper */
+  .mobile-quicklinks .mq-inner {
+    position: relative;
+    padding: 8px 12px;
+  }
+
+  /* horizontal scroll */
+  .mq-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+  .mq-list::-webkit-scrollbar { display: none; }
+
+  .mq-item { flex: 0 0 auto; scroll-snap-align: start; }
+
+  /* pill links */
+  .mq-link {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--mq-pill-bg);
+    color: var(--mq-pill-text);
+    border: 1px solid var(--mq-pill-border);
+    font-size: 15px;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: all .15s ease;
+  }
+
+  .mq-link:hover {
+    background: #f9f9f9;
+    transform: translateY(-1px);
+  }
+  .mq-link.is-active {
+    color: var(--mq-pill-text-active);
+    font-weight: 600;
+    border-color: rgba(0,0,0,.18);
+  }
+
+  /* edge fades */
+  .mq-fade {
+    position: absolute; top: 0; bottom: 0; width: 24px; pointer-events: none;
+  }
+  .mq-fade--left  { left: 0;  background: linear-gradient(90deg, var(--mq-bg) 0%, rgba(249,242,232,0) 100%); }
+  .mq-fade--right { right: 0; background: linear-gradient(270deg, var(--mq-bg) 0%, rgba(249,242,232,0) 100%); }
+}
+
+/* ========= Hide on desktop ========= */
+@media (min-width: 750px) {
+  .mobile-quicklinks { display: none; }
+}
 
 </style>
