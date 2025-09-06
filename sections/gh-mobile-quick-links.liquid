@@ -1,0 +1,28 @@
+{% comment %}
+GH Mobile Quick Links — section wrapper so it can live inside the header-group.
+Relies on the menu handle: mobile-quick-links
+{% endcomment %}
+
+<div class="gh-mq-section">
+  {% render 'gh-mobile-quick-links', inline: true %}
+</div>
+
+{% schema %}
+{
+  "name": "GH Mobile Quick Links",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable",
+      "default": true
+    }
+  ],
+  "presets": [
+    { "name": "GH Mobile Quick Links" }
+  ],
+  "enabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}
