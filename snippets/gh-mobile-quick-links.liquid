@@ -5,28 +5,19 @@
 
 {%- assign mq_menu = linklists['mobile-quick-links'] | default: linklists.mobile-quick-links -%}
 {%- if mq_menu and mq_menu.links.size > 0 -%}
-<nav class="mobile-quicklinks" role="navigation" aria-label="Quick links">
-  <div class="mq-inner id="gh-ql"">
-    <ul class="mq-list" role="list">
-      {%- for link in mq_menu.links -%}
-        {%- assign is_active = link.active | default: false -%}
-        <li class="mq-item">
-          <a
-            class="mq-link{% if is_active %} is-active{% endif %}"
-            href="{{ link.url }}"
-            {% if is_active %}aria-current="page"{% endif %}
-          >
-            {{ link.title }}
-          </a>
-        </li>
-      {%- endfor -%}
-    </ul>
-
-    <!-- edge fades -->
-    <div class="mq-fade mq-fade--left" aria-hidden="true"></div>
-    <div class="mq-fade mq-fade--right" aria-hidden="true"></div>
+<nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
+  <div class="mq-inner" id="gh-ql">
+    {%- assign menu = linklists['gh-mobile-nav'] | default: linklists.gh-mobile-nav -%}
+    {%- for link in menu.links -%}
+      <a
+        href="{{ link.url }}"
+        class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
+        {{ link.title }}
+      </a>
+    {%- endfor -%}
   </div>
 </nav>
+
 {%- endif -%}
 
 <style>
