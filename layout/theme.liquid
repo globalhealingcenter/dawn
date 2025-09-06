@@ -440,85 +440,29 @@
 </script>
 
 
-
 <script>
 (function(){
-  var PARAM = 'ql';
-  var RESTORE_MS = 1500;   // keep re-centering briefly to beat late scripts
-  var TICK = 40;
-
-  function $(sel){ return document.querySelector(sel); }
-  function getLane(){
-    return $('#gh-ql') ||
+  function lane(){
+    return document.getElementById('gh-ql') ||
            document.querySelector('.gh-mobile-nav .mq-inner') ||
-           document.querySelector('.mobile-quicklinks .mq-inner') || null;
+           document.querySelector('.mobile-quicklinks .mq-inner');
   }
-
-  // --- Add ql=<scrollLeft> to the clicked link BEFORE navigation ---
-  function onPointer(e){
-    var a = e.target && e.target.closest('a[href]');
+  function centerActive(){
+    var s = lane(); if (!s) return;
+    var a = s.querySelector('.is-active');
     if (!a) return;
-    var lane = getLane();
-    if (!lane) return;
-    var left = Math.max(0, Math.round(lane.scrollLeft));
-    try{
-      var u = new URL(a.href, location.origin);
-      u.searchParams.set(PARAM, String(left));
-      a.href = u.toString(); // rewrite target so the value survives redirect/template swaps
-    }catch(_){}
+    s.style.scrollBehavior = 'auto';
+    s.scrollLeft = Math.max(0, a.offsetLeft - (s.clientWidth - a.clientWidth)/2);
   }
-  // capture early so it always fires on mobile
-  document.addEventListener('pointerdown', onPointer, true);
-  document.addEventListener('touchstart',  onPointer, true);
-  document.addEventListener('mousedown',   onPointer, true);
-
-  // --- Restore from ?ql= on the next page and then clean the URL ---
-  function parseQL(){
-    var v = new URL(location.href).searchParams.get(PARAM);
-    return v == null ? null : (parseInt(v,10) || 0);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', centerActive, { once: true });
+  } else {
+    centerActive();
   }
-
-  function restore(){
-    var lane = getLane();
-    if (!lane) return;
-    var ql = parseQL();
-    if (ql == null) return;
-
-    // run a few frames in case header/layout reflows later
-    var start = performance.now();
-    (function loop(){
-      lane.scrollLeft = ql;
-      if (performance.now() - start < RESTORE_MS) setTimeout(loop, TICK);
-    })();
-
-    // remove ql from the URL so it stays clean
-    try{
-      var url = new URL(location.href);
-      url.searchParams.delete(PARAM);
-      history.replaceState(null, '', url.pathname + (url.search ? '?' + url.searchParams.toString() : '') + location.hash);
-    }catch(_){}
-  }
-
-  function start(){
-    var lane = getLane();
-    if (lane) restore();
-    else{
-      // header added late? watch for it
-      var mo = new MutationObserver(function(){
-        var l = getLane();
-        if (l){ restore(); mo.disconnect(); }
-      });
-      mo.observe(document.documentElement, {childList:true, subtree:true});
-    }
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
-
-  // bfcache
-  window.addEventListener('pageshow', function(e){ if (e.persisted) start(); });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActive(); });
 })();
 </script>
+
 
 
 </body>
