@@ -64,25 +64,58 @@
 @media (min-width: 750px) {
   .mobile-quicklinks { display: none; }
 }
+
+/* Prevent chain/bounce and any smooth-scroll on the quicklinks lane */
+#gh-ql,
+.gh-mobile-nav .mq-inner,
+.mobile-quicklinks .mq-inner {
+  overscroll-behavior-x: contain;
+  scroll-snap-type: none !important;
+  scroll-behavior: auto !important;  /* override global html{ scroll-behavior:smooth } */
+}
+
 </style>
 
 <script>
-/* Center the active item on load (simple + reliable). Remove older scroll scripts. */
 (function(){
-  function lane(){ return document.getElementById('gh-ql'); }
-  function centerActive(){
-    var s = lane(); if (!s) return;
+  function lane(){
+    return document.getElementById('gh-ql') ||
+           document.querySelector('.gh-mobile-nav .mq-inner') ||
+           document.querySelector('.mobile-quicklinks .mq-inner');
+  }
+
+  function centerActiveOnce(){
+    var s = lane(); if (!s || s.dataset.centered) return;
     var a = s.querySelector('.is-active');
-    if (!a) return;
-    var left = a.offsetLeft - (s.clientWidth - a.clientWidth)/2;
+    if (!a) { s.dataset.centered = '1'; return; }
+
+    // Temporarily disable snapping/smooth/momentum so it doesn't "swing"
+    var prevSnap = s.style.scrollSnapType;
+    var prevBeh  = s.style.scrollBehavior;
+    var prevIos  = s.style.webkitOverflowScrolling;
+
+    s.style.scrollSnapType = 'none';
     s.style.scrollBehavior = 'auto';
-    s.scrollLeft = Math.max(0, left);
+    s.style.webkitOverflowScrolling = 'auto'; // stop iOS momentum for a tick
+
+    // Compute delta via rects (more stable than offsetLeft in flex rows)
+    var sRect = s.getBoundingClientRect();
+    var aRect = a.getBoundingClientRect();
+    var delta = (aRect.left + aRect.width/2) - (sRect.left + sRect.width/2);
+
+    s.scrollLeft += delta;   // center instantly (no smooth)
+    // Restore styles next tick and mark done so we don't fight other scripts
+    setTimeout(function(){
+      s.style.scrollSnapType = prevSnap || '';
+      s.style.scrollBehavior = prevBeh  || '';
+      s.style.webkitOverflowScrolling = prevIos || '';
+      s.dataset.centered = '1';
+    }, 0);
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', centerActive, { once:true });
-  } else {
-    centerActive();
-  }
-  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActive(); });
+
+  // Run once after full layout (images/fonts) to avoid reflows moving the target
+  window.addEventListener('load', centerActiveOnce, { once: true });
+  // bfcache restore (Safari/Firefox)
+  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActiveOnce(); });
 })();
 </script>
