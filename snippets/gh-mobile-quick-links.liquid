@@ -1,217 +1,88 @@
 {%- comment -%}
   Mobile quick links (scrollable, sticky under header)
-  Requires a Navigation menu with handle: mobile-quick-links
+  Tries these handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
 {%- endcomment -%}
 
-{%- assign mq_menu = linklists['mobile-quick-links'] | default: linklists.mobile-quick-links -%}
-{%- if mq_menu and mq_menu.links.size > 0 -%}
-<nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
-  {%- assign menu =
-    linklists['gh-mobile-nav']
-    | default: linklists['mobile-nav']
-  -%}
+{%- assign mq_menu = linklists['mobile-quick-links'] -%}
+{%- if mq_menu == nil or mq_menu.links.size == 0 -%}
+  {%- assign mq_menu = linklists['gh-mobile-nav'] -%}
+{%- endif -%}
+{%- if mq_menu == nil or mq_menu.links.size == 0 -%}
+  {%- assign mq_menu = linklists['mobile-nav'] -%}
+{%- endif -%}
 
-  {%- if menu and menu.links.size > 0 -%}
-    <div class="mq-inner" id="gh-ql">
-      {%- for link in menu.links -%}
+<nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
+  <div class="mq-inner" id="gh-ql">
+    {%- if mq_menu and mq_menu.links.size > 0 -%}
+      {%- for link in mq_menu.links -%}
         <a href="{{ link.url }}" class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
           {{ link.title }}
         </a>
       {%- endfor -%}
-    </div>
-  {%- else -%}
-    <div class="mq-inner" id="gh-ql"><!-- No menu found (gh-mobile-nav / mobile-nav) --></div>
-  {%- endif -%}
+    {%- else -%}
+      <!-- No menu found for: mobile-quick-links / gh-mobile-nav / mobile-nav -->
+    {%- endif -%}
+  </div>
 </nav>
 
-{%- endif -%}
-
 <style>
-
 /* ========= Mobile Quick Links ========= */
 @media (max-width: 749px) {
-  :root {
-    --mq-header-offset: 56px;
-  }
-
   .mobile-quicklinks,
   .mobile-quicklinks--inline {
     position: static;
-    top: auto;
-    background: var(--gh-color-green, #21472D); /* green banner background */
-    border: 0;
-    z-index: auto;
+    background: var(--gh-color-green, #21472D);
   }
-
   .mobile-quicklinks .mq-inner {
-    position: relative;
-    padding: 6px 12px;
-  }
-
-  .mq-list {
-    display: flex;
-    gap: 20px;
+    display: flex;                 /* lay out links in a row */
+    gap: 20px;                     /* space between links */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    scroll-snap-type: none;
+    padding: 6px 12px;
   }
-  .mq-list::-webkit-scrollbar { display: none; }
-
-  .mq-item { flex: 0 0 auto; scroll-snap-align: start; }
+  .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
 
   .mq-link {
     display: inline-block;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    font-size: 12px;              /* font size */
+    font-size: 12px;
     font-weight: 500;
-    color: #fff;                  /* white text */
-    text-decoration: none;        /* no underline */
+    color: #fff;
+    text-decoration: none;
     white-space: nowrap;
     line-height: 1.4;
   }
-
-  .mq-link:hover {
-    opacity: 0.85; /* subtle hover effect */
-  }
-
+  .mq-link:hover { opacity: .85; }
   .mq-link.is-active {
     font-weight: 600;
-    border-bottom: 2px solid #fff; /* underline active in white */
+    border-bottom: 2px solid #fff;
     padding-bottom: 2px;
   }
-
-  .mq-fade { display: none; }
 }
 
 /* ========= Hide on desktop ========= */
 @media (min-width: 750px) {
   .mobile-quicklinks { display: none; }
 }
-
-#gh-ql,
-.gh-mobile-nav .mq-inner,
-.mobile-quicklinks .mq-inner{
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  scroll-snap-type:none !important;
-}
-
-#gh-ql { overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
-#gh-ql a { display: inline-block; }
-
-
 </style>
 
 <script>
-(function () {
-  var HASH_KEY = 'ql';            // hash key, e.g. #ql=3
-  var RESTORE_MS = 1500;          // keep centering for this long
-  var selectors = ['#gh-ql', '.gh-mobile-nav .mq-inner', '.mobile-quicklinks .mq-inner'];
-
-  function getScroller() {
-    for (var i = 0; i < selectors.length; i++) {
-      var el = document.querySelector(selectors[i]);
-      if (el) return el;
-    }
-    // fallback: find first horizontally scrollable row with links
-    var cands = document.querySelectorAll('header nav, header [role="navigation"], nav, .mq-inner, .mobile-quicklinks, .gh-mobile-nav');
-    for (var j = 0; j < cands.length; j++) {
-      var el2 = cands[j];
-      if (el2.querySelectorAll('a[href]').length >= 3 && el2.scrollWidth > el2.clientWidth) return el2;
-      var inner = el2.querySelector(':scope > .mq-inner, :scope > ul, :scope > div');
-      if (inner && inner.querySelectorAll('a[href]').length >= 3 && inner.scrollWidth > inner.clientWidth) return inner;
-    }
-    return null;
-  }
-
-  function indexLinks(s) {
-    var links = Array.prototype.slice.call(s.querySelectorAll('a[href]'));
-    links.forEach(function (a, i) { a.dataset.qlIndex = i; });
-    return links;
-  }
-
-  function centerIndex(s, idx) {
-    if (!s || idx == null) return;
-    var links = indexLinks(s);
-    var a = links[idx]; if (!a) return;
-    var left = a.offsetLeft - (s.clientWidth - a.clientWidth) / 2;
-    var snap = s.style.scrollSnapType, beh = s.style.scrollBehavior;
-    s.style.scrollSnapType = 'none';
+/* Center the active item on load (simple + reliable). Remove older scroll scripts. */
+(function(){
+  function lane(){ return document.getElementById('gh-ql'); }
+  function centerActive(){
+    var s = lane(); if (!s) return;
+    var a = s.querySelector('.is-active');
+    if (!a) return;
+    var left = a.offsetLeft - (s.clientWidth - a.clientWidth)/2;
     s.style.scrollBehavior = 'auto';
     s.scrollLeft = Math.max(0, left);
-    s.style.scrollSnapType = snap || '';
-    s.style.scrollBehavior = beh || '';
   }
-
-  // Add hash (#ql=N) to the clicked link BEFORE navigation (works across redirects)
-  function tagIndexOnPointer(e) {
-    var a = e.target && e.target.closest('a[href]');
-    if (!a) return;
-    var scroller = getScroller(); if (!scroller) return;
-    var links = indexLinks(scroller);
-    var idx = links.indexOf(a);
-    if (idx < 0) return;
-    try {
-      var url = new URL(a.href, location.origin);
-      var existing = url.hash.replace(/^#/, '');
-      // Preserve existing hash if any, append ql=idx
-      var parts = existing ? existing.split('&').filter(Boolean) : [];
-      // remove previous ql if present
-      parts = parts.filter(function(p){ return p.split('=')[0] !== HASH_KEY; });
-      parts.push(HASH_KEY + '=' + idx);
-      url.hash = parts.join('&');
-      a.href = url.toString();
-    } catch (err) { /* ignore */ }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', centerActive, { once:true });
+  } else {
+    centerActive();
   }
-  document.addEventListener('pointerdown', tagIndexOnPointer, true);
-  document.addEventListener('mousedown',   tagIndexOnPointer, true);
-  document.addEventListener('touchstart',  tagIndexOnPointer, true);
-
-  function parseHashIdx() {
-    var m = location.hash.match(new RegExp('[#&]' + HASH_KEY + '=(\\d+)'));
-    return m ? parseInt(m[1], 10) : null;
-  }
-
-  function restore() {
-    var s = getScroller(); if (!s) return;
-    indexLinks(s);
-    var idx = parseHashIdx();
-    // Fallback: center active link if no hash
-    if (idx == null) {
-      var active = s.querySelector('a[aria-current="page"], a.active, a.is-active');
-      if (active) idx = parseInt(active.dataset.qlIndex || '-1', 10);
-    }
-    var start = performance.now();
-    (function loop() {
-      centerIndex(s, idx);
-      if (performance.now() - start < RESTORE_MS) requestAnimationFrame(loop);
-    })();
-    // Clean the hash so URL stays pretty
-    if (parseHashIdx() != null) {
-      history.replaceState(null, '', location.pathname + location.search);
-    }
-  }
-
-  function start() {
-    var s = getScroller();
-    if (s) restore();
-    else {
-      var mo = new MutationObserver(function () {
-        var s2 = getScroller();
-        if (s2) { restore(); mo.disconnect(); }
-      });
-      mo.observe(document.documentElement, { childList: true, subtree: true });
-    }
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
-  else start();
-  window.addEventListener('pageshow', function (e) { if (e.persisted) start(); });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActive(); });
 })();
 </script>
