@@ -31,87 +31,70 @@
 
 <style>
 
-/* ========= GH Mobile Nav ========= */
+/* ========= Mobile Quick Links ========= */
 @media (max-width: 749px) {
   :root {
-    /* If your header is fixed, you can use this to offset content if needed */
     --mq-header-offset: 56px;
   }
 
-  /* Tokenized background: configurable via CSS var; defaults to GH green */
-  .gh-mobile-nav,
-  .gh-mobile-nav.mobile-quicklinks--inline {
+  .mobile-quicklinks,
+  .mobile-quicklinks--inline {
     position: static;
     top: auto;
-    background: var(--gh-mobile-nav-bg, var(--gh-color-green, #21472D));
+    background: var(--gh-color-green, #21472D); /* green banner background */
     border: 0;
     z-index: auto;
   }
 
-  .gh-mobile-nav .mq-inner {
+  .mobile-quicklinks .mq-inner {
     position: relative;
     padding: 6px 12px;
   }
 
-  /* Horizontal, scrollable quick-links row */
-  .gh-mobile-nav .mq-list {
+  .mq-list {
     display: flex;
     gap: 20px;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* iOS momentum */
-    scroll-snap-type: x proximity;     /* nicer snap while scrolling */
-    scrollbar-width: none;             /* Firefox hide scrollbar */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .gh-mobile-nav .mq-list::-webkit-scrollbar { display: none; } /* WebKit hide scrollbar */
+  .mq-list::-webkit-scrollbar { display: none; }
 
-  .gh-mobile-nav .mq-item {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-  }
+  .mq-item { flex: 0 0 auto; scroll-snap-align: start; }
 
-  /* Links */
-  .gh-mobile-nav .mq-link {
+  .mq-link {
     display: inline-block;
     padding: 0;
     border: 0;
     background: transparent;
-    font-size: 12px;
+    font-size: 12px;              /* font size */
     font-weight: 500;
-    color: #fff;
-    text-decoration: none;
+    color: #fff;                  /* white text */
+    text-decoration: none;        /* no underline */
     white-space: nowrap;
     line-height: 1.4;
-    transition: opacity .18s ease;
   }
 
-  .gh-mobile-nav .mq-link:hover {
-    opacity: 0.85;
+  .mq-link:hover {
+    opacity: 0.85; /* subtle hover effect */
   }
 
-  /* Active state underline */
-  .gh-mobile-nav .mq-link.is-active {
+  .mq-link.is-active {
     font-weight: 600;
-    border-bottom: 2px solid #fff;
+    border-bottom: 2px solid #fff; /* underline active in white */
     padding-bottom: 2px;
   }
 
-  /* Accessible keyboard focus */
-  .gh-mobile-nav .mq-link:focus-visible {
-    outline: 2px solid var(--gh-color-gold, #CCA72D);
-    outline-offset: 2px;
-    border-radius: 4px;
-  }
-
-  /* If you later add gradient fades at edges, keep hidden by default */
-  .gh-mobile-nav .mq-fade { display: none; }
+  .mq-fade { display: none; }
 }
 
-/* Hide on desktop/tablet */
+/* ========= Hide on desktop ========= */
 @media (min-width: 750px) {
-  .gh-mobile-nav { display: none; }
+  .mobile-quicklinks { display: none; }
 }
 
 
