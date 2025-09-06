@@ -269,6 +269,9 @@
 
   {%- render 'gh-header', product: product, canonical_url: canonical_url, customer: customer, collection: collection, template: template, settings: settings, current_tags: current_tags, cart: cart -%}
 
+  {% render 'gh-mobile-quick-links' %}
+
+
   <script>
     document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
     if (Shopify.designMode) {
