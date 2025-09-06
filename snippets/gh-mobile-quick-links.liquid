@@ -1,144 +1,71 @@
 {%- comment -%}
-  Mobile quick links (scrollable, sticky under header)
+  Mobile quick links — show on HOME only
   Tries these handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
 {%- endcomment -%}
 
-{%- assign mq_menu = linklists['mobile-quick-links'] -%}
-{%- if mq_menu == nil or mq_menu.links.size == 0 -%}
-  {%- assign mq_menu = linklists['gh-mobile-nav'] -%}
-{%- endif -%}
-{%- if mq_menu == nil or mq_menu.links.size == 0 -%}
-  {%- assign mq_menu = linklists['mobile-nav'] -%}
-{%- endif -%}
+{%- if request.page_type == 'index' or template.name == 'index' -%}
 
-<nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
-  <div class="mq-inner" id="gh-ql">
-    {%- if mq_menu and mq_menu.links.size > 0 -%}
-      {%- for link in mq_menu.links -%}
-        <a href="{{ link.url }}" class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
-          {{ link.title }}
-        </a>
-      {%- endfor -%}
-    {%- else -%}
-      <!-- No menu found for: mobile-quick-links / gh-mobile-nav / mobile-nav -->
-    {%- endif -%}
-  </div>
-</nav>
+  {%- assign mq_menu = linklists['mobile-quick-links'] -%}
+  {%- if mq_menu == nil or mq_menu.links.size == 0 -%}
+    {%- assign mq_menu = linklists['gh-mobile-nav'] -%}
+  {%- endif -%}
+  {%- if mq_menu == nil or mq_menu.links.size == 0 -%}
+    {%- assign mq_menu = linklists['mobile-nav'] -%}
+  {%- endif -%}
 
-<style>
-/* ========= Mobile Quick Links ========= */
-@media (max-width: 749px) {
-  .mobile-quicklinks,
-  .mobile-quicklinks--inline {
-    position: static;
-    background: var(--gh-color-green, #21472D);
-  }
-  .mobile-quicklinks .mq-inner {
-    display: flex;                 /* lay out links in a row */
-    gap: 20px;                     /* space between links */
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: none;
-    padding: 6px 12px;
-  }
-  .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
+  <nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
+    <div class="mq-inner" id="gh-ql">
+      {%- if mq_menu and mq_menu.links.size > 0 -%}
+        {%- for link in mq_menu.links -%}
+          <a href="{{ link.url }}" class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- No menu found for: mobile-quick-links / gh-mobile-nav / mobile-nav -->
+      {%- endif -%}
+    </div>
+  </nav>
 
-  .mq-link {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 500;
-    color: #fff;
-    text-decoration: none;
-    white-space: nowrap;
-    line-height: 1.4;
-  }
-  .mq-link:hover { opacity: .85; }
-  .mq-link.is-active {
-    font-weight: 600;
-    border-bottom: 2px solid #fff;
-    padding-bottom: 2px;
-  }
-}
+  <style>
+    /* ========= Mobile Quick Links (home only) ========= */
+    @media (max-width: 749px) {
+      .mobile-quicklinks,
+      .mobile-quicklinks--inline {
+        position: static;
+        background: var(--gh-color-green, #21472D);
+      }
+      .mobile-quicklinks .mq-inner {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: none;
+        padding: 6px 12px;
+      }
+      .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
 
-/* ========= Hide on desktop ========= */
-@media (min-width: 750px) {
-  .mobile-quicklinks { display: none; }
-}
-
-/* Prevent chain/bounce and any smooth-scroll on the quicklinks lane */
-#gh-ql,
-.gh-mobile-nav .mq-inner,
-.mobile-quicklinks .mq-inner {
-  overscroll-behavior-x: contain;
-  scroll-snap-type: none !important;
-  scroll-behavior: auto !important;  /* override global html{ scroll-behavior:smooth } */
-}
-
-</style>
-
-<script>
-(function(){
-  function lane(){
-    return document.getElementById('gh-ql') ||
-           document.querySelector('.gh-mobile-nav .mq-inner') ||
-           document.querySelector('.mobile-quicklinks .mq-inner');
-  }
-
-  function centerActiveOnce(){
-    var s = lane(); if (!s || s.dataset.centered) return;
-    var a = s.querySelector('.is-active'); if (!a) { s.dataset.centered = '1'; return; }
-
-    // save & disable smooth/momentum/snapping for a tick
-    var prevSnap = s.style.scrollSnapType;
-    var prevBeh  = s.style.scrollBehavior;
-    var prevIos  = s.style.webkitOverflowScrolling;
-    s.style.scrollSnapType = 'none';
-    s.style.scrollBehavior = 'auto';
-    s.style.webkitOverflowScrolling = 'auto';
-
-    // center math via rects (robust in flex/gap layouts)
-    var sRect = s.getBoundingClientRect();
-    var aRect = a.getBoundingClientRect();
-    var delta = (aRect.left + aRect.width/2) - (sRect.left + sRect.width/2);
-
-    var max  = Math.max(0, s.scrollWidth - s.clientWidth);
-    var next = Math.round(s.scrollLeft + delta);
-    if (next < 0) next = 0;
-    if (next > max) next = max;
-
-    // detect "last link / near end" and align hard-right instead of center
-    var links   = Array.prototype.slice.call(s.querySelectorAll('a[href]'));
-    var idx     = links.indexOf(a);
-    var nearEnd = (idx === links.length - 1) || (next > max - 1);
-
-    if (nearEnd) {
-      s.scrollLeft = max;  // align to right edge
-      // lock for a short window so nothing swings it back
-      var stop = performance.now() + 700; // adjust 500–900ms if needed
-      (function lock(){
-        s.scrollLeft = max;
-        if (performance.now() < stop) requestAnimationFrame(lock);
-        else {
-          s.style.scrollSnapType = prevSnap || '';
-          s.style.scrollBehavior = prevBeh  || '';
-          s.style.webkitOverflowScrolling = prevIos || '';
-          s.dataset.centered = '1';
-        }
-      })();
-    } else {
-      s.scrollLeft = next; // normal center
-      setTimeout(function(){
-        s.style.scrollSnapType = prevSnap || '';
-        s.style.scrollBehavior = prevBeh  || '';
-        s.style.webkitOverflowScrolling = prevIos || '';
-        s.dataset.centered = '1';
-      }, 0);
+      .mq-link {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #fff;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1.4;
+      }
+      .mq-link:hover { opacity: .85; }
+      .mq-link.is-active {
+        font-weight: 600;
+        border-bottom: 2px solid #fff;
+        padding-bottom: 2px;
+      }
     }
-  }
 
-  // run once after layout; also on bfcache restore
-  window.addEventListener('load', centerActiveOnce, { once: true });
-  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActiveOnce(); });
-})();
-</script>
+    /* Hide on desktop */
+    @media (min-width: 750px) {
+      .mobile-quicklinks { display: none; }
+    }
+  </style>
 
+{%- endif -%}
