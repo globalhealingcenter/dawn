@@ -28,6 +28,11 @@
         "menu": "main-menu-uk"
       },
       "blocks": {}
+    },
+    "gh_mobile_nav_gUThLY": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
     }
   }
 }

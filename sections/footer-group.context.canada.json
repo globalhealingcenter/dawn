@@ -8,12 +8,9 @@
  * ------------------------------------------------------------
  */
 {
-  "markets": {
-    "uk": {
-      "parent": "@default"
-    },
-    "canada": {
-      "parent": "@default"
-    }
-  }
+  "parent": "footer-group.json",
+  "context": {
+    "market": "canada"
+  },
+  "sections": {}
 }

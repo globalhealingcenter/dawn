@@ -13,13 +13,18 @@
     "market": "canada"
   },
   "sections": {
+    "announcement-bar": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
     "header": {
       "settings": {
         "menu": "main-menu-canada"
       },
       "blocks": {}
     },
-    "announcement-bar": {
+    "gh_mobile_nav_gUThLY": {
       "disabled": true,
       "settings": {},
       "blocks": {}
