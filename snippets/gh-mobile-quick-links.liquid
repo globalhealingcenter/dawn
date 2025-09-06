@@ -102,46 +102,103 @@
 
 <script>
 (function () {
-  // Adjust selectors if your classes differ
-  var nav = document.querySelector('.gh-mobile-nav .mq-inner') ||
-            document.querySelector('.mobile-quicklinks .mq-inner');
-  if (!nav) return;
+  // ---- Robust finder: grabs the horizontally scrollable quicklinks row
+  function findNav() {
+    // Try common structures first
+    var nav =
+      document.querySelector('.gh-mobile-nav .mq-inner') ||
+      document.querySelector('.mobile-quicklinks .mq-inner');
 
-  var KEY = 'gh-mobile-nav:scrollLeft';
+    if (nav) return nav;
 
-  // --- Restore previous scroll position (if any) ---
-  var saved = sessionStorage.getItem(KEY);
-  if (saved !== null) nav.scrollLeft = parseInt(saved, 10);
-
-  // --- Persist while user scrolls / taps a link ---
-  function save() { sessionStorage.setItem(KEY, nav.scrollLeft); }
-  nav.addEventListener('scroll', save, { passive: true });
-  nav.addEventListener('click', function (e) {
-    var a = e.target.closest('a');
-    if (a) save();
-  });
-
-  // Handle bfcache restores (Safari/Firefox)
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) {
-      var s = sessionStorage.getItem(KEY);
-      if (s !== null) nav.scrollLeft = parseInt(s, 10);
+    // Fallback: find the first horizontally scrollable row near the header
+    var candidates = document.querySelectorAll(
+      'nav .mq-inner, .mq-inner, nav[aria-label*="quick"], nav[role="navigation"]'
+    );
+    for (var i = 0; i < candidates.length; i++) {
+      var el = candidates[i];
+      var cs = getComputedStyle(el);
+      if (el.scrollWidth > el.clientWidth && (cs.overflowX === 'auto' || cs.overflowX === 'scroll')) {
+        return el;
+      }
     }
-  });
-
-  // --- Optional: ensure the active item is visible/centered on load ---
-  var links = nav.querySelectorAll('a[href]');
-  var here  = location.pathname.replace(/\/+$/, '');
-  var active = null;
-
-  links.forEach(function (a) {
-    var path = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/+$/, '');
-    if (path === here) active = a;
-  });
-
-  if (!saved && active) {
-    // only center if no saved scroll position to respect user’s last place
-    active.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
+    return null;
   }
+
+  function normalizePath(p) { return (p || '').replace(/\/+$/, '') || '/'; }
+
+  function init(nav) {
+    if (!nav) return;
+
+    // Key per host + pathname root (so US/UK stores don't collide)
+    var root = '/' + normalizePath(location.pathname).split('/')[1];
+    var KEY  = 'gh:mqnav:scrollLeft:' + location.host + root;
+
+    // Restore saved scroll
+    var saved = localStorage.getItem(KEY);
+    if (saved !== null) {
+      var left = parseInt(saved, 10) || 0;
+      // Multiple passes to beat late layout reflows
+      requestAnimationFrame(function(){ nav.scrollLeft = left; });
+      window.addEventListener('load', function(){ nav.scrollLeft = left; });
+      setTimeout(function(){ nav.scrollLeft = left; }, 60);
+    }
+
+    // Save on scroll / clicks / before unload
+    var save = function(){ localStorage.setItem(KEY, nav.scrollLeft); };
+    nav.addEventListener('scroll', save, { passive: true });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) save();
+    }, true);
+    window.addEventListener('beforeunload', save);
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') save();
+    });
+
+    // Center active link if no saved position yet
+    if (saved === null) {
+      var here = normalizePath(location.pathname);
+      var links = nav.querySelectorAll('a[href]');
+      var active = nav.querySelector('.is-active, .active, [aria-current="page"]');
+      if (!active) {
+        for (var i = 0; i < links.length; i++) {
+          var url = new URL(links[i].getAttribute('href'), location.origin);
+          if (normalizePath(url.pathname) === here) { active = links[i]; break; }
+        }
+      }
+      if (active && typeof active.scrollIntoView === 'function') {
+        active.scrollIntoView({ block: 'nearest', inline: 'center' });
+      }
+    }
+  }
+
+  function start() {
+    var nav = findNav();
+    if (nav) return init(nav);
+
+    // If sections render late, observe the DOM
+    var mo = new MutationObserver(function () {
+      var n = findNav();
+      if (n) { init(n); mo.disconnect(); }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+
+  // Safari/Firefox bfcache restore
+  window.addEventListener('pageshow', function (e) {
+    if (!e.persisted) return;
+    var nav = findNav();
+    if (!nav) return;
+    var root = '/' + location.pathname.replace(/\/+$/, '').split('/')[1];
+    var KEY  = 'gh:mqnav:scrollLeft:' + location.host + root;
+    var saved = localStorage.getItem(KEY);
+    if (saved !== null) nav.scrollLeft = parseInt(saved, 10) || 0;
+  });
 })();
 </script>
