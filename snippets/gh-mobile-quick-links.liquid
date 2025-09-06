@@ -102,71 +102,114 @@
 
 <script>
 (function () {
-  // --- Helpers ---
-  function norm(path) { return (new URL(path, location.origin).pathname).replace(/\/+$/,'') || '/'; }
+  var KEY = 'gh:quicklinks:lastIndex';
 
-  function findNav() {
-    // Adjust selector if your structure differs
-    return document.querySelector('.gh-mobile-nav .mq-inner') ||
-           document.querySelector('.mobile-quicklinks .mq-inner') ||
-           null;
+  /* Find the horizontal quicklinks scroller without relying on exact classes */
+  function findScroller() {
+    // Prefer known classes if present
+    var s = document.querySelector('.gh-mobile-nav .mq-inner')
+         || document.querySelector('.mobile-quicklinks .mq-inner');
+    if (s) return s;
+
+    // Fallback: scan header/nav for a horizontally scrollable row with links
+    var candidates = document.querySelectorAll(
+      'header nav, header [role="navigation"], nav, .mq-inner, .mobile-quicklinks, .gh-mobile-nav'
+    );
+    for (var i = 0; i < candidates.length; i++) {
+      var el = candidates[i];
+      var cs = getComputedStyle(el);
+      if (
+        el.querySelectorAll('a[href]').length >= 3 &&
+        el.scrollWidth > el.clientWidth &&
+        (cs.overflowX === 'auto' || cs.overflowX === 'scroll' || cs.overflowX === 'overlay')
+      ) {
+        return el;
+      }
+      // Sometimes the inner scroller is a child
+      var inner = el.querySelector(':scope > .mq-inner, :scope > .scroller, :scope > div, :scope > ul');
+      if (inner) {
+        var cs2 = getComputedStyle(inner);
+        if (
+          inner.querySelectorAll('a[href]').length >= 3 &&
+          inner.scrollWidth > inner.clientWidth &&
+          (cs2.overflowX === 'auto' || cs2.overflowX === 'scroll' || cs2.overflowX === 'overlay')
+        ) {
+          return inner;
+        }
+      }
+    }
+    return null;
   }
 
-  function centerLink(nav, link) {
-    if (!nav || !link) return;
-    var prev = nav.style.scrollBehavior;
-    nav.style.scrollBehavior = 'auto'; // jump immediately
-    var left = link.offsetLeft - (nav.clientWidth - link.clientWidth) / 2;
-    nav.scrollLeft = Math.max(0, left);
-    nav.style.scrollBehavior = prev || '';
+  function listLinks(scroller) {
+    return Array.prototype.filter.call(
+      scroller.querySelectorAll('a[href]'),
+      function (a) { return a.offsetParent !== null; } // visible only
+    );
   }
 
-  var KEY_LAST = 'gh:mqnav:lastClicked';
+  function indexOfLink(scroller, link) {
+    var links = listLinks(scroller);
+    return links.indexOf(link);
+  }
 
-  // 1) Record which tab was clicked
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest('.gh-mobile-nav a, .mobile-quicklinks a');
-    if (!a) return;
-    try { sessionStorage.setItem(KEY_LAST, norm(a.href)); } catch (_) {}
-  }, true);
+  function centerByIndex(scroller, idx) {
+    var links = listLinks(scroller);
+    if (idx < 0 || idx >= links.length) return;
+    var a = links[idx];
+    var left = a.offsetLeft - (scroller.clientWidth - a.clientWidth) / 2;
+    scroller.style.scrollBehavior = 'auto';         // avoid smooth snap
+    scroller.scrollLeft = Math.max(0, left);
+  }
 
-  // 2) On load, center last clicked tab; if none, center the active tab
-  function init() {
-    var nav = findNav();
-    if (!nav) return;
+  function wire(scroller) {
+    if (!scroller.__wired) {
+      scroller.__wired = true;
 
-    var targetPath = sessionStorage.getItem(KEY_LAST) || norm(location.pathname);
-    var links = nav.querySelectorAll('a[href]');
-    var target = null;
+      // Save index on any link click inside the scroller
+      scroller.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href]');
+        if (!a || !scroller.contains(a)) return;
+        try { sessionStorage.setItem(KEY, String(indexOfLink(scroller, a))); } catch (_) {}
+      }, true);
+    }
 
-    links.forEach(function (a) {
-      if (!target && norm(a.href) === targetPath) target = a;
-    });
-
-    // Center over several frames to win against late reflows
+    // Restore: center last clicked index; if none, center active
+    var idx = parseInt(sessionStorage.getItem(KEY), 10);
     var tries = 0;
-    (function tick(){
-      centerLink(nav, target);
-      if (++tries < 8) requestAnimationFrame(tick);
+    (function tick() {
+      if (!isNaN(idx)) {
+        centerByIndex(scroller, idx);
+      } else {
+        var active = scroller.querySelector('a[aria-current="page"], a.active, a.is-active');
+        if (active) centerByIndex(scroller, indexOfLink(scroller, active));
+      }
+      // run a few frames to beat late header/layout scripts
+      if (++tries < 10) requestAnimationFrame(tick);
     })();
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  function start() {
+    var s = findScroller();
+    if (s) return wire(s);
+
+    // If header/nav mounts late, observe and run once found
+    var mo = new MutationObserver(function () {
+      var s2 = findScroller();
+      if (s2) { wire(s2); mo.disconnect(); }
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  // Handle bfcache restores
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) init();
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
 
-  // If your header renders late (sections), observe and run once when nav appears
-  var mo = new MutationObserver(function(){
-    var nav = findNav();
-    if (nav) { init(); mo.disconnect(); }
+  // bfcache restores
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) start();
   });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
 })();
 </script>
