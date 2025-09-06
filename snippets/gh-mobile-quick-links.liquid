@@ -6,16 +6,22 @@
 {%- assign mq_menu = linklists['mobile-quick-links'] | default: linklists.mobile-quick-links -%}
 {%- if mq_menu and mq_menu.links.size > 0 -%}
 <nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
-  <div class="mq-inner" id="gh-ql">
-    {%- assign menu = linklists['gh-mobile-nav'] | default: linklists.gh-mobile-nav -%}
-    {%- for link in menu.links -%}
-      <a
-        href="{{ link.url }}"
-        class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
-        {{ link.title }}
-      </a>
-    {%- endfor -%}
-  </div>
+  {%- assign menu =
+    linklists['gh-mobile-nav']
+    | default: linklists['mobile-nav']
+  -%}
+
+  {%- if menu and menu.links.size > 0 -%}
+    <div class="mq-inner" id="gh-ql">
+      {%- for link in menu.links -%}
+        <a href="{{ link.url }}" class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
+          {{ link.title }}
+        </a>
+      {%- endfor -%}
+    </div>
+  {%- else -%}
+    <div class="mq-inner" id="gh-ql"><!-- No menu found (gh-mobile-nav / mobile-nav) --></div>
+  {%- endif -%}
 </nav>
 
 {%- endif -%}
