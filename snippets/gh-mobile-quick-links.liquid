@@ -86,25 +86,30 @@
 
   function centerActiveOnce(){
     var s = lane(); if (!s || s.dataset.centered) return;
-    var a = s.querySelector('.is-active');
-    if (!a) { s.dataset.centered = '1'; return; }
+    var a = s.querySelector('.is-active'); if (!a) { s.dataset.centered = '1'; return; }
 
-    // Temporarily disable snapping/smooth/momentum so it doesn't "swing"
+    // Temporarily disable any snapping/smooth/momentum so there's no animation swing
     var prevSnap = s.style.scrollSnapType;
     var prevBeh  = s.style.scrollBehavior;
     var prevIos  = s.style.webkitOverflowScrolling;
-
     s.style.scrollSnapType = 'none';
     s.style.scrollBehavior = 'auto';
-    s.style.webkitOverflowScrolling = 'auto'; // stop iOS momentum for a tick
+    s.style.webkitOverflowScrolling = 'auto';
 
-    // Compute delta via rects (more stable than offsetLeft in flex rows)
+    // Compute desired delta using rects (robust in flex/gap layouts)
     var sRect = s.getBoundingClientRect();
     var aRect = a.getBoundingClientRect();
     var delta = (aRect.left + aRect.width/2) - (sRect.left + sRect.width/2);
 
-    s.scrollLeft += delta;   // center instantly (no smooth)
-    // Restore styles next tick and mark done so we don't fight other scripts
+    // Clamp to valid range so the last item doesn't overshoot
+    var max = Math.max(0, s.scrollWidth - s.clientWidth);
+    var next = s.scrollLeft + delta;
+    if (next < 0) next = 0;
+    if (next > max) next = max;
+
+    s.scrollLeft = Math.round(next);
+
+    // Restore styles and mark as centered
     setTimeout(function(){
       s.style.scrollSnapType = prevSnap || '';
       s.style.scrollBehavior = prevBeh  || '';
@@ -113,9 +118,9 @@
     }, 0);
   }
 
-  // Run once after full layout (images/fonts) to avoid reflows moving the target
+  // Run once after layout (prevents late reflows moving the target)
   window.addEventListener('load', centerActiveOnce, { once: true });
-  // bfcache restore (Safari/Firefox)
   window.addEventListener('pageshow', function(e){ if (e.persisted) centerActiveOnce(); });
 })();
 </script>
+
