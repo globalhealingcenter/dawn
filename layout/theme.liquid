@@ -402,6 +402,45 @@
 
 <!-- Widget : Gift with Purchase: Latero-Flora on orders $100+ -->
 <!-- <div data-rebuy-id="146906"></div>   -->  
-  
+ 
+<script>
+  (function () {
+    function stickyTopTotal() {
+      var total = 0;
+      var selectors = [
+        'header',
+        '.shopify-section-header',
+        '.header-wrapper',
+        '.announcement-bar',
+        '.announcement-bar-section',
+        '.promo-bar',
+        '.top-banner'
+      ];
+      selectors.forEach(function (sel) {
+        var el = document.querySelector(sel);
+        if (!el) return;
+        var style = window.getComputedStyle(el);
+        var isSticky = ['fixed','sticky'].includes(style.position);
+        var rect = el.getBoundingClientRect();
+        var atTop = Math.round(rect.top) <= 0;
+        if (isSticky || atTop) total += el.offsetHeight || 0;
+      });
+      return Math.max(total, 56);
+    }
+
+    function setOffset() {
+      document.documentElement.style.setProperty('--mq-header-offset', stickyTopTotal() + 'px');
+    }
+
+    setOffset();
+    window.addEventListener('resize', setOffset);
+    document.addEventListener('shopify:section:load', setOffset);
+    document.addEventListener('shopify:section:reorder', setOffset);
+    document.addEventListener('shopify:section:select', setOffset);
+    document.addEventListener('shopify:section:deselect', setOffset);
+  }());
+</script>
+
+
 </body>
 </html>
