@@ -99,3 +99,49 @@
 
 
 </style>
+
+<script>
+(function () {
+  // Adjust selectors if your classes differ
+  var nav = document.querySelector('.gh-mobile-nav .mq-inner') ||
+            document.querySelector('.mobile-quicklinks .mq-inner');
+  if (!nav) return;
+
+  var KEY = 'gh-mobile-nav:scrollLeft';
+
+  // --- Restore previous scroll position (if any) ---
+  var saved = sessionStorage.getItem(KEY);
+  if (saved !== null) nav.scrollLeft = parseInt(saved, 10);
+
+  // --- Persist while user scrolls / taps a link ---
+  function save() { sessionStorage.setItem(KEY, nav.scrollLeft); }
+  nav.addEventListener('scroll', save, { passive: true });
+  nav.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (a) save();
+  });
+
+  // Handle bfcache restores (Safari/Firefox)
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      var s = sessionStorage.getItem(KEY);
+      if (s !== null) nav.scrollLeft = parseInt(s, 10);
+    }
+  });
+
+  // --- Optional: ensure the active item is visible/centered on load ---
+  var links = nav.querySelectorAll('a[href]');
+  var here  = location.pathname.replace(/\/+$/, '');
+  var active = null;
+
+  links.forEach(function (a) {
+    var path = new URL(a.getAttribute('href'), location.origin).pathname.replace(/\/+$/, '');
+    if (path === here) active = a;
+  });
+
+  if (!saved && active) {
+    // only center if no saved scroll position to respect user’s last place
+    active.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'auto' });
+  }
+})();
+</script>
