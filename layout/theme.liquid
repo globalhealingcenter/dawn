@@ -440,30 +440,5 @@
 </script>
 
 
-<script>
-(function(){
-  function lane(){
-    return document.getElementById('gh-ql') ||
-           document.querySelector('.gh-mobile-nav .mq-inner') ||
-           document.querySelector('.mobile-quicklinks .mq-inner');
-  }
-  function centerActive(){
-    var s = lane(); if (!s) return;
-    var a = s.querySelector('.is-active');
-    if (!a) return;
-    s.style.scrollBehavior = 'auto';
-    s.scrollLeft = Math.max(0, a.offsetLeft - (s.clientWidth - a.clientWidth)/2);
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', centerActive, { once: true });
-  } else {
-    centerActive();
-  }
-  window.addEventListener('pageshow', function(e){ if (e.persisted) centerActive(); });
-})();
-</script>
-
-
-
 </body>
 </html>
