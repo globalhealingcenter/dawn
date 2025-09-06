@@ -35,36 +35,22 @@
 @media (max-width: 749px) {
   :root {
     --mq-header-offset: 56px;
-    --mq-bg: var(--gh-color-cream, #F9F2E8);
-    --mq-pill-text: var(--gh-color-green-dark, #00260f);
-    --mq-pill-text-active: var(--gh-color-green, #21472D);
   }
 
-  /* default sticky mode (if used outside header) */
-  .mobile-quicklinks {
-    position: sticky;
-    top: var(--mq-header-offset);
-    z-index: 40;
-    background: transparent;
-    border: 0;
-  }
-
-  /* inline mode (if rendered inside header) */
+  .mobile-quicklinks,
   .mobile-quicklinks--inline {
     position: static;
     top: auto;
-    background: transparent;
+    background: var(--gh-color-green, #21472D); /* green banner background */
     border: 0;
     z-index: auto;
   }
 
-  /* wrapper */
   .mobile-quicklinks .mq-inner {
     position: relative;
-    padding: 6px 12px; /* tighter spacing like Honest */
+    padding: 6px 12px;
   }
 
-  /* horizontal list */
   .mq-list {
     display: flex;
     gap: 20px;
@@ -72,7 +58,7 @@
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x proximity;
     scrollbar-width: none;
-    list-style: none; /* remove bullets */
+    list-style: none;
     margin: 0;
     padding: 0;
   }
@@ -80,11 +66,36 @@
 
   .mq-item { flex: 0 0 auto; scroll-snap-align: start; }
 
-  /* links styled like Honest */
   .mq-link {
     display: inline-block;
     padding: 0;
     border: 0;
-    border-radius:
+    background: transparent;
+    font-size: 12px;              /* font size */
+    font-weight: 500;
+    color: #fff;                  /* white text */
+    text-decoration: none;        /* no underline */
+    white-space: nowrap;
+    line-height: 1.4;
+  }
+
+  .mq-link:hover {
+    opacity: 0.85; /* subtle hover effect */
+  }
+
+  .mq-link.is-active {
+    font-weight: 600;
+    border-bottom: 2px solid #fff; /* underline active in white */
+    padding-bottom: 2px;
+  }
+
+  .mq-fade { display: none; }
+}
+
+/* ========= Hide on desktop ========= */
+@media (min-width: 750px) {
+  .mobile-quicklinks { display: none; }
+}
+
 
 </style>
