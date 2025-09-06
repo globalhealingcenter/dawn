@@ -64,10 +64,16 @@
         "padding_top": 8,
         "padding_bottom": 8
       }
+    },
+    "gh_mobile_nav_gUThLY": {
+      "type": "gh-mobile-nav",
+      "name": "GH Mobile Nav",
+      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
-    "header"
+    "header",
+    "gh_mobile_nav_gUThLY"
   ]
 }
