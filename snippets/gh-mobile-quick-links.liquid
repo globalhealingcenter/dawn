@@ -102,38 +102,35 @@
 
 <script>
 (function () {
-  var KEY = 'gh:quicklinks:lastIndex';
+  var KEY = 'gh:mqnav:lastIndex';
+  var RESTORE_MS = 1600;   // keep re-centering for this long
+  var TICK_MS    = 40;
 
-  /* Find the horizontal quicklinks scroller without relying on exact classes */
+  // ---- helpers ----
   function findScroller() {
-    // Prefer known classes if present
-    var s = document.querySelector('.gh-mobile-nav .mq-inner')
-         || document.querySelector('.mobile-quicklinks .mq-inner');
+    // your classes first
+    var s = document.querySelector('.gh-mobile-nav .mq-inner') ||
+            document.querySelector('.mobile-quicklinks .mq-inner');
     if (s) return s;
 
-    // Fallback: scan header/nav for a horizontally scrollable row with links
+    // fallbacks: first horizontally scrollable row with links near the header
     var candidates = document.querySelectorAll(
       'header nav, header [role="navigation"], nav, .mq-inner, .mobile-quicklinks, .gh-mobile-nav'
     );
     for (var i = 0; i < candidates.length; i++) {
       var el = candidates[i];
       var cs = getComputedStyle(el);
-      if (
-        el.querySelectorAll('a[href]').length >= 3 &&
-        el.scrollWidth > el.clientWidth &&
-        (cs.overflowX === 'auto' || cs.overflowX === 'scroll' || cs.overflowX === 'overlay')
-      ) {
+      if (el.querySelectorAll('a[href]').length >= 3 &&
+          el.scrollWidth > el.clientWidth &&
+          (cs.overflowX === 'auto' || cs.overflowX === 'scroll' || cs.overflowX === 'overlay')) {
         return el;
       }
-      // Sometimes the inner scroller is a child
-      var inner = el.querySelector(':scope > .mq-inner, :scope > .scroller, :scope > div, :scope > ul');
+      var inner = el.querySelector(':scope > .mq-inner, :scope > .scroller, :scope > ul, :scope > div');
       if (inner) {
         var cs2 = getComputedStyle(inner);
-        if (
-          inner.querySelectorAll('a[href]').length >= 3 &&
-          inner.scrollWidth > inner.clientWidth &&
-          (cs2.overflowX === 'auto' || cs2.overflowX === 'scroll' || cs2.overflowX === 'overlay')
-        ) {
+        if (inner.querySelectorAll('a[href]').length >= 3 &&
+            inner.scrollWidth > inner.clientWidth &&
+            (cs2.overflowX === 'auto' || cs2.overflowX === 'scroll' || cs2.overflowX === 'overlay')) {
           return inner;
         }
       }
@@ -141,75 +138,74 @@
     return null;
   }
 
-  function listLinks(scroller) {
-    return Array.prototype.filter.call(
-      scroller.querySelectorAll('a[href]'),
-      function (a) { return a.offsetParent !== null; } // visible only
-    );
+  function getLinks(s){ return Array.from(s.querySelectorAll('a[href]')).filter(a => a.offsetParent !== null); }
+  function indexOf(s, a){ return getLinks(s).indexOf(a); }
+
+  function centerLink(s, a){
+    if (!s || !a) return;
+    var prevSnap = s.style.scrollSnapType;
+    var prevBeh  = s.style.scrollBehavior;
+    s.style.scrollSnapType = 'none';
+    s.style.scrollBehavior = 'auto';
+    var x = a.offsetLeft - (s.clientWidth - a.clientWidth)/2;
+    s.scrollLeft = Math.max(0, x);
+    s.style.scrollSnapType = prevSnap || '';
+    s.style.scrollBehavior = prevBeh  || '';
   }
 
-  function indexOfLink(scroller, link) {
-    var links = listLinks(scroller);
-    return links.indexOf(link);
+  // ---- save index early (before navigation) ----
+  function saveIndexFromEvent(e){
+    var a = e.target && e.target.closest('a[href]');
+    if (!a) return;
+    var scroller = a.closest('.mq-inner') || findScroller();
+    if (!scroller) return;
+    var idx = indexOf(scroller, a);
+    if (idx >= 0) { try { sessionStorage.setItem(KEY, String(idx)); } catch(_){} }
   }
+  document.addEventListener('pointerdown', saveIndexFromEvent, true);
+  document.addEventListener('touchstart',  saveIndexFromEvent, true);  // iOS Safari
+  document.addEventListener('mousedown',   saveIndexFromEvent, true);  // desktop
 
-  function centerByIndex(scroller, idx) {
-    var links = listLinks(scroller);
-    if (idx < 0 || idx >= links.length) return;
-    var a = links[idx];
-    var left = a.offsetLeft - (scroller.clientWidth - a.clientWidth) / 2;
-    scroller.style.scrollBehavior = 'auto';         // avoid smooth snap
-    scroller.scrollLeft = Math.max(0, left);
-  }
+  // ---- restore on next page ----
+  function restore(){
+    var s = findScroller();
+    if (!s) return;
 
-  function wire(scroller) {
-    if (!scroller.__wired) {
-      scroller.__wired = true;
+    var idxStr = sessionStorage.getItem(KEY);
+    var links  = getLinks(s);
+    var target = null;
 
-      // Save index on any link click inside the scroller
-      scroller.addEventListener('click', function (e) {
-        var a = e.target.closest('a[href]');
-        if (!a || !scroller.contains(a)) return;
-        try { sessionStorage.setItem(KEY, String(indexOfLink(scroller, a))); } catch (_) {}
-      }, true);
+    if (idxStr != null) {
+      var idx = parseInt(idxStr, 10);
+      if (!isNaN(idx) && idx >= 0 && idx < links.length) target = links[idx];
+    }
+    // fallback: match current page path
+    if (!target) {
+      var here = location.pathname.replace(/\/+$/,'');
+      target = links.find(a => new URL(a.href, location.origin).pathname.replace(/\/+$/,'') === here) || links[0];
     }
 
-    // Restore: center last clicked index; if none, center active
-    var idx = parseInt(sessionStorage.getItem(KEY), 10);
-    var tries = 0;
-    (function tick() {
-      if (!isNaN(idx)) {
-        centerByIndex(scroller, idx);
-      } else {
-        var active = scroller.querySelector('a[aria-current="page"], a.active, a.is-active');
-        if (active) centerByIndex(scroller, indexOfLink(scroller, active));
-      }
-      // run a few frames to beat late header/layout scripts
-      if (++tries < 10) requestAnimationFrame(tick);
+    var start = performance.now();
+    (function loop(){
+      centerLink(s, target);
+      if (performance.now() - start < RESTORE_MS) setTimeout(loop, TICK_MS);
     })();
   }
 
-  function start() {
+  function start(){
     var s = findScroller();
-    if (s) return wire(s);
-
-    // If header/nav mounts late, observe and run once found
-    var mo = new MutationObserver(function () {
-      var s2 = findScroller();
-      if (s2) { wire(s2); mo.disconnect(); }
-    });
-    mo.observe(document.documentElement, { childList: true, subtree: true });
+    if (s) restore();
+    else {
+      var mo = new MutationObserver(function(){
+        var s2 = findScroller(); if (s2) { restore(); mo.disconnect(); }
+      });
+      mo.observe(document.documentElement, { childList: true, subtree: true });
+    }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start);
-  } else {
-    start();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 
-  // bfcache restores
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) start();
-  });
+  window.addEventListener('pageshow', function(e){ if (e.persisted) start(); });
 })();
 </script>
