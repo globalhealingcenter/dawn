@@ -24,3 +24,72 @@ Requires a Navigation menu with handle: mobile-nav
   </div>
 </nav>
 {%- endif -%}
+
+<style>
+
+    /* ========= GH Mobile Nav ========= */
+@media (max-width: 749px) {
+  :root {
+    --mq-header-offset: 56px;
+  }
+
+  .gh-mobile-nav,
+  .gh-mobile-nav.mobile-quicklinks--inline {
+    position: static;
+    top: auto;
+    background: var(--gh-color-green, #21472D);
+    border: 0;
+    z-index: auto;
+  }
+
+  .gh-mobile-nav .mq-inner {
+    position: relative;
+    padding: 6px 12px;
+  }
+
+  .gh-mobile-nav .mq-list {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gh-mobile-nav .mq-list::-webkit-scrollbar { display: none; }
+
+  .gh-mobile-nav .mq-item { flex: 0 0 auto; scroll-snap-align: start; }
+
+  .gh-mobile-nav .mq-link {
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1.4;
+    transition: color .18s ease;
+  }
+
+  .gh-mobile-nav .mq-link:hover { opacity: 0.85; }
+
+  .gh-mobile-nav .mq-link.is-active {
+    font-weight: 600;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 2px;
+  }
+
+  .gh-mobile-nav .mq-fade { display: none; }
+}
+
+@media (min-width: 750px) {
+  .gh-mobile-nav { display: none; }
+}
+
+
+</style>
