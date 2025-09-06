@@ -1,9 +1,9 @@
 {%- comment -%}
-  Mobile quick links — show on HOME only
-  Tries these handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
+  Mobile quick links — show on HOME and PRODUCT pages
+  Tries handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
 {%- endcomment -%}
 
-{%- if request.page_type == 'index' or template.name == 'index' -%}
+{%- if request.page_type == 'index' or request.page_type == 'product' -%}
 
   {%- assign mq_menu = linklists['mobile-quick-links'] -%}
   {%- if mq_menu == nil or mq_menu.links.size == 0 -%}
@@ -28,7 +28,7 @@
   </nav>
 
   <style>
-    /* ========= Mobile Quick Links (home only) ========= */
+    /* ========= Mobile Quick Links ========= */
     @media (max-width: 749px) {
       .mobile-quicklinks,
       .mobile-quicklinks--inline {
