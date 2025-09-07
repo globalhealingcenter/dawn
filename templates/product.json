@@ -228,6 +228,7 @@
     },
     "gh_sticky_atc_gRBYqU": {
       "type": "gh-sticky-atc",
+      "disabled": true,
       "name": "Sticky Add To Cart Bar",
       "settings": {
         "show_price": true,
