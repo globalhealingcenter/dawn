@@ -73,6 +73,7 @@
         "gh_out_of_stock_form_dAeEPR": {
           "type": "gh_out_of_stock_form",
           "settings": {
+            "form_url": "",
             "message": "<p><strong>Sorry we’re out of stock.</strong></p><p>At Global Healing, we’re picky about ingredients (in the best way). Every batch goes through strict testing, and if something does not meet our standards, we send it back. Lately, we’ve been running into more suppliers who are not meeting our quality requirements, which is causing delays. We’d rather take our time than compromise on what we manufacture.<br/>We’re actively sourcing high-quality ingredients and will restock as soon as we find a supplier that meets our standards.</p><p>Get notified when this product is back in stock.</p>",
             "success_message": "<p>Success! You'll be receiving an email shortly.</p>",
             "force_show": false
@@ -224,6 +225,20 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "gh_sticky_atc_gRBYqU": {
+      "type": "gh-sticky-atc",
+      "name": "Sticky Add To Cart Bar",
+      "settings": {
+        "show_price": true,
+        "tagline_text": "Gentle, effective cleansing support",
+        "hide_on_mobile": false,
+        "hide_on_desktop": false,
+        "bg_color": "#ffffff",
+        "border_color": "#21472d",
+        "btn_bg": "#21472d",
+        "btn_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -238,6 +253,7 @@
     "1686083501cc540fa5",
     "shogun-below",
     "custom_liquid_kweCXJ",
-    "custom_liquid_8t6wPh"
+    "custom_liquid_8t6wPh",
+    "gh_sticky_atc_gRBYqU"
   ]
 }
