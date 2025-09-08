@@ -67,7 +67,6 @@
     },
     "gh_mobile_nav_gUThLY": {
       "type": "gh-mobile-nav",
-      "disabled": true,
       "name": "GH Mobile Nav",
       "settings": {}
     }
