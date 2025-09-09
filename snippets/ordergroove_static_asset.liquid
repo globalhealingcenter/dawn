@@ -4,8 +4,8 @@ This file can be re-written at any time.
 Last updated at: 2023-07-12T17:03:31.438Z / Version: 3.0.0
 {%- render 'ordergroove_static_asset' -%}
 {% endcomment %}
-<script type="text/javascript" src="https://static.ordergroove.com/98d71fca8cd111ebb13f8e5c81121b1e/main.js" data-shopify-selling-plans {% if customer -%}
-{%- assign secret_key = "7d38da9e45739b194a273ee8447d3e8ee0a16d7e" -%}
+<script type="text/javascript" src="https://static.ordergroove.com/34678dc28cd111ebaeb4265adaf3f03e/main.js" data-shopify-selling-plans {% if customer -%}
+{%- assign secret_key = "34678dc28cd111ebaeb4265adaf3f03e" -%}
 {%- assign timestamp = "now" | date: "%s" -%}
 {%- assign signature = customer.id | append: "|" | append: timestamp | hmac_sha256: secret_key -%}
 data-customer="{{customer.id | append: "|" | append: timestamp | append: "|" | append: signature | append: "|" | append: customer.email | base64_encode }}"
