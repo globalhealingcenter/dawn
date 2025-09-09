@@ -360,8 +360,10 @@
 {%- render 'gh-footer', product: product,settings: settings, cart: cart -%}
 
 <!-- Rebuy START -->
+{% comment %}
 {% render 'rebuy-extensions' %}
 {% render 'rebuy-cart-template' %}
+{% endcomment  %}
 
 <script>
   document.querySelector("#cart-icon-bubble").style.pointerEvents = "none"
