@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -21,7 +30,9 @@
         },
         "gh_product_recoms_iHQxUm": {
           "type": "gh_product_recoms",
-          "settings": {}
+          "settings": {
+            "title": ""
+          }
         },
         "tags_TbqTVD": {
           "type": "tags",
@@ -32,7 +43,7 @@
           "settings": {}
         },
         "pro_blogger_pb_post_related_posts_kkNpNf": {
-          "type": "shopify:\/\/apps\/lfs-pro-blogger\/blocks\/pb_post_related_posts\/edf01a04-3374-4cc5-afca-2e583da0c869",
+          "type": "shopify://apps/lfs-pro-blogger/blocks/pb_post_related_posts/edf01a04-3374-4cc5-afca-2e583da0c869",
           "settings": {
             "pb_related_posts_title": "Related Posts",
             "pb_related_posts_title_style": "H5",
@@ -70,9 +81,30 @@
         "pro_blogger_pb_post_related_posts_kkNpNf"
       ],
       "settings": {}
+    },
+    "1757527074a6cacae3": {
+      "type": "apps",
+      "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_dCKBqm": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "238897",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_dCKBqm"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "1757527074a6cacae3"
   ]
 }
