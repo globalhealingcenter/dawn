@@ -13,12 +13,6 @@
     "market": "uk"
   },
   "sections": {
-    "1f534ab1-3f58-4e78-ba4d-d858cf22e505": {
-      "settings": {
-        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"/pages/contact\" title=\"\">Contact Us</a><br><br>\n<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX, 77055<br>United States</a><br>\n\t\n\t\n</div>"
-      },
-      "blocks": {}
-    },
     "footer": {
       "settings": {},
       "blocks": {
@@ -26,8 +20,19 @@
           "settings": {
             "menu": "uk-footer-my-account"
           }
+        },
+        "bafd4c2b-8073-4b13-9139-bd774e317717": {
+          "settings": {
+            "menu": "uk-customer-account-menu"
+          }
         }
       }
+    },
+    "1f534ab1-3f58-4e78-ba4d-d858cf22e505": {
+      "settings": {
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"/pages/contact\" title=\"\">Contact Us</a><br><br>\n<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX, 77055<br>United States</a><br>\n\t\n\t\n</div>"
+      },
+      "blocks": {}
     }
   }
 }
