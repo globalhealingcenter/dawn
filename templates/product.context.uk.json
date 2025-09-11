@@ -16,15 +16,20 @@
     "main": {
       "settings": {},
       "blocks": {
-        "ordergroove_offer": {
-          "disabled": true,
-          "settings": {}
-        },
         "price": {
           "disabled": false,
           "settings": {}
+        },
+        "ordergroove_offer": {
+          "disabled": true,
+          "settings": {}
         }
       }
+    },
+    "169838059718b5ce0c": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
     }
   }
 }
