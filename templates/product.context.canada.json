@@ -12,5 +12,11 @@
   "context": {
     "market": "canada"
   },
-  "sections": {}
+  "sections": {
+    "custom_liquid_kweCXJ": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    }
+  }
 }
