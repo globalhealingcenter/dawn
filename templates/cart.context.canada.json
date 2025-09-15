@@ -12,5 +12,15 @@
   "context": {
     "market": "canada"
   },
-  "sections": {}
+  "sections": {
+    "1687779380613f616b": {
+      "settings": {},
+      "blocks": {
+        "b17ced85-f450-4f6f-8376-86722179ac14": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
+    }
+  }
 }
