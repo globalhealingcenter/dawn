@@ -1,149 +1,121 @@
-/**
- * Yotpo “Earn up to X points” — dynamic updater for PDP
- *
- * Why:
- * Yotpo’s native points widget uses the product’s default one-time price.
- * On our PDP the effective price can change (e.g., Subscribe & Save, variant
- * price differences). That makes the default “earn X points” message wrong.
- *
- * What this script does:
- * - Reads the *current* effective unit price shown on the PDP.
- * - Recalculates earned points using our simple rule:
- *     1 point per whole USD dollar (floor; e.g., $4.80 → 4 points).
- *   (No tiers or multipliers in this version.)
- * - Replaces the text inside the Yotpo points widget so it always matches the
- *   selection the shopper is viewing.
- *
- * When it runs:
- * - On initial page load and whenever price-affecting choices change:
- *   variant change, selling plan (Subscribe & Save) toggle/change, and quantity.
- * - Uses lightweight observers / debounced listeners to avoid reflow spam.
- *
- * Safety & performance:
- * - Non-destructive: if the Yotpo element isn’t present, the script quietly exits.
- * - No network calls; only DOM reads/writes of the widget’s text/aria.
- * - Selectors and the points rule can be adjusted at the top of the script.
- */
-
-/* yotpo-points-sync.js
-   Keep Yotpo "Earn up to X points" aligned to the currently selected price.
-   Rule: 1 point per whole USD dollar (Math.floor). Example: $25.46 -> 25 points.
-
-   You can adjust selectors in CONFIG if your theme uses different markup.
+/* Yotpo Dynamic Points (subscription-aware, shadowRoot safe)
+   Shows floor(price) points for One-Time or Subscribe selection.
+   Reads <og-price> values from shadowRoot; falls back to "Save XX%".
 */
+
 (function () {
-  // ---- CONFIG: tweak selectors if your theme differs ----
-  const WIDGET_SELECTOR =
-    '.yotpo-product-points-widget-logged-in-view, .yotpo-product-points-widget';
-  const AMOUNT_SELECTOR =
-    '.yotpo-product-points-widget-amount'; // if present we only change this text
+  const log = (...a) => console.debug('[points]', ...a);
+  const $ = (s, r = document) => r.querySelector(s);
 
-  // potential price sources (ordered by preference)
-  const PRICE_SELECTORS = [
-    // 1) checked purchase/selling plan radios
-    'input[type="radio"][name*="purchase"]:checked',
-    'input[type="radio"][name*="selling_plan"]:checked',
-    'input[name="purchase_option"]:checked',
-    // 2) price labels in the selected row/container
-    '.rc-option__price',
-    '.selling-plan-group [data-price]',
-    // 3) generic price elements as fallback
-    '.price-item--sale',
-    '.price-item--regular',
-    '.product__price .price-item',
-    '[data-product-price]'
-  ];
-
-  // only run on product pages (guard for theme.liquid load)
-  if (!/\/products\//.test(location.pathname)) return;
-
-  // --- helpers ---
-  const parseUSD = (txt) => {
-    if (!txt) return NaN;
-    // pull the first $number.xx in the string
-    const m = String(txt).replace(/,/g, '').match(/\$?\s*([0-9]+(?:\.[0-9]{1,2})?)/);
+  // ---------- Parse money from <og-price> shadow root ----------
+  function parseShadowMoney(el) {
+    if (!el || !el.shadowRoot) return NaN;
+    const txt = (el.shadowRoot.textContent || '').replace(/,/g, '');
+    const m = txt.match(/(\d+(?:\.\d{1,2})?)/);
     return m ? parseFloat(m[1]) : NaN;
-  };
+  }
 
-  const selectedRowText = () => {
-    const radio = document.querySelector(
-      'input[type="radio"][name*="purchase"]:checked, ' +
-      'input[type="radio"][name*="selling_plan"]:checked, ' +
-      'input[name="purchase_option"]:checked'
-    );
-    if (!radio) return '';
-    const row = radio.closest(
-      'label, .purchase-option, .selling-plan, .rc-option, .purchase-option__row, .selling-plan-group'
-    );
-    return row ? row.textContent : '';
-  };
+  // ---------- Base (one-time) price ----------
+  function getOneTimePrice() {
+    // Prefer the pre-discount price element
+    let n = parseShadowMoney($('og-price.gh--pre-discount-price'));
+    if (isFinite(n)) return n;
 
-  const getEffectivePrice = () => {
-    // 1) try the checked purchase/plan row first
-    let price = parseUSD(selectedRowText());
-
-    // 2) scan fallbacks
-    if (!price || isNaN(price)) {
-      for (const sel of PRICE_SELECTORS) {
-        const el = document.querySelector(sel);
-        if (el) {
-          price = parseUSD(el.getAttribute('data-price') || el.textContent);
-          if (!isNaN(price)) break;
-        }
-      }
+    // Fallback: read number near the “One-Time Purchase” row
+    const row = [...document.querySelectorAll('*')]
+      .find(n => /one[-\s]?time purchase/i.test(n?.textContent || ''));
+    if (row) {
+      const m = (row.parentElement?.textContent || row.textContent || '').replace(/,/g, '').match(/(\d+(?:\.\d{1,2})?)/);
+      if (m) n = parseFloat(m[1]);
     }
-    return price;
-  };
+    return isFinite(n) ? n : NaN;
+  }
 
-  const setPoints = (points) => {
-    const widget = document.querySelector(WIDGET_SELECTOR);
-    if (!widget) return;
+  // ---------- Subscription price ----------
+  function getSubscribePrice() {
+    // 1) Try the price inside the subscribe card
+    let n = parseShadowMoney($('.gh-subscribe-card og-price')) ||
+            parseShadowMoney($('og-price[subscription]'));
+    if (isFinite(n)) return n;
 
-    const label = `Earn up to ${points} point${points === 1 ? '' : 's'}`;
+    // 2) Fallback: derive from one-time and “Save XX%”
+    const pctMatch = ($('.gh-subscribe-card')?.textContent || '').match(/save\s*(\d+)\s*%/i);
+    const base = getOneTimePrice();
+    if (pctMatch && isFinite(base)) {
+      const pct = parseInt(pctMatch[1], 10);
+      n = base * (1 - pct / 100);
+    }
+    return isFinite(n) ? n : NaN;
+  }
 
-    // If Yotpo exposes a dedicated span for the number, change only that
-    const amt = widget.querySelector(AMOUNT_SELECTOR);
-    if (amt) {
-      amt.textContent = `${points} point${points === 1 ? '' : 's'}`;
+  // ---------- Is subscribe selected? (multiple signals) ----------
+  function isSubscribeSelected() {
+    const card = $('.gh-subscribe-card');
+    if (!card) return false;
+
+    // Common states
+    if (card.matches('.selected,.active,[selected],[aria-pressed="true"],[aria-checked="true"]')) return true;
+
+    const radio = card.querySelector('input[type="radio"],input[role="radio"]');
+    if (radio && (radio.checked || radio.getAttribute('aria-checked') === 'true')) return true;
+
+    if (card.hasAttribute('subscribed')) return true;
+
+    // If the One-Time row itself looks selected, invert
+    const one = [...document.querySelectorAll('*')].find(n => /one[-\s]?time purchase/i.test(n.textContent || ''));
+    if (one && one.closest('.selected,.active')) return false;
+
+    return false;
+  }
+
+  function setPoints(val) {
+    const span = $('.yotpo-product-points-widget-points-amount');
+    if (span && isFinite(val)) span.textContent = String(Math.floor(val));
+  }
+
+  function render() {
+    const ptsEl = $('.yotpo-product-points-widget-points-amount');
+    if (!ptsEl) return log('Yotpo span not ready');
+
+    const base = getOneTimePrice();
+    const sub  = getSubscribePrice();
+    const useSub = isSubscribeSelected();
+
+    log('prices', { base, sub, useSub });
+
+    let price = base;
+    if (useSub && isFinite(sub)) price = sub;
+
+    if (isFinite(price)) setPoints(price);
+    else log('no price available');
+  }
+
+  // Wait for the Yotpo span, then attach listeners
+  function boot(start = Date.now()) {
+    if ($('.yotpo-product-points-widget-points-amount')) {
+      render();
+
+      // Update on interactions and DOM changes
+      ['click', 'change', 'input'].forEach(ev =>
+        document.addEventListener(ev, () => setTimeout(render, 0), true)
+      );
+
+      const mo = new MutationObserver(() => setTimeout(render, 0));
+      mo.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true });
+
+      // Safety passes after async widgets finish
+      setTimeout(render, 400);
+      setTimeout(render, 1200);
+      setTimeout(render, 2500);
+    } else if (Date.now() - start < 15000) {
+      setTimeout(() => boot(start), 200);
     } else {
-      // Fallback: set the whole text (useful if the widget is plain text)
-      widget.textContent = label;
+      log('gave up waiting for Yotpo span');
     }
+  }
 
-    widget.setAttribute('aria-label', label);
-  };
-
-  const recalc = () => {
-    const price = getEffectivePrice();
-    if (!price || isNaN(price)) return;
-    const points = Math.floor(price); // 1 point per whole dollar
-    setPoints(points);
-  };
-
-  // --- wire up ---
-  const run = () => {
-    recalc();
-
-    // user interactions that can change the effective price
-    document.addEventListener('change', (e) => {
-      if (
-        e.target.matches('input[type="radio"], select, [name*="purchase"], [name*="selling_plan"]')
-      ) {
-        // small delay to let theme update prices in DOM
-        setTimeout(recalc, 50);
-      }
-    });
-
-    // MutationObserver to catch price/widget rerenders
-    let t;
-    const mo = new MutationObserver(() => {
-      clearTimeout(t);
-      t = setTimeout(recalc, 120); // debounce
-    });
-    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
-  };
-
-  if (document.readyState !== 'loading') run();
-  else document.addEventListener('DOMContentLoaded', run);
+  // Only run on PDP-ish pages
+  if (document.querySelector('form[action*="/cart/add"], [data-product-id], .yotpo-product-points-widget-logged-in-view')) {
+    boot();
+  }
 })();
-
