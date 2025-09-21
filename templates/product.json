@@ -38,6 +38,10 @@
             "tab_3_title": "Suggested Use"
           }
         },
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
+        },
         "price": {
           "type": "price",
           "disabled": true,
@@ -90,6 +94,7 @@
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "price",
         "variant_picker",
         "ordergroove_offer",
@@ -117,6 +122,12 @@
       }
     },
     "858a67e8a8d93195f4d4": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "1758490710fe464197": {
       "type": "apps",
       "settings": {
         "include_margins": true
@@ -247,6 +258,7 @@
     "shogun-above",
     "main",
     "858a67e8a8d93195f4d4",
+    "1758490710fe464197",
     "169838059718b5ce0c",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
