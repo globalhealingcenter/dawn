@@ -81,12 +81,6 @@
         "yotpo_loyalty_rewards_product_points_module_app_block_gfef97": {
           "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {}
-        },
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
-          "settings": {
-            "publishId": "5ded4xh85pays"
-          }
         }
       },
       "block_order": [
@@ -99,8 +93,7 @@
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
         "gh_out_of_stock_form_nDyWFK",
-        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97",
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
+        "yotpo_loyalty_rewards_product_points_module_app_block_gfef97"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
@@ -170,20 +163,10 @@
     "1686083501cc540fa5": {
       "type": "apps",
       "blocks": {
-        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd": {
-          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {}
-        },
         "25085916-2810-44e8-9e6d-866a06af66f3": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/reviews/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
           "settings": {
             "product": "{{product}}"
-          }
-        },
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
-          "settings": {
-            "publishId": "publishId"
           }
         },
         "rebuy_personalization_engine_rebuy_widget_MCbLYn": {
@@ -197,9 +180,7 @@
         }
       },
       "block_order": [
-        "yotpo_loyalty_rewards_product_points_module_app_block_EEntUd",
         "25085916-2810-44e8-9e6d-866a06af66f3",
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky",
         "rebuy_personalization_engine_rebuy_widget_MCbLYn"
       ],
       "settings": {
@@ -222,7 +203,16 @@
     "sticky_atc_WbUPHR": {
       "type": "gh-sticky-atc",
       "name": "GH Sticky ATC Bar",
-      "settings": {}
+      "settings": {
+        "show_price": true,
+        "tagline_text": "Gentle, effective cleansing support",
+        "hide_on_mobile": false,
+        "hide_on_desktop": false,
+        "bg_color": "#ffffff",
+        "border_color": "#21472d",
+        "btn_bg": "#21472d",
+        "btn_color": "#ffffff"
+      }
     }
   },
   "order": [
