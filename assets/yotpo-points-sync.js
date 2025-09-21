@@ -25,111 +25,125 @@
  * - Selectors and the points rule can be adjusted at the top of the script.
  */
 
-<script>
+/* yotpo-points-sync.js
+   Keep Yotpo "Earn up to X points" aligned to the currently selected price.
+   Rule: 1 point per whole USD dollar (Math.floor). Example: $25.46 -> 25 points.
+
+   You can adjust selectors in CONFIG if your theme uses different markup.
+*/
 (function () {
-  // ---- helpers ----
-  const $ = (s, r=document) => r.querySelector(s);
+  // ---- CONFIG: tweak selectors if your theme differs ----
+  const WIDGET_SELECTOR =
+    '.yotpo-product-points-widget-logged-in-view, .yotpo-product-points-widget';
+  const AMOUNT_SELECTOR =
+    '.yotpo-product-points-widget-amount'; // if present we only change this text
 
-  // Try a few common price locations. Returns cents (int) or null.
-  function getPriceCents() {
-    const candidates = [
-      '[data-current-price]',
-      '[data-product-price]',
-      '[data-price]',
-      '.price .price__sale .price-item--sale',
-      '.price .price-item--sale',
-      '.price .price__regular .price-item--regular',
-      '.price-item.price-item--regular',
-      '.price .price-item__price',
-    ];
-    for (const sel of candidates) {
-      const el = $(sel);
-      if (!el) continue;
-      const raw = (el.getAttribute('data-current-price')
-                || el.getAttribute('data-product-price')
-                || el.getAttribute('data-price')
-                || el.textContent || '').trim();
-      // keep only digits (assumes $ with 2 decimals)
-      const cents = parseInt(raw.replace(/[^0-9]/g, ''), 10);
-      if (!isNaN(cents) && cents > 0) return cents;
-    }
-    return null;
-  }
+  // potential price sources (ordered by preference)
+  const PRICE_SELECTORS = [
+    // 1) checked purchase/selling plan radios
+    'input[type="radio"][name*="purchase"]:checked',
+    'input[type="radio"][name*="selling_plan"]:checked',
+    'input[name="purchase_option"]:checked',
+    // 2) price labels in the selected row/container
+    '.rc-option__price',
+    '.selling-plan-group [data-price]',
+    // 3) generic price elements as fallback
+    '.price-item--sale',
+    '.price-item--regular',
+    '.product__price .price-item',
+    '[data-product-price]'
+  ];
 
-  function getQty() {
-    const q = $('input[name="quantity"]');
-    const n = q ? parseInt(q.value, 10) : 1;
-    return isNaN(n) ? 1 : Math.max(1, n);
-  }
+  // only run on product pages (guard for theme.liquid load)
+  if (!/\/products\//.test(location.pathname)) return;
 
-  // Find the numeric span inside Yotpo's points widget.
-  function getYotpoPointsSpan() {
-    const root =
-      $('.yotpo-product-points-widget-logged-in-view') ||
-      $('.yotpo-product-points-widget-logged-out-view') ||
-      $('.yotpo-product-points-widget');
-    if (!root) return null;
+  // --- helpers ---
+  const parseUSD = (txt) => {
+    if (!txt) return NaN;
+    // pull the first $number.xx in the string
+    const m = String(txt).replace(/,/g, '').match(/\$?\s*([0-9]+(?:\.[0-9]{1,2})?)/);
+    return m ? parseFloat(m[1]) : NaN;
+  };
 
-    return root.querySelector('.yotpo-product-points-widget-points-amount')
-        || root.querySelector('.yotpo-product-points-widget-amount')
-        || root.querySelector('[class*="points-amount"]')
-        || root.querySelector('span'); // fallback
-  }
+  const selectedRowText = () => {
+    const radio = document.querySelector(
+      'input[type="radio"][name*="purchase"]:checked, ' +
+      'input[type="radio"][name*="selling_plan"]:checked, ' +
+      'input[name="purchase_option"]:checked'
+    );
+    if (!radio) return '';
+    const row = radio.closest(
+      'label, .purchase-option, .selling-plan, .rc-option, .purchase-option__row, .selling-plan-group'
+    );
+    return row ? row.textContent : '';
+  };
 
-  // ---- main updater ----
-  function updatePoints() {
-    const span = getYotpoPointsSpan();
-    const priceCents = getPriceCents();
-    if (!span || !priceCents) return;
+  const getEffectivePrice = () => {
+    // 1) try the checked purchase/plan row first
+    let price = parseUSD(selectedRowText());
 
-    const qty = getQty();
-    // 1 pt per $1, DO NOT round up
-    const points = Math.floor((priceCents * qty) / 100);
-    span.textContent = points.toString();
-  }
-
-  // ---- wire it up ----
-  function start() {
-    // Initial update when widget shows up
-    const t0 = Date.now();
-    const iv = setInterval(() => {
-      if (getYotpoPointsSpan()) {
-        clearInterval(iv);
-        updatePoints();
-
-        // React to price re-renders
-        const priceRoot = $('.price') || document.body;
-        new MutationObserver(updatePoints)
-          .observe(priceRoot, { childList: true, subtree: true, characterData: true });
-
-        // React to Yotpo re-renders
-        const widgetRoot = getYotpoPointsSpan()?.closest('.yotpo-product-points-widget') || document.body;
-        new MutationObserver(updatePoints)
-          .observe(widgetRoot, { childList: true, subtree: true });
-
-        // React to user input (qty / subscription toggles)
-        document.addEventListener('change', (e) => {
-          const t = e.target;
-          if (!t) return;
-          if (t.name === 'quantity' || t.name === 'selling_plan' || t.name === 'selling_plan_id') {
-            updatePoints();
-          }
-        });
-        document.addEventListener('click', (e) => {
-          if (e.target.closest('[data-subscription],[data-selling-plan],[data-purchase-option]')) {
-            setTimeout(updatePoints, 0);
-          }
-        });
-      } else if (Date.now() - t0 > 10000) {
-        clearInterval(iv); // give up after 10s
+    // 2) scan fallbacks
+    if (!price || isNaN(price)) {
+      for (const sel of PRICE_SELECTORS) {
+        const el = document.querySelector(sel);
+        if (el) {
+          price = parseUSD(el.getAttribute('data-price') || el.textContent);
+          if (!isNaN(price)) break;
+        }
       }
-    }, 150);
-  }
+    }
+    return price;
+  };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start);
-  } else {
-    start();
-  }
+  const setPoints = (points) => {
+    const widget = document.querySelector(WIDGET_SELECTOR);
+    if (!widget) return;
+
+    const label = `Earn up to ${points} point${points === 1 ? '' : 's'}`;
+
+    // If Yotpo exposes a dedicated span for the number, change only that
+    const amt = widget.querySelector(AMOUNT_SELECTOR);
+    if (amt) {
+      amt.textContent = `${points} point${points === 1 ? '' : 's'}`;
+    } else {
+      // Fallback: set the whole text (useful if the widget is plain text)
+      widget.textContent = label;
+    }
+
+    widget.setAttribute('aria-label', label);
+  };
+
+  const recalc = () => {
+    const price = getEffectivePrice();
+    if (!price || isNaN(price)) return;
+    const points = Math.floor(price); // 1 point per whole dollar
+    setPoints(points);
+  };
+
+  // --- wire up ---
+  const run = () => {
+    recalc();
+
+    // user interactions that can change the effective price
+    document.addEventListener('change', (e) => {
+      if (
+        e.target.matches('input[type="radio"], select, [name*="purchase"], [name*="selling_plan"]')
+      ) {
+        // small delay to let theme update prices in DOM
+        setTimeout(recalc, 50);
+      }
+    });
+
+    // MutationObserver to catch price/widget rerenders
+    let t;
+    const mo = new MutationObserver(() => {
+      clearTimeout(t);
+      t = setTimeout(recalc, 120); // debounce
+    });
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
+  };
+
+  if (document.readyState !== 'loading') run();
+  else document.addEventListener('DOMContentLoaded', run);
 })();
-</script>
+
