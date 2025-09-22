@@ -1,121 +1,147 @@
-/* Yotpo Dynamic Points (subscription-aware, shadowRoot safe)
-   Shows floor(price) points for One-Time or Subscribe selection.
-   Reads <og-price> values from shadowRoot; falls back to "Save XX%".
-*/
+<!-- in Assets: yotpo-points-sync.js (or whatever file you’re using) -->
+<script>
+(() => {
+  // Avoid double-start if theme loads this file twice
+  if (window.__PPW_YOTPO_SYNC__) return;
+  window.__PPW_YOTPO_SYNC__ = true;
 
-(function () {
-  const log = (...a) => console.debug('[points]', ...a);
-  const $ = (s, r = document) => r.querySelector(s);
+  // ---------- helpers ----------
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
 
-  // ---------- Parse money from <og-price> shadow root ----------
-  function parseShadowMoney(el) {
-    if (!el || !el.shadowRoot) return NaN;
-    const txt = (el.shadowRoot.textContent || '').replace(/,/g, '');
-    const m = txt.match(/(\d+(?:\.\d{1,2})?)/);
-    return m ? parseFloat(m[1]) : NaN;
+  const POINTS_CONTAINER_SEL = '.yotpo-product-points-widget';
+  const POINTS_NUMBER_SEL    = '.yotpo-product-points-widget-points-amount';
+
+  // Try a few likely selectors for the SUBSCRIBE price.
+  const SUB_PRICE_CANDIDATES = [
+    // your subscribe card / green price area (try specific first)
+    '.gh-subscribe-card [class*="price"]',
+    '.gh-subscribe-card og-price',
+    '.gh-subscribe-card [data-price]',
+    '.gh-subscribe-card [data-testid*="price"]',
+    '.gh-subscribe-card *',
+  ];
+
+  // If we can’t find a sub price we fall back to the normal price near the form
+  const OTO_PRICE_CANDIDATES = [
+    '[data-product-price]',
+    '.price-item--regular',
+    '.product__price',
+    '.product__info-container [class*="price"]',
+    '.product [class*="price"]',
+  ];
+
+  const MONEY_RE = /\$?\s*([0-9]+(?:[.,][0-9]{1,2})?)/;
+
+  function parseMoneyFrom(el) {
+    if (!el) return null;
+    const txt = (el.getAttribute('aria-label') || el.textContent || '').trim();
+    const m = txt.match(MONEY_RE);
+    if (!m) return null;
+    // normalize 25,46 => 25.46
+    const n = parseFloat(m[1].replace(',', '.'));
+    return isNaN(n) ? null : n;
   }
 
-  // ---------- Base (one-time) price ----------
-  function getOneTimePrice() {
-    // Prefer the pre-discount price element
-    let n = parseShadowMoney($('og-price.gh--pre-discount-price'));
-    if (isFinite(n)) return n;
-
-    // Fallback: read number near the “One-Time Purchase” row
-    const row = [...document.querySelectorAll('*')]
-      .find(n => /one[-\s]?time purchase/i.test(n?.textContent || ''));
-    if (row) {
-      const m = (row.parentElement?.textContent || row.textContent || '').replace(/,/g, '').match(/(\d+(?:\.\d{1,2})?)/);
-      if (m) n = parseFloat(m[1]);
+  function firstMoneyFrom(selectors) {
+    for (const sel of selectors) {
+      for (const el of $$(sel)) {
+        const n = parseMoneyFrom(el);
+        if (n) return n;
+      }
     }
-    return isFinite(n) ? n : NaN;
+    return null;
   }
 
-  // ---------- Subscription price ----------
   function getSubscribePrice() {
-    // 1) Try the price inside the subscribe card
-    let n = parseShadowMoney($('.gh-subscribe-card og-price')) ||
-            parseShadowMoney($('og-price[subscription]'));
-    if (isFinite(n)) return n;
-
-    // 2) Fallback: derive from one-time and “Save XX%”
-    const pctMatch = ($('.gh-subscribe-card')?.textContent || '').match(/save\s*(\d+)\s*%/i);
-    const base = getOneTimePrice();
-    if (pctMatch && isFinite(base)) {
-      const pct = parseInt(pctMatch[1], 10);
-      n = base * (1 - pct / 100);
-    }
-    return isFinite(n) ? n : NaN;
+    // If a subscribe option is visible/selected, this usually exists
+    return firstMoneyFrom(SUB_PRICE_CANDIDATES);
   }
 
-  // ---------- Is subscribe selected? (multiple signals) ----------
-  function isSubscribeSelected() {
-    const card = $('.gh-subscribe-card');
-    if (!card) return false;
-
-    // Common states
-    if (card.matches('.selected,.active,[selected],[aria-pressed="true"],[aria-checked="true"]')) return true;
-
-    const radio = card.querySelector('input[type="radio"],input[role="radio"]');
-    if (radio && (radio.checked || radio.getAttribute('aria-checked') === 'true')) return true;
-
-    if (card.hasAttribute('subscribed')) return true;
-
-    // If the One-Time row itself looks selected, invert
-    const one = [...document.querySelectorAll('*')].find(n => /one[-\s]?time purchase/i.test(n.textContent || ''));
-    if (one && one.closest('.selected,.active')) return false;
-
-    return false;
+  function getOtoPrice() {
+    return firstMoneyFrom(OTO_PRICE_CANDIDATES);
   }
 
-  function setPoints(val) {
-    const span = $('.yotpo-product-points-widget-points-amount');
-    if (span && isFinite(val)) span.textContent = String(Math.floor(val));
+  // Compute target points: floor(price). If a subscribe price
+  // is on screen we prefer that; otherwise fall back to OTO.
+  function computeTargetPoints() {
+    const sub = getSubscribePrice();
+    const price = sub ?? getOtoPrice();
+    if (!price) return null;
+    return Math.floor(price);
   }
 
-  function render() {
-    const ptsEl = $('.yotpo-product-points-widget-points-amount');
-    if (!ptsEl) return log('Yotpo span not ready');
-
-    const base = getOneTimePrice();
-    const sub  = getSubscribePrice();
-    const useSub = isSubscribeSelected();
-
-    log('prices', { base, sub, useSub });
-
-    let price = base;
-    if (useSub && isFinite(sub)) price = sub;
-
-    if (isFinite(price)) setPoints(price);
-    else log('no price available');
+  // Debounce updates so we only touch DOM after things settle
+  let pendingTimer = null;
+  function scheduleUpdate(delay = 250) {
+    clearTimeout(pendingTimer);
+    pendingTimer = setTimeout(applyUpdate, delay);
   }
 
-  // Wait for the Yotpo span, then attach listeners
-  function boot(start = Date.now()) {
-    if ($('.yotpo-product-points-widget-points-amount')) {
-      render();
+  function applyUpdate() {
+    const box = $(POINTS_CONTAINER_SEL);
+    if (!box) return;
 
-      // Update on interactions and DOM changes
-      ['click', 'change', 'input'].forEach(ev =>
-        document.addEventListener(ev, () => setTimeout(render, 0), true)
-      );
+    // The number span that Yotpo renders
+    const num = $(POINTS_NUMBER_SEL, box);
+    if (!num) return;
 
-      const mo = new MutationObserver(() => setTimeout(render, 0));
-      mo.observe(document.body, { subtree: true, childList: true, characterData: true, attributes: true });
+    const desired = computeTargetPoints();
+    if (desired == null) return;
 
-      // Safety passes after async widgets finish
-      setTimeout(render, 400);
-      setTimeout(render, 1200);
-      setTimeout(render, 2500);
-    } else if (Date.now() - start < 15000) {
-      setTimeout(() => boot(start), 200);
-    } else {
-      log('gave up waiting for Yotpo span');
+    // Only update if changed; store last value on the number element
+    const last = num.getAttribute('data-ppw-last');
+    const next = String(desired);
+
+    if (last !== next && num.textContent !== next) {
+      // Update only textContent of the NUMBER span.
+      num.textContent = next;
+      num.setAttribute('data-ppw-last', next);
     }
   }
 
-  // Only run on PDP-ish pages
-  if (document.querySelector('form[action*="/cart/add"], [data-product-id], .yotpo-product-points-widget-logged-in-view')) {
-    boot();
+  // ---------- boot ----------
+  function bootWhenReady() {
+    const yotpoBox = $(POINTS_CONTAINER_SEL);
+    if (!yotpoBox) {
+      // try again shortly; Yotpo loads async
+      setTimeout(bootWhenReady, 300);
+      return;
+    }
+
+    // Run once after it renders
+    scheduleUpdate(350);
+
+    // Observe Yotpo widget subtree & price areas with a quiet-time debounce
+    const mo = new MutationObserver(() => scheduleUpdate(300));
+    mo.observe(yotpoBox, { childList: true, subtree: true, characterData: true });
+
+    // Also listen for clicks/changes that switch purchase type
+    document.addEventListener('click', e => {
+      // clicks that likely change prices/subscription choice
+      if (e.target.closest('.gh-subscribe-card') ||
+          e.target.closest('input[type="radio"]') ||
+          e.target.closest('[data-selling-plan], [data-frequency], [data-price]')) {
+        scheduleUpdate(200);
+      }
+    });
+
+    document.addEventListener('change', e => {
+      if (e.target.closest('form') || e.target.closest('.gh-subscribe-card')) {
+        scheduleUpdate(200);
+      }
+    });
+
+    // a few safety re-checks after initial load
+    setTimeout(applyUpdate, 1000);
+    setTimeout(applyUpdate, 2000);
+  }
+
+  // Start
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootWhenReady);
+  } else {
+    bootWhenReady();
   }
 })();
+</script>
