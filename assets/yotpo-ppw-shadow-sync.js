@@ -1,147 +1,105 @@
-/* Yotpo points number sync — PPW
-   - Keeps the Yotpo widget intact (no re-rendering, no flicker)
-   - Only updates the numeric text inside
-     .yotpo-product-points-widget-points-amount
-   - Switches to subscription price when subscribe is selected
-   - Points rule: floor(price)  (e.g., $4.80 -> 4)
-   - Exposes window.__ppwYotpoDebug()
-*/
 (() => {
-  const DEBUG = false;
-  const log = (...a) => DEBUG && console.log('[PPW]', ...a);
+  const D = document, W = window;
 
-  const $ = (sel, root = document) => root.querySelector(sel);
+  // Tiny helpers
+  const $ = (s, c = D) => c.querySelector(s);
 
-  // Parse a money string to Number, robust to commas/periods
-  function parseMoney(s) {
-    if (!s) return 0;
-    let str = String(s).replace(/[^\d.,]/g, '');
-    // Coerce thousands/decimal: keep last '.' as decimal, strip others
-    const lastDot = str.lastIndexOf('.');
-    if (lastDot !== -1) {
-      str = str.slice(0, lastDot).replace(/[.]/g, '') + '.' + str.slice(lastDot + 1);
-    }
-    // If there is no dot but there is a comma, treat comma as decimal
-    if (lastDot === -1 && str.indexOf(',') !== -1) {
-      const lastComma = str.lastIndexOf(',');
-      str = str.slice(0, lastComma).replace(/,/g, '') + '.' + str.slice(lastComma + 1);
-    } else {
-      // remove commas as thousands
-      str = str.replace(/,/g, '');
-    }
-    const n = Number(str);
-    return isNaN(n) ? 0 : n;
+  // Pull a $xx.xx number out of a row’s text. Takes the last $ in the row.
+  function getPriceFromRow(row) {
+    if (!row) return NaN;
+    const m = row.textContent.replace(/\s+/g, ' ').match(/\$[\d,]*\.?\d+/g);
+    if (!m || !m.length) return NaN;
+    return parseFloat(m[m.length - 1].replace(/[^\d.]/g, ''));
   }
 
-  function getPointsForPrice(price) {
-    return Math.floor(price); // $4.80 -> 4
+  // Find the two rows by their text (works across themes)
+  function findRows() {
+    // Consider common containers that act like the radio rows
+    const candidates = [
+      ...D.querySelectorAll(
+        'label, [role="radio"], .purchase-option, .rc-option, .gh-subscribe-card, og-optin-button'
+      )
+    ];
+    let oto = null, sub = null;
+
+    for (const el of candidates) {
+      const t = (el.textContent || '').toLowerCase();
+      if (!oto && /one[-\s]?time/.test(t)) oto = el;
+      if (!sub && /(subscribe|subscription)/.test(t)) sub = el;
+      if (oto && sub) break;
+    }
+
+    // Weak fallbacks
+    if (!sub) sub = D.querySelector('.gh-subscribe-card, [class*="subscribe"]');
+    if (!oto)  oto = D.querySelector('[class*="one"][class*="time"], [data-purchase-option="one_time"]');
+
+    return { oto, sub };
   }
 
-  // Is subscribe selected?
-  function isSubscribeSelected() {
-    // Radix: aria radio or input radio inside subscribe block
-    if ($('.gh-subscribe-card [role="radio"][aria-checked="true"]')) return true;
-    const r = $('.gh-subscribe-card input[type="radio"]');
-    if (r && r.checked) return true;
+  function isSubSelected(subRow) {
+    if (!subRow) return false;
+    const input = subRow.querySelector('input[type="radio"]');
+    if (input) return !!input.checked;
+    const aria = subRow.getAttribute('aria-checked');
+    if (aria != null) return aria === 'true';
+    return /\b(selected|active|is-selected)\b/.test(subRow.className);
+  }
+
+  function computePoints() {
+    const { oto, sub } = findRows();
+    const subOn = isSubSelected(sub);
+    const price = subOn ? getPriceFromRow(sub) : getPriceFromRow(oto);
+    const points = isFinite(price) ? Math.floor(price) : NaN; // $4.80 => 4
+    return { subOn, price, points };
+  }
+
+  // Write only the number, preserve Yotpo’s markup/links to avoid flicker
+  function setYotpoPoints(p) {
+    const amtEl =
+      $('.yotpo-product-points-widget-logged-in-view .yotpo-product-points-widget-points-amount') ||
+      $('.yotpo-product-points-widget-points-amount');
+
+    if (!amtEl || !isFinite(p)) return false;
+
+    const current = parseInt(amtEl.textContent.replace(/[^\d]/g, ''), 10);
+    if (current !== p) {
+      amtEl.textContent = String(p);
+      return true;
+    }
     return false;
   }
 
-  // Try to read the OTO price and SUB price from the page.
-  // We read visible text; fallback to og-price web component text if needed.
-  function readSubPrice() {
-    // 1) Try og-price[subscription]
-    const host = $('og-price[subscription]');
-    if (host && host.shadowRoot) {
-      const txt = host.shadowRoot.textContent || '';
-      const n = parseMoney(txt);
-      if (n) return n;
-    }
-    // 2) Fallback: visible text inside subscribe card
-    const card = $('.gh-subscribe-card');
-    if (card) {
-      const txt = card.textContent || '';
-      const n = parseMoney(txt);
-      if (n) return n;
-    }
-    return 0;
+  function tick() {
+    const { points } = computePoints();
+    setYotpoPoints(points);
   }
 
-  function readOtoPrice() {
-    // common “one-time purchase” row
-    const row = document.querySelector('[data-test="one-time"], .one-time, .gh--pre-discount-price') || document.body;
-    const txt = (row.textContent || '');
-    const n = parseMoney(txt);
-    if (n) return n;
+  // Observe minimal mutations that reflect option/price changes
+  let mo;
+  function start() {
+    tick();
 
-    // Fallback: product price anywhere on the page
-    const any = document.body.textContent || '';
-    return parseMoney(any) || 0;
-  }
-
-  function getActivePrice() {
-    if (isSubscribeSelected()) {
-      const s = readSubPrice();
-      if (s) return s;
-    }
-    return readOtoPrice();
-  }
-
-  // Update just the number inside Yotpo points amount
-  function updateWidget() {
-    const amountEl = $('.yotpo-product-points-widget-points-amount');
-    if (!amountEl) return; // widget not rendered yet
-
-    const price = getActivePrice();
-    if (!price) return;
-
-    const pts = String(getPointsForPrice(price));
-    if (amountEl.textContent !== pts) {
-      amountEl.textContent = pts;
-      log('updated ->', { pts, price });
-    }
-  }
-
-  // Observe things that can change the visible price:
-  function attachObservers() {
-    // Generic observer on subscribe block (text/attributes)
-    const subBlock = $('.gh-subscribe-card') || document.body;
-    const mo1 = new MutationObserver(() => updateWidget());
-    mo1.observe(subBlock, { subtree: true, childList: true, characterData: true, attributes: true });
-
-    // If og-price has open shadow root, observe inside it as well
-    const og = $('og-price[subscription]');
-    if (og && og.shadowRoot) {
-      const mo2 = new MutationObserver(updateWidget);
-      mo2.observe(og.shadowRoot, { subtree: true, childList: true, characterData: true });
-    }
-
-    // Watch clicks/changes on radios or the subscribe card
-    document.addEventListener('change', (e) => {
-      if (e.target && (e.target.type === 'radio' || e.target.closest('.gh-subscribe-card'))) {
-        setTimeout(updateWidget, 20);
-      }
+    if (mo) mo.disconnect();
+    mo = new MutationObserver(() => tick());
+    mo.observe(D.body, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['class', 'aria-checked', 'checked']
     });
-    document.addEventListener('click', (e) => {
-      if (e.target && e.target.closest('.gh-subscribe-card')) {
-        setTimeout(updateWidget, 20);
-      }
-    });
+
+    D.addEventListener('change', tick, true);
   }
 
-  // Debug helper so you can verify it’s running
-  window.__ppwYotpoDebug = function () {
-    const amountEl = $('.yotpo-product-points-widget-points-amount');
-    return {
-      subSelected: isSubscribeSelected(),
-      activePrice: getActivePrice(),
-      pointsShown: amountEl ? amountEl.textContent : null
-    };
+  if (D.readyState !== 'loading') start();
+  else D.addEventListener('DOMContentLoaded', start);
+
+  // Debug helper: run __ppwYotpoDebug() in console
+  W.__ppwYotpoDebug = function () {
+    const { subOn, price, points } = computePoints();
+    const shown =
+      ($('.yotpo-product-points-widget-points-amount') || {}).textContent || null;
+    return { subSelected: subOn, activePrice: price, pointsShown: shown };
   };
-
-  // Kick off
-  attachObservers();
-  // First pass + a couple defer retries in case Yotpo renders late
-  updateWidget();
-  setTimeout(updateWidget, 150);
-  setTimeout(updateWidget, 500);
 })();
