@@ -1,19 +1,18 @@
-/* yotpo-ppw-shadow-sync.js
-   Sync Yotpo "Earn up to X points" with the active PDP price (one-time vs subscribe).
-   - No tier/multiplier: 1 point = $1 (floor; $4.80 → 4 points)
-   - Non-destructive: updates only the number inside Yotpo's amount span
-   - Flicker-free: avoids touching surrounding copy/links, throttles updates
+/* yotpo-ppw-shadow-sync.js — variant-safe
+   Sync Yotpo "Earn up to X points" with the active PDP price (OTO vs SUB).
+   - 1 point = $1 (floor; 4.80 → 4)
+   - Only changes the number inside Yotpo’s amount span
+   - Watches subscribe toggle + VARIANT changes (select/radio/buttons)
 */
 
 (function () {
   'use strict';
 
-  // ---------- Utilities ----------
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const moneyToNumber = (txt = '') => {
-    const m = String(txt).replace(/[^0-9.]/g, '');
-    const n = parseFloat(m);
+  // ---------- tiny helpers ----------
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const moneyToNumber = (t = '') => {
+    const n = parseFloat(String(t).replace(/[^0-9.]/g, ''));
     return Number.isFinite(n) ? n : NaN;
   };
 
@@ -22,177 +21,150 @@
     try {
       const root = el.shadowRoot || el;
       return moneyToNumber(root.textContent || '');
-    } catch {
-      return NaN;
-    }
+    } catch { return NaN; }
   }
 
-  // Get current one-time and subscribe prices from your theme’s price elements
+  // Pull prices from your OG price elements every time (variant safe)
   function getPrices() {
-    // Subscribe price lives in <og-price subscription>
     const subEl =
       $('og-price[subscription]') ||
       $('og-price.subscription') ||
       $('.gh-subscribe-card og-price');
 
-    // One-time price lives in <og-price regular> OR the OTO row
-    let oneEl = $('og-price[regular]') || $('og-price.regular');
-    if (!oneEl) {
-      // last fallback: any og-price inside the OTO row
-      const otoRow =
-        $('[data-offer="onetime"]') ||
-        $('[data-type="onetime"]') ||
-        $$('div,li,section').find(n => /one[-\s]?time/i.test(n.textContent || ''));
-      if (otoRow) oneEl = $('og-price', otoRow);
-    }
+    let oneEl =
+      $('og-price[regular]') ||
+      $('og-price.regular') ||
+      (function () {
+        const otoRow =
+          $('[data-offer="onetime"]') ||
+          $('[data-type="onetime"]') ||
+          $$('div,li,section').find(n => /one[-\s]?time/i.test(n?.textContent || ''));
+        return otoRow ? $('og-price', otoRow) : null;
+      })();
 
-    const subscription = readOgPrice(subEl);
-    const onetime = readOgPrice(oneEl);
-
-    return { subscription, onetime };
+    return {
+      subscription: readOgPrice(subEl),
+      onetime: readOgPrice(oneEl)
+    };
   }
 
-  // Your theme toggles a flag on the subscribe button/card.
+  // Your theme toggles attributes on the subscribe card/button when selected.
   function isSubscribeSelected() {
     const og = $('og-optin-button.gh-subscribe-card');
     if (og && (og.hasAttribute('subscribed') ||
                og.hasAttribute('active') ||
-               og.hasAttribute('checked'))) {
-      return true;
-    }
-    // fallbacks
+               og.hasAttribute('checked'))) return true;
     if ($('.gh-subscribe-card [aria-checked="true"]')) return true;
     if ($('.gh-subscribe-card input[type="radio"]:checked')) return true;
     return false;
   }
 
-  // Find Yotpo's number span and capture its prefix/suffix once
-  let pointsEl = null;
-  let prefix = '';
-  let suffix = '';
+  // Find Yotpo number span and learn its prefix/suffix around the number
+  let pointsEl = null, prefix = '', suffix = '';
   function getPointsEl() {
-    // This span exists inside the Yotpo widget and contains the number
-    const el =
-      $('.yotpo-product-points-widget-points-amount') ||
-      // fallback: any span inside the Yotpo link that contains a number
-      $$('a.yotpo-product-points-widget-link span').find(s =>
-        /\d/.test(s.textContent || '')
-      );
-    return el || null;
+    return $('.yotpo-product-points-widget-points-amount') ||
+           $$('a.yotpo-product-points-widget-link span')
+             .find(s => /\d/.test(s.textContent || '')) || null;
   }
   function captureTemplate(node) {
     if (!node) return;
-    const t = (node.textContent || '').trim();
-    const m = t.match(/^(.*?)(\d[\d,\.]*)(.*)$/);
-    if (m) {
-      prefix = m[1];
-      suffix = m[3];
-    } else {
-      // default if Yotpo only rendered a number
-      prefix = '';
-      suffix = '';
-    }
+    const txt = (node.textContent || '').trim();
+    const m = txt.match(/^(.*?)(\d[\d,\.]*)(.*)$/);
+    prefix = m ? m[1] : '';
+    suffix = m ? m[3] : '';
   }
 
-  // ---------- Update loop ----------
-  let lastShown = null;
-  let prices = { subscription: NaN, onetime: NaN };
-  let rafId = null;
-
+  // -------- render loop (variant-safe) --------
+  let lastShown = null, rafId = null;
   function computeActivePrice() {
-    // Refresh prices if we don't have them yet
-    if (!Number.isFinite(prices.subscription) || !Number.isFinite(prices.onetime)) {
-      prices = getPrices();
-    }
-    return isSubscribeSelected() && Number.isFinite(prices.subscription)
-      ? prices.subscription
-      : prices.onetime;
+    // Re-read prices EVERY time to catch variant changes
+    const p = getPrices();
+    return isSubscribeSelected() && Number.isFinite(p.subscription)
+      ? p.subscription
+      : p.onetime;
   }
 
   function render() {
-    // (Re)discover the Yotpo span if it was re-rendered
     if (!pointsEl || !document.contains(pointsEl)) {
       pointsEl = getPointsEl();
       if (pointsEl) captureTemplate(pointsEl);
     }
     if (!pointsEl) return;
 
-    const activePrice = computeActivePrice();
-    if (!Number.isFinite(activePrice)) return;
+    const price = computeActivePrice();
+    if (!Number.isFinite(price)) return;
 
-    const pts = Math.floor(activePrice); // $1 → 1 point, floor
-    if (pts === lastShown) return; // no change
+    const pts = Math.floor(price);
+    if (pts === lastShown) return;
 
-    // Update only the number to avoid flicker / copy loss
     pointsEl.textContent = `${prefix}${pts}${suffix}`;
     lastShown = pts;
   }
 
-  // Throttled schedule to coalesce rapid UI changes
   function scheduleRender() {
     if (rafId) return;
-    rafId = requestAnimationFrame(() => {
-      rafId = null;
-      render();
-    });
+    rafId = requestAnimationFrame(() => { rafId = null; render(); });
   }
 
-  // ---------- Wiring ----------
+  // -------- wiring & observers --------
   function initObservers() {
-    // 1) React to changes on the subscribe card/button
+    // Subscribe card changes
     const card = $('og-optin-button.gh-subscribe-card');
     if (card) {
-      new MutationObserver(scheduleRender).observe(card, {
-        attributes: true,
-        childList: false,
-        subtree: false
-      });
+      new MutationObserver(scheduleRender).observe(card, { attributes: true });
       card.addEventListener('change', scheduleRender, true);
       card.addEventListener('click', scheduleRender, true);
     }
 
-    // 2) React to Yotpo re-renders (it sometimes replaces the amount span)
+    // Yotpo can re-render its DOM
     const yWrap =
       $('.yotpo-product-points-widget-logged-in-view') ||
       $('.yotpo-product-points-inner-wrapper') ||
       $('a.yotpo-product-points-widget-link')?.parentElement;
     if (yWrap) {
-      new MutationObserver(() => {
-        pointsEl = null; // force rediscovery
-        scheduleRender();
-      }).observe(yWrap, { childList: true, subtree: true });
+      new MutationObserver(() => { pointsEl = null; scheduleRender(); })
+        .observe(yWrap, { childList: true, subtree: true });
     }
 
-    // 3) Periodic soft refresh as a safety net (very light)
+    // Variant changes (cover selects, radios, size buttons)
+    const variantSelectors = [
+      'select[name="id"]',
+      'input[name="id"]',
+      '[data-option], [data-variant], [data-product-attribute]',
+      '.product-form, .product__info, .product__options'
+    ];
+    document.addEventListener('change', e => {
+      if (variantSelectors.some(sel => e.target.matches?.(sel))) scheduleRender();
+    }, true);
+    document.addEventListener('click', e => {
+      // Many stores use button radios for options
+      if (e.target.closest('[role="radio"],[data-option],[data-variant]')) scheduleRender();
+    }, true);
+
+    // Safety net: very light periodic check
     setInterval(scheduleRender, 1500);
   }
 
-  function ready(fn) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', fn, { once: true });
-    } else {
-      fn();
-    }
-  }
-
-  // ---------- Debug helper ----------
+  // Debug helper
   window.__ppwYotpoDebug = function () {
-    const active = computeActivePrice();
     const shown = pointsEl ? pointsEl.textContent : null;
+    const p = getPrices();
     return {
       subSelected: isSubscribeSelected(),
-      prices: { ...prices },
+      prices: p,
       pointsShown: shown
     };
   };
 
-  // ---------- Boot ----------
-  ready(() => {
-    prices = getPrices();
+  // Boot
+  (document.readyState === 'loading'
+    ? document.addEventListener('DOMContentLoaded', start, { once: true })
+    : start());
+
+  function start() {
     pointsEl = getPointsEl();
     if (pointsEl) captureTemplate(pointsEl);
-
     initObservers();
     scheduleRender();
-  });
+  }
 })();
