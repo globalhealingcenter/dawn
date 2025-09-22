@@ -429,8 +429,9 @@
 {% endif %}
 
 {% if request.page_type == 'product' %}
-  <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v=2" defer></script>
+  <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
 {% endif %}
+
 
 
 {% render 'klaviyo-out-of-stock' %}
