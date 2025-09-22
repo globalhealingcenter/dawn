@@ -1,105 +1,121 @@
 /* yotpo-ppw-shadow-sync.js
-   Update only the points number based on the currently selected price.
-   $4.80 => 4 points (no rounding up).
+   Update ONLY the number in the Yotpo points widget based on selected price.
+   Rule: $4.80 → 4 points (floor). Keeps all Yotpo copy/links intact.
 */
 (function () {
-  // -------- helpers --------
   const $ = (s, r = document) => r.querySelector(s);
 
+  // --- helpers ---------------------------------------------------------------
   const getText = (el) => {
     if (!el) return '';
-    // og-price is a web component with open shadow root
     if (el.shadowRoot) return (el.shadowRoot.textContent || '').trim();
     return (el.textContent || '').trim();
   };
-
   const parseMoney = (txt) => {
     if (!txt) return NaN;
-    const m = txt.replace(/\s+/g, ' ').match(/(\$|USD)?\s*([0-9]+(?:\.[0-9]{1,2})?)/);
-    return m ? parseFloat(m[2]) : NaN;
+    const m = txt.replace(/\s+/g, ' ').match(/([0-9]+(?:\.[0-9]{1,2})?)/);
+    return m ? parseFloat(m[1]) : NaN;
+  };
+  const firstNumber = (vals) => { for (const v of vals) if (!Number.isNaN(v)) return v; return NaN; };
+
+  // --- selection detection (fixed) ------------------------------------------
+  const isSubSelected = () => {
+    // 1) Try the subscribe web component directly (open shadow root)
+    const subHost = $('og-optin-button.gh-subscribe-card');
+    if (subHost) {
+      if (subHost.hasAttribute('subscribed')) return true;
+      if (subHost.getAttribute('aria-checked') === 'true') return true;
+      // check its internal radio
+      if (subHost.shadowRoot &&
+          subHost.shadowRoot.querySelector('input[type="radio"]:checked')) return true;
+    }
+
+    // 2) If the One-Time row's radio is checked, then subscribe is NOT selected
+    const oneRow = [...document.querySelectorAll('div,section,li')].find(el =>
+      /one[\s-]?time\s+purchase/i.test(el.textContent || '')
+    );
+    if (oneRow && oneRow.querySelector('input[type="radio"]:checked')) return false;
+
+    // 3) Fallback: if a subscription price exists and One-Time isn’t explicitly checked,
+    // assume subscribe is selected.
+    if (!oneRow && $('og-price[subscription]')) return true;
+
+    return false;
   };
 
-  const firstNumber = (vals) => {
-    for (const v of vals) if (!Number.isNaN(v)) return v;
-    return NaN;
-  };
-
-  // Which option is selected? Look for a checked radio or aria-checked row
-  const modeSelected = () => {
-    const checked =
-      $('input[type="radio"]:checked') ||
-      $('[role="radio"][aria-checked="true"]');
-    if (!checked) return 'one';
-    const ctx = checked.closest('[role="radio"], .gh-subscribe-card, .one-time') || checked;
-    const txt = (ctx.textContent || '').toLowerCase();
-    return /subscribe|save/.test(txt) ? 'sub' : 'one';
-  };
-
-  // Try several places to read subscription price
+  // --- price readers ---------------------------------------------------------
   const readSubPrice = () =>
     firstNumber([
+      parseMoney(getText($('og-optin-button.gh-subscribe-card og-price[subscription]'))),
       parseMoney(getText($('og-price[subscription]'))),
-      parseMoney(getText($('.gh-subscribe-card og-price[subscription]'))),
-      parseMoney(getText($('[data-offer="subscription"]'))),
     ]);
 
-  // Try several places to read one-time price
-  const readOnePrice = () =>
-    firstNumber([
+  const readOneTimePrice = () => {
+    const row = [...document.querySelectorAll('div,section,li')].find(el =>
+      /one[\s-]?time\s+purchase/i.test(el.textContent || '')
+    ) || null;
+
+    return firstNumber([
+      parseMoney(getText(row)),
       parseMoney(getText($('og-price.regular, og-price:not([subscription])'))),
-      parseMoney(getText($('.one-time-purchase og-price'))),
-      parseMoney(getText($('[data-offer="one-time"], .one-time-purchase'))),
     ]);
-
-  const getActivePrice = () =>
-    modeSelected() === 'sub' ? readSubPrice() : readOnePrice();
-
-  // The Yotpo widget and the number span we will update
-  const getWidgetAmountNode = () =>
-    $('.yotpo-product-points-widget .yotpo-product-points-widget-points-amount');
-
-  // -------- apply once & wire updates --------
-  const apply = () => {
-    const amtNode = getWidgetAmountNode();
-    if (!amtNode) return; // widget not rendered yet
-    const price = getActivePrice();
-    if (!Number.isNaN(price)) {
-      const points = Math.floor(price); // $4.80 -> 4
-      // Only touch the number span
-      if (amtNode.textContent !== String(points)) {
-        amtNode.textContent = String(points);
-      }
-    }
   };
 
-  // Run on load
+  const getActivePrice = () => (isSubSelected() ? readSubPrice() : readOneTimePrice());
+
+  // --- yotpo number writer ---------------------------------------------------
+  const setPointsNumber = (points) => {
+    const widget = $('.yotpo-product-points-widget');
+    if (!widget) return false;
+
+    const amt = widget.querySelector('.yotpo-product-points-widget-points-amount');
+    if (amt) {
+      if (amt.textContent.trim() !== String(points)) amt.textContent = String(points);
+      return true;
+    }
+    // fallback: replace first number in the link’s HTML (preserves copy/links)
+    const link = widget.querySelector('.yotpo-product-points-widget-link') || widget;
+    const html = link.innerHTML;
+    const newHtml = html.replace(/\b\d+\b/, String(points));
+    if (newHtml !== html) link.innerHTML = newHtml;
+    return true;
+  };
+
+  // --- apply (throttled) -----------------------------------------------------
+  let raf = 0;
+  const apply = () => {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const price = getActivePrice();
+      if (!Number.isNaN(price)) setPointsNumber(Math.floor(price));
+    });
+  };
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', apply, { once: true });
   } else {
     apply();
   }
 
-  // Re-run on radio/offer changes
+  // re-run on user interactions and DOM updates
   document.addEventListener('change', (e) => {
-    if (
-      e.target.matches('input[type="radio"]') ||
-      e.target.closest('[role="radio"]')
-    ) {
-      apply();
-    }
+    if (e.target.matches('input[type="radio"]') || e.target.closest('.gh-subscribe-card')) apply();
+  });
+  const mo = new MutationObserver(() => apply());
+  mo.observe(document.body, {
+    subtree: true,
+    childList: true,
+    characterData: true,
+    attributes: true,
+    attributeFilter: ['subscribed', 'aria-checked']
   });
 
-  // Re-run when price text changes anywhere in the PDP offer area
-  const mo = new MutationObserver((muts) => {
-    // cheap filter to avoid over-triggering
-    if (muts.some(m => m.type === 'characterData' || m.type === 'childList')) apply();
-  });
-  mo.observe(document.body, { subtree: true, childList: true, characterData: true });
-
-  // expose a tiny debug helper (optional)
+  // tiny debugger
   window.__ppwYotpoDebug = () => ({
-    subSelected: modeSelected() === 'sub',
+    subSelected: isSubSelected(),
     activePrice: getActivePrice(),
-    pointsShown: getWidgetAmountNode()?.textContent || null
+    pointsShown:
+      document.querySelector('.yotpo-product-points-widget .yotpo-product-points-widget-points-amount')
+        ?.textContent || null
   });
 })();
