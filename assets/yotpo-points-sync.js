@@ -1,55 +1,53 @@
 <script>
+/* PDP • Yotpo points number sync with Subscribe price (Shadow-DOM aware)
+   - Looks into og-optin-button shadowRoot and uses the *lowest* amount
+     (discounted subscribe price) found there.
+   - Falls back to one-time price if subscribe isn’t present.
+   - Only updates the number span so the rest of the Yotpo copy stays intact.
+*/
 (() => {
-  // prevent double init
-  if (window.__PPW_YOTPO_SYNC__) return;
-  window.__PPW_YOTPO_SYNC__ = true;
+  if (window.__PPW_YOTPO_SHADOW_SYNC__) return;
+  window.__PPW_YOTPO_SHADOW_SYNC__ = true;
 
-  const $ = (s, r=document) => r.querySelector(s);
-  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+  const POINTS_BOX_SEL = '.yotpo-product-points-widget';
+  const POINTS_NUM_SEL = '.yotpo-product-points-widget-points-amount';
 
-  const POINTS_BOX_SEL   = '.yotpo-product-points-widget';
-  const POINTS_NUM_SEL   = '.yotpo-product-points-widget-points-amount';
+  // ---- Shadow-DOM utilities ------------------------------------
+  function deepQueryAll(selector, root = document) {
+    const found = [];
+    const scan = (node) => {
+      if (!node) return;
+      // Walk element children
+      const walker = document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT, null, false);
+      let cur = node === document ? document.documentElement : node;
+      if (cur && cur.matches && cur.matches(selector)) found.push(cur);
+      while (walker.nextNode()) {
+        const el = walker.currentNode;
+        if (el.matches && el.matches(selector)) found.push(el);
+        if (el.shadowRoot) scan(el.shadowRoot);
+      }
+      // If root is a ShadowRoot, also check its direct children
+      if (node instanceof ShadowRoot) {
+        for (const el of node.children) {
+          if (el.matches && el.matches(selector)) found.push(el);
+          if (el.shadowRoot) scan(el.shadowRoot);
+        }
+      }
+    };
+    scan(root);
+    return found;
+  }
 
-  // containers / elements that hold subscribe price
-  const SUB_HOSTS = [
-    '.gh-subscribe-card',            // container of the subscribe module
-    'og-price[subscription]',        // subscribe price web component (host)
-    'og-price.subscription'
-  ];
-
-  // fallback OTO price
-  const OTO_HOSTS = [
-    '[data-product-price]',
-    '.price-item--regular',
-    '.product__price',
-    '.product [class*="price"]'
-  ];
-
-  // --- helpers ----------------------------------------------------
-
-  // Read text including Shadow DOM (open)
-  function deepText(el) {
+  function textDeep(el) {
     if (!el) return '';
-    // some components keep the value in attributes as well
-    const attrHints = [
-      'aria-label','data-price','data-amount','data-value','value','price','amount'
-    ];
-    for (const a of attrHints) {
-      const v = el.getAttribute && el.getAttribute(a);
-      if (v && /\d/.test(v)) return String(v);
-    }
-
-    let t = (el.textContent || '');
-    if (el.shadowRoot) {
-      t += ' ' + (el.shadowRoot.textContent || '');
-    }
+    let t = el.textContent || '';
+    if (el.shadowRoot) t += ' ' + (el.shadowRoot.textContent || '');
     return t;
   }
 
-  // Get ALL money amounts from text, return array of Numbers
-  function allMoneyInText(txt) {
-    const re = /\$?\s*([0-9]+(?:[.,][0-9]{1,2})?)/g;
+  function moneyVals(txt) {
     const out = [];
+    const re = /\$?\s*([0-9]+(?:[.,][0-9]{1,2})?)/g;
     let m;
     while ((m = re.exec(txt))) {
       const n = parseFloat(m[1].replace(',', '.'));
@@ -58,93 +56,93 @@
     return out;
   }
 
-  // Return first money value found in any of the hosts
-  function firstMoneyFrom(hostSelectors) {
-    for (const sel of hostSelectors) {
-      for (const host of $$(sel)) {
-        const txt = deepText(host);
-        const vals = allMoneyInText(txt);
+  // ---- Price readers -------------------------------------------
+  // Prefer the *lowest* number inside the subscribe card’s shadowRoot
+  function subscribePrice() {
+    // Host is in light DOM; price is inside its shadowRoot
+    const hosts = deepQueryAll('og-optin-button.gh-subscribe-card');
+    for (const host of hosts) {
+      const txt = host.shadowRoot ? host.shadowRoot.textContent : '';
+      const vals = moneyVals(txt);
+      if (vals.length) return Math.min(...vals);
+    }
+    // Fallback: direct og-price[subscription] hosts (if exposed)
+    const subs = deepQueryAll('og-price[subscription]');
+    for (const el of subs) {
+      const vals = moneyVals(textDeep(el));
+      if (vals.length) return vals[0];
+    }
+    return null;
+  }
+
+  function oneTimePrice() {
+    // Try common PDP price spots (both light & shadow)
+    const spots = [
+      '[data-product-price]',
+      '.price-item--regular',
+      '.product__price',
+      '.product [class*="price"]',
+      'og-price.regular',
+      'og-price:not([subscription])'
+    ];
+    for (const sel of spots) {
+      const els = deepQueryAll(sel);
+      for (const el of els) {
+        const vals = moneyVals(textDeep(el));
         if (vals.length) return vals[0];
       }
     }
     return null;
   }
 
-  // For the SUBSCRIBE card, prefer the *lowest* value seen in that card
-  function lowestMoneyFromSubscribe() {
-    for (const sel of SUB_HOSTS) {
-      for (const host of $$(sel)) {
-        const txt = deepText(host);
-        const vals = allMoneyInText(txt);
-        if (vals.length) {
-          // discounted price will be the lowest number rendered in the card
-          return Math.min(...vals);
-        }
-      }
-    }
-    return null;
-  }
-
-  function computeTargetPoints() {
-    // Try subscribe price first (lowest in card)
-    const sub = lowestMoneyFromSubscribe();
-    const price = (sub != null) ? sub : firstMoneyFrom(OTO_HOSTS);
+  function computePoints() {
+    const sub = subscribePrice();
+    const price = (sub != null) ? sub : oneTimePrice();
     if (price == null) return null;
-    return Math.floor(price);
+    return Math.floor(price); // 25.46 → 25 (no rounding up)
   }
 
-  // Debounced updater
-  let timer = null;
-  function scheduleUpdate(ms=250) {
-    clearTimeout(timer);
-    timer = setTimeout(applyUpdate, ms);
+  // ---- Update logic (debounced, no flicker) --------------------
+  let t = null;
+  function schedule(ms = 200) {
+    clearTimeout(t);
+    t = setTimeout(update, ms);
   }
 
-  function applyUpdate() {
-    const box = $(POINTS_BOX_SEL);
-    if (!box) return;
-
-    const num = $(POINTS_NUM_SEL, box);
+  function update() {
+    const box = document.querySelector(POINTS_BOX_SEL);
+    const num = box && box.querySelector(POINTS_NUM_SEL);
     if (!num) return;
 
-    const desired = computeTargetPoints();
-    if (desired == null) return;
+    const want = computePoints();
+    if (want == null) return;
 
-    const next = String(desired);
-    const last = num.getAttribute('data-ppw-last') || '';
-    if (last !== next && num.textContent !== next) {
-      num.textContent = next;           // only change the number
-      num.setAttribute('data-ppw-last', next);
-    }
+    const next = String(want);
+    if (num.getAttribute('data-ppw-last') === next || num.textContent === next) return;
+    num.textContent = next;                 // only the number
+    num.setAttribute('data-ppw-last', next);
   }
 
-  // Boot when Yotpo widget appears
   function boot() {
-    const box = $(POINTS_BOX_SEL);
-    if (!box) { setTimeout(boot, 300); return; }
+    if (!document.querySelector(POINTS_BOX_SEL)) { setTimeout(boot, 250); return; }
 
-    // initial pass
-    scheduleUpdate(350);
+    // initial & safety passes
+    schedule(350);
+    setTimeout(update, 1000);
+    setTimeout(update, 2000);
 
-    // Observe Yotpo area and price areas
-    const mo = new MutationObserver(() => scheduleUpdate(300));
-    mo.observe(box, { childList:true, subtree:true, characterData:true });
+    // Watch the subscribe module (light + shadow) and the Yotpo box
+    const mo = new MutationObserver(() => schedule(150));
+    mo.observe(document.body, { childList: true, subtree: true, characterData: true });
 
-    // Any click/change that likely toggles price
-    const rebounce = () => scheduleUpdate(200);
-    document.addEventListener('click',  e => {
-      if (e.target.closest('.gh-subscribe-card') ||
-          e.target.closest('input[type="radio"]') ||
-          e.target.closest('[data-selling-plan], [data-frequency]')) rebounce();
-    });
-    document.addEventListener('change', e => {
-      if (e.target.closest('.gh-subscribe-card') ||
-          e.target.closest('form')) rebounce();
-    });
-
-    // safety passes after JS settles
-    setTimeout(applyUpdate, 1000);
-    setTimeout(applyUpdate, 2000);
+    // User interactions that change price
+    const kick = () => schedule(150);
+    document.addEventListener('click',  (e) => {
+      if (e.target.closest('.gh-subscribe-card') || e.target.closest('input[type="radio"]')) kick();
+    }, true);
+    document.addEventListener('change', (e) => {
+      if (e.target.closest('.gh-subscribe-card') || e.target.closest('form')) kick();
+    }, true);
   }
 
   if (document.readyState === 'loading') {
@@ -152,5 +150,12 @@
   } else {
     boot();
   }
+
+  // --- tiny debug helper in console:
+  window.__ppwYotpoDebug = () => ({
+    sub: subscribePrice(),
+    oto: oneTimePrice(),
+    points: computePoints()
+  });
 })();
 </script>
