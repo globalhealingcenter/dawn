@@ -1,144 +1,105 @@
-(() => {
-  const D = document, W = window;
-  const $ = (s, c = D) => c.querySelector(s);
+/* yotpo-ppw-shadow-sync.js
+   Update only the points number based on the currently selected price.
+   $4.80 => 4 points (no rounding up).
+*/
+(function () {
+  // -------- helpers --------
+  const $ = (s, r = document) => r.querySelector(s);
 
-  // --- price helpers ---------------------------------------------------------
-  function firstDollar(el) {
-    if (!el) return NaN;
-    const m = el.textContent.replace(/\s+/g, " ").match(/\$[\d,]*\.?\d+/g);
-    if (!m || !m.length) return NaN;
-    return parseFloat(m[0].replace(/[^\d.]/g, ""));
-  }
-  function lastDollar(el) {
-    if (!el) return NaN;
-    const m = el.textContent.replace(/\s+/g, " ").match(/\$[\d,]*\.?\d+/g);
-    if (!m || !m.length) return NaN;
-    return parseFloat(m[m.length - 1].replace(/[^\d.]/g, ""));
-  }
-  function findRows() {
-    // Collect likely row elements (labels, radios, known blocks)
-    const pool = [
-      ...D.querySelectorAll(
-        'label,[role="radio"],.purchase-option,.rc-option,.gh-subscribe-card,og-optin-button,[class*="subscribe"],[data-purchase-option]'
-      )
-    ];
+  const getText = (el) => {
+    if (!el) return '';
+    // og-price is a web component with open shadow root
+    if (el.shadowRoot) return (el.shadowRoot.textContent || '').trim();
+    return (el.textContent || '').trim();
+  };
 
-    let oto = null, sub = null;
-    for (const el of pool) {
-      const t = (el.textContent || "").toLowerCase();
-      if (!oto && /one[-\s]?time/.test(t)) oto = el;
-      if (!sub && /(subscribe|subscription)/.test(t)) sub = el;
-      if (oto && sub) break;
-    }
+  const parseMoney = (txt) => {
+    if (!txt) return NaN;
+    const m = txt.replace(/\s+/g, ' ').match(/(\$|USD)?\s*([0-9]+(?:\.[0-9]{1,2})?)/);
+    return m ? parseFloat(m[2]) : NaN;
+  };
 
-    // Weak fallbacks (in case of custom markup)
-    if (!oto)  oto = D.querySelector('[data-purchase-option="one_time"], [class*="one"][class*="time"]');
-    if (!sub)  sub = D.querySelector('.gh-subscribe-card,[class*="subscribe"]');
+  const firstNumber = (vals) => {
+    for (const v of vals) if (!Number.isNaN(v)) return v;
+    return NaN;
+  };
 
-    return { oto, sub };
-  }
-  function isSubSelected(subRow) {
-    if (!subRow) return false;
-    const input = subRow.querySelector('input[type="radio"]');
-    if (input) return !!input.checked;
-    const aria = subRow.getAttribute('aria-checked');
-    if (aria != null) return aria === 'true';
-    return /\b(selected|active|is-selected)\b/.test(subRow.className);
-  }
-  function readPercent(el) {
-    if (!el) return NaN;
-    const m = el.textContent.match(/(\d+)\s*%/);
-    return m ? parseInt(m[1], 10) : NaN;
-  }
+  // Which option is selected? Look for a checked radio or aria-checked row
+  const modeSelected = () => {
+    const checked =
+      $('input[type="radio"]:checked') ||
+      $('[role="radio"][aria-checked="true"]');
+    if (!checked) return 'one';
+    const ctx = checked.closest('[role="radio"], .gh-subscribe-card, .one-time') || checked;
+    const txt = (ctx.textContent || '').toLowerCase();
+    return /subscribe|save/.test(txt) ? 'sub' : 'one';
+  };
 
-  function getOtoPrice(row) {
-    // OTO row typically has just one price → take the last occurrence
-    let p = lastDollar(row);
-    if (isNaN(p)) {
-      // fallback to common price elements on PDP
-      p = firstDollar($('.price-item--regular')) ||
-          firstDollar($('.product__price, .product-price')) ||
-          firstDollar(D);
-    }
-    return p;
-  }
+  // Try several places to read subscription price
+  const readSubPrice = () =>
+    firstNumber([
+      parseMoney(getText($('og-price[subscription]'))),
+      parseMoney(getText($('.gh-subscribe-card og-price[subscription]'))),
+      parseMoney(getText($('[data-offer="subscription"]'))),
+    ]);
 
-  function getSubPrice(row, fallbackOto) {
-    // SUB row usually shows "discounted $first, original $last" → take FIRST
-    let p = firstDollar(row);
+  // Try several places to read one-time price
+  const readOnePrice = () =>
+    firstNumber([
+      parseMoney(getText($('og-price.regular, og-price:not([subscription])'))),
+      parseMoney(getText($('.one-time-purchase og-price'))),
+      parseMoney(getText($('[data-offer="one-time"], .one-time-purchase'))),
+    ]);
 
-    // If not present, compute from % off + OTO price
-    if (isNaN(p)) {
-      const off = readPercent(row);
-      if (!isNaN(off) && isFinite(fallbackOto)) {
-        p = +(fallbackOto * (1 - off / 100)).toFixed(2);
+  const getActivePrice = () =>
+    modeSelected() === 'sub' ? readSubPrice() : readOnePrice();
+
+  // The Yotpo widget and the number span we will update
+  const getWidgetAmountNode = () =>
+    $('.yotpo-product-points-widget .yotpo-product-points-widget-points-amount');
+
+  // -------- apply once & wire updates --------
+  const apply = () => {
+    const amtNode = getWidgetAmountNode();
+    if (!amtNode) return; // widget not rendered yet
+    const price = getActivePrice();
+    if (!Number.isNaN(price)) {
+      const points = Math.floor(price); // $4.80 -> 4
+      // Only touch the number span
+      if (amtNode.textContent !== String(points)) {
+        amtNode.textContent = String(points);
       }
     }
-    return p;
-  }
-
-  // --- yotpo replace (only number) ------------------------------------------
-  function setYotpoPoints(points) {
-    const amt =
-      $('.yotpo-product-points-widget-logged-in-view .yotpo-product-points-widget-points-amount') ||
-      $('.yotpo-product-points-widget-points-amount');
-    if (!amt || !isFinite(points)) return false;
-    const current = parseInt(amt.textContent.replace(/[^\d]/g, ''), 10);
-    if (current !== points) {
-      amt.textContent = String(points);
-      return true;
-    }
-    return false;
-  }
-
-  function compute() {
-    const { oto, sub } = findRows();
-    const subOn = isSubSelected(sub);
-
-    const otoPrice = getOtoPrice(oto);
-    const subPrice = getSubPrice(sub, otoPrice);
-
-    const active = subOn ? subPrice : otoPrice;
-    const points = isFinite(active) ? Math.floor(active) : NaN;
-
-    return { subOn, otoPrice, subPrice, active, points };
-  }
-
-  function tick() {
-    const c = compute();
-    setYotpoPoints(c.points);
-  }
-
-  // Observe minimal mutations that reflect option/price changes
-  let mo;
-  function start() {
-    tick();
-    if (mo) mo.disconnect();
-    mo = new MutationObserver(() => tick());
-    mo.observe(D.body, {
-      subtree: true,
-      childList: true,
-      characterData: true,
-      attributes: true,
-      attributeFilter: ['class', 'aria-checked', 'checked']
-    });
-    D.addEventListener('change', tick, true);
-  }
-
-  if (D.readyState !== 'loading') start();
-  else D.addEventListener('DOMContentLoaded', start);
-
-  // Debug: run __ppwYotpoDebug() in console
-  W.__ppwYotpoDebug = function () {
-    const c = compute();
-    const shown =
-      ($('.yotpo-product-points-widget-points-amount') || {}).textContent || null;
-    return {
-      subSelected: c.subOn,
-      otoPrice: c.otoPrice,
-      subPrice: c.subPrice,
-      activePrice: c.active,
-      pointsShown: shown
-    };
   };
+
+  // Run on load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', apply, { once: true });
+  } else {
+    apply();
+  }
+
+  // Re-run on radio/offer changes
+  document.addEventListener('change', (e) => {
+    if (
+      e.target.matches('input[type="radio"]') ||
+      e.target.closest('[role="radio"]')
+    ) {
+      apply();
+    }
+  });
+
+  // Re-run when price text changes anywhere in the PDP offer area
+  const mo = new MutationObserver((muts) => {
+    // cheap filter to avoid over-triggering
+    if (muts.some(m => m.type === 'characterData' || m.type === 'childList')) apply();
+  });
+  mo.observe(document.body, { subtree: true, childList: true, characterData: true });
+
+  // expose a tiny debug helper (optional)
+  window.__ppwYotpoDebug = () => ({
+    subSelected: modeSelected() === 'sub',
+    activePrice: getActivePrice(),
+    pointsShown: getWidgetAmountNode()?.textContent || null
+  });
 })();
