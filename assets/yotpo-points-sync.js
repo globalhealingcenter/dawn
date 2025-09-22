@@ -1,147 +1,156 @@
-<!-- in Assets: yotpo-points-sync.js (or whatever file you’re using) -->
 <script>
 (() => {
-  // Avoid double-start if theme loads this file twice
+  // prevent double init
   if (window.__PPW_YOTPO_SYNC__) return;
   window.__PPW_YOTPO_SYNC__ = true;
 
-  // ---------- helpers ----------
-  const $ = (sel, root=document) => root.querySelector(sel);
-  const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
 
-  const POINTS_CONTAINER_SEL = '.yotpo-product-points-widget';
-  const POINTS_NUMBER_SEL    = '.yotpo-product-points-widget-points-amount';
+  const POINTS_BOX_SEL   = '.yotpo-product-points-widget';
+  const POINTS_NUM_SEL   = '.yotpo-product-points-widget-points-amount';
 
-  // Try a few likely selectors for the SUBSCRIBE price.
-  const SUB_PRICE_CANDIDATES = [
-    // your subscribe card / green price area (try specific first)
-    '.gh-subscribe-card [class*="price"]',
-    '.gh-subscribe-card og-price',
-    '.gh-subscribe-card [data-price]',
-    '.gh-subscribe-card [data-testid*="price"]',
-    '.gh-subscribe-card *',
+  // containers / elements that hold subscribe price
+  const SUB_HOSTS = [
+    '.gh-subscribe-card',            // container of the subscribe module
+    'og-price[subscription]',        // subscribe price web component (host)
+    'og-price.subscription'
   ];
 
-  // If we can’t find a sub price we fall back to the normal price near the form
-  const OTO_PRICE_CANDIDATES = [
+  // fallback OTO price
+  const OTO_HOSTS = [
     '[data-product-price]',
     '.price-item--regular',
     '.product__price',
-    '.product__info-container [class*="price"]',
-    '.product [class*="price"]',
+    '.product [class*="price"]'
   ];
 
-  const MONEY_RE = /\$?\s*([0-9]+(?:[.,][0-9]{1,2})?)/;
+  // --- helpers ----------------------------------------------------
 
-  function parseMoneyFrom(el) {
-    if (!el) return null;
-    const txt = (el.getAttribute('aria-label') || el.textContent || '').trim();
-    const m = txt.match(MONEY_RE);
-    if (!m) return null;
-    // normalize 25,46 => 25.46
-    const n = parseFloat(m[1].replace(',', '.'));
-    return isNaN(n) ? null : n;
+  // Read text including Shadow DOM (open)
+  function deepText(el) {
+    if (!el) return '';
+    // some components keep the value in attributes as well
+    const attrHints = [
+      'aria-label','data-price','data-amount','data-value','value','price','amount'
+    ];
+    for (const a of attrHints) {
+      const v = el.getAttribute && el.getAttribute(a);
+      if (v && /\d/.test(v)) return String(v);
+    }
+
+    let t = (el.textContent || '');
+    if (el.shadowRoot) {
+      t += ' ' + (el.shadowRoot.textContent || '');
+    }
+    return t;
   }
 
-  function firstMoneyFrom(selectors) {
-    for (const sel of selectors) {
-      for (const el of $$(sel)) {
-        const n = parseMoneyFrom(el);
-        if (n) return n;
+  // Get ALL money amounts from text, return array of Numbers
+  function allMoneyInText(txt) {
+    const re = /\$?\s*([0-9]+(?:[.,][0-9]{1,2})?)/g;
+    const out = [];
+    let m;
+    while ((m = re.exec(txt))) {
+      const n = parseFloat(m[1].replace(',', '.'));
+      if (!isNaN(n)) out.push(n);
+    }
+    return out;
+  }
+
+  // Return first money value found in any of the hosts
+  function firstMoneyFrom(hostSelectors) {
+    for (const sel of hostSelectors) {
+      for (const host of $$(sel)) {
+        const txt = deepText(host);
+        const vals = allMoneyInText(txt);
+        if (vals.length) return vals[0];
       }
     }
     return null;
   }
 
-  function getSubscribePrice() {
-    // If a subscribe option is visible/selected, this usually exists
-    return firstMoneyFrom(SUB_PRICE_CANDIDATES);
+  // For the SUBSCRIBE card, prefer the *lowest* value seen in that card
+  function lowestMoneyFromSubscribe() {
+    for (const sel of SUB_HOSTS) {
+      for (const host of $$(sel)) {
+        const txt = deepText(host);
+        const vals = allMoneyInText(txt);
+        if (vals.length) {
+          // discounted price will be the lowest number rendered in the card
+          return Math.min(...vals);
+        }
+      }
+    }
+    return null;
   }
 
-  function getOtoPrice() {
-    return firstMoneyFrom(OTO_PRICE_CANDIDATES);
-  }
-
-  // Compute target points: floor(price). If a subscribe price
-  // is on screen we prefer that; otherwise fall back to OTO.
   function computeTargetPoints() {
-    const sub = getSubscribePrice();
-    const price = sub ?? getOtoPrice();
-    if (!price) return null;
+    // Try subscribe price first (lowest in card)
+    const sub = lowestMoneyFromSubscribe();
+    const price = (sub != null) ? sub : firstMoneyFrom(OTO_HOSTS);
+    if (price == null) return null;
     return Math.floor(price);
   }
 
-  // Debounce updates so we only touch DOM after things settle
-  let pendingTimer = null;
-  function scheduleUpdate(delay = 250) {
-    clearTimeout(pendingTimer);
-    pendingTimer = setTimeout(applyUpdate, delay);
+  // Debounced updater
+  let timer = null;
+  function scheduleUpdate(ms=250) {
+    clearTimeout(timer);
+    timer = setTimeout(applyUpdate, ms);
   }
 
   function applyUpdate() {
-    const box = $(POINTS_CONTAINER_SEL);
+    const box = $(POINTS_BOX_SEL);
     if (!box) return;
 
-    // The number span that Yotpo renders
-    const num = $(POINTS_NUMBER_SEL, box);
+    const num = $(POINTS_NUM_SEL, box);
     if (!num) return;
 
     const desired = computeTargetPoints();
     if (desired == null) return;
 
-    // Only update if changed; store last value on the number element
-    const last = num.getAttribute('data-ppw-last');
     const next = String(desired);
-
+    const last = num.getAttribute('data-ppw-last') || '';
     if (last !== next && num.textContent !== next) {
-      // Update only textContent of the NUMBER span.
-      num.textContent = next;
+      num.textContent = next;           // only change the number
       num.setAttribute('data-ppw-last', next);
     }
   }
 
-  // ---------- boot ----------
-  function bootWhenReady() {
-    const yotpoBox = $(POINTS_CONTAINER_SEL);
-    if (!yotpoBox) {
-      // try again shortly; Yotpo loads async
-      setTimeout(bootWhenReady, 300);
-      return;
-    }
+  // Boot when Yotpo widget appears
+  function boot() {
+    const box = $(POINTS_BOX_SEL);
+    if (!box) { setTimeout(boot, 300); return; }
 
-    // Run once after it renders
+    // initial pass
     scheduleUpdate(350);
 
-    // Observe Yotpo widget subtree & price areas with a quiet-time debounce
+    // Observe Yotpo area and price areas
     const mo = new MutationObserver(() => scheduleUpdate(300));
-    mo.observe(yotpoBox, { childList: true, subtree: true, characterData: true });
+    mo.observe(box, { childList:true, subtree:true, characterData:true });
 
-    // Also listen for clicks/changes that switch purchase type
-    document.addEventListener('click', e => {
-      // clicks that likely change prices/subscription choice
+    // Any click/change that likely toggles price
+    const rebounce = () => scheduleUpdate(200);
+    document.addEventListener('click',  e => {
       if (e.target.closest('.gh-subscribe-card') ||
           e.target.closest('input[type="radio"]') ||
-          e.target.closest('[data-selling-plan], [data-frequency], [data-price]')) {
-        scheduleUpdate(200);
-      }
+          e.target.closest('[data-selling-plan], [data-frequency]')) rebounce();
     });
-
     document.addEventListener('change', e => {
-      if (e.target.closest('form') || e.target.closest('.gh-subscribe-card')) {
-        scheduleUpdate(200);
-      }
+      if (e.target.closest('.gh-subscribe-card') ||
+          e.target.closest('form')) rebounce();
     });
 
-    // a few safety re-checks after initial load
+    // safety passes after JS settles
     setTimeout(applyUpdate, 1000);
     setTimeout(applyUpdate, 2000);
   }
 
-  // Start
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bootWhenReady);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    bootWhenReady();
+    boot();
   }
 })();
 </script>
