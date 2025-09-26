@@ -34,6 +34,7 @@
         "778775ac-0fd5-4070-8198-2dec1665d8fc",
         "announcement_GGCHez"
       ],
+      "disabled": true,
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
       ],
