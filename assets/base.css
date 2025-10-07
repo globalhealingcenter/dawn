@@ -3631,8 +3631,3 @@ details-disclosure > details {
   display: block !important;
 }
 
-/* Tolstoy spacing */
-.section--tolstoy-home [class*="tolstoy-carousel-title"]{ margin-top: 2rem !important; }
-.section--tolstoy-home [class*="tolstoy-carousel-container"]{ padding-top: 1rem !important; }
-
-
