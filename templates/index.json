@@ -175,11 +175,29 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "17598458706780f49a": {
+      "type": "apps",
+      "blocks": {
+        "tolstoy_shoppable_video_quiz_carousel_block_TeyLJX": {
+          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "settings": {
+            "publishId": "q0unfkc3w7j0l"
+          }
+        }
+      },
+      "block_order": [
+        "tolstoy_shoppable_video_quiz_carousel_block_TeyLJX"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493",
     "4a534389-073e-4980-a2fd-d7304e59caec",
-    "1687779425f103d894"
+    "1687779425f103d894",
+    "17598458706780f49a"
   ]
 }
