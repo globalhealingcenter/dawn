@@ -258,19 +258,18 @@
         "btn_color": "#ffffff"
       }
     },
-    "1759979196f408af3d": {
+    "17599793091e02ec5a": {
       "type": "apps",
       "blocks": {
-        "tolstoy_shoppable_video_quiz_product_tile_block_zCULnd": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/product-tile-block/06fa8282-42ff-403e-b67c-1936776aed11",
+        "tolstoy_shoppable_video_quiz_stories_block_LGedPN": {
+          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
-            "publishId": "zgl654227kz70",
-            "product_handle": ""
+            "publishId": "zgl654227kz70"
           }
         }
       },
       "block_order": [
-        "tolstoy_shoppable_video_quiz_product_tile_block_zCULnd"
+        "tolstoy_shoppable_video_quiz_stories_block_LGedPN"
       ],
       "settings": {
         "include_margins": true
@@ -284,6 +283,7 @@
     "858a67e8a8d93195f4d4",
     "1759979121503fe86b",
     "1758490710fe464197",
+    "17599793091e02ec5a",
     "169838059718b5ce0c",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
     "related-products",
@@ -292,7 +292,6 @@
     "shogun-below",
     "custom_liquid_kweCXJ",
     "custom_liquid_8t6wPh",
-    "gh_sticky_atc_gRBYqU",
-    "1759979196f408af3d"
+    "gh_sticky_atc_gRBYqU"
   ]
 }
