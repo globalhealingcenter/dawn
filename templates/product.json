@@ -82,12 +82,6 @@
             "success_message": "<p>Success! You'll be receiving an email shortly.</p>",
             "force_show": false
           }
-        },
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
-          "settings": {
-            "publishId": "5ded4xh85pays"
-          }
         }
       },
       "block_order": [
@@ -100,8 +94,7 @@
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
-        "gh_out_of_stock_form_dAeEPR",
-        "tolstoy_shoppable_video_ugc_stories_block_QDrz6L"
+        "gh_out_of_stock_form_dAeEPR"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
@@ -119,18 +112,6 @@
         "enable_video_looping": false,
         "padding_top": 52,
         "padding_bottom": 52
-      }
-    },
-    "858a67e8a8d93195f4d4": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "1759979121503fe86b": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
       }
     },
     "1758490710fe464197": {
@@ -215,17 +196,10 @@
           "settings": {
             "product": "{{product}}"
           }
-        },
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
-          "settings": {
-            "publishId": "publishId"
-          }
         }
       },
       "block_order": [
-        "25085916-2810-44e8-9e6d-866a06af66f3",
-        "tolstoy_shoppable_video_ugc_stories_block_zkXxky"
+        "25085916-2810-44e8-9e6d-866a06af66f3"
       ],
       "settings": {
         "include_margins": true
@@ -274,8 +248,6 @@
     "shogun-helper",
     "shogun-above",
     "main",
-    "858a67e8a8d93195f4d4",
-    "1759979121503fe86b",
     "1758490710fe464197",
     "169838059718b5ce0c",
     "6aad8ee4-f0b4-4ee0-b33e-033d42601241",
