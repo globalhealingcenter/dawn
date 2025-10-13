@@ -119,6 +119,7 @@
       "blocks": {
         "tolstoy_shoppable_video_quiz_stories_block_gCYGWz": {
           "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
           }
