@@ -1,3 +1,9 @@
+{% comment %}
+{% if request.path contains 'quiz-test-page' %}
+  {{ 'quiz-embed.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{% endcomment %}
+{{ 'quiz-embed.css' | asset_url | stylesheet_tag }}
 
 <div>
     {{ page.content }}
