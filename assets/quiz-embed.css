@@ -12,3 +12,23 @@
     padding-top: 0;
   }
 }
+
+.oct-quiz-wrapper--result-page .oct-quiz-title[role="heading"] {
+  font-size: 16px;
+  padding: 0px 48px;
+  text-align: left;
+  color: #555;
+  font-family: "proxima-nova", serif;
+  text-transform: uppercase;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.oct-quiz-wrapper--result-page .oct-quiz-bottom_content {
+  padding-top: 5px;
+}
+
+.oct-quiz-wrapper--result-page {
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
