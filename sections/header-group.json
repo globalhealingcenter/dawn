@@ -24,7 +24,6 @@
         },
         "announcement_GGCHez": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "✨ Free US Shipping for a limited time! ✨",
             "link": "https://globalhealing.com/collections/collections"
