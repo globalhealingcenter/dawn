@@ -3616,7 +3616,7 @@ details-disclosure > details {
   height: auto !important;
 }
 
-/* If any script toggles these, override them */
+/* If any script toggles these, override them 
 .index .announcement-bar-section[hidden],
 .index .utility-bar[hidden],
 .index .announcement-bar[hidden],
@@ -3631,3 +3631,4 @@ details-disclosure > details {
   display: block !important;
 }
 
+*/

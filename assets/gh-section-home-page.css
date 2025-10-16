@@ -778,7 +778,7 @@ section h3.eyebrow span{
         }
     }
 
-    /* Extra space for Tolstoy UGC title on the homepage only */
+/* Extra space for Tolstoy UGC title on the homepage only */
 .gh--home-page [class*="tolstoy-carousel-title"] {
   margin-top: 2rem !important;   /* = 32px if 1rem = 16px */
 }
