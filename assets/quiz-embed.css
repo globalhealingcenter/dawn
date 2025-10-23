@@ -9,7 +9,7 @@
   margin-top: 30px;
 
   .oct-quiz-top_content {
-    padding-top: 0;
+    padding-top: 1px;
   }
 
   +* {
@@ -79,7 +79,8 @@
       color: #fff;
       font-family: "proxima-nova", serif;
       font-size: 16px;
-      padding: 10px 20px 6px 20px;
+      padding: 7px 20px 6px 20px;
+      min-height: 36px;
     }
   }
 }
@@ -96,7 +97,7 @@
 
 @media only screen and (min-width: 768px) {
   .oct-quiz-wrapper.oct-quiz-wrapper--question-page .oct-quiz-top_content {
-    padding-top: 20px;
+    padding-top: 1px;
     padding-bottom: 0px;
   }
 
@@ -106,7 +107,13 @@
 
   .oct-quiz-btn.oct-quiz-btn--primary.oct-quiz-btn--large {
     font-size: 20px;
-    padding: 16px 30px;
+    padding: 8px 10px;
+    min-height: 36px;
+
+    &[title="Continue"],
+    &[title="Begin Section"] {
+      padding: 8px 50px;
+    }
   }
 
   .oct-quiz-wrapper--result-page {
