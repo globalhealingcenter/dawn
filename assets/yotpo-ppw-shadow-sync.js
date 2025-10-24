@@ -5,6 +5,32 @@
    - Watches subscribe toggle + VARIANT changes (select/radio/buttons)
 */
 
+/* ==========================================================
+[FIX C: Tapcart Safe Shim for Yotpo Points Widget]
+Purpose:
+Prevent Tapcart app crashes when Yotpo Loyalty or Reviews 
+widgets run on screens without Shopify product context.
+Only activates in Tapcart webviews.
+========================================================== */
+
+(function () {
+  try {
+    const inTapcart = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
+    const isPdp =
+      /\/products\//.test(location.pathname) ||
+      !!(window.meta && window.meta.product);
+
+    if (inTapcart && !isPdp) {
+      window.product = window.product || {};
+      window.product.reviews = window.product.reviews || {};
+      window.product.reviews.bottomline = window.product.reviews.bottomline || {};
+    }
+  } catch (err) {
+    console.warn("[Tapcart/Yotpo Fix C]", err);
+  }
+})();
+
+
 (function () {
   'use strict';
 

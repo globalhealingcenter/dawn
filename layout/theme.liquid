@@ -476,5 +476,17 @@ TypeErrors on non-PDP screens inside the app.
   })();
 </script>
 
+{%- comment -%}
+[FIX D: Tapcart guard for browser-only Reviews widgets]
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.__IN_TAPCART__ && !window.__IS_PDP__) {
+      window.__SKIP_YOTPO_REVIEWS__ = true;
+    }
+  })();
+</script>
+
+
 </body>
 </html>
