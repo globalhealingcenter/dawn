@@ -14,6 +14,40 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-N233MFC3');</script>
   <!-- End Google Tag Manager -->
+
+  {%- comment -%}
+[FIX 1: Tapcart bottomline shim — must be early in <head>]
+Ensures window.product.reviews exists on non-PDP screens inside Tapcart
+*before* any third-party scripts (Yotpo/Rebuy) run.
+{%- endcomment -%}
+<script>
+  (function () {
+    var IN_TAPCART = !!(window.Tapcart) || /Tapcart/i.test(navigator.userAgent);
+    var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
+    window.__IN_TAPCART__ = IN_TAPCART;
+    window.__IS_PDP__ = IS_PDP;
+
+    if (IN_TAPCART && !IS_PDP) {
+      window.product = window.product || {};
+      window.product.reviews = window.product.reviews || {};
+      // also guard the nested object some scripts expect immediately:
+      window.product.reviews.bottomline = window.product.reviews.bottomline || {};
+    }
+  })();
+</script>
+
+{%- comment -%}
+[FIX D: Tapcart guard — set skip flag for browser-only Reviews widgets]
+Placed early so any in-head loaders can honor it.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.__IN_TAPCART__ && !window.__IS_PDP__) {
+      window.__SKIP_YOTPO_REVIEWS__ = true;
+    }
+  })();
+</script>
+
  {% render 'speedshopify-head' %}
   {% comment %}
   <!-- moved to gh-header -->
@@ -447,45 +481,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {% render 'klaviyo-out-of-stock' %}
 {% render 'osano-shopify' %}
 {% render 'speedshopify-body' %}
-
-{%- comment -%}
-[FIX 1: Tapcart bottomline shim]
-Purpose: Prevent crashes in the Tapcart app when third-party scripts
-(Yotpo Reviews, some Rebuy glue) try to read product.reviews.bottomline
-on non-product pages. In Tapcart non-PDP screens, Shopify’s product JSON
-doesn’t exist, so we create a minimal safe object.
-
-Safe: Does NOT fabricate ratings or change PDP behavior. It only avoids
-TypeErrors on non-PDP screens inside the app.
-{%- endcomment -%}
-<script>
-  (function () {
-    var IN_TAPCART = !!(window.Tapcart) || /Tapcart/i.test(navigator.userAgent);
-    var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
-
-    // Make these flags available to other scripts (and options C/D below)
-    window.__IN_TAPCART__ = IN_TAPCART;
-    window.__IS_PDP__ = IS_PDP;
-
-    // On Tapcart non-PDP screens, ensure product.reviews exists so code like
-    // product.reviews.bottomline won't throw a TypeError.
-    if (IN_TAPCART && !IS_PDP) {
-      window.product = window.product || {};
-      window.product.reviews = window.product.reviews || {};
-    }
-  })();
-</script>
-
-{%- comment -%}
-[FIX D: Tapcart guard for browser-only Reviews widgets]
-{%- endcomment -%}
-<script>
-  (function () {
-    if (window.__IN_TAPCART__ && !window.__IS_PDP__) {
-      window.__SKIP_YOTPO_REVIEWS__ = true;
-    }
-  })();
-</script>
 
 
 </body>
