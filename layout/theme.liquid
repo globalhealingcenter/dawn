@@ -447,5 +447,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {% render 'klaviyo-out-of-stock' %}
 {% render 'osano-shopify' %}
 {% render 'speedshopify-body' %}
+
+{%- comment -%}
+[FIX 1: Tapcart bottomline shim]
+Purpose: Prevent crashes in the Tapcart app when third-party scripts
+(Yotpo Reviews, some Rebuy glue) try to read product.reviews.bottomline
+on non-product pages. In Tapcart non-PDP screens, Shopify’s product JSON
+doesn’t exist, so we create a minimal safe object.
+
+Safe: Does NOT fabricate ratings or change PDP behavior. It only avoids
+TypeErrors on non-PDP screens inside the app.
+{%- endcomment -%}
+<script>
+  (function () {
+    var IN_TAPCART = !!(window.Tapcart) || /Tapcart/i.test(navigator.userAgent);
+    var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
+
+    // Make these flags available to other scripts (and options C/D below)
+    window.__IN_TAPCART__ = IN_TAPCART;
+    window.__IS_PDP__ = IS_PDP;
+
+    // On Tapcart non-PDP screens, ensure product.reviews exists so code like
+    // product.reviews.bottomline won't throw a TypeError.
+    if (IN_TAPCART && !IS_PDP) {
+      window.product = window.product || {};
+      window.product.reviews = window.product.reviews || {};
+    }
+  })();
+</script>
+
 </body>
 </html>
