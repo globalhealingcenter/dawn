@@ -4,7 +4,14 @@
 	{{content_for_header}}
 
   {% render 'shogun-head' %}
-  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
+
+{%- comment -%}
+Yotpo loader disabled here to prevent duplicate initialization.
+Handled safely in main theme.liquid with Tapcart guard.
+<script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
+{%- endcomment -%}
+
+  
 </head>
 <body>
 	{{ content_for_layout }}

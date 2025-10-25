@@ -282,7 +282,13 @@ This file can be re-written at any time.
       document.documentElement.classList.add('shopify-design-mode');
     }
   </script>
-  <script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
+
+{%- comment -%}
+Yotpo loader disabled here to prevent duplicate initialization.
+Handled safely in main theme.liquid with Tapcart guard.
+<script src="https://cdn-widgetsrepository.yotpo.com/v1/loader/biz9zGm3crKRr_rj-OtV8w" async></script>
+{%- endcomment -%}
+ 
   <!-- Start of LittledataLayer -->
   {% include 'LittledataLayer' %}
   <!-- End of LittledataLayer -->
