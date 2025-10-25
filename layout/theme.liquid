@@ -15,7 +15,49 @@
   })(window,document,'script','dataLayer','GTM-N233MFC3');</script>
   <!-- End Google Tag Manager -->
 
-  
+ <!-- ============================================
+FIX C + D: Tapcart Safe Shim for Yotpo Rewards & Reviews
+-----------------------------------------------
+Purpose:
+Prevent Tapcart app crashes when Yotpo Rewards or Reviews
+try to access `product.reviews.bottomline` or related product data
+on screens without a Shopify product context (non-PDP screens).
+
+- Fix C: Create a safe placeholder for window.product.reviews.bottomline
+- Fix D: Add a Tapcart flag to skip Yotpo Reviews init on non-PDP screens
+
+Safe to include globally; runs only in Tapcart webviews.
+================================================= -->
+<script>
+  (function () {
+    try {
+      var IN_TAPCART = !!(window.Tapcart) || /Tapcart/i.test(navigator.userAgent);
+      var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
+
+      // Store flags globally for later use
+      window.__IN_TAPCART__ = IN_TAPCART;
+      window.__IS_PDP__ = IS_PDP;
+
+      // ✅ Fix C: ensure safe product object so Yotpo doesn’t crash
+      if (IN_TAPCART && !IS_PDP) {
+        window.product = window.product || {};
+        window.product.reviews = window.product.reviews || {};
+        window.product.reviews.bottomline = window.product.reviews.bottomline || {};
+      }
+
+      // ✅ Fix D: flag Tapcart environment to skip Yotpo Reviews init
+      if (IN_TAPCART && !IS_PDP) {
+        window.__SKIP_YOTPO_REVIEWS__ = true;
+      }
+
+      console.log("[Tapcart Shim] Safe Yotpo initialization applied:", { IN_TAPCART, IS_PDP });
+    } catch (err) {
+      console.warn("[Tapcart Shim] initialization error", err);
+    }
+  })();
+</script>
+<!-- ============================================ -->
+ 
 
  {% render 'speedshopify-head' %}
   {% comment %}
