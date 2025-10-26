@@ -1,7 +1,4 @@
-{% assign ua = request.user_agent | downcase %}
-{% unless ua contains 'tapcart' %}
-
-  <style>
+<style>
 {{ 'component-slideshow.css' | inline_asset_content }}
 {{ 'component-slider.css' | inline_asset_content }}
 </style>
@@ -216,9 +213,6 @@
     </div>
   </div>
 </div>
-
-{% endunless %}
-
 
 {% schema %}
 {
