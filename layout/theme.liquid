@@ -513,12 +513,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="{{ 'og-subscribe-click.js' | asset_url }}" defer></script>
 {% endif %}
 
-<script>
-  if (navigator.userAgent.includes('Tapcart')) {
-    document.documentElement.classList.add('tapcart-app');
-  }
-</script>
-
 <!-- Yotpo points widget -->
 {% if request.page_type == 'product' %}
   <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
