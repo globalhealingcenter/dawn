@@ -16,7 +16,6 @@
       "blocks": {
         "778775ac-0fd5-4070-8198-2dec1665d8fc": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "🌿 Support a healthy inflammatory response with Black Seed Oil",
             "link": "https://globalhealing.com/products/organic-black-seed-oil?utm_source=site&utm_medium=top-bar&utm_campaign=black_seed_oil_launch&utm_content=inflammatory_response"
@@ -24,7 +23,6 @@
         },
         "announcement_GGCHez": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
             "text": "✨ Free US Shipping for a limited time! ✨",
             "link": "https://globalhealing.com/collections/collections"
