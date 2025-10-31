@@ -3631,3 +3631,12 @@ details-disclosure > details {
   display: block !important;
 }
 
+.tolstoy-product-tile-button svg rect {
+    fill: #21472D !important;
+}
+._productTextContainer_4t3oi_14{
+    padding:20px 0 !important;
+}
+.tolstoy-product-tile-title {
+    font-family: var(--gh-font-secondary) !important;
+}
