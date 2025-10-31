@@ -75,6 +75,16 @@ Safe to include globally; runs only in Tapcart webviews.
     {% endcomment %}
   </title>
 
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-683425101"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-683425101');
+</script>
+
   {% if page_description %}
     <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
