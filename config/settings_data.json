@@ -261,6 +261,11 @@
           "announcement_bar_padding_x": 10,
           "sale_price_color": "#ff0000"
         }
+      },
+      "15879463164198068590": {
+        "type": "shopify://apps/tapcart-mobile-app/blocks/ck_loader/604cad6b-3841-4da3-b864-b96622b4adb8",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
