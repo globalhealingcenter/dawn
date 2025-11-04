@@ -374,7 +374,21 @@ Purpose:
     {% render 'ss-script' %}
   {% endif %}
 
+{% assign ua = request.user_agent | downcase %}
+{% if ua contains 'tapcart' %}
+  <style>
+    /* Hide Shopify site banner inside Tapcart app */
+    #shopify-section-announcement-bar,
+    .announcement-bar-section,
+    .announcement-bar,
+    .site-header__announcement,
+    .shopify-section--announcement-bar,
+    .utility-bar { display:none !important; }
+  </style>
+{% endif %}
+
   
+
 </head>
 
 <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
