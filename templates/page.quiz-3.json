@@ -11,6 +11,9 @@
   "sections": {
     "main": {
       "type": "gh-page",
+      "custom_css": [
+        "/* Make this page’s content full-bleed */.page-width,.content-container,.container,.wrapper {max-width: none; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: 0; padding-right: 0;}"
+      ],
       "settings": {
         "padding_top": 0,
         "padding_bottom": 0
