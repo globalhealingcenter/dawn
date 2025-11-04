@@ -524,8 +524,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
 {% endif %}
 
-{% assign ua = request.user_agent | downcase %}
-<body class="{% if ua contains 'tapcart' %}is-in-tapcart {% endif %}{{ body_class }}">
 
 
 {% render 'klaviyo-out-of-stock' %}
