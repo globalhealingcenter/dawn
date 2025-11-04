@@ -39,6 +39,9 @@
       "block_order": [
         "octane_ai_advanced_quiz_maker_octaneai_section_Jgp4Hp"
       ],
+      "custom_css": [
+        "/* Make this page’s content full-bleed */.page-width,.content-container,.container,.wrapper {max-width: none; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); padding-left: 0; padding-right: 0;}"
+      ],
       "settings": {
         "include_margins": true
       }
