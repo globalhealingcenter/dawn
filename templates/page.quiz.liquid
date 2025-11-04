@@ -1,5 +1,6 @@
 {{ 'quiz-embed.css' | asset_url | stylesheet_tag }}
 
 <div class="quiz-landing">
+  {% render 'octane-quiz-embed' %}
   {{ page.content }}
 </div>
