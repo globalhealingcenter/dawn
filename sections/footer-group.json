@@ -1,1 +1,160 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"17368734953e81bbe2":{"type":"apps","blocks":{"rebuy_personalization_engine_rebuy_widget_dGeUyR":{"type":"shopify:\/\/apps\/rebuy-personalization-engine\/blocks\/rebuy-widget\/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc","settings":{"enabled":true,"id":"131965","product_id_enabled":true,"collection_id_enabled":false}}},"block_order":["rebuy_personalization_engine_rebuy_widget_dGeUyR"],"settings":{"include_margins":true}},"d947e1ce-44fc-42ef-a922-8f7f3a559f02":{"type":"custom-liquid","settings":{"custom_liquid":"{% render 'gh-block-footer-signup' %}","color_scheme":"accent-2","padding_top":40,"padding_bottom":40}},"footer":{"type":"footer","blocks":{"325f985d-3032-42e2-8841-4268ef850be3":{"type":"link_list","settings":{"heading":"My Account","menu":"footer"}},"bafd4c2b-8073-4b13-9139-bd774e317717":{"type":"link_list","settings":{"heading":"Customer Care","menu":"customer-care"}},"6557986c-cb7f-4da5-af8b-efa4dfdee993":{"type":"link_list","settings":{"heading":"Our Story","menu":"our-story"}},"e7394b27-fac4-4247-9561-3f95b7c4725b":{"type":"link_list","settings":{"heading":"Our Company","menu":"our-company"}}},"block_order":["325f985d-3032-42e2-8841-4268ef850be3","bafd4c2b-8073-4b13-9139-bd774e317717","6557986c-cb7f-4da5-af8b-efa4dfdee993","e7394b27-fac4-4247-9561-3f95b7c4725b"],"custom_css":[".footer {padding-bottom: 0;}",".footer__copyright {display: none;}"],"settings":{"color_scheme":"accent-1","newsletter_enable":false,"newsletter_heading":"Subscribe to our emails","enable_follow_on_shop":false,"show_social":true,"enable_country_selector":true,"enable_language_selector":false,"payment_enable":false,"show_policy":false,"margin_top":0,"padding_top":60,"padding_bottom":36}},"1f534ab1-3f58-4e78-ba4d-d858cf22e505":{"type":"custom-liquid","custom_css":["a {color: rgba(var(--color-foreground), 0.75);}",".gh-have-a-question {padding: 0 15px; text-align: center;}"],"settings":{"custom_liquid":"<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016<\/a><br><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>","color_scheme":"accent-1","padding_top":40,"padding_bottom":52}},"f2b378ac-331e-49bc-b144-696adb524db9":{"type":"custom-liquid","custom_css":[".disclaimer,.fda {text-align: center; font-size: 14px; max-width: 1250px; margin: 0 auto; padding: 0 15px;}",".fda {border: 1px solid #ffffff80; padding: 1rem; margin: 1rem auto;}","a {color: #fff;}"],"settings":{"custom_liquid":"<div class=\"disclaimer\">\n\t<a href=\"\/pages\/terms-of-use\" title=\"Terms of Use\">Terms of Use<\/a> | <a href=\"\/pages\/disclaimer\" title=\"Site Use &amp; Health Disclaimer\">Disclaimer<\/a> | <a href=\"\/pages\/privacy-policy\" title=\"Global Healing Privacy Policy\">Privacy Policy<\/a> | <a href=\"\/pages\/product-sitemap\" title=\"Product Sitemap\">Sitemap<\/a><br><br>\n\tAll testimonials and product reviews are authentic from actual customers. Documentation is available for legal inspection. Product reviews are within range of typicality.<br>Information and statements made are for education purposes and are not intended to replace the advice of your treating doctor. Global Healing does not dispense medical advice, prescribe, or diagnose illness. The views and nutritional advice expressed by Global Healing are not intended to be a substitute for conventional medical service. If you have a severe medical condition or health concern, see your physician. This Web site contains links to Web sites operated by other parties. Such links are provided for your convenience and reference only. We are not responsible for the content or products of any linked site or any link contained in a linked site. Global Healing does not adopt any medical claims which may have been made in 3rd party references. Where Global Healing has control over the posting or other communications of such claims to the public, Global Healing will make its best effort to remove such claims.\n<\/div>\n\n<div class=\"fda\">\n\tThese statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.\n<\/div>","color_scheme":"accent-1","padding_top":40,"padding_bottom":52}}},"order":["17368734953e81bbe2","d947e1ce-44fc-42ef-a922-8f7f3a559f02","footer","1f534ab1-3f58-4e78-ba4d-d858cf22e505","f2b378ac-331e-49bc-b144-696adb524db9"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "17622757587d20ee8b": {
+      "type": "apps",
+      "blocks": {
+        "octane_ai_advanced_quiz_maker_octaneai_section_MA4Mrn": {
+          "type": "shopify://apps/octane-ai-advanced-quiz-maker/blocks/octaneai_section/db2513a5-c9b0-40fd-9058-42c28e6e6502",
+          "settings": {
+            "octane_id": "YvaR8M44gFT7UBGh",
+            "embed_type": "fullpage",
+            "enable_loading": false,
+            "stroke_color": "#000000",
+            "mobile_height": "match_browser",
+            "mobile_custom_height_px": 600,
+            "desktop_height": "match_browser",
+            "desktop_custom_height_px": 600
+          }
+        }
+      },
+      "block_order": [
+        "octane_ai_advanced_quiz_maker_octaneai_section_MA4Mrn"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17368734953e81bbe2": {
+      "type": "apps",
+      "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_dGeUyR": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "131965",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_dGeUyR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "d947e1ce-44fc-42ef-a922-8f7f3a559f02": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "{% render 'gh-block-footer-signup' %}",
+        "color_scheme": "accent-2",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "325f985d-3032-42e2-8841-4268ef850be3": {
+          "type": "link_list",
+          "settings": {
+            "heading": "My Account",
+            "menu": "footer"
+          }
+        },
+        "bafd4c2b-8073-4b13-9139-bd774e317717": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "customer-care"
+          }
+        },
+        "6557986c-cb7f-4da5-af8b-efa4dfdee993": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Our Story",
+            "menu": "our-story"
+          }
+        },
+        "e7394b27-fac4-4247-9561-3f95b7c4725b": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Our Company",
+            "menu": "our-company"
+          }
+        }
+      },
+      "block_order": [
+        "325f985d-3032-42e2-8841-4268ef850be3",
+        "bafd4c2b-8073-4b13-9139-bd774e317717",
+        "6557986c-cb7f-4da5-af8b-efa4dfdee993",
+        "e7394b27-fac4-4247-9561-3f95b7c4725b"
+      ],
+      "custom_css": [
+        ".footer {padding-bottom: 0;}",
+        ".footer__copyright {display: none;}"
+      ],
+      "settings": {
+        "color_scheme": "accent-1",
+        "newsletter_enable": false,
+        "newsletter_heading": "Subscribe to our emails",
+        "enable_follow_on_shop": false,
+        "show_social": true,
+        "enable_country_selector": true,
+        "enable_language_selector": false,
+        "payment_enable": false,
+        "show_policy": false,
+        "margin_top": 0,
+        "padding_top": 60,
+        "padding_bottom": 36
+      }
+    },
+    "1f534ab1-3f58-4e78-ba4d-d858cf22e505": {
+      "type": "custom-liquid",
+      "custom_css": [
+        "a {color: rgba(var(--color-foreground), 0.75);}",
+        ".gh-have-a-question {padding: 0 15px; text-align: center;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055</a><br>\n\t<a href=\"/pages/contact\" title=\"\">Contact Us</a>\n</div>",
+        "color_scheme": "accent-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "f2b378ac-331e-49bc-b144-696adb524db9": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".disclaimer,.fda {text-align: center; font-size: 14px; max-width: 1250px; margin: 0 auto; padding: 0 15px;}",
+        ".fda {border: 1px solid #ffffff80; padding: 1rem; margin: 1rem auto;}",
+        "a {color: #fff;}"
+      ],
+      "settings": {
+        "custom_liquid": "<div class=\"disclaimer\">\n\t<a href=\"/pages/terms-of-use\" title=\"Terms of Use\">Terms of Use</a> | <a href=\"/pages/disclaimer\" title=\"Site Use &amp; Health Disclaimer\">Disclaimer</a> | <a href=\"/pages/privacy-policy\" title=\"Global Healing Privacy Policy\">Privacy Policy</a> | <a href=\"/pages/product-sitemap\" title=\"Product Sitemap\">Sitemap</a><br><br>\n\tAll testimonials and product reviews are authentic from actual customers. Documentation is available for legal inspection. Product reviews are within range of typicality.<br>Information and statements made are for education purposes and are not intended to replace the advice of your treating doctor. Global Healing does not dispense medical advice, prescribe, or diagnose illness. The views and nutritional advice expressed by Global Healing are not intended to be a substitute for conventional medical service. If you have a severe medical condition or health concern, see your physician. This Web site contains links to Web sites operated by other parties. Such links are provided for your convenience and reference only. We are not responsible for the content or products of any linked site or any link contained in a linked site. Global Healing does not adopt any medical claims which may have been made in 3rd party references. Where Global Healing has control over the posting or other communications of such claims to the public, Global Healing will make its best effort to remove such claims.\n</div>\n\n<div class=\"fda\">\n\tThese statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.\n</div>",
+        "color_scheme": "accent-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "17622757587d20ee8b",
+    "17368734953e81bbe2",
+    "d947e1ce-44fc-42ef-a922-8f7f3a559f02",
+    "footer",
+    "1f534ab1-3f58-4e78-ba4d-d858cf22e505",
+    "f2b378ac-331e-49bc-b144-696adb524db9"
+  ]
+}
