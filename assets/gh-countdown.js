@@ -14,12 +14,12 @@ Notes:
 (function(){
   // ---------- Page scope ----------
   // --- both pages (uncomment when going live on both) ---
-  // var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
-  // if (!PATH_OK) return;
-
-  // --- test page only (current) ---
-  var PATH_OK = /\/pages\/(influencer-test)(?:\/|$)/i.test(location.pathname);
+  var PATH_OK = /\/pages\/(influencer|influencer-test)(?:\/|$)/i.test(location.pathname);
   if (!PATH_OK) return;
+
+  // --- test page only  ---
+  // var PATH_OK = /\/pages\/(influencer-test)(?:\/|$)/i.test(location.pathname);
+  // if (!PATH_OK) return;
 
   // ---------- small helpers ----------
   function ready(fn){ if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',fn,{once:true});} else { fn(); } }
