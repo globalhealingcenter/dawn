@@ -41,10 +41,21 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "custom_liquid_KgzP8R": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"octane-ai-quiz \" data-quiz-id=\"YvaR8M44gFT7UBGh\" data-embed-type=\"fullpage\" data-mobile-height=\"match_browser\" data-desktop-height=\"match_browser\" >\n    \n</div>\n<script src=\"https://app.octaneai.com/298iwtdqh2ryopce/quiz.js\" defer></script>",
+        "color_scheme": "",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
     "main",
-    "1762276797369a1fdd"
+    "1762276797369a1fdd",
+    "custom_liquid_KgzP8R"
   ]
 }
