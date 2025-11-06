@@ -24,7 +24,7 @@
           "type": "shopify://apps/octane-ai-advanced-quiz-maker/blocks/octaneai_section/db2513a5-c9b0-40fd-9058-42c28e6e6502",
           "settings": {
             "octane_id": "YvaR8M44gFT7UBGh",
-            "embed_type": "fullpage",
+            "embed_type": "fullscreen",
             "enable_loading": false,
             "stroke_color": "#000000",
             "mobile_height": "match_browser",
