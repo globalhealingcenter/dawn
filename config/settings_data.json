@@ -156,11 +156,6 @@
         "disabled": true,
         "settings": {}
       },
-      "11945366711752539959": {
-        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
-        "disabled": false,
-        "settings": {}
-      },
       "11735689235857492391": {
         "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
@@ -265,6 +260,11 @@
       "15879463164198068590": {
         "type": "shopify://apps/tapcart-mobile-app/blocks/ck_loader/604cad6b-3841-4da3-b864-b96622b4adb8",
         "disabled": false,
+        "settings": {}
+      },
+      "11945366711752539959": {
+        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
+        "disabled": true,
         "settings": {}
       }
     },
