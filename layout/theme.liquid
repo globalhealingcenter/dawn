@@ -468,24 +468,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% render 'ss-intellisuggest' %}
 {% endif %}
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  document.body.addEventListener('click', function (event) {
-    // Detect the OG subscription toggle button inside Rebuy Smart Cart
-    const toggle = event.target.closest('button.og-button-toggle');
-    if (!toggle) return;
-
-    // Wait for OG/Rebuy to finish updating the cart line item selling_plan_id
-    setTimeout(function () {
-      if (window.Rebuy?.Cart?.fetchCart) {
-        console.log("Rebuy → forcing cart refresh after subscription toggle");
-        Rebuy.Cart.fetchCart();
-      }
-    }, 800);
-  });
-});
-</script>
-
 
 <!-- Widget : Gift with Purchase: 5 OP Samples on orders $100+ -->
 <!-- <div data-rebuy-id="124103"></div> -->
