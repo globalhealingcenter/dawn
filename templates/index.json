@@ -24,9 +24,9 @@
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
           "settings": {
-            "image_obj": "shopify://shop_images/2025-bfcm-advertisedv2-desktop-banner.jpg",
-            "image_mobile_obj": "shopify://shop_images/2025-bfcm-advertisedv2-mobile-banner.jpg",
-            "url": "/pages/bfcm-2025?utm_source=site&utm_medium=homepagebanner&utm_campaign=bfcm_adv&utm_content=adv"
+            "image_obj": "shopify://shop_images/pure-transparency-desktop-banner.jpg",
+            "image_mobile_obj": "shopify://shop_images/pure-transparency-mobile-banner.jpg",
+            "url": "/pages/pure-transparency"
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
