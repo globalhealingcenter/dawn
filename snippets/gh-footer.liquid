@@ -34,24 +34,27 @@
 
 <!-- CONSENTMO -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Grab ALL links that should open the Consentmo preferences
-    const triggers = document.querySelectorAll(
-      'a[href="#osano-cookie-drawer"], a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href*="cookie-preferences"]'
+  window.addEventListener('load', function () {
+    // Match both "#cookie-preferences" and "/#cookie-preferences"
+    var trigger = document.querySelector(
+      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"]'
     );
 
-    if (!triggers.length) return;
+    if (!trigger) return;
 
-    triggers.forEach((trigger) => {
-      trigger.addEventListener('click', (e) => {
-        e.preventDefault();
+    trigger.addEventListener('click', function (e) {
+      e.preventDefault();
 
-        if (window.CookieConsent && typeof window.CookieConsent.showSettings === 'function') {
-          window.CookieConsent.showSettings();
-        } else {
-          console.warn('CookieConsent.showSettings is not available');
-        }
-      });
+      // Try the Consentmo globals in a defensive way
+      if (window.CookieConsent && typeof window.CookieConsent.showSettings === 'function') {
+        window.CookieConsent.showSettings();
+      } else if (window.consentmo && typeof window.consentmo.showSettings === 'function') {
+        window.consentmo.showSettings();
+      } else {
+        console.warn('Consentmo settings function not found on window.');
+      }
+
+      return false;
     });
   });
 </script>
