@@ -32,34 +32,6 @@
 {%- endcomment -%}
 <!-- [/osano] -->
 
-<!-- CONSENTMO -->
-<script>
-  window.addEventListener('load', function () {
-    // Match both "#cookie-preferences" and "/#cookie-preferences"
-    var trigger = document.querySelector(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"]'
-    );
-
-    if (!trigger) return;
-
-    trigger.addEventListener('click', function (e) {
-      e.preventDefault();
-
-      // Try the Consentmo globals in a defensive way
-      if (window.CookieConsent && typeof window.CookieConsent.showSettings === 'function') {
-        window.CookieConsent.showSettings();
-      } else if (window.consentmo && typeof window.consentmo.showSettings === 'function') {
-        window.consentmo.showSettings();
-      } else {
-        console.warn('Consentmo settings function not found on window.');
-      }
-
-      return false;
-    });
-  });
-</script>
-<!-- CONSENTMO END -->
-
 
 <!-- gh_dawn_forms -->
 <script>
