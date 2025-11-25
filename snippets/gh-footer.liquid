@@ -16,6 +16,9 @@
         font-size: 14px;
     }
 </style>
+
+<!-- REMOVE OSANO -->
+{%- comment -%}
 <script>
 	let osano_trigger = document.querySelector('[href="#osano-cookie-drawer"]');
 	if( osano_trigger ) {
@@ -26,7 +29,25 @@
 		})
 	}
 </script>
+{%- endcomment -%}
 <!-- [/osano] -->
+
+<!-- CONSENTMO -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.querySelector('[href="#osano-cookie-drawer"], [href="#cookie-preferences"]');
+
+    if (trigger) {
+      trigger.addEventListener('click', e => {
+        e.preventDefault();
+        if (window.CookieConsent) {
+          CookieConsent.showSettings();
+        }
+      });
+    }
+  });
+</script>
+<!-- CONSENTMO END -->
 
 <!-- gh_dawn_forms -->
 <script>
