@@ -37,7 +37,7 @@
   document.addEventListener('DOMContentLoaded', () => {
     // Grab ALL links that should open the Consentmo preferences
     const triggers = document.querySelectorAll(
-      'a[href="#osano-cookie-drawer"], a[href="#cookie-preferences"]'
+      'a[href="#osano-cookie-drawer"], a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href*="cookie-preferences"]'
     );
 
     if (!triggers.length) return;
