@@ -549,6 +549,24 @@
     <!-- <div data-rebuy-id="253569"></div>-->
     <!-- End Widget : 2025 BFCM Free Tote on New Sub -->
 
+    <script>
+document.addEventListener('click', function(e) {
+  // Any link pointing to #cookie-preferences
+  if (e.target.matches('[href="#cookie-preferences"]')) {
+    e.preventDefault();
+
+    // Retry until Consentmo is fully loaded
+    const waitForConsentmo = setInterval(() => {
+      if (window.CookieConsent && typeof window.CookieConsent.showSettings === 'function') {
+        clearInterval(waitForConsentmo);
+        window.CookieConsent.showSettings();
+      }
+    }, 100);
+  }
+});
+</script>
+
+
     <!-- influencer page countdown -->
     {% if request.path contains '/pages/influencer' %}
       <script src="{{ 'gh-countdown.js' | asset_url }}" defer></script>
