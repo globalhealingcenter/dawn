@@ -35,25 +35,37 @@
 <!-- CONSENTMO PREFERENCES -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Footer "Cookie Preferences" link (and any other trigger we add)
+    // Footer "Cookie Preferences" link (menu item)
     var prefLinks = document.querySelectorAll(
       'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href$="cookie-preferences"], .js-cookie-preferences'
     );
 
     if (!prefLinks.length) return;
 
+    function openConsentmoPreferences() {
+      // Try a few ways to find the Preferences button in the banner
+      var btn =
+        document.querySelector('[data-cc="c-settings"]') ||                // common data attr
+        document.querySelector('button#c-p-bn') ||                          // possible ID
+        Array.prototype.find.call(
+          document.querySelectorAll('button'),
+          function (b) {
+            return b.textContent && b.textContent.trim().toLowerCase() === 'preferences';
+          }
+        );
+
+      if (btn) {
+        btn.click();
+      } else if (window.Shopify && window.Shopify.designMode) {
+        console.warn('Consentmo Preferences button not found on page.');
+      }
+    }
+
     prefLinks.forEach(function (link) {
       link.addEventListener('click', function (e) {
-        // Use Consentmo's own helper
-        if (typeof window.showPreferences === 'function') {
-          e.preventDefault();
-          window.showPreferences(this); // same as their docs: showPreferences(this)
-          return false;
-        } else if (window.Shopify && window.Shopify.designMode) {
-          console.warn(
-            'Consentmo showPreferences() not found – check that the Consentmo app embed is enabled.'
-          );
-        }
+        e.preventDefault();
+        openConsentmoPreferences();
+        return false;
       });
     });
   });
