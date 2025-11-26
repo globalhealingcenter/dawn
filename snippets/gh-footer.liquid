@@ -35,28 +35,30 @@
 <!-- CONSENTMO PREFERENCES -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Footer Cookie Preferences link (menu item)
-    const prefLinks = document.querySelectorAll(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], .js-cookie-preferences'
+    // Footer "Cookie Preferences" link (and any other trigger we add)
+    var prefLinks = document.querySelectorAll(
+      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href$="cookie-preferences"], .js-cookie-preferences'
     );
 
     if (!prefLinks.length) return;
 
     prefLinks.forEach(function (link) {
       link.addEventListener('click', function (e) {
-        e.preventDefault();
-
-        if (window.consentmoShowPreferences) {
-          window.consentmoShowPreferences();
+        // Use Consentmo's own helper
+        if (typeof window.showPreferences === 'function') {
+          e.preventDefault();
+          window.showPreferences(this); // same as their docs: showPreferences(this)
+          return false;
         } else if (window.Shopify && window.Shopify.designMode) {
-          console.warn('Consentmo preferences function not found (window.consentmoShowPreferences).');
+          console.warn(
+            'Consentmo showPreferences() not found – check that the Consentmo app embed is enabled.'
+          );
         }
-
-        return false;
       });
     });
   });
 </script>
+
 
 
 <!-- gh_dawn_forms -->
