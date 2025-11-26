@@ -35,30 +35,33 @@
 <!-- CONSENTMO PREFERENCES -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Any link that should act as "Change my cookie preferences"
-    var prefLinks = document.querySelectorAll(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href*="/cookie-preferences"]'
+    // Footer menu link + any other cookie-preferences links/buttons
+    var prefTriggers = document.querySelectorAll(
+      'a[href="#cookie-preferences"],' +
+      'a[href="/#cookie-preferences"],' +
+      'a[href*="/cookie-preferences"],' +
+      '.js-cookie-preferences,' +
+      '.isense-reopen-widget-button'
     );
 
-    if (!prefLinks.length) return;
+    if (!prefTriggers.length) return;
 
-    prefLinks.forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        console.log('GH consentmo: footer Cookie Preferences clicked', link);
+    prefTriggers.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        console.log('GH consentmo: Cookie Preferences trigger clicked', el);
 
-        // Consentmo's documented API
-        if (typeof showPreferences === 'function') {
+        // If Consentmo exposes the documented function, use it
+        if (typeof window.showPreferences === 'function') {
           e.preventDefault();
           try {
-            showPreferences(this);
+            window.showPreferences(this);
             console.log('GH consentmo: showPreferences() called');
           } catch (err) {
             console.error('GH consentmo: error calling showPreferences()', err);
           }
         } else {
-          // Fallback: let it navigate to the Cookie preferences page
-          console.warn('GH consentmo: showPreferences() not available – fallback to normal link.');
-          // no preventDefault here
+          // Fallback: let the link/button behave normally (go to the page)
+          console.warn('GH consentmo: showPreferences() not available – falling back to normal navigation.');
         }
       });
     });
