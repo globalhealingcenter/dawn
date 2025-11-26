@@ -549,56 +549,6 @@
     <!-- <div data-rebuy-id="253569"></div>-->
     <!-- End Widget : 2025 BFCM Free Tote on New Sub -->
 
-    <script>
-document.addEventListener('click', function(e) {
-  // Any link pointing to #cookie-preferences
-  if (e.target.matches('[href="#cookie-preferences"]')) {
-    e.preventDefault();
-
-    // Retry until Consentmo is fully loaded
-    const waitForConsentmo = setInterval(() => {
-      if (window.CookieConsent && typeof window.CookieConsent.showSettings === 'function') {
-        clearInterval(waitForConsentmo);
-        window.CookieConsent.showSettings();
-      }
-    }, 100);
-  }
-});
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // wait a moment in case Consentmo injects a bit late
-    function positionConsentmoWidget() {
-      var widget = document.getElementById('reopen_widget');
-      if (!widget) return;
-
-      // this is the 55x55 bubble wrapper that actually has left/bottom
-      var bubble = widget.parentElement;
-      if (!bubble) return;
-
-      // desktop defaults
-      bubble.style.position = 'fixed';
-      bubble.style.zIndex = '60';
-      bubble.style.bottom = '20px';
-      bubble.style.left   = '260px'; // to the right of Tapcart CTA
-
-      // mobile: bump it up a bit so it clears the Tapcart bar
-      if (window.matchMedia('(max-width: 749px)').matches) {
-        bubble.style.bottom = '80px';
-        bubble.style.left   = '20px';
-      }
-    }
-
-    // run once now
-    positionConsentmoWidget();
-
-    // and again if Consentmo re-renders (simple safety net)
-    document.addEventListener('consentmoSignal_onLoad', positionConsentmoWidget);
-  });
-</script>
-
-
 
     <!-- influencer page countdown -->
     {% if request.path contains '/pages/influencer' %}
