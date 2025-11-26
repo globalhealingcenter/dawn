@@ -32,38 +32,35 @@
 {%- endcomment -%}
 <!-- [/osano] -->
 
-<!-- CONSENTMO PREFERENCES -->
+<!-- CONSENTMO PREFERENCES (use reopen widget) -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Footer menu link + any other cookie-preferences links/buttons
-    var prefTriggers = document.querySelectorAll(
-      'a[href="#cookie-preferences"],' +
-      'a[href="/#cookie-preferences"],' +
-      'a[href*="/cookie-preferences"],' +
-      '.js-cookie-preferences,' +
-      '.isense-reopen-widget-button'
+    // Footer link + any explicit "cookie preferences" buttons
+    var triggers = document.querySelectorAll(
+      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], .js-cookie-preferences'
     );
 
-    if (!prefTriggers.length) return;
+    if (!triggers.length) return;
 
-    prefTriggers.forEach(function (el) {
-      el.addEventListener('click', function (e) {
-        console.log('GH consentmo: Cookie Preferences trigger clicked', el);
+    function handleClick(event) {
+      console.log('GH consentmo: Cookie Preferences trigger clicked', event.currentTarget);
 
-        // If Consentmo exposes the documented function, use it
-        if (typeof window.showPreferences === 'function') {
-          e.preventDefault();
-          try {
-            window.showPreferences(this);
-            console.log('GH consentmo: showPreferences() called');
-          } catch (err) {
-            console.error('GH consentmo: error calling showPreferences()', err);
-          }
-        } else {
-          // Fallback: let the link/button behave normally (go to the page)
-          console.warn('GH consentmo: showPreferences() not available – falling back to normal navigation.');
-        }
-      });
+      var widget = document.querySelector('#reopen_widget');
+
+      if (widget) {
+        event.preventDefault();
+        console.log('GH consentmo: clicking #reopen_widget to open Consentmo preferences');
+        widget.click();
+        return false;
+      } else {
+        console.warn('GH consentmo: #reopen_widget not found – falling back to normal navigation');
+        // let the link/button behave normally (e.g., navigate to the cookie-preferences page)
+        return true;
+      }
+    }
+
+    triggers.forEach(function (el) {
+      el.addEventListener('click', handleClick);
     });
   });
 </script>
