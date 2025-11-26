@@ -32,6 +32,29 @@
 {%- endcomment -%}
 <!-- [/osano] -->
 
+<!-- CONSENTMO PREFERENCES -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Look for the same footer link Osano was attached to
+    const prefLink = document.querySelector('[href="#osano-cookie-drawer"], .js-cookie-preferences');
+
+    if (prefLink) {
+      prefLink.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        // Consentmo’s method to open the Preferences popup
+        if (window.consentmoShowPreferences) {
+          window.consentmoShowPreferences();
+        } else {
+          console.warn('Consentmo not loaded yet.');
+        }
+
+        return false;
+      });
+    }
+  });
+</script>
+
 
 <!-- gh_dawn_forms -->
 <script>
