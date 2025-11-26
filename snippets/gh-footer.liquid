@@ -34,37 +34,36 @@
 
 <!-- CONSENTMO PREFERENCES -->
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Footer "Cookie Preferences" link (menu item)
-    var prefLinks = document.querySelectorAll(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], .js-cookie-preferences'
-    );
-
-    if (!prefLinks.length) {
-      return;
-    }
-
+  (function () {
     function openConsentmoPreferences() {
-      // This is the real Consentmo "Preferences" button
-      var btn = document.querySelector(
-        'button.cc-settings.isense-cc-settings, button.cc-settings, button.isense-cc-settings'
-      );
+      // Real Consentmo "Preferences" button from your DOM
+      var btn =
+        document.querySelector('button.cc-settings.isense-cc-settings') ||
+        document.querySelector('button.cc-settings') ||
+        document.querySelector('button[aria-controls="cookieconsent:settings"]');
 
       if (btn) {
+        console.log('GH consentmo: clicking settings button', btn);
         btn.click();
-      } else if (window.Shopify && window.Shopify.designMode) {
-        console.warn('Consentmo Preferences button not found.');
+        return true;
+      } else {
+        console.log('GH consentmo: settings button NOT found');
+        return false;
       }
     }
 
-    prefLinks.forEach(function (link) {
-      link.addEventListener('click', function (e) {
-        e.preventDefault();
-        openConsentmoPreferences();
-        return false;
-      });
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest(
+        'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href$="#cookie-preferences"], .js-cookie-preferences'
+      );
+      if (!link) return;
+
+      e.preventDefault();
+      console.log('GH consentmo: footer Cookie Preferences clicked', link);
+      openConsentmoPreferences();
+      return false;
     });
-  });
+  })();
 </script>
 
 
