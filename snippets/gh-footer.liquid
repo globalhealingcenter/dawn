@@ -35,9 +35,9 @@
 <!-- CONSENTMO PREFERENCES -->
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    // Footer Cookie Preferences link (menu item)
+    // Any link that should act as "Change my cookie preferences"
     var prefLinks = document.querySelectorAll(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href$="#cookie-preferences"]'
+      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], a[href*="/cookie-preferences"]'
     );
 
     if (!prefLinks.length) return;
@@ -45,17 +45,21 @@
     prefLinks.forEach(function (link) {
       link.addEventListener('click', function (e) {
         console.log('GH consentmo: footer Cookie Preferences clicked', link);
-        e.preventDefault();
-        e.stopPropagation();
 
-        // Consentmo helper from their docs
-        if (typeof window.showPreferences === 'function') {
-          window.showPreferences(this); // same as their example: showPreferences(this)
+        // Consentmo's documented API
+        if (typeof showPreferences === 'function') {
+          e.preventDefault();
+          try {
+            showPreferences(this);
+            console.log('GH consentmo: showPreferences() called');
+          } catch (err) {
+            console.error('GH consentmo: error calling showPreferences()', err);
+          }
         } else {
-          console.warn('GH consentmo: window.showPreferences() not available');
+          // Fallback: let it navigate to the Cookie preferences page
+          console.warn('GH consentmo: showPreferences() not available – fallback to normal link.');
+          // no preventDefault here
         }
-
-        return false;
       });
     });
   });
