@@ -32,39 +32,6 @@
 {%- endcomment -%}
 <!-- [/osano] -->
 
-<!-- CONSENTMO PREFERENCES (use reopen widget) -->
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Footer link + any explicit "cookie preferences" buttons
-    var triggers = document.querySelectorAll(
-      'a[href="#cookie-preferences"], a[href="/#cookie-preferences"], .js-cookie-preferences'
-    );
-
-    if (!triggers.length) return;
-
-    function handleClick(event) {
-      console.log('GH consentmo: Cookie Preferences trigger clicked', event.currentTarget);
-
-      var widget = document.querySelector('#reopen_widget');
-
-      if (widget) {
-        event.preventDefault();
-        console.log('GH consentmo: clicking #reopen_widget to open Consentmo preferences');
-        widget.click();
-        return false;
-      } else {
-        console.warn('GH consentmo: #reopen_widget not found – falling back to normal navigation');
-        // let the link/button behave normally (e.g., navigate to the cookie-preferences page)
-        return true;
-      }
-    }
-
-    triggers.forEach(function (el) {
-      el.addEventListener('click', handleClick);
-    });
-  });
-</script>
-
 
 
 <!-- gh_dawn_forms -->
