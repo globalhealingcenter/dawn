@@ -24,8 +24,8 @@
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
           "settings": {
-            "image_obj": "shopify://shop_images/2025-bfcm-bf-homepage-banner.jpg",
-            "image_mobile_obj": "shopify://shop_images/2025-bfcm-bf-mobile-banner.jpg",
+            "image_obj": "shopify://shop_images/2025-bfcm-cmv2-desktop-banner.jpg",
+            "image_mobile_obj": "shopify://shop_images/2025-bfcm-cmv2-mobile-banner.jpg",
             "url": "https://globalhealing.com/pages/bfcm-2025?utm_source=site&utm_medium=homepagebanner&utm_campaign=bfcm_bf&utm_content=bf"
           }
         },
