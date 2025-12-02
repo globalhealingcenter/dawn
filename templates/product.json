@@ -83,6 +83,35 @@
             "success_message": "<p>Success! You'll be receiving an email shortly.</p>",
             "force_show": false
           }
+        },
+        "abra_promotions_banner_gift_RQAc3p": {
+          "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "settings": {
+            "name": "Gift",
+            "color": "#21472d",
+            "icon_color": "#00260f",
+            "progress_bar_color": "#00260f",
+            "font_size": 14,
+            "icon_size": 14,
+            "text_align": "center",
+            "discount_background_color": "#f9f2e8",
+            "discount_padding_y": 10,
+            "discount_padding_x": 10,
+            "badge_background_color": "#00260f",
+            "badge_color": "#FFFFFF",
+            "badge_icon_color": "#FFFFFF",
+            "badge_border_radius": 48,
+            "badge_font_size": 12,
+            "badge_icon_size": 10,
+            "discount_title_color": "#000000",
+            "discount_price_color": "#404040",
+            "discount_title_font_size": 14,
+            "discount_price_font_size": 12,
+            "add_variant_color": "#000000",
+            "add_variant_text_color": "#FFFFFF",
+            "add_variant_disabled_color": "#000000",
+            "add_variant_disabled_text_color": "#FFFFFF"
+          }
         }
       },
       "block_order": [
@@ -95,7 +124,8 @@
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "buy_buttons",
-        "gh_out_of_stock_form_dAeEPR"
+        "gh_out_of_stock_form_dAeEPR",
+        "abra_promotions_banner_gift_RQAc3p"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
