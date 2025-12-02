@@ -62,6 +62,7 @@
       "blocks": {
         "abra_promotions_banner_gift_xT6Gw4": {
           "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Gift",
             "color": "#43341f",
