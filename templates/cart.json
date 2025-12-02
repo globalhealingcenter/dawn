@@ -75,8 +75,8 @@
             "discount_padding_y": 10,
             "discount_padding_x": 10,
             "badge_background_color": "#21472d",
-            "badge_color": "#FFFFFF",
-            "badge_icon_color": "#FFFFFF",
+            "badge_color": "#ffffff",
+            "badge_icon_color": "#ffffff",
             "badge_border_radius": 48,
             "badge_font_size": 12,
             "badge_icon_size": 10,
@@ -85,9 +85,9 @@
             "discount_title_font_size": 14,
             "discount_price_font_size": 12,
             "add_variant_color": "#000000",
-            "add_variant_text_color": "#FFFFFF",
+            "add_variant_text_color": "#ffffff",
             "add_variant_disabled_color": "#000000",
-            "add_variant_disabled_text_color": "#FFFFFF"
+            "add_variant_disabled_text_color": "#ffffff"
           }
         }
       },
@@ -97,12 +97,19 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "1764701879cdf4bcd3": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "cart-items",
     "cart-footer",
     "1687779380613f616b",
-    "17647015295bf220e3"
+    "17647015295bf220e3",
+    "1764701879cdf4bcd3"
   ]
 }
