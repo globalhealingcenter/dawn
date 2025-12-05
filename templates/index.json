@@ -188,12 +188,54 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "17649547427ed9a738": {
+      "type": "apps",
+      "blocks": {
+        "abra_promotions_banner_gift_Ah9kQR": {
+          "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
+          "settings": {
+            "name": "Gift",
+            "color": "#000000",
+            "icon_color": "#000000",
+            "progress_bar_color": "#119E52",
+            "font_size": 14,
+            "icon_size": 14,
+            "text_align": "center",
+            "discount_background_color": "#E7F5EE",
+            "discount_padding_y": 10,
+            "discount_padding_x": 10,
+            "badge_background_color": "#119E52",
+            "badge_color": "#FFFFFF",
+            "badge_icon_color": "#FFFFFF",
+            "badge_border_radius": 48,
+            "badge_font_size": 12,
+            "badge_icon_size": 10,
+            "discount_title_color": "#000000",
+            "discount_price_color": "#404040",
+            "discount_title_font_size": 14,
+            "discount_price_font_size": 12,
+            "add_variant_color": "#000000",
+            "add_variant_text_color": "#FFFFFF",
+            "add_variant_disabled_color": "#000000",
+            "add_variant_disabled_text_color": "#FFFFFF"
+          }
+        }
+      },
+      "block_order": [
+        "abra_promotions_banner_gift_Ah9kQR"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493",
     "4a534389-073e-4980-a2fd-d7304e59caec",
     "1687779425f103d894",
-    "17598458706780f49a"
+    "17598458706780f49a",
+    "17649547427ed9a738"
   ]
 }
