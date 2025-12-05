@@ -3603,7 +3603,11 @@ details-disclosure > details {
 
  .article-template__content img {float: right; width: 374px !important;} ul.related_post.wp_rp {display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0;} ul.related_post.wp_rp li {flex: 1 1 20%; box-sizing: border-box; padding: 10px; text-align: center;} /* NEW BLOG CSS *//* General styles for the layout */.custom-article-layout {display: flex; flex-wrap: wrap; gap: 20px; max-width: 1300px; margin: 0 auto;} .custom-article-content {flex: 1; min-width: 300px; max-width: 70%; padding-left: 122px;} .custom-sidebar {flex: 0 0 300px; max-width: 300px;border-radius: 10px;} .custom-article-content.rte article > img, .custom-article-content.rte article > header + p img {float: right;} /* Styles for mobile responsiveness */@media (max-width: 768px) {.custom-article-layout {flex-direction: column; } .custom-article-content, .custom-sidebar {max-width: 100%; padding-right: 50px; padding-left: 50px; }} /* NEW BLOG CSS END */
 
- 
+ /*
+-----------------------------------------
+TEMP DISABLE: Homepage announcement bar override
+-----------------------------------------
+
 /* Keep the announcement bar visible on the home page */
 .index .announcement-bar-section,
 .index .utility-bar,
@@ -3611,10 +3615,10 @@ details-disclosure > details {
 .template-index .announcement-bar-section,
 .template-index .utility-bar,
 .template-index .announcement-bar {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  height: auto !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
 }
 
 /* If any script toggles these, override them */
@@ -3624,13 +3628,16 @@ details-disclosure > details {
 .template-index .announcement-bar-section[hidden],
 .template-index .utility-bar[hidden],
 .template-index .announcement-bar[hidden] {
-  display: block !important;
+    display: block !important;
 }
 
 .index .announcement-bar[aria-hidden="true"],
 .template-index .announcement-bar[aria-hidden="true"] {
-  display: block !important;
+    display: block !important;
 }
+
+*/
+
 
 .tolstoy-product-tile-button svg rect {
     fill: #21472D !important;
