@@ -352,7 +352,12 @@
 </div>
 
 {% liquid
-  assign description = article.excerpt
+  assign description = page_description
+
+  if description == blank
+    assign description = article.excerpt
+  endif
+
   if description == blank
     assign description = article.content | strip_html | truncatewords: 50
   endif
