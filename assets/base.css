@@ -3615,3 +3615,5 @@ details-disclosure > details {
 .tolstoy-product-tile-title {
     font-family: var(--gh-font-secondary) !important;
 }
+
+#tc-capture-kit { z-index: 998 !important; }
