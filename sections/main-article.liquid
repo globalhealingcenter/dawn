@@ -361,37 +361,44 @@
   if description == blank
     assign description = article.content | strip_html | truncatewords: 50
   endif
+
+  assign clean_body = article.content
+  assign clean_body = clean_body | replace: '&nbsp;', ' '
+  assign clean_body = clean_body | replace: '  ', ' '
 %}
 
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": {{ request.origin | append: article.url | json }}
-    },
-      "headline": {{ article.title | json }},
-      "articleBody": {{ article.content | strip_html | json }},
-      "description": {{ description | strip_html | json }},
-      {% if article.image %}
-      "image": {{ article.image | image_url: width: 1920 | prepend: "https:" | json }},
-      {% endif %}
-      "author": {
-        "@type": "Person",
-        "name": "Dr. Edward Group, DC",
-        "url": "https://globalhealing.com/pages/dr-group"
-      },
-    "publisher": {
-      "@type": "Organization",
-      "name": {{ shop.name | json }},
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://globalhealing.com/cdn/shop/files/seal-white.png?v=1616710274&width=60"
-          }
-    },
-    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}
-  }
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ request.origin | append: article.url | json }}
+  },
+  "headline": {{ article.title | json }},
+  "articleSection": "Education",
+  "inLanguage": "en",
+  "articleBody": {{ clean_body | json }},
+  "description": {{ description | strip_html | json }},
+  {% if article.image %}
+  "image": {{ article.image | image_url: width: 1920 | prepend: "https:" | json }},
+  {% endif %}
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Edward Group, DC",
+    "url": "https://globalhealing.com/pages/dr-group"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://globalhealing.com/cdn/shop/files/seal-white.png?v=1616710274&width=60"
+    }
+  },
+  "datePublished": {{ article.published_at | date: "%Y-%m-%dT%H:%M:%SZ" | json }},
+  "dateModified": {{ article.updated_at | date: "%Y-%m-%dT%H:%M:%SZ" | json }}
+}
 </script>
 
 {% schema %}
