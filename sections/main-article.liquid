@@ -364,6 +364,7 @@
 
   assign clean_body = article.content
   assign clean_body = clean_body | replace: '&nbsp;', ' '
+  assign clean_body = clean_body | strip_html
   assign clean_body = clean_body | replace: '  ', ' '
 %}
 
