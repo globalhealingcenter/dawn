@@ -44,6 +44,9 @@
     },
     "custom_liquid_KgzP8R": {
       "type": "custom-liquid",
+      "custom_css": [
+        "button.oct-quiz-btn.oct-quiz-btn--secondary.oct-quiz-btn--large {margin-left: 70px; margin-right: auto; display: block; font-weight: 300; font-size: clamp(18px, 3.6vw, 24px); line-height: clamp(20px, 4vw, 28px); letter-spacing: 1.4px; padding-left: 80px; padding-right: 80px;}"
+      ],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
         "custom_liquid": "<div class=\"octane-ai-quiz \" data-quiz-id=\"YvaR8M44gFT7UBGh\" data-embed-type=\"fullpage\" data-mobile-height=\"match_browser\" data-desktop-height=\"match_browser\" >\n    \n</div>\n<script src=\"https://app.octaneai.com/298iwtdqh2ryopce/quiz.js\" defer></script>",
