@@ -376,6 +376,7 @@
     "@type": "WebPage",
     "@id": {{ request.origin | append: article.url | json }}
   },
+  "url": {{ request.origin | append: article.url | json }},
   "headline": {{ article.title | json }},
   "articleSection": "Education",
   "inLanguage": "en",
