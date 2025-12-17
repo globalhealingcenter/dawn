@@ -1,5 +1,6 @@
 {%- comment -%}
   GH Mobile Nav — quick links for HOME and PRODUCT pages
+  Tries handles in order: mobile-quick-links, gh-mobile-nav, mobile-nav
 {%- endcomment -%}
 
 {%- if request.page_type == 'index' or request.page_type == 'product' -%}
@@ -12,26 +13,16 @@
     {%- assign mq_menu = linklists['mobile-nav'] -%}
   {%- endif -%}
 
-  {%- assign default_active_url = '/pages/subscribe-save' -%} {# <-- change me #}
-
-  <nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline"
-       role="navigation"
-       aria-label="Mobile quick nav"
-       data-page-type="{{ request.page_type }}"
-       data-default-active-url="{{ default_active_url }}">
+  <nav class="gh-mobile-nav mobile-quicklinks mobile-quicklinks--inline" role="navigation" aria-label="Mobile quick nav">
     <div class="mq-inner" id="gh-ql">
       {%- if mq_menu and mq_menu.links.size > 0 -%}
         {%- for link in mq_menu.links -%}
-          {%- assign force_active = false -%}
-          {%- if request.page_type == 'index' and link.url == default_active_url -%}
-            {%- assign force_active = true -%}
-          {%- endif -%}
-
-          <a href="{{ link.url }}"
-             class="mq-link{% if link.active or link.child_active or force_active %} is-active{% endif %}">
+          <a href="{{ link.url }}" class="mq-link{% if link.active or link.child_active %} is-active{% endif %}">
             {{ link.title }}
           </a>
         {%- endfor -%}
+      {%- else -%}
+        <!-- No menu found for: mobile-quick-links / gh-mobile-nav / mobile-nav -->
       {%- endif -%}
     </div>
   </nav>
@@ -47,64 +38,40 @@
 
       .mobile-quicklinks .mq-inner {
         display: flex;
-        gap: 18px;                 /* more breathing room */
-        padding: 10px 14px;
+        gap: 16px;
+        padding: 10px 12px;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        scroll-snap-type: none;
         overscroll-behavior-x: contain;
-        scroll-behavior: auto !important;
+        scroll-behavior: auto !important; /* avoid smooth “swing” */
       }
       .mobile-quicklinks .mq-inner::-webkit-scrollbar { display: none; }
 
       .mq-link {
-        display: inline-flex;
-        align-items: center;
+        display: inline-block;
         white-space: nowrap;
         color: #fff;
         text-decoration: none;
 
-        /* nicer tap target */
-        padding: 8px 2px;          /* vertical padding helps a lot */
-        min-height: 40px;
-
         /* Typography */
-        font-size: 1rem;           /* slightly smaller reads cleaner in a nav */
-        line-height: 1.2;
+        font-size: 1.1rem;
+        line-height: 1.6;
         letter-spacing: 0.04em;
         font-weight: 500;
-        opacity: 0.88;             /* makes active stand out */
       }
-      .mq-link:hover { opacity: .95; }
-
+      .mq-link:hover { opacity: .85; }
       .mq-link.is-active {
-        opacity: 1;
         font-weight: 600;
         border-bottom: 2px solid #fff;
-        padding-bottom: 6px;       /* pushes underline away from letters */
+        padding-bottom: 2px;
       }
     }
 
+    /* Hide on desktop */
     @media (min-width: 750px) {
       .mobile-quicklinks { display: none; }
     }
   </style>
-
-  <script>
-    (function () {
-      // If Shopify didn't mark anything active (or if you want to ensure it's visible),
-      // scroll the active item into view without smooth jank.
-      var nav = document.getElementById('gh-ql');
-      if (!nav) return;
-
-      var active = nav.querySelector('.mq-link.is-active');
-      if (!active) return;
-
-      // ensure active is visible (center-ish)
-      var navRect = nav.getBoundingClientRect();
-      var aRect = active.getBoundingClientRect();
-      var delta = (aRect.left - navRect.left) - (navRect.width / 2 - aRect.width / 2);
-      nav.scrollLeft = nav.scrollLeft + delta;
-    })();
-  </script>
 
 {%- endif -%}
