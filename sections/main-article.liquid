@@ -11,7 +11,7 @@
         {{ block.shopify_attributes }}
       >
 
-<article class="article-template" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="article-template">
   {%- for block in section.blocks -%}
     {%- case block.type -%}
       {% when 'sharethis' %}
@@ -55,7 +55,6 @@
           >
             <div
               class="article-template__hero-{{ block.settings.image_height }} media"
-              itemprop="image"
               {% if block.settings.image_height == 'adapt' and article.image %}
                 style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
               {% endif %}
@@ -88,17 +87,17 @@
           {{ block.shopify_attributes }}
         >
           {%- if block.settings.blog_show_date -%}
-            <span class="circle-divider caption-with-letter-spacing" itemprop="dateCreated datePublished">
+            <span class="circle-divider caption-with-letter-spacing">
               {{- article.published_at | time_tag: format: 'date' -}}
             </span>
           {%- endif -%}
           {%- if block.settings.blog_show_author -%}
-            <span class="caption-with-letter-spacing" itemprop="author" itemscope itemtype="http://schema.org/Person">
-              <span itemprop="name">{{ article.author }}</span>
+            <span class="caption-with-letter-spacing">
+              {{ article.author }}
             </span>
           {%- endif -%}
 
-          <h1 class="article-template__title color-green h2" itemprop="headline">
+          <h1 class="article-template__title color-green h2">
             {{ article.title | escape }}
           </h1>
           
@@ -342,34 +341,34 @@
 <script>gh.defer.youtube.loadAll()</script>
 
 <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "articleBody": {{ article.content | strip_html | json }},
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": {{ request.origin | append: page.url | json }}
-    },
-    "headline": {{ article.title | json }},
-    {% if article.excerpt != blank %}
-      "description": {{ article.excerpt | strip_html | json }},
-    {% endif %}
-    {% if article.image %}
-      "image": [
-        {{ article | image_url: width: 1920 | prepend: "https:" | json }}
-      ],
-    {% endif %}
-    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
-    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
-    "author": {
-      "@type": "Person",
-      "name": {{ article.author | json }}
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": {{ shop.name | json }}
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ request.origin | append: article.url | json }}
+  },
+  "headline": {{ article.title | json }},
+  "articleBody": {{ article.content | strip_html | json }},
+  "description": {{ description | strip_html | json }},
+  {% if article.image %}
+  "image": {{ article.image | image_url: width: 1920 | prepend: "https:" | json }},
+  {% endif %}
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Edward Group, DC",
+    "url": "https://globalhealing.com/pages/dr-group"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Global Healing",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://globalhealing.com/cdn/shop/files/seal-white.png?v=1616710274&width=60"
     }
-  }
+  },
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}
+}
 </script>
 
 {% schema %}
