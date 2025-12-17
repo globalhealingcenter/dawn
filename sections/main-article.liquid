@@ -348,7 +348,10 @@
     "@type": "WebPage",
     "@id": {{ request.origin | append: article.url | json }}
   },
+  "url": {{ request.origin | append: article.url | json }},
   "headline": {{ article.title | json }},
+  "articleSection": "Education",
+  "inLanguage": "en",
   "articleBody": {{ article.content | strip_html | json }},
   "description": {{ description | strip_html | json }},
   {% if article.image %}
@@ -367,7 +370,8 @@
       "url": "https://globalhealing.com/cdn/shop/files/seal-white.png?v=1616710274&width=60"
     }
   },
-  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }}
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "dateModified": {{ article.updated_at | date: "%Y-%m-%dT%H:%M:%SZ" | json }}
 }
 </script>
 
