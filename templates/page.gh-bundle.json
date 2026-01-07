@@ -88,6 +88,81 @@
       "block_order": [
         "ai_gen_block_ecd0fb6_GPK89h"
       ],
+      "disabled": true,
+      "settings": {}
+    },
+    "176781772470b0327d": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_1869309_hMLxM8": {
+          "type": "ai_gen_block_1869309",
+          "settings": {
+            "main_title": "Choose Your Bundle",
+            "main_subtitle": "Select from our curated wellness bundles",
+            "main_title_size": 32,
+            "main_subtitle_size": 16,
+            "max_width": 1300,
+            "column_1_title": "Starter Bundle",
+            "column_1_subtitle": "Perfect for beginners",
+            "column_1_product_1": "",
+            "column_1_qty_1": 1,
+            "column_1_product_2": "",
+            "column_1_qty_2": 1,
+            "column_1_product_3": "",
+            "column_1_qty_3": 1,
+            "column_1_original_price": "$150.00",
+            "column_1_sale_price": "$120.00",
+            "column_1_savings": "$30.00",
+            "column_1_discount_code": "",
+            "column_2_title": "Advanced Bundle",
+            "column_2_subtitle": "For experienced users",
+            "column_2_product_1": "paratrex",
+            "column_2_qty_1": 1,
+            "column_2_product_2": "paratrex-ii",
+            "column_2_qty_2": 1,
+            "column_2_product_3": "toxin-binder-detox",
+            "column_2_qty_3": 1,
+            "column_2_original_price": "115.00",
+            "column_2_sale_price": "99.00",
+            "column_2_savings": "16.00",
+            "column_2_discount_code": "welcome10",
+            "column_3_title": "Premium Bundle",
+            "column_3_subtitle": "Complete wellness package",
+            "column_3_product_1": "",
+            "column_3_qty_1": 1,
+            "column_3_product_2": "",
+            "column_3_qty_2": 1,
+            "column_3_product_3": "",
+            "column_3_qty_3": 1,
+            "column_3_original_price": "$250.00",
+            "column_3_sale_price": "$200.00",
+            "column_3_savings": "$50.00",
+            "column_3_discount_code": "",
+            "global_discount_code": "",
+            "button_text": "Add to Cart",
+            "column_title_size": 20,
+            "column_subtitle_size": 14,
+            "background_color": "#f9f2e8",
+            "text_color": "#545454",
+            "column_bg_color": "#ffffff",
+            "column_border_color": "#e0e0e0",
+            "pricing_bg_color": "#f9f9f9",
+            "sale_price_color": "#21472d",
+            "savings_color": "#008060",
+            "button_color": "#3c5949",
+            "button_text_color": "#ffffff",
+            "copy_button_color": "#545454",
+            "copy_button_text_color": "#ffffff",
+            "column_border_width": 1,
+            "column_border_radius": 8,
+            "button_border_radius": 4
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_1869309_hMLxM8"
+      ],
       "settings": {}
     }
   },
@@ -95,6 +170,7 @@
     "shogun-helper",
     "main",
     "shogun-optimizer",
-    "1767810054cc6121ef"
+    "1767810054cc6121ef",
+    "176781772470b0327d"
   ]
 }
