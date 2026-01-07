@@ -25,71 +25,22 @@
       "type": "shogun-optimizer",
       "settings": {}
     },
-    "1767810054cc6121ef": {
-      "type": "_blocks",
-      "blocks": {
-        "ai_gen_block_ecd0fb6_GPK89h": {
-          "type": "ai_gen_block_ecd0fb6",
-          "settings": {
-            "section_heading": "Choose your bundle",
-            "section_subheading": "Save more when you bundle",
-            "background_color": "#f9f2e8",
-            "heading_color": "#545454",
-            "subheading_color": "#545454",
-            "show_discount_input": false,
-            "discount_input_label": "Have a discount code?",
-            "discount_input_placeholder": "Enter code",
-            "column_bg_color": "#ffffff",
-            "column_border_color": "#e5e5e5",
-            "featured_border_color": "#21472d",
-            "badge_bg_color": "#21472d",
-            "badge_text_color": "#ffffff",
-            "button_text": "Add to cart",
-            "button_bg_color": "#21472d",
-            "button_text_color": "#ffffff",
-            "button_hover_bg_color": "#3c5949",
-            "column_1_title": "Starter bundle",
-            "column_1_subtitle": "Perfect for beginners",
-            "column_1_product_1": "",
-            "column_1_qty_1": 1,
-            "column_1_product_2": "",
-            "column_1_qty_2": 1,
-            "column_1_product_3": "",
-            "column_1_qty_3": 1,
-            "column_1_discount_code": "",
-            "column_1_featured": false,
-            "column_1_badge_text": "",
-            "column_2_title": "Best value bundle",
-            "column_2_subtitle": "Most popular choice",
-            "column_2_product_1": "paratrex",
-            "column_2_qty_1": 1,
-            "column_2_product_2": "paratrex-ii",
-            "column_2_qty_2": 1,
-            "column_2_product_3": "toxin-binder-detox",
-            "column_2_qty_3": 1,
-            "column_2_discount_code": "welcome10",
-            "column_2_featured": true,
-            "column_2_badge_text": "Best value",
-            "column_3_title": "Premium bundle",
-            "column_3_subtitle": "Complete wellness",
-            "column_3_product_1": "",
-            "column_3_qty_1": 1,
-            "column_3_product_2": "",
-            "column_3_qty_2": 1,
-            "column_3_product_3": "",
-            "column_3_qty_3": 1,
-            "column_3_discount_code": "",
-            "column_3_featured": false,
-            "column_3_badge_text": ""
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "ai_gen_block_ecd0fb6_GPK89h"
-      ],
-      "disabled": true,
-      "settings": {}
+    "image_banner_8He8RB": {
+      "type": "image-banner",
+      "name": "t:sections.image-banner.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Affiliate-Logo-Bakker-Blue-1024x213.png",
+        "image_overlay_opacity": 0,
+        "image_height": "adapt",
+        "desktop_content_position": "middle-center",
+        "show_text_box": true,
+        "desktop_content_alignment": "center",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": true,
+        "show_text_below": true
+      }
     },
     "176781772470b0327d": {
       "type": "_blocks",
@@ -164,13 +115,37 @@
         "ai_gen_block_1869309_hMLxM8"
       ],
       "settings": {}
+    },
+    "rich_text_6r3fyp": {
+      "type": "rich-text",
+      "blocks": {
+        "text_9kaNLa": {
+          "type": "text",
+          "settings": {
+            "text": "<p>PLEASE NOTE: Products offered on this page are available to you through a special Affiliate Program with the PTL. We may use “cookies” to track your purchases for the sole purpose of providing an affiliate commission to help support the PTL. If requested, please “Allow Cookies” so that the PTL will be blessed with your love gift.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_9kaNLa"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "shogun-helper",
     "main",
     "shogun-optimizer",
-    "1767810054cc6121ef",
-    "176781772470b0327d"
+    "image_banner_8He8RB",
+    "176781772470b0327d",
+    "rich_text_6r3fyp"
   ]
 }
