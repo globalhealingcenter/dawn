@@ -1,6 +1,856 @@
+{% doc %}
+  @prompt
+    Build a 3-column bundle section.
+    
+        Per column:
+        - Editable title + subtitle
+        - Exactly 3 products (Shopify product picker)
+        - Each product row has an editor-set fixed quantity shown as “Quantity: X” (read-only)
+        - IMPORTANT: use product.selected_or_first_available_variant.id (NOT product.id)
+    
+        Add to cart:
+        - One button per column adds all 3 items at once via POST /cart/add.js with { items: [...] }
+        - DO NOT use separate data attributes like data-product-1-id / dataset.product1Id
+        - Instead, Liquid must build ONE JSON array per column and output it as a single attribute:
+          data-items='[{"id":VARIANT_ID,"quantity":QTY}, {...}, {...}]'
+        - JS must read items with JSON.parse(button.getAttribute("data-items")) and send to /cart/add.js
+        - Stay on the same page (no redirect after add). Show a small success state on the button.
+    
+        Discounts:
+        - Optional per-column discount code display (read-only)
+        - Optional single discount code input for the whole section
+        - If a code is present when clicking “Add”, apply it AFTER a successful add using:
+          /discount/CODE?redirect=CURRENT_PAGE
+          where CURRENT_PAGE includes pathname + search + hash.
+        - Only redirect when applying a code; otherwise never redirect.
+    
+        Styling:
+        - 3-column layout, stack on mobile
+        - Visually highlight the middle column with optional “Best Value” badge
+    
+        Notes:
+        - Do not require manual variant ID entry in the editor.
+        - If a product picker is blank, omit that line item from the JSON.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-bundle-section-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-bundle-container-{{ ai_gen_id }} {
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .ai-bundle-section-title-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-bundle-section-heading-{{ ai_gen_id }} {
+    font-size: 32px;
+    margin: 0 0 10px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-bundle-section-subheading-{{ ai_gen_id }} {
+    font-size: 16px;
+    margin: 0;
+    color: {{ block.settings.subheading_color }};
+  }
+
+  .ai-bundle-discount-input-wrapper-{{ ai_gen_id }} {
+    max-width: 400px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+
+  .ai-bundle-discount-input-label-{{ ai_gen_id }} {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-bundle-discount-input-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+
+  .ai-bundle-columns-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .ai-bundle-column-{{ ai_gen_id }} {
+    background-color: {{ block.settings.column_bg_color }};
+    border: 1px solid {{ block.settings.column_border_color }};
+    border-radius: 8px;
+    padding: 30px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-bundle-column-{{ ai_gen_id }}.ai-bundle-column-featured-{{ ai_gen_id }} {
+    border: 2px solid {{ block.settings.featured_border_color }};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-bundle-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: {{ block.settings.badge_bg_color }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .ai-bundle-column-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .ai-bundle-column-title-{{ ai_gen_id }} {
+    font-size: 24px;
+    margin: 0 0 8px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-bundle-column-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    margin: 0;
+    color: {{ block.settings.subheading_color }};
+  }
+
+  .ai-bundle-products-{{ ai_gen_id }} {
+    flex-grow: 1;
+    margin-bottom: 20px;
+  }
+
+  .ai-bundle-product-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .ai-bundle-product-{{ ai_gen_id }}:last-child {
+    border-bottom: none;
+  }
+
+  .ai-bundle-product-image-{{ ai_gen_id }} {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .ai-bundle-product-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-bundle-product-info-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-bundle-product-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-bundle-product-quantity-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.subheading_color }};
+  }
+
+  .ai-bundle-discount-display-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 12px;
+    background-color: #f9f2e8;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .ai-bundle-discount-label-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.subheading_color }};
+    margin-bottom: 4px;
+  }
+
+  .ai-bundle-discount-code-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.heading_color }};
+    font-family: monospace;
+  }
+
+  .ai-bundle-add-button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 16px 24px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-bundle-add-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+  }
+
+  .ai-bundle-add-button-{{ ai_gen_id }}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .ai-bundle-add-button-{{ ai_gen_id }}.ai-bundle-success-{{ ai_gen_id }} {
+    background-color: #008060;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-bundle-columns-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+{% endstyle %}
+
+<bundle-section-{{ ai_gen_id }} class="ai-bundle-section-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-bundle-container-{{ ai_gen_id }}">
+    {% if block.settings.section_heading != blank or block.settings.section_subheading != blank %}
+      <div class="ai-bundle-section-title-{{ ai_gen_id }}">
+        {% if block.settings.section_heading != blank %}
+          <h2 class="ai-bundle-section-heading-{{ ai_gen_id }}">{{ block.settings.section_heading }}</h2>
+        {% endif %}
+        {% if block.settings.section_subheading != blank %}
+          <p class="ai-bundle-section-subheading-{{ ai_gen_id }}">{{ block.settings.section_subheading }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_discount_input %}
+      <div class="ai-bundle-discount-input-wrapper-{{ ai_gen_id }}">
+        <label class="ai-bundle-discount-input-label-{{ ai_gen_id }}" for="ai-bundle-discount-{{ ai_gen_id }}">
+          {{ block.settings.discount_input_label }}
+        </label>
+        <input
+          type="text"
+          id="ai-bundle-discount-{{ ai_gen_id }}"
+          class="ai-bundle-discount-input-{{ ai_gen_id }}"
+          placeholder="{{ block.settings.discount_input_placeholder }}"
+        >
+      </div>
+    {% endif %}
+
+    <div class="ai-bundle-columns-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign title_key = 'column_' | append: i | append: '_title'
+          assign subtitle_key = 'column_' | append: i | append: '_subtitle'
+          assign product_1_key = 'column_' | append: i | append: '_product_1'
+          assign product_2_key = 'column_' | append: i | append: '_product_2'
+          assign product_3_key = 'column_' | append: i | append: '_product_3'
+          assign qty_1_key = 'column_' | append: i | append: '_qty_1'
+          assign qty_2_key = 'column_' | append: i | append: '_qty_2'
+          assign qty_3_key = 'column_' | append: i | append: '_qty_3'
+          assign discount_key = 'column_' | append: i | append: '_discount_code'
+          assign featured_key = 'column_' | append: i | append: '_featured'
+          assign badge_key = 'column_' | append: i | append: '_badge_text'
+
+          assign column_title = block.settings[title_key]
+          assign column_subtitle = block.settings[subtitle_key]
+          assign product_1 = block.settings[product_1_key]
+          assign product_2 = block.settings[product_2_key]
+          assign product_3 = block.settings[product_3_key]
+          assign qty_1 = block.settings[qty_1_key]
+          assign qty_2 = block.settings[qty_2_key]
+          assign qty_3 = block.settings[qty_3_key]
+          assign discount_code = block.settings[discount_key]
+          assign is_featured = block.settings[featured_key]
+          assign badge_text = block.settings[badge_key]
+
+          assign items_array = ''
+          assign items_count = 0
+
+          if product_1 and product_1.selected_or_first_available_variant
+            assign variant_id = product_1.selected_or_first_available_variant.id
+            if items_array == ''
+              assign items_array = items_array | append: '{"id":' | append: variant_id | append: ',"quantity":' | append: qty_1 | append: '}'
+            else
+              assign items_array = items_array | append: ',{"id":' | append: variant_id | append: ',"quantity":' | append: qty_1 | append: '}'
+            endif
+            assign items_count = items_count | plus: 1
+          endif
+
+          if product_2 and product_2.selected_or_first_available_variant
+            assign variant_id = product_2.selected_or_first_available_variant.id
+            if items_array == ''
+              assign items_array = items_array | append: '{"id":' | append: variant_id | append: ',"quantity":' | append: qty_2 | append: '}'
+            else
+              assign items_array = items_array | append: ',{"id":' | append: variant_id | append: ',"quantity":' | append: qty_2 | append: '}'
+            endif
+            assign items_count = items_count | plus: 1
+          endif
+
+          if product_3 and product_3.selected_or_first_available_variant
+            assign variant_id = product_3.selected_or_first_available_variant.id
+            if items_array == ''
+              assign items_array = items_array | append: '{"id":' | append: variant_id | append: ',"quantity":' | append: qty_3 | append: '}'
+            else
+              assign items_array = items_array | append: ',{"id":' | append: variant_id | append: ',"quantity":' | append: qty_3 | append: '}'
+            endif
+            assign items_count = items_count | plus: 1
+          endif
+
+          assign items_json = '[' | append: items_array | append: ']'
+        %}
+
+        <div class="ai-bundle-column-{{ ai_gen_id }} {% if is_featured %}ai-bundle-column-featured-{{ ai_gen_id }}{% endif %}">
+          {% if is_featured and badge_text != blank %}
+            <div class="ai-bundle-badge-{{ ai_gen_id }}">{{ badge_text }}</div>
+          {% endif %}
+
+          <div class="ai-bundle-column-header-{{ ai_gen_id }}">
+            {% if column_title != blank %}
+              <h3 class="ai-bundle-column-title-{{ ai_gen_id }}">{{ column_title }}</h3>
+            {% endif %}
+            {% if column_subtitle != blank %}
+              <p class="ai-bundle-column-subtitle-{{ ai_gen_id }}">{{ column_subtitle }}</p>
+            {% endif %}
+          </div>
+
+          <div class="ai-bundle-products-{{ ai_gen_id }}">
+            {% if product_1 %}
+              <div class="ai-bundle-product-{{ ai_gen_id }}">
+                <div class="ai-bundle-product-image-{{ ai_gen_id }}">
+                  {% if product_1.featured_image %}
+                    <img
+                      src="{{ product_1.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_1.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-product-title-{{ ai_gen_id }}">{{ product_1.title }}</div>
+                  <div class="ai-bundle-product-quantity-{{ ai_gen_id }}">Quantity: {{ qty_1 }}</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if product_2 %}
+              <div class="ai-bundle-product-{{ ai_gen_id }}">
+                <div class="ai-bundle-product-image-{{ ai_gen_id }}">
+                  {% if product_2.featured_image %}
+                    <img
+                      src="{{ product_2.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_2.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-product-title-{{ ai_gen_id }}">{{ product_2.title }}</div>
+                  <div class="ai-bundle-product-quantity-{{ ai_gen_id }}">Quantity: {{ qty_2 }}</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if product_3 %}
+              <div class="ai-bundle-product-{{ ai_gen_id }}">
+                <div class="ai-bundle-product-image-{{ ai_gen_id }}">
+                  {% if product_3.featured_image %}
+                    <img
+                      src="{{ product_3.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_3.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-product-title-{{ ai_gen_id }}">{{ product_3.title }}</div>
+                  <div class="ai-bundle-product-quantity-{{ ai_gen_id }}">Quantity: {{ qty_3 }}</div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if discount_code != blank %}
+            <div class="ai-bundle-discount-display-{{ ai_gen_id }}">
+              <div class="ai-bundle-discount-label-{{ ai_gen_id }}">Discount code</div>
+              <div class="ai-bundle-discount-code-{{ ai_gen_id }}">{{ discount_code }}</div>
+            </div>
+          {% endif %}
+
+          <button
+            class="ai-bundle-add-button-{{ ai_gen_id }}"
+            data-items='{{ items_json }}'
+            data-column-discount="{{ discount_code }}"
+            {% if items_count == 0 %}disabled{% endif %}
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</bundle-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BundleSection{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.buttons = this.querySelectorAll('.ai-bundle-add-button-{{ ai_gen_id }}');
+        this.discountInput = this.querySelector('#ai-bundle-discount-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', this.handleAddToCart.bind(this, button));
+        });
+      }
+
+      async handleAddToCart(button) {
+        if (button.disabled) return;
+
+        const itemsJson = button.getAttribute('data-items');
+        const columnDiscount = button.getAttribute('data-column-discount');
+        const items = JSON.parse(itemsJson);
+
+        if (items.length === 0) return;
+
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = 'Adding...';
+
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items: items }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Failed to add to cart');
+          }
+
+          button.textContent = 'Added!';
+          button.classList.add('ai-bundle-success-{{ ai_gen_id }}');
+
+          const discountCode = this.discountInput ? this.discountInput.value.trim() : '';
+          const finalDiscount = discountCode || columnDiscount;
+
+          if (finalDiscount) {
+            const currentPath = window.location.pathname;
+            const currentSearch = window.location.search;
+            const currentHash = window.location.hash;
+            const redirectUrl = currentPath + currentSearch + currentHash;
+            window.location.href = '/discount/' + encodeURIComponent(finalDiscount) + '?redirect=' + encodeURIComponent(redirectUrl);
+          } else {
+            setTimeout(() => {
+              button.textContent = originalText;
+              button.classList.remove('ai-bundle-success-{{ ai_gen_id }}');
+              button.disabled = false;
+            }, 2000);
+          }
+        } catch (error) {
+          button.textContent = 'Error - Try again';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+        }
+      }
+    }
+
+    customElements.define('bundle-section-{{ ai_gen_id }}', BundleSection{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Bundle section",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Choose your bundle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "section_subheading",
+      "label": "Subheading",
+      "default": "Save more when you bundle"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f9f2e8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#545454"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#545454"
+    },
+    {
+      "type": "header",
+      "content": "Discount input"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_discount_input",
+      "label": "Show discount code input",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "discount_input_label",
+      "label": "Input label",
+      "default": "Have a discount code?"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "discount_input_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter code"
+    },
+    {
+      "type": "header",
+      "content": "Column style"
+    },
+    {
+      "type": "color",
+      "id": "column_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "column_border_color",
+      "label": "Border color",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "color",
+      "id": "featured_border_color",
+      "label": "Featured border color",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to cart"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Hover background",
+      "default": "#3c5949"
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_1_title",
+      "label": "Title",
+      "default": "Starter bundle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_1_subtitle",
+      "label": "Subtitle",
+      "default": "Perfect for beginners"
+    },
+    {
+      "type": "product",
+      "id": "column_1_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "column_1_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_1_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "column_1_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_1_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "column_1_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "column_1_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_1_featured",
+      "label": "Featured column",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_1_badge_text",
+      "label": "Badge text"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_2_title",
+      "label": "Title",
+      "default": "Best value bundle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_2_subtitle",
+      "label": "Subtitle",
+      "default": "Most popular choice"
+    },
+    {
+      "type": "product",
+      "id": "column_2_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "column_2_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_2_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "column_2_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_2_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "column_2_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "column_2_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_2_featured",
+      "label": "Featured column",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_2_badge_text",
+      "label": "Badge text",
+      "default": "Best value"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_3_title",
+      "label": "Title",
+      "default": "Premium bundle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_3_subtitle",
+      "label": "Subtitle",
+      "default": "Complete wellness"
+    },
+    {
+      "type": "product",
+      "id": "column_3_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "column_3_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_3_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "column_3_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "column_3_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "column_3_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "column_3_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "column_3_featured",
+      "label": "Featured column",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "column_3_badge_text",
+      "label": "Badge text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle section"
+    }
+  ]
+}
 {% endschema %}
