@@ -106,12 +106,85 @@
         "ai_gen_block_2118f5f_iUBdYV"
       ],
       "settings": {}
+    },
+    "1767807091239b12f7": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_649577e_h9DFC9": {
+          "type": "ai_gen_block_649577e",
+          "settings": {
+            "show_global_discount_input": false,
+            "discount_input_label": "Have a discount code?",
+            "discount_input_placeholder": "Enter code",
+            "button_text": "Add to cart",
+            "badge_text": "Best Value",
+            "badge_bg_color": "#21472d",
+            "badge_text_color": "#ffffff",
+            "column_bg_color": "#ffffff",
+            "column_border_color": "#e0e0e0",
+            "featured_border_color": "#21472d",
+            "heading_color": "#000000",
+            "text_color": "#545454",
+            "price_color": "#21472d",
+            "savings_color": "#d82c0d",
+            "button_bg_color": "#21472d",
+            "button_text_color": "#ffffff",
+            "button_hover_bg_color": "#3c5949",
+            "success_bg_color": "#008060",
+            "tier_1_heading": "Starter Bundle",
+            "tier_1_subheading": "Perfect for beginners",
+            "tier_1_product_1": "paratrex",
+            "tier_1_qty_1": 1,
+            "tier_1_product_2": "paratrex-ii",
+            "tier_1_qty_2": 1,
+            "tier_1_product_3": "toxin-binder-detox",
+            "tier_1_qty_3": 1,
+            "tier_1_original_price": "$115.00",
+            "tier_1_sale_price": "$99.00",
+            "tier_1_savings": "Save $16",
+            "tier_1_discount_code": "welcome10",
+            "tier_1_featured": false,
+            "tier_2_heading": "Popular Bundle",
+            "tier_2_subheading": "Most popular choice",
+            "tier_2_product_1": "",
+            "tier_2_qty_1": 2,
+            "tier_2_product_2": "",
+            "tier_2_qty_2": 2,
+            "tier_2_product_3": "",
+            "tier_2_qty_3": 2,
+            "tier_2_original_price": "$300.00",
+            "tier_2_sale_price": "$179.00",
+            "tier_2_savings": "Save $121",
+            "tier_2_discount_code": "",
+            "tier_2_featured": true,
+            "tier_3_heading": "Premium Bundle",
+            "tier_3_subheading": "Maximum value",
+            "tier_3_product_1": "",
+            "tier_3_qty_1": 3,
+            "tier_3_product_2": "",
+            "tier_3_qty_2": 3,
+            "tier_3_product_3": "",
+            "tier_3_qty_3": 3,
+            "tier_3_original_price": "$450.00",
+            "tier_3_sale_price": "$249.00",
+            "tier_3_savings": "Save $201",
+            "tier_3_discount_code": "",
+            "tier_3_featured": false
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_649577e_h9DFC9"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "shogun-helper",
     "main",
     "shogun-optimizer",
-    "1767805652ac222a38"
+    "1767805652ac222a38",
+    "1767807091239b12f7"
   ]
 }
