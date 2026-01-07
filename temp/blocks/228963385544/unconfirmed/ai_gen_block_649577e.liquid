@@ -1,6 +1,915 @@
+{% doc %}
+  @prompt
+    Each column represents a bundle tier but with different fixed quantities per tier.
+    
+    Editable column heading (example: Starter Bundle, Popular Bundle, Premium Bundle)
+    
+    Editable column subheading
+    
+    A list of exactly 3 products with thumbnail and title
+    
+    Each product must be selectable using a Shopify theme editor product picker (search dropdown)
+    
+    Each product row must store and use the selected_or_first_available_variant.id as the identifier used for add-to-cart (NOT product.id)
+    
+    Show a fixed quantity per product row (set in editor). Customer must not be able to edit quantities.
+    
+    Pricing display per column:
+    
+    Editable “Original price” text shown with strikethrough
+    
+    Editable “Sale price” text shown prominently
+    
+    Editable “Save $X” text
+    
+    Do not show per-unit pricing and do not calculate discounts dynamically. Prices are display-only text fields.
+    
+    Discount code:
+    
+    Per-column optional discount code display (read-only display)
+    
+    Optional global discount code input for the whole section
+    
+    When the bundle is added to cart, apply the discount code using the /discount/CODE?redirect=CURRENT_PAGE approach so the customer returns to the same landing page (not homepage).
+    
+    Add to cart behavior:
+    
+    Each column has a single “Add to cart” button
+    
+    On click, add all 3 products (their variant IDs) with the configured quantities to the cart using POST /cart/add.js with an items array
+    
+    After success, show a subtle success state on the button
+    
+    Keep the user on the current landing page (redirect back to the same page only if applying a discount code; otherwise no redirect).
+    
+    Responsive & styling:
+    
+    visually highlight the middle column as “Best Value” with an optional badge
+    
+    Implementation requirements (must follow):
+    
+    For cart/add.js, each line item must use id: <variant_id> (NOT product ID)
+    Use product.selected_or_first_available_variant.id in Liquid when outputting data attributes for the JS to read.
+    Do not require manual entry of variant IDs in the editor; use product picker only
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-bundle-tiers-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .ai-bundle-tiers__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-bundle-tiers__discount-input-{{ ai_gen_id }} {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .ai-bundle-tiers__discount-label-{{ ai_gen_id }} {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-bundle-tiers__discount-field-{{ ai_gen_id }} {
+    padding: 10px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    max-width: 300px;
+  }
+
+  .ai-bundle-tiers__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .ai-bundle-tiers__column-{{ ai_gen_id }} {
+    background: {{ block.settings.column_bg_color }};
+    border: 1px solid {{ block.settings.column_border_color }};
+    border-radius: 8px;
+    padding: 30px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-bundle-tiers__column-{{ ai_gen_id }}--featured {
+    border: 2px solid {{ block.settings.featured_border_color }};
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-bundle-tiers__badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: {{ block.settings.badge_bg_color }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .ai-bundle-tiers__heading-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    text-align: center;
+    color: {{ block.settings.heading_color }};
+  }
+
+  .ai-bundle-tiers__subheading-{{ ai_gen_id }} {
+    font-size: 14px;
+    margin: 0 0 24px;
+    text-align: center;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-bundle-tiers__products-{{ ai_gen_id }} {
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .ai-bundle-tiers__product-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .ai-bundle-tiers__product-image-{{ ai_gen_id }} {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f4f4f4;
+  }
+
+  .ai-bundle-tiers__product-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-bundle-tiers__product-info-{{ ai_gen_id }} {
+    flex-grow: 1;
+  }
+
+  .ai-bundle-tiers__product-title-{{ ai_gen_id }} {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-bundle-tiers__product-qty-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: #666;
+  }
+
+  .ai-bundle-tiers__pricing-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px 0;
+    border-top: 1px solid {{ block.settings.column_border_color }};
+    border-bottom: 1px solid {{ block.settings.column_border_color }};
+  }
+
+  .ai-bundle-tiers__original-price-{{ ai_gen_id }} {
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #999;
+    margin-bottom: 8px;
+  }
+
+  .ai-bundle-tiers__sale-price-{{ ai_gen_id }} {
+    font-size: 32px;
+    font-weight: 700;
+    color: {{ block.settings.price_color }};
+    margin-bottom: 8px;
+  }
+
+  .ai-bundle-tiers__savings-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.savings_color }};
+    font-weight: 600;
+  }
+
+  .ai-bundle-tiers__discount-code-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .ai-bundle-tiers__discount-code-value-{{ ai_gen_id }} {
+    display: inline-block;
+    background: #f4f4f4;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-weight: 600;
+    color: #333;
+    margin-left: 4px;
+  }
+
+  .ai-bundle-tiers__button-{{ ai_gen_id }} {
+    width: 100%;
+    padding: 16px 24px;
+    background: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .ai-bundle-tiers__button-{{ ai_gen_id }}:hover {
+    background: {{ block.settings.button_hover_bg_color }};
+  }
+
+  .ai-bundle-tiers__button-{{ ai_gen_id }}:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .ai-bundle-tiers__button-{{ ai_gen_id }}--success {
+    background: {{ block.settings.success_bg_color }};
+  }
+
+  .ai-bundle-tiers__empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-bundle-tiers__grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+{% endstyle %}
+
+<bundle-tiers-{{ ai_gen_id }}
+  class="ai-bundle-tiers-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-bundle-tiers__container-{{ ai_gen_id }}">
+    {% if block.settings.show_global_discount_input %}
+      <div class="ai-bundle-tiers__discount-input-{{ ai_gen_id }}">
+        <label class="ai-bundle-tiers__discount-label-{{ ai_gen_id }}">
+          {{ block.settings.discount_input_label }}
+        </label>
+        <input
+          type="text"
+          class="ai-bundle-tiers__discount-field-{{ ai_gen_id }}"
+          id="ai-bundle-discount-{{ ai_gen_id }}"
+          placeholder="{{ block.settings.discount_input_placeholder }}"
+        >
+      </div>
+    {% endif %}
+
+    <div class="ai-bundle-tiers__grid-{{ ai_gen_id }}">
+      {% for i in (1..3) %}
+        {% liquid
+          assign heading_key = 'tier_' | append: i | append: '_heading'
+          assign subheading_key = 'tier_' | append: i | append: '_subheading'
+          assign product_1_key = 'tier_' | append: i | append: '_product_1'
+          assign product_2_key = 'tier_' | append: i | append: '_product_2'
+          assign product_3_key = 'tier_' | append: i | append: '_product_3'
+          assign qty_1_key = 'tier_' | append: i | append: '_qty_1'
+          assign qty_2_key = 'tier_' | append: i | append: '_qty_2'
+          assign qty_3_key = 'tier_' | append: i | append: '_qty_3'
+          assign original_price_key = 'tier_' | append: i | append: '_original_price'
+          assign sale_price_key = 'tier_' | append: i | append: '_sale_price'
+          assign savings_key = 'tier_' | append: i | append: '_savings'
+          assign discount_code_key = 'tier_' | append: i | append: '_discount_code'
+          assign featured_key = 'tier_' | append: i | append: '_featured'
+
+          assign heading = block.settings[heading_key]
+          assign subheading = block.settings[subheading_key]
+          assign product_1 = block.settings[product_1_key]
+          assign product_2 = block.settings[product_2_key]
+          assign product_3 = block.settings[product_3_key]
+          assign qty_1 = block.settings[qty_1_key]
+          assign qty_2 = block.settings[qty_2_key]
+          assign qty_3 = block.settings[qty_3_key]
+          assign original_price = block.settings[original_price_key]
+          assign sale_price = block.settings[sale_price_key]
+          assign savings = block.settings[savings_key]
+          assign discount_code = block.settings[discount_code_key]
+          assign is_featured = block.settings[featured_key]
+        %}
+
+        <div
+          class="ai-bundle-tiers__column-{{ ai_gen_id }} {% if is_featured %}ai-bundle-tiers__column-{{ ai_gen_id }}--featured{% endif %}"
+          data-tier="{{ i }}"
+          data-variant-1="{% if product_1 %}{{ product_1.selected_or_first_available_variant.id }}{% endif %}"
+          data-variant-2="{% if product_2 %}{{ product_2.selected_or_first_available_variant.id }}{% endif %}"
+          data-variant-3="{% if product_3 %}{{ product_3.selected_or_first_available_variant.id }}{% endif %}"
+          data-qty-1="{{ qty_1 }}"
+          data-qty-2="{{ qty_2 }}"
+          data-qty-3="{{ qty_3 }}"
+          data-discount-code="{{ discount_code }}"
+        >
+          {% if is_featured and block.settings.badge_text != blank %}
+            <div class="ai-bundle-tiers__badge-{{ ai_gen_id }}">
+              {{ block.settings.badge_text }}
+            </div>
+          {% endif %}
+
+          <h3 class="ai-bundle-tiers__heading-{{ ai_gen_id }}">{{ heading }}</h3>
+          {% if subheading != blank %}
+            <p class="ai-bundle-tiers__subheading-{{ ai_gen_id }}">{{ subheading }}</p>
+          {% endif %}
+
+          <div class="ai-bundle-tiers__products-{{ ai_gen_id }}">
+            {% if product_1 %}
+              <div class="ai-bundle-tiers__product-{{ ai_gen_id }}">
+                <div class="ai-bundle-tiers__product-image-{{ ai_gen_id }}">
+                  {% if product_1.featured_image %}
+                    <img
+                      src="{{ product_1.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_1.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-tiers__product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-tiers__product-title-{{ ai_gen_id }}">{{ product_1.title }}</div>
+                  <div class="ai-bundle-tiers__product-qty-{{ ai_gen_id }}">Qty: {{ qty_1 }}</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if product_2 %}
+              <div class="ai-bundle-tiers__product-{{ ai_gen_id }}">
+                <div class="ai-bundle-tiers__product-image-{{ ai_gen_id }}">
+                  {% if product_2.featured_image %}
+                    <img
+                      src="{{ product_2.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_2.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-tiers__product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-tiers__product-title-{{ ai_gen_id }}">{{ product_2.title }}</div>
+                  <div class="ai-bundle-tiers__product-qty-{{ ai_gen_id }}">Qty: {{ qty_2 }}</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if product_3 %}
+              <div class="ai-bundle-tiers__product-{{ ai_gen_id }}">
+                <div class="ai-bundle-tiers__product-image-{{ ai_gen_id }}">
+                  {% if product_3.featured_image %}
+                    <img
+                      src="{{ product_3.featured_image | image_url: width: 120 }}"
+                      alt="{{ product_3.featured_image.alt | escape }}"
+                      loading="lazy"
+                      width="60"
+                      height="60"
+                    >
+                  {% endif %}
+                </div>
+                <div class="ai-bundle-tiers__product-info-{{ ai_gen_id }}">
+                  <div class="ai-bundle-tiers__product-title-{{ ai_gen_id }}">{{ product_3.title }}</div>
+                  <div class="ai-bundle-tiers__product-qty-{{ ai_gen_id }}">Qty: {{ qty_3 }}</div>
+                </div>
+              </div>
+            {% endif %}
+
+            {% if product_1 == blank and product_2 == blank and product_3 == blank %}
+              <div class="ai-bundle-tiers__empty-state-{{ ai_gen_id }}">
+                Select products for this tier
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-bundle-tiers__pricing-{{ ai_gen_id }}">
+            {% if original_price != blank %}
+              <div class="ai-bundle-tiers__original-price-{{ ai_gen_id }}">{{ original_price }}</div>
+            {% endif %}
+            {% if sale_price != blank %}
+              <div class="ai-bundle-tiers__sale-price-{{ ai_gen_id }}">{{ sale_price }}</div>
+            {% endif %}
+            {% if savings != blank %}
+              <div class="ai-bundle-tiers__savings-{{ ai_gen_id }}">{{ savings }}</div>
+            {% endif %}
+          </div>
+
+          {% if discount_code != blank %}
+            <div class="ai-bundle-tiers__discount-code-{{ ai_gen_id }}">
+              Use code:<span class="ai-bundle-tiers__discount-code-value-{{ ai_gen_id }}">{{ discount_code }}</span>
+            </div>
+          {% endif %}
+
+          <button
+            class="ai-bundle-tiers__button-{{ ai_gen_id }}"
+            data-add-to-cart
+            {% if product_1 == blank and product_2 == blank and product_3 == blank %}disabled{% endif %}
+          >
+            {{ block.settings.button_text }}
+          </button>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</bundle-tiers-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class BundleTiers{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+        this.buttons = this.querySelectorAll('[data-add-to-cart]');
+        this.discountInput = this.querySelector('#ai-bundle-discount-{{ ai_gen_id }}');
+      }
+
+      connectedCallback() {
+        this.buttons.forEach(button => {
+          button.addEventListener('click', this.handleAddToCart.bind(this));
+        });
+      }
+
+      async handleAddToCart(event) {
+        const button = event.target;
+        const column = button.closest('[data-tier]');
+        
+        const variantId1 = column.dataset.variant1;
+        const variantId2 = column.dataset.variant2;
+        const variantId3 = column.dataset.variant3;
+        const qty1 = parseInt(column.dataset.qty1) || 1;
+        const qty2 = parseInt(column.dataset.qty2) || 1;
+        const qty3 = parseInt(column.dataset.qty3) || 1;
+        const tierDiscountCode = column.dataset.discountCode;
+
+        const items = [];
+        if (variantId1) items.push({ id: parseInt(variantId1), quantity: qty1 });
+        if (variantId2) items.push({ id: parseInt(variantId2), quantity: qty2 });
+        if (variantId3) items.push({ id: parseInt(variantId3), quantity: qty3 });
+
+        if (items.length === 0) return;
+
+        button.disabled = true;
+        const originalText = button.textContent;
+        button.textContent = 'Adding...';
+
+        try {
+          const response = await fetch('/cart/add.js', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items })
+          });
+
+          if (!response.ok) throw new Error('Failed to add to cart');
+
+          button.textContent = 'Added!';
+          button.classList.add('ai-bundle-tiers__button-{{ ai_gen_id }}--success');
+
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('ai-bundle-tiers__button-{{ ai_gen_id }}--success');
+            button.disabled = false;
+          }, 2000);
+
+          const discountCode = this.discountInput ? this.discountInput.value.trim() : tierDiscountCode;
+          
+          if (discountCode) {
+            const currentPath = window.location.pathname + window.location.search;
+            window.location.href = `/discount/${encodeURIComponent(discountCode)}?redirect=${encodeURIComponent(currentPath)}`;
+          }
+
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          button.textContent = 'Error - Try again';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+        }
+      }
+    }
+
+    customElements.define('bundle-tiers-{{ ai_gen_id }}', BundleTiers{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Bundle tiers",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Global settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_global_discount_input",
+      "label": "Show global discount input",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "discount_input_label",
+      "label": "Discount input label",
+      "default": "Have a discount code?"
+    },
+    {
+      "type": "text",
+      "id": "discount_input_placeholder",
+      "label": "Discount input placeholder",
+      "default": "Enter code"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to cart"
+    },
+    {
+      "type": "header",
+      "content": "Featured badge"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Best Value"
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "column_bg_color",
+      "label": "Column background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "column_border_color",
+      "label": "Column border",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "color",
+      "id": "featured_border_color",
+      "label": "Featured border",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#545454"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "savings_color",
+      "label": "Savings",
+      "default": "#d82c0d"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#3c5949"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Success background",
+      "default": "#008060"
+    },
+    {
+      "type": "header",
+      "content": "Tier 1"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_heading",
+      "label": "Heading",
+      "default": "Starter Bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_subheading",
+      "label": "Subheading",
+      "default": "Perfect for beginners"
+    },
+    {
+      "type": "product",
+      "id": "tier_1_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "tier_1_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "tier_1_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "tier_1_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "product",
+      "id": "tier_1_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "tier_1_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "tier_1_original_price",
+      "label": "Original price text",
+      "default": "$150.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_sale_price",
+      "label": "Sale price text",
+      "default": "$99.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_savings",
+      "label": "Savings text",
+      "default": "Save $51"
+    },
+    {
+      "type": "text",
+      "id": "tier_1_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_1_featured",
+      "label": "Mark as featured",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Tier 2"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_heading",
+      "label": "Heading",
+      "default": "Popular Bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_subheading",
+      "label": "Subheading",
+      "default": "Most popular choice"
+    },
+    {
+      "type": "product",
+      "id": "tier_2_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "tier_2_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "product",
+      "id": "tier_2_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "tier_2_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "product",
+      "id": "tier_2_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "tier_2_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "text",
+      "id": "tier_2_original_price",
+      "label": "Original price text",
+      "default": "$300.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_sale_price",
+      "label": "Sale price text",
+      "default": "$179.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_savings",
+      "label": "Savings text",
+      "default": "Save $121"
+    },
+    {
+      "type": "text",
+      "id": "tier_2_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_2_featured",
+      "label": "Mark as featured",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Tier 3"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_heading",
+      "label": "Heading",
+      "default": "Premium Bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_subheading",
+      "label": "Subheading",
+      "default": "Maximum value"
+    },
+    {
+      "type": "product",
+      "id": "tier_3_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "range",
+      "id": "tier_3_qty_1",
+      "label": "Product 1 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "product",
+      "id": "tier_3_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "range",
+      "id": "tier_3_qty_2",
+      "label": "Product 2 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "product",
+      "id": "tier_3_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "range",
+      "id": "tier_3_qty_3",
+      "label": "Product 3 quantity",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "tier_3_original_price",
+      "label": "Original price text",
+      "default": "$450.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_sale_price",
+      "label": "Sale price text",
+      "default": "$249.00"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_savings",
+      "label": "Savings text",
+      "default": "Save $201"
+    },
+    {
+      "type": "text",
+      "id": "tier_3_discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "checkbox",
+      "id": "tier_3_featured",
+      "label": "Mark as featured",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle tiers"
+    }
+  ]
+}
 {% endschema %}
