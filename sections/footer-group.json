@@ -110,7 +110,7 @@
         ".gh-have-a-question {padding: 0 15px; text-align: center;}"
       ],
       "settings": {
-        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055</a><br>\n\t<a href=\"/pages/contact\" title=\"\">Contact Us</a>\n</div>\n<div class=\"footer__copyright caption\">\n        <small class=\"copyright__content\">© 2026, <a href=\"/\" title=\"\">Global Healing</a></small>\n        <small class=\"copyright__content\"><a target=\"_blank\" rel=\"nofollow\" href=\"https://www.shopify.com?utm_campaign=poweredby&amp;utm_medium=shopify&amp;utm_source=onlinestore\"></small></div>",
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055</a><br>\n\t<a href=\"/pages/contact\" title=\"\">Contact Us</a>\n</div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
         "padding_bottom": 52
