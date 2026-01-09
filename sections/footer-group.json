@@ -92,11 +92,7 @@
     },
     "custom_liquid_3qrGpi": {
       "type": "custom-liquid",
-      "custom_css": [
-        ".footer__app-badges {display: flex; justify-content: center; align-items: center; gap: 16px;}",
-        ".footer__app-badges a {display: flex; align-items: center; height: 48px;}",
-        ".footer__app-badges img {height: 100%; width: auto; display: block;}"
-      ],
+      "custom_css": [],
       "name": "t:sections.custom-liquid.presets.name",
       "settings": {
         "custom_liquid": "{% render 'gh-app-badges' %}",
