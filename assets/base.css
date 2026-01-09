@@ -3596,21 +3596,3 @@ details-disclosure > details {
     font-size: 26px;
 }
 
-/* align badges under social icons */
-.footer__app-badges-wrap{
-  width: 100%;
-  display: block;
-  margin-top: 12px;
-}
-
-.footer__app-badges{
-  display: inline-flex;  /* keep as a tight group */
-  gap: 14px;
-  align-items: center;
-}
-
-.footer__app-badges img{
-  height: 44px;
-  width: auto;
-  display: block;
-}
