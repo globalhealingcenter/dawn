@@ -48,7 +48,8 @@
     or section.settings.enable_follow_on_shop
   -%}
     {%- unless only_empty_brand -%}
-      <div class="footer__app-badges" role="navigation" aria-label="Get the Global Healing App">
+      <div class="footer__content-top page-width">
+        <div class="footer__app-badges" role="navigation" aria-label="Get the Global Healing App">
   <a href="https://0vf059r6.tapc.art/?utm_source=website&utm_medium=footer&utm_campaign=app_install" target="_blank" rel="noopener">
     <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store" loading="lazy">
   </a>
@@ -58,7 +59,6 @@
   </a>
 </div>
 
-      <div class="footer__content-top page-width">
         {%- if section.blocks.size > 0 -%}
           {%- liquid
             if section.blocks.size == 9
