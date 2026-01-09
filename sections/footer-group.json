@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.footer.name",
   "type": "footer",
@@ -5,7 +14,7 @@
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<style>\n  .gh-footer-newsletter-form{\n      display: flex;\n      justify-content: center;\n      gap: 5%;\n      align-items: center;\n      flex-wrap: wrap;\n      padding: 0 2rem;\n  }\n  .gh-footer-newsletter-form > form{\n      min-width: 300px;\n  }\n  .gh-footer-newsletter-form .input-group{\n      display: flex;\n      gap: 10px;\n      margin-bottom: 1rem;\n  }\n  .gh-footer-newsletter-form input[type=\"email\"]{\n      border: 1px solid #fff;\n      padding: 10px 15px;\n      background: transparent;\n      color: #fff;\n  }\n  .gh-footer-newsletter-form label{\n      font-size: 14px;\n  }\n  .gh-footer-newsletter-form a{\n      color: #fff\n  }\n<\/style>\n\n<div class='gh-footer-newsletter-form'>\n  <p class='h4 my2'>Your journey to health starts here.<\/p>\n  <form id=\"footer-newsletter-form\" method=\"post\" data-action=\"https:\/\/hooks.zapier.com\/hooks\/catch\/1153851\/byx96rz\/\">\n    <div class=\"pre-submit\">\n      <div class=\"input-group\">\n        <input type=\"email\" placeholder=\"Enter Your Email\" name=\"email\" required=\"\">\n        <button class=\"button button--secondary\" type=\"submit\">Sign Up<\/button>\n      <\/div>\n      <label style=\"margin-top: 10px\">\n        <input type=\"checkbox\" name=\"GDPR\" value=\"1\" required=\"\"> I agree to receive marketing emails. <a style=\"text-decoration: underline\" href=\"https:\/\/globalhealing.com\/pages\/privacy-policy\">View Privacy Policy<\/a>.\n      <\/label>\n    <\/div>\n    <div class=\"success hide\">\n      Success! You'll be receiving an email shortly.\n    <\/div>\n  <\/form>\n<\/div>\n\n<script>\n  {\n    let newsletter_form = document.getElementById('footer-newsletter-form');\n    let preSubmit = newsletter_form.querySelector('.pre-submit');\n    let success = newsletter_form.querySelector('.success');\n    let button = newsletter_form.querySelector('button');\n\n    newsletter_form.addEventListener('submit', (e) => {\n      e.preventDefault();\n      let email = newsletter_form.querySelector('[name=\"email\"]').value;\n      let url = newsletter_form.getAttribute('data-action');\n\n      button.classList.add('btn--loading');\n\n      fetch(url, {\n        method: 'post',\n        body: JSON.stringify({\n          email: email,\n          GDPR: 1\n        })\n      }).then(function (response) {\n        return response.json();\n      }).then(function (data) {\n        console.log(data);\n        preSubmit.classList.add('hide');\n        success.classList.remove('hide');\n      });\n    })\n  }\n<\/script>",
+        "custom_liquid": "<style>\n  .gh-footer-newsletter-form{\n      display: flex;\n      justify-content: center;\n      gap: 5%;\n      align-items: center;\n      flex-wrap: wrap;\n      padding: 0 2rem;\n  }\n  .gh-footer-newsletter-form > form{\n      min-width: 300px;\n  }\n  .gh-footer-newsletter-form .input-group{\n      display: flex;\n      gap: 10px;\n      margin-bottom: 1rem;\n  }\n  .gh-footer-newsletter-form input[type=\"email\"]{\n      border: 1px solid #fff;\n      padding: 10px 15px;\n      background: transparent;\n      color: #fff;\n  }\n  .gh-footer-newsletter-form label{\n      font-size: 14px;\n  }\n  .gh-footer-newsletter-form a{\n      color: #fff\n  }\n</style>\n\n<div class='gh-footer-newsletter-form'>\n  <p class='h4 my2'>Your journey to health starts here.</p>\n  <form id=\"footer-newsletter-form\" method=\"post\" data-action=\"https://hooks.zapier.com/hooks/catch/1153851/byx96rz/\">\n    <div class=\"pre-submit\">\n      <div class=\"input-group\">\n        <input type=\"email\" placeholder=\"Enter Your Email\" name=\"email\" required=\"\">\n        <button class=\"button button--secondary\" type=\"submit\">Sign Up</button>\n      </div>\n      <label style=\"margin-top: 10px\">\n        <input type=\"checkbox\" name=\"GDPR\" value=\"1\" required=\"\"> I agree to receive marketing emails. <a style=\"text-decoration: underline\" href=\"https://globalhealing.com/pages/privacy-policy\">View Privacy Policy</a>.\n      </label>\n    </div>\n    <div class=\"success hide\">\n      Success! You'll be receiving an email shortly.\n    </div>\n  </form>\n</div>\n\n<script>\n  {\n    let newsletter_form = document.getElementById('footer-newsletter-form');\n    let preSubmit = newsletter_form.querySelector('.pre-submit');\n    let success = newsletter_form.querySelector('.success');\n    let button = newsletter_form.querySelector('button');\n\n    newsletter_form.addEventListener('submit', (e) => {\n      e.preventDefault();\n      let email = newsletter_form.querySelector('[name=\"email\"]').value;\n      let url = newsletter_form.getAttribute('data-action');\n\n      button.classList.add('btn--loading');\n\n      fetch(url, {\n        method: 'post',\n        body: JSON.stringify({\n          email: email,\n          GDPR: 1\n        })\n      }).then(function (response) {\n        return response.json();\n      }).then(function (data) {\n        console.log(data);\n        preSubmit.classList.add('hide');\n        success.classList.remove('hide');\n      });\n    })\n  }\n</script>",
         "color_scheme": "accent-2",
         "padding_top": 40,
         "padding_bottom": 40
@@ -25,21 +34,21 @@
           "type": "link_list",
           "settings": {
             "heading": "Customer Care",
-            "menu": "customer-care"
+            "menu": ""
           }
         },
         "6557986c-cb7f-4da5-af8b-efa4dfdee993": {
           "type": "link_list",
           "settings": {
             "heading": "Our Story",
-            "menu": "our-story"
+            "menu": ""
           }
         },
         "e7394b27-fac4-4247-9561-3f95b7c4725b": {
           "type": "link_list",
           "settings": {
             "heading": "Our Company",
-            "menu": "our-company"
+            "menu": ""
           }
         }
       },
@@ -75,10 +84,25 @@
         ".gh-have-a-question {padding: 0 15px; text-align: center;}"
       ],
       "settings": {
-        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016<\/a><br><br>\n\t<a href=\"https:\/\/g.page\/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055<\/a><br>\n\t<a href=\"\/pages\/contact\" title=\"\">Contact Us<\/a>\n<\/div>",
+        "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055</a><br>\n\t<a href=\"/pages/contact\" title=\"\">Contact Us</a>\n</div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
-        "padding_bottom": 52
+        "padding_bottom": 4
+      }
+    },
+    "custom_liquid_3qrGpi": {
+      "type": "custom-liquid",
+      "custom_css": [
+        ".footer__app-badges {display: flex; justify-content: center; align-items: center; gap: 16px;}",
+        ".footer__app-badges a {display: flex; align-items: center; height: 48px;}",
+        ".footer__app-badges img {height: 100%; width: auto; display: block;}"
+      ],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% render 'gh-app-badges' %}",
+        "color_scheme": "accent-1",
+        "padding_top": 16,
+        "padding_bottom": 12
       }
     },
     "f2b378ac-331e-49bc-b144-696adb524db9": {
@@ -89,7 +113,7 @@
         "a {color: #fff;}"
       ],
       "settings": {
-        "custom_liquid": "<div class=\"disclaimer\">\n\t<a href=\"\/pages\/terms-of-use\" title=\"Terms of Use\">Terms of Use<\/a> | <a href=\"\/pages\/disclaimer\" title=\"Site Use &amp; Health Disclaimer\">Disclaimer<\/a> | <a href=\"\/pages\/privacy-policy\" title=\"Global Healing Privacy Policy\">Privacy Policy<\/a> | <a href=\"\/pages\/product-sitemap\" title=\"Product Sitemap\">Sitemap<\/a><br><br>\n\tAll testimonials and product reviews are authentic from actual customers. Documentation is available for legal inspection. Product reviews are within range of typicality.<br>Information and statements made are for education purposes and are not intended to replace the advice of your treating doctor. Global Healing does not dispense medical advice, prescribe, or diagnose illness. The views and nutritional advice expressed by Global Healing are not intended to be a substitute for conventional medical service. If you have a severe medical condition or health concern, see your physician. This Web site contains links to Web sites operated by other parties. Such links are provided for your convenience and reference only. We are not responsible for the content or products of any linked site or any link contained in a linked site. Global Healing does not adopt any medical claims which may have been made in 3rd party references. Where Global Healing has control over the posting or other communications of such claims to the public, Global Healing will make its best effort to remove such claims.\n<\/div>\n\n<div class=\"fda\">\n\tThese statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.\n<\/div>",
+        "custom_liquid": "<div class=\"disclaimer\">\n\t<a href=\"/pages/terms-of-use\" title=\"Terms of Use\">Terms of Use</a> | <a href=\"/pages/disclaimer\" title=\"Site Use &amp; Health Disclaimer\">Disclaimer</a> | <a href=\"/pages/privacy-policy\" title=\"Global Healing Privacy Policy\">Privacy Policy</a> | <a href=\"/pages/product-sitemap\" title=\"Product Sitemap\">Sitemap</a><br><br>\n\tAll testimonials and product reviews are authentic from actual customers. Documentation is available for legal inspection. Product reviews are within range of typicality.<br>Information and statements made are for education purposes and are not intended to replace the advice of your treating doctor. Global Healing does not dispense medical advice, prescribe, or diagnose illness. The views and nutritional advice expressed by Global Healing are not intended to be a substitute for conventional medical service. If you have a severe medical condition or health concern, see your physician. This Web site contains links to Web sites operated by other parties. Such links are provided for your convenience and reference only. We are not responsible for the content or products of any linked site or any link contained in a linked site. Global Healing does not adopt any medical claims which may have been made in 3rd party references. Where Global Healing has control over the posting or other communications of such claims to the public, Global Healing will make its best effort to remove such claims.\n</div>\n\n<div class=\"fda\">\n\tThese statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.\n</div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
         "padding_bottom": 52
@@ -100,6 +124,7 @@
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02",
     "footer",
     "1f534ab1-3f58-4e78-ba4d-d858cf22e505",
+    "custom_liquid_3qrGpi",
     "f2b378ac-331e-49bc-b144-696adb524db9"
   ]
 }
