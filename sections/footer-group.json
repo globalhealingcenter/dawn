@@ -113,7 +113,17 @@
         "custom_liquid": "<div class=\"gh-have-a-question footer__collapsible\">\n\n\tHave a question? We'd love to help!<br> <a href=\"tel:18004760016\">1-800-476-0016</a><br><br>\n\t<a href=\"https://g.page/global-healing-houston\" title=\"\">1242 N Post Oak Rd Suite 100, <br>Houston, TX 77055</a><br>\n\t<a href=\"/pages/contact\" title=\"\">Contact Us</a>\n</div>",
         "color_scheme": "accent-1",
         "padding_top": 40,
-        "padding_bottom": 52
+        "padding_bottom": 24
+      }
+    },
+    "custom_liquid_mBVCEm": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "{% render 'gh-app-badges' %}",
+        "color_scheme": "accent-1",
+        "padding_top": 12,
+        "padding_bottom": 12
       }
     },
     "f2b378ac-331e-49bc-b144-696adb524db9": {
@@ -137,6 +147,7 @@
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02",
     "footer",
     "1f534ab1-3f58-4e78-ba4d-d858cf22e505",
+    "custom_liquid_mBVCEm",
     "f2b378ac-331e-49bc-b144-696adb524db9"
   ]
 }
