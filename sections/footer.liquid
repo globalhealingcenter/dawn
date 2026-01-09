@@ -130,8 +130,8 @@
                       {%- if block.settings.show_social and has_social_icons -%}
                         {%- render 'social-icons', class: 'footer__list-social' -%}
                       {%- endif -%}
-                      {%- render 'gh-app-badges', class: 'footer__list-social' -%}
                     </div>
+                    {%- render 'gh-app-badges', class: 'footer__list-social' -%}
                   {%- when 'image' -%}
                     <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
                       {%- if block.settings.image != blank -%}
