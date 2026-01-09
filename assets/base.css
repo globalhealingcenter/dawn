@@ -3595,3 +3595,30 @@ details-disclosure > details {
 .blog-articles h3.card__heading.h2 {
     font-size: 26px;
 }
+
+.footer__app-badges-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.footer__app-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.footer__app-badges img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
+
+@media (max-width: 749px) {
+  .footer__app-badges {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
