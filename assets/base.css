@@ -3596,29 +3596,21 @@ details-disclosure > details {
     font-size: 26px;
 }
 
-.footer__app-badges-wrap {
+/* align badges under social icons */
+.footer__app-badges-wrap{
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: block;
   margin-top: 12px;
 }
 
-.footer__app-badges {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.footer__app-badges{
+  display: inline-flex;  /* keep as a tight group */
   gap: 14px;
+  align-items: center;
 }
 
-.footer__app-badges img {
+.footer__app-badges img{
   height: 44px;
   width: auto;
   display: block;
-}
-
-@media (max-width: 749px) {
-  .footer__app-badges {
-    flex-direction: column;
-    gap: 10px;
-  }
 }
