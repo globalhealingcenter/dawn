@@ -3596,3 +3596,24 @@ details-disclosure > details {
     font-size: 26px;
 }
 
+.footer__app-badges{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  width:100%;
+}
+
+.footer__app-badge{
+  display:flex;
+  align-items:center;
+  height:48px; /* one source of truth */
+}
+
+/* override Dawn img defaults that mess with SVG */
+.footer__app-badge img{
+  height:100%;
+  width:auto;
+  max-width:none;
+  display:block;
+}
