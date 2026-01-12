@@ -55,6 +55,10 @@
             "row_1_img": "https://cdn.shopify.com/s/files/1/0539/5621/4984/files/premium-ingredients-1.svg",
             "row_1_text": "<p>Quality above all. We search the world for the best, no matter the cost.</p>"
           }
+        },
+        "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
+          "disabled": true,
+          "settings": {}
         }
       }
     },
