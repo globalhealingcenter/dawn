@@ -3619,6 +3619,7 @@ details-disclosure > details {
 
 .tolstoy-stories-main-container {
     width:438px !important
+    justify-content: left;
 }
 
 /* Places Tapcart Get Our App bubble in front of product images */
