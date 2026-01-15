@@ -773,6 +773,9 @@
       },
       "about": {
         "@id": {{ request.origin | append: product.url | append: "#product" | json }}
+      },
+      "mainEntity": {
+        "@id": {{ request.origin | append: product.url | append: "#product" | json }}
       }
     },
     {
