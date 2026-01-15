@@ -740,37 +740,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "Organization",
-      "@id": {{ request.origin | append: "/#organization" | json }},
-      "name": "Global Healing",
-      "url": {{ request.origin | append: "/" | json }},
-      "telephone": "+1-800-476-0016",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "1242 N Post Oak Rd Suite 100",
-        "addressLocality": "Houston",
-        "addressRegion": "TX",
-        "postalCode": "77055",
-        "addressCountry": "US"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": {{ request.origin | append: "/#website" | json }},
-      "url": {{ request.origin | append: "/" | json }},
-      "name": "Global Healing",
-      "publisher": {
-        "@id": {{ request.origin | append: "/#organization" | json }}
-      }
-    },
-    {
       "@type": "WebPage",
       "@id": {{ request.origin | append: product.url | append: "#webpage" | json }},
       "url": {{ request.origin | append: product.url | json }},
       "name": {{ product.title | json }},
-      "isPartOf": {
-        "@id": {{ request.origin | append: "/#website" | json }}
-      },
       "about": {
         "@id": {{ request.origin | append: product.url | append: "#product" | json }}
       },
@@ -794,7 +767,9 @@
         "name": {{ product.vendor | json }}
       },
       "manufacturer": {
-        "@id": {{ request.origin | append: "/#organization" | json }}
+        "@type": "Organization",
+        "name": "Global Healing",
+        "url": {{ request.origin | append: "/" | json }}
       },
       {%- if product.selected_or_first_available_variant.sku != blank -%}
       "sku": {{ product.selected_or_first_available_variant.sku | json }},
