@@ -3604,6 +3604,8 @@ details-disclosure > details {
  .article-template__content img {float: right; width: 374px !important;} ul.related_post.wp_rp {display: flex; flex-wrap: wrap; list-style: none; padding: 0; margin: 0;} ul.related_post.wp_rp li {flex: 1 1 20%; box-sizing: border-box; padding: 10px; text-align: center;} /* NEW BLOG CSS *//* General styles for the layout */.custom-article-layout {display: flex; flex-wrap: wrap; gap: 20px; max-width: 1300px; margin: 0 auto;} .custom-article-content {flex: 1; min-width: 300px; max-width: 70%; padding-left: 122px;} .custom-sidebar {flex: 0 0 300px; max-width: 300px;border-radius: 10px;} .custom-article-content.rte article > img, .custom-article-content.rte article > header + p img {float: right;} /* Styles for mobile responsiveness */@media (max-width: 768px) {.custom-article-layout {flex-direction: column; } .custom-article-content, .custom-sidebar {max-width: 100%; padding-right: 50px; padding-left: 50px; }} /* NEW BLOG CSS END */
 
 
+
+
 /* Tolstoy homepage styling revisions */
 
 .tolstoy-product-tile-button svg rect {
@@ -3616,6 +3618,50 @@ details-disclosure > details {
     font-family: var(--gh-font-secondary) !important;
 }
 
+.tolstoy-product-content{
+    overflow:visible !important;
+    background-color:#F9F2E8 !important;
+
+}
+.tolstoy-product-tile-image{
+    position: absolute !important;
+    padding:10px !important;
+    background:#FAECE1 !important;
+    object-fit:contain !important;
+    aspect-ratio:1/1 !important;
+    border-radius:10px !important;
+    top:-40px !important;
+    left:12px !important;
+    height:unset !important;
+}
+.tolstoy-product-tile > div > div {
+    padding-left:12px !important;
+    height:unset !important;
+}
+.tolstoy-product-tile-subtitle {
+    color:red !important;
+}
+.tolstoy-product-tile-button{
+    display:none !important;
+}
+.tolstoy-carousel-container {
+    max-width:1060px !important;
+    margin:0 auto !important;
+}
+.tolstoy-product-content{
+    border-radius:0 0 20px 20px !important;
+}
+.tolstoy-carousel-video {
+    border-radius:20px 20px 0px 0px !important;
+}
+
+.tolstoy-product-tile-price { 
+  color:#545454 !important;
+}
+
+.tolstoy-carousel-videos-container {
+  overflow-y:hidden !important;
+}
 
 /* Places Tapcart Get Our App bubble in front of product images */
 
