@@ -49,7 +49,7 @@
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
           "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
-            "publishId": "q0unfkc3w7j0l"
+            "publishId": "qoqax285bu91b"
           }
         },
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
@@ -199,16 +199,16 @@
             "name": "Gift",
             "color": "#000000",
             "icon_color": "#000000",
-            "progress_bar_color": "#119E52",
+            "progress_bar_color": "#119e52",
             "font_size": 14,
             "icon_size": 14,
             "text_align": "center",
-            "discount_background_color": "#E7F5EE",
+            "discount_background_color": "#e7f5ee",
             "discount_padding_y": 10,
             "discount_padding_x": 10,
-            "badge_background_color": "#119E52",
-            "badge_color": "#FFFFFF",
-            "badge_icon_color": "#FFFFFF",
+            "badge_background_color": "#119e52",
+            "badge_color": "#ffffff",
+            "badge_icon_color": "#ffffff",
             "badge_border_radius": 48,
             "badge_font_size": 12,
             "badge_icon_size": 10,
@@ -217,9 +217,9 @@
             "discount_title_font_size": 14,
             "discount_price_font_size": 12,
             "add_variant_color": "#000000",
-            "add_variant_text_color": "#FFFFFF",
+            "add_variant_text_color": "#ffffff",
             "add_variant_disabled_color": "#000000",
-            "add_variant_disabled_text_color": "#FFFFFF"
+            "add_variant_disabled_text_color": "#ffffff"
           }
         }
       },
