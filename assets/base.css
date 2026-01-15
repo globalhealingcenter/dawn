@@ -3617,11 +3617,6 @@ details-disclosure > details {
 }
 
 
-._stories_1v61q_1 {
-    width:438px !important
-    justify-content: left;
-}
-
 /* Places Tapcart Get Our App bubble in front of product images */
 
 #tc-capture-kit { z-index: 998 !important; }
