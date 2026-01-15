@@ -3616,6 +3616,11 @@ details-disclosure > details {
     font-family: var(--gh-font-secondary) !important;
 }
 
+
+.tolstoy-stories-main-container {
+    width:438px !important
+}
+
 /* Places Tapcart Get Our App bubble in front of product images */
 
 #tc-capture-kit { z-index: 998 !important; }
@@ -3641,3 +3646,4 @@ details-disclosure > details {
   max-width:none;
   display:block;
 }
+
