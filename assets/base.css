@@ -3605,7 +3605,6 @@ details-disclosure > details {
 
 
 
-
 /* Tolstoy homepage styling revisions */
 
 .tolstoy-product-tile-button svg rect {
@@ -3662,6 +3661,11 @@ details-disclosure > details {
 .tolstoy-carousel-videos-container {
   overflow-y:hidden !important;
 }
+
+.tolstoy-stories-main-container {
+    width:438px !important;
+}
+
 
 /* Places Tapcart Get Our App bubble in front of product images */
 
