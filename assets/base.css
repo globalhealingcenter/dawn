@@ -3693,7 +3693,7 @@ div[id^="shopify-block-"][id*="tolstoy"] {
 }
 
 /* Rebuy: remove the 1300px clamp so it can match Tolstoy */
-body.template-index div[id^="rebuy-widget-"] .rebuy-widget-content { 
+.ghd-home-page div[id^="rebuy-widget-"] .rebuy-widget-content { 
   max-width: none !important; width: 100% !important; 
 }
 
