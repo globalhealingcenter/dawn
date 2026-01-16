@@ -3692,6 +3692,13 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   }
 }
 
+@media (max-width: 768px) {
+  .tolstoy-carousel-center-tile,
+  .tolstoy-carousel-tile {
+    gap: 0 !important;
+  }
+}
+
 /* Homepage: keep Rebuy aligned with the main content column (not full-bleed) */
 #rebuy-widget-108417,
 #rebuy-widget-108417 .rebuy-widget-container,
