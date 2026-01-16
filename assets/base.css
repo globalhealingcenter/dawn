@@ -3707,6 +3707,36 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-bottom: 56px;
 }
 
+/* --- Tolstoy: remove the seam/gap between video + product panel (mobile) --- */
+@media (max-width: 768px) {
+  /* kill any vertical spacing added by mobile layout */
+  .tolstoy-carousel-video {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    display: block !important;
+  }
+
+  .tolstoy-product-content,
+  ._productTextContainer_4t3oi_14 {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* if Tolstoy uses a flex wrapper with a gap, this nukes it */
+  .tolstoy-product-tile,
+  .tolstoy-carousel-video-container,
+  .tolstoy-carousel-videos-container {
+    row-gap: 0 !important;
+    gap: 0 !important;
+  }
+
+  /* tiny overlap to hide any 1px hairline that can show on mobile */
+  .tolstoy-product-content {
+    position: relative;
+    top: -1px;
+  }
+}
+
 /* Space after the Our Process band before Most Loved Products */
 .ghd--our-process {
   margin-bottom: 72px;
