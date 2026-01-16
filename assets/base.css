@@ -3666,6 +3666,13 @@ details-disclosure > details {
     width:438px !important;
 }
 
+/* Tolstoy shoppable video carousel spacing */
+#shopify-block-AMGULZNVc2FwWK0Qe,
+#shopify-block-AMGULZNVc2FwWK0Qe > div {
+  padding-top: 48px;
+  padding-bottom: 64px;
+}
+
 
 /* Places Tapcart Get Our App bubble in front of product images */
 
