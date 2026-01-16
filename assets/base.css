@@ -3702,6 +3702,21 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-right: auto !important;
 }
 
+/* Space after Tolstoy */
+div[id^="shopify-block-"][id*="tolstoy"] {
+  margin-bottom: 56px;
+}
+
+/* Space after the Our Process band before Most Loved Products */
+.ghd--our-process {
+  margin-bottom: 72px;
+}
+
+@media (max-width: 768px) {
+  div[id^="shopify-block-"][id*="tolstoy"] { margin-bottom: 40px; }
+  .ghd--our-process { margin-bottom: 48px; }
+}
+
 
 /* Places Tapcart Get Our App bubble in front of product images */
 
