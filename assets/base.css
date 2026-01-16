@@ -3669,7 +3669,7 @@ details-disclosure > details {
 /* Tolstoy carousel spacing (targets any Tolstoy app block on the page) */
 div[id^="shopify-block-"][id*="tolstoy"] {
   padding-top: 48px !important;
-  padding-bottom: 64px !important;
+  padding-bottom: 72px !important;
 }
 
 
