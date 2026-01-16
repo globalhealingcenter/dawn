@@ -3623,13 +3623,13 @@ details-disclosure > details {
 
 }
 .tolstoy-product-tile-image{
-    /* position: absolute !important; */
+    position: absolute !important;
     padding:10px !important;
     background:#FAECE1 !important;
     object-fit:contain !important;
     aspect-ratio:1/1 !important;
     border-radius:10px !important;
-    /* top:-40px !important; */
+    top:-40px !important;
     left:12px !important;
     height:unset !important;
 }
@@ -3702,56 +3702,6 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-right: auto !important;
 }
 
-/* MOBILE ONLY */
-@media (max-width: 768px) {
-  /* 1) Make the product info bar shorter + align content */
-  .tolstoy-product-tile-info {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    padding: 10px 12px !important;
-    height: 74px !important;          /* adjust: 68–78 */
-    box-sizing: border-box !important;
-  }
-
-  /* 2) Force the product image to NOT be an overlay */
-  .tolstoy-product-tile-image {
-    position: static !important;      /* key fix */
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    inset: auto !important;
-    transform: none !important;
-
-    width: 46px !important;
-    height: 46px !important;
-    flex: 0 0 46px !important;
-
-    padding: 0 !important;            /* remove extra box size */
-    object-fit: contain !important;
-    border-radius: 10px !important;
-    background: #FAECE1 !important;
-  }
-
-  /* 3) Make sure text sits to the right and doesn’t get shoved */
-  .tolstoy-product-tile-text,
-  .tolstoy-product-tile-title-container {
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-  }
-
-  /* 4) Tighten title/price spacing so it fits the shorter bar */
-  .tolstoy-product-tile-title {
-    margin: 0 !important;
-    line-height: 1.15 !important;
-  }
-
-  .tolstoy-product-tile-price {
-    margin-top: 4px !important;
-    line-height: 1.1 !important;
-  }
-}
 
 
 /* Space after Tolstoy */
