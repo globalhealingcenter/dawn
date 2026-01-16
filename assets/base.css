@@ -3666,11 +3666,10 @@ details-disclosure > details {
     width:438px !important;
 }
 
-/* Tolstoy shoppable video carousel spacing */
-#shopify-block-AMGULZNVc2FwWK0Qe,
-#shopify-block-AMGULZNVc2FwWK0Qe > div {
-  padding-top: 48px;
-  padding-bottom: 64px;
+/* Tolstoy carousel spacing (targets any Tolstoy app block on the page) */
+div[id^="shopify-block-"][id*="tolstoy"] {
+  padding-top: 48px !important;
+  padding-bottom: 64px !important;
 }
 
 
