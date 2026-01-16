@@ -3692,10 +3692,10 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   }
 }
 
-/* Homepage only – make Rebuy match Tolstoy width */
-.template-index .rebuy-widget-content {
-  max-width: none;
-  width: 100%;
+/* Rebuy: remove the 1300px clamp so it can match Tolstoy */
+div[id^="rebuy-widget-"] .rebuy-widget-content {
+  max-width: none !important;
+  width: 100% !important;
 }
 
 
