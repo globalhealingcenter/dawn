@@ -3707,50 +3707,6 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-bottom: 56px;
 }
 
-/* =========================
-   Tolstoy MOBILE FIX PACK
-   (flush seam + shorter card + thumbnail not overlapping text)
-   ========================= */
-@media (max-width: 768px) {
-
-  /* 1) Make video + product panel flush (remove the seam/gap) */
-  .tolstoy-carousel-video {
-    margin: 0 !important;
-    border-bottom-left-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-  }
-
-  .tolstoy-product-content {
-    margin: 0 !important;
-    padding: 0 !important;
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-
-    /* If Tolstoy inserts a 1px gap, this hides it */
-    transform: translateY(-1px) !important;
-  }
-
-  /* 2) Shorten the *entire bottom product area* (the “name/price card”) */
-  ._productTextContainer_4t3oi_14 {
-    padding: 10px 12px !important;   /* was 20px 0 */
-  }
-
-  /* 3) Fix the thumbnail overlapping the title:
-        remove absolute positioning + use a compact inline layout */
-  .tolstoy-product-tile-image {
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-
-    padding: 0 !important;
-    background: transparent !important;
-
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 12px !important;
-    object-fit: contain !important;
-    aspect-ratio: 1 / 1 !important;
-    flex: 0 0 44px !important;
 
 /* Space after the Our Process band before Most Loved Products */
 .ghd--our-process {
