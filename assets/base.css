@@ -3707,19 +3707,69 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-bottom: 56px;
 }
 
-/* --- Tolstoy: shorter on mobile by reducing width (keeps aspect ratio) --- */
+/* --- Tolstoy: MOBILE fixes (gap + image overlap + shorter video) --- */
 @media (max-width: 768px) {
-  .tolstoy-stories-main-container {
-    width: 92vw !important;
-    max-width: 340px !important; /* good target for iPhone 14 Pro Max */
-    margin-left: auto !important;
-    margin-right: auto !important;
+  /* 1) Kill the seam/gap between video and product panel */
+  .tolstoy-carousel-video {
+    display: block !important;      /* prevents baseline gap */
+    margin: 0 !important;
+    line-height: 0 !important;      /* also helps baseline gaps */
+    background: #F9F2E8 !important;
   }
 
-  /* ensure the video area scales cleanly */
+  .tolstoy-product-content {
+    margin-top: -1px !important;    /* hides 1px seams from rounding */
+  }
+
+  /* 2) Make the story/video shorter BUT keep aspect ratio:
+        reduce width (height follows naturally) */
   .tolstoy-carousel-video {
+    width: min(78vw, 320px) !important;   /* tweak 78vw / 320px if needed */
+    margin-left: auto !important;
+    margin-right: auto !important;
+    aspect-ratio: 9 / 16 !important;      /* keeps correct story ratio */
+    overflow: hidden !important;
+  }
+
+  /* If Tolstoy uses an inner <video> or <iframe>, keep it filling */
+  .tolstoy-carousel-video video,
+  .tolstoy-carousel-video iframe {
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+
+  /* 3) Stop product image overlapping title:
+        remove absolute positioning + use grid */
+  .tolstoy-product-tile > div > div {
+    padding-left: 0 !important; /* undo the desktop offset */
+  }
+
+  .tolstoy-product-content {
+    display: grid !important;
+    grid-template-columns: 56px 1fr !important;
+    column-gap: 12px !important;
+    align-items: start !important;
+    padding: 14px 14px 16px !important;
+  }
+
+  .tolstoy-product-tile-image {
+    position: static !important;     /* <-- key: no more overlap */
+    top: auto !important;
+    left: auto !important;
+    width: 56px !important;
+    height: 56px !important;
+    padding: 6px !important;
+    border-radius: 12px !important;
+    background: #FAECE1 !important;
+    object-fit: contain !important;
+  }
+
+  /* Ensure title/price sit nicely next to the image */
+  .tolstoy-product-tile-title,
+  .tolstoy-product-tile-price {
+    margin: 0 !important;
   }
 }
 
