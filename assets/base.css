@@ -3692,6 +3692,12 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   }
 }
 
+/* Homepage only – make Rebuy match Tolstoy width */
+.template-index .rebuy-widget-content {
+  max-width: none;
+  width: 100%;
+}
+
 
 /* Places Tapcart Get Our App bubble in front of product images */
 
