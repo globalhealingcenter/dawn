@@ -3623,13 +3623,13 @@ details-disclosure > details {
 
 }
 .tolstoy-product-tile-image{
-    position: absolute !important;
+    /* position: absolute !important; */
     padding:10px !important;
     background:#FAECE1 !important;
     object-fit:contain !important;
     aspect-ratio:1/1 !important;
     border-radius:10px !important;
-    top:-40px !important;
+    /* top:-40px !important; */
     left:12px !important;
     height:unset !important;
 }
@@ -3701,6 +3701,119 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   margin-left: auto !important;
   margin-right: auto !important;
 }
+
+/* =========================
+   Tolstoy: MOBILE card layout fix
+   - remove gap
+   - shorten video
+   - correct product tile position (no overlap)
+   ========================= */
+
+@media (max-width: 768px) {
+  /* Scope to Tolstoy block so we don't affect other stuff */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-carousel-container {
+    max-width: 100% !important;
+  }
+
+  /* 1) Make the video area shorter on mobile */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-carousel-video {
+    display: block !important;
+    width: 100% !important;
+
+    /* shorter, but responsive */
+    height: clamp(280px, 52vh, 360px) !important;
+
+    border-radius: 20px 20px 0 0 !important;
+    overflow: hidden !important;
+
+    /* kill any spacing that can create a seam */
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Ensure the actual media fills that height */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-carousel-video video,
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-carousel-video img,
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-carousel-video iframe {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* 2) Make product section flush to the video (no gap) + shorter */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-content {
+    margin: 0 !important;
+    padding: 10px 12px 12px !important; /* shorter bar */
+    background-color: #F9F2E8 !important;
+
+    border-radius: 0 0 20px 20px !important;
+
+    /* if there's a 1px seam, this kills it */
+    position: relative !important;
+    top: -1px !important;
+  }
+
+  /* Some Tolstoy builds add padding inside a generated text container (hashed class) */
+  div[id^="shopify-block-"][id*="tolstoy"] [class*="productTextContainer"] {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 3) Rebuild the product tile layout (no absolute positioning) */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+
+    /* keep it compact */
+    min-height: 56px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Remove left padding Tolstoy may inject on the inner wrapper */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile > div > div {
+    padding-left: 0 !important;
+    height: auto !important;
+  }
+
+  /* Product thumbnail: bottom-left, NOT floating into the video */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile-image {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px !important;
+
+    padding: 0 !important;
+    background: #FAECE1 !important;
+    border-radius: 12px !important;
+
+    object-fit: contain !important;
+  }
+
+  /* Title + price tighter so the whole bar is shorter */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile-title {
+    font-family: var(--gh-font-secondary) !important;
+    line-height: 1.15 !important;
+    margin: 0 !important;
+  }
+
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile-price {
+    line-height: 1.15 !important;
+    margin: 2px 0 0 !important;
+    color: #545454 !important;
+  }
+
+  /* optional: hide the button (you already do this) */
+  div[id^="shopify-block-"][id*="tolstoy"] .tolstoy-product-tile-button {
+    display: none !important;
+  }
+}
+
 
 /* Space after Tolstoy */
 div[id^="shopify-block-"][id*="tolstoy"] {
