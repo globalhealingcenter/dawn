@@ -138,6 +138,36 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "176892419327f84047": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_8ce25f7_LrDNRJ": {
+          "type": "ai_gen_block_8ce25f7",
+          "settings": {
+            "image": "shopify://shop_images/why-everyone-needs-a-parasite-cleanse.png",
+            "image_border_radius": 0,
+            "title": "Restore Balance from Within",
+            "paragraph": "<p>Step into a new chapter of health by addressing the root causes of hidden fatigue, brain fog, and chronic illness. This course empowers you to detox your body from the parasites that thrive in toxic environments, disrupting your health and energy. By following Dr. Edward Group’s proven methods, you’ll cleanse your body from the inside out, restoring balance, vitality, and a sense of well-being you may not have experienced in years. Reclaim control over your health, boost your immune system, and unlock the vibrant, energized life you deserve. The path to true healing begins here.</p>",
+            "text_alignment": "center",
+            "title_color": "#545454",
+            "title_size": 28,
+            "paragraph_color": "#545454",
+            "paragraph_size": 16,
+            "spacing_image_title": 24,
+            "spacing_title_paragraph": 16,
+            "padding_top": 40,
+            "padding_bottom": 40,
+            "padding_horizontal": 20,
+            "max_width": 800
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_8ce25f7_LrDNRJ"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -146,6 +176,7 @@
     "shogun-optimizer",
     "image_banner_8He8RB",
     "176781772470b0327d",
+    "176892419327f84047",
     "rich_text_6r3fyp"
   ]
 }
