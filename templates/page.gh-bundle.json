@@ -152,22 +152,53 @@
         "text_9kaNLa": {
           "type": "text",
           "settings": {
-            "text": "<p>PLEASE NOTE: Products offered on this page are available to you through a special Affiliate Program with the PTL. We may use “cookies” to track your purchases for the sole purpose of providing an affiliate commission to help support the PTL. If requested, please “Allow Cookies” so that the PTL will be blessed with your love gift.</p>"
+            "text": "<p>PLEASE NOTE: Products offered on this page are available to you through a special Affiliate Program with the PTL. We may use “cookies” to track your purchases for the sole purpose of providing an affiliate commission to help support the PTL. If requested, please “Allow Cookies” so that the PTL will be blessed with your love gift.</p><p></p>"
           }
         }
       },
       "block_order": [
         "text_9kaNLa"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
         "content_alignment": "center",
-        "color_scheme": "",
+        "color_scheme": "background-1",
         "full_width": true,
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "176892479617856e41": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_ff2394f_Bd4Rxg": {
+          "type": "ai_gen_block_ff2394f",
+          "settings": {
+            "content": "<p>PLEASE NOTE: Products offered on this page are available to you through a special Affiliate Program with the PTL. We may use “cookies” to track your purchases for the sole purpose of providing an affiliate commission to help support the PTL. If requested, please “Allow Cookies” so that the PTL will be blessed with your love gift.</p><p></p>",
+            "text_color": "#545454",
+            "font_size": 16,
+            "line_height": 1.5,
+            "text_align": "center",
+            "desktop_width_percent": 100,
+            "desktop_padding_top": 40,
+            "desktop_padding_bottom": 40,
+            "desktop_padding_left": 0,
+            "desktop_padding_right": 0,
+            "mobile_padding_top": 24,
+            "mobile_padding_bottom": 24,
+            "mobile_padding_left": 0,
+            "mobile_padding_right": 0,
+            "custom_css": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_ff2394f_Bd4Rxg"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -177,6 +208,7 @@
     "image_banner_8He8RB",
     "176781772470b0327d",
     "176892419327f84047",
-    "rich_text_6r3fyp"
+    "rich_text_6r3fyp",
+    "176892479617856e41"
   ]
 }
