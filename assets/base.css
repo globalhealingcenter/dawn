@@ -3754,3 +3754,16 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   display:block;
 }
 
+/* Force announcement bar to show */
+#shopify-section-announcement-bar,
+.announcement-bar-section,
+.announcement-bar,
+.shopify-section--announcement-bar,
+.site-header__announcement,
+.utility-bar,
+.header__utility-bar {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+}
