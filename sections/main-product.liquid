@@ -718,50 +718,73 @@
     endif
   -%}
 
-  <script type="application/ld+json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "http://schema.org/",
-      "@type": "Product",
+      "@type": "WebPage",
+      "@id": {{ request.origin | append: product.url | append: "#webpage" | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      "name": {{ product.title | json }},
+      "about": {
+        "@id": {{ request.origin | append: product.url | append: "#product" | json }}
+      },
+      "mainEntity": {
+        "@id": {{ request.origin | append: product.url | append: "#product" | json }}
+      }
+    },
+    {
+      "@type": "DietarySupplement",
+      "@id": {{ request.origin | append: product.url | append: "#product" | json }},
       "name": {{ product.title | json }},
       "url": {{ request.origin | append: product.url | json }},
-      {% if seo_media -%}
-        "image": [
-          {{ seo_media | image_url: width: 1920 | prepend: "https:" | json }}
-        ],
-      {%- endif %}
+      {%- if seo_media -%}
+      "image": [
+        {{ seo_media | image_url: width: 1920 | prepend: "https:" | json }}
+      ],
+      {%- endif -%}
       "description": {{ product.description | strip_html | json }},
-      {% if product.selected_or_first_available_variant.sku != blank -%}
-        "sku": {{ product.selected_or_first_available_variant.sku | json }},
-      {%- endif %}
       "brand": {
         "@type": "Brand",
         "name": {{ product.vendor | json }}
       },
+      "manufacturer": {
+        "@type": "Organization",
+        "name": "Global Healing",
+        "url": {{ request.origin | append: "/" | json }}
+      },
+      {%- if product.selected_or_first_available_variant.sku != blank -%}
+      "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif -%}
       "offers": [
         {%- for variant in product.variants -%}
           {
-            "@type" : "Offer",
+            "@type": "Offer",
+            "url": {{ request.origin | append: variant.url | json }},
+            "priceCurrency": {{ cart.currency.iso_code | json }},
+            "price": {{ variant.price | divided_by: 100.00 | json }},
+            "availability": "https://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "itemCondition": "https://schema.org/NewCondition"
             {%- if variant.sku != blank -%}
-              "sku": {{ variant.sku | json }},
+              ,"sku": {{ variant.sku | json }}
             {%- endif -%}
-  {%- if variant.barcode.size == 12 -%}
-              "gtin12": {{ variant.barcode }},
+            {%- if variant.barcode != blank and variant.barcode.size == 12 -%}
+              ,"gtin12": {{ variant.barcode | json }}
             {%- endif -%}
-  {%- if variant.barcode.size == 13 -%}
-              "gtin13": {{ variant.barcode }},
+            {%- if variant.barcode != blank and variant.barcode.size == 13 -%}
+              ,"gtin13": {{ variant.barcode | json }}
             {%- endif -%}
-  {%- if variant.barcode.size == 14 -%}
-              "gtin14": {{ variant.barcode }},
+            {%- if variant.barcode != blank and variant.barcode.size == 14 -%}
+              ,"gtin14": {{ variant.barcode | json }}
             {%- endif -%}
-            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
-            "price" : {{ variant.price | divided_by: 100.00 | json }},
-            "priceCurrency" : {{ cart.currency.iso_code | json }},
-            "url" : {{ request.origin | append: variant.url | json }}
           }{% unless forloop.last %},{% endunless %}
-    {%- endfor -%}
+        {%- endfor -%}
       ]
     }
-  </script>
+  ]
+}
+</script>
 </section>
 
 {% comment %}
