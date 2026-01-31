@@ -26,6 +26,14 @@
       </a>
     </li>
   {%- endif -%}
+  {%- if settings.social_threads_link != blank -%}
+  <li class="list-social__item">
+    <a href="{{ settings.social_threads_link }}" class="link list-social__link">
+      {%- render 'icon-threads' -%}
+      <span class="visually-hidden">Threads</span>
+    </a>
+  </li>
+  {%- endif -%}
   {%- if settings.social_youtube_link != blank -%}
     <li class="list-social__item">
       <a href="{{ settings.social_youtube_link }}" class="link list-social__link">
@@ -83,13 +91,5 @@
         <span class="visually-hidden">{{ 'general.social.links.vimeo' | t }}</span>
       </a>
     </li>
-  {%- endif -%}
-  {%- if settings.social_threads_link != blank -%}
-  <li class="list-social__item">
-    <a href="{{ settings.social_threads_link }}" class="link list-social__link">
-      {%- render 'icon-threads' -%}
-      <span class="visually-hidden">Threads</span>
-    </a>
-  </li>
   {%- endif -%}
 </ul>
