@@ -230,6 +230,7 @@
               </div>
             {%- endif -%}
             <ul class="list list-social list-unstyled" role="list">
+              {%- comment -%}
               {%- if settings.social_twitter_link != blank -%}
                 <li class="list-social__item">
                   <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
@@ -238,6 +239,7 @@
                   </a>
                 </li>
               {%- endif -%}
+              {%- endcomment -%}
               {%- if settings.social_facebook_link != blank -%}
                 <li class="list-social__item">
                   <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
@@ -259,6 +261,14 @@
                   <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
                     {%- render 'icon-instagram' -%}
                     <span class="visually-hidden">{{ 'general.social.links.instagram' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_threads_link != blank -%}
+                <li class="list-social__item">
+                   <a href="{{ settings.social_threads_link }}" class="link list-social__link">
+                   {%- render 'icon-threads' -%}
+                   <span class="visually-hidden">Threads</span>
                   </a>
                 </li>
               {%- endif -%}
