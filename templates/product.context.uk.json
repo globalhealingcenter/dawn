@@ -16,16 +16,16 @@
     "main": {
       "settings": {},
       "blocks": {
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
+          "disabled": true,
+          "settings": {}
+        },
         "price": {
           "disabled": false,
           "settings": {}
         },
         "ordergroove_offer": {
-          "disabled": true,
-          "settings": {}
-        },
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
-          "disabled": true,
+          "disabled": false,
           "settings": {}
         }
       }
