@@ -25,7 +25,7 @@
           "settings": {}
         },
         "ordergroove_offer": {
-          "disabled": true,
+          "disabled": false,
           "settings": {}
         }
       }
