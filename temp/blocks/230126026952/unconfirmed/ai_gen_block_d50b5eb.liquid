@@ -1,6 +1,1023 @@
+{% doc %}
+  @prompt
+    Got it. I’ll give you (1) a clear recommendation on layout and (2) a ready-to-paste Shopify AI prompt that’s scoped, performant, and flexible as collections evolve.
+    
+    1. Layout Recommendation (what to build)
+    Recommended: Image + Text Grid (Primary) + Text List (Secondary)
+    
+    Why this is the right balance for GH:
+    
+    Visual tiles help discovery + brand storytelling
+    
+    Text list keeps it scannable and SEO-friendly
+    
+    Future-proof when health goals change
+    
+    Works cleanly on mobile without feeling dense
+    
+    Lets homepage feature top 5, while this page shows everything
+    
+    Structure
+    
+    Above the fold
+    
+    Headline + short intro (mission-driven, non-clinical)
+    
+    Optional subhead reinforcing personalization
+    
+    Main section
+    
+    Responsive grid of collection cards
+    
+    Image
+    
+    Collection name
+    
+    1-line benefit descriptor
+    
+    Entire card clickable
+    
+    Secondary section (below grid)
+    
+    Simple text list of all health goals (alphabetical or grouped)
+    
+    Lightweight fallback for power users + SEO
+    
+    Why not list-only
+    
+    Feels utilitarian, not premium
+    
+    Misses education + brand opportunity
+    
+    Lower engagement for exploratory users
+    
+    Why not image-only
+    
+    Accessibility + SEO loss
+    
+    Harder to scan quickly
+    
+    Risky if images aren’t consistent yet
+    
+    2. Shopify AI Prompt (ready to paste)
+    
+    You can drop this directly into Shopify AI → Generate Page.
+    
+    SHOPIFY AI PROMPT
+    
+    Create a conversion-focused landing page that displays all product subcollections for a health and wellness brand.
+    
+    Page goal:
+    Help customers explore and discover products by health goal in a clear, premium, and scannable way, while keeping the layout flexible as collections change over time.
+    
+    Brand tone:
+    Calm, trustworthy, premium, educational, and customer-first. Avoid medical claims. Focus on support, balance, and holistic wellness.
+    
+    Page structure:
+    
+    Hero section
+    
+    Headline communicating personalization and wellness support
+    
+    Short supporting paragraph explaining that products are organized by health goals to help customers find what fits their needs
+    
+    Health Goals Collection Grid
+    
+    Responsive grid of collection cards
+    
+    Each card includes:
+    
+    Collection image
+    
+    Collection name
+    
+    Short 1-line descriptor (benefit-focused, non-clinical)
+    
+    Entire card should link to the collection page
+    
+    Grid should scale easily as collections are added or removed
+    
+    Browse All Health Goals (Text List)
+    
+    Clean, text-based list of all health goal collections below the grid
+    
+    Designed for quick scanning and SEO support
+    
+    CTA section
+    
+    Encourage users who aren’t sure where to start to browse all products or shop the full collection
+    
+    UX & design notes:
+    
+    Mobile-first layout
+    
+    Clean spacing, readable typography
+    
+    No heavy animations or scripts
+    
+    Fast-loading and accessible. make images and collection names link to /collections/collections
+    
+    Collections to include (can be placeholders):
+    
+    Cleanse & Detox
+    
+    Energy
+    
+    Brain Health
+    
+    Mood & Sleep
+    
+    Immune Health
+    
+    Gut Health
+    
+    Hormone Support
+    
+    Skin Care
+    
+    Use placeholder images and copy that can be easily swapped later.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-health-goals-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    padding: {{ block.settings.section_padding_top }}px 0 {{ block.settings.section_padding_bottom }}px;
+  }
+
+  .ai-health-goals-container-{{ ai_gen_id }} {
+    max-width: {{ block.settings.container_width }}px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-health-goals-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-health-goals-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+
+  .ai-health-goals-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .ai-health-goals-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: {{ block.settings.list_spacing }}px;
+  }
+
+  .ai-health-goals-card-{{ ai_gen_id }} {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+    border-radius: {{ block.settings.card_corner_radius }}px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-health-goals-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+  }
+
+  .ai-health-goals-card-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: {{ block.settings.image_ratio }}%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+    border-radius: {{ block.settings.card_corner_radius }}px;
+  }
+
+  .ai-health-goals-card-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-health-goals-card-image-wrapper-{{ ai_gen_id }} svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-health-goals-card-content-{{ ai_gen_id }} {
+    padding: 16px 0;
+  }
+
+  .ai-health-goals-card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .ai-health-goals-card-description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_description_size }}px;
+    color: {{ block.settings.text_color }};
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .ai-health-goals-text-list-{{ ai_gen_id }} {
+    background-color: {{ block.settings.list_background_color }};
+    border-radius: {{ block.settings.card_corner_radius }}px;
+    padding: 32px;
+  }
+
+  .ai-health-goals-list-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.list_heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 20px;
+    font-weight: 600;
+    text-align: {{ block.settings.text_alignment }};
+  }
+
+  .ai-health-goals-list-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.list_columns_desktop }}, 1fr);
+    gap: 12px 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .ai-health-goals-list-item-{{ ai_gen_id }} {
+    margin: 0;
+  }
+
+  .ai-health-goals-list-link-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.list_text_size }}px;
+    transition: color 0.2s ease;
+    display: inline-block;
+  }
+
+  .ai-health-goals-list-link-{{ ai_gen_id }}:hover {
+    color: {{ block.settings.heading_color }};
+    text-decoration: underline;
+  }
+
+  .ai-health-goals-cta-{{ ai_gen_id }} {
+    text-align: center;
+    margin-top: {{ block.settings.cta_spacing }}px;
+  }
+
+  .ai-health-goals-cta-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.cta_text_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+  }
+
+  .ai-health-goals-cta-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 14px 32px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  .ai-health-goals-cta-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-health-goals-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ai-health-goals-list-{{ ai_gen_id }} {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ai-health-goals-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.85);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-health-goals-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding_top | times: 0.7 }}px 0 {{ block.settings.section_padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-health-goals-grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
+    }
+
+    .ai-health-goals-list-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+    }
+
+    .ai-health-goals-heading-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.7);
+    }
+
+    .ai-health-goals-text-list-{{ ai_gen_id }} {
+      padding: 24px 20px;
+    }
+  }
+{% endstyle %}
+
+<health-goals-{{ ai_gen_id }} class="ai-health-goals-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-health-goals-container-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank or block.settings.subheading != blank %}
+      <div class="ai-health-goals-header-{{ ai_gen_id }}">
+        {% if block.settings.heading != blank %}
+          <h2 class="ai-health-goals-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+        {% endif %}
+        {% if block.settings.subheading != blank %}
+          <div class="ai-health-goals-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_grid %}
+      <div class="ai-health-goals-grid-{{ ai_gen_id }}">
+        {% for i in (1..8) %}
+          {% liquid
+            assign collection_key = 'collection_' | append: i
+            assign title_key = 'collection_' | append: i | append: '_title'
+            assign description_key = 'collection_' | append: i | append: '_description'
+            assign image_key = 'collection_' | append: i | append: '_image'
+            
+            assign collection = block.settings[collection_key]
+            assign custom_title = block.settings[title_key]
+            assign custom_description = block.settings[description_key]
+            assign custom_image = block.settings[image_key]
+          %}
+
+          {% if collection != blank %}
+            <a href="{{ collection.url }}" class="ai-health-goals-card-{{ ai_gen_id }}">
+              <div class="ai-health-goals-card-image-wrapper-{{ ai_gen_id }}">
+                {% if custom_image != blank %}
+                  <img
+                    src="{{ custom_image | image_url: width: 600 }}"
+                    alt="{{ custom_image.alt | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
+                    class="ai-health-goals-card-image-{{ ai_gen_id }}"
+                  >
+                {% elsif collection.image %}
+                  <img
+                    src="{{ collection.image | image_url: width: 600 }}"
+                    alt="{{ collection.image.alt | escape }}"
+                    loading="lazy"
+                    width="600"
+                    height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
+                    class="ai-health-goals-card-image-{{ ai_gen_id }}"
+                  >
+                {% else %}
+                  {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+              <div class="ai-health-goals-card-content-{{ ai_gen_id }}">
+                <h3 class="ai-health-goals-card-title-{{ ai_gen_id }}">
+                  {% if custom_title != blank %}
+                    {{ custom_title }}
+                  {% else %}
+                    {{ collection.title }}
+                  {% endif %}
+                </h3>
+                {% if custom_description != blank %}
+                  <p class="ai-health-goals-card-description-{{ ai_gen_id }}">{{ custom_description }}</p>
+                {% endif %}
+              </div>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_text_list %}
+      <div class="ai-health-goals-text-list-{{ ai_gen_id }}">
+        {% if block.settings.list_heading != blank %}
+          <h3 class="ai-health-goals-list-heading-{{ ai_gen_id }}">{{ block.settings.list_heading }}</h3>
+        {% endif %}
+        <ul class="ai-health-goals-list-{{ ai_gen_id }}">
+          {% for i in (1..8) %}
+            {% liquid
+              assign collection_key = 'collection_' | append: i
+              assign title_key = 'collection_' | append: i | append: '_title'
+              
+              assign collection = block.settings[collection_key]
+              assign custom_title = block.settings[title_key]
+            %}
+
+            {% if collection != blank %}
+              <li class="ai-health-goals-list-item-{{ ai_gen_id }}">
+                <a href="{{ collection.url }}" class="ai-health-goals-list-link-{{ ai_gen_id }}">
+                  {% if custom_title != blank %}
+                    {{ custom_title }}
+                  {% else %}
+                    {{ collection.title }}
+                  {% endif %}
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if block.settings.show_cta %}
+      <div class="ai-health-goals-cta-{{ ai_gen_id }}">
+        {% if block.settings.cta_text != blank %}
+          <p class="ai-health-goals-cta-text-{{ ai_gen_id }}">{{ block.settings.cta_text }}</p>
+        {% endif %}
+        {% if block.settings.cta_button_text != blank and block.settings.cta_button_link != blank %}
+          <a href="{{ block.settings.cta_button_link }}" class="ai-health-goals-cta-button-{{ ai_gen_id }}">
+            {{ block.settings.cta_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</health-goals-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class HealthGoals{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        const cards = this.querySelectorAll('.ai-health-goals-card-{{ ai_gen_id }}');
+        cards.forEach(card => {
+          card.setAttribute('role', 'link');
+        });
+      }
+    }
+
+    customElements.define('health-goals-{{ ai_gen_id }}', HealthGoals{{ ai_gen_id }});
+  })();
+</script>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Health goals grid",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Health Goal"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "<p>Discover products organized by health goals to help you find what fits your wellness needs.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Collection grid"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_grid",
+      "label": "Show collection grid",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_1_title",
+      "label": "Collection 1 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_1_description",
+      "label": "Collection 1 description",
+      "default": "Support your body's natural cleansing processes"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_1_image",
+      "label": "Collection 1 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_2_title",
+      "label": "Collection 2 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_2_description",
+      "label": "Collection 2 description",
+      "default": "Boost vitality and maintain healthy energy levels"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_2_image",
+      "label": "Collection 2 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_3_title",
+      "label": "Collection 3 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_3_description",
+      "label": "Collection 3 description",
+      "default": "Enhance focus, memory, and cognitive function"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_3_image",
+      "label": "Collection 3 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_4_title",
+      "label": "Collection 4 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_4_description",
+      "label": "Collection 4 description",
+      "default": "Promote restful sleep and emotional balance"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_4_image",
+      "label": "Collection 4 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_5",
+      "label": "Collection 5"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_5_title",
+      "label": "Collection 5 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_5_description",
+      "label": "Collection 5 description",
+      "default": "Strengthen your body's natural defenses"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_5_image",
+      "label": "Collection 5 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_6",
+      "label": "Collection 6"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_6_title",
+      "label": "Collection 6 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_6_description",
+      "label": "Collection 6 description",
+      "default": "Support digestive wellness and microbiome balance"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_6_image",
+      "label": "Collection 6 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_7",
+      "label": "Collection 7"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_7_title",
+      "label": "Collection 7 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_7_description",
+      "label": "Collection 7 description",
+      "default": "Maintain healthy hormonal balance naturally"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_7_image",
+      "label": "Collection 7 custom image"
+    },
+    {
+      "type": "collection",
+      "id": "collection_8",
+      "label": "Collection 8"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "collection_8_title",
+      "label": "Collection 8 custom title"
+    },
+    {
+      "type": "text",
+      "id": "collection_8_description",
+      "label": "Collection 8 description",
+      "default": "Nourish skin health from within"
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_8_image",
+      "label": "Collection 8 custom image"
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_ratio",
+      "label": "Image aspect ratio",
+      "min": 50,
+      "max": 150,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Text list"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_text_list",
+      "label": "Show text list",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "list_heading",
+      "label": "List heading",
+      "default": "Browse All Health Goals"
+    },
+    {
+      "type": "range",
+      "id": "list_columns_desktop",
+      "label": "List columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "list_spacing",
+      "label": "Space above list",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show call to action",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "<p>Not sure where to start? Browse all products or explore our full collection.</p>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cta_button_text",
+      "label": "Button text",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "cta_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "cta_spacing",
+      "label": "Space above CTA",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "container_width",
+      "label": "Container width",
+      "min": 1000,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "default": 1300
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Card title size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "card_description_size",
+      "label": "Card description size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "list_heading_size",
+      "label": "List heading size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "list_text_size",
+      "label": "List text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "cta_text_size",
+      "label": "CTA text size",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Button text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#545454"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#545454"
+    },
+    {
+      "type": "color",
+      "id": "list_background_color",
+      "label": "List background",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#21472d"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#3c5949"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "card_corner_radius",
+      "label": "Card corner radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Health goals grid"
+    }
+  ]
+}
 {% endschema %}
