@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
     "main": {
       "type": "main-page",
       "settings": {
@@ -16,18 +20,92 @@
         "padding_bottom": 28
       }
     },
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "settings": {}
-    },
     "shogun-optimizer": {
       "type": "shogun-optimizer",
+      "settings": {}
+    },
+    "1770745897e6344e20": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_d50b5eb_awXiih": {
+          "type": "ai_gen_block_d50b5eb",
+          "settings": {
+            "heading": "Shop by Health Goal",
+            "subheading": "<p>Discover products organized by health goals to help you find what fits your wellness needs.</p>",
+            "text_alignment": "center",
+            "header_spacing": 48,
+            "show_grid": true,
+            "collection_1": "organic-gut-health-supplements",
+            "collection_1_title": "Gut Health",
+            "collection_1_description": "Support your body's natural cleansing processes",
+            "collection_1_image": "shopify://shop_images/3000w_9c31996a-3cd4-4634-9058-feed0a836457.png",
+            "collection_2": "brain-health",
+            "collection_2_title": "",
+            "collection_2_description": "Boost vitality and maintain healthy energy levels",
+            "collection_3": "",
+            "collection_3_title": "",
+            "collection_3_description": "Enhance focus, memory, and cognitive function",
+            "collection_4": "",
+            "collection_4_title": "",
+            "collection_4_description": "Promote restful sleep and emotional balance",
+            "collection_5": "",
+            "collection_5_title": "",
+            "collection_5_description": "Strengthen your body's natural defenses",
+            "collection_6": "",
+            "collection_6_title": "",
+            "collection_6_description": "Support digestive wellness and microbiome balance",
+            "collection_7": "",
+            "collection_7_title": "",
+            "collection_7_description": "Maintain healthy hormonal balance naturally",
+            "collection_8": "",
+            "collection_8_title": "",
+            "collection_8_description": "Nourish skin health from within",
+            "columns_desktop": 4,
+            "columns_mobile": "2",
+            "grid_gap": 20,
+            "image_ratio": 100,
+            "show_text_list": true,
+            "list_heading": "Browse All Health Goals",
+            "list_columns_desktop": 3,
+            "list_spacing": 48,
+            "show_cta": true,
+            "cta_text": "<p>Not sure where to start? Browse all products or explore our full collection.</p>",
+            "cta_button_text": "Shop All Products",
+            "cta_button_link": "",
+            "cta_spacing": 48,
+            "container_width": 1300,
+            "section_padding_top": 60,
+            "section_padding_bottom": 60,
+            "heading_size": 40,
+            "subheading_size": 16,
+            "card_title_size": 18,
+            "card_description_size": 14,
+            "list_heading_size": 24,
+            "list_text_size": 15,
+            "cta_text_size": 16,
+            "button_text_size": 15,
+            "heading_color": "#545454",
+            "text_color": "#545454",
+            "list_background_color": "#e3d2be",
+            "button_background": "#21472d",
+            "button_text_color": "#ffffff",
+            "button_hover_background": "#3c5949",
+            "card_corner_radius": 10,
+            "button_border_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_d50b5eb_awXiih"
+      ],
       "settings": {}
     }
   },
   "order": [
     "shogun-helper",
     "main",
-    "shogun-optimizer"
+    "shogun-optimizer",
+    "1770745897e6344e20"
   ]
 }
