@@ -1,11 +1,9 @@
 {% doc %}
-  Health goals grid (URL image version)
-  - Uses image URL fields instead of image_picker
-  - Card image area is white
-  - Title/description are inside the same card with matching bottom radii
-  - Title/description centered
-  - Card shadow added
-  - Heading color forced to #21472d
+  Health goals grid (URL image version) + 3 Pillars grouping
+  - Keeps your existing “collection_1...collection_12” settings model
+  - Adds a “Pillar” dropdown for each collection setting
+  - Renders 3 grouped sections with pillar headings
+  - Keeps your existing URL image support
 {% enddoc %}
 
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
@@ -44,6 +42,16 @@
     margin: 0 auto;
   }
 
+  /* PILLAR HEADING */
+  .ai-health-goals-pillar-heading-{{ ai_gen_id }}{
+    margin: 10px 0 18px;
+    font-size: 26px;
+    line-height: 1.2;
+    font-weight: 600;
+    color: #21472d;
+    text-align: left;
+  }
+
   .ai-health-goals-grid-{{ ai_gen_id }} {
     display: grid;
     grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
@@ -68,13 +76,13 @@
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
   }
 
-  /* IMAGE AREA: white background, top radii match card */
+  /* IMAGE AREA: white background */
   .ai-health-goals-card-image-wrapper-{{ ai_gen_id }} {
     position: relative;
     width: 100%;
     padding-bottom: {{ block.settings.image_ratio }}%;
     overflow: hidden;
-    background-color: #ffffff; /* requested */
+    background-color: #ffffff;
   }
 
   .ai-health-goals-card-image-{{ ai_gen_id }} {
@@ -82,7 +90,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* product-style look; switch to cover if preferred */
+    object-fit: contain;
     background: #ffffff;
   }
 
@@ -94,19 +102,18 @@
     object-fit: contain;
   }
 
-  /* CONTENT AREA: inside same card, with bottom radii matching card */
   .ai-health-goals-card-content-{{ ai_gen_id }} {
     padding: 18px 18px 20px;
-    text-align: center; /* requested */
+    text-align: center;
     background: #ffffff;
   }
 
   .ai-health-goals-card-title-{{ ai_gen_id }} {
     font-size: {{ block.settings.card_title_size }}px;
-    color: {{ block.settings.heading_color }};
+    color: #21472d; /* force */
     margin: 0 0 8px;
     font-weight: 600;
-    text-align: center; /* requested */
+    text-align: center;
   }
 
   .ai-health-goals-card-description-{{ ai_gen_id }} {
@@ -114,7 +121,7 @@
     color: {{ block.settings.text_color }};
     line-height: 1.5;
     margin: 0;
-    text-align: center; /* requested */
+    text-align: center;
   }
 
   /* TEXT LIST */
@@ -126,7 +133,7 @@
 
   .ai-health-goals-list-heading-{{ ai_gen_id }} {
     font-size: {{ block.settings.list_heading_size }}px;
-    color: {{ block.settings.heading_color }};
+    color: #21472d;
     margin: 0 0 20px;
     font-weight: 600;
     text-align: {{ block.settings.text_alignment }};
@@ -154,7 +161,7 @@
   }
 
   .ai-health-goals-list-link-{{ ai_gen_id }}:hover {
-    color: {{ block.settings.heading_color }};
+    color: #21472d;
     text-decoration: underline;
   }
 
@@ -187,17 +194,9 @@
   }
 
   @media screen and (max-width: 989px) {
-    .ai-health-goals-grid-{{ ai_gen_id }} {
-      grid-template-columns: repeat(3, 1fr);
-    }
-
-    .ai-health-goals-list-{{ ai_gen_id }} {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    .ai-health-goals-heading-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.heading_size }}px * 0.85);
-    }
+    .ai-health-goals-grid-{{ ai_gen_id }} { grid-template-columns: repeat(3, 1fr); }
+    .ai-health-goals-list-{{ ai_gen_id }} { grid-template-columns: repeat(2, 1fr); }
+    .ai-health-goals-heading-{{ ai_gen_id }} { font-size: calc({{ block.settings.heading_size }}px * 0.85); }
   }
 
   @media screen and (max-width: 749px) {
@@ -210,17 +209,10 @@
       gap: {{ block.settings.grid_gap | times: 0.75 }}px;
     }
 
-    .ai-health-goals-list-{{ ai_gen_id }} {
-      grid-template-columns: 1fr;
-    }
-
-    .ai-health-goals-heading-{{ ai_gen_id }} {
-      font-size: calc({{ block.settings.heading_size }}px * 0.7);
-    }
-
-    .ai-health-goals-text-list-{{ ai_gen_id }} {
-      padding: 24px 20px;
-    }
+    .ai-health-goals-list-{{ ai_gen_id }} { grid-template-columns: 1fr; }
+    .ai-health-goals-heading-{{ ai_gen_id }} { font-size: calc({{ block.settings.heading_size }}px * 0.7); }
+    .ai-health-goals-text-list-{{ ai_gen_id }} { padding: 24px 20px; }
+    .ai-health-goals-pillar-heading-{{ ai_gen_id }} { font-size: 22px; }
   }
 {% endstyle %}
 
@@ -238,69 +230,104 @@
     {% endif %}
 
     {% if block.settings.show_grid %}
-      <div class="ai-health-goals-grid-{{ ai_gen_id }}">
+
+      {% assign pillars = "daily_foundations,energy_metabolic,brain_mood_hormones" | split: "," %}
+
+      {% for pillar in pillars %}
+        {%- comment -%} check if this pillar has at least 1 configured collection {%- endcomment -%}
+        {% assign has_pillar_items = false %}
         {% for i in (1..12) %}
           {% liquid
             assign collection_key = 'collection_' | append: i
-            assign title_key = 'collection_' | append: i | append: '_title'
-            assign description_key = 'collection_' | append: i | append: '_description'
-            assign image_url_key = 'collection_' | append: i | append: '_image_url'
-
+            assign pillar_key = 'collection_' | append: i | append: '_pillar'
             assign collection = block.settings[collection_key]
-            assign custom_title = block.settings[title_key]
-            assign custom_description = block.settings[description_key]
-            assign custom_image_url = block.settings[image_url_key]
+            assign item_pillar = block.settings[pillar_key]
           %}
-
-          {% if collection != blank %}
-            {% capture card_alt %}
-              {% if custom_title != blank %}{{ custom_title }}{% else %}{{ collection.title }}{% endif %}
-            {% endcapture %}
-
-            <a href="{{ collection.url }}" class="ai-health-goals-card-{{ ai_gen_id }}">
-              <div class="ai-health-goals-card-image-wrapper-{{ ai_gen_id }}">
-                {% if custom_image_url != blank %}
-                  <img
-                    src="{{ custom_image_url | escape }}"
-                    alt="{{ card_alt | strip_html | escape }}"
-                    loading="lazy"
-                    decoding="async"
-                    width="600"
-                    height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
-                    class="ai-health-goals-card-image-{{ ai_gen_id }}"
-                  >
-                {% elsif collection.image %}
-                  <img
-                    src="{{ collection.image | image_url: width: 600 }}"
-                    alt="{{ collection.image.alt | escape }}"
-                    loading="lazy"
-                    decoding="async"
-                    width="600"
-                    height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
-                    class="ai-health-goals-card-image-{{ ai_gen_id }}"
-                  >
-                {% else %}
-                  {{ 'collection-apparel-1' | placeholder_svg_tag }}
-                {% endif %}
-              </div>
-
-              <div class="ai-health-goals-card-content-{{ ai_gen_id }}">
-                <h3 class="ai-health-goals-card-title-{{ ai_gen_id }}">
-                  {% if custom_title != blank %}
-                    {{ custom_title }}
-                  {% else %}
-                    {{ collection.title }}
-                  {% endif %}
-                </h3>
-
-                {% if custom_description != blank %}
-                  <p class="ai-health-goals-card-description-{{ ai_gen_id }}">{{ custom_description }}</p>
-                {% endif %}
-              </div>
-            </a>
+          {% if collection != blank and item_pillar == pillar %}
+            {% assign has_pillar_items = true %}
+            {% break %}
           {% endif %}
         {% endfor %}
-      </div>
+
+        {% if has_pillar_items %}
+
+          {% if pillar == 'daily_foundations' %}
+            <h3 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}">Daily Foundations</h3>
+          {% elsif pillar == 'energy_metabolic' %}
+            <h3 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}">Energy &amp; Metabolic Health</h3>
+          {% elsif pillar == 'brain_mood_hormones' %}
+            <h3 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}">Brain, Mood &amp; Hormones</h3>
+          {% endif %}
+
+          <div class="ai-health-goals-grid-{{ ai_gen_id }}">
+            {% for i in (1..12) %}
+              {% liquid
+                assign collection_key = 'collection_' | append: i
+                assign title_key = 'collection_' | append: i | append: '_title'
+                assign description_key = 'collection_' | append: i | append: '_description'
+                assign image_url_key = 'collection_' | append: i | append: '_image_url'
+                assign pillar_key = 'collection_' | append: i | append: '_pillar'
+
+                assign collection = block.settings[collection_key]
+                assign custom_title = block.settings[title_key]
+                assign custom_description = block.settings[description_key]
+                assign custom_image_url = block.settings[image_url_key]
+                assign item_pillar = block.settings[pillar_key]
+              %}
+
+              {% if collection != blank and item_pillar == pillar %}
+                {% capture card_alt %}
+                  {% if custom_title != blank %}{{ custom_title }}{% else %}{{ collection.title }}{% endif %}
+                {% endcapture %}
+
+                <a href="{{ collection.url }}" class="ai-health-goals-card-{{ ai_gen_id }}">
+                  <div class="ai-health-goals-card-image-wrapper-{{ ai_gen_id }}">
+                    {% if custom_image_url != blank %}
+                      <img
+                        src="{{ custom_image_url | escape }}"
+                        alt="{{ card_alt | strip_html | escape }}"
+                        loading="lazy"
+                        decoding="async"
+                        width="600"
+                        height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
+                        class="ai-health-goals-card-image-{{ ai_gen_id }}"
+                      >
+                    {% elsif collection.image %}
+                      <img
+                        src="{{ collection.image | image_url: width: 600 }}"
+                        alt="{{ collection.image.alt | escape }}"
+                        loading="lazy"
+                        decoding="async"
+                        width="600"
+                        height="{{ 600 | times: block.settings.image_ratio | divided_by: 100 }}"
+                        class="ai-health-goals-card-image-{{ ai_gen_id }}"
+                      >
+                    {% else %}
+                      {{ 'collection-apparel-1' | placeholder_svg_tag }}
+                    {% endif %}
+                  </div>
+
+                  <div class="ai-health-goals-card-content-{{ ai_gen_id }}">
+                    <h3 class="ai-health-goals-card-title-{{ ai_gen_id }}">
+                      {% if custom_title != blank %}
+                        {{ custom_title }}
+                      {% else %}
+                        {{ collection.title }}
+                      {% endif %}
+                    </h3>
+
+                    {% if custom_description != blank %}
+                      <p class="ai-health-goals-card-description-{{ ai_gen_id }}">{{ custom_description }}</p>
+                    {% endif %}
+                  </div>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+        {% endif %}
+      {% endfor %}
+
     {% endif %}
 
     {% if block.settings.show_text_list %}
@@ -309,29 +336,57 @@
           <h3 class="ai-health-goals-list-heading-{{ ai_gen_id }}">{{ block.settings.list_heading }}</h3>
         {% endif %}
 
-        <ul class="ai-health-goals-list-{{ ai_gen_id }}">
+        {% assign pillars = "daily_foundations,energy_metabolic,brain_mood_hormones" | split: "," %}
+
+        {% for pillar in pillars %}
+          {% assign has_pillar_items = false %}
           {% for i in (1..12) %}
             {% liquid
               assign collection_key = 'collection_' | append: i
-              assign title_key = 'collection_' | append: i | append: '_title'
-
+              assign pillar_key = 'collection_' | append: i | append: '_pillar'
               assign collection = block.settings[collection_key]
-              assign custom_title = block.settings[title_key]
+              assign item_pillar = block.settings[pillar_key]
             %}
-
-            {% if collection != blank %}
-              <li class="ai-health-goals-list-item-{{ ai_gen_id }}">
-                <a href="{{ collection.url }}" class="ai-health-goals-list-link-{{ ai_gen_id }}">
-                  {% if custom_title != blank %}
-                    {{ custom_title }}
-                  {% else %}
-                    {{ collection.title }}
-                  {% endif %}
-                </a>
-              </li>
+            {% if collection != blank and item_pillar == pillar %}
+              {% assign has_pillar_items = true %}
+              {% break %}
             {% endif %}
           {% endfor %}
-        </ul>
+
+          {% if has_pillar_items %}
+
+            {% if pillar == 'daily_foundations' %}
+              <h4 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}" style="margin-top: 0;">Daily Foundations</h4>
+            {% elsif pillar == 'energy_metabolic' %}
+              <h4 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}" style="margin-top: 0;">Energy &amp; Metabolic Health</h4>
+            {% elsif pillar == 'brain_mood_hormones' %}
+              <h4 class="ai-health-goals-pillar-heading-{{ ai_gen_id }}" style="margin-top: 0;">Brain, Mood &amp; Hormones</h4>
+            {% endif %}
+
+            <ul class="ai-health-goals-list-{{ ai_gen_id }}" style="margin-bottom: 22px;">
+              {% for i in (1..12) %}
+                {% liquid
+                  assign collection_key = 'collection_' | append: i
+                  assign title_key = 'collection_' | append: i | append: '_title'
+                  assign pillar_key = 'collection_' | append: i | append: '_pillar'
+
+                  assign collection = block.settings[collection_key]
+                  assign custom_title = block.settings[title_key]
+                  assign item_pillar = block.settings[pillar_key]
+                %}
+
+                {% if collection != blank and item_pillar == pillar %}
+                  <li class="ai-health-goals-list-item-{{ ai_gen_id }}">
+                    <a href="{{ collection.url }}" class="ai-health-goals-list-link-{{ ai_gen_id }}">
+                      {% if custom_title != blank %}{{ custom_title }}{% else %}{{ collection.title }}{% endif %}
+                    </a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+
+          {% endif %}
+        {% endfor %}
       </div>
     {% endif %}
 
@@ -384,62 +439,206 @@
     { "type": "header", "content": "Collection grid" },
     { "type": "checkbox", "id": "show_grid", "label": "Show collection grid", "default": true },
 
+    /* ========== COLLECTION 1 ========== */
     { "type": "collection", "id": "collection_1", "label": "Collection 1" },
+    {
+      "type": "select",
+      "id": "collection_1_pillar",
+      "label": "Collection 1 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "daily_foundations"
+    },
     { "type": "inline_richtext", "id": "collection_1_title", "label": "Collection 1 custom title" },
     { "type": "text", "id": "collection_1_description", "label": "Collection 1 description", "default": "Support your body's natural cleansing processes" },
     { "type": "url", "id": "collection_1_image_url", "label": "Collection 1 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 2 ========== */
     { "type": "collection", "id": "collection_2", "label": "Collection 2" },
+    {
+      "type": "select",
+      "id": "collection_2_pillar",
+      "label": "Collection 2 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "daily_foundations"
+    },
     { "type": "inline_richtext", "id": "collection_2_title", "label": "Collection 2 custom title" },
     { "type": "text", "id": "collection_2_description", "label": "Collection 2 description", "default": "Boost vitality and maintain healthy energy levels" },
     { "type": "url", "id": "collection_2_image_url", "label": "Collection 2 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 3 ========== */
     { "type": "collection", "id": "collection_3", "label": "Collection 3" },
+    {
+      "type": "select",
+      "id": "collection_3_pillar",
+      "label": "Collection 3 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "brain_mood_hormones"
+    },
     { "type": "inline_richtext", "id": "collection_3_title", "label": "Collection 3 custom title" },
     { "type": "text", "id": "collection_3_description", "label": "Collection 3 description", "default": "Support focus, memory, and cognitive performance" },
     { "type": "url", "id": "collection_3_image_url", "label": "Collection 3 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 4 ========== */
     { "type": "collection", "id": "collection_4", "label": "Collection 4" },
+    {
+      "type": "select",
+      "id": "collection_4_pillar",
+      "label": "Collection 4 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "brain_mood_hormones"
+    },
     { "type": "inline_richtext", "id": "collection_4_title", "label": "Collection 4 custom title" },
     { "type": "text", "id": "collection_4_description", "label": "Collection 4 description", "default": "Promote restful sleep and emotional balance" },
     { "type": "url", "id": "collection_4_image_url", "label": "Collection 4 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 5 ========== */
     { "type": "collection", "id": "collection_5", "label": "Collection 5" },
+    {
+      "type": "select",
+      "id": "collection_5_pillar",
+      "label": "Collection 5 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "daily_foundations"
+    },
     { "type": "inline_richtext", "id": "collection_5_title", "label": "Collection 5 custom title" },
     { "type": "text", "id": "collection_5_description", "label": "Collection 5 description", "default": "Support your body's natural defenses" },
     { "type": "url", "id": "collection_5_image_url", "label": "Collection 5 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 6 ========== */
     { "type": "collection", "id": "collection_6", "label": "Collection 6" },
+    {
+      "type": "select",
+      "id": "collection_6_pillar",
+      "label": "Collection 6 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "daily_foundations"
+    },
     { "type": "inline_richtext", "id": "collection_6_title", "label": "Collection 6 custom title" },
     { "type": "text", "id": "collection_6_description", "label": "Collection 6 description", "default": "Support digestive wellness and microbiome balance" },
     { "type": "url", "id": "collection_6_image_url", "label": "Collection 6 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 7 ========== */
     { "type": "collection", "id": "collection_7", "label": "Collection 7" },
+    {
+      "type": "select",
+      "id": "collection_7_pillar",
+      "label": "Collection 7 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "brain_mood_hormones"
+    },
     { "type": "inline_richtext", "id": "collection_7_title", "label": "Collection 7 custom title" },
     { "type": "text", "id": "collection_7_description", "label": "Collection 7 description", "default": "Maintain healthy hormonal balance naturally" },
     { "type": "url", "id": "collection_7_image_url", "label": "Collection 7 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 8 ========== */
     { "type": "collection", "id": "collection_8", "label": "Collection 8" },
+    {
+      "type": "select",
+      "id": "collection_8_pillar",
+      "label": "Collection 8 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "brain_mood_hormones"
+    },
     { "type": "inline_richtext", "id": "collection_8_title", "label": "Collection 8 custom title" },
     { "type": "text", "id": "collection_8_description", "label": "Collection 8 description", "default": "Nourish skin health from within" },
     { "type": "url", "id": "collection_8_image_url", "label": "Collection 8 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 9 ========== */
     { "type": "collection", "id": "collection_9", "label": "Collection 9" },
+    {
+      "type": "select",
+      "id": "collection_9_pillar",
+      "label": "Collection 9 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "energy_metabolic"
+    },
     { "type": "inline_richtext", "id": "collection_9_title", "label": "Collection 9 custom title" },
     { "type": "text", "id": "collection_9_description", "label": "Collection 9 description", "default": "Add a short, non-clinical benefit line" },
     { "type": "url", "id": "collection_9_image_url", "label": "Collection 9 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 10 ========== */
     { "type": "collection", "id": "collection_10", "label": "Collection 10" },
+    {
+      "type": "select",
+      "id": "collection_10_pillar",
+      "label": "Collection 10 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "energy_metabolic"
+    },
     { "type": "inline_richtext", "id": "collection_10_title", "label": "Collection 10 custom title" },
     { "type": "text", "id": "collection_10_description", "label": "Collection 10 description", "default": "Add a short, non-clinical benefit line" },
     { "type": "url", "id": "collection_10_image_url", "label": "Collection 10 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 11 ========== */
     { "type": "collection", "id": "collection_11", "label": "Collection 11" },
+    {
+      "type": "select",
+      "id": "collection_11_pillar",
+      "label": "Collection 11 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "energy_metabolic"
+    },
     { "type": "inline_richtext", "id": "collection_11_title", "label": "Collection 11 custom title" },
     { "type": "text", "id": "collection_11_description", "label": "Collection 11 description", "default": "Add a short, non-clinical benefit line" },
     { "type": "url", "id": "collection_11_image_url", "label": "Collection 11 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
 
+    /* ========== COLLECTION 12 ========== */
     { "type": "collection", "id": "collection_12", "label": "Collection 12" },
+    {
+      "type": "select",
+      "id": "collection_12_pillar",
+      "label": "Collection 12 pillar",
+      "options": [
+        { "value": "daily_foundations", "label": "Daily Foundations" },
+        { "value": "energy_metabolic", "label": "Energy & Metabolic Health" },
+        { "value": "brain_mood_hormones", "label": "Brain, Mood & Hormones" }
+      ],
+      "default": "energy_metabolic"
+    },
     { "type": "inline_richtext", "id": "collection_12_title", "label": "Collection 12 custom title" },
     { "type": "text", "id": "collection_12_description", "label": "Collection 12 description", "default": "Add a short, non-clinical benefit line" },
     { "type": "url", "id": "collection_12_image_url", "label": "Collection 12 image URL", "info": "Paste a full image URL (e.g. https://cdn.shopify.com/...)" },
