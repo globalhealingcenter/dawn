@@ -25,7 +25,7 @@
           "type": "hero",
           "settings": {
             "image_obj": "shopify://shop_images/art-of-detox-desktop-banner.jpg",
-            "image_mobile_obj": "shopify://shop_images/art-of-detox-mobile-banner.jpg",
+            "image_mobile_obj": "shopify://shop_images/art-of-detox-desktop-banner.jpg",
             "url": "https://globalhealing.com/pages/art-of-detox?utm_source=site&utm_medium=homepagebanner&utm_campaign=art_of_detox&utm_content=aod"
           }
         },
@@ -36,13 +36,9 @@
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "type": "banners",
           "settings": {
-            "banner_1_image_obj": "shopify://shop_images/nad-desktop-october-2025-banner.jpg",
-            "banner_1_image_mobile_obj": "shopify://shop_images/nad-mobile-october-2025-banner.jpg",
             "image_is_2x": false,
             "banner_1_url": "https://globalhealing.com/products/nad?utm_source=site&utm_medium=homepagebanner&utm_campaign=nad_launch&utm_content=nad",
-            "banner_2_image_obj": "shopify://shop_images/featured-blog-10282025.png",
             "banner_2_url": "/blogs/education/gut-cleanse",
-            "banner_3_image_obj": "shopify://shop_images/page-homepage-banner-3-inside-the-facility.jpg",
             "banner_3_url": "shopify://blogs/education/inside-the-facility-thats-redefining-supplement-manufacturing"
           }
         },
@@ -80,7 +76,7 @@
             "link_2_text": "",
             "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
-            "link_list": "homepage-menu"
+            "link_list": ""
           }
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
