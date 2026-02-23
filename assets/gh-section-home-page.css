@@ -86,6 +86,54 @@ section h3.eyebrow span{
       width: 64.5%;
 }
 
+/* Hero Carousel (homepage banners) - 1430×475px, fixed aspect-ratio for CLS */
+.ghd--hero-carousel { padding-top: 4rem; padding-bottom: 4rem; }
+.gh-hero-carousel { position: relative; width: 100%; }
+.gh-hero-carousel__track-container {
+  position: relative; overflow: hidden; border-radius: 8px;
+  max-width: 1430px; margin: 0 auto;
+}
+.gh-hero-carousel__track {
+  display: flex; width: 100%; height: 100%;
+  scroll-snap-type: x mandatory; overflow-x: auto; overflow-y: hidden;
+  scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.gh-hero-carousel__track::-webkit-scrollbar { display: none; }
+.gh-hero-slide {
+  flex: 0 0 100%; width: 100%; height: 100%;
+  scroll-snap-align: start; scroll-snap-stop: always;
+  position: relative;
+}
+.gh-hero-slide__link { display: block; width: 100%; height: 100%; text-decoration: none; }
+.gh-hero-slide__media { width: 100%; height: 100%; position: relative; }
+.gh-hero-slide__media--mobile { display: none; }
+.gh-hero-slide__media--desktop { display: block; }
+.gh-hero-slide__img,
+.gh-hero-slide__video { width: 100%; height: 100%; object-fit: cover; display: block; vertical-align: middle; }
+.gh-hero-slide__img--lazy:not([src]) {
+  min-height: 1px;
+  background: linear-gradient(-45deg, #fff, var(--gh-color-green-light), #fff, var(--gh-color-green-light));
+  background-size: 400% 400%;
+}
+.gh-hero-carousel__btn {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
+  width: 48px; height: 48px; border-radius: 50%; border: none;
+  background: rgba(255,255,255,0.6); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gh-color-green); transition: background 0.2s, color 0.2s;
+}
+.gh-hero-carousel__btn:hover { background: rgba(255,255,255,0.9); color: var(--gh-color-green-dark); }
+.gh-hero-carousel__btn--prev { left: 16px; }
+.gh-hero-carousel__btn--next { right: 16px; }
+@media (max-width: 749px) {
+  .gh-hero-slide__media--desktop { display: none; }
+  .gh-hero-slide__media--mobile { display: block; }
+  .gh-hero-carousel__track-container { aspect-ratio: 4/3; }
+  .gh-hero-carousel__btn { width: 40px; height: 40px; left: 8px; }
+  .gh-hero-carousel__btn--next { right: 8px; }
+}
+
 /*
     OUR PROCESS / QUALITY
 */
