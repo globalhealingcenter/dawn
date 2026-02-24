@@ -123,7 +123,7 @@ section h3.eyebrow span {
 .ghd--hero-carousel__headline-line-1 {
     font-size: clamp(2rem, 4.1667vw, 5rem);
     font-weight: 700;
-    color: var(--gh-color-green, #006337);
+    color: var(--gh-color-green, #22472D);
     text-transform: uppercase;
     letter-spacing: 0.02em;
     line-height: 1;
@@ -131,7 +131,7 @@ section h3.eyebrow span {
 
 .ghd--hero-carousel__headline-line-2 {
     font-size: clamp(2rem, 5.3125vw, 6.375rem);
-    color: var(--gh-color-green, #006337);
+    color: var(--gh-color-green, #22472D);
     line-height: 1;
 }
 
@@ -154,7 +154,7 @@ section h3.eyebrow span {
 .ghd--hero-carousel__review-text {
     font-size: clamp(1.125rem, 1.5625vw, 1.875rem);
     font-weight: 400;
-    color: var(--gh-color-green, #006337);
+    color: var(--gh-color-green, #22472D);
     text-align: right;
     line-height: 1.3;
 }
