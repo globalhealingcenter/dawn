@@ -152,11 +152,6 @@
     },
     "content_for_index": [],
     "blocks": {
-      "9271244056961380716": {
-        "type": "shopify://apps/discount-kit/blocks/core/baf3f84c-ff2c-442d-a0fc-e8e16b834acd",
-        "disabled": true,
-        "settings": {}
-      },
       "11735689235857492391": {
         "type": "shopify://apps/algolia-search-and-discovery/blocks/autocomplete/57bb7f86-d5fe-4d43-96ca-3953324494cf",
         "disabled": false,
@@ -173,16 +168,6 @@
           "utm_term": true,
           "ref": true
         }
-      },
-      "17428600031447253342": {
-        "type": "shopify://apps/attentive/blocks/attn-tag/8df62c72-8fe4-407e-a5b3-72132be30a0d",
-        "disabled": false,
-        "settings": {}
-      },
-      "1248957848723945065": {
-        "type": "shopify://apps/mntn/blocks/tracking-pixel/d40b5b2f-bf84-4a06-b576-832ad24a8652",
-        "disabled": false,
-        "settings": {}
       },
       "7570552984445421165": {
         "type": "shopify://apps/yotpo-product-reviews-ugc/blocks/settings/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
@@ -202,23 +187,8 @@
         "disabled": false,
         "settings": {}
       },
-      "1373006865992778634": {
-        "type": "shopify://apps/impact-com/blocks/utt/adac1a7f-d17f-4936-8a12-45628cdd8add",
-        "disabled": false,
-        "settings": {}
-      },
-      "1173261918193615741": {
-        "type": "shopify://apps/geo-pro-geolocation/blocks/geopro/16fc5313-7aee-4e90-ac95-f50fc7c8b657",
-        "disabled": false,
-        "settings": {}
-      },
       "10641372206048101839": {
         "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-global-embed/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-        "disabled": false,
-        "settings": {}
-      },
-      "1602673961235493340": {
-        "type": "shopify://apps/impact-com/blocks/consent_mode/adac1a7f-d17f-4936-8a12-45628cdd8add",
         "disabled": false,
         "settings": {}
       },
@@ -258,23 +228,18 @@
           "sale_price_color": "#ff0000"
         }
       },
-      "15879463164198068590": {
-        "type": "shopify://apps/tapcart-mobile-app/blocks/ck_loader/604cad6b-3841-4da3-b864-b96622b4adb8",
-        "disabled": false,
-        "settings": {}
-      },
       "2153490007123654574": {
         "type": "shopify://apps/consentmo-gdpr/blocks/gdpr_cookie_consent/4fbe573f-a377-4fea-9801-3ee0858cae41",
         "disabled": false,
         "settings": {}
       },
-      "11945366711752539959": {
-        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
+      "back-in-stock-restock-alerts-4bb73be2-b7c2-4870-949f-c528145452a3": {
+        "type": "shopify://apps/back-in-stock-restock-alerts/blocks/main/4bb73be2-b7c2-4870-949f-c528145452a3",
         "disabled": false,
         "settings": {}
       },
-      "back-in-stock-restock-alerts-4bb73be2-b7c2-4870-949f-c528145452a3": {
-        "type": "shopify://apps/back-in-stock-restock-alerts/blocks/main/4bb73be2-b7c2-4870-949f-c528145452a3",
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
         "disabled": false,
         "settings": {}
       }
