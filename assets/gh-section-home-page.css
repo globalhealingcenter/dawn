@@ -117,7 +117,7 @@ section h3.eyebrow span {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding-left: 14rem;
+    padding-left: 7rem;
 }
 
 .ghd--hero-carousel__headline-line-1 {
@@ -148,7 +148,7 @@ section h3.eyebrow span {
     flex-direction: column;
     align-items: flex-end;
     gap: 0.35rem;
-    padding-right: 14rem;
+    padding-right: 7rem;
 }
 
 .ghd--hero-carousel__review-text {
