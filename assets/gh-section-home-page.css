@@ -152,7 +152,7 @@ section h3.eyebrow span {
 }
 
 .ghd--hero-carousel__review-text {
-    font-size: clamp(1.125rem, 1.5625vw, 1.875rem);
+    font-size: clamp(12.29px, 1.5625vw, 1.875rem);
     font-weight: 400;
     color: var(--gh-color-green, #22472D);
     text-align: right;
