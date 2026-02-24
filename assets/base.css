@@ -3836,9 +3836,9 @@ div[id^="shopify-block-"][id*="tolstoy"] {
 }
 
 /* Homepage: keep Rebuy aligned with the main content column (not full-bleed) */
-#rebuy-widget-108417,
-#rebuy-widget-108417 .rebuy-widget-container,
-#rebuy-widget-108417 .rebuy-widget-content {
+#rebuy-widget-273582,
+#rebuy-widget-273582 .rebuy-widget-container,
+#rebuy-widget-273582 .rebuy-widget-content {
   width: 100% !important;
   max-width: 1130px !important;
   margin-left: auto !important;
