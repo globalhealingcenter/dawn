@@ -105,7 +105,7 @@ section h3.eyebrow span {
 .ghd--hero-carousel__header {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: space-between;
     gap: 1rem 2rem;
     margin-bottom: 1.5rem;
