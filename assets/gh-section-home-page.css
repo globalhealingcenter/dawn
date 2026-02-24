@@ -137,8 +137,6 @@ section h3.eyebrow span {
 
 .ghd--hero-carousel__headline-highlight {
     display: inline-block;
-    padding: 0 .1em 0.15em;
-    background-color: #f5d0d0;
     border-radius: 2px;
     width: fit-content;
 }
