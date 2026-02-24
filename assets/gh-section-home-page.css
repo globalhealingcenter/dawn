@@ -1,22 +1,25 @@
-.ghd--foundation h2.eyebrow span{
-  color: #fff;
+.ghd--foundation h2.eyebrow span {
+    color: #fff;
 }
 
-section a{
+section a {
     color: var(--gh-color-green);
 }
-hr{
+
+hr {
     background: var(--gh-color-gray);
 }
+
 section h2.eyebrow,
-section h3.eyebrow{
+section h3.eyebrow {
     font-size: 5rem;
     margin-bottom: 0.4em;
     margin-top: 0;
     line-height: 1.2;
 }
+
 section h2.eyebrow span,
-section h3.eyebrow span{
+section h3.eyebrow span {
     font-family: var(--gh-font-secondary);
     font-weight: 500;
     font-size: .5em;
@@ -27,143 +30,321 @@ section h3.eyebrow span{
     HERO
 */
 
-.ghd--hero img{
+.ghd--hero img {
     display: block;
 }
 
 /*
     LOGOS
 */
-.ghd--logos{
+.ghd--logos {
     padding: 2rem 2rem;
     border-bottom: 1px solid var(--gh-color-gray);
 }
 
-.ghd--logos .ghd--flex{
+.ghd--logos .ghd--flex {
     align-items: center;
     justify-content: space-between;
 }
-.ghd--logos .ghd--flex > div{
 
-}
-.ghd--logos img{
+.ghd--logos .ghd--flex>div {}
+
+.ghd--logos img {
     display: block;
     height: 30px;
     margin: 0 auto;
 }
 
-.ghd--logos img[data-logo="huffpost"]{
+.ghd--logos img[data-logo="huffpost"] {
     height: 21px;
 }
+
 .ghd--logos img[data-logo="miami-herald"],
-.ghd--logos img[data-logo="forbes"]{
+.ghd--logos img[data-logo="forbes"] {
     height: 27px;
 }
 
 /*
     BANNERS
 */
-.ghd--banners{
+.ghd--banners {
     padding-top: 4rem;
     padding-bottom: 4rem;
 }
-.ghd--banners > div{
+
+.ghd--banners>div {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
-.ghd--banners img{
-  display: block;
+
+.ghd--banners img {
+    display: block;
 }
-.ghd--banners [data-side="right"]{
-  justify-content: space-between;
-  gap: 1em;
+
+.ghd--banners [data-side="right"] {
+    justify-content: space-between;
+    gap: 1em;
 }
-.ghd--banners [data-side="right"] > div{
+
+.ghd--banners [data-side="right"]>div {
     flex: 1;
 }
-.ghd--banners > .ghd--flex > div:first-child{
-      width: 64.5%;
+
+.ghd--banners>.ghd--flex>div:first-child {
+    width: 64.5%;
 }
 
 /* Hero Carousel (homepage banners) - 1430×475px, fixed aspect-ratio for CLS */
-.ghd--hero-carousel { padding-top: 4rem; padding-bottom: 4rem; }
-.gh-hero-carousel { position: relative; width: 100%; }
+.ghd--hero-carousel {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Hero header: headline + review text above the carousel */
+.ghd--hero-carousel__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ghd--hero-carousel__headline {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-left: 14rem;
+}
+
+.ghd--hero-carousel__headline-line-1 {
+    font-family: var(--gh-font-primary, inherit);
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+    font-weight: 700;
+    color: var(--gh-color-green, #006337);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+.ghd--hero-carousel__headline-line-2 {
+    font-family: var(--gh-font-primary, inherit);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--gh-color-green, #006337);
+    line-height: 1.2;
+}
+
+.ghd--hero-carousel__headline-highlight {
+    display: inline-block;
+    padding: 0.15em 0.35em;
+    background-color: #f5d0d0;
+    border-radius: 2px;
+    width: fit-content;
+}
+
+.ghd--hero-carousel__reviews {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+    padding-right: 14rem;
+}
+
+.ghd--hero-carousel__review-text {
+    font-family: var(--gh-font-primary, inherit);
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+    font-weight: 500;
+    color: var(--gh-color-green, #006337);
+    text-align: right;
+    line-height: 1.3;
+}
+
+.ghd--hero-carousel__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.ghd--hero-carousel__star {
+    color: #d4a84b;
+    flex-shrink: 0;
+}
+
+.ghd--hero-carousel__star--empty {
+    color: rgba(0, 99, 55, 0.25);
+}
+
+.gh-hero-carousel {
+    position: relative;
+    width: 100%;
+}
+
 .gh-hero-carousel__track-container {
-  position: relative; overflow: hidden; border-radius: 8px;
-  max-width: 1430px; margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    max-width: 1430px;
+    margin: 0 auto;
 }
+
 .gh-hero-carousel__track {
-  display: flex; width: 100%; height: 100%;
-  scroll-snap-type: x mandatory; overflow-x: auto; overflow-y: hidden;
-  scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
-.gh-hero-carousel__track::-webkit-scrollbar { display: none; }
+
+.gh-hero-carousel__track::-webkit-scrollbar {
+    display: none;
+}
+
 .gh-hero-slide {
-  flex: 0 0 100%; width: 100%; height: 100%;
-  scroll-snap-align: start; scroll-snap-stop: always;
-  position: relative;
+    flex: 0 0 100%;
+    min-width: 100%;
+    width: 100%;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    position: relative;
 }
-.gh-hero-slide__link { display: block; width: 100%; height: 100%; text-decoration: none; }
-.gh-hero-slide__media { width: 100%; height: 100%; position: relative; }
-.gh-hero-slide__media--mobile { display: none; }
-.gh-hero-slide__media--desktop { display: block; }
+
+.gh-hero-slide__link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.gh-hero-slide__media {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.gh-hero-slide__media--mobile {
+    display: none;
+}
+
+.gh-hero-slide__media--desktop {
+    display: block;
+}
+
 .gh-hero-slide__img,
-.gh-hero-slide__video { width: 100%; height: 100%; object-fit: cover; display: block; vertical-align: middle; }
+.gh-hero-slide__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    vertical-align: middle;
+}
+
 .gh-hero-slide__img--lazy:not([src]) {
-  min-height: 1px;
-  background: linear-gradient(-45deg, #fff, var(--gh-color-green-light), #fff, var(--gh-color-green-light));
-  background-size: 400% 400%;
+    min-height: 1px;
+    background: linear-gradient(-45deg, #fff, var(--gh-color-green-light), #fff, var(--gh-color-green-light));
+    background-size: 400% 400%;
 }
+
 .gh-hero-carousel__btn {
-  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2;
-  width: 48px; height: 48px; border-radius: 50%; border: none;
-  background: rgba(255,255,255,0.6); cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--gh-color-green); transition: background 0.2s, color 0.2s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gh-color-green);
+    transition: background 0.2s, color 0.2s;
 }
-.gh-hero-carousel__btn:hover { background: rgba(255,255,255,0.9); color: var(--gh-color-green-dark); }
-.gh-hero-carousel__btn--prev { left: 16px; }
-.gh-hero-carousel__btn--next { right: 16px; }
+
+.gh-hero-carousel__btn:hover {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--gh-color-green-dark);
+}
+
+.gh-hero-carousel__btn--prev {
+    left: 16px;
+}
+
+.gh-hero-carousel__btn--next {
+    right: 16px;
+}
+
 @media (max-width: 749px) {
-  .gh-hero-slide__media--desktop { display: none; }
-  .gh-hero-slide__media--mobile { display: block; }
-  .gh-hero-carousel__track-container { aspect-ratio: 4/3; }
-  .gh-hero-carousel__btn { width: 40px; height: 40px; left: 8px; }
-  .gh-hero-carousel__btn--next { right: 8px; }
+    .gh-hero-slide__media--desktop {
+        display: none;
+    }
+
+    .gh-hero-slide__media--mobile {
+        display: block;
+    }
+
+    .gh-hero-carousel__track-container {
+        aspect-ratio: 4/3;
+    }
+
+    .gh-hero-carousel__btn {
+        width: 40px;
+        height: 40px;
+        left: 8px;
+    }
+
+    .gh-hero-carousel__btn--next {
+        right: 8px;
+    }
 }
 
 /*
     OUR PROCESS / QUALITY
 */
-.ghd--our-process{
+.ghd--our-process {
     padding: 5rem 0;
     background: var(--gh-color-green) url(https://cdn.globalhealing.com/pages/v2/home/quality-bg.jpg?w=1000) center center no-repeat;
     background-size: cover;
 }
-.ghd--our-process > div{
+
+.ghd--our-process>div {
     gap: 4rem;
     align-items: center;
 }
+
 .ghd--our-process h2,
 .ghd--our-process a,
-.ghd--our-process span{
+.ghd--our-process span {
     color: #fff;
 }
-.ghd--our-process h2{
+
+.ghd--our-process h2 {
     font-size: 3rem;
     margin: 0;
 }
-.ghd--our-process [data-side="right"]{
+
+.ghd--our-process [data-side="right"] {
     display: flex;
     justify-content: flex-end;
     flex: 1;
 }
-.ghd--our-process [data-side="right"] span{
+
+.ghd--our-process [data-side="right"] span {
     padding: 0px 5rem;
 }
-.ghd--our-process img{
+
+.ghd--our-process img {
     width: 50px;
     display: block;
 }
@@ -171,44 +352,53 @@ section h3.eyebrow span{
 /*
     JOURNEY
 */
-.ghd--journey{
+.ghd--journey {
     padding: 3rem 0;
 }
-.ghd--journey [data-type="header"] h2{
+
+.ghd--journey [data-type="header"] h2 {
     font-size: 7rem;
     font-style: italic;
     font-weight: 500;
     color: var(--gh-color-green);
 }
-.ghd--journey h3{
+
+.ghd--journey h3 {
     font-size: 3.4rem;
     margin-top: 2rem;
     margin-bottom: 0;
     line-height: 1.1;
 }
-.ghd--journey [data-type="cols"]{
+
+.ghd--journey [data-type="cols"] {
     border-top: 1px solid var(--gh-color-gray);
     border-bottom: 1px solid var(--gh-color-gray);
 }
-.ghd--journey [data-type="cols"] > div{
+
+.ghd--journey [data-type="cols"]>div {
     padding: 1.5rem 5rem 4rem 5rem;
 }
-.ghd--journey [data-type="cols"] > div:first-child{
+
+.ghd--journey [data-type="cols"]>div:first-child {
     width: 30%;
     border-style: solid;
     border-color: var(--gh-color-gray);
     border-width: 0 1px 0 0;
 }
-.ghd--journey [data-type="cols"] > div:last-child{
+
+.ghd--journey [data-type="cols"]>div:last-child {
     width: 70%;
 }
-.ghd--journey--goals{
+
+.ghd--journey--goals {
     flex-wrap: wrap;
 }
-.ghd--journey--goals > div{
+
+.ghd--journey--goals>div {
     width: 50%;
 }
-.ghd--journey--goals a{
+
+.ghd--journey--goals a {
     font-size: 3rem;
     text-decoration: none;
     color: #777;
@@ -217,7 +407,8 @@ section h3.eyebrow span{
     padding-right: 1.2em;
     text-transform: uppercase;
 }
-.ghd--journey--goals a::after{
+
+.ghd--journey--goals a::after {
     content: "";
     background: transparent url(https://cdn.globalhealing.com/web/v2/icon/arrow-right.svg) right center no-repeat;
     background-size: contain;
@@ -228,341 +419,397 @@ section h3.eyebrow span{
     width: 1em;
     line-height: 1;
     opacity: 0;
-    transition: opacity .2s ease-in-out,right .2s ease-in-out;
+    transition: opacity .2s ease-in-out, right .2s ease-in-out;
 }
-.ghd--journey--goals a:hover{
+
+.ghd--journey--goals a:hover {
     color: var(--gh-color-green);
 }
-.ghd--journey--goals a:hover::after{
+
+.ghd--journey--goals a:hover::after {
     opacity: 1;
     right: 0;
 }
 
-.ghd--journey .button{
+.ghd--journey .button {
     min-width: 230px;
 }
 
 /*
     FOUNDATION
 */
-.ghd--foundation{
+.ghd--foundation {
     background-color: var(--gh-color-dark-green);
     color: #fff;
     margin-top: 80px;
 }
-.ghd--foundation .ghd--flex{
+
+.ghd--foundation .ghd--flex {
     justify-content: center;
     align-items: center;
 }
 
-.ghd--foundation .ghd--flex > div{
+.ghd--foundation .ghd--flex>div {
     padding: 0 2rem;
 }
 
-.ghd--foundation [data-type="image"]{
+.ghd--foundation [data-type="image"] {
     max-width: 800px;
 }
 
-.ghd--foundation [data-type="text"]{
+.ghd--foundation [data-type="text"] {
     max-width: 500px;
 }
 
-.ghd--foundation [data-type="text"] > div{
+.ghd--foundation [data-type="text"]>div {
     max-width: 500px;
     margin: 0 auto;
 }
-.ghd--foundation h2{
+
+.ghd--foundation h2 {
     color: #fff;
 }
 
-.ghd--foundation [data-type="image"] img{
+.ghd--foundation [data-type="image"] img {
     margin-top: -80px;
 }
-.ghd--foundation img{
+
+.ghd--foundation img {
     display: block;
 }
 
 /*
     AUTOSHIP
 */
-.ghd--autoship-info{
+.ghd--autoship-info {
     padding: 6rem 0;
 }
 
-.ghd--autoship-info .page-width{
+.ghd--autoship-info .page-width {
     padding: 0;
     background: #e9ebea;
     justify-content: space-between;
 }
-.ghd--autoship-info [data-type="image"]{
+
+.ghd--autoship-info [data-type="image"] {
     width: 40%;
     background: url(https://cdn.globalhealing.com/pages/v2/home/subscription.png) right center no-repeat;
     background-size: cover;
 }
-.ghd--autoship-info [data-type="image"] > div{
+
+.ghd--autoship-info [data-type="image"]>div {
     margin: 0 auto;
     max-width: 300px;
     display: flex;
     align-items: center;
     height: 100%;
 }
-.ghd--autoship-info [data-type="image"] img{
+
+.ghd--autoship-info [data-type="image"] img {
     width: 100%;
     display: block;
 }
-.ghd--autoship-info [data-type="border"]{
+
+.ghd--autoship-info [data-type="border"] {
     width: 1px;
     border-right: 1px solid var(--gh-color-gray);
 }
-.ghd--autoship-info [data-type="text"]{
+
+.ghd--autoship-info [data-type="text"] {
     width: 60%;
     padding: 3rem;
 }
-.ghd--autoship-info h2 span{
+
+.ghd--autoship-info h2 span {
     color: var(--gh-color-gray);
 }
-.ghd--autoship-info h2{
+
+.ghd--autoship-info h2 {
     color: var(--gh-color-green);
 }
 
 /*
     MISSION
 */
-.ghd--mission{
+.ghd--mission {
     padding: 4rem 0 8rem 0;
 }
-.ghd--mission [data-type="header"]{
+
+.ghd--mission [data-type="header"] {
     justify-content: space-between;
     align-items: center;
 }
-.ghd--mission h2{
+
+.ghd--mission h2 {
     font-size: 5rem;
     color: var(--gh-color-green);
 }
-.ghd--mission [data-type="header"] > div:last-child{
+
+.ghd--mission [data-type="header"]>div:last-child {
     max-width: 550px;
 }
 
-.ghd--mission [data-type="cols"]{
+.ghd--mission [data-type="cols"] {
     justify-content: space-between;
 }
-.ghd--mission [data-type="cols"] > div{
+
+.ghd--mission [data-type="cols"]>div {
     width: calc(25% - 10px);
     background: #fff;
     border: 1px solid var(--gh-color-gray);
 }
-.ghd--mission [data-type="cols"] > div > div{
+
+.ghd--mission [data-type="cols"]>div>div {
     padding: 1rem 2rem;
 }
-.ghd--mission [data-type="cols"] h3{
+
+.ghd--mission [data-type="cols"] h3 {
     margin-top: 0;
     font-size: 2.5rem;
     font-style: italic;
     color: var(--gh-color-green);
 }
-.ghd--mission [data-type="cols"] h3 span{
+
+.ghd--mission [data-type="cols"] h3 span {
     color: var(--gh-color-gray);
 }
 
 /*
     REVIEWS
 */
-.ghd--reviews h3{
+.ghd--reviews h3 {
     color: var(--gh-color-gold);
 }
-.ghd--reviews h3 span{
+
+.ghd--reviews h3 span {
     color: var(--gh-color-gray);
 }
-.ghd--reviews [data-type="image"] a{
+
+.ghd--reviews [data-type="image"] a {
     color: #fff;
 }
-.ghd--reviews .ghd--reviews--featured-title{
+
+.ghd--reviews .ghd--reviews--featured-title {
     font-size: 4rem;
     margin-top: 2em;
     margin-bottom: 0;
 }
-.ghd--reviews [data-type="cols"] > div{
+
+.ghd--reviews [data-type="cols"]>div {
     width: 50%;
 }
-.ghd--reviews [data-type="cols"] > div:first-child{
+
+.ghd--reviews [data-type="cols"]>div:first-child {
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8rem 0;
 }
-.ghd--reviews [data-type="cols"] > div:first-child > div{
+
+.ghd--reviews [data-type="cols"]>div:first-child>div {
     max-width: 500px;
 }
-.ghd--reviews [data-type="cols"] > div:last-child{
+
+.ghd--reviews [data-type="cols"]>div:last-child {
     background: var(--gh-color-dark-green) url(https://cdn.globalhealing.com/pages/v2/home/reviews-bg.png) center center no-repeat;
     background-size: cover;
 }
-.ghd--reviews [data-type="image"]{
+
+.ghd--reviews [data-type="image"] {
     align-items: center;
     justify-content: center;
     display: flex;
 }
-.ghd--reviews [data-type="image"] > div{
+
+.ghd--reviews [data-type="image"]>div {
     display: flex;
     flex-direction: column;
     padding: 8rem 0;
     max-width: 500px;
 }
-.ghd--reviews [data-type="image"] > div > div{
+
+.ghd--reviews [data-type="image"]>div>div {
     display: flex;
     justify-content: space-between;
     gap: 10rem;
     padding: 2rem 0;
     align-items: center;
 }
-.ghd--reviews [data-type="image"] > div > div > div:first-child{
+
+.ghd--reviews [data-type="image"]>div>div>div:first-child {
     width: 200px;
 }
-.ghd--reviews [data-type="image"] > div > div > div:last-child{
+
+.ghd--reviews [data-type="image"]>div>div>div:last-child {
     max-width: 200px;
     color: #fff;
 }
-.ghd--reviews [data-type="image"] > div > div:not(:last-child){
+
+.ghd--reviews [data-type="image"]>div>div:not(:last-child) {
     border-bottom: 1px solid var(--gh-color-gold);
 }
-.ghd--reviews [data-type="image"] [data-type="border"]{
+
+.ghd--reviews [data-type="image"] [data-type="border"] {
     height: 1px;
     background: var(--gh-color-gold);
 }
 
-@media( min-width: 701px ) and (max-width: 1250px){
+@media(min-width: 701px) and (max-width: 1250px) {
 
-    .ghd--our-process > div > div{
+    .ghd--our-process>div>div {
         flex-wrap: wrap;
     }
-    .ghd--our-process > div > div:first-child{
+
+    .ghd--our-process>div>div:first-child {
         min-width: 300px;
     }
-    .ghd--our-process [data-side=right] span{
+
+    .ghd--our-process [data-side=right] span {
         padding: 1rem 2rem;
         width: 50%;
     }
-    .ghd--journey [data-type=cols]>div:first-child{
+
+    .ghd--journey [data-type=cols]>div:first-child {
         padding-left: 0;
         padding-right: 2rem;
         width: 50%;
     }
-    .ghd--journey [data-type=cols]>div:last-child{
+
+    .ghd--journey [data-type=cols]>div:last-child {
         padding-right: 0;
         padding-left: 3rem;
         width: 50%;
     }
-    .ghd--journey--goals>div{
+
+    .ghd--journey--goals>div {
         width: 100%;
     }
 
-    .ghd--mission [data-type="header"] > div:first-child{
+    .ghd--mission [data-type="header"]>div:first-child {
         min-width: 400px;
     }
-    .ghd--mission [data-type=cols]{
+
+    .ghd--mission [data-type=cols] {
         flex-wrap: wrap;
         gap: 2rem;
     }
-    .ghd--mission [data-type=cols]>div{
+
+    .ghd--mission [data-type=cols]>div {
         width: calc(50% - 10px);
     }
 
-    .ghd--reviews .ghd--flex{
+    .ghd--reviews .ghd--flex {
         flex-wrap: wrap;
     }
-    .ghd--reviews [data-type=cols]>div{
+
+    .ghd--reviews [data-type=cols]>div {
         width: 100%;
     }
 }
 
-@media (max-width: 1250px){
+@media (max-width: 1250px) {
 
 
 
-    .ghd--foundation .ghd--flex{
+    .ghd--foundation .ghd--flex {
         flex-wrap: wrap;
     }
 
-    .ghd--foundation [data-type=image] img{
+    .ghd--foundation [data-type=image] img {
         margin-top: -30px;
         width: 500px;
     }
-    .ghd--foundation > div >[data-type=text]{
+
+    .ghd--foundation>div>[data-type=text] {
         order: 2;
         max-width: 100%;
         padding: 5rem;
         background: var(--gh-color-green);
     }
 
-    .ghd--autoship-info h2 br{
+    .ghd--autoship-info h2 br {
         display: none;
     }
-    .ghd--autoship-info .page-width{
+
+    .ghd--autoship-info .page-width {
         flex-direction: column;
     }
-    .ghd--autoship-info [data-type=image]{
+
+    .ghd--autoship-info [data-type=image] {
         max-width: 100%;
         width: 100%;
         padding-bottom: 3rem;
         height: 140px;
         background-image: url(https://cdn.globalhealing.com/pages/v2/home/subscription-mobile.png);
     }
-    .ghd--autoship-info [data-type=image]>div{
+
+    .ghd--autoship-info [data-type=image]>div {
         margin-left: 0;
     }
-    .ghd--autoship-info [data-type=border]{
+
+    .ghd--autoship-info [data-type=border] {
         width: 100%;
         height: 1px;
         background: var(--gh-color-gray);
     }
-    .ghd--autoship-info [data-type=text]{
+
+    .ghd--autoship-info [data-type=text] {
         width: 100%;
         padding-top: 3rem;
     }
 
-    .ghd--reviews [data-type=image]>div>div>div:last-child{
+    .ghd--reviews [data-type=image]>div>div>div:last-child {
         padding-left: 0;
         padding-right: 0;
     }
 
-    .ghd--journey--goals a{
+    .ghd--journey--goals a {
         font-size: 2.6rem;
     }
 }
 
-@media (min-width: 801px) and (max-width: 1200px){
-  .ghd--logos .ghd--flex div:nth-child(2n) {
-    display: none;
-  }
+@media (min-width: 801px) and (max-width: 1200px) {
+    .ghd--logos .ghd--flex div:nth-child(2n) {
+        display: none;
+    }
 }
 
-@media (max-width: 800px){
-  .ghd--reviews [data-type=cols]>div{
+@media (max-width: 800px) {
+    .ghd--reviews [data-type=cols]>div {
         width: 100%;
     }
-  
-  .ghd--logos{
+
+    .ghd--logos {
         position: relative;
         overflow: hidden;
         height: calc(22px + 4rem)
     }
-    .ghd--logos img{
+
+    .ghd--logos img {
         height: 22px;
     }
-    .ghd--logos img[data-logo="huffpost"]{
+
+    .ghd--logos img[data-logo="huffpost"] {
         height: 16px;
     }
+
     .ghd--logos img[data-logo="miami-herald"],
-    .ghd--logos img[data-logo="forbes"]{
+    .ghd--logos img[data-logo="forbes"] {
         height: 20px;
     }
 
     @keyframes homepage-logos {
-        from {left: 2rem}
-        to {left: calc( calc(calc(1000px - 100%) + 2rem) * -1);}
+        from {
+            left: 2rem
+        }
+
+        to {
+            left: calc(calc(calc(1000px - 100%) + 2rem) * -1);
+        }
     }
-    .ghd--logos .ghd--flex{
+
+    .ghd--logos .ghd--flex {
         flex-wrap: nowrap;
         min-width: 1000px;
         position: absolute;
@@ -575,8 +822,8 @@ section h3.eyebrow span{
 
 @media (max-width: 700px) {
 
-    .ghd--banners > .ghd--flex > div:first-child{
-      width: 100%;
+    .ghd--banners>.ghd--flex>div:first-child {
+        width: 100%;
     }
 
     .ghd--banners [data-side=right]>div {
@@ -586,82 +833,89 @@ section h3.eyebrow span{
 
     .ghd--our-process .ghd--flex,
     .ghd--journey .page-width,
-    .ghd--reviews [data-type=cols]>div:first-child{
+    .ghd--reviews [data-type=cols]>div:first-child {
         padding-left: 2rem;
         padding-right: 2rem;
     }
 
     .ghd--journey [data-type=header] h2 br,
-    .ghd--our-process h2 br{
+    .ghd--our-process h2 br {
         display: none;
     }
 
     .ghd--flex,
     .ghd--our-process [data-side=right],
-    .ghd--reviews [data-type=image]>div>div{
+    .ghd--reviews [data-type=image]>div>div {
         flex-wrap: wrap;
     }
 
-    .ghd--banners .ghd--flex 
-    .ghd--reviews [data-type=cols]>div,
+    .ghd--banners .ghd--flex .ghd--reviews [data-type=cols]>div,
     .ghd--mission [data-type=cols]>div,
     .ghd--journey [data-type=cols]>div:last-child,
     .ghd--journey [data-type=cols]>div:first-child,
-    .ghd--our-process > div,
-    .ghd--journey--goals>div{
+    .ghd--our-process>div,
+    .ghd--journey--goals>div {
         width: 100%;
     }
 
-    .ghd--our-process [data-side=right] span{
+    .ghd--our-process [data-side=right] span {
         width: 50%;
         padding: 1rem 1rem;
     }
-    .ghd--mission [data-type=header]{
+
+    .ghd--mission [data-type=header] {
         padding-bottom: 3rem;
     }
 
-    .ghd--journey [data-type=cols]>div{
+    .ghd--journey [data-type=cols]>div {
         padding: 2rem 0 3rem;
     }
 
-    .ghd--foundation > div >[data-type=text]{
+    .ghd--foundation>div>[data-type=text] {
         padding: 3rem;
     }
-    .ghd--foundation h2.eyebrow{
+
+    .ghd--foundation h2.eyebrow {
         font-size: 4rem;
     }
-    .ghd--journey [data-type=cols]>div:first-child{
+
+    .ghd--journey [data-type=cols]>div:first-child {
         border-right-width: 0;
         border-bottom-width: 1px;
     }
 
-    .ghd--mission [data-type=cols]{
+    .ghd--mission [data-type=cols] {
         flex-direction: column;
         gap: 2rem;
     }
 
-    .ghd--journey [data-type=header] h2{
+    .ghd--journey [data-type=header] h2 {
         font-size: 4rem;
         margin-top: 1rem;
     }
-    .ghd--reviews section h3.eyebrow{
-        padding-top:0
+
+    .ghd--reviews section h3.eyebrow {
+        padding-top: 0
     }
-    .ghd--mission h2{
+
+    .ghd--mission h2 {
         margin-top: 0;
         margin-bottom: 0;
     }
 
-    .ghd--reviews [data-type=image]>div>div{
+    .ghd--reviews [data-type=image]>div>div {
         gap: 0;
     }
-    .ghd--reviews [data-type=image]>div>div>div:last-child{
+
+    .ghd--reviews [data-type=image]>div>div>div:last-child {
         max-width: initial;
     }
-    .ghd--reviews [data-type=image]>div>div>div:last-child p{
+
+    .ghd--reviews [data-type=image]>div>div>div:last-child p {
         margin-bottom: 0;
     }
-    .ghd--reviews [data-type=image]>div{
+
+    .ghd--reviews [data-type=image]>div {
         padding: 2rem;
     }
 
@@ -670,170 +924,178 @@ section h3.eyebrow span{
 /* HERO */
 
 .sh-hero-video {
-        position: relative;
-        background: #000;
-    }
+    position: relative;
+    background: #000;
+}
+
+.sh-hero-video .video--mobile {
+    display: none;
+}
+
+.sh-hero-video video {
+    width: 100%;
+}
+
+.sh-hero-video--content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.sh-hero-video--content h1 {
+    font-family: var(--gh-font-secondary), sans-serif;
+    font-weight: 300;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 0;
+    padding-bottom: .3em;
+    font-size: 5em;
+}
+
+.sh-hero-video--content h1 span {
+    font-family: var(--gh-font-primary), serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.sh-hero-video--content .flex {
+    align-items: center;
+    gap: 2em;
+}
+
+.sh-hero-video--content a {
+    border: 1px solid #fff;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 1em 4em;
+    transition: background-color .25s ease-in-out, color .25s ease-in-out;
+}
+
+.sh-hero-video--content a:hover {
+    background: #fff;
+    color: #000;
+}
+
+.sh-hero-video--content h4 {
+    margin-bottom: 0;
+    color: #fff;
+    font-weight: 300;
+    font-size: 2em;
+    letter-spacing: 2px;
+}
+
+.sh-hero-video--content h4 span {}
+
+.sh-hero-video--video-container {
+    height: 100%;
+    width: 10000px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    margin-left: -5000px;
+}
+
+.sh-hero-video--video {
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sh-hero-video--video video {
+    width: auto;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: inherit;
+    filter: brightness(0.6);
+}
+
+@media (max-width: 700px) {
+
+
     .sh-hero-video .video--mobile {
-		display: none;
+        display: block;
     }
 
-    .sh-hero-video video {
-        width: 100%;
+    .sh-hero-video .video--desktop {
+        display: none;
     }
 
     .sh-hero-video--content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        display: flex;
-        align-items: center;
-		font-size: 18px;
+        font-size: 14px;
     }
+
     .sh-hero-video--content h1 {
-		font-family: var(--gh-font-secondary), sans-serif;
-		font-weight: 300;
-		line-height: 1.1;
-		color: #fff;
-		margin-bottom: 0;
-		padding-bottom: .3em;
-		font-size: 5em;
+        font-size: 2.4em;
+        line-height: 1.2;
     }
-    	.sh-hero-video--content h1 span{
-			font-family: var(--gh-font-primary), serif;
-			font-weight: 400;
-			font-style: italic;
-        }
-
-    .sh-hero-video--content .flex{
-		align-items: center;
-		gap: 2em;
-    }
-
-    .sh-hero-video--content a {
-		border: 1px solid #fff;
-		font-size: 1.1em;
-		letter-spacing: 2px;
-		color: #fff;
-		text-decoration: none;
-		display: flex;
-		align-items: center;
-		padding: 1em 4em;
-		transition: background-color .25s ease-in-out, color .25s ease-in-out;
-    }
-		.sh-hero-video--content a:hover {
-			background: #fff;
-			color: #000;
-		}
 
     .sh-hero-video--content h4 {
-		margin-bottom: 0;
-		color: #fff;
-		font-weight: 300;
-		font-size: 2em;
-		letter-spacing: 2px;
+        font-size: 1.3em;
     }
-    	.sh-hero-video--content h4 span {
 
-        }
+    .sh-hero-video--content .flex {
+        flex-wrap: wrap;
+        gap: 1.2em;
+    }
 
-    .sh-hero-video--video-container{
-        height: 100%;
-        width: 10000px;
-        position: absolute;
-        left: 50%;
-        top: 0;
-        display: flex;
-        justify-content: center;
-        margin-left: -5000px;
+    .sh-hero-video--content .flex>* {
+        width: 100%;
+    }
+
+    .sh-hero-video--content .flex>a {
+        order: 2;
+        width: auto;
+        padding: .5em 3em;
+    }
+
+    .sh-hero-video {
+        height: auto;
     }
 
     .sh-hero-video--video {
-        height: 550px;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        height: auto;
+        min-height: 220px;
     }
 
-    .sh-hero-video--video  video{
-        width: auto;
-        min-width: 100%;
-        min-height: 100%;
-        max-width: inherit;
-        filter: brightness(0.6);
+    .sh-hero-video--video video {
+        width: 105%;
     }
 
-    @media (max-width: 700px){
+    .sh-hero-video--content .flex {}
+}
 
-
-        .sh-hero-video .video--mobile {
-            display: block;
-        }
-        .sh-hero-video .video--desktop{
-			display: none;
-        }
-
-        .sh-hero-video--content{
-			font-size: 14px;
-		}
-
-        .sh-hero-video--content h1{
-			font-size: 2.4em;
-			line-height: 1.2;
-		}
-        .sh-hero-video--content h4{
-			font-size: 1.3em;
-        }
-
-        .sh-hero-video--content .flex{
-			flex-wrap: wrap;
-			gap: 1.2em;
-		}
-        .sh-hero-video--content .flex > *{
-			width: 100%;
-        }
-        .sh-hero-video--content .flex > a{
-			order: 2;
-			width: auto;
-			padding: .5em 3em;
-        }
-        .sh-hero-video {
-            height: auto;
-        }
-        .sh-hero-video--video{
-			height: auto;
-          min-height: 220px;
-		}
-        .sh-hero-video--video video{
-			width: 105%;
-		}
-
-        .sh-hero-video--content .flex{
-
-		}
+@media (max-width: 699px) and (min-width: 581px) {
+    .sh-hero-video--video {
+        justify-content: start;
     }
 
-    @media (max-width: 699px) and (min-width: 581px)  {
-        .sh-hero-video--video{
-        	justify-content: start;
-		}
-        .sh-hero-video--video video{
-            width: 120%;
-        }
+    .sh-hero-video--video video {
+        width: 120%;
     }
+}
 
 /* Extra space for Tolstoy UGC title on the homepage only */
 .gh--home-page [class*="tolstoy-carousel-title"] {
-  margin-top: 2rem !important;   /* = 32px if 1rem = 16px */
+    margin-top: 2rem !important;
+    /* = 32px if 1rem = 16px */
 }
 
 /* (Optional) add breathing room above the whole carousel */
 .gh--home-page [class*="tolstoy-carousel-container"] {
-  padding-top: 1rem !important;
+    padding-top: 1rem !important;
 }
-
-

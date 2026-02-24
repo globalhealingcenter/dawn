@@ -12,10 +12,14 @@
   {% assign desktop_width = desktop_width_2x %}
 {% endif %}
 
-{% assign has_desktop_media = desktop_image != blank or desktop_video != blank %}
-{% assign has_mobile_media = mobile_image != blank or mobile_video != blank %}
-{% assign use_desktop_video = desktop_video != blank %}
-{% assign use_mobile_video = mobile_video != blank %}
+{% assign has_desktop_media = false %}
+{% if desktop_image != blank or desktop_video != blank %}{% assign has_desktop_media = true %}{% endif %}
+{% assign has_mobile_media = false %}
+{% if mobile_image != blank or mobile_video != blank %}{% assign has_mobile_media = true %}{% endif %}
+{% assign use_desktop_video = false %}
+{% if desktop_video != blank %}{% assign use_desktop_video = true %}{% endif %}
+{% assign use_mobile_video = false %}
+{% if mobile_video != blank %}{% assign use_mobile_video = true %}{% endif %}
 
 {% if has_desktop_media or has_mobile_media %}
   <div class="gh-hero-slide" data-slide-index="{{ index }}" {% unless is_first %}data-lazy{% endunless %}>

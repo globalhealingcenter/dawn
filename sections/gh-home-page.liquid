@@ -14,6 +14,12 @@
     .utility-bar.utility-bar--bottom-border{
         display: none;
     }
+
+    .ghd--hero-carousel {
+        background-image: url('{{ 'section-bg-texture.png' | asset_url }}');
+        background-repeat: repeat;
+        background-color: var(--gh-color-beige, #faf3e7);
+    }
 {%- endstyle -%}
 
 <div class="gh--home-page section-{{ section.id }}-padding">
@@ -76,8 +82,23 @@
                 </div>
             </section>
         {% when 'banners' %}
-            {% comment %} Hero carousel - 4 slots, 3 live (4th for staging), supports JPG/PNG/MP4 {% endcomment %}
-            {% assign now_s = 'now' | date: '%s' %}
+            {% comment %} Hero carousel - Display when today is between start/end, or always when both dates are blank {% endcomment %}
+            {% assign section_start = block.settings.banner_start_date | strip %}
+            {% assign section_end = block.settings.banner_end_date | strip %}
+            {% assign section_in_range = true %}
+            {% if section_start != blank or section_end != blank %}
+              {% assign now_ts = 'now' | date: '%s' | plus: 0 %}
+              {% if section_start != blank %}
+                {% assign start_ts = section_start | date: '%s' | plus: 0 %}
+                {% if start_ts != 0 and now_ts < start_ts %}{% assign section_in_range = false %}{% endif %}
+              {% endif %}
+              {% if section_end != blank %}
+                {% assign end_ts = section_end | date: '%s' | plus: 0 %}
+                {% if end_ts != 0 and now_ts > end_ts %}{% assign section_in_range = false %}{% endif %}
+              {% endif %}
+            {% endif %}
+
+            {% if section_in_range %}
             {% assign slide_count = 0 %}
             {% for target_order in (1..4) %}
               {% for slot_num in (1..4) %}
@@ -85,8 +106,6 @@
                 {% assign slot_order = block.settings[order_key] | default: slot_num %}
                 {% if slot_order == target_order %}
                   {% assign visible_key = 'banner_' | append: slot_num | append: '_visible' %}
-                  {% assign start_key = 'banner_' | append: slot_num | append: '_start_date' %}
-                  {% assign end_key = 'banner_' | append: slot_num | append: '_end_date' %}
                   {% assign desktop_img_key = 'banner_' | append: slot_num | append: '_desktop_image' %}
                   {% assign mobile_img_key = 'banner_' | append: slot_num | append: '_mobile_image' %}
                   {% assign desktop_video_key = 'banner_' | append: slot_num | append: '_desktop_video' %}
@@ -98,19 +117,10 @@
                   {% assign mobile_img = block.settings[mobile_img_key] %}
                   {% assign desktop_video = block.settings[desktop_video_key] %}
                   {% assign mobile_video = block.settings[mobile_video_key] %}
-                  {% assign start_date = block.settings[start_key] %}
-                  {% assign end_date = block.settings[end_key] %}
-                  {% assign has_media = desktop_img != blank or desktop_video != blank or mobile_img != blank or mobile_video != blank %}
-                  {% assign in_range = true %}
-                  {% if start_date != blank %}
-                    {% assign start_s = start_date | date: '%s' %}
-                    {% if now_s < start_s %}{% assign in_range = false %}{% endif %}
-                  {% endif %}
-                  {% if end_date != blank %}
-                    {% assign end_s = end_date | date: '%s' %}
-                    {% if now_s > end_s %}{% assign in_range = false %}{% endif %}
-                  {% endif %}
-                  {% if visible and has_media and in_range %}
+                  {% assign has_media = false %}
+                  {% if desktop_img != blank or desktop_video != blank %}{% assign has_media = true %}{% endif %}
+                  {% if mobile_img != blank or mobile_video != blank %}{% assign has_media = true %}{% endif %}
+                  {% if visible and has_media %}
                     {% assign slide_count = slide_count | plus: 1 %}
                   {% endif %}
                   {% break %}
@@ -119,6 +129,45 @@
             {% endfor %}
 
             <section class="ghd--hero-carousel ghd--bg-white" {{ block.shopify_attributes }} data-block-id="{{ block.id }}">
+                {% assign hero_line_1 = block.settings.hero_headline_line_1 | strip %}
+                {% assign hero_line_2 = block.settings.hero_headline_line_2 | strip %}
+                {% assign hero_review = block.settings.hero_review_text | strip %}
+                {% assign hero_show_stars = block.settings.hero_show_stars %}
+                {% assign hero_stars = block.settings.hero_star_rating | default: 5 %}
+                {% assign show_hero_header = false %}
+                {% if hero_line_1 != blank or hero_line_2 != blank or hero_review != blank %}
+                  {% assign show_hero_header = true %}
+                {% endif %}
+                {% if show_hero_header %}
+                <div class="ghd--hero-carousel__header page-width">
+                    <div class="ghd--hero-carousel__headline">
+                        {% if hero_line_1 != blank %}
+                        <span class="ghd--hero-carousel__headline-line-1">{{ hero_line_1 }}</span>
+                        {% endif %}
+                        {% if hero_line_2 != blank %}
+                        <span class="ghd--hero-carousel__headline-line-2 ghd--hero-carousel__headline-highlight">{{ hero_line_2 }}</span>
+                        {% endif %}
+                    </div>
+                    {% if hero_review != blank or hero_show_stars %}
+                    <div class="ghd--hero-carousel__reviews">
+                        {% if hero_review != blank %}
+                        <span class="ghd--hero-carousel__review-text">{{ hero_review }}</span>
+                        {% endif %}
+                        {% if hero_show_stars %}
+                        <span class="ghd--hero-carousel__stars" aria-hidden="true">
+                            {% for i in (1..5) %}
+                                {% if i <= hero_stars %}
+                                <svg class="ghd--hero-carousel__star" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                {% else %}
+                                <svg class="ghd--hero-carousel__star ghd--hero-carousel__star--empty" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                                {% endif %}
+                            {% endfor %}
+                        </span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
                 <div class="gh-hero-carousel page-width">
                     <div class="gh-hero-carousel__track-container" style="aspect-ratio: 1430/475;">
                         <div class="gh-hero-carousel__track" role="list" aria-label="Hero banners" data-slide-count="{{ slide_count }}">
@@ -135,8 +184,6 @@
                                       {% assign desktop_video = block.settings.banner_1_desktop_video %}
                                       {% assign mobile_video = block.settings.banner_1_mobile_video %}
                                       {% assign visible = block.settings.banner_1_visible %}
-                                      {% assign start_date = block.settings.banner_1_start_date %}
-                                      {% assign end_date = block.settings.banner_1_end_date %}
                                       {% assign slot_url = block.settings.banner_1_url %}
                                       {% assign slot_retina = block.settings.banner_1_retina_2x %}
                                     {% when 2 %}
@@ -145,8 +192,6 @@
                                       {% assign desktop_video = block.settings.banner_2_desktop_video %}
                                       {% assign mobile_video = block.settings.banner_2_mobile_video %}
                                       {% assign visible = block.settings.banner_2_visible %}
-                                      {% assign start_date = block.settings.banner_2_start_date %}
-                                      {% assign end_date = block.settings.banner_2_end_date %}
                                       {% assign slot_url = block.settings.banner_2_url %}
                                       {% assign slot_retina = block.settings.banner_2_retina_2x %}
                                     {% when 3 %}
@@ -155,8 +200,6 @@
                                       {% assign desktop_video = block.settings.banner_3_desktop_video %}
                                       {% assign mobile_video = block.settings.banner_3_mobile_video %}
                                       {% assign visible = block.settings.banner_3_visible %}
-                                      {% assign start_date = block.settings.banner_3_start_date %}
-                                      {% assign end_date = block.settings.banner_3_end_date %}
                                       {% assign slot_url = block.settings.banner_3_url %}
                                       {% assign slot_retina = block.settings.banner_3_retina_2x %}
                                     {% when 4 %}
@@ -165,23 +208,14 @@
                                       {% assign desktop_video = block.settings.banner_4_desktop_video %}
                                       {% assign mobile_video = block.settings.banner_4_mobile_video %}
                                       {% assign visible = block.settings.banner_4_visible %}
-                                      {% assign start_date = block.settings.banner_4_start_date %}
-                                      {% assign end_date = block.settings.banner_4_end_date %}
                                       {% assign slot_url = block.settings.banner_4_url %}
                                       {% assign slot_retina = block.settings.banner_4_retina_2x %}
                                   {% endcase %}
                                   {% if visible == nil %}{% assign visible = true %}{% endif %}
-                                  {% assign has_media = desktop_img != blank or desktop_video != blank or mobile_img != blank or mobile_video != blank %}
-                                  {% assign in_range = true %}
-                                  {% if start_date != blank %}
-                                    {% assign start_s = start_date | date: '%s' %}
-                                    {% if now_s < start_s %}{% assign in_range = false %}{% endif %}
-                                  {% endif %}
-                                  {% if end_date != blank %}
-                                    {% assign end_s = end_date | date: '%s' %}
-                                    {% if now_s > end_s %}{% assign in_range = false %}{% endif %}
-                                  {% endif %}
-                                  {% if visible and has_media and in_range %}
+                                  {% assign has_media = false %}
+                                  {% if desktop_img != blank or desktop_video != blank %}{% assign has_media = true %}{% endif %}
+                                  {% if mobile_img != blank or mobile_video != blank %}{% assign has_media = true %}{% endif %}
+                                  {% if visible and has_media %}
                                     {% assign is_first = false %}
                                     {% if slide_idx == 0 %}{% assign is_first = true %}{% endif %}
                                     {% render 'gh-hero-carousel-slide',
@@ -212,6 +246,7 @@
                     </div>
                 </div>
             </section>
+            {% endif %}
         {% when 'quality' %}
             <section class="ghd--our-process" {{ block.shopify_attributes }}>
                 <div class="page-width ghd--flex">
@@ -504,6 +539,59 @@
       "settings": [
         {
           "type": "header",
+          "content": "Hero header (above carousel)"
+        },
+        {
+          "type": "text",
+          "id": "hero_headline_line_1",
+          "label": "Headline line 1",
+          "default": "HEALING IS THE"
+        },
+        {
+          "type": "text",
+          "id": "hero_headline_line_2",
+          "label": "Headline line 2 (highlighted)",
+          "default": "New Wellness"
+        },
+        {
+          "type": "text",
+          "id": "hero_review_text",
+          "label": "Review text",
+          "default": "Over 50,000 5-Star Reviews"
+        },
+        {
+          "type": "checkbox",
+          "id": "hero_show_stars",
+          "label": "Show star rating",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "hero_star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star rating",
+          "default": 5
+        },
+        {
+          "type": "header",
+          "content": "Schedule"
+        },
+        {
+          "type": "text",
+          "id": "banner_start_date",
+          "label": "Start date (YYYY-MM-DD)",
+          "info": "Section shows on or after this date. Leave blank to show from the beginning."
+        },
+        {
+          "type": "text",
+          "id": "banner_end_date",
+          "label": "End date (YYYY-MM-DD)",
+          "info": "Section shows on or before this date. Leave blank for no end. Both blank = always show."
+        },
+        {
+          "type": "header",
           "content": "Slot 1"
         },
         {
@@ -551,16 +639,6 @@
           "step": 1,
           "label": "Order",
           "default": 1
-        },
-        {
-          "type": "text",
-          "id": "banner_1_start_date",
-          "label": "Start date (YYYY-MM-DD)"
-        },
-        {
-          "type": "text",
-          "id": "banner_1_end_date",
-          "label": "End date (YYYY-MM-DD)"
         },
         {
           "type": "header",
@@ -613,16 +691,6 @@
           "default": 2
         },
         {
-          "type": "text",
-          "id": "banner_2_start_date",
-          "label": "Start date (YYYY-MM-DD)"
-        },
-        {
-          "type": "text",
-          "id": "banner_2_end_date",
-          "label": "End date (YYYY-MM-DD)"
-        },
-        {
           "type": "header",
           "content": "Slot 3"
         },
@@ -671,16 +739,6 @@
           "step": 1,
           "label": "Order",
           "default": 3
-        },
-        {
-          "type": "text",
-          "id": "banner_3_start_date",
-          "label": "Start date (YYYY-MM-DD)"
-        },
-        {
-          "type": "text",
-          "id": "banner_3_end_date",
-          "label": "End date (YYYY-MM-DD)"
         },
         {
           "type": "header",
@@ -732,16 +790,6 @@
           "step": 1,
           "label": "Order",
           "default": 4
-        },
-        {
-          "type": "text",
-          "id": "banner_4_start_date",
-          "label": "Start date (YYYY-MM-DD)"
-        },
-        {
-          "type": "text",
-          "id": "banner_4_end_date",
-          "label": "End date (YYYY-MM-DD)"
         }
       ]
     },
