@@ -308,6 +308,10 @@ section h3.eyebrow span {
     .gh-hero-carousel{
         padding: 0;
     }
+    .ghd--hero-carousel__review-text {
+        width: 100%;
+        display: block;
+    }
 }
 
 /*
