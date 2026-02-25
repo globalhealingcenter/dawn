@@ -68,7 +68,7 @@
         "custom_liquid_mUJYKW": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<style>\n\t.product__info-wrapper .product-form > form{\n\t\tdisplay: none;\n\t}\n\t.product__info-wrapper .product-form > form.restock-rocket-form-updated{\n\t\tdisplay: block;\n\t}\n</style>"
+            "custom_liquid": "<style>\n\t.product__info-wrapper .product-form > form .product-form__submit{\n\t\tdisplay: none;\n\t}\n\t.product__info-wrapper .product-form > form.restock-rocket-form-updated .restock-rocket-preorder-button{\n\t\tdisplay: flex;\n\t}\n\t.product__info-wrapper .product-form > form.restock-rocket-form-updated .preorder-signup-out-of-stock-button{\n\t\tdisplay: none;\n\t}\n</style>"
           }
         },
         "fd07f90a-d072-4889-9f15-50599ae59cfd": {
