@@ -22,8 +22,9 @@
   }
 {%- endstyle -%}
 
+{{ 'gh-section-home-page.css' | asset_url | stylesheet_tag }}
+
 <div class="gh--home-page section-{{ section.id }}-padding">
-  {{ 'gh-section-home-page.css' | asset_url | stylesheet_tag }}
   {{ 'gh-hero-carousel.js' | asset_url | script_tag }}
 
   {%- for block in section.blocks -%}
