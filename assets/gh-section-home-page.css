@@ -316,6 +316,9 @@ section h3.eyebrow span {
     .ghd--hero-carousel__review-text br{
         display: none;
     }
+    .ghd--hero-carousel__star{
+        width: 14px;
+    }
 }
 
 /*
