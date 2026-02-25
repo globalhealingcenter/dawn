@@ -320,23 +320,11 @@
       }
 
       /* Global Fonts */
-      /* @font-face {
-        font-family: 'miller-display';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-DisplayItalic.eot?v=1771871249');
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-DisplayItalic.eot?v=1771871249?#iefix') format('embedded-opentype'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-DisplayItalic.woff2?v=1771871249') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-DisplayItalic.woff?v=1771871249') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-DisplayItalic.ttf?v=1771871249') format('truetype');
-        font-weight: 500;
-        font-style: italic;
-        font-display: swap;
-      } */
-
       @font-face {
         font-family: 'Miller';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.woff2?v=1771935763') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.woff?v=1771935764') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.ttf?v=1771935763') format('truetype');
+        src: url({{ 'Miller-Display.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Miller-Display.woff' | asset_url }}) format('woff'),
+            url({{ 'Miller-Display.ttf' | asset_url }}) format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -344,9 +332,9 @@
 
       @font-face {
         font-family: 'Miller Display';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.woff2?v=1771935764') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.woff?v=1771935764') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.ttf?v=1771935764') format('truetype');
+        src: url({{ 'MillerDisplay-SemiBold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'MillerDisplay-SemiBold.woff' | asset_url }}) format('woff'),
+            url({{ 'MillerDisplay-SemiBold.ttf' | asset_url }}) format('truetype');
         font-weight: 600;
         font-style: normal;
         font-display: swap;
@@ -354,9 +342,9 @@
 
       @font-face {
         font-family: 'MillerDisplay';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.woff2?v=1771935764') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.woff?v=1771935764') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.ttf?v=1771935764') format('truetype');
+        src: url({{ 'MillerDisplay-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'MillerDisplay-Bold.woff' | asset_url }}) format('woff'),
+            url({{ 'MillerDisplay-Bold.ttf' | asset_url }}) format('truetype');
         font-weight: bold;
         font-style: normal;
         font-display: swap;
@@ -364,11 +352,11 @@
 
       @font-face {
         font-family: 'Proxima Nova Rg';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Regular.eot?v=1771871250');
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Regular.eot?v=1771871250?#iefix') format('embedded-opentype'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Regular.woff2?v=1771871249') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Regular.woff?v=1771871250') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Regular.ttf?v=1771871250') format('truetype');
+        src: url({{ 'ProximaNova-Regular.eot' | asset_url }});
+        src: url({{ 'ProximaNova-Regular.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-Regular.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-Regular.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-Regular.ttf' | asset_url }}) format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
@@ -376,11 +364,11 @@
 
       @font-face {
         font-family: 'Proxima Nova Rg';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Bold.eot?v=1771871249');
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Bold.eot?v=1771871249?#iefix') format('embedded-opentype'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Bold.woff2?v=1771871249') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Bold.woff?v=1771871249') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-Bold.ttf?v=1771871250') format('truetype');
+        src: url({{ 'ProximaNova-Bold.eot' | asset_url }});
+        src: url({{ 'ProximaNova-Bold.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-Bold.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-Bold.ttf' | asset_url }}) format('truetype');
         font-weight: bold;
         font-style: normal;
         font-display: swap;
@@ -388,11 +376,11 @@
 
       @font-face {
         font-family: 'Proxima Nova Rg';
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-RegularIt.eot?v=1771871250');
-        src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-RegularIt.eot?v=1771871250?#iefix') format('embedded-opentype'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-RegularIt.woff2?v=1771871249') format('woff2'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-RegularIt.woff?v=1771871249') format('woff'),
-          url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/ProximaNova-RegularIt.ttf?v=1771871249') format('truetype');
+        src: url({{ 'ProximaNova-RegularIt.eot' | asset_url }});
+        src: url({{ 'ProximaNova-RegularIt.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-RegularIt.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-RegularIt.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-RegularIt.ttf' | asset_url }}) format('truetype');
         font-weight: normal;
         font-style: normal;
         font-display: swap;
