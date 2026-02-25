@@ -112,11 +112,13 @@
             {{ form | payment_button }}
           {%- endif -%}
         </div>
+
+        {% if template.suffix == 'preorder-signup' %}
+          <button class="button button--full-width disabled preorder-signup-out-of-stock-button">Out of Stock</button>
+        {% endif %}
       {%- endform -%}
-      <!-- template suffix: {{ template.suffix }} -->
-      {% if template.suffix == 'preorder-signup' %}
-        <button class="button button--full-width disabled">Out of Stock</button>
-      {% endif %}
+      
+      
     </product-form>
   {%- else -%}
     <div class="product-form">
