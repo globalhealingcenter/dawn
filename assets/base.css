@@ -1,3 +1,83 @@
+/* Global Fonts */
+      @font-face {
+        font-family: 'Miller';
+        src: url({{ 'Miller-Display.woff2' | asset_url }}) format('woff2'),
+            url({{ 'Miller-Display.woff' | asset_url }}) format('woff'),
+            url({{ 'Miller-Display.ttf' | asset_url }}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Miller Display';
+        src: url({{ 'MillerDisplay-SemiBold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'MillerDisplay-SemiBold.woff' | asset_url }}) format('woff'),
+            url({{ 'MillerDisplay-SemiBold.ttf' | asset_url }}) format('truetype');
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'MillerDisplay';
+        src: url({{ 'MillerDisplay-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'MillerDisplay-Bold.woff' | asset_url }}) format('woff'),
+            url({{ 'MillerDisplay-Bold.ttf' | asset_url }}) format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Proxima Nova Rg';
+        src: url({{ 'ProximaNova-Regular.eot' | asset_url }});
+        src: url({{ 'ProximaNova-Regular.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-Regular.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-Regular.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-Regular.ttf' | asset_url }}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Proxima Nova Rg';
+        src: url({{ 'ProximaNova-Bold.eot' | asset_url }});
+        src: url({{ 'ProximaNova-Bold.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-Bold.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-Bold.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-Bold.ttf' | asset_url }}) format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: 'Proxima Nova Rg';
+        src: url({{ 'ProximaNova-RegularIt.eot' | asset_url }});
+        src: url({{ 'ProximaNova-RegularIt.eot' | asset_url }}) format('embedded-opentype'),
+            url({{ 'ProximaNova-RegularIt.woff2' | asset_url }}) format('woff2'),
+            url({{ 'ProximaNova-RegularIt.woff' | asset_url }}) format('woff'),
+            url({{ 'ProximaNova-RegularIt.ttf' | asset_url }}) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      .font-miller-bold {
+        font-family: 'MillerDisplay';
+      }
+
+      .font-miller-semibold {
+        font-family: 'Miller Display';
+      }
+
+      .font-miller-regular {
+        font-family: 'Miller';
+        font-weight: normal;
+      }
+
 /* Yotpo SEO Tab  */
 .yotpo-testimonials-btn {
   display: none !important;
