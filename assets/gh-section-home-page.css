@@ -122,7 +122,7 @@ section h3.eyebrow span {
 
 .ghd--hero-carousel__headline-line-1 {
     font-size: clamp(25px, 4.1667vw, 5rem);
-    font-weight: 700;
+    font-weight: bold;
     color: var(--gh-color-green, #22472D);
     text-transform: uppercase;
     letter-spacing: 0.02em;
