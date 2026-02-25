@@ -791,28 +791,6 @@ section h3.eyebrow span {
     }
 }
 
-@media (min-width: 801px){
-    
-    @keyframes homepage-logos {
-        from {
-            left: 2rem
-        }
-
-        to {
-            left: calc(calc(calc(1000px - 100%) + 2rem) * -1);
-        }
-    }
-
-    .ghd--logos .ghd--flex {
-        flex-wrap: nowrap;
-        min-width: 1000px;
-        position: absolute;
-        left: 2rem;
-        top: 2rem;
-        animation: 21s linear 0s infinite alternate homepage-logos;
-    }
-}
-
 @media (max-width: 800px) {
     .ghd--reviews [data-type=cols]>div {
         width: 100%;
