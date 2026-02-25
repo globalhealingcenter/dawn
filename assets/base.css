@@ -1,35 +1,3 @@
-/* Global Fonts */
-@font-face {
-  font-family: 'Miller';
-  src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.woff2?v=1771935763') format('woff2'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.woff?v=1771935764') format('woff'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/Miller-Display.ttf?v=1771935763') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Miller Display';
-  src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.woff2?v=1771935764') format('woff2'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.woff?v=1771935764') format('woff'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-SemiBold.ttf?v=1771935764') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'MillerDisplay';
-  src: url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.woff2?v=1771935764') format('woff2'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.woff?v=1771935764') format('woff'),
-    url('https://cdn.shopify.com/s/files/1/0555/3474/7822/files/MillerDisplay-Bold.ttf?v=1771935764') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-
-
 /* Yotpo SEO Tab  */
 .yotpo-testimonials-btn {
   display: none !important;
