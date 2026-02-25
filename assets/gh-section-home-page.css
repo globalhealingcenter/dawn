@@ -45,6 +45,7 @@ section h3.eyebrow span {
 .ghd--logos .ghd--flex {
     align-items: center;
     justify-content: space-between;
+    gap: 5rem;
 }
 
 .ghd--logos .ghd--flex>div {}
@@ -296,31 +297,37 @@ section h3.eyebrow span {
         height: 20px;
     }
 
-    .gh-hero-carousel__btn--prev{
+    .gh-hero-carousel__btn--prev {
         left: 15px;
     }
 
     .gh-hero-carousel__btn--next {
         right: 15px;
     }
-    .ghd--hero-carousel__headline{
+
+    .ghd--hero-carousel__headline {
         padding-left: 15px;
     }
-    .ghd--hero-carousel__reviews{
+
+    .ghd--hero-carousel__reviews {
         padding-right: 15px;
     }
-    .gh-hero-carousel{
+
+    .gh-hero-carousel {
         padding: 0;
     }
+
     .ghd--hero-carousel__review-text {
         width: 90px;
         display: block;
         text-align: left;
     }
-    .ghd--hero-carousel__review-text br{
+
+    .ghd--hero-carousel__review-text br {
         display: none;
     }
-    .ghd--hero-carousel__star{
+
+    .ghd--hero-carousel__star {
         width: 14px;
     }
 }
@@ -786,8 +793,54 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) and (max-width: 1200px) {
-    .ghd--logos .ghd--flex div:nth-child(2n) {
+    .ghd--logos .ghd--logos-set>div:nth-child(2n) {
         display: none;
+    }
+}
+
+@media (min-width: 801px) {
+    @keyframes homepage-logos {
+        from {
+            transform: translateX(0);
+        }
+
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    section.ghd--logos.ghd--bg-white {
+        position: relative;
+        height: 70px;
+        overflow: hidden;
+    }
+
+    .ghd--logos .ghd--logos-track {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+        min-width: max-content;
+        position: absolute;
+        left: 2rem;
+        top: 2rem;
+        animation: 21s linear 0s infinite homepage-logos;
+    }
+
+    .ghd--logos .ghd--logos-set {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+        flex-shrink: 0;
+        padding-right: 5rem;
+    }
+
+    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
+        padding-right: 0;
+    }
+
+    .ghd--logos .ghd--flex.ghd--logos-track {
+        justify-content: flex-start;
+        gap: 0;
     }
 }
 
@@ -799,7 +852,7 @@ section h3.eyebrow span {
     .ghd--logos {
         position: relative;
         overflow: hidden;
-        height: calc(22px + 4rem)
+        height: calc(22px + 4rem);
     }
 
     .ghd--logos img {
@@ -815,23 +868,42 @@ section h3.eyebrow span {
         height: 20px;
     }
 
-    @keyframes homepage-logos {
+    @keyframes homepage-logos-mobile {
         from {
-            left: 2rem
+            transform: translateX(0);
         }
 
         to {
-            left: calc(calc(calc(1000px - 100%) + 2rem) * -1);
+            transform: translateX(-50%);
         }
     }
 
-    .ghd--logos .ghd--flex {
+    .ghd--logos .ghd--logos-track {
+        display: flex;
         flex-wrap: nowrap;
-        min-width: 1000px;
+        flex-shrink: 0;
+        min-width: max-content;
         position: absolute;
         left: 2rem;
         top: 2rem;
-        animation: 21s linear 0s infinite alternate homepage-logos;
+        animation: 50s linear 0s infinite homepage-logos-mobile;
+    }
+
+    .ghd--logos .ghd--logos-set {
+        display: flex;
+        align-items: center;
+        gap: 5rem;
+        flex-shrink: 0;
+        padding-right: 5rem;
+    }
+
+    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
+        padding-right: 0;
+    }
+
+    .ghd--logos .ghd--flex.ghd--logos-track {
+        justify-content: flex-start;
+        gap: 0;
     }
 }
 
