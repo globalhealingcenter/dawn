@@ -260,7 +260,7 @@ section h3.eyebrow span {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--gh-color-green);
+    color: #ffffff;
     transition: background 0.2s, color 0.2s;
 }
 
