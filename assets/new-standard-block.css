@@ -1,0 +1,242 @@
+/* New Standard block - shared with new-standard-section.liquid */
+.new-standard-section {
+  background: #fff;
+  padding: 60px 40px;
+  font-family: 'Georgia', serif;
+}
+
+.new-standard-inner {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  padding: 20px;
+  max-width: 1130px;
+  margin: 0 auto;
+}
+
+.ns-left {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.ns-title,
+.ns-tagline {
+  font-size: clamp(30px, 4vw, 6.4rem);
+  font-weight: 400;
+  line-height: clamp(33px, 4.438vw, 7.1rem);
+  color: #22472D;
+  margin: 0;
+}
+
+.ns-description {
+  font-size: clamp(16px, 1.875vw, 3rem);
+  line-height: clamp(19.2px, 2.25vw, 3.6rem);
+  font-weight: 700;
+  color: #cca72c;
+  margin: 30px 0px 50px;
+}
+
+.ns-button:hover {
+  background: transparent;
+  color: #2d4a2d;
+}
+
+.ns-right {
+  flex: 1;
+}
+
+.new-standard-inner .button {
+  width: 100%;
+}
+
+.ns-accordion {
+  border-bottom: 1px solid #22472D;
+}
+
+.ns-accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+}
+
+.ns-accordion.ns-accordion--open .ns-accordion__trigger {
+  padding-bottom: 45px;
+}
+
+.ns-accordion__title {
+  font-size: clamp(16px, 1.875vw, 3rem);
+  line-height: clamp(19.2px, 2.25vw, 3.6rem);
+  font-weight: 400;
+  color: #22472D;
+  margin: 0;
+}
+
+.ns-accordion .ns-accordion__icon img {
+  width: 25px;
+  height: auto;
+  object-fit: contain;
+}
+
+.ns-accordion__icon-wrap svg {
+  width: 100%;
+}
+
+.ns-accordion__icon {
+  flex-shrink: 0;
+  color: #22472D;
+  transition: transform 0.3s ease;
+}
+
+.ns-accordion--open .ns-accordion__icon {
+  transform: rotate(180deg);
+}
+
+.ns-accordion__body {
+  display: none;
+  overflow: hidden;
+}
+
+.ns-accordion--open .ns-accordion__body {
+  display: block;
+}
+
+.ns-accordion__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding-bottom: 24px;
+}
+
+.ns-accordion__icon-wrap {
+  flex-shrink: 0;
+  width: clamp(66px, 6.5vw, 10.4rem);
+  height: clamp(66px, 6.5vw, 10.4rem);
+  border-radius: 50%;
+  background: #2d4a2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ns-accordion__icon-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ns-accordion__icon-wrap--default {
+  border: 2px solid #2d4a2d;
+  background: #2d4a2d;
+}
+
+.ns-accordion__text-wrap {
+  flex: 1;
+  max-height: 171px;
+  overflow-y: auto;
+  padding-right: 20px;
+}
+
+/* width */
+.ns-accordion__text-wrap::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.ns-accordion__text-wrap::-webkit-scrollbar-track {
+  background: rgb(35 31 32 / 20%);
+  border-radius: 50px;
+}
+
+/* Handle */
+.ns-accordion__text-wrap::-webkit-scrollbar-thumb {
+  background: #231F20;
+  border-radius: 50px;
+}
+
+.ns-accordion__label {
+  display: block;
+  font-size: clamp(12px, 1.25vw, 2rem);
+  line-height: clamp(14.4px, 1.563vw, 2.4rem);
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #02472D;
+  margin-bottom: 8px;
+}
+
+.ns-accordion__copy {
+  font-size: clamp(12px, 1.25vw, 2rem);
+  font-weight: 400;
+  color: #22472D;
+  line-height: clamp(14.4px, 1.563vw, 2.4rem);
+}
+
+.hide-on-desktop {
+  display: none;
+}
+
+.hide-on-mobile {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .new-standard-inner {
+    flex-direction: column;
+    gap: 35px;
+    padding: 40px 20px;
+  }
+
+  .ns-left {
+    flex: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .new-standard-section {
+    padding: 0;
+  }
+
+  .ns-accordion__trigger {
+    padding: 10px 0px;
+  }
+
+  .ns-accordion .ns-accordion__icon img {
+    width: 15px;
+  }
+
+  .ns-accordion__text-wrap {
+    max-height: 80px;
+  }
+
+  .ns-accordion__content {
+    gap: 20px;
+  }
+
+  .ns-accordion.ns-accordion--open .ns-accordion__trigger {
+    padding-bottom: 15px;
+  }
+
+  .hide-on-desktop {
+    display: flex;
+  }
+
+  .hide-on-mobile {
+    display: none;
+  }
+
+  .ns-description {
+    margin-bottom: 0;
+  }
+
+  .ns-accordions {
+    margin-bottom: 20px;
+  }
+}
