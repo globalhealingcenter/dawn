@@ -86,6 +86,11 @@
   font-family: 'Proxima Nova Rg';
 }
 
+.font-proxima-semibold{
+  font-family: 'Proxima Nova Lt';
+  font-weight: 600;
+}
+
 /* Yotpo SEO Tab  */
 .yotpo-testimonials-btn {
   display: none !important;
