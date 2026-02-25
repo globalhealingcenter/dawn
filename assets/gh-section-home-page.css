@@ -126,7 +126,6 @@ section h3.eyebrow span {
     font-style: normal;
     color: var(--gh-color-green, #22472D);
     text-transform: uppercase;
-    letter-spacing: 0.02em;
     line-height: clamp(35px, 5.938vw, 8.938rem);
 }
 
