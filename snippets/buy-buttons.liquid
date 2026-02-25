@@ -111,6 +111,10 @@
           {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
           {%- endif -%}
+
+          {% if template.suffix == 'preorder-signup' %}
+            <button class="button button--full-width disabled">Out of Stock</button>
+          {% endif %}
         </div>
       {%- endform -%}
     </product-form>
