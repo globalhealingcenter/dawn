@@ -288,6 +288,7 @@ section h3.eyebrow span {
 
     .gh-hero-carousel__track-container {
         aspect-ratio: 363 / 203 !important;
+        border-radius: 0;
     }
 
     .gh-hero-carousel__btn {
