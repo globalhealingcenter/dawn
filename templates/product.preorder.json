@@ -51,21 +51,28 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
             "show_gift_card_recipient": true
           }
         },
         "gh_out_of_stock_form_f4Aq77": {
           "type": "gh_out_of_stock_form",
+          "disabled": true,
           "settings": {
+            "form_url": "",
             "message": "<p><strong>Sorry we’re out of stock.</strong></p><p>At Global Healing, we’re picky about ingredients (in the best way). Every batch goes through strict testing, and if something does not meet our standards, we send it back. Lately, we’ve been running into more suppliers who are not meeting our quality requirements, which is causing delays. We’d rather take our time than compromise on what we manufacture.</p><p>We’re actively sourcing high-quality ingredients and will restock as soon as we find a supplier that meets our standards.</p>",
             "success_message": "<p>Success! You'll be receiving an email shortly.</p>",
             "force_show": false
           }
         },
+        "custom_liquid_mUJYKW": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<style>\n\t.product-form__submit{ display: none }\n</style>"
+          }
+        },
         "fd07f90a-d072-4889-9f15-50599ae59cfd": {
           "type": "custom_liquid",
-          "disabled": true,
           "settings": {
             "custom_liquid": "{% render 'gh-product-supplement-facts', product: product, type: 'mobile', render_modal: true %}"
           }
@@ -79,6 +86,7 @@
         "variant_picker",
         "buy_buttons",
         "gh_out_of_stock_form_f4Aq77",
+        "custom_liquid_mUJYKW",
         "fd07f90a-d072-4889-9f15-50599ae59cfd"
       ],
       "custom_css": [],
