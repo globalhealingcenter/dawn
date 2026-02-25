@@ -277,7 +277,7 @@ section h3.eyebrow span {
     right: 30px;
 }
 
-@media (max-width: 749px) {
+@media (max-width: 767px) {
     .gh-hero-slide__media--desktop {
         display: none;
     }
@@ -298,6 +298,9 @@ section h3.eyebrow span {
 
     .gh-hero-carousel__btn--next {
         right: 8px;
+    }
+    .ghd--hero-carousel__headline{
+        padding-left: 15px;
     }
 }
 
