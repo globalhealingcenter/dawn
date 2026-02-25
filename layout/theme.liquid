@@ -321,7 +321,7 @@
 
 
             /* Global Fonts */
-      @font-face {
+      /* @font-face {
         font-family: 'Miller';
         src: url({{ 'Miller-Display.woff2' | asset_url }}) format('woff2'),
         url({{ 'Miller-Display.woff' | asset_url }}) format('woff'),
@@ -349,7 +349,7 @@
         font-weight: bold;
         font-style: normal;
         font-display: swap;
-      }
+      } */
 
       @font-face {
         font-family: 'Proxima Nova Rg';
@@ -392,18 +392,21 @@
       }
 
       .font-miller-bold {
-        font-family: 'MillerDisplay', serif;
+        font-family: 'miller-display', serif;
         font-weight: bold;
+        font-style: italic;
       }
 
       .font-miller-semibold {
-        font-family: 'Miller Display', serif;
+        font-family: 'miller-display', serif;
         font-weight: 600;
+        font-style: italic;
       }
 
       .font-miller-regular {
-        font-family: 'Miller', serif;
+        font-family: 'miller-display', serif;
         font-weight: normal;
+        font-style: italic;
       }
 
       .font-proxima {
