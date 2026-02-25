@@ -152,7 +152,7 @@ section h3.eyebrow span {
     font-weight: 400;
     color: var(--gh-color-green, #22472D);
     text-align: right;
-    line-height: 1.3;
+    line-height: clamp(12.29px, 2.25vw, 3.6rem);
 }
 
 .ghd--hero-carousel__stars {
