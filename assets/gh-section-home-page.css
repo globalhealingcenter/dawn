@@ -294,11 +294,14 @@ section h3.eyebrow span {
     .gh-hero-carousel__btn {
         width: 20px;
         height: 20px;
-        left: 8px;
+    }
+
+    .gh-hero-carousel__btn--prev{
+        left: 15px;
     }
 
     .gh-hero-carousel__btn--next {
-        right: 8px;
+        right: 15px;
     }
     .ghd--hero-carousel__headline{
         padding-left: 15px;
