@@ -246,4 +246,7 @@
   .ns-accordions {
     margin-bottom: 20px;
   }
+  .new-standard-section .ns-right {
+      width: 100%;
+  }
 }
