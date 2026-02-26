@@ -97,6 +97,8 @@
   flex-shrink: 0;
   color: #22472D;
   transition: transform 0.3s ease;
+  position: relative;
+  right: -10px;
 }
 
 .ns-accordion--open .ns-accordion__icon {
