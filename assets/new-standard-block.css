@@ -142,6 +142,7 @@
 .ns-accordion__icon-wrap--default {
   border: 2px solid #2d4a2d;
   background: #2d4a2d;
+  margin-top: 15px
 }
 
 .ns-accordion__text-wrap {
