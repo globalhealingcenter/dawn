@@ -937,6 +937,12 @@ section h3.eyebrow span {
     }
 }
 
+@media (max-width: 767px) {
+    .ghd--hero-carousel {
+        padding-bottom: 0;
+    }
+}
+
 
 @media (max-width: 700px) {
 
