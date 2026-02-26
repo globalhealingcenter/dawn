@@ -50,6 +50,10 @@
   border-radius: 6px;
 }
 
+.new-standard-inner .button::after{
+  display:none
+}
+
 .ns-accordion {
   border-bottom: 1px solid #22472D;
 }
