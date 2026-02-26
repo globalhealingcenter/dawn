@@ -176,6 +176,7 @@ section h3.eyebrow span {
 .gh-hero-carousel {
     position: relative;
     width: 100%;
+    padding: 0 15px
 }
 
 .gh-hero-slide img {
