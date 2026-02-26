@@ -827,7 +827,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-    @keyframes homepage-logos {
+    /* @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -869,7 +869,46 @@ section h3.eyebrow span {
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
+    } */
+
+    section.ghd--logos.ghd--bg-white {
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center; /* Centers logos vertically in the 70px bar */
+}
+
+.ghd--logos .ghd--logos-track {
+    display: flex;
+    flex-wrap: nowrap;
+    /* This ensures the track is exactly as wide as the two sets combined */
+    width: max-content; 
+    animation: marquee-infinite 25s linear infinite;
+    will-change: transform;
+}
+
+.ghd--logos .ghd--logos-set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    /* Use a consistent gap between all items */
+    gap: 5rem;
+    /* This padding-right MUST match the gap to keep spacing even at the loop point */
+    padding-right: 5rem; 
+}
+
+/* Updated Animation */
+@keyframes marquee-infinite {
+    0% {
+        transform: translateX(0);
     }
+    100% {
+        /* Move exactly half the width (one full set) */
+        transform: translateX(-50%);
+    }
+}
 }
 
 @media (max-width: 800px) {
