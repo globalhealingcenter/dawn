@@ -139,6 +139,10 @@
   .health-goals__column {
     padding: 0 !important;
   }
+  
+  .mobile--hide{
+    display: none
+  }
 
   .health-goals__button {
     min-width: unset;
