@@ -85,8 +85,7 @@
   cursor: pointer;
 }
 
-.health-goals__link:hover,
-.health-goals__link--active {
+.health-goals__link:hover {
   color: #CCA72C;
 }
 
