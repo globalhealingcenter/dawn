@@ -80,7 +80,7 @@
   line-height: clamp(33px, 3.75vw, 3rem);
   text-transform: uppercase;
   font-weight: 500;
-  padding: 10px 0;
+  padding: 5px 0;
   transition: color 0.2s ease, letter-spacing 0.2s ease;
   cursor: pointer;
 }
