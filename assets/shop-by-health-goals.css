@@ -97,7 +97,7 @@
 .health-goals__button {
   width: 516px;
   max-width: 100%;
-  border-radius: 7px
+  /* border-radius: 7px */
 }
 
 .health-goals__button:hover {}
