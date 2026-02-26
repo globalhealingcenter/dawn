@@ -350,9 +350,12 @@ section h3.eyebrow span {
     }
 
     .ghd--hero-carousel__review-text {
-        width: 90px;
         display: block;
         text-align: left;
+        font-size: 16px;
+        width: 82%;
+        line-height: 20px;
+        letter-spacing: 0;
     }
 
     .ghd--hero-carousel__review-text br {
@@ -362,6 +365,23 @@ section h3.eyebrow span {
     .ghd--hero-carousel__star {
         width: 14px;
     }
+    .ghd--hero-carousel__header.page-width {
+        gap: 0;
+        margin-bottom: 20px;
+    }
+
+    .ghd--hero-carousel {
+        padding-top: 60px;
+    }
+
+    .ghd--hero-carousel__stars {
+        margin-left: 0;
+    }
+
+    .ghd--hero-carousel__stars svg {
+        width: 17px;
+        height: 17px;
+}
 }
 
 /*
