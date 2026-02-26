@@ -260,5 +260,10 @@
   .ns-accordion__icon{
     right: initial
   }
+  .new-standard-inner .button {
+    width: 75%;
+    margin: auto;
+    padding: 9px;
+  }
 
 }
