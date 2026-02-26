@@ -47,7 +47,6 @@
 
 .new-standard-inner .button {
   width: 90%;
-  border-radius: 6px;
 }
 
 .new-standard-inner .button::after{
