@@ -6,7 +6,7 @@
 }
 
 .health-goals__inner {
-  width: 990px;
+  width: 1130px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -60,7 +60,7 @@
 }
 
 .health-goals__column:last-child {
-  padding-left: 40px;
+  padding-left: 70px;
   padding-right: 0;
 }
 
