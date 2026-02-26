@@ -39,7 +39,7 @@ section h3.eyebrow span {
 */
 .ghd--logos {
     padding: 2rem 2rem;
-    border-bottom: 1px solid var(--gh-color-gray);
+    /* border-bottom: 1px solid var(--gh-color-gray); */
 }
 
 .ghd--logos .ghd--flex {
@@ -105,24 +105,25 @@ section h3.eyebrow span {
 /* Hero header: headline + review text above the carousel */
 .ghd--hero-carousel__header {
     display: flex;
-    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: 13rem;
+    margin-bottom: 3rem;
     margin-left: auto;
     margin-right: auto;
+    flex-direction: row;
 }
 
 .ghd--hero-carousel__headline {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: .25rem;
     padding-left: 7rem;
+    width: 100%;
 }
 
 .ghd--hero-carousel__headline-line-1 {
-    font-size: clamp(25px, 5vw, 8rem);
+    font-size: clamp(28px, 5vw, 8rem);
     font-weight: bold;
     font-style: normal;
     color: var(--gh-color-green, #22472D);
@@ -131,7 +132,7 @@ section h3.eyebrow span {
 }
 
 .ghd--hero-carousel__headline-line-2 {
-    font-size: clamp(30px, 6.375vw, 10.2rem);
+    font-size: clamp(30px, 7.375vw, 10.2rem);
     color: var(--gh-color-green, #22472D);
     line-height: clamp(28px, 5vw, 8rem);
 }
@@ -143,23 +144,28 @@ section h3.eyebrow span {
 }
 
 .ghd--hero-carousel__reviews {
-    text-align: justify;
-    gap: 0.35rem;
+    text-align: left; 
+    /* gap: .35rem; */
     padding-right: 7rem;
+    /* display: flex; */
 }
 
 .ghd--hero-carousel__review-text {
-    font-size: clamp(12.29px, 1.875vw, 3rem);
+    font-size: clamp(12.29px, 1.975vw, 3rem);
     font-weight: 400;
     color: var(--gh-color-green, #22472D);
     text-align: right;
     line-height: clamp(14.74px, 2.25vw, 3.6rem);
+    letter-spacing: 0
 }
 
 .ghd--hero-carousel__stars {
     display: inline-flex;
     align-items: center;
     gap: 2px;
+    position: relative;
+    top: 2px;
+    margin-left: 7px;
 }
 
 .ghd--hero-carousel__star {
@@ -174,6 +180,33 @@ section h3.eyebrow span {
 .gh-hero-carousel {
     position: relative;
     width: 100%;
+    padding: 0 15px
+}
+
+.gh-hero-slide img {
+  transition: opacity 0.3s ease-in-out;
+}
+/* Ensure the image is transparent while loading */
+.gh-hero-slide img[data-src] {
+  opacity: 0;
+}
+
+.gh-hero-carousel__track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;           /* Critical: removes the space between slides */
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important; /* Prevents manual scroll overlapping */
+  width: 100%;
+}
+
+.gh-hero-slide {
+  flex: 0 0 100% !important;   /* Forces slide to be EXACTLY 100% width */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  outline: none;               /* Removes any focus borders */
 }
 
 .gh-hero-carousel__track-container {
@@ -307,6 +340,7 @@ section h3.eyebrow span {
 
     .ghd--hero-carousel__headline {
         padding-left: 15px;
+        margin-bottom: 7px;
     }
 
     .ghd--hero-carousel__reviews {
@@ -318,9 +352,12 @@ section h3.eyebrow span {
     }
 
     .ghd--hero-carousel__review-text {
-        width: 90px;
         display: block;
         text-align: left;
+        font-size: 16px;
+        width: 82%;
+        line-height: 20px;
+        letter-spacing: 0;
     }
 
     .ghd--hero-carousel__review-text br {
@@ -330,6 +367,23 @@ section h3.eyebrow span {
     .ghd--hero-carousel__star {
         width: 14px;
     }
+    .ghd--hero-carousel__header.page-width {
+        gap: 0;
+        margin-bottom: 20px;
+    }
+
+    .ghd--hero-carousel {
+        padding-top: 60px;
+    }
+
+    .ghd--hero-carousel__stars {
+        margin-left: 0;
+    }
+
+    .ghd--hero-carousel__stars svg {
+        width: 20px;
+        height: 20px;
+}
 }
 
 /*
@@ -799,7 +853,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-    @keyframes homepage-logos {
+     @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -823,7 +877,7 @@ section h3.eyebrow span {
         position: absolute;
         left: 2rem;
         top: 2rem;
-        animation: 21s linear 0s infinite homepage-logos;
+        animation: 40s linear 0s infinite homepage-logos;
     }
 
     .ghd--logos .ghd--logos-set {
@@ -842,6 +896,8 @@ section h3.eyebrow span {
         justify-content: flex-start;
         gap: 0;
     }
+
+
 }
 
 @media (max-width: 800px) {
@@ -856,7 +912,7 @@ section h3.eyebrow span {
     }
 
     .ghd--logos img {
-        height: 22px;
+        height: 20px;
     }
 
     .ghd--logos img[data-logo="huffpost"] {
@@ -904,6 +960,12 @@ section h3.eyebrow span {
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .ghd--hero-carousel {
+        padding-bottom: 0;
     }
 }
 

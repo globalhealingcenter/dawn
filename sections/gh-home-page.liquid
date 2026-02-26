@@ -80,7 +80,7 @@
       {% when 'logos' %}
         <section class="ghd--logos ghd--bg-white" {{ block.shopify_attributes }}>
           <div class="ghd--flex ghd--logos-track">
-            {%- for i in (1..2) -%}
+            {%- for i in (1..4) -%}
               <div class="ghd--logos-set">
                 <div>
                   <img
@@ -223,7 +223,7 @@
                       <span class="ghd--hero-carousel__stars" aria-hidden="true">
                         {% for i in (1..5) %}
                           {% if i <= hero_stars %}
-                            <svg
+                            {% comment %} <svg
                               class="ghd--hero-carousel__star"
                               width="20"
                               height="20"
@@ -232,9 +232,15 @@
                               aria-hidden="true"
                             >
                               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg> {% endcomment %}
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="25" height="25">
+                              <style>
+                                .s5 { fill: #cca72c } 
+                              </style>
+                              <path fill-rule="evenodd" class="s5" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
                             </svg>
                           {% else %}
-                            <svg
+                            {% comment %} <svg
                               class="ghd--hero-carousel__star ghd--hero-carousel__star--empty"
                               width="20"
                               height="20"
@@ -243,6 +249,12 @@
                               aria-hidden="true"
                             >
                               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg> {% endcomment %}
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="25" height="25">
+                              <style>
+                                .s6 { fill: #22472d } 
+                              </style>
+                              <path fill-rule="evenodd" class="s6" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
                             </svg>
                           {% endif %}
                         {% endfor %}

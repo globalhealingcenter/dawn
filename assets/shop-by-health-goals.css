@@ -6,7 +6,7 @@
 }
 
 .health-goals__inner {
-  width: 990px;
+  width: 1130px;
   max-width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -55,12 +55,12 @@
 
 .health-goals__column:first-child {
   padding-left: 0;
-  padding-right: 40px;
+  padding-right: 80px;
   border-right: 1px solid rgb(249 242 232 / 50%);
 }
 
 .health-goals__column:last-child {
-  padding-left: 40px;
+  padding-left: 80px;
   padding-right: 0;
 }
 
@@ -77,16 +77,15 @@
   font-family: 'proxima-nova';
   text-decoration: none;
   font-size: clamp(18px, 1.875vw, 3rem);
-  line-height: clamp(33px, 3.75vw, 6rem);
+  line-height: clamp(23px, 3.75vw, 3rem);
   text-transform: uppercase;
   font-weight: 500;
-  padding: 10px 0;
+  padding: 5px 0;
   transition: color 0.2s ease, letter-spacing 0.2s ease;
   cursor: pointer;
 }
 
-.health-goals__link:hover,
-.health-goals__link--active {
+.health-goals__link:hover {
   color: #CCA72C;
 }
 
@@ -98,18 +97,22 @@
 .health-goals__button {
   width: 516px;
   max-width: 100%;
+  /* border-radius: 7px */
+  letter-spacing: 0;
 }
 
 .health-goals__button:hover {}
 
 @media (max-width: 767px) {
   .health-goals-section {
-    padding: 30px 15px 40px;
+    padding: 40px 30px;
+    min-height: initial
   }
 
   .health-goals__heading {
     margin-bottom: 25px;
     text-align: left;
+    font-size: clamp(36px,4vw,6.4rem)
   }
 
   .health-goals__link {
@@ -122,7 +125,7 @@
 
   .health-goals__grid {
     flex-direction: column;
-    gap: 0;
+    gap: 10px;
     margin-bottom: 25px;
   }
 
@@ -136,10 +139,14 @@
   .health-goals__column {
     padding: 0 !important;
   }
+  
+  .mobile--hide{
+    display: none
+  }
 
   .health-goals__button {
     min-width: unset;
-    width: 100%;
-    padding: 18px 24px;
+    width: 75%;
+    padding: 12px 24px;
   }
 }

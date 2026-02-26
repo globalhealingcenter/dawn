@@ -8,20 +8,20 @@
 .new-standard-inner {
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 140px;
   padding: 20px;
-  max-width: 1130px;
+  max-width: 1360px;
   margin: 0 auto;
 }
 
 .ns-left {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 45%;
+  max-width: 45%;
 }
 
 .ns-title,
 .ns-tagline {
-  font-size: clamp(30px, 4vw, 6.4rem);
+  font-size: clamp(36px,4vw,6.4rem);.new-standard-inner
   font-weight: 400;
   line-height: clamp(33px, 4.438vw, 7.1rem);
   color: #22472D;
@@ -33,7 +33,7 @@
   line-height: clamp(19.2px, 2.25vw, 3.6rem);
   font-weight: 700;
   color: #cca72c;
-  margin: 30px 0px 50px;
+  margin: 30px 0px 70px;
 }
 
 .ns-button:hover {
@@ -46,7 +46,12 @@
 }
 
 .new-standard-inner .button {
-  width: 100%;
+  width: 90%;
+  letter-spacing: 0;
+}
+
+.new-standard-inner .button::after{
+  display:none
 }
 
 .ns-accordion {
@@ -58,7 +63,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 20px 0;
+  padding: 15px 0;
   background: none;
   border: none;
   cursor: pointer;
@@ -67,7 +72,7 @@
 }
 
 .ns-accordion.ns-accordion--open .ns-accordion__trigger {
-  padding-bottom: 45px;
+  padding-bottom: 35px;
 }
 
 .ns-accordion__title {
@@ -92,6 +97,8 @@
   flex-shrink: 0;
   color: #22472D;
   transition: transform 0.3s ease;
+  position: relative;
+  right: -10px;
 }
 
 .ns-accordion--open .ns-accordion__icon {
@@ -136,13 +143,15 @@
 .ns-accordion__icon-wrap--default {
   border: 2px solid #2d4a2d;
   background: #2d4a2d;
+  margin-top: 15px
 }
 
 .ns-accordion__text-wrap {
   flex: 1;
-  max-height: 171px;
+  max-height: 170px;
   overflow-y: auto;
   padding-right: 20px;
+  padding-top: 20px;
 }
 
 /* width */
@@ -191,7 +200,7 @@
   .new-standard-inner {
     flex-direction: column;
     gap: 35px;
-    padding: 40px 20px;
+    padding: 40px 30px;
   }
 
   .ns-left {
@@ -214,6 +223,8 @@
 
   .ns-accordion__text-wrap {
     max-height: 80px;
+    margin-right: 5px;
+    padding-top: 0
   }
 
   .ns-accordion__content {
@@ -234,9 +245,31 @@
 
   .ns-description {
     margin-bottom: 0;
+    margin-top: 14px
   }
 
   .ns-accordions {
     margin-bottom: 20px;
   }
+  .new-standard-section .ns-right {
+      width: 100%;
+  }
+
+  /* width */
+  .ns-accordion__text-wrap::-webkit-scrollbar {
+    width: 5px;
+  }
+  .ns-accordion__icon{
+    right: initial
+  }
+  .new-standard-inner .button {
+    width: 75%;
+    margin: auto;
+    padding: 12px;
+  }
+
+  .ns-accordion__icon-wrap--default{
+    margin-top: 0
+  }
+
 }
