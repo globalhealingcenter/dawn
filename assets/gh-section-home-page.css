@@ -162,6 +162,9 @@ section h3.eyebrow span {
     display: inline-flex;
     align-items: center;
     gap: 2px;
+    position: relative;
+    top: 2px;
+    margin-left: 7px;
 }
 
 .ghd--hero-carousel__star {
