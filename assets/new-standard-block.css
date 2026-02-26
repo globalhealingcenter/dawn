@@ -219,6 +219,7 @@
 
   .ns-accordion__content {
     gap: 20px;
+    padding-right: 3px;
   }
 
   .ns-accordion.ns-accordion--open .ns-accordion__trigger {
