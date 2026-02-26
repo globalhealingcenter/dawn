@@ -23,6 +23,10 @@
 {%- endstyle -%}
 
 {{ 'gh-section-home-page.css' | asset_url | stylesheet_tag }}
+{{ 'consistency-wellness.css' | asset_url | stylesheet_tag }}
+{{ 'consistency-wellness.js' | asset_url | script_tag }}
+{{ 'static-reviews-carousel.css' | asset_url | stylesheet_tag }}
+{{ 'static-reviews-carousel.js' | asset_url | script_tag }}
 
 <div class="gh--home-page section-{{ section.id }}-padding">
   {{ 'gh-hero-carousel.js' | asset_url | script_tag }}
@@ -470,6 +474,15 @@
 
       {% when 'shop_by_health_goals' %}
         {% render 'shop-by-health-goals', block: block, section: section %}
+
+      {% when 'oxy_powder_hero' %}
+        {% render 'oxy-powder-hero', block: block %}
+
+      {% when 'consistency_wellness' %}
+        {% render 'consistency-wellness', block: block %}
+
+      {% when 'static_reviews_carousel' %}
+        {% render 'static-reviews-carousel', block: block %}
 
       {% when 'br' %}
         <hr class="page-width" {{ block.shopify_attributes }}>
@@ -1270,6 +1283,24 @@
           "label": "Button URL"
         }
       ]
+    },
+    {
+      "type": "oxy_powder_hero",
+      "name": "Oxy-Powder Hero",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "consistency_wellness",
+      "name": "Consistency Wellness",
+      "limit": 1,
+      "settings": []
+    },
+    {
+      "type": "static_reviews_carousel",
+      "name": "Static Reviews Carousel",
+      "limit": 1,
+      "settings": []
     },
     {
       "type": "br",

@@ -1,0 +1,259 @@
+/* Consistency Wellness - static homepage block */
+
+.cw.consistency-wellness {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+/* Video background */
+.cw__video-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.cw__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
+
+.cw__video--mobile {
+  display: none;
+}
+
+.cw__video-wrap .cw__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0 0 0 / 50%);
+  z-index: 1;
+  display: block;
+}
+
+/* Content */
+.cw__content {
+  position: relative;
+  z-index: 2;
+  padding: 5rem 30px 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9rem;
+}
+
+/* Header */
+.cw__header {
+  text-align: center;
+}
+
+.cw__heading {
+  font-weight: 400;
+  font-size: clamp(3rem, 4vw, 6.4rem);
+  line-height: clamp(3.3rem, 4.438vw, 7.1rem);
+  color: #F9F2E8;
+  margin: 0 0 0.5rem;
+}
+
+.cw__tagline {
+  font-size: clamp(1.6rem, 1.875vw, 3rem);
+  line-height: clamp(1.9rem, 2.25vw, 3.6rem);
+  font-weight: 400;
+  color: #F9F2E8;
+  margin: 10px 0px 0px;
+}
+
+/* Cards wrapper (contains track + progress bar) */
+.cw__cards-outer {
+  width: 100%;
+}
+
+/* Progress bar - hidden on desktop */
+.cw__progress {
+  display: none;
+}
+
+/* Cards grid (desktop/tablet) */
+.cw__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4.5rem 1.5rem;
+  width: 100%;
+}
+
+.cw__card {
+  background: rgb(33 71 45 / 70%);
+  border-radius: 8px;
+  padding: calc(3.2vw + 25px) 20px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  aspect-ratio: 4/3;
+}
+
+/* Icon - circular, overlaps top of box */
+.cw__card-icon {
+  width: clamp(9.9rem, 7.25vw, 11.6rem);
+  height: clamp(9.9rem, 7.25vw, 11.6rem);
+  border-radius: 50%;
+  background: #22472D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -3.2vw;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #E8D5A3;
+}
+
+.cw__card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cw__card-heading {
+  font-size: clamp(2rem, 1.875vw, 3rem);
+  font-weight: bold;
+  color: #F9F2E8;
+  margin: 0 0 10px;
+  line-height: clamp(2.4rem, 2.25vw, 3.6rem);
+}
+
+.cw__card-text {
+  font-size: clamp(1.6rem, 1.25vw, 2rem);
+  line-height: clamp(2.4rem, 1.5vw, 3.3rem);
+  color: #F9F2E8;
+  margin: 0 0 auto;
+  flex: 1;
+}
+
+.cw__card-link {
+  font-size: clamp(1.6rem, 1.563vw, 2.5rem);
+  line-height: clamp(1.9rem, 1.875vw, 3rem);
+  font-weight: 600;
+  color: #F9F2E8;
+  text-decoration: none;
+  border-bottom: 1px solid #F9F2E8;
+  margin-top: 1rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.cw__card-link:hover {
+  color: #CCA72C;
+  border-bottom-color: #CCA72C;
+}
+
+/* Responsive */
+@media (max-width: 1418px) {
+  .cw__card {
+    aspect-ratio: unset;
+  }
+}
+
+@media (max-width: 1200px) {
+  .cw__card-icon {
+    top: -4.4vw;
+  }
+}
+
+@media (max-width: 990px) {
+  .cw__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6.5rem 1.5rem;
+  }
+
+  .cw__card-icon {
+    top: -45px;
+  }
+}
+
+@media (max-width: 600px) {
+  .cw.consistency-wellness {
+    min-height: auto;
+  }
+
+  .cw__video--desktop {
+    display: none;
+  }
+
+  .cw__video--mobile {
+    display: block;
+  }
+
+  .cw__content {
+    gap: 2.5rem;
+    padding: 4rem 0px;
+  }
+
+  /* Mobile carousel: thin symmetrical peek of adjacent slides */
+  .cw__cards-outer {
+    overflow: hidden;
+  }
+
+  .cw__cards {
+    display: flex;
+    grid-template-columns: unset;
+    gap: 2%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 50px 3.5% 0;
+    scroll-padding-inline: 3.5%;
+  }
+
+  .cw__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cw__card {
+    flex: 0 0 97%;
+    min-width: 97%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    padding-top: 7.25rem;
+  }
+
+  /* Progress bar - single track with filled portion */
+  .cw__progress {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    padding: 0 2rem 1rem;
+  }
+
+  .cw__progress-track {
+    width: 100%;
+    max-width: 70%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .cw__progress-track .cw__progress-fill {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 2px;
+    width: 25%;
+    transition: width 0.3s ease;
+    display: block;
+  }
+}
