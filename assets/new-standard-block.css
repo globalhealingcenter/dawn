@@ -8,15 +8,15 @@
 .new-standard-inner {
   display: flex;
   align-items: center;
-  gap: 90px;
+  gap: 140px;
   padding: 20px;
   max-width: 1360px;
   margin: 0 auto;
 }
 
 .ns-left {
-  flex: 0 0 50%;
-  max-width: 50%;
+  flex: 0 0 45%;
+  max-width: 45%;
 }
 
 .ns-title,
