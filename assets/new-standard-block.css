@@ -222,6 +222,7 @@
 
   .ns-accordion__text-wrap {
     max-height: 80px;
+    margin-right: 5px;
   }
 
   .ns-accordion__content {
