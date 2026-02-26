@@ -105,20 +105,21 @@ section h3.eyebrow span {
 /* Hero header: headline + review text above the carousel */
 .ghd--hero-carousel__header {
     display: flex;
-    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 13rem;
     margin-bottom: 1.5rem;
     margin-left: auto;
     margin-right: auto;
+    flex-direction: row;
 }
 
 .ghd--hero-carousel__headline {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: .25rem;
     padding-left: 7rem;
+    width: 100%;
 }
 
 .ghd--hero-carousel__headline-line-1 {
@@ -143,9 +144,10 @@ section h3.eyebrow span {
 }
 
 .ghd--hero-carousel__reviews {
-    text-align: justify;
-    gap: 0.35rem;
+    text-align: justify; */
+    /* gap: .35rem; */
     padding-right: 7rem;
+    /* display: flex; */
 }
 
 .ghd--hero-carousel__review-text {
