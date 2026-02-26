@@ -237,8 +237,7 @@ nutrient integrity from start to finish.
 
 
 <script>
-
-  document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
   const iconLibrary = {
     "1": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
                   <defs>
@@ -315,7 +314,7 @@ nutrient integrity from start to finish.
                       </g>
                     </g>
                   </g>
-                </svg>`, // Accordion 1 - Icon 2
+                </svg>`, 
     "3": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
                   <defs>
                     <style>
@@ -356,48 +355,50 @@ nutrient integrity from start to finish.
                       </g>
                     </g>
                   </g>
-                </svg>`, // Accordion 1 - Icon 3
+                </svg>`,
     "4": `<svg>...</svg>`, // Accordion 2 - Icon 1
-    "5": `<svg>...</svg>`, // Accordion 2 - Icon 2
-    "6": `<svg>...</svg>`, // Accordion 2 - Icon 3
+    "5": `<svg>...</svg>`,
+    "6": `<svg>...</svg>`,
     "7": `<svg>...</svg>`, // Accordion 3 - Icon 1
-    "8": `<svg>...</svg>`, // Accordion 3 - Icon 2
-    "9": `<svg>...</svg>`  // Accordion 3 - Icon 3
+    "8": `<svg>...</svg>`,
+    "9": `<svg>...</svg>`
   };
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px 0px -50% 0px', // Triggers when label passes the middle of the screen
-    threshold: 0.1 
-  };
+  // Find all accordion content areas
+  const accordionContents = document.querySelectorAll(".ns-accordion__content");
 
-  const iconObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const index = entry.target.getAttribute("data-icon-index");
-        const parentContent = entry.target.closest(".ns-accordion__content");
-        const container = parentContent ? parentContent.querySelector(".svg-display") : null;
+  accordionContents.forEach((content) => {
+    const scrollContainer = content.querySelector(".ns-accordion__text-wrap");
+    const displayContainer = content.querySelector(".svg-display");
 
-        if (container && iconLibrary[index]) {
-          console.log("Switching to icon:", index); // Debugging: Check your console!
+    if (!scrollContainer || !displayContainer) return;
+
+    // Create an observer specifically for THIS scrollable div
+    const internalObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = entry.target.getAttribute("data-icon-index");
           
-          container.style.opacity = "0";
-          setTimeout(() => {
-            container.innerHTML = iconLibrary[index];
-            container.style.opacity = "1";
-          }, 150);
+          if (iconLibrary[index]) {
+            displayContainer.style.opacity = "0";
+            setTimeout(() => {
+              displayContainer.innerHTML = iconLibrary[index];
+              displayContainer.style.opacity = "1";
+            }, 150);
+          }
         }
-      }
+      });
+    }, {
+      root: scrollContainer, // THIS IS THE KEY FIX
+      rootMargin: "0px 0px -50% 0px",
+      threshold: 0.5
     });
-  }, observerOptions);
 
-  // Initialize
-  const labels = document.querySelectorAll(".ns-accordion__label");
-  if (labels.length > 0) {
-    labels.forEach((label) => iconObserver.observe(label));
-  } else {
-    console.warn("Scroll JS: No labels found. Check your class names.");
-  }
+    // Observe labels inside this specific scroll container
+    scrollContainer.querySelectorAll(".ns-accordion__label").forEach((label) => {
+      internalObserver.observe(label);
+    });
+  });
 });
 </script>
 
