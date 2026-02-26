@@ -186,6 +186,20 @@ section h3.eyebrow span {
   opacity: 0;
 }
 
+.gh-hero-carousel__track {
+  display: flex;
+  overflow-x: hidden; /* Prevent manual scroll peeking */
+  scroll-snap-type: x mandatory; /* Browser-level alignment */
+  -webkit-overflow-scrolling: touch;
+}
+
+.gh-hero-slide {
+  scroll-snap-align: start;
+  width: 100%;
+  min-width: 100%; /* Fixes the "small area" visibility */
+  box-sizing: border-box;
+}
+
 .gh-hero-carousel__track-container {
     position: relative;
     overflow: hidden;

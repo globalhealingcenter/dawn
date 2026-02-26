@@ -15,7 +15,7 @@
     var count = originalSlides.length;
     if (count <= 1) return;
 
-    // 1. Infinite Cloning
+    // 1. Create Clones
     var firstClone = originalSlides[0].cloneNode(true);
     var lastClone = originalSlides[count - 1].cloneNode(true);
     track.appendChild(firstClone);
@@ -25,12 +25,17 @@
     var currentIndex = 1;
     var isTransitioning = false;
 
-    function getSlideWidth() {
-      return track.offsetWidth || track.clientWidth;
+    // 2. Force Exact Widths to prevent "slivers" of other slides
+    function syncWidths() {
+      var width = track.getBoundingClientRect().width;
+      allSlides.forEach(function(slide) {
+        slide.style.width = width + 'px';
+        slide.style.flex = '0 0 ' + width + 'px'; // Prevent shrinking/growing
+      });
+      // Snap to current position without animation to keep it aligned
+      track.style.scrollBehavior = 'auto';
+      track.scrollLeft = currentIndex * width;
     }
-
-    // Jump to the "real" first slide instantly
-    track.scrollLeft = getSlideWidth();
 
     function loadSlideAssets(slide) {
       if (!slide) return;
@@ -44,34 +49,32 @@
           } else if (el.tagName === 'VIDEO') {
             el.src = src;
             el.load();
+            el.play().catch(function() {});
           }
           el.removeAttribute('data-src');
-          el.classList.remove('gh-hero-slide__img--lazy');
         }
       });
     }
 
-    // Pre-loads the current, next, and previous slides
     function preloadNeighbors(index) {
-      loadSlideAssets(allSlides[index]);         // Current
-      loadSlideAssets(allSlides[index + 1]);     // Next
-      loadSlideAssets(allSlides[index - 1]);     // Previous
+      loadSlideAssets(allSlides[index]);
+      loadSlideAssets(allSlides[index + 1]);
+      loadSlideAssets(allSlides[index - 1]);
     }
 
     function scrollToIndex(index) {
       if (isTransitioning) return;
       isTransitioning = true;
       
-      // Pre-load the slide we are about to see BEFORE we move
-      loadSlideAssets(allSlides[index]);
-
-      var width = getSlideWidth();
+      var width = track.getBoundingClientRect().width;
       currentIndex = index;
+      
       track.style.scrollBehavior = 'smooth';
-      track.scrollLeft = currentIndex * width;
+      // Use Math.round to prevent sub-pixel gaps
+      track.scrollLeft = Math.round(currentIndex * width);
 
       setTimeout(function() {
-        // Infinite Loop Snap Logic
+        // Infinite Loop Logic
         if (currentIndex >= allSlides.length - 1) {
           track.style.scrollBehavior = 'auto';
           currentIndex = 1;
@@ -79,13 +82,12 @@
         } else if (currentIndex <= 0) {
           track.style.scrollBehavior = 'auto';
           currentIndex = allSlides.length - 2;
-          track.scrollLeft = currentIndex * width;
+          track.scrollLeft = Math.round(currentIndex * width);
         }
         
         isTransitioning = false;
-        // Pre-load neighbors for the next potential click
         preloadNeighbors(currentIndex);
-      }, 500); 
+      }, 550); // Slightly longer than smooth scroll to ensure it finishes
     }
 
     container.querySelector('.gh-hero-carousel__btn--prev')?.addEventListener('click', function() {
@@ -96,13 +98,12 @@
       scrollToIndex(currentIndex + 1);
     });
 
-    // Initial load: Prepare the first view and the items next to it
-    preloadNeighbors(currentIndex);
+    // Handle Window Resize and Orientation change
+    window.addEventListener('resize', syncWidths);
     
-    window.addEventListener('resize', function() {
-      track.style.scrollBehavior = 'auto';
-      track.scrollLeft = currentIndex * getSlideWidth();
-    });
+    // Final check: Load initial assets and set position
+    syncWidths();
+    preloadNeighbors(currentIndex);
   }
 
   function initAll() {
