@@ -110,6 +110,7 @@
   .health-goals__heading {
     margin-bottom: 25px;
     text-align: left;
+    font-size: clamp(36px,4vw,6.4rem)
   }
 
   .health-goals__link {
