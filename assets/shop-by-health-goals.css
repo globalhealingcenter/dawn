@@ -125,7 +125,7 @@
 
   .health-goals__grid {
     flex-direction: column;
-    gap: 0;
+    gap: 10px;
     margin-bottom: 25px;
   }
 
