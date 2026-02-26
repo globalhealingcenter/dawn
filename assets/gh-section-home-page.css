@@ -827,7 +827,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-     @keyframes homepage-logos {
+     /* @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -869,17 +869,47 @@ section h3.eyebrow span {
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
-    }
+    } */
+.ghd--logos.ghd--bg-white {
+  width: 100%;
+  height: 70px;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
 
+.ghd--logos-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
 
-@keyframes logo-marquee {
-  0% {
-    offset-distance: 0%;
-  }
-  100% {
+.ghd--logos-set > div {
+  position: absolute;
+  width: 150px;
+  offset: shape(from -150px 50%, hline by calc(sibling-count() * 210px));
+  animation: logo-marquee 12s linear infinite calc(-1 * sibling-index() * 12s / sibling-count());
+}
+
+.ghd--logos-set > div img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes logo-marquee { 
+  to {
     offset-distance: 100%;
   }
 }
+
+/* .ghd--logos-set:nth-child(2) {
+  display: none;
+} */
+
 }
 
 @media (max-width: 800px) {
