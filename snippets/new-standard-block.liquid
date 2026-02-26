@@ -392,8 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "9": `<svg>...</svg>`
   };
 
-  // Find all accordion content areas
-  const accordionContents = document.querySelectorAll(".ns-accordion__content");
+ const accordionContents = document.querySelectorAll(".ns-accordion__content");
 
   accordionContents.forEach((content) => {
     const scrollContainer = content.querySelector(".ns-accordion__text-wrap");
@@ -401,28 +400,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!scrollContainer || !displayContainer) return;
 
-    // Create an observer specifically for THIS scrollable div
     const internalObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const index = entry.target.getAttribute("data-icon-index");
           
           if (iconLibrary[index]) {
-            displayContainer.style.opacity = "0";
-            setTimeout(() => {
-              displayContainer.innerHTML = iconLibrary[index];
-              displayContainer.style.opacity = "1";
-            }, 150);
+            // Direct injection with no delay or opacity logic
+            displayContainer.innerHTML = iconLibrary[index];
           }
         }
       });
     }, {
-      root: scrollContainer, // THIS IS THE KEY FIX
+      root: scrollContainer,
       rootMargin: "0px 0px -50% 0px",
-      threshold: 0.5
+      threshold: 0.1 // Low threshold for faster response
     });
 
-    // Observe labels inside this specific scroll container
     scrollContainer.querySelectorAll(".ns-accordion__label").forEach((label) => {
       internalObserver.observe(label);
     });
