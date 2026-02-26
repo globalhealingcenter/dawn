@@ -47,6 +47,7 @@
 
 .new-standard-inner .button {
   width: 90%;
+  letter-spacing: 0;
 }
 
 .new-standard-inner .button::after{
