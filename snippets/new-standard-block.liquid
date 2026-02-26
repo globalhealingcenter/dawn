@@ -235,39 +235,6 @@ nutrient integrity from start to finish.
   </div>
 </section>
 
-<script>
-  (function () {
-    const container = document.getElementById('ns-block-static');
-    if (!container) return;
-
-    container.querySelectorAll('.ns-accordion__trigger').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        const accordion = this.closest('.ns-accordion');
-        const isOpen = accordion.classList.contains('ns-accordion--open');
-
-        container.querySelectorAll('.ns-accordion').forEach(function (a) {
-          a.classList.remove('ns-accordion--open');
-          var trigger = a.querySelector('.ns-accordion__trigger');
-          var body = a.querySelector('.ns-accordion__body');
-          if (trigger) trigger.setAttribute('aria-expanded', 'false');
-          if (body) body.style.display = 'none';
-        });
-
-        if (!isOpen) {
-          accordion.classList.add('ns-accordion--open');
-          btn.setAttribute('aria-expanded', 'true');
-          var b = accordion.querySelector('.ns-accordion__body');
-          if (b) b.style.display = 'block';
-        }
-      });
-    });
-
-    container.querySelectorAll('.ns-accordion--open .ns-accordion__body').forEach(function (body) {
-      body.style.display = 'block';
-    });
-  })();
-</script>
-
 
 <script>
 
@@ -427,3 +394,37 @@ nutrient integrity from start to finish.
   });
 });
 </script>
+
+<script>
+  (function () {
+    const container = document.getElementById('ns-block-static');
+    if (!container) return;
+
+    container.querySelectorAll('.ns-accordion__trigger').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const accordion = this.closest('.ns-accordion');
+        const isOpen = accordion.classList.contains('ns-accordion--open');
+
+        container.querySelectorAll('.ns-accordion').forEach(function (a) {
+          a.classList.remove('ns-accordion--open');
+          var trigger = a.querySelector('.ns-accordion__trigger');
+          var body = a.querySelector('.ns-accordion__body');
+          if (trigger) trigger.setAttribute('aria-expanded', 'false');
+          if (body) body.style.display = 'none';
+        });
+
+        if (!isOpen) {
+          accordion.classList.add('ns-accordion--open');
+          btn.setAttribute('aria-expanded', 'true');
+          var b = accordion.querySelector('.ns-accordion__body');
+          if (b) b.style.display = 'block';
+        }
+      });
+    });
+
+    container.querySelectorAll('.ns-accordion--open .ns-accordion__body').forEach(function (body) {
+      body.style.display = 'block';
+    });
+  })();
+</script>
+
