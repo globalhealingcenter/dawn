@@ -886,7 +886,7 @@ section h3.eyebrow span {
     display: flex;
     flex-wrap: nowrap;
     width: max-content; 
-    animation: marquee-infinite 25s linear infinite;
+    animation: marquee-infinite 32s linear infinite;
     /* This ensures the animation is smooth on high-refresh screens */
     will-change: transform; 
     padding: 0;
