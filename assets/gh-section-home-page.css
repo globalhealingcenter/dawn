@@ -827,7 +827,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-    /* @keyframes homepage-logos {
+     @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -869,43 +869,8 @@ section h3.eyebrow span {
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
-    } */
+    }
 
-    .ghd--logos-track {
-  /* Configuration Variables */
-  --s: 150px;       /* Width of each logo */
-  --d: 15s;         /* Speed: higher is slower */
-  --n: 6;           /* Number of logos visible at once */
-  --gap: 50px;      /* Gap between logos */
-  
-  display: flex;
-  overflow: hidden;
-  height: 70px;
-  width: 100%;
-  position: relative;
-  align-items: center;
-}
-
-/* Target the individual logo containers inside the track */
-.ghd--logos-set > div {
-  position: absolute; /* Motion path works best with absolute children */
-  width: var(--s);
-  
-  /* The Path: It starts off-screen (left) and moves right */
-  /* We calculate the distance based on the number of siblings and gaps */
-  offset-path: ray(90deg); /* Simplest way to move in a straight line */
-  
-  animation: logo-marquee var(--d) linear infinite;
-  
-  /* This staggering logic is what prevents the 'restart' glitch */
-  animation-delay: calc(-1 * sibling-index() * var(--d) / sibling-count());
-}
-
-.ghd--logos-set > div img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
 @keyframes logo-marquee {
   0% {
