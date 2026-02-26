@@ -8,113 +8,105 @@
 (function () {
   function initHeroCarousel(container) {
     var track = container.querySelector('.gh-hero-carousel__track');
-    if (!track) return;
+    if (!track || container.dataset.initialized) return;
+    container.dataset.initialized = "true"; // Prevent double-init
 
-    var slides = track.querySelectorAll('.gh-hero-slide');
-    var count = slides.length;
+    var originalSlides = Array.from(track.querySelectorAll('.gh-hero-slide'));
+    var count = originalSlides.length;
     if (count <= 1) return;
 
-    var prevBtn = container.querySelector('.gh-hero-carousel__btn--prev');
-    var nextBtn = container.querySelector('.gh-hero-carousel__btn--next');
+    // 1. Clone first and last slides for infinite effect
+    var firstClone = originalSlides[0].cloneNode(true);
+    var lastClone = originalSlides[count - 1].cloneNode(true);
+    
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, originalSlides[0]);
+
+    var allSlides = track.querySelectorAll('.gh-hero-slide');
+    var currentIndex = 1; // Start at 1 because 0 is the clone
+    var isTransitioning = false;
 
     function getSlideWidth() {
       return track.offsetWidth || track.clientWidth;
     }
 
-    function getCurrentIndex() {
-      var width = getSlideWidth();
-      if (!width) return 0;
-      return Math.round(track.scrollLeft / width);
+    // Set initial position to the "real" first slide
+    function setInitialPosition() {
+      track.scrollLeft = getSlideWidth();
     }
-
-    function scrollToIndex(index) {
-      var width = getSlideWidth();
-      var target = Math.max(0, Math.min(index, count - 1)) * width;
-      track.scrollTo({ left: target, behavior: 'smooth' });
-    }
+    setInitialPosition();
 
     function loadLazySlide(slide) {
       if (!slide) return;
-      var lazyImgs = slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]');
-      for (var i = 0; i < lazyImgs.length; i++) {
-        var img = lazyImgs[i];
-        var src = img.getAttribute('data-src');
-        var srcset = img.getAttribute('data-srcset');
+      var lazyElements = slide.querySelectorAll('[data-src]');
+      lazyElements.forEach(function(el) {
+        var src = el.getAttribute('data-src');
         if (src) {
-          img.src = src;
-          if (srcset) img.setAttribute('srcset', srcset);
-          img.removeAttribute('data-src');
-          img.removeAttribute('data-srcset');
-          img.classList.remove('gh-hero-slide__img--lazy');
+          if (el.tagName === 'IMG') {
+            el.src = src;
+            var srcset = el.getAttribute('data-srcset');
+            if (srcset) el.srcset = srcset;
+          } else if (el.tagName === 'VIDEO') {
+            el.src = src;
+            el.load();
+            el.play().catch(function() {});
+          }
+          el.removeAttribute('data-src');
         }
-      }
-      var lazyVideos = slide.querySelectorAll('video[data-src]');
-      for (var j = 0; j < lazyVideos.length; j++) {
-        var video = lazyVideos[j];
-        var vSrc = video.getAttribute('data-src');
-        if (vSrc) {
-          video.src = vSrc;
-          video.removeAttribute('data-src');
-          video.load();
-          video.play().catch(function() {});
-        }
-      }
+      });
     }
 
-    if (slides[0]) loadLazySlide(slides[0]);
+    function updateLoop() {
+      var width = getSlideWidth();
+      // If we are on the "Fake Last" (the clone of the first)
+      if (currentIndex >= allSlides.length - 1) {
+        track.style.scrollBehavior = 'auto';
+        currentIndex = 1;
+        track.scrollLeft = width;
+      } 
+      // If we are on the "Fake First" (the clone of the last)
+      else if (currentIndex <= 0) {
+        track.style.scrollBehavior = 'auto';
+        currentIndex = allSlides.length - 2;
+        track.scrollLeft = currentIndex * width;
+      }
+      isTransitioning = false;
+    }
 
-    track.addEventListener('scroll', function() {
-      var idx = getCurrentIndex();
-      if (slides[idx]) loadLazySlide(slides[idx]);
+    function scrollToIndex(index) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      var width = getSlideWidth();
+      currentIndex = index;
+      
+      track.style.scrollBehavior = 'smooth';
+      track.scrollLeft = currentIndex * width;
+
+      // Wait for the smooth scroll to finish, then check if we need to "snap"
+      setTimeout(function() {
+        updateLoop();
+        loadLazySlide(allSlides[currentIndex]);
+      }, 500); // Matches standard smooth scroll duration
+    }
+
+    container.querySelector('.gh-hero-carousel__btn--prev')?.addEventListener('click', function() {
+      scrollToIndex(currentIndex - 1);
     });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function() {
-        scrollToIndex(getCurrentIndex() - 1);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function() {
-        scrollToIndex(getCurrentIndex() + 1);
-      });
-    }
+    container.querySelector('.gh-hero-carousel__btn--next')?.addEventListener('click', function() {
+      scrollToIndex(currentIndex + 1);
+    });
 
-    var touchStartX = 0;
-    var touchEndX = 0;
-    track.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    track.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      var diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 50) {
-        if (diff > 0) scrollToIndex(getCurrentIndex() + 1);
-        else scrollToIndex(getCurrentIndex() - 1);
-      }
-    }, { passive: true });
+    // Handle window resizing so width stays correct
+    window.addEventListener('resize', setInitialPosition);
 
-    var scrollObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        var vids = entry.target.querySelectorAll('video');
-        for (var k = 0; k < vids.length; k++) {
-          if (entry.isIntersecting) {
-            vids[k].play().catch(function() {});
-          } else {
-            vids[k].pause();
-          }
-        }
-      });
-    }, { root: track, threshold: 0.5 });
-    for (var s = 0; s < slides.length; s++) {
-      scrollObserver.observe(slides[s]);
-    }
+    // Initial Load
+    loadLazySlide(allSlides[currentIndex]);
   }
 
   function initAll() {
-    var carousels = document.querySelectorAll('.ghd--hero-carousel');
-    for (var i = 0; i < carousels.length; i++) {
-      initHeroCarousel(carousels[i]);
-    }
+    document.querySelectorAll('.ghd--hero-carousel').forEach(initHeroCarousel);
   }
 
   if (document.readyState === 'loading') {
@@ -122,6 +114,5 @@
   } else {
     initAll();
   }
-
   document.addEventListener('shopify:section:load', initAll);
 })();
