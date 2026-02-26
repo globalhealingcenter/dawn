@@ -21,7 +21,7 @@
 
 .ns-title,
 .ns-tagline {
-  font-size: clamp(30px, 4vw, 6.4rem);.new-standard-inner
+  font-size: clamp(36px,4vw,6.4rem);.new-standard-inner
   font-weight: 400;
   line-height: clamp(33px, 4.438vw, 7.1rem);
   color: #22472D;
