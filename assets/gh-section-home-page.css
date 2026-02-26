@@ -890,27 +890,30 @@ section h3.eyebrow span {
 .ghd--logos-set > div {
   position: absolute;
   width: 150px;
-  /* Start from off-screen left (-150px) and move Right (+ hline) */
-  offset: shape(from -150px 50%, hline by calc(sibling-count() * 210px));
-  animation: logo-marquee 12s linear infinite calc(-1 * sibling-index() * 12s / sibling-count());
+  /* 1. Path starts off-screen left (-150px) and moves right (+ hline) */
+  /* 2. 'auto 0deg' ensures logos stay upright while following the path */
+  offset-path: hline(calc(sibling-count() * 220px));
+  offset-position: -150px 50%;
+  offset-rotate: 0deg; 
+  
+  animation: logo-marquee 15s linear infinite;
+  /* 3. Negative delay ensures the screen is filled instantly (no white space) */
+  animation-delay: calc(-1 * sibling-index() * 15s / sibling-count());
 }
 
 .ghd--logos-set > div img {
   width: 100%;
   height: auto;
   display: block;
-  /* Fixes the upside-down issue */
-  transform: rotate(0deg); 
 }
 
 @keyframes logo-marquee { 
-  to {
-    offset-distance: 100%;
-  }
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
 }
 
-/* Hide the duplicate set to prevent overlapping logic glitches */
-.ghd--logos-set:nth-child(2) {
+/* 4. Hide duplicate set to prevent math collisions */
+.ghd--logos-set:nth-child(n+2) {
   display: none;
 }
 
