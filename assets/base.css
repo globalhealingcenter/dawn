@@ -109,6 +109,10 @@ body:has(.section-header .drawer-menu) .announcement-bar-section .page-width {
   max-width: 100%;
 }
 
+body.gradient.index {
+  background-color: #ffffff;
+}
+
 .page-width.drawer-menu {
   max-width: 100%;
 }
