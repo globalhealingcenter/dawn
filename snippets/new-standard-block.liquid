@@ -239,45 +239,8 @@ nutrient integrity from start to finish.
 <script>
 
   document.addEventListener("DOMContentLoaded", function () {
-  // Add all your SVGs here. 
-  // Accordion 1 uses 1-3, Accordion 2 uses 4-6, Accordion 3 uses 7-9.
   const iconLibrary = {
-    "1": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.47 104.47">
-                  <defs>
-                    <style>
-                      .cls-1 {
-                        fill: #cca72c;
-                      }
-
-                      .cls-1, .cls-2 {
-                        stroke-width: 0px;
-                      }
-
-                      .cls-2 {
-                        fill: #22472d;
-                      }
-                    </style>
-                  </defs>
-                  <g id="Layer_1-2" data-name="Layer 1">
-                    <g>
-                      <circle class="cls-2" cx="52.24" cy="52.24" r="52.24"/>
-                      <g>
-                        <path class="cls-1" d="M52.24,93.68c-22.85,0-41.45-18.59-41.45-41.45S29.38,10.79,52.24,10.79s41.45,18.59,41.45,41.45-18.59,41.45-41.45,41.45ZM52.24,11.75c-22.32,0-40.49,18.16-40.49,40.49s18.16,40.49,40.49,40.49,40.49-18.16,40.49-40.49S74.56,11.75,52.24,11.75Z"/>
-                        <g>
-                          <g>
-                            <path class="cls-1" d="M44.78,47.39v-18.49l.29-.13c.58-.26,14.26-6.25,20.24-3.51l.28.13v18.92l-.81-.75c-.08-.07-1.96-1.74-5.68-.62l-14.32,4.46ZM45.74,29.52v16.56l13.07-4.08c2.85-.86,4.8-.24,5.81.3v-16.29c-5.29-2.06-16.91,2.68-18.89,3.51Z"/>
-                            <path class="cls-1" d="M58.73,48.11l-.39-.06h-.55s0-.02,0-.04l-.08-5.27h.96s.04,2.7.06,4.25c.75-.33,1.98-.61,3.85-.9.17-.03.3-.05.37-.06.49-.09,1.14-.31,1.45-.79.26-.42.25-.96.23-1.53,0-.17-.01-.35,0-.52h.96c0,.17,0,.33,0,.49.02.66.04,1.4-.38,2.06-.39.62-1.11,1.04-2.09,1.23-.08.02-.22.04-.4.07-3.3.52-3.9.92-4,1.07Z"/>
-                            <path class="cls-1" d="M64.15,52.47c-1.67,0-3.21-.27-4.35-.98-1.2-.74-1.87-1.89-2.01-3.41-.02-.26.17-.5.44-.52.26-.02.5.17.52.44.11,1.22.61,2.1,1.55,2.68,3.76,2.33,12.9-.85,14.69-1.51l-.11-15.7c-2.54,1.12-8.9,1.95-9.71,2.06-.25.03-.5-.15-.54-.42-.03-.26.15-.5.42-.54,3.34-.42,9.01-1.42,9.98-2.29.14-.13.34-.16.51-.08.17.08.28.25.29.44l.12,16.86c0,.2-.12.38-.3.45-.34.14-6.51,2.53-11.5,2.53Z"/>
-                            <rect class="cls-1" x="44.78" y="28.86" width=".96" height="39.89"/>
-                          </g>
-                          <path class="cls-1" d="M53.07,73.56h-15.62c-.27,0-.48-.22-.48-.48v-4.33c0-.27.21-.48.48-.48h15.62c.27,0,.48.22.48.48v4.33c0,.27-.21.48-.48.48ZM37.93,72.6h14.66v-3.37h-14.66v3.37Z"/>
-                          <path class="cls-1" d="M57.68,77.89h-24.83c-.27,0-.48-.22-.48-.48v-4.33c0-.27.21-.48.48-.48h24.83c.27,0,.48.22.48.48v4.33c0,.27-.21.48-.48.48ZM33.32,76.93h23.87v-3.37h-23.87v3.37Z"/>
-                        </g>
-                      </g>
-                    </g>
-                  </g>
-                </svg>`,
-    "2": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
+    "1": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
                   <defs>
                     <style>
                       .cls-1 {
@@ -317,8 +280,8 @@ nutrient integrity from start to finish.
                       </g>
                     </g>
                   </g>
-                </svg>`,
-    "3": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.47 104.47">
+                </svg>`, // Accordion 1 - Icon 1
+    "2": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 104.47 104.47">
                   <defs>
                     <style>
                       .cls-1 {
@@ -352,46 +315,89 @@ nutrient integrity from start to finish.
                       </g>
                     </g>
                   </g>
-                </svg>`,
-    "4": `<svg>...Icon 4...</svg>`,
-    "5": `<svg>...Icon 5...</svg>`,
-    "6": `<svg>...Icon 6...</svg>`,
-    "7": `<svg>...Icon 7...</svg>`,
-    "8": `<svg>...Icon 8...</svg>`,
-    "9": `<svg>...Icon 9...</svg>`
+                </svg>`, // Accordion 1 - Icon 2
+    "3": `<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 299 299">
+                  <defs>
+                    <style>
+                      .cls-1 {
+                        fill: #cca72c;
+                      }
+
+                      .cls-1, .cls-2 {
+                        stroke-width: 0px;
+                      }
+
+                      .cls-2 {
+                        fill: #22472d;
+                      }
+                    </style>
+                  </defs>
+                  <g id="Layer_1-2" data-name="Layer 1">
+                    <g>
+                      <circle class="cls-2" cx="149.5" cy="149.5" r="149.5"/>
+                      <g>
+                        <g>
+                          <path class="cls-1" d="M222.89,109.38c-.22,0-.44-.05-.64-.16l-22.14-11.71c-.67-.36-.93-1.19-.58-1.86s1.2-.93,1.86-.57l22.14,11.71c.67.36.93,1.19.58,1.86-.25.47-.73.73-1.22.73Z"/>
+                          <path class="cls-1" d="M75.51,109.38c-.5,0-.97-.27-1.22-.74-.36-.67-.1-1.51.58-1.86l73.9-38.86c.4-.21.89-.21,1.28,0l15.77,8.34c.67.36.93,1.19.58,1.86-.36.67-1.2.93-1.86.57l-15.13-8-73.26,38.52c-.2.11-.42.16-.64.16Z"/>
+                          <path class="cls-1" d="M149.41,231.24c-.22,0-.44-.05-.64-.16l-73.9-38.86c-.45-.24-.74-.71-.74-1.22l-.07-81.93c0-.48.25-.93.66-1.18s.93-.27,1.35-.04l17.79,9.32c.67.35.93,1.19.58,1.86-.35.68-1.19.93-1.86.58l-15.77-8.26.07,78.82,71.14,37.41-.2-79-18.44-9.67c-.67-.35-.93-1.19-.58-1.86.35-.68,1.19-.93,1.86-.58l19.18,10.05c.45.24.74.71.74,1.22l.21,82.12c0,.48-.25.93-.66,1.18-.22.13-.47.2-.71.2Z"/>
+                          <path class="cls-1" d="M149.59,230.85c-.5,0-.97-.27-1.22-.74-.36-.67-.1-1.51.58-1.86l73.17-38.48.07-78.82-71.74,37.61c-.67.35-1.51.1-1.86-.58-.36-.67-.09-1.51.58-1.86l73.76-38.67c.43-.22.94-.21,1.35.04.41.25.66.7.66,1.18l-.07,81.93c0,.51-.29.98-.74,1.22l-73.9,38.86c-.2.11-.42.16-.64.16Z"/>
+                          <path class="cls-1" d="M123.41,154.81c-.22,0-.44-.05-.64-.16l-24.64-12.89c-.45-.24-.74-.71-.74-1.22l.03-20.93c0-.51.28-.97.73-1.21l72.44-38.93c.4-.22.89-.22,1.29,0l24.86,13.15c.45.24.73.7.73,1.21,0,.51-.27.98-.72,1.22l-71.97,38.87v19.52c0,.48-.25.93-.66,1.18-.22.13-.47.2-.71.2ZM100.15,139.71l21.88,11.45v-18.06c0-.51.28-.97.72-1.21l70.43-38.03-21.94-11.6-71.07,38.19-.03,19.27Z"/>
+                          <g>
+                            <path class="cls-1" d="M177.04,187.58c-.76,0-1.38-.62-1.38-1.38v-31.19l-5.19,8.49c-.4.65-1.25.85-1.9.46-.65-.4-.85-1.25-.46-1.9l7.74-12.67c.32-.53.95-.78,1.55-.61.59.17,1,.71,1,1.33v36.09c0,.76-.62,1.38-1.38,1.38Z"/>
+                            <path class="cls-1" d="M187.15,158.34c-.27,0-.54-.08-.77-.24l-10.11-6.85c-.63-.43-.79-1.28-.37-1.91.43-.63,1.28-.79,1.91-.37l10.11,6.85c.63.43.79,1.28.37,1.91-.27.39-.7.61-1.14.61Z"/>
+                          </g>
+                          <g>
+                            <path class="cls-1" d="M199.38,176.76c-.76,0-1.38-.62-1.38-1.38v-31.19l-5.46,8.94c-.4.65-1.25.85-1.9.46-.65-.4-.85-1.25-.46-1.9l8.01-13.12c.32-.53.96-.78,1.55-.61.59.17,1,.71,1,1.33v36.09c0,.76-.62,1.38-1.38,1.38Z"/>
+                            <path class="cls-1" d="M209.49,147.52c-.27,0-.54-.08-.77-.24l-10.11-6.85c-.63-.43-.79-1.28-.37-1.91.43-.63,1.28-.79,1.91-.37l10.11,6.85c.63.43.79,1.28.37,1.91-.27.39-.7.61-1.14.61Z"/>
+                          </g>
+                          <path class="cls-1" d="M169.87,201.02c-.49,0-.97-.27-1.22-.74-.36-.67-.1-1.51.58-1.86l37.23-19.62c.67-.35,1.5-.1,1.86.58.36.67.1,1.51-.58,1.86l-37.23,19.62c-.2.11-.43.16-.64.16Z"/>
+                        </g>
+                        <path class="cls-1" d="M149.5,268.41c-65.56,0-118.91-53.34-118.91-118.9S83.94,30.59,149.5,30.59s118.91,53.34,118.91,118.91-53.34,118.9-118.91,118.9ZM149.5,33.35c-64.05,0-116.15,52.1-116.15,116.15s52.1,116.15,116.15,116.15,116.15-52.1,116.15-116.15-52.1-116.15-116.15-116.15Z"/>
+                      </g>
+                    </g>
+                  </g>
+                </svg>`, // Accordion 1 - Icon 3
+    "4": `<svg>...</svg>`, // Accordion 2 - Icon 1
+    "5": `<svg>...</svg>`, // Accordion 2 - Icon 2
+    "6": `<svg>...</svg>`, // Accordion 2 - Icon 3
+    "7": `<svg>...</svg>`, // Accordion 3 - Icon 1
+    "8": `<svg>...</svg>`, // Accordion 3 - Icon 2
+    "9": `<svg>...</svg>`  // Accordion 3 - Icon 3
   };
 
   const observerOptions = {
     root: null,
-    // Adjust these margins to control exactly where on screen the icon swaps
-    rootMargin: "-25% 0px -65% 0px", 
-    threshold: 0
+    rootMargin: '0px 0px -50% 0px', // Triggers when label passes the middle of the screen
+    threshold: 0.1 
   };
 
   const iconObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const index = entry.target.getAttribute("data-icon-index");
-        
-        // Finds the .svg-display within the same accordion item
         const parentContent = entry.target.closest(".ns-accordion__content");
         const container = parentContent ? parentContent.querySelector(".svg-display") : null;
 
         if (container && iconLibrary[index]) {
-            // Apply a quick fade transition
-            container.style.opacity = "0";
-            setTimeout(() => {
-                container.innerHTML = iconLibrary[index];
-                container.style.opacity = "1";
-            }, 150);
+          console.log("Switching to icon:", index); // Debugging: Check your console!
+          
+          container.style.opacity = "0";
+          setTimeout(() => {
+            container.innerHTML = iconLibrary[index];
+            container.style.opacity = "1";
+          }, 150);
         }
       }
     });
   }, observerOptions);
 
-  document.querySelectorAll(".ns-accordion__label").forEach((label) => {
-    iconObserver.observe(label);
-  });
+  // Initialize
+  const labels = document.querySelectorAll(".ns-accordion__label");
+  if (labels.length > 0) {
+    labels.forEach((label) => iconObserver.observe(label));
+  } else {
+    console.warn("Scroll JS: No labels found. Check your class names.");
+  }
 });
 </script>
 
