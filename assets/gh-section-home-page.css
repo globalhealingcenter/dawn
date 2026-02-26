@@ -827,7 +827,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-     /* @keyframes homepage-logos {
+     @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -869,53 +869,8 @@ section h3.eyebrow span {
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
-    } */
-.ghd--logos.ghd--bg-white {
-  width: 100%;
-  height: 70px;
-  overflow: hidden;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
+    }
 
-.ghd--logos-track {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.ghd--logos-set > div {
-  position: absolute;
-  width: 150px;
-  /* 1. Path starts off-screen left (-150px) and moves right (+ hline) */
-  /* 2. 'auto 0deg' ensures logos stay upright while following the path */
-  offset-path: hline(calc(sibling-count() * 220px));
-  offset-position: -150px 50%;
-  offset-rotate: 0deg; 
-  
-  animation: logo-marquee 15s linear infinite;
-  /* 3. Negative delay ensures the screen is filled instantly (no white space) */
-  animation-delay: calc(-1 * sibling-index() * 15s / sibling-count());
-}
-
-.ghd--logos-set > div img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-@keyframes logo-marquee { 
-  from { offset-distance: 0%; }
-  to { offset-distance: 100%; }
-}
-
-/* 4. Hide duplicate set to prevent math collisions */
-.ghd--logos-set:nth-child(n+2) {
-  display: none;
-}
 
 }
 
