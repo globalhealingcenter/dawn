@@ -251,4 +251,10 @@
   .new-standard-section .ns-right {
       width: 100%;
   }
+
+  /* width */
+  .ns-accordion__text-wrap::-webkit-scrollbar {
+    width: 5px;
+  }
+
 }
