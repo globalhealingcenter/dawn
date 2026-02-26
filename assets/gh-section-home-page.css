@@ -871,47 +871,49 @@ section h3.eyebrow span {
         gap: 0;
     } */
 
-    section.ghd--logos.ghd--bg-white {
-   position: relative;
-    width: 100%;
-    min-height: 20vh;
-    overflow: hidden;
-    background: #fff;
-    display: flex;
-    align-items: center;
+    .ghd--logos-track {
+  /* Configuration Variables */
+  --s: 150px;       /* Width of each logo */
+  --d: 15s;         /* Speed: higher is slower */
+  --n: 6;           /* Number of logos visible at once */
+  --gap: 50px;      /* Gap between logos */
+  
+  display: flex;
+  overflow: hidden;
+  height: 70px;
+  width: 100%;
+  position: relative;
+  align-items: center;
 }
 
-/* The track must be flex and have no extra padding/margins */
-.ghd--logos .ghd--logos-track {
-    display: flex;
-    flex-shrink: 0;
-    white-space: nowrap;
-    animation: marquee 30s linear infinite;
+/* Target the individual logo containers inside the track */
+.ghd--logos-set > div {
+  position: absolute; /* Motion path works best with absolute children */
+  width: var(--s);
+  
+  /* The Path: It starts off-screen (left) and moves right */
+  /* We calculate the distance based on the number of siblings and gaps */
+  offset-path: ray(90deg); /* Simplest way to move in a straight line */
+  
+  animation: logo-marquee var(--d) linear infinite;
+  
+  /* This staggering logic is what prevents the 'restart' glitch */
+  animation-delay: calc(-1 * sibling-index() * var(--d) / sibling-count());
 }
 
-.ghd--logos .ghd--logos-set {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-    /* Use a fixed gap and matching right padding */
-    gap: 5rem;
-    padding-right: 5rem; 
+.ghd--logos-set > div img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* The glitch usually happens because this was set to 0 in your old code */
-/* Ensure the last set also has the padding so the loop is seamless */
-.ghd--logos .ghd--logos-set:last-child {
-    padding-right: 5rem !important;
-}
-
-@keyframes marquee {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Move exactly the width of ONE set */
-        transform: translateX(-50%);
-    }
+@keyframes logo-marquee {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
 }
 }
 
