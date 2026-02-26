@@ -268,4 +268,8 @@
     padding: 12px;
   }
 
+  .ns-accordion__icon-wrap--default{
+    margin-top: 0
+  }
+
 }
