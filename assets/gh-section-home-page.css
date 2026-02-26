@@ -886,7 +886,7 @@ section h3.eyebrow span {
     display: flex;
     flex-shrink: 0;
     white-space: nowrap;
-    animation: marquee-scroll 20s linear infinite;
+    animation: marquee 20s linear infinite;
 }
 
 .ghd--logos .ghd--logos-set {
@@ -904,7 +904,7 @@ section h3.eyebrow span {
     padding-right: 5rem !important;
 }
 
-@keyframes marquee-infinite {
+@keyframes marquee {
     0% {
         transform: translateX(0);
     }
