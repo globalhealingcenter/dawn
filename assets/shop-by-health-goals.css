@@ -140,7 +140,7 @@
 
   .health-goals__button {
     min-width: unset;
-    width: 100%;
-    padding: 18px 24px;
+    width: 75%;
+    padding: 12px 24px;
   }
 }
