@@ -187,17 +187,21 @@ section h3.eyebrow span {
 }
 
 .gh-hero-carousel__track {
-  display: flex;
-  overflow-x: hidden; /* Prevent manual scroll peeking */
-  scroll-snap-type: x mandatory; /* Browser-level alignment */
-  -webkit-overflow-scrolling: touch;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;           /* Critical: removes the space between slides */
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important; /* Prevents manual scroll overlapping */
+  width: 100%;
 }
 
 .gh-hero-slide {
-  scroll-snap-align: start;
-  width: 100%;
-  min-width: 100%; /* Fixes the "small area" visibility */
-  box-sizing: border-box;
+  flex: 0 0 100% !important;   /* Forces slide to be EXACTLY 100% width */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  outline: none;               /* Removes any focus borders */
 }
 
 .gh-hero-carousel__track-container {
