@@ -119,7 +119,6 @@
   align-items: flex-start;
   gap: 40px;
   padding-bottom: 24px;
-  padding-right: 7px;
 }
 
 .ns-accordion__icon-wrap {
@@ -226,7 +225,6 @@
 
   .ns-accordion__content {
     gap: 20px;
-    padding-right: 3px;
   }
 
   .ns-accordion.ns-accordion--open .ns-accordion__trigger {
