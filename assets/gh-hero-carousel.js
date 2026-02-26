@@ -10,122 +10,117 @@
     var track = container.querySelector('.gh-hero-carousel__track');
     if (!track) return;
 
-    var slides = track.querySelectorAll('.gh-hero-slide');
+    var slides = Array.from(track.querySelectorAll('.gh-hero-slide'));
     var count = slides.length;
     if (count <= 1) return;
 
     var prevBtn = container.querySelector('.gh-hero-carousel__btn--prev');
     var nextBtn = container.querySelector('.gh-hero-carousel__btn--next');
 
-    var currentIndex = 0;
-    var autoplayInterval = 5000; // 5 seconds
-    var autoplayTimer;
+    // Clone first and last for infinite loop
+    var firstClone = slides[0].cloneNode(true);
+    var lastClone = slides[count - 1].cloneNode(true);
+    track.appendChild(firstClone);
+    track.insertBefore(lastClone, slides[0]);
+    slides = Array.from(track.querySelectorAll('.gh-hero-slide')); // update array
+    var slideWidth = track.offsetWidth;
+    var currentIndex = 1; // start at original first slide
 
-    function getSlideWidth() {
-      return track.offsetWidth || track.clientWidth;
-    }
-
-    function scrollToIndex(index) {
-      currentIndex = Math.max(0, Math.min(index, count - 1));
-      loadLazySlide(slides[currentIndex]);
-      var width = getSlideWidth();
-      track.scrollTo({ left: currentIndex * width, behavior: 'smooth' });
-    }
+    // Set initial position
+    track.style.display = 'flex';
+    track.style.transition = 'transform 0.5s ease';
+    track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
 
     function loadLazySlide(slide) {
       if (!slide) return;
-      var lazyImgs = slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]');
-      lazyImgs.forEach(function (img) {
-        var src = img.getAttribute('data-src');
-        var srcset = img.getAttribute('data-srcset');
+      slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]').forEach(img => {
+        var src = img.dataset.src;
+        var srcset = img.dataset.srcset;
         if (src) {
           img.src = src;
-          if (srcset) img.setAttribute('srcset', srcset);
-          img.removeAttribute('data-src');
-          img.removeAttribute('data-srcset');
+          if (srcset) img.srcset = srcset;
           img.classList.remove('gh-hero-slide__img--lazy');
+          delete img.dataset.src;
+          delete img.dataset.srcset;
         }
       });
-
-      var lazyVideos = slide.querySelectorAll('video[data-src]');
-      lazyVideos.forEach(function (video) {
-        var vSrc = video.getAttribute('data-src');
-        if (vSrc) {
-          video.src = vSrc;
-          video.removeAttribute('data-src');
+      slide.querySelectorAll('video[data-src]').forEach(video => {
+        if (video.dataset.src) {
+          video.src = video.dataset.src;
+          delete video.dataset.src;
           video.load();
-          video.play().catch(function() {});
+          video.play().catch(() => {});
         }
       });
     }
 
-    // Initial load
-    loadLazySlide(slides[0]);
+    // Load initial slides
+    loadLazySlide(slides[currentIndex]);
+    loadLazySlide(slides[currentIndex + 1]);
+    loadLazySlide(slides[currentIndex - 1]);
+
+    function goToSlide(index) {
+      currentIndex = index;
+      track.style.transition = 'transform 0.5s ease';
+      track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
+      loadLazySlide(slides[currentIndex]);
+      loadLazySlide(slides[currentIndex + 1]);
+      loadLazySlide(slides[currentIndex - 1]);
+    }
+
+    track.addEventListener('transitionend', () => {
+      // Infinite loop adjustment
+      if (currentIndex === 0) {
+        track.style.transition = 'none';
+        currentIndex = count;
+        track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
+      } else if (currentIndex === slides.length - 1) {
+        track.style.transition = 'none';
+        currentIndex = 1;
+        track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
+      }
+    });
 
     // Buttons
-    prevBtn?.addEventListener('click', function() {
-      scrollToIndex(currentIndex - 1);
-      resetAutoplay();
-    });
-    nextBtn?.addEventListener('click', function() {
-      scrollToIndex(currentIndex + 1);
-      resetAutoplay();
-    });
+    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+    // Autoplay
+    var autoplayInterval = 5000;
+    var autoplayTimer = setInterval(() => goToSlide(currentIndex + 1), autoplayInterval);
+    function resetAutoplay() {
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(() => goToSlide(currentIndex + 1), autoplayInterval);
+    }
+    prevBtn?.addEventListener('click', resetAutoplay);
+    nextBtn?.addEventListener('click', resetAutoplay);
 
     // Touch swipe
-    var touchStartX = 0;
-    track.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    track.addEventListener('touchend', function(e) {
-      var touchEndX = e.changedTouches[0].screenX;
-      var diff = touchStartX - touchEndX;
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
+    track.addEventListener('touchend', e => {
+      let touchEndX = e.changedTouches[0].screenX;
+      let diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) scrollToIndex(currentIndex + 1);
-        else scrollToIndex(currentIndex - 1);
+        if (diff > 0) goToSlide(currentIndex + 1);
+        else goToSlide(currentIndex - 1);
         resetAutoplay();
       }
     }, { passive: true });
 
-    // Video play/pause on visibility
-    var scrollObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        var vids = entry.target.querySelectorAll('video');
-        vids.forEach(function(v) {
-          if (entry.isIntersecting) v.play().catch(() => {});
-          else v.pause();
-        });
-      });
-    }, { root: track, threshold: 0.5 });
-    slides.forEach(s => scrollObserver.observe(s));
-
-    // Autoplay
-    function startAutoplay() {
-      autoplayTimer = setInterval(function() {
-        scrollToIndex(currentIndex + 1 >= count ? 0 : currentIndex + 1);
-      }, autoplayInterval);
-    }
-    function resetAutoplay() {
-      clearInterval(autoplayTimer);
-      startAutoplay();
-    }
-    startAutoplay();
-
-    // Resize handler
-    window.addEventListener('resize', function() {
-      scrollToIndex(currentIndex); // recalc width
+    // Resize
+    window.addEventListener('resize', () => {
+      slideWidth = track.offsetWidth;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
     });
   }
 
   function initAll() {
-    var carousels = document.querySelectorAll('.ghd--hero-carousel');
-    carousels.forEach(c => initHeroCarousel(c));
+    document.querySelectorAll('.ghd--hero-carousel').forEach(c => initHeroCarousel(c));
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initAll);
-  } else {
-    initAll();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+  else initAll();
   document.addEventListener('shopify:section:load', initAll);
 })();
