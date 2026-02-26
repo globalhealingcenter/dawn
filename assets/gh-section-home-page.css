@@ -877,15 +877,16 @@ section h3.eyebrow span {
     overflow: hidden;
     width: 100%;
     display: flex;
-    align-items: center; /* Centers logos vertically in the 70px bar */
+    align-items: center;
+    background: #fff;
 }
 
 .ghd--logos .ghd--logos-track {
     display: flex;
     flex-wrap: nowrap;
-    /* This ensures the track is exactly as wide as the two sets combined */
-    width: max-content; 
-    animation: marquee-infinite 25s linear infinite;
+    width: max-content; /* Critical: allows the track to extend as far as needed */
+    /* Use 'infinite' and 'linear' for smooth motion */
+    animation: marquee-seamless 20s linear infinite; 
     will-change: transform;
 }
 
@@ -893,21 +894,29 @@ section h3.eyebrow span {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    /* Use a consistent gap between all items */
+    /* This gap must be exactly the same as the padding-right below */
     gap: 5rem;
-    /* This padding-right MUST match the gap to keep spacing even at the loop point */
     padding-right: 5rem; 
 }
 
-/* Updated Animation */
-@keyframes marquee-infinite {
+/* The Secret Sauce: Perfect Loop Math */
+@keyframes marquee-seamless {
     0% {
         transform: translateX(0);
     }
     100% {
-        /* Move exactly half the width (one full set) */
+        /* We move exactly -50% because we have 2 identical sets. 
+           The moment the 2nd set hits the start, it snaps back to 0% 
+           completely invisibly. */
         transform: translateX(-50%);
     }
+}
+
+/* Ensure images don't have weird margins */
+.ghd--logos-set div img {
+    display: block;
+    max-height: 40px;
+    width: auto;
 }
 }
 
