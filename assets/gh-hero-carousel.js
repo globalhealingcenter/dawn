@@ -10,117 +10,118 @@
     var track = container.querySelector('.gh-hero-carousel__track');
     if (!track) return;
 
-    var slides = Array.from(track.querySelectorAll('.gh-hero-slide'));
+    var slides = track.querySelectorAll('.gh-hero-slide');
     var count = slides.length;
     if (count <= 1) return;
 
     var prevBtn = container.querySelector('.gh-hero-carousel__btn--prev');
     var nextBtn = container.querySelector('.gh-hero-carousel__btn--next');
 
-    // Clone first and last for infinite loop
-    var firstClone = slides[0].cloneNode(true);
-    var lastClone = slides[count - 1].cloneNode(true);
-    track.appendChild(firstClone);
-    track.insertBefore(lastClone, slides[0]);
-    slides = Array.from(track.querySelectorAll('.gh-hero-slide')); // update array
-    var slideWidth = track.offsetWidth;
-    var currentIndex = 1; // start at original first slide
+    function getSlideWidth() {
+      return track.offsetWidth || track.clientWidth;
+    }
 
-    // Set initial position
-    track.style.display = 'flex';
-    track.style.transition = 'transform 0.5s ease';
-    track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
+    function getCurrentIndex() {
+      var width = getSlideWidth();
+      if (!width) return 0;
+      return Math.round(track.scrollLeft / width);
+    }
+
+    function scrollToIndex(index) {
+      var width = getSlideWidth();
+      var target = Math.max(0, Math.min(index, count - 1)) * width;
+      track.scrollTo({ left: target, behavior: 'smooth' });
+    }
 
     function loadLazySlide(slide) {
       if (!slide) return;
-      slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]').forEach(img => {
-        var src = img.dataset.src;
-        var srcset = img.dataset.srcset;
+      var lazyImgs = slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]');
+      for (var i = 0; i < lazyImgs.length; i++) {
+        var img = lazyImgs[i];
+        var src = img.getAttribute('data-src');
+        var srcset = img.getAttribute('data-srcset');
         if (src) {
           img.src = src;
-          if (srcset) img.srcset = srcset;
+          if (srcset) img.setAttribute('srcset', srcset);
+          img.removeAttribute('data-src');
+          img.removeAttribute('data-srcset');
           img.classList.remove('gh-hero-slide__img--lazy');
-          delete img.dataset.src;
-          delete img.dataset.srcset;
         }
-      });
-      slide.querySelectorAll('video[data-src]').forEach(video => {
-        if (video.dataset.src) {
-          video.src = video.dataset.src;
-          delete video.dataset.src;
-          video.load();
-          video.play().catch(() => {});
-        }
-      });
-    }
-
-    // Load initial slides
-    loadLazySlide(slides[currentIndex]);
-    loadLazySlide(slides[currentIndex + 1]);
-    loadLazySlide(slides[currentIndex - 1]);
-
-    function goToSlide(index) {
-      currentIndex = index;
-      track.style.transition = 'transform 0.5s ease';
-      track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
-      loadLazySlide(slides[currentIndex]);
-      loadLazySlide(slides[currentIndex + 1]);
-      loadLazySlide(slides[currentIndex - 1]);
-    }
-
-    track.addEventListener('transitionend', () => {
-      // Infinite loop adjustment
-      if (currentIndex === 0) {
-        track.style.transition = 'none';
-        currentIndex = count;
-        track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
-      } else if (currentIndex === slides.length - 1) {
-        track.style.transition = 'none';
-        currentIndex = 1;
-        track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
       }
+      var lazyVideos = slide.querySelectorAll('video[data-src]');
+      for (var j = 0; j < lazyVideos.length; j++) {
+        var video = lazyVideos[j];
+        var vSrc = video.getAttribute('data-src');
+        if (vSrc) {
+          video.src = vSrc;
+          video.removeAttribute('data-src');
+          video.load();
+          video.play().catch(function() {});
+        }
+      }
+    }
+
+    if (slides[0]) loadLazySlide(slides[0]);
+
+    track.addEventListener('scroll', function() {
+      var idx = getCurrentIndex();
+      if (slides[idx]) loadLazySlide(slides[idx]);
     });
 
-    // Buttons
-    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-    // Autoplay
-    var autoplayInterval = 5000;
-    var autoplayTimer = setInterval(() => goToSlide(currentIndex + 1), autoplayInterval);
-    function resetAutoplay() {
-      clearInterval(autoplayTimer);
-      autoplayTimer = setInterval(() => goToSlide(currentIndex + 1), autoplayInterval);
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function() {
+        scrollToIndex(getCurrentIndex() - 1);
+      });
     }
-    prevBtn?.addEventListener('click', resetAutoplay);
-    nextBtn?.addEventListener('click', resetAutoplay);
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function() {
+        scrollToIndex(getCurrentIndex() + 1);
+      });
+    }
 
-    // Touch swipe
-    let touchStartX = 0;
-    track.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
-    track.addEventListener('touchend', e => {
-      let touchEndX = e.changedTouches[0].screenX;
-      let diff = touchStartX - touchEndX;
+    var touchStartX = 0;
+    var touchEndX = 0;
+    track.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) goToSlide(currentIndex + 1);
-        else goToSlide(currentIndex - 1);
-        resetAutoplay();
+        if (diff > 0) scrollToIndex(getCurrentIndex() + 1);
+        else scrollToIndex(getCurrentIndex() - 1);
       }
     }, { passive: true });
 
-    // Resize
-    window.addEventListener('resize', () => {
-      slideWidth = track.offsetWidth;
-      track.style.transition = 'none';
-      track.style.transform = `translateX(${-slideWidth * currentIndex}px)`;
-    });
+    var scrollObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var vids = entry.target.querySelectorAll('video');
+        for (var k = 0; k < vids.length; k++) {
+          if (entry.isIntersecting) {
+            vids[k].play().catch(function() {});
+          } else {
+            vids[k].pause();
+          }
+        }
+      });
+    }, { root: track, threshold: 0.5 });
+    for (var s = 0; s < slides.length; s++) {
+      scrollObserver.observe(slides[s]);
+    }
   }
 
   function initAll() {
-    document.querySelectorAll('.ghd--hero-carousel').forEach(c => initHeroCarousel(c));
+    var carousels = document.querySelectorAll('.ghd--hero-carousel');
+    for (var i = 0; i < carousels.length; i++) {
+      initHeroCarousel(carousels[i]);
+    }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
-  else initAll();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+
   document.addEventListener('shopify:section:load', initAll);
 })();
