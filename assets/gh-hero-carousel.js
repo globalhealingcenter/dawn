@@ -17,27 +17,25 @@
     var prevBtn = container.querySelector('.gh-hero-carousel__btn--prev');
     var nextBtn = container.querySelector('.gh-hero-carousel__btn--next');
 
+    var currentIndex = 0;
+    var autoplayInterval = 5000; // 5 seconds
+    var autoplayTimer;
+
     function getSlideWidth() {
       return track.offsetWidth || track.clientWidth;
     }
 
-    function getCurrentIndex() {
-      var width = getSlideWidth();
-      if (!width) return 0;
-      return Math.round(track.scrollLeft / width);
-    }
-
     function scrollToIndex(index) {
+      currentIndex = Math.max(0, Math.min(index, count - 1));
+      loadLazySlide(slides[currentIndex]);
       var width = getSlideWidth();
-      var target = Math.max(0, Math.min(index, count - 1)) * width;
-      track.scrollTo({ left: target, behavior: 'smooth' });
+      track.scrollTo({ left: currentIndex * width, behavior: 'smooth' });
     }
 
     function loadLazySlide(slide) {
       if (!slide) return;
       var lazyImgs = slide.querySelectorAll('img.gh-hero-slide__img--lazy[data-src]');
-      for (var i = 0; i < lazyImgs.length; i++) {
-        var img = lazyImgs[i];
+      lazyImgs.forEach(function (img) {
         var src = img.getAttribute('data-src');
         var srcset = img.getAttribute('data-srcset');
         if (src) {
@@ -47,10 +45,10 @@
           img.removeAttribute('data-srcset');
           img.classList.remove('gh-hero-slide__img--lazy');
         }
-      }
+      });
+
       var lazyVideos = slide.querySelectorAll('video[data-src]');
-      for (var j = 0; j < lazyVideos.length; j++) {
-        var video = lazyVideos[j];
+      lazyVideos.forEach(function (video) {
         var vSrc = video.getAttribute('data-src');
         if (vSrc) {
           video.src = vSrc;
@@ -58,63 +56,70 @@
           video.load();
           video.play().catch(function() {});
         }
-      }
+      });
     }
 
-    if (slides[0]) loadLazySlide(slides[0]);
+    // Initial load
+    loadLazySlide(slides[0]);
 
-    track.addEventListener('scroll', function() {
-      var idx = getCurrentIndex();
-      if (slides[idx]) loadLazySlide(slides[idx]);
+    // Buttons
+    prevBtn?.addEventListener('click', function() {
+      scrollToIndex(currentIndex - 1);
+      resetAutoplay();
+    });
+    nextBtn?.addEventListener('click', function() {
+      scrollToIndex(currentIndex + 1);
+      resetAutoplay();
     });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function() {
-        scrollToIndex(getCurrentIndex() - 1);
-      });
-    }
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function() {
-        scrollToIndex(getCurrentIndex() + 1);
-      });
-    }
-
+    // Touch swipe
     var touchStartX = 0;
-    var touchEndX = 0;
     track.addEventListener('touchstart', function(e) {
       touchStartX = e.changedTouches[0].screenX;
     }, { passive: true });
     track.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
+      var touchEndX = e.changedTouches[0].screenX;
       var diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) scrollToIndex(getCurrentIndex() + 1);
-        else scrollToIndex(getCurrentIndex() - 1);
+        if (diff > 0) scrollToIndex(currentIndex + 1);
+        else scrollToIndex(currentIndex - 1);
+        resetAutoplay();
       }
     }, { passive: true });
 
+    // Video play/pause on visibility
     var scrollObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         var vids = entry.target.querySelectorAll('video');
-        for (var k = 0; k < vids.length; k++) {
-          if (entry.isIntersecting) {
-            vids[k].play().catch(function() {});
-          } else {
-            vids[k].pause();
-          }
-        }
+        vids.forEach(function(v) {
+          if (entry.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        });
       });
     }, { root: track, threshold: 0.5 });
-    for (var s = 0; s < slides.length; s++) {
-      scrollObserver.observe(slides[s]);
+    slides.forEach(s => scrollObserver.observe(s));
+
+    // Autoplay
+    function startAutoplay() {
+      autoplayTimer = setInterval(function() {
+        scrollToIndex(currentIndex + 1 >= count ? 0 : currentIndex + 1);
+      }, autoplayInterval);
     }
+    function resetAutoplay() {
+      clearInterval(autoplayTimer);
+      startAutoplay();
+    }
+    startAutoplay();
+
+    // Resize handler
+    window.addEventListener('resize', function() {
+      scrollToIndex(currentIndex); // recalc width
+    });
   }
 
   function initAll() {
     var carousels = document.querySelectorAll('.ghd--hero-carousel');
-    for (var i = 0; i < carousels.length; i++) {
-      initHeroCarousel(carousels[i]);
-    }
+    carousels.forEach(c => initHeroCarousel(c));
   }
 
   if (document.readyState === 'loading') {
@@ -122,6 +127,5 @@
   } else {
     initAll();
   }
-
   document.addEventListener('shopify:section:load', initAll);
 })();
