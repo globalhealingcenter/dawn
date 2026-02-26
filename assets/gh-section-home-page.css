@@ -178,6 +178,14 @@ section h3.eyebrow span {
     width: 100%;
 }
 
+.gh-hero-slide img {
+  transition: opacity 0.3s ease-in-out;
+}
+/* Ensure the image is transparent while loading */
+.gh-hero-slide img[data-src] {
+  opacity: 0;
+}
+
 .gh-hero-carousel__track-container {
     position: relative;
     overflow: hidden;
