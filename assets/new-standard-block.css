@@ -256,5 +256,8 @@
   .ns-accordion__text-wrap::-webkit-scrollbar {
     width: 5px;
   }
+  .ns-accordion__icon{
+    right: initial
+  }
 
 }
