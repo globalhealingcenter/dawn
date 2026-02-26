@@ -890,7 +890,8 @@ section h3.eyebrow span {
 .ghd--logos-set > div {
   position: absolute;
   width: 150px;
-  offset: shape(from -150px 50%, hline by calc(sibling-count() * 210px));
+  /* Start from right (100% + width) and move left (negative hline) */
+  offset: shape(from calc(100% + 150px) 50%, hline by calc(sibling-count() * -210px));
   animation: logo-marquee 12s linear infinite calc(-1 * sibling-index() * 12s / sibling-count());
 }
 
@@ -906,9 +907,9 @@ section h3.eyebrow span {
   }
 }
 
-/* .ghd--logos-set:nth-child(2) {
+.ghd--logos-set:nth-child(2) {
   display: none;
-} */
+}
 
 }
 
