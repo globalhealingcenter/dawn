@@ -361,6 +361,10 @@ section h3.eyebrow span {
         letter-spacing: 0;
     }
 
+    .ghd--hero-carousel__review-text span {
+        display: inline-block;
+    }
+
     .ghd--hero-carousel__review-text br {
         display: none;
     }
