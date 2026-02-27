@@ -1281,3 +1281,9 @@ section h3.eyebrow span {
     font-family: 'miller-display' !important;
     font-style: italic;
 }
+
+@media screen and (max-width: 767px){
+    .gh--home-page [class*="tolstoy-carousel-title"] {
+        margin-bottom: 4rem !important;
+    }
+}
