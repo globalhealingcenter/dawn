@@ -379,6 +379,7 @@ section h3.eyebrow span {
 
     .ghd--hero-carousel__stars {
         margin-left: 0;
+        gap: 1px
     }
 
     .ghd--hero-carousel__stars svg {
