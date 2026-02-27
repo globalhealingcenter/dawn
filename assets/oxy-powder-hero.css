@@ -95,7 +95,8 @@
 .oph__product-img {
   width: 100%;
   height: auto;
-  object-fit: contain;
+  object-fit: cover;
+  height: 440px;
 }
 
 .oph__content-col {
