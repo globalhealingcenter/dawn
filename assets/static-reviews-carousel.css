@@ -45,8 +45,8 @@
 
 /* Desktop: 3.5 slides visible (3 full + ~0.25 peek each side) */
 .src__card {
-  flex: 0 0 calc((100% - 3 * 1.5rem) / 3.5);
-  min-width: calc((100% - 3 * 1.5rem) / 3.5);
+  flex: 0 0 calc((100% - 3 * 1.5rem) / 3.25);
+  min-width: calc((100% - 3 * 1.5rem) / 3.25);
   background: #10331D;
   border-radius: 7px;
   padding: 4.6rem 2.5rem;
