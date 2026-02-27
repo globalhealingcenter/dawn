@@ -78,7 +78,7 @@
 }
 
 .oph__social-proof {
-  font-size: clamp(16px, 1.875vw, 3rem);
+  font-size: clamp(12px,1.875vw,3rem);
   line-height: clamp(19.2px, 2.25vw, 3.6rem);
   font-weight: bold;
   color: #F9F2E8;
