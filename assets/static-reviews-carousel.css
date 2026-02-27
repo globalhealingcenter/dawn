@@ -159,6 +159,9 @@
     padding: 20px 10px;
   }
 
+  .src__progress{
+    margin-top: 3rem
+  }
 
 
   .src__progress-track {
