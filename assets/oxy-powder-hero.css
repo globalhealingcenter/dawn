@@ -215,6 +215,11 @@
 }
 
 
+@media (max-width: 1440px) {
+  .oph__middle {
+      width: 85%;
+  }
+}
 @media (max-width: 767px) {
   .oph.oxy-powder-hero {
     padding: 25px;
