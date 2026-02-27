@@ -3827,7 +3827,7 @@ div[id^="shopify-block-"][id*="tolstoy"] {
 
 @media (max-width: 768px) {
   div[id^="shopify-block-"][id*="tolstoy"] {
-    margin-bottom: 40px;
+    margin-bottom: 0;
   }
 
   .ghd--our-process {
