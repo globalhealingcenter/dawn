@@ -198,6 +198,7 @@
 
   .src__heading span {
     display: block;
+    margin-top: 10px
   }
 
   .hide-on-mobile {
