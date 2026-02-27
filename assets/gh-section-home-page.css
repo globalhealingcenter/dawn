@@ -388,7 +388,7 @@ section h3.eyebrow span {
 
 @media screen and (max-width:430px){
     .ghd--hero-carousel__reviews {
-        padding-right: 15px;
+        padding-right: 0px;
     }
 }
 
