@@ -3848,6 +3848,11 @@ div[id^="shopify-block-"][id*="tolstoy"] {
     min-height: 420px !important;
     overflow: visible !important;
   }
+
+  body.gradient.index,
+  html {
+    overflow-x: hidden;
+  }
 }
 
 
