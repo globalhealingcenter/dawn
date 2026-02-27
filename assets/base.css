@@ -3748,11 +3748,11 @@ ul.related_post.wp_rp li {
 }
 
 .tolstoy-product-content {
-  border-radius: 0 0 20px 20px !important;
+  border-radius: 0 0 8px 8px !important;
 }
 
 .tolstoy-carousel-video {
-  border-radius: 20px 20px 0px 0px !important;
+  border-radius: 8px 8px 0px 0px !important;
 }
 
 .tolstoy-product-tile-price {
@@ -3769,7 +3769,6 @@ ul.related_post.wp_rp li {
 
 /* Tolstoy carousel spacing (targets any Tolstoy app block on the page) */
 div[id^="shopify-block-"][id*="tolstoy"] {
-  padding-top: 48px !important;
   padding-bottom: 72px !important;
 }
 
