@@ -181,4 +181,7 @@
   .hide-on-desktop {
     display: block;
   }
+  .src__heading {
+      margin: 0 auto 0px 30px;
+  }
 }
