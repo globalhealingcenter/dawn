@@ -184,6 +184,12 @@
   }
 }
 
+@media (max-width: 768px) {
+  span.cw__heading-span.font-miller {
+    display: block;
+    margin-top: 4px;
+}
+}
 @media (max-width: 600px) {
   .cw.consistency-wellness {
     min-height: auto;
