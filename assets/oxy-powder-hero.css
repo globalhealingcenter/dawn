@@ -113,6 +113,10 @@
   margin: 0;
   padding: 0px 10px;
   text-align: center;
+  font-weight: 300;
+}
+.oph__description strong {
+  font-weight: 500
 }
 
 .oph__ctas {
