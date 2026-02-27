@@ -122,7 +122,7 @@
 .oph__ctas {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.7rem;
   margin-bottom: 30px
 }
 
