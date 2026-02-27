@@ -61,7 +61,8 @@
 
 .cw__heading {
   font-weight: 400;
-  font-size: clamp(3rem, 4vw, 6.4rem);
+  /* font-size: clamp(3rem, 4vw, 6.4rem); */
+  font-size: clamp(36px,4vw,6.4rem);
   line-height: clamp(3.3rem, 4.438vw, 7.1rem);
   color: #F9F2E8;
   margin: 0 0 0.5rem;
