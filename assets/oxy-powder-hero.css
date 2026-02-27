@@ -249,17 +249,19 @@
     padding: 0;
     gap: 2rem;
     flex-wrap: nowrap;
+    margin: 30px 0
   }
 
   .oph__image-col {
     flex: none;
     top: 0;
     max-width: 100%;
-    width: 40%;
+    width: 35%;
   }
 
   .oph__ctas {
     flex-direction: column;
+    gap: 10px
   }
 
   .oph__bottom {
@@ -309,7 +311,9 @@
   }
 
   .oph__ctas a {
-    font-size: 12px;
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 0
   }
 
   .oph__bottom-right {
@@ -318,5 +322,13 @@
   .oph__product-img {
     object-fit: contain;
     height: 100%;
+    width: 85%;
+  }
+  .oph__content-col {
+      width: 50%;
+      margin: 0 auto 0 0;
+      flex: 0 0 50%;
+      gap: 0;
+      justify-content: space-between;
   }
 }
