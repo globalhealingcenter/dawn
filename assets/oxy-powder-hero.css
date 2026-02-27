@@ -261,6 +261,7 @@
 
   .oph__ctas {
     flex-direction: column;
+    gap: 5px
   }
 
   .oph__bottom {
