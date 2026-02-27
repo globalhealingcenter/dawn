@@ -1,0 +1,94 @@
+{{ 'oxy-powder-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="oph oxy-powder-hero" {{ block.shopify_attributes }}>
+  {%- comment -%} Background image with overlay {%- endcomment -%}
+  <div class="oph__bg-wrap">
+    <img
+      src="{{ 'Bubble-Background.png' | asset_url }}"
+      alt=""
+      loading="eager"
+      class="oph__bg-img"
+      width="1920"
+      height="910"
+    >
+  </div>
+
+  <div class="oph__content">
+    {%- comment -%} Top row: logo, tagline, description {%- endcomment -%}
+    <div class="oph__top">
+      <div class="oph__oxy_logo">
+        <img
+          src="{{ 'oxy-powder-tag-logo.png' | asset_url }}"
+          alt="BEST SELLER"
+          width="140"
+          height="40"
+          loading="lazy"
+          class="oph__badge"
+        >
+        <span>Oxy-Powder®</span>
+      </div>
+      <p class="oph__tagline font-proxima">Support for Your Foundation of Healing</p>
+      <p class="oph__social-proof font-proxima">1M + Bottles Sold | 10,000 5-Star Reviews</p>
+    </div>
+
+    {%- comment -%} Middle row: image left, content + CTAs right {%- endcomment -%}
+    <div class="oph__middle ghd--flex">
+      <div class="oph__image-col">
+        <img
+          src="{{ 'oxy-powder-img.png' | asset_url }}"
+          alt="Oxy-Powder® Natural Digestive Cleanse"
+          width="400"
+          height="500"
+          loading="lazy"
+          class="oph__product-img"
+        >
+      </div>
+      <div class="oph__content-col">
+        <p class="oph__description font-proxima">
+          Health begins in the gut. <strong>Oxy-Powder®</strong> uses gentle, non-habit-forming ingredients to support
+          elimination and refresh the starting point of your overall health.
+        </p>
+        <div class="oph__ctas">
+          <a href="https://globalhealing.com/cart/39862723117256:1" class="oph__cta button button--primary"
+            >Add to Cart</a
+          >
+          <a
+            href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
+            target="_blank"
+            class="oph__cta button button--secondary"
+            >Read the Study</a
+          >
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} Bottom white row: content left, logo right {%- endcomment -%}
+    <div class="oph__bottom">
+      <div class="oph__bottom__content__area">
+        <div class="oph__bottom-left"></div>
+        <div class="oph__bottom-right">
+          <div class="oph__bottom-content">
+            <span class="oph__bottom-stat font-proxima">92.5% Overall Satisfaction</span>
+            <span class="oph__bottom-sub font-proxima"
+              ><a
+                href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
+                target="_blank"
+                class="oph-anchors"
+                >Backed by independent clinical research.</a
+              ></span
+            >
+          </div>
+          <div class="oph__bottom-logo">
+            <img
+              src="{{ 'oxy-pw-tags.png' | asset_url }}"
+              alt="CITRUSLABS TESTED"
+              width="120"
+              height="120"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
