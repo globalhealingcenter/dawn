@@ -1282,7 +1282,7 @@ section h3.eyebrow span {
     font-style: italic;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 768px){
     .gh--home-page [class*="tolstoy-carousel-title"] {
         margin-bottom: 4rem !important;
     }
