@@ -145,7 +145,7 @@ section h3.eyebrow span {
 }
 
 .ghd--hero-carousel__reviews {
-    text-align: left;
+    text-align: left; 
     /* gap: .35rem; */
     padding-right: 7rem;
     /* display: flex; */
@@ -185,34 +185,29 @@ section h3.eyebrow span {
 }
 
 .gh-hero-slide img {
-    transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
-
 /* Ensure the image is transparent while loading */
 .gh-hero-slide img[data-src] {
-    opacity: 0;
+  opacity: 0;
 }
 
 .gh-hero-carousel__track {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    gap: 0 !important;
-    /* Critical: removes the space between slides */
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    /* Prevents manual scroll overlapping */
-    width: 100%;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 0 !important;           /* Critical: removes the space between slides */
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important; /* Prevents manual scroll overlapping */
+  width: 100%;
 }
 
 .gh-hero-slide {
-    flex: 0 0 100% !important;
-    /* Forces slide to be EXACTLY 100% width */
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    outline: none;
-    /* Removes any focus borders */
+  flex: 0 0 100% !important;   /* Forces slide to be EXACTLY 100% width */
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  outline: none;               /* Removes any focus borders */
 }
 
 .gh-hero-carousel__track-container {
@@ -378,7 +373,6 @@ section h3.eyebrow span {
     .ghd--hero-carousel__star {
         width: 14px;
     }
-
     .ghd--hero-carousel__header.page-width {
         gap: 0;
         margin-bottom: 20px;
@@ -396,20 +390,18 @@ section h3.eyebrow span {
     .ghd--hero-carousel__stars svg {
         width: 20px;
         height: 20px;
-    }
+}
 }
 
-@media screen and (max-width:430px) {
+@media screen and (max-width:430px){
     .ghd--hero-carousel__reviews {
         padding-right: 0px;
     }
 }
-
-@media screen and (max-width:390px) {
-    .ghd--hero-carousel__review-text {
+@media screen and (max-width:390px){
+    .ghd--hero-carousel__review-text{
         width: 84%
     }
-
     .ghd--hero-carousel__headline {
         padding-left: 5px;
     }
@@ -882,7 +874,7 @@ section h3.eyebrow span {
 }
 
 @media (min-width: 801px) {
-    @keyframes homepage-logos {
+     @keyframes homepage-logos {
         from {
             transform: translateX(0);
         }
@@ -1295,10 +1287,10 @@ section h3.eyebrow span {
     font-style: italic;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px){
     .gh--home-page [class*="tolstoy-carousel-title"] {
-        padding-left: 40px;
         margin-bottom: 4rem !important;
+        padding-left: 40px;
     }
 }
 
