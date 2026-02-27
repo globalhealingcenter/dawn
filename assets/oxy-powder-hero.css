@@ -317,6 +317,6 @@
   }
   .oph__product-img {
     object-fit: contain;
-    height: initial;
+    height: 100%;
   }
 }
