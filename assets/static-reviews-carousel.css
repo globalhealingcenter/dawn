@@ -63,6 +63,15 @@
   color: #CCA72C;
 }
 
+ .src__stars svg {
+      width: 30px;
+      height: 30px;
+  }
+
+  .src__stars {
+      gap: 6px;
+}
+
 .src__star {
   flex-shrink: 0;
 }
@@ -150,14 +159,7 @@
     padding: 20px 10px;
   }
 
- .src__stars svg {
-      width: 30px;
-      height: 30px;
-  }
 
-  .src__stars {
-      gap: 6px;
-}
 
   .src__progress-track {
     max-width: 70%;
