@@ -356,6 +356,15 @@
 }
 }
 
+@media screen and (max-width: 540px){
+    .oph__image-col {
+    width: 128px;
+    }
+    .oph__product-img {
+    height: 100%;
+    width: 130px;
+    }
+}
 @media screen and (max-width: 417px){
   .oph__oxy_logo span {
     font-size: 31px;
