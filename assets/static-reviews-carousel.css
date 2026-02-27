@@ -172,9 +172,20 @@
   }
 
   .src__stars svg {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
+
+  .src__text {
+    width: 90%;
+    margin: auto;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .src__stars {
+      margin-top: 13px;
+}
 
   .src__meta span {
     font-weight: bold;
