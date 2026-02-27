@@ -169,6 +169,7 @@
     margin: 10px auto 0px;
     text-align: center;
     flex-flow: column;
+    font-size: 12px;
   }
 
   .src__stars svg {
