@@ -70,8 +70,8 @@
 }
 
 .oph__tagline {
-  font-size: clamp(20px, 1.875vw, 3rem);
-  line-height: clamp(24px, 2.25vw, 3.6rem);
+  font-size: clamp(18px, 1.875vw, 3rem);
+  line-height: clamp(22px, 2.25vw, 3.6rem);
   color: #F9F2E8;
   margin: 0;
   font-weight: 400;
