@@ -3827,26 +3827,11 @@ div[id^="shopify-block-"][id*="tolstoy"] {
 
 @media (max-width: 768px) {
   div[id^="shopify-block-"][id*="tolstoy"] {
-    margin-bottom: 0;
+    margin-bottom: 40px;
   }
 
   .ghd--our-process {
     margin-bottom: 48px;
-  }
-}
-
-@media (max-width: 600px) {
-  .tolstoy-carousel-videos-container {
-    top: 5rem;
-    z-index: 1;
-    margin-bottom: 0 !important;
-  }
-}
-
-@media (max-width: 450px) {
-  .tolstoy-carousel-videos-container {
-    min-height: 420px !important;
-    overflow: visible !important;
   }
 }
 
