@@ -323,6 +323,7 @@
                         {% if visible and has_media %}
                           {% assign is_first = false %}
                           {% if slide_idx == 0 %}{% assign is_first = true %}{% endif %}
+                          
                           {% render 'gh-hero-carousel-slide',
                             desktop_image: desktop_img,
                             mobile_image: mobile_img,
