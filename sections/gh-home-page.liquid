@@ -272,7 +272,7 @@
                   aria-label="Hero banners"
                   data-slide-count="{{ slide_count }}"
                 >
-                  {% assign slide_idx = 0 %}
+                  {% comment %} {% assign slide_idx = 0 %}
                   {% for target_order in (1..4) %}
                     {% for slot_num in (1..4) %}
                       {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
@@ -329,7 +329,7 @@
                             mobile_image: mobile_img,
                             desktop_video: desktop_video,
                             mobile_video: mobile_video,
-                            url: block.settings.url,
+                            url: block.settings[url_key],
                             index: slide_idx,
                             is_first: is_first
                           %}
@@ -338,7 +338,49 @@
                         {% break %}
                       {% endif %}
                     {% endfor %}
-                  {% endfor %}
+                  {% endfor %} {% endcomment %}
+                   {% assign slide_idx = 0 %}
+
+                      {% for slot_num in (1..3) %}
+                        {% assign desktop_img_key = "banner_" | append: slot_num | append: "_desktop_image" %}
+                        {% assign mobile_img_key = "banner_" | append: slot_num | append: "_mobile_image" %}
+                        {% assign desktop_video_key = "banner_" | append: slot_num | append: "_desktop_video" %}
+                        {% assign mobile_video_key = "banner_" | append: slot_num | append: "_mobile_video" %}
+                        {% assign slot_url_key = "banner_" | append: slot_num | append: "_url" %}
+                        {% assign visible_key = "banner_" | append: slot_num | append: "_visible" %}
+
+                        {% assign desktop_img = block.settings[desktop_img_key] %}
+                        {% assign mobile_img = block.settings[mobile_img_key] %}
+                        {% assign desktop_video = block.settings[desktop_video_key] %}
+                        {% assign mobile_video = block.settings[mobile_video_key] %}
+                        {% assign slot_url = block.settings[slot_url_key] %}
+                        {% assign visible = block.settings[visible_key] %}
+
+                        {% assign has_media = false %}
+                          {% if desktop_img != blank or desktop_video != blank or mobile_img != blank or mobile_video != blank %}
+                            {% assign has_media = true %}
+                          {% endif %}
+
+                        {% if visible and has_media %}
+                          {% if slide_idx == 0 %}
+                            {% assign is_first = true %}
+                          {% else %}
+                            {% assign is_first = false %}
+                          {% endif %}
+                          
+                          {% render 'gh-hero-carousel-slide',
+                            desktop_image: desktop_img,
+                            mobile_image: mobile_img,
+                            desktop_video: desktop_video,
+                            mobile_video: mobile_video,
+                            url: slot_url,
+                            index: slide_idx,
+                            is_first: is_first
+                          %}
+
+                          {% assign slide_idx = slide_idx | plus: 1 %}
+                        {% endif %}
+                      {% endfor %}
                 </div>
                 {% if slide_count > 1 %}
                   <button
