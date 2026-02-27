@@ -145,7 +145,7 @@
 .cw__card-link {
   font-size: clamp(1.6rem, 1.563vw, 2.5rem);
   line-height: clamp(1.9rem, 1.875vw, 3rem);
-  font-weight: 600;
+  font-weight: 500;
   color: #F9F2E8;
   text-decoration: none;
   border-bottom: 1px solid #F9F2E8;
@@ -156,6 +156,7 @@
 .cw__card-link:hover {
   color: #CCA72C;
   border-bottom-color: #CCA72C;
+  font-weight: 600;
 }
 
 /* Responsive */
