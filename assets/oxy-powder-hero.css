@@ -50,8 +50,21 @@
   display: block;
   width: auto;
   height: clamp(40px, 34.375vw, 70px);
-  margin: 0 auto 0.75rem;
+  /* margin: 0 auto 0.75rem; */
   object-fit: contain;
+}
+
+.oph__oxy_logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.oph__oxy_logo span {
+    color: #fff;
+    font-weight: 700;
+    font-size: 60px;
 }
 
 .oph__tagline {
