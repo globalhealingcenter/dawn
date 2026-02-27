@@ -265,3 +265,9 @@
     display: block;
   }
 }
+
+@media (max-width: 450px) {
+  .cw__content {
+    padding: 12rem 0px 4rem;
+  }
+}
