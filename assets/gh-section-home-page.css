@@ -347,6 +347,7 @@ section h3.eyebrow span {
     .ghd--hero-carousel__headline {
         padding-left: 15px;
         margin-bottom: 7px;
+        width: 95%;
     }
 
     .ghd--hero-carousel__reviews {
@@ -364,6 +365,10 @@ section h3.eyebrow span {
         width: 82%;
         line-height: 20px;
         letter-spacing: 0;
+    }
+
+    .ghd--hero-carousel__review-text span {
+        display: inline-block;
     }
 
     .ghd--hero-carousel__review-text br {
