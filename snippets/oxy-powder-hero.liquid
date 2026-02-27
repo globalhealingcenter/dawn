@@ -16,14 +16,17 @@
   <div class="oph__content">
     {%- comment -%} Top row: logo, tagline, description {%- endcomment -%}
     <div class="oph__top">
-      <img
-        src="{{ 'oxy-powder-tag.png' | asset_url }}"
-        alt="BEST SELLER"
-        width="140"
-        height="40"
-        loading="lazy"
-        class="oph__badge"
-      >
+      <div class="oph__oxy_logo">
+        <img
+          src="{{ 'oxy-powder-tag-logo.png' | asset_url }}"
+          alt="BEST SELLER"
+          width="140"
+          height="40"
+          loading="lazy"
+          class="oph__badge"
+        >
+        <span>Oxy-Powder®</span>
+      </div>
       <p class="oph__tagline font-proxima">Support for Your Foundation of Healing</p>
       <p class="oph__social-proof font-proxima">1M + Bottles Sold | 10,000 5-Star Reviews</p>
     </div>
