@@ -150,6 +150,11 @@
     padding: 20px 10px;
   }
 
+  .src__stars svg {
+    width: 20px;
+    height: 20px;
+}
+
   .src__progress-track {
     max-width: 70%;
   }
