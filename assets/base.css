@@ -3853,6 +3853,11 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   html {
     overflow-x: hidden;
   }
+
+  .rebuy-widget .rebuy-product-grid.small-carousel .rebuy-product-block,
+  .rebuy-recommended-products .rebuy-product-grid.small-carousel .rebuy-product-block {
+    min-height: 100vw;
+  }
 }
 
 
