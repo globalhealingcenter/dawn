@@ -58,6 +58,10 @@
   border-bottom: 1px solid #22472D;
 }
 
+.ns-accordion:last-child {
+    border: 0;
+}
+
 .ns-accordion__trigger {
   display: flex;
   align-items: center;
