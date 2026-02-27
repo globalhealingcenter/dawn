@@ -72,13 +72,13 @@
 
 /* Middle row */
 .oph__middle {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-  padding: 2rem 0;
-  width: 58%;
-  max-width: 100%;
-  margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem 0;
+    width: 58%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 .oph__image-col {
