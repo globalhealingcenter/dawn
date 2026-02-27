@@ -354,3 +354,9 @@
     line-height: 34px;
 }
 }
+
+@media and screen (max-width: 417px){
+  .oph__oxy_logo span {
+    font-size: 32px;
+}
+}
