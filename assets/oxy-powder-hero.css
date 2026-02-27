@@ -311,7 +311,8 @@
   }
 
   .oph__ctas a {
-    font-size: 12px;
+    font-size: 16px;
+    padding: 10px;
   }
 
   .oph__bottom-right {
