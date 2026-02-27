@@ -63,25 +63,27 @@
   color: #CCA72C;
 }
 
- .src__stars svg {
-      width: 30px;
-      height: 30px;
-  }
+.src__stars svg {
+  width: 30px;
+  height: 30px;
+}
 
-  .src__stars {
-      gap: 6px;
+.src__stars {
+  gap: 6px;
 }
 
 .src__star {
   flex-shrink: 0;
 }
 
-.src__product {
+.src__product,
+.src__product a {
   font-size: clamp(1.8rem, 1.875vw, 3rem);
   font-weight: bold;
   color: #F9F2E8;
   margin: 0;
   text-align: center;
+  text-decoration: none;
 }
 
 .src__text {
@@ -159,7 +161,7 @@
     padding: 20px 10px;
   }
 
-  .src__progress{
+  .src__progress {
     margin-top: 3rem
   }
 
@@ -188,8 +190,8 @@
   }
 
   .src__stars {
-      margin: 5px 0;
-}
+    margin: 5px 0;
+  }
 
   .src__meta span {
     font-weight: bold;
@@ -208,8 +210,9 @@
   .hide-on-desktop {
     display: block;
   }
+
   .src__heading {
-      margin: 0 auto 0px 30px;
-      font-size: 36px
+    margin: 0 auto 0px 30px;
+    font-size: 36px
   }
 }
