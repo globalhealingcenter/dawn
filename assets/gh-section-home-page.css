@@ -391,6 +391,9 @@ section h3.eyebrow span {
     .ghd--hero-carousel__reviews {
         padding-right: 0px;
     }
+    .ghd--hero-carousel__review-text{
+        width: 85%
+    }
 }
 
 /*
