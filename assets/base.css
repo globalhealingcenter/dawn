@@ -3769,13 +3769,13 @@ ul.related_post.wp_rp li {
 
 /* Tolstoy carousel spacing (targets any Tolstoy app block on the page) */
 div[id^="shopify-block-"][id*="tolstoy"] {
-  padding-top: 48px !important;
+  padding-top: 0 !important;
   padding-bottom: 72px !important;
 }
 
 /* Tolstoy homepage carousel spacing */
 div[id^="shopify-block-"][id*="tolstoy"] {
-  margin-top: 48px;
+  margin-top: 0;
   margin-bottom: 72px;
 }
 
