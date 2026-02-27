@@ -315,4 +315,8 @@
   .oph__bottom-right {
     gap: 5px;
   }
+  .oph__product-img {
+    object-fit: contain;
+    height: initial;
+  }
 }
