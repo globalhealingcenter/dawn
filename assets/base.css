@@ -3791,9 +3791,6 @@ div[id^="shopify-block-"][id*="tolstoy"] {
     margin-top: 0;
     margin-bottom: 48px;
   }
-  .gh--home-page [class*=tolstoy-carousel-title] {
-    margin-bottom: 4rem !important;
-  }
 }
 
 @media (max-width: 768px) {
