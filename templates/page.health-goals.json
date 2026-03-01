@@ -107,7 +107,7 @@
             "show_cta": true,
             "cta_text": "<p>Not sure where to start? Browse all products or explore our full collection.</p>",
             "cta_button_text": "Shop All Products",
-            "cta_button_link": "shopify://collections",
+            "cta_button_link": "/collections/collections",
             "cta_spacing": 48,
             "container_width": 1300,
             "section_padding_top": 60,
