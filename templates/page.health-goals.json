@@ -105,7 +105,7 @@
             "list_columns_desktop": 3,
             "list_spacing": 48,
             "show_cta": true,
-            "cta_text": "<p>Not sure where to start? Browse all products or explore our full collection.</p>",
+            "cta_text": "<p>Not sure where to start? Explore our full collection.</p>",
             "cta_button_text": "Shop All Products",
             "cta_button_link": "/collections/collections",
             "cta_spacing": 48,
