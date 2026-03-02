@@ -196,6 +196,7 @@
             {% assign hero_line_1 = block.settings.hero_headline_line_1 | strip %}
             {% assign hero_line_2 = block.settings.hero_headline_line_2 | strip %}
             {% assign hero_review = block.settings.hero_review_text | strip %}
+            {% assign hero_review_stars_text = block.settings.hero_review_stars_text | strip %}
             {% assign hero_show_stars = block.settings.hero_show_stars %}
             {% assign hero_stars = block.settings.hero_star_rating | default: 5 %}
             {% assign show_hero_header = false %}
@@ -217,7 +218,7 @@
                 {% if hero_review != blank or hero_show_stars %}
                   <div class="ghd--hero-carousel__reviews">
                     {% if hero_review != blank %}
-                      <span class="ghd--hero-carousel__review-text font-proxima">{{ hero_review }}</span>
+                      <span class="ghd--hero-carousel__review-text font-proxima">{{ hero_review }}{% if hero_review_stars_text != blank %} <span class="text-stars">{{ hero_review_stars_text }}</span>{% endif %}</span>
                     {% endif %}
                     {% if hero_show_stars %}
                       <span class="ghd--hero-carousel__stars" aria-hidden="true">
@@ -878,6 +879,12 @@
           "id": "hero_review_text",
           "label": "Review text",
           "default": "Over 50,000 5-Star Reviews"
+        },
+        {
+          "type": "text",
+          "id": "hero_review_stars_text",
+          "label": "Review stars text",
+          "default": "5-Star"
         },
         {
           "type": "checkbox",
