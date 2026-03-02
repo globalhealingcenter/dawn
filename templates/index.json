@@ -102,6 +102,7 @@
         },
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
           "type": "quality",
+          "disabled": true,
           "settings": {
             "heading": "The Quality & Purity Your Body Deserves",
             "link_text": "OUR PROCESS",
