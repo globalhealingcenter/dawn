@@ -1,0 +1,74 @@
+{% comment %}
+  Hero carousel slide - supports image (JPG/PNG) or video (MP4)
+  Params: desktop_image, mobile_image, desktop_video, mobile_video, url, retina_2x, index, is_first
+  Desktop dimensions: 1430x475px
+{% endcomment %}
+
+{% assign desktop_width = 1430 %}
+{% assign desktop_width_2x = 2860 %}
+{% assign mobile_width = 750 %}
+
+{% if retina_2x %}
+  {% assign desktop_width = desktop_width_2x %}
+{% endif %}
+
+{% assign has_desktop_media = false %}
+{% if desktop_image != blank or desktop_video != blank %}{% assign has_desktop_media = true %}{% endif %}
+{% assign has_mobile_media = false %}
+{% if mobile_image != blank or mobile_video != blank %}{% assign has_mobile_media = true %}{% endif %}
+{% assign use_desktop_video = false %}
+{% if desktop_video != blank %}{% assign use_desktop_video = true %}{% endif %}
+{% assign use_mobile_video = false %}
+{% if mobile_video != blank %}{% assign use_mobile_video = true %}{% endif %}
+
+{% if has_desktop_media or has_mobile_media %}
+  <div class="gh-hero-slide" data-slide-index="{{ index }}" {% unless is_first %}data-lazy{% endunless %}>
+    {% if url != blank %}
+      <a href="{{ url }}" class="gh-hero-slide__link">
+    {% endif %}
+
+    <div class="gh-hero-slide__media gh-hero-slide__media--desktop">
+      {% if use_desktop_video %}
+        <video class="gh-hero-slide__video" muted playsinline loop preload="none" data-src="{{ desktop_video }}"
+          poster="{% if desktop_image %}{{ desktop_image | image_url: width: desktop_width }}{% endif %}" aria-hidden="true"></video>
+      {% elsif desktop_image != blank %}
+        {% if is_first %}
+          <img src="{{ desktop_image | image_url: width: desktop_width }}"
+            {% if retina_2x %}srcset="{{ desktop_image | image_url: width: desktop_width }} 1x, {{ desktop_image | image_url: width: desktop_width_2x }} 2x"{% endif %}
+            alt="" width="1430" height="475" loading="eager" fetchpriority="high" decoding="async" class="gh-hero-slide__img">
+        {% else %}
+          <img data-src="{{ desktop_image | image_url: width: desktop_width }}"
+            {% if retina_2x %}data-srcset="{{ desktop_image | image_url: width: desktop_width }} 1x, {{ desktop_image | image_url: width: desktop_width_2x }} 2x"{% endif %}
+            alt="" width="1430" height="475" loading="lazy" decoding="async" class="gh-hero-slide__img gh-hero-slide__img--lazy">
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="gh-hero-slide__media gh-hero-slide__media--mobile">
+      {% if use_mobile_video %}
+        <video class="gh-hero-slide__video" muted playsinline loop preload="none" data-src="{{ mobile_video }}"
+          poster="{% if mobile_image %}{{ mobile_image | image_url: width: mobile_width }}{% elsif desktop_image %}{{ desktop_image | image_url: width: mobile_width }}{% endif %}" aria-hidden="true"></video>
+      {% elsif mobile_image != blank %}
+        {% if is_first %}
+          <img src="{{ mobile_image | image_url: width: mobile_width }}"
+            {% if retina_2x %}srcset="{{ mobile_image | image_url: width: mobile_width }} 1x, {{ mobile_image | image_url: width: 1500 }} 2x"{% endif %}
+            alt="" loading="eager" fetchpriority="high" decoding="async" class="gh-hero-slide__img">
+        {% else %}
+          <img data-src="{{ mobile_image | image_url: width: mobile_width }}"
+            {% if retina_2x %}data-srcset="{{ mobile_image | image_url: width: mobile_width }} 1x, {{ mobile_image | image_url: width: 1500 }} 2x"{% endif %}
+            alt="" loading="lazy" decoding="async" class="gh-hero-slide__img gh-hero-slide__img--lazy">
+        {% endif %}
+      {% elsif desktop_image != blank %}
+        {% if is_first %}
+          <img src="{{ desktop_image | image_url: width: mobile_width }}" alt="" loading="eager" fetchpriority="high" decoding="async" class="gh-hero-slide__img">
+        {% else %}
+          <img data-src="{{ desktop_image | image_url: width: mobile_width }}" alt="" loading="lazy" decoding="async" class="gh-hero-slide__img gh-hero-slide__img--lazy">
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% if url != blank %}
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

@@ -23,28 +23,55 @@
         },
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc": {
           "type": "hero",
+          "disabled": true,
           "settings": {
             "image_obj": "shopify://shop_images/art-of-detox-desktop-banner.jpg",
-            "image_mobile_obj": "shopify://shop_images/art-of-detox-mobile-banner.jpg",
+            "image_mobile_obj": "shopify://shop_images/art-of-detox-desktop-banner.jpg",
             "url": "https://globalhealing.com/pages/art-of-detox?utm_source=site&utm_medium=homepagebanner&utm_campaign=art_of_detox&utm_content=aod"
+          }
+        },
+        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
+          "type": "banners",
+          "settings": {
+            "hero_headline_line_1": "HEALING IS THE",
+            "hero_headline_line_2": "New Wellness",
+            "hero_review_text": "Over 50,000",
+            "hero_review_stars_text": "5-Star Reviews",
+            "hero_show_stars": true,
+            "hero_star_rating": 5,
+            "banner_start_date": "",
+            "banner_end_date": "",
+            "banner_1_desktop_image": "shopify://shop_images/GH-Home-Banner.jpg",
+            "banner_1_desktop_video": "",
+            "banner_1_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner_1af1659f-3440-4ead-8273-8653d961d820.jpg",
+            "banner_1_mobile_video": "",
+            "banner_1_url": "https://globalhealing.com/products/nad?utm_source=site&utm_medium=homepagebanner&utm_campaign=nad_launch&utm_content=nad",
+            "banner_1_visible": true,
+            "banner_1_order": 2,
+            "banner_2_desktop_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-desktop3.jpg",
+            "banner_2_desktop_video": "",
+            "banner_2_mobile_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-mobile3.jpg",
+            "banner_2_mobile_video": "",
+            "banner_2_url": "/products/probiotic",
+            "banner_2_visible": true,
+            "banner_2_order": 1,
+            "banner_3_desktop_image": "shopify://shop_images/030126-gh-app-homepage-banner-desktop.jpg",
+            "banner_3_desktop_video": "",
+            "banner_3_mobile_image": "shopify://shop_images/030126-gh-app-homepage-banner-mobile.jpg",
+            "banner_3_mobile_video": "",
+            "banner_3_url": "https://0vf059r6.tapc.art",
+            "banner_3_visible": true,
+            "banner_3_order": 2,
+            "banner_4_desktop_video": "",
+            "banner_4_mobile_video": "",
+            "banner_4_url": "",
+            "banner_4_visible": false,
+            "banner_4_order": 4
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
           "type": "logos",
           "settings": {}
-        },
-        "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
-          "type": "banners",
-          "settings": {
-            "banner_1_image_obj": "shopify://shop_images/nad-desktop-october-2025-banner.jpg",
-            "banner_1_image_mobile_obj": "shopify://shop_images/nad-mobile-october-2025-banner.jpg",
-            "image_is_2x": false,
-            "banner_1_url": "https://globalhealing.com/products/nad?utm_source=site&utm_medium=homepagebanner&utm_campaign=nad_launch&utm_content=nad",
-            "banner_2_image_obj": "shopify://shop_images/featured-blog-10282025.png",
-            "banner_2_url": "/blogs/education/gut-cleanse",
-            "banner_3_image_obj": "shopify://shop_images/page-homepage-banner-3-inside-the-facility.jpg",
-            "banner_3_url": "shopify://blogs/education/inside-the-facility-thats-redefining-supplement-manufacturing"
-          }
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
@@ -55,22 +82,65 @@
             "collection_id_enabled": false
           }
         },
+        "new_standard_RNKKnX": {
+          "type": "new_standard",
+          "settings": {
+            "title": "The New Standard in Supplements",
+            "tagline": "Because industry norms aren't enough.",
+            "description": "",
+            "button_text": "See the Full Process",
+            "button_url": "",
+            "accordion_heading": "Our Way, In Our Hands"
+          }
+        },
+        "shop_by_health_goals_a6iJBX": {
+          "type": "shop_by_health_goals",
+          "settings": {
+            "heading": "Shop by",
+            "heading_em": "Health Goals",
+            "cta_text": "Shop More Health Goals",
+            "cta_url": "https://globalhealing.com/pages/shop-by-health-benefit"
+          }
+        },
+        "rebuy_personalization_engine_rebuy_widget_4iFdrQ": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "108416",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        },
         "e10c7322-7eab-438a-a4fb-087f5dca4764": {
           "type": "quality",
+          "disabled": true,
           "settings": {
             "heading": "The Quality & Purity Your Body Deserves",
             "link_text": "OUR PROCESS",
             "link": "/pages/quality-purity"
           }
         },
+        "oxy_powder_hero_qyHCU9": {
+          "type": "oxy_powder_hero",
+          "settings": {}
+        },
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
           "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
-            "publishId": "qoqax285bu91b"
+            "publishId": "dhknd9e74ir2m"
           }
+        },
+        "consistency_wellness_qHWUNT": {
+          "type": "consistency_wellness",
+          "settings": {}
+        },
+        "static_reviews_carousel_AixkJn": {
+          "type": "static_reviews_carousel",
+          "settings": {}
         },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
+          "disabled": true,
           "settings": {
             "heading": "Products Uniquely Made With You in Mind",
             "left_col_heading": "Start Your Journey",
@@ -80,11 +150,12 @@
             "link_2_text": "",
             "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
-            "link_list": "homepage-menu"
+            "link_list": "main-menu"
           }
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
           "type": "foundation",
+          "disabled": true,
           "settings": {
             "pre_heading": "THE FOUNDATION OF WELLNESS",
             "heading": "Healing Starts From the Inside Out",
@@ -97,6 +168,7 @@
         },
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea": {
           "type": "autoship",
+          "disabled": true,
           "settings": {
             "image": "https://cdn.globalhealing.com/pages/v2/home/subscription.png",
             "image_mobile": "https://cdn.globalhealing.com/pages/v2/home/subscription-mobile.png",
@@ -109,12 +181,14 @@
         },
         "71d00f7f-4b0a-4c94-aaa7-5e49a3438b98": {
           "type": "br",
+          "disabled": true,
           "settings": {
             "image_one": "Products Uniquely Made With You in Mind"
           }
         },
         "90d53a3e-607e-44cf-81c0-4d063ee2042c": {
           "type": "mission",
+          "disabled": true,
           "settings": {
             "heading": "Global Healing is Our Mission",
             "intro_text": "<p>Since 1998, our mission has been to empower people to take control of their health naturally and restore their body’s self-healing abilities.<br/><a href=\"/pages/our-story\" title=\"Our Healing Mission & Story\"><strong>OUR STORY</strong></a><br/>                        </p>"
@@ -122,6 +196,7 @@
         },
         "b871651f-c308-4034-8741-ebbb3f7989ed": {
           "type": "reviews",
+          "disabled": true,
           "settings": {
             "review": "<p>“I have been making protein smoothies for over 30 years now ~ I was always 'on the hunt' for the best protein powder with the purest of ingredients~ well I think I have finally found it ~ Vanilla Pure plant protein is my new breakfast fave ~ blends very well and I love that it has a probiotic and prebiotic blend. Taste wonderful, no clumping, very filling.”</p><p><strong>Linda S.</strong></p>",
             "row_1_img": "https://cdn.globalhealing.com/pages/v2/home/reviews-free-shipping.v2.svg",
@@ -145,11 +220,17 @@
       "block_order": [
         "video_hero_yDmxn3",
         "a12c25e5-0dd7-40ea-8981-205f8eac2fcc",
-        "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0",
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be",
+        "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0",
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed",
+        "new_standard_RNKKnX",
+        "shop_by_health_goals_a6iJBX",
+        "rebuy_personalization_engine_rebuy_widget_4iFdrQ",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
+        "oxy_powder_hero_qyHCU9",
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji",
+        "consistency_wellness_qHWUNT",
+        "static_reviews_carousel_AixkJn",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
@@ -160,16 +241,16 @@
       ],
       "settings": {
         "padding_top": 0,
-        "padding_bottom": 52
+        "padding_bottom": 0
       }
     },
     "4a534389-073e-4980-a2fd-d7304e59caec": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
-        "color_scheme": "background-1",
+        "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:left; font-size: clamp(3rem, 4vw, 6.4rem); font-family: 'proxima-nova'; font-weight:400; padding-left:10vw;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
+        "color_scheme": "accent-1",
         "padding_top": 40,
-        "padding_bottom": 52
+        "padding_bottom": 20
       }
     },
     "1687779425f103d894": {

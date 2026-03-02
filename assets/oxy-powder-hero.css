@@ -1,0 +1,389 @@
+/* Oxy-Powder Hero - static homepage block */
+
+.oph {
+  position: relative;
+  overflow: hidden;
+}
+
+.oph.oxy-powder-hero {
+  padding: 68px 100px;
+}
+
+/* Background image */
+.oph__bg-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background: linear-gradient(180deg, #2a5f7a 0%, #1e4a5e 50%, #153d4d 100%);
+}
+
+.oph__bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Content wrapper */
+.oph__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  /* gap: 3rem; */
+  border-radius: 10px;
+  background-color: rgb(60 128 193 / 70%);
+  padding: 35px;
+}
+
+/* Top row */
+.oph__top {
+  text-align: center;
+}
+
+.oph__badge {
+  display: block;
+  width: auto;
+  height: clamp(40px, 34.375vw, 70px);
+  /* margin: 0 auto 0.75rem; */
+  object-fit: contain;
+}
+
+.oph__oxy_logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 10px
+}
+
+.oph__oxy_logo span {
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(3rem, 4vw, 6.4rem);
+  line-height: clamp(3.6rem, 79.012vw, 8.1rem);
+}
+
+.oph__oxy_logo .text-icons {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 0;
+  position: relative;
+  top: -18px;
+  right: 2px;
+}
+
+.oph__tagline {
+  font-size: clamp(18px, 1.575vw, 3rem);
+  line-height: clamp(22px, 2.25vw, 3.6rem);
+  color: #F9F2E8;
+  margin: 0;
+  font-weight: 400;
+}
+
+.oph__social-proof {
+  font-size: clamp(12px, 1.875vw, 3rem);
+  line-height: clamp(19.2px, 2.25vw, 3.6rem);
+  font-weight: bold;
+  color: #F9F2E8;
+  margin: 0;
+}
+
+/* Middle row */
+.oph__middle {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding: 1rem 0;
+  width: 58%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.oph__image-col {
+  flex: 0 0 40%;
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 30px;
+  z-index: 1;
+}
+
+.oph__product-img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  height: 440px;
+}
+
+.oph__content-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.oph__description {
+  font-size: clamp(12px, 1.25vw, 2rem);
+  line-height: clamp(15px, 1.5vw, 2.4rem);
+  color: #F9F2E8;
+  margin: 0;
+  padding: 0px 10px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.oph__description strong {
+  font-weight: 500
+}
+
+.oph__ctas {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  margin-bottom: 30px
+}
+
+.oph__cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  min-width: 200px;
+}
+
+/* Use light blue style per design - override button vars for this block */
+.oph__cta.button--primary {
+  --color-button: 255, 255, 255;
+  --color-button-text: 60 128 193;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.oph__cta.button--secondary {
+  --color-button: var(--color-secondary-button);
+  --color-button-text: 255, 255, 255;
+  background-color: rgb(255 255 255 / 30%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* Bottom white row */
+.oph__bottom {
+  background: #fff;
+  width: 100%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  bottom: 0px;
+  left: 0;
+}
+
+.oph__bottom__content__area {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 110px;
+}
+
+.oph__bottom-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.oph__bottom__content__area .oph__bottom-left {
+  display: block;
+  width: 40%;
+  max-width: 400px;
+}
+
+.oph__bottom-stat {
+  font-size: clamp(16px, 1.875vw, 3rem);
+  line-height: clamp(19.2px, 2.25vw, 3.6rem);
+  font-weight: bold;
+  color: #3C80C1;
+  margin: 0;
+}
+
+.oph__bottom-sub {
+  font-size: clamp(11px, 1.063vw, 1.7rem);
+  line-height: clamp(15px, 1.938vw, 3.1rem);
+  color: #545554;
+  font-weight: bold;
+  text-align: center;
+}
+
+.oph__bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  justify-content: center;
+}
+
+.oph__bottom-logo img {
+  width: 75px;
+  height: 75px;
+}
+
+.oph__bottom-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@media (max-width: 1600px) {
+  .oph__middle {
+    width: 85%;
+  }
+
+  .oph__content-col {
+    width: 50%;
+    margin: 0 auto 0 0;
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .oph.oxy-powder-hero {
+    padding: 25px;
+  }
+
+  .oph__content {
+    padding: 15px 15px 0;
+  }
+
+  .oph__top img {
+    /* width: 355px;
+    margin: 0 auto; */
+  }
+
+  .oph__tagline {
+    margin: 0px 0px 2px;
+  }
+
+  .oph__middle {
+    width: 100%;
+    padding: 0;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    margin: 35px 0 40px;
+  }
+
+  .oph__image-col {
+    flex: none;
+    top: 0;
+    max-width: 100%;
+    width: 35%;
+  }
+
+  .oph__ctas {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 0
+  }
+
+  .oph__bottom {
+    flex-direction: column;
+    text-align: center;
+    margin: 0px 0px 0px -15px;
+    padding: 1.5rem 2rem;
+    position: relative;
+    width: calc(100% + 30px);
+  }
+
+  .oph__cta {
+    min-width: unset;
+    text-align: center;
+  }
+
+  .oph__bottom-content {
+    order: 1;
+  }
+
+  .oph__bottom-logo {
+    order: 2;
+  }
+
+  .oph__bottom__content__area {
+    width: 100%;
+    min-height: unset;
+  }
+
+  .oph__bottom__content__area .oph__bottom-left {
+    width: 0;
+    display: none;
+  }
+
+  .oph__bottom-right {
+    width: 100%;
+  }
+
+  .oph__bottom-logo img {
+    width: 39px;
+    height: 39px;
+  }
+
+  .oph__description {
+    word-break: break-word;
+    text-align: left;
+    padding: 0;
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .oph__ctas a {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .oph__bottom-right {
+    gap: 5px;
+  }
+
+  .oph__product-img {
+    object-fit: contain;
+    height: 100%;
+    width: 85%;
+  }
+
+  .oph__content-col {
+    width: 100%;
+    margin: 0;
+    flex: 0 0 55%;
+    gap: 1rem;
+    justify-content: space-between;
+
+  }
+
+  .oph__oxy_logo span {
+    font-size: 36px;
+    line-height: 34px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .oph__image-col {
+    width: 128px;
+  }
+
+  .oph__product-img {
+    height: 100%;
+    width: 130px;
+  }
+}
+
+@media screen and (max-width: 417px) {
+  .oph__oxy_logo span {
+    font-size: 31px;
+  }
+}

@@ -1,0 +1,152 @@
+.health-goals-section {
+  background-color: #22472D;
+  padding: 50px 40px 55px;
+  position: relative;
+  min-height: 57rem;
+}
+
+.health-goals__inner {
+  width: 1130px;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.health-goals-section__bg {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.health-goals__heading {
+  font-size: clamp(30px, 4vw, 6.4rem);
+  line-height: clamp(33px, 5.098vw, 8.1rem);
+  font-weight: 400;
+  color: #CCA72C;
+  margin: 0 0 60px;
+  letter-spacing: 0.01em;
+}
+
+.health-goals__heading em {
+  font-family: 'miller-display';
+}
+
+.health-goals__grid {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 60px;
+  text-align: left;
+}
+
+.health-goals__column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 40px;
+}
+
+.health-goals__column:first-child {
+  padding-left: 0;
+  padding-right: 80px;
+  border-right: 1px solid rgb(249 242 232 / 50%);
+}
+
+.health-goals__column:last-child {
+  padding-left: 80px;
+  padding-right: 0;
+}
+
+.health-goals__divider {
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  align-self: stretch;
+  min-height: 160px;
+}
+
+.health-goals__link {
+  display: block;
+  color: #F9F2E8;
+  font-family: 'proxima-nova';
+  text-decoration: none;
+  font-size: clamp(18px, 1.875vw, 3rem);
+  line-height: clamp(23px, 3.75vw, 3rem);
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 5px 0;
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
+  cursor: pointer;
+}
+
+.health-goals__link:hover {
+  color: #CCA72C;
+}
+
+.health-goals__cta {
+  display: flex;
+  justify-content: center;
+}
+
+.health-goals__button {
+  width: 516px;
+  max-width: 100%;
+  /* border-radius: 7px */
+  letter-spacing: 0;
+}
+
+.health-goals__button:hover {}
+
+@media (max-width: 767px) {
+  .health-goals-section {
+    padding: 40px 30px;
+    min-height: initial
+  }
+
+  .health-goals__heading {
+    margin-bottom: 25px;
+    text-align: left;
+    font-size: clamp(36px, 4vw, 6.4rem)
+  }
+
+  .health-goals__link {
+    padding: 5px 0px;
+  }
+
+  .health-goals__column:first-child {
+    border-right: none;
+  }
+
+  .health-goals__grid {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+  }
+
+  .health-goals__divider {
+    width: 100%;
+    height: 1px;
+    min-height: unset;
+    margin: 16px 0;
+  }
+
+  .health-goals__column {
+    padding: 0 !important;
+  }
+
+  .mobile--hide {
+    display: none
+  }
+
+  .health-goals__button {
+    min-width: unset;
+    width: 75%;
+    padding: 12px 24px;
+  }
+}
