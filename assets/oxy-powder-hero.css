@@ -71,6 +71,11 @@
 
 .oph__oxy_logo .text-icons {
   font-weight: 400;
+  font-size: 40px;
+  line-height: 0;
+  position: relative;
+  top: -18px;
+  right: 2px;
 }
 
 .oph__tagline {
