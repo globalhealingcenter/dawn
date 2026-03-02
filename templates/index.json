@@ -45,21 +45,19 @@
             "banner_1_desktop_video": "",
             "banner_1_mobile_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-mobile3.jpg",
             "banner_1_mobile_video": "",
-            "banner_1_url": "shopify://products/probiotic",
+            "banner_1_url": "https://globalhealing.com/products/nad?utm_source=site&utm_medium=homepagebanner&utm_campaign=nad_launch&utm_content=nad",
             "banner_1_visible": true,
             "banner_1_order": 1,
             "banner_2_desktop_image": "shopify://shop_images/GH-Home-Banner.jpg",
             "banner_2_desktop_video": "",
             "banner_2_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner_1af1659f-3440-4ead-8273-8653d961d820.jpg",
             "banner_2_mobile_video": "",
-            "banner_2_url": "shopify://products/nad",
+            "banner_2_url": "/blogs/education/gut-cleanse",
             "banner_2_visible": true,
             "banner_2_order": 2,
-            "banner_3_desktop_image": "shopify://shop_images/030126-gh-app-homepage-banner-desktop.jpg",
             "banner_3_desktop_video": "",
-            "banner_3_mobile_image": "shopify://shop_images/030126-gh-app-homepage-banner-mobile.jpg",
             "banner_3_mobile_video": "",
-            "banner_3_url": "https://0vf059r6.tapc.art",
+            "banner_3_url": "shopify://blogs/education/inside-the-facility-thats-redefining-supplement-manufacturing",
             "banner_3_visible": true,
             "banner_3_order": 3,
             "banner_4_desktop_video": "",
@@ -89,7 +87,7 @@
             "tagline": "Because industry norms aren't enough.",
             "description": "",
             "button_text": "See the Full Process",
-            "button_url": "shopify://pages/quality-purity",
+            "button_url": "",
             "accordion_heading": "Our Way, In Our Hands"
           }
         },
@@ -99,7 +97,7 @@
             "heading": "Shop by",
             "heading_em": "Health Goals",
             "cta_text": "Shop More Health Goals",
-            "cta_url": "shopify://pages/shop-by-health-benefit"
+            "cta_url": ""
           }
         },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
@@ -237,10 +235,10 @@
     "4a534389-073e-4980-a2fd-d7304e59caec": {
       "type": "custom-liquid",
       "settings": {
-        "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:center; font-size: 40px;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
-        "color_scheme": "background-1",
+        "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:left; font-size: clamp(3rem, 4vw, 6.4rem); font-family: 'proxima-nova'; font-weight:400; padding-left:10vw;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
+        "color_scheme": "accent-1",
         "padding_top": 40,
-        "padding_bottom": 52
+        "padding_bottom": 20
       }
     },
     "1687779425f103d894": {
