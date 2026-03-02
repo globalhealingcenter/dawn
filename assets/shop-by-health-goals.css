@@ -1,8 +1,8 @@
 .health-goals-section {
   background-color: #22472D;
-  padding: 70px 40px 75px;
+  padding: 50px 40px 55px;
   position: relative;
-  min-height: 61.9rem;
+  min-height: 57rem;
 }
 
 .health-goals__inner {
@@ -112,7 +112,7 @@
   .health-goals__heading {
     margin-bottom: 25px;
     text-align: left;
-    font-size: clamp(36px,4vw,6.4rem)
+    font-size: clamp(36px, 4vw, 6.4rem)
   }
 
   .health-goals__link {
@@ -139,8 +139,8 @@
   .health-goals__column {
     padding: 0 !important;
   }
-  
-  .mobile--hide{
+
+  .mobile--hide {
     display: none
   }
 
