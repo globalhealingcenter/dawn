@@ -917,16 +917,14 @@ section h3.eyebrow span {
         padding-right: 5rem;
     }
 
-    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
-        padding-right: 0;
-    }
-
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
     }
 
-
+    .ghd--logos:hover .ghd--logos-track {
+        animation-play-state: paused;
+    }
 }
 
 @media (max-width: 800px) {
@@ -982,13 +980,17 @@ section h3.eyebrow span {
         padding-right: 5rem;
     }
 
-    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
-        padding-right: 0;
-    }
-
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
+    }
+
+    .ghd--logos:hover .ghd--logos-track {
+        animation-play-state: paused;
+    }
+
+    .ghd--logos.ghd--logos-touch .ghd--logos-track {
+        animation: none;
     }
 }
 
