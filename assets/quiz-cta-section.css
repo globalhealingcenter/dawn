@@ -90,7 +90,7 @@
 .quiz-cta__button {
   width: clamp(240px, 32.25vw, 51.6rem);
   background: #f9f2e8;
-  color: #231f20 !important;
+  color: #21472D !important;
   font-family: 'proxima-nova';
   display: flex;
   align-items: center;
