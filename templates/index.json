@@ -169,6 +169,15 @@
             "cta_url": "https://globalhealing.com/pages/shop-by-health-benefit"
           }
         },
+        "health_goal_link_gJfKxf": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Gut & Digestion",
+            "url": "/collections/gut-digestion",
+            "column": "1",
+            "hide_on_mobile": false
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -286,6 +295,7 @@
         "accordion_item_qc98ma",
         "accordion_item_y997Ld",
         "shop_by_health_goals_Em9nxw",
+        "health_goal_link_gJfKxf",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
