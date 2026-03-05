@@ -549,6 +549,9 @@
       {% when 'shop_by_health_goals' %}
         {% render 'shop-by-health-goals', block: block, section: section %}
 
+      {% when 'quiz_cta' %}
+        {% render 'quiz-cta-block', block: block %}
+
       {% when 'oxy_powder_hero' %}
         {% render 'oxy-powder-hero', block: block %}
 
@@ -1464,6 +1467,58 @@
         {
           "type": "url",
           "id": "cta_url",
+          "label": "Button URL"
+        }
+      ]
+    },
+    {
+      "type": "quiz_cta",
+      "name": "Quiz CTA",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "background",
+          "label": "Background Image (Desktop)"
+        },
+        {
+          "type": "image_picker",
+          "id": "background_mobile",
+          "label": "Background Image (Mobile)"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#231f20",
+          "info": "Choose a color that contrasts well with your background"
+        },
+        {
+          "type": "text",
+          "id": "heading_1",
+          "label": "Heading (line 1)",
+          "default": "Find Your"
+        },
+        {
+          "type": "text",
+          "id": "heading_2",
+          "label": "Heading (line 2 - emphasized)",
+          "default": "Starting Point"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Not sure where to begin? Our guided quiz helps you find a thoughtful starting point for your healing journey.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Take the Quiz"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
           "label": "Button URL"
         }
       ]
