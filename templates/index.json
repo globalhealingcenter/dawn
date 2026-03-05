@@ -214,6 +214,15 @@
             "hide_on_mobile": true
           }
         },
+        "health_goal_link_REBBKW": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Hormones & Thyroid",
+            "url": "/collections/hormones-thyroid",
+            "column": "2",
+            "hide_on_mobile": true
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -336,6 +345,7 @@
         "health_goal_link_zxwm7p",
         "health_goal_link_MrUnMb",
         "health_goal_link_qKYCNi",
+        "health_goal_link_REBBKW",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
