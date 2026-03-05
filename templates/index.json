@@ -259,6 +259,19 @@
             "link": "/pages/quality-purity"
           }
         },
+        "quiz_cta_tJMUrz": {
+          "type": "quiz_cta",
+          "settings": {
+            "background": "shopify://shop_images/Quiz-section-bg.jpg",
+            "background_mobile": "shopify://shop_images/Quiz-section-mobile-bg.jpg",
+            "text_color": "#f9f2e8",
+            "heading_1": "Find Your",
+            "heading_2": "<span>Starting</span> Point",
+            "content": "<p><strong>Not sure where to begin? </strong><br/>Our guided quiz helps you find a thoughtful <br/>starting point for your healing journey.</p>",
+            "button_text": "Take the Quiz",
+            "button_url": ""
+          }
+        },
         "oxy_powder_hero_Ee7FXg": {
           "type": "oxy_powder_hero",
           "settings": {}
@@ -271,7 +284,33 @@
         },
         "consistency_wellness_QY9M6U": {
           "type": "consistency_wellness",
-          "settings": {}
+          "settings": {
+            "video_url": "",
+            "video_url_mobile": "",
+            "heading": "Consistency",
+            "heading_em": "Made Easier",
+            "tagline": "Turn Wellness into an Automatic Habit",
+            "card_1_heading": "Subscribe & Save",
+            "card_1_text": "<p>Enjoy 15% off every order—automatically delivered for uninterrupted wellness.</p>",
+            "card_1_link_text": "Learn More",
+            "card_1_link_url": "",
+            "card_1_svg": "",
+            "card_2_heading": "Live Healthy Rewards",
+            "card_2_text": "<p>Earn points with every purchase. Redeem for exclusive discounts and free products.</p>",
+            "card_2_link_text": "Learn More",
+            "card_2_link_url": "",
+            "card_2_svg": "",
+            "card_3_heading": "Free U.S. Shipping",
+            "card_3_text": "<p>Enjoy complimentary U.S. shipping on every order over $100.</p>",
+            "card_3_link_text": "Learn More",
+            "card_3_link_url": "",
+            "card_3_svg": "",
+            "card_4_heading": "Satisfaction Guarantee",
+            "card_4_text": "<p>Take a year to try any product. If it's not a good fit, we'll offer a full refund.</p>",
+            "card_4_link_text": "Learn More",
+            "card_4_link_url": "",
+            "card_4_svg": ""
+          }
         },
         "static_reviews_carousel_yURM78": {
           "type": "static_reviews_carousel",
@@ -368,6 +407,7 @@
         "health_goal_link_qUzEJ3",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
+        "quiz_cta_tJMUrz",
         "oxy_powder_hero_Ee7FXg",
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji",
         "consistency_wellness_QY9M6U",
