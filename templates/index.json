@@ -26,7 +26,6 @@
           "disabled": true,
           "settings": {
             "image_obj": "shopify://shop_images/art-of-detox-desktop-banner.jpg",
-            "image_mobile_obj": "shopify://shop_images/art-of-detox-mobile-banner.jpg",
             "url": "https://globalhealing.com/pages/art-of-detox?utm_source=site&utm_medium=homepagebanner&utm_campaign=art_of_detox&utm_content=aod"
           }
         },
@@ -39,34 +38,40 @@
             "hero_review_stars_text": "5-Star Reviews",
             "hero_show_stars": true,
             "hero_star_rating": 5,
-            "banner_start_date": "",
-            "banner_end_date": "",
-            "banner_1_desktop_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-desktop3.jpg",
+            "banner_1_desktop_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-desktop2.webp",
             "banner_1_desktop_video": "",
-            "banner_1_mobile_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-mobile3.jpg",
+            "banner_1_mobile_image": "shopify://shop_images/022426-ultimate-probiotic-homepage-banner-mobile1.webp",
             "banner_1_mobile_video": "",
             "banner_1_url": "shopify://products/probiotic",
             "banner_1_visible": true,
             "banner_1_order": 1,
-            "banner_2_desktop_image": "shopify://shop_images/GH-Home-Banner.jpg",
+            "banner_1_start_date": "",
+            "banner_1_end_date": "",
+            "banner_2_desktop_image": "shopify://shop_images/nad-desktop-october-2025-banner.jpg",
             "banner_2_desktop_video": "",
-            "banner_2_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner_1af1659f-3440-4ead-8273-8653d961d820.jpg",
+            "banner_2_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner.jpg",
             "banner_2_mobile_video": "",
             "banner_2_url": "shopify://products/nad",
             "banner_2_visible": true,
             "banner_2_order": 2,
-            "banner_3_desktop_image": "shopify://shop_images/030126-gh-app-homepage-banner-desktop.jpg",
+            "banner_2_start_date": "",
+            "banner_2_end_date": "",
+            "banner_3_desktop_image": "shopify://shop_images/GH-28th_Anniversary_Banner-Desktop-1430x475.jpg",
             "banner_3_desktop_video": "",
-            "banner_3_mobile_image": "shopify://shop_images/030126-gh-app-homepage-banner-mobile.jpg",
+            "banner_3_mobile_image": "shopify://shop_images/gh-28th_anniversar_hafy58.idlk.jpg",
             "banner_3_mobile_video": "",
             "banner_3_url": "https://0vf059r6.tapc.art",
             "banner_3_visible": true,
             "banner_3_order": 3,
+            "banner_3_start_date": "",
+            "banner_3_end_date": "",
             "banner_4_desktop_video": "",
             "banner_4_mobile_video": "",
             "banner_4_url": "",
             "banner_4_visible": false,
-            "banner_4_order": 4
+            "banner_4_order": 4,
+            "banner_4_start_date": "",
+            "banner_4_end_date": ""
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
@@ -89,8 +94,7 @@
             "tagline": "Because industry norms aren't enough.",
             "description": "",
             "button_text": "See the Full Process",
-            "button_url": "shopify://pages/quality-purity",
-            "accordion_heading": "Our Way, In Our Hands"
+            "button_url": "shopify://pages/quality-purity"
           }
         },
         "shop_by_health_goals_Em9nxw": {
@@ -150,7 +154,7 @@
             "link_2_text": "",
             "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
-            "link_list": "homepage-menu"
+            "link_list": ""
           }
         },
         "f6b3c029-5d02-4e58-b13b-d168889906a5": {
