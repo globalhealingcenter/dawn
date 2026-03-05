@@ -232,6 +232,15 @@
             "hide_on_mobile": false
           }
         },
+        "health_goal_link_qUzEJ3": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Energy & Performance",
+            "url": "/collections/energy-performance",
+            "column": "2",
+            "hide_on_mobile": true
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -356,6 +365,7 @@
         "health_goal_link_qKYCNi",
         "health_goal_link_REBBKW",
         "health_goal_link_z6WkbH",
+        "health_goal_link_qUzEJ3",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
