@@ -196,6 +196,15 @@
             "hide_on_mobile": false
           }
         },
+        "health_goal_link_MrUnMb": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Immune Support",
+            "url": "/collections/immune-support",
+            "column": "1",
+            "hide_on_mobile": false
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -316,6 +325,7 @@
         "health_goal_link_gJfKxf",
         "health_goal_link_MFwd4t",
         "health_goal_link_zxwm7p",
+        "health_goal_link_MrUnMb",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
