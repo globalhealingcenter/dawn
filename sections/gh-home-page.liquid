@@ -1469,6 +1469,39 @@
       ]
     },
     {
+      "type": "health_goal_link",
+      "name": "Health Goal Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link Text",
+          "default": "Gut & Digestion"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link URL"
+        },
+        {
+          "type": "select",
+          "id": "column",
+          "label": "Column",
+          "options": [
+            { "value": "1", "label": "Left" },
+            { "value": "2", "label": "Right" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_on_mobile",
+          "label": "Hide on mobile",
+          "default": false
+        }
+      ]
+    },
+    {
       "type": "oxy_powder_hero",
       "name": "Oxy-Powder Hero",
       "limit": 1,

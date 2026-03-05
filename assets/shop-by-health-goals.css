@@ -87,6 +87,7 @@
 
 .health-goals__link:hover {
   color: #CCA72C;
+  font-weight: 700;
 }
 
 .health-goals__cta {
@@ -101,12 +102,15 @@
   letter-spacing: 0;
 }
 
-.health-goals__button:hover {}
-
 @media (max-width: 767px) {
   .health-goals-section {
     padding: 40px 30px;
     min-height: initial
+  }
+
+  .health-goals__link:hover {
+    font-weight: 500;
+    color: #f9f2e8;
   }
 
   .health-goals__heading {
