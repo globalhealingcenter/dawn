@@ -209,7 +209,7 @@
           "type": "health_goal_link",
           "settings": {
             "title": "Brain & Cognitive Health",
-            "url": "https://globalhealing.com/collections/brain-cognitive-health",
+            "url": "/collections/brain-cognitive-health",
             "column": "2",
             "hide_on_mobile": true
           }
