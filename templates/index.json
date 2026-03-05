@@ -90,9 +90,9 @@
         "new_standard_DrPHj8": {
           "type": "new_standard",
           "settings": {
-            "title": "The New Standard in Supplements",
-            "tagline": "Because industry norms aren't enough.",
-            "description": "",
+            "title": "The New Standard",
+            "tagline": "in Supplements",
+            "description": "Because industry norms aren't enough.",
             "button_text": "See the Full Process",
             "button_url": "shopify://pages/quality-purity"
           }
