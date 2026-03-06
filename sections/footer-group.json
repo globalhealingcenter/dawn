@@ -38,10 +38,14 @@
       }
     },
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02": {
-      "type": "custom-liquid",
+      "type": "footer-signup",
       "settings": {
-        "custom_liquid": "{% render 'gh-block-footer-signup' %}",
-        "color_scheme": "accent-2",
+        "heading": "Join the",
+        "heading_em": "Healing",
+        "description": "Thoughtful guidance, educational articles, and updates to support your journey.",
+        "form_action": "https://hooks.zapier.com/hooks/catch/1153851/byx96rz/",
+        "privacy_url": "/pages/privacy-policy",
+        "stay_connected_text": "Stay Connected",
         "padding_top": 40,
         "padding_bottom": 40
       }

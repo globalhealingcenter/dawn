@@ -1,7 +1,7 @@
 /* Static Reviews Carousel - infinite touch swipe, transform-based */
 
 .src.static-reviews-carousel {
-  padding: 8rem 0;
+  padding: 8rem 0 0;
   background: #fff;
 }
 
@@ -25,7 +25,7 @@
 /* Carousel wrapper - clips overflow */
 .src__carousel-outer {
   width: 100%;
-  overflow: hidden;
+  position: relative;
 }
 
 /* Track - positioned via JS transform, no native scroll */
@@ -109,13 +109,17 @@
 .src__progress {
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
   padding: 0 2rem;
+  position: absolute;
+  bottom: -8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
 .src__progress-track {
   width: 100%;
-  max-width: 200px;
+  max-width: 550px;
   height: 4px;
   background: rgba(34, 71, 45, 0.2);
   border-radius: 2px;
