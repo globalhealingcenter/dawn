@@ -1,6 +1,7 @@
 {{ 'oxy-powder-hero.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
+  assign bg_video = block.settings.background_video
   assign bg_img = block.settings.background_image
   assign badge_img = block.settings.badge_image
   assign product_img = block.settings.product_image
@@ -8,9 +9,20 @@
 -%}
 
 <section class="oph oxy-powder-hero" {{ block.shopify_attributes }}>
-  {%- comment -%} Background image with overlay {%- endcomment -%}
+  {%- comment -%} Background video or image with overlay {%- endcomment -%}
   <div class="oph__bg-wrap">
-    {% if bg_img != blank %}
+    {% if bg_video != blank %}
+      {{
+        bg_video
+        | video_tag:
+          image_size: '1920x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          class: 'oph__bg-video'
+      }}
+    {% elsif bg_img != blank %}
       <img
         src="{{ bg_img | image_url: width: 1920 }}"
         alt=""
