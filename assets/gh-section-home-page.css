@@ -1197,6 +1197,11 @@ section h3.eyebrow span {
     justify-content: center;
 }
 
+html,
+body.gradient.index {
+    overflow-x: hidden;
+}
+
 .sh-hero-video--video video {
     width: auto;
     min-width: 100%;
@@ -1272,8 +1277,9 @@ section h3.eyebrow span {
 
 /* Extra space for Tolstoy UGC title on the homepage only */
 .gh--home-page [class*="tolstoy-carousel-title"] {
-    margin-top: 2rem !important;
-    /* = 32px if 1rem = 16px */
+    margin-top: 0 !important;
+    top: 3rem;
+    position: relative;
 }
 
 /* (Optional) add breathing room above the whole carousel */

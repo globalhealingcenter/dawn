@@ -189,6 +189,11 @@
     margin-top: 4px;
   }
 
+  .cw__content {
+    gap: 2.5rem;
+    padding: 10rem 0px 4rem;
+  }
+
   .cw__card-link {
     height: 30px;
     border: none;
@@ -214,11 +219,6 @@
 
   .cw__video--mobile {
     display: block;
-  }
-
-  .cw__content {
-    gap: 2.5rem;
-    padding: 10rem 0px 4rem;
   }
 
   /* Mobile carousel: thin symmetrical peek of adjacent slides */
