@@ -25,7 +25,9 @@ li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.hu
 }
 
 li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.huk_menu_item_text:hover,
-li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.huk_menu_item_text:active {
+li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.huk_menu_item_text:active,
+.huk_menu_submenu_type_flyout .huk_menu_item_link span.huk_menu_item_text:hover,
+.huk_menu_submenu_type_flyout .huk_menu_item_link span.huk_menu_item_text:active {
     color: var(--gh-color-gold) !important;
 }
 
