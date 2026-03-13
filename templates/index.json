@@ -266,7 +266,7 @@
             "background_mobile": "shopify://shop_images/Quiz-section-mobile-bg.jpg",
             "text_color": "#f9f2e8",
             "heading_1": "Find Your",
-            "heading_2": "<span>Starting</span> Point",
+            "heading_2": "Starting Point",
             "content": "<p><strong>Not sure where to begin? </strong><br/>Our guided quiz helps you find a thoughtful <br/>starting point for your healing journey.</p>",
             "button_text": "Take the Quiz",
             "button_url": ""
@@ -275,7 +275,7 @@
         "oxy_powder_hero_Ee7FXg": {
           "type": "oxy_powder_hero",
           "settings": {
-            "background_image": "shopify://shop_images/Bubble-Background.png",
+            "background_video": "shopify://files/videos/oxy-section-video.mov",
             "badge_image": "shopify://shop_images/oxy-powder-tag-logo.png",
             "product_name": "Oxy-Powder",
             "tagline": "Support for Your Foundation of Healing",
