@@ -113,33 +113,4 @@ body.overflow-hidden-tablet {
         height: 18px;
     }
 
-    /* Replace chevron with plus/minus on mobile */
-    .huk_menu_item_mobile .huk_menu_indicator_icon {
-        position: relative;
-    }
-
-    .huk_menu_item_mobile .huk_menu_indicator_icon svg {
-        display: none;
-    }
-
-    .huk_menu_item_mobile .huk_menu_indicator_icon::before {
-        content: '+';
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        line-height: 1;
-        font-weight: 400;
-        width: 18px;
-        height: 18px;
-    }
-
-    /* Minus when expanded - Huk may use huk_menu_item_expanded or similar */
-    .huk_menu_item_mobile.huk_menu_item_expanded .huk_menu_indicator_icon::before,
-    .huk_menu_item_mobile.huk_menu_item--expanded .huk_menu_indicator_icon::before,
-    li.huk_menu_item_expanded .huk_menu_item_mobile .huk_menu_indicator_icon::before,
-    li.huk_menu_item--expanded .huk_menu_item_mobile .huk_menu_indicator_icon::before {
-        content: '−';
-    }
-
 }
