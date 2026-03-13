@@ -119,13 +119,10 @@ body.overflow-hidden-tablet {
     }
 
     .huk_menu_item_mobile .huk_menu_indicator_icon svg {
-        visibility: hidden;
-        width: 0;
-        height: 0;
-        overflow: hidden;
+        display: none;
     }
 
-    .huk_menu_item_mobile .huk_menu_indicator::before {
+    .huk_menu_item_mobile .huk_menu_indicator_icon::before {
         content: '+';
         display: inline-flex;
         align-items: center;
@@ -137,11 +134,11 @@ body.overflow-hidden-tablet {
         height: 18px;
     }
 
-    /* Minus when expanded - Huk uses huk_menu_item_expanded or similar */
-    .huk_menu_item_mobile.huk_menu_item_expanded .huk_menu_indicator::before,
-    .huk_menu_item_mobile.huk_menu_item--expanded .huk_menu_indicator::before,
-    li.huk_menu_item_expanded .huk_menu_item_mobile .huk_menu_indicator::before,
-    li.huk_menu_item--expanded .huk_menu_item_mobile .huk_menu_indicator::before {
+    /* Minus when expanded - Huk may use huk_menu_item_expanded or similar */
+    .huk_menu_item_mobile.huk_menu_item_expanded .huk_menu_indicator_icon::before,
+    .huk_menu_item_mobile.huk_menu_item--expanded .huk_menu_indicator_icon::before,
+    li.huk_menu_item_expanded .huk_menu_item_mobile .huk_menu_indicator_icon::before,
+    li.huk_menu_item--expanded .huk_menu_item_mobile .huk_menu_indicator_icon::before {
         content: '−';
     }
 
