@@ -266,7 +266,7 @@
             "background_mobile": "shopify://shop_images/Quiz-section-mobile-bg.jpg",
             "text_color": "#f9f2e8",
             "heading_1": "Find Your",
-            "heading_2": "<span>Starting</span> Point",
+            "heading_2": "Starting Point",
             "content": "<p><strong>Not sure where to begin? </strong><br/>Our guided quiz helps you find a thoughtful <br/>starting point for your healing journey.</p>",
             "button_text": "Take the Quiz",
             "button_url": ""
@@ -275,7 +275,7 @@
         "oxy_powder_hero_Ee7FXg": {
           "type": "oxy_powder_hero",
           "settings": {
-            "background_image": "shopify://shop_images/Bubble-Background.png",
+            "background_video": "shopify://files/videos/oxy-section-video.mov",
             "badge_image": "shopify://shop_images/oxy-powder-tag-logo.png",
             "product_name": "Oxy-Powder",
             "tagline": "Support for Your Foundation of Healing",
@@ -295,7 +295,7 @@
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
           "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
-            "publishId": "qoqax285bu91b"
+            "publishId": "dhknd9e74ir2m"
           }
         },
         "consistency_wellness_QY9M6U": {
@@ -509,12 +509,28 @@
         "padding_bottom": 52
       }
     },
+    "footer_signup_pCQ4QE": {
+      "type": "footer-signup",
+      "name": "Footer Signup",
+      "settings": {
+        "background_image": "shopify://shop_images/Signup-background.jpg",
+        "heading": "Join the",
+        "heading_em": "Healing",
+        "description": "Thoughtful guidance, educational articles, and updates to support your journey.",
+        "form_action": "https://hooks.zapier.com/hooks/catch/1153851/byx96rz/",
+        "privacy_url": "/pages/privacy-policy",
+        "stay_connected_text": "Stay Connected",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "4a534389-073e-4980-a2fd-d7304e59caec": {
       "type": "custom-liquid",
+      "custom_css": [],
       "settings": {
         "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:left; font-size: clamp(3rem, 4vw, 6.4rem); font-family: 'proxima-nova'; font-weight:400; padding-left:10vw;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
         "color_scheme": "accent-1",
-        "padding_top": 40,
+        "padding_top": 100,
         "padding_bottom": 20
       }
     },
@@ -589,6 +605,7 @@
   },
   "order": [
     "e3ef9d2f-fbcb-4a7a-ba5a-b876b018c493",
+    "footer_signup_pCQ4QE",
     "4a534389-073e-4980-a2fd-d7304e59caec",
     "1687779425f103d894",
     "17598458706780f49a",

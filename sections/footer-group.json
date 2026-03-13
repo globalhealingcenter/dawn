@@ -39,6 +39,7 @@
     },
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02": {
       "type": "footer-signup",
+      "disabled": true,
       "settings": {
         "heading": "Join the",
         "heading_em": "Healing",
@@ -64,21 +65,21 @@
           "type": "link_list",
           "settings": {
             "heading": "Customer Care",
-            "menu": "customer-care"
+            "menu": ""
           }
         },
         "6557986c-cb7f-4da5-af8b-efa4dfdee993": {
           "type": "link_list",
           "settings": {
             "heading": "Our Story",
-            "menu": "our-story"
+            "menu": ""
           }
         },
         "e7394b27-fac4-4247-9561-3f95b7c4725b": {
           "type": "link_list",
           "settings": {
             "heading": "Our Company",
-            "menu": "our-company"
+            "menu": ""
           }
         }
       },
