@@ -9,6 +9,7 @@
     transform: translateX(-50%);
     top: 100% !important;
     box-shadow: none !important;
+    border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
 .huk_menu_item_display_header span.huk_menu_item_text {
@@ -23,4 +24,23 @@
 
 .huk_menu_submenu_type_mega .huk_menu_submenu {
     height: 100%;
+}
+
+.huk_menu_image img {
+    max-width: 100% !important;
+}
+
+.huk_menu_submenu li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link.use-icon {
+    position: absolute;
+    bottom: 50px;
+    padding: 0px !important;
+}
+
+.huk_menu_submenu li.huk_menu_item.huk_menu_col.huk_menu_item_level_2.huk_menu_item_submenu_type_automatic.huk_menu_item_layout.huk_menu_col-automatic.huk_menu_item_layout_text:last-child {
+    position: unset;
+}
+
+li.huk_menu_item.huk_menu_col.huk_menu_item_level_1 {
+    position: relative;
+    padding-bottom: 50px !important;
 }
