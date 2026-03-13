@@ -44,3 +44,12 @@ li.huk_menu_item.huk_menu_col.huk_menu_item_level_1 {
     position: relative;
     padding-bottom: 50px !important;
 }
+
+ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop {
+    padding: 0px !important;
+    top: 70px !important;
+}
+
+ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop li.huk_menu_item.huk_menu_col.huk_menu_item_level_1 {
+    padding-bottom: 0px !important;
+}
