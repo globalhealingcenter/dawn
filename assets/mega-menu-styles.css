@@ -77,3 +77,18 @@ body.overflow-hidden-tablet {
     left: 0;
     width: 100%;
 }
+
+@media (max-width: 989px) {
+
+    .menu-drawer__localization.header-localization,
+    .menu-drawer .list-social {
+        display: none;
+    }
+
+    .huk_menu_item_text {
+        font-weight: 400 !important;
+        font-family: var(--gh-font-primary) !important;
+        color: rgba(var(--color-foreground), .75) !important;
+    }
+
+}
