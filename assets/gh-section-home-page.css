@@ -1,3 +1,7 @@
+main#MainContent {
+    overflow-x: hidden;
+}
+
 .ghd--foundation h2.eyebrow span {
     color: #fff;
 }
@@ -1195,11 +1199,6 @@ section h3.eyebrow span {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-html,
-body.gradient.index {
-    overflow-x: hidden;
 }
 
 .sh-hero-video--video video {

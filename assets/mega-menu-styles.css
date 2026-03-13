@@ -108,4 +108,9 @@ body.overflow-hidden-tablet {
         display: block !important;
     }
 
+    .huk_menu_item_mobile .huk_menu_indicator svg {
+        width: 18px;
+        height: 18px;
+    }
+
 }
