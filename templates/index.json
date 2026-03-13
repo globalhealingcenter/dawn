@@ -526,9 +526,7 @@
     },
     "4a534389-073e-4980-a2fd-d7304e59caec": {
       "type": "custom-liquid",
-      "custom_css": [
-        "@media (max-width: 767px){.color-accent-1.gradient > div{padding-top: 20px; }}"
-      ],
+      "custom_css": [],
       "settings": {
         "custom_liquid": "<a href=\"/pages/social-shop-instagram\" style=\"text-decoration:none\"><h2 style=\"text-align:left; font-size: clamp(3rem, 4vw, 6.4rem); font-family: 'proxima-nova'; font-weight:400; padding-left:10vw;\">Explore our Instagram</h2></a>\n\n<script src=\"https://foursixty.com/media/scripts/fs.slider.v2.5.js\" data-feed-id=\"global-healing-center\" data-theme=\"slider_v2_5\" data-cell-size=\"25%\"></script>\n\n<style>\n.fs-slider_v2_5-feed .fs-entry-container { padding-top: 35% !important; }\n</style>",
         "color_scheme": "accent-1",
