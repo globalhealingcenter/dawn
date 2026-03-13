@@ -1303,18 +1303,20 @@ body.gradient.index {
     font-style: italic;
 }
 
-@media screen and (max-width: 768px) {
-    .gh--home-page [class*="tolstoy-carousel-title"] {
-        margin-bottom: 4rem !important;
-        padding-left: 40px;
-    }
-
+@media (max-width: 1024px) {
     .section-footer-signup>div {
         padding-bottom: 0;
     }
 
     .color-accent-1.gradient>div {
         padding-top: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .gh--home-page [class*="tolstoy-carousel-title"] {
+        margin-bottom: 4rem !important;
+        padding-left: 40px;
     }
 }
 
