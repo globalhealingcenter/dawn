@@ -12,14 +12,14 @@
     border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
-.huk_menu_item_display_header span.huk_menu_item_text {
-    font-family: 'proxima-nova' !important;
+.huk_menu_item_display_header.huk_menu_item_level_1.huk_menu_item_has_child .huk_menu_item_link span.huk_menu_item_text {
+    font-family: var(--gh-font-primary) !important;
     font-weight: 500 !important;
 }
 
-.huk_menu_submenu a.huk_menu_item_link {
+li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.huk_menu_item_text {
     font-weight: 400 !important;
-    font-family: 'proxima-nova' !important;
+    font-family: var(--gh-font-primary) !important;
 }
 
 .huk_menu_submenu_type_mega .huk_menu_submenu {
