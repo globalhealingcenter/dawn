@@ -1308,6 +1308,14 @@ body.gradient.index {
         margin-bottom: 4rem !important;
         padding-left: 40px;
     }
+
+    .section-footer-signup>div {
+        padding-bottom: 0;
+    }
+
+    .color-accent-1.gradient>div {
+        padding-top: 20px;
+    }
 }
 
 @media (max-width: 600px) {
