@@ -38,6 +38,7 @@ li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link span.hu
 .huk_menu_image img {
     max-width: 100% !important;
     aspect-ratio: 16 / 9;
+    margin-top: 10px !important;
 }
 
 .huk_menu_submenu li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link.use-icon {
@@ -67,4 +68,12 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
 .huk_menu_item_submenu_type_flyout .huk_menu_submenu {
     max-width: 250px !important;
     width: 250px;
+}
+
+body.overflow-hidden-tablet {
+    overflow: hidden !important;
+    position: fixed;
+    top: 0px;
+    left: 0;
+    width: 100%;
 }
