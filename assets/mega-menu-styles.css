@@ -85,7 +85,8 @@ body.overflow-hidden-tablet {
         display: none;
     }
 
-    .huk_menu_item_link .huk_menu_item_text {
+    .huk_menu_item_link .huk_menu_item_text,
+    .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account {
         font-weight: 400 !important;
         font-family: var(--gh-font-primary) !important;
         color: rgba(var(--color-foreground), .75) !important;
@@ -98,8 +99,13 @@ body.overflow-hidden-tablet {
     .huk_menu_item_link .huk_menu_item_text:hover,
     .huk_menu_item_link .huk_menu_item_text:active,
     .huk_menu_item_mobile .huk_menu_indicator:hover,
-    .huk_menu_item_mobile .huk_menu_indicator:active {
+    .huk_menu_item_mobile .huk_menu_indicator:active,
+    .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account:hover {
         color: var(--gh-color-gold) !important;
+    }
+
+    .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account {
+        display: block !important;
     }
 
 }
