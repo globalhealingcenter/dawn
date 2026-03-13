@@ -2,11 +2,21 @@
 ** Mega menu styles
 */
 
-.huk_menu_item--root>.huk_menu_submenu {
+.header__inline-menu .huk_menu_item--root>.huk_menu_submenu {
     width: 1280px !important;
     max-width: 100%;
     left: 50% !important;
     transform: translateX(-50%);
     top: 100% !important;
+    box-shadow: none !important;
 }
 
+.huk_menu_item_display_header span.huk_menu_item_text {
+    font-family: 'proxima-nova' !important;
+    font-weight: 500 !important;
+}
+
+.huk_menu_submenu a.huk_menu_item_link {
+    font-weight: 400 !important;
+    font-family: 'proxima-nova' !important;
+}
