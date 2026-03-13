@@ -32,7 +32,7 @@
 
 .huk_menu_submenu li.huk_menu_item.huk_menu_col.huk_menu_item_level_2 a.huk_menu_item_link.use-icon {
     position: absolute;
-    bottom: 50px;
+    bottom: 0px;
     padding: 0px !important;
 }
 
