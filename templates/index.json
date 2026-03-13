@@ -506,7 +506,7 @@
       ],
       "settings": {
         "padding_top": 0,
-        "padding_bottom": 52
+        "padding_bottom": 0
       }
     },
     "footer_signup_pCQ4QE": {
@@ -520,7 +520,7 @@
         "form_action": "https://hooks.zapier.com/hooks/catch/1153851/byx96rz/",
         "privacy_url": "/pages/privacy-policy",
         "stay_connected_text": "Stay Connected",
-        "padding_top": 40,
+        "padding_top": 0,
         "padding_bottom": 40
       }
     },
