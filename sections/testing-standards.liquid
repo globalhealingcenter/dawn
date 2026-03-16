@@ -10,17 +10,50 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .new-standard-banner {
+    position: relative;
+    width: 100%;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    color: #ffffff;
+    background-image: url('assets/images/new-standard-banner.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .new-standard-banner__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .new-standard-banner__title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+  }
+
+  .new-standard-banner__subtitle {
+    font-size: 1.1rem;
+    margin: 0;
+  }
 {%- endstyle -%}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="page-width section-{{ section.id }}-padding">
-    <div class="static-html__content rte">
-      {% comment %} Page Sections {% endcomment %}
-       <span>testings</span>
-    </div>
+<section class="new-standard-banner section-{{ section.id }}-padding">
+  <div class="new-standard-banner__content">
+    <h1 class="new-standard-banner__title">
+      A New Standard
+    </h1>
+    <p class="new-standard-banner__subtitle">
+      Meticulous Craftsmanship Meets Health First
+    </p>
   </div>
-</div>
-
+</section>
 {% schema %}
 {
   "name": "Testing Standards",
