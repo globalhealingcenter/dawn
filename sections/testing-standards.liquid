@@ -219,19 +219,18 @@
     padding: 0 24px;
   }
 
+  .standards-cards__swiper {
+    overflow: visible;
+  }
+
   .standards-cards__list {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
+    /* becomes Swiper wrapper */
   }
 
   .standards-cards__item {
     background-color: #f7f0e5;
     border-right: 1px solid #d9cbb8;
-  }
-
-  .standards-cards__item:last-child {
-    border-right: none;
+    height: 100%;
   }
 
   .standards-cards__media {
@@ -276,24 +275,8 @@
       margin-top: -56px;
     }
 
-    .standards-cards__list {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      gap: 0;
-    }
-
     .standards-cards__item {
-      flex: 0 0 80%;
-      max-width: 80%;
-      scroll-snap-align: center;
-      margin-right: 16px;
       border-right: none;
-    }
-
-    .standards-cards__item:last-child {
-      margin-right: 40px;
     }
   }
 {%- endstyle -%}
@@ -359,8 +342,9 @@
 
 <section class="standards-cards">
   <div class="standards-cards__inner">
-    <div class="standards-cards__list">
-      <article class="standards-cards__item">
+    <div class="swiper standards-cards__swiper">
+      <div class="standards-cards__list swiper-wrapper">
+        <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -377,9 +361,9 @@
             sustainable growing and ethical working conditions.
           </p>
         </div>
-      </article>
+        </article>
 
-      <article class="standards-cards__item">
+        <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -396,9 +380,9 @@
             for, and why it’s included in a supplement.
           </p>
         </div>
-      </article>
+        </article>
 
-      <article class="standards-cards__item">
+        <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -415,10 +399,44 @@
             standards to rule out any misidentifications or adulterants.
           </p>
         </div>
-      </article>
+        </article>
+      </div>
     </div>
   </div>
 </section>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sliderEl = document.querySelector('.standards-cards__swiper');
+    if (!sliderEl) return;
+
+    new Swiper(sliderEl, {
+      loop: true,
+      speed: 500,
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 3,
+      spaceBetween: 0,
+      breakpoints: {
+        0: {
+          slidesPerView: 1.2,
+          centeredSlides: true,
+          spaceBetween: 16,
+        },
+        768: {
+          slidesPerView: 3,
+          centeredSlides: false,
+          spaceBetween: 0,
+        },
+      },
+      allowTouchMove: true,
+      pagination: false,
+      navigation: false,
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "Testing Standards",
