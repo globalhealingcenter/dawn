@@ -455,45 +455,74 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    if (typeof window.jQuery === 'undefined') return;
+  (function () {
+    function initStandardsCardsSlick() {
+      if (typeof window.jQuery === 'undefined') return false;
 
-    var $ = window.jQuery;
-    var $track = $('.standards-cards__track');
-    if (!$track.length) return;
+      var $ = window.jQuery;
+      if (!$.fn || !$.fn.slick) return false;
 
-    function initSlick() {
-      if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
+      var $track = $('.standards-cards__track');
+      if (!$track.length) return true;
 
-      $track.slick({
-        infinite: true,
-        arrows: false,
-        dots: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        centerMode: true,
-        centerPadding: '12%',
-        variableWidth: false,
-        speed: 450,
-        draggable: true,
-        swipe: true,
-        touchMove: true,
-      });
-    }
+      function enableSlick() {
+        if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
 
-    function destroySlick() {
-      if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
-        $track.slick('unslick');
+        $track.slick({
+          infinite: true,
+          arrows: false,
+          dots: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '12%',
+          variableWidth: false,
+          speed: 450,
+          draggable: true,
+          swipe: true,
+          touchMove: true,
+          mobileFirst: true
+        });
       }
+
+      function disableSlick() {
+        if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
+          $track.slick('unslick');
+        }
+      }
+
+      enableSlick();
+
+      if (!$track.data('slick-bound')) {
+        window.addEventListener('resize', function () {
+          disableSlick();
+          enableSlick();
+        });
+        $track.data('slick-bound', true);
+      }
+
+      return true;
     }
 
-    initSlick();
+    function tryInit(attemptsLeft) {
+      if (initStandardsCardsSlick() || attemptsLeft <= 0) return;
+      window.setTimeout(function () {
+        tryInit(attemptsLeft - 1);
+      }, 200);
+    }
 
-    window.addEventListener('resize', function () {
-      destroySlick();
-      initSlick();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        tryInit(20);
+      });
+    } else {
+      tryInit(20);
+    }
+
+    window.addEventListener('load', function () {
+      tryInit(20);
     });
-  });
+  })();
 </script>
 {% schema %}
 {
