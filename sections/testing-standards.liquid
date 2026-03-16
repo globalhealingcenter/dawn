@@ -207,6 +207,95 @@
       padding: 32px 20px 56px;
     }
   }
+
+  .standards-cards {
+    background-color: #0f3e2b;
+    padding: 0 0 80px;
+  }
+
+  .standards-cards__inner {
+    max-width: 1200px;
+    margin: -80px auto 0;
+    padding: 0 24px;
+  }
+
+  .standards-cards__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .standards-cards__item {
+    background-color: #f7f0e5;
+    border-right: 1px solid #d9cbb8;
+  }
+
+  .standards-cards__item:last-child {
+    border-right: none;
+  }
+
+  .standards-cards__media {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .standards-cards__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .standards-cards__content {
+    padding: 24px 24px 28px;
+  }
+
+  .standards-cards__title {
+    font-size: clamp(1.4rem, 1.8vw, 1.6rem);
+    line-height: clamp(1.3em, 2vw, 1.4em);
+    color: #174f33;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .standards-cards__text {
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    line-height: clamp(1.6, 2.2vw, 1.8);
+    color: #2f3b34;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .standards-cards {
+      padding: 0 0 56px;
+    }
+
+    .standards-cards__inner {
+      padding: 0 0 0 20px;
+      margin-top: -56px;
+    }
+
+    .standards-cards__list {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+    }
+
+    .standards-cards__item {
+      flex: 0 0 80%;
+      max-width: 80%;
+      scroll-snap-align: center;
+      margin-right: 16px;
+      border-right: none;
+    }
+
+    .standards-cards__item:last-child {
+      margin-right: 40px;
+    }
+  }
 {%- endstyle -%}
 
 <section class="new-standard-banner section-{{ section.id }}-padding">
@@ -265,6 +354,69 @@
       to walk the grounds in person. If we are unable to source an ingredient that meets our standards, we will reformulate
       or pause production for that product. No exceptions.
     </p>
+  </div>
+</section>
+
+<section class="standards-cards">
+  <div class="standards-cards__inner">
+    <div class="standards-cards__list">
+      <article class="standards-cards__item">
+        <div class="standards-cards__media">
+          <img
+            class="standards-cards__image"
+            src="{{ 'standard_card_vetted.jpg' | asset_url }}"
+            alt="Vetted suppliers"
+          >
+        </div>
+        <div class="standards-cards__content">
+          <h3 class="standards-cards__title font-proxima">
+            Vetted Suppliers
+          </h3>
+          <p class="standards-cards__text font-proxima">
+            We begin with a strict vendor qualification process, only choosing those that meet our requirements for
+            sustainable growing and ethical working conditions.
+          </p>
+        </div>
+      </article>
+
+      <article class="standards-cards__item">
+        <div class="standards-cards__media">
+          <img
+            class="standards-cards__image"
+            src="{{ 'standard_card_traceable.jpg' | asset_url }}"
+            alt="Traceable ingredients"
+          >
+        </div>
+        <div class="standards-cards__content">
+          <h3 class="standards-cards__title font-proxima">
+            Traceable Ingredients
+          </h3>
+          <p class="standards-cards__text font-proxima">
+            We can tell you where every single ingredient came from, how it was grown and harvested, what it was tested
+            for, and why it’s included in a supplement.
+          </p>
+        </div>
+      </article>
+
+      <article class="standards-cards__item">
+        <div class="standards-cards__media">
+          <img
+            class="standards-cards__image"
+            src="{{ 'standard_card_verified.jpg' | asset_url }}"
+            alt="Verified quality"
+          >
+        </div>
+        <div class="standards-cards__content">
+          <h3 class="standards-cards__title font-proxima">
+            Verified Quality
+          </h3>
+          <p class="standards-cards__text font-proxima">
+            Our in-house lab holds a library of herbs that we have verified for identity and purity. We test against these
+            standards to rule out any misidentifications or adulterants.
+          </p>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
 {% schema %}
