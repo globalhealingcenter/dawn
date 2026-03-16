@@ -13,7 +13,7 @@
 {%- endstyle -%}
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="{% if section.settings.full_width %}static-html--full-width{% else %}page-width{% endif %} section-{{ section.id }}-padding">
+  <div class="page-width section-{{ section.id }}-padding">
     <div class="static-html__content rte">
       {% comment %} Page Sections {% endcomment %}
     </div>
@@ -26,12 +26,6 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": false
-    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
