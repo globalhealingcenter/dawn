@@ -23,7 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setSlideWidth() {
     var sliderWidth = slider.offsetWidth;
-    slideWidth = sliderWidth * 0.7; // show ~30% of neighbors
+    if (!slides || !slides.length || !sliderWidth) return;
+    // Use actual slide width so math stays in sync with layout
+    var firstSlideWidth = slides[0].getBoundingClientRect().width || sliderWidth * 0.7;
+    slideWidth = firstSlideWidth;
     centerOffset = (sliderWidth - slideWidth) / 2;
   }
 
@@ -115,7 +118,10 @@ document.addEventListener('DOMContentLoaded', function () {
     track.style.willChange = 'transform';
 
     setSlideWidth();
-    setPositionByIndex();
+    // wait a frame so layout is stable before first jump
+    window.requestAnimationFrame(function () {
+      setPositionByIndex();
+    });
     attachEvents();
 
     initialized = true;
