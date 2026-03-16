@@ -67,6 +67,11 @@ document.addEventListener('DOMContentLoaded', function () {
     var clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
     var deltaX = clientX - startX;
     currentTranslate = prevTranslate + deltaX;
+    // Clamp during drag so we never expose empty background past clones
+    var maxTranslate = centerOffset; // when first clone is centered
+    var minTranslate = -(slideCount + 1) * slideWidth + centerOffset; // when last clone is centered
+    if (currentTranslate > maxTranslate) currentTranslate = maxTranslate;
+    if (currentTranslate < minTranslate) currentTranslate = minTranslate;
     track.style.transform = 'translateX(' + currentTranslate + 'px)';
   }
 
