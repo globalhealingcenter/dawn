@@ -3,26 +3,25 @@ document.addEventListener('DOMContentLoaded', function () {
   if (!slider) return;
 
   var track = slider.querySelector('.standards-cards__track');
-  var slides = Array.prototype.slice.call(track.children);
-  if (!slides.length) return;
+  var originalSlides = Array.prototype.slice.call(track.children);
+  if (!originalSlides.length) return;
 
-  var currentIndex = 0;
+  var slides;
+  var slideCount = originalSlides.length;
+  var currentIndex = 1; // start on first real slide (after prepended clone)
   var isDragging = false;
   var startX = 0;
   var currentTranslate = 0;
   var prevTranslate = 0;
   var slideWidth = 0;
+  var initialized = false;
 
   function isMobile() {
     return window.innerWidth <= 767;
   }
 
   function setSlideWidth() {
-    if (!isMobile()) {
-      slideWidth = slider.offsetWidth / slides.length;
-    } else {
-      slideWidth = slider.offsetWidth * 0.8;
-    }
+    slideWidth = slider.offsetWidth * 0.8;
   }
 
   function setPositionByIndex() {
@@ -30,21 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
     track.style.transform = 'translateX(' + currentTranslate + 'px)';
   }
 
-  function loopIndex(index) {
-    var total = slides.length;
-    if (index < 0) return total - 1;
-    if (index >= total) return 0;
-    return index;
-  }
-
   function animateToIndex(index) {
-    currentIndex = loopIndex(index);
+    currentIndex = index;
     track.style.transition = 'transform 0.35s ease-out';
     setPositionByIndex();
   }
 
+  function handleTransitionEnd() {
+    // seamless looping between cloned edges and real slides
+    track.style.transition = 'none';
+    if (currentIndex === 0) {
+      currentIndex = slideCount;
+      setPositionByIndex();
+    } else if (currentIndex === slideCount + 1) {
+      currentIndex = 1;
+      setPositionByIndex();
+    }
+  }
+
   function pointerDown(e) {
-    if (!isMobile()) return;
+    if (!isMobile() || !initialized) return;
     isDragging = true;
     track.style.transition = 'none';
     startX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function pointerMove(e) {
-    if (!isDragging || !isMobile()) return;
+    if (!isDragging || !isMobile() || !initialized) return;
     var clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
     var deltaX = clientX - startX;
     currentTranslate = prevTranslate + deltaX;
@@ -60,14 +64,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function pointerUp() {
-    if (!isDragging || !isMobile()) return;
+    if (!isDragging || !isMobile() || !initialized) return;
     isDragging = false;
     var movedBy = currentTranslate - prevTranslate;
 
     if (Math.abs(movedBy) > slideWidth * 0.25) {
       if (movedBy < 0) {
+        // next
         animateToIndex(currentIndex + 1);
       } else {
+        // prev
         animateToIndex(currentIndex - 1);
       }
     } else {
@@ -83,25 +89,55 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('mouseup', pointerUp);
     window.addEventListener('touchend', pointerUp);
     window.addEventListener('touchcancel', pointerUp);
+    track.addEventListener('transitionend', handleTransitionEnd);
   }
 
-  function init() {
-    setSlideWidth();
+  function initMobileSlider() {
+    if (initialized || !isMobile()) return;
+
+    // Clone first and last slide for seamless loop
+    var firstClone = originalSlides[0].cloneNode(true);
+    var lastClone = originalSlides[slideCount - 1].cloneNode(true);
+    track.insertBefore(lastClone, originalSlides[0]);
+    track.appendChild(firstClone);
+
+    slides = Array.prototype.slice.call(track.children);
+
     slides.forEach(function (slide) {
       slide.style.flex = '0 0 80%';
       slide.style.maxWidth = '80%';
     });
+
     track.style.display = 'flex';
     track.style.willChange = 'transform';
-    track.style.transition = 'transform 0.35s ease-out';
+
+    setSlideWidth();
     setPositionByIndex();
     attachEvents();
+
+    initialized = true;
   }
 
   window.addEventListener('resize', function () {
-    setSlideWidth();
-    setPositionByIndex();
+    if (initialized && !isMobile()) {
+      // when leaving mobile, just reset transform so cards sit naturally
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+      isDragging = false;
+    }
+
+    if (isMobile()) {
+      setSlideWidth();
+      if (initialized) {
+        setPositionByIndex();
+      } else {
+        initMobileSlider();
+      }
+    }
   });
 
-  init();
+  // Initial run – only create slider on mobile
+  if (isMobile()) {
+    initMobileSlider();
+  }
 });
