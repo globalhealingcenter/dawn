@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', function () {
     slides = Array.prototype.slice.call(track.children);
 
     slides.forEach(function (slide) {
-      slide.style.flex = '0 0 80%';
-      slide.style.maxWidth = '80%';
+      slide.style.flex = '0 0 70%';
+      slide.style.maxWidth = '70%';
     });
 
     track.style.display = 'flex';
