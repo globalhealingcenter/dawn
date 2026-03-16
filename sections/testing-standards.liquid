@@ -155,6 +155,54 @@
       width: clamp(220px, 70vw, 280px);
     }
   }
+
+  .independent-company-detail {
+    background-color: #f7f0e5;
+  }
+
+  .independent-company-detail__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    border-top: 1px solid #174f33;
+  }
+
+  .independent-company-detail__number {
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    line-height: clamp(1.2em, 2vw, 1.4em);
+    color: #174f33;
+    font-style: italic;
+    margin: 0 0 0.75rem;
+  }
+
+  .independent-company-detail__title {
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    line-height: clamp(1.1em, 2.2vw, 1.3em);
+    color: #174f33;
+    margin: 0 0 1.25rem;
+    font-weight: 500;
+  }
+
+  .independent-company-detail__subtitle {
+    font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+    line-height: clamp(1.4em, 2vw, 1.5em);
+    color: #174f33;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
+  }
+
+  .independent-company-detail__body {
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    line-height: clamp(1.6, 2.2vw, 1.8);
+    color: #2f3b34;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .independent-company-detail__inner {
+      padding: 32px 20px 56px;
+    }
+  }
 {%- endstyle -%}
 
 <section class="new-standard-banner section-{{ section.id }}-padding">
@@ -194,6 +242,25 @@
         >
       </div>
     </div>
+  </div>
+</section>
+
+<section class="independent-company-detail">
+  <div class="independent-company-detail__inner">
+    <p class="independent-company-detail__number font-miller">
+      01.
+    </p>
+    <h3 class="independent-company-detail__title font-proxima">
+      Direct-Sourced Ingredients
+    </h3>
+    <p class="independent-company-detail__subtitle font-proxima">
+      We don’t shop by price. We shop by quality.
+    </p>
+    <p class="independent-company-detail__body font-proxima">
+      We search the world for the best, no matter the cost. We work directly with several farms and take every opportunity
+      to walk the grounds in person. If we are unable to source an ingredient that meets our standards, we will reformulate
+      or pause production for that product. No exceptions.
+    </p>
   </div>
 </section>
 {% schema %}
