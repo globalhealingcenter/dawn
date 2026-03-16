@@ -434,39 +434,49 @@
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     var sliderEl = document.querySelector('.standards-cards__swiper');
-    if (!sliderEl || !window.Swiper) return;
+    if (!sliderEl) return;
 
-    var swiperInstance;
+    function setupSwiper() {
+      if (typeof Swiper === 'undefined') return;
 
-    function initSwiper() {
-      if (window.innerWidth > 767 || swiperInstance) return;
+      var swiperInstance;
 
-      swiperInstance = new Swiper(sliderEl, {
-        loop: true,
-        speed: 450,
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 1.3,
-        spaceBetween: 20,
-        allowTouchMove: true,
-        pagination: false,
-        navigation: false,
+      function initSwiper() {
+        if (window.innerWidth > 767 || swiperInstance) return;
+
+        swiperInstance = new Swiper(sliderEl, {
+          loop: true,
+          speed: 450,
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 1.3,
+          spaceBetween: 20,
+          allowTouchMove: true,
+          pagination: false,
+          navigation: false,
+        });
+      }
+
+      function destroySwiper() {
+        if (swiperInstance && window.innerWidth > 767) {
+          swiperInstance.destroy(true, true);
+          swiperInstance = null;
+        }
+      }
+
+      initSwiper();
+
+      window.addEventListener('resize', function () {
+        destroySwiper();
+        initSwiper();
       });
     }
 
-    function destroySwiper() {
-      if (swiperInstance && window.innerWidth > 767) {
-        swiperInstance.destroy(true, true);
-        swiperInstance = null;
-      }
+    if (typeof Swiper !== 'undefined') {
+      setupSwiper();
+    } else {
+      window.addEventListener('load', setupSwiper);
     }
-
-    initSwiper();
-
-    window.addEventListener('resize', function () {
-      destroySwiper();
-      initSwiper();
-    });
   });
 </script>
 {% schema %}
