@@ -72,11 +72,12 @@
   .independent-company__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 24px;
+    padding: 80px 24px 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
+    border-top: 1px solid #174f33;
   }
 
   .independent-company__content {
@@ -85,18 +86,26 @@
 
   .independent-company__eyebrow {
     font-size: clamp(2.3rem, 3vw, 4rem);
-    line-height: 1.3;
+    line-height: clamp(1.2em, 2vw, 1.4em);
     color: #174f33;
     margin-bottom: 0;
   }
 
   .independent-company__heading {
     font-size: clamp(2.2rem, 3vw, 4rem);
-    line-height: 1.25;
+    line-height: clamp(1.1em, 2.2vw, 1.3em);
     color: #174f33;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1.25rem;
     font-weight: 400;
-    width: 90%
+    width: 90%;
+  }
+
+  .independent-company__subheading {
+    font-size: clamp(1.4rem, 2.1vw, 1.8rem);
+    line-height: clamp(1.3em, 2vw, 1.5em);
+    color: #174f33;
+    font-weight: 600;
+    margin: 0 0 1.5rem;
   }
 
   .independent-company__heading em,
@@ -110,8 +119,8 @@
   }
 
   .independent-company__body {
-    font-size: clamp(1.6rem, 1.4vw, 2.1rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    font-size: clamp(1.4rem, 1.4vw, 1.7rem);
+    line-height: clamp(1.5em, 2.1vw, 1.8em);
     color: #2f3b34;
     margin: 0;
   }
@@ -138,7 +147,7 @@
 
   @media screen and (max-width: 767px) {
     .independent-company__inner {
-      padding: 56px 20px 48px;
+      padding: 40px 20px 48px;
       flex-direction: column;
       text-align: left;
     }
@@ -177,6 +186,10 @@
       <h2 class="independent-company__heading font-proxima">
         As an <strong>independent company</strong>, we hold safety and quality to a <em>higher standard of trust.</em>
       </h2>
+      <p class="independent-company__subheading font-proxima">
+        We don’t shop by price.<br>
+        We shop by quality.
+      </p>
       <p class="independent-company__body font-proxima">
         Most supplement companies are owned, at least in part, by an outside investment firm, corporation, or conglomerate
         that monitors and controls spending to ensure maximum profitability. Global Healing has been completely independent
