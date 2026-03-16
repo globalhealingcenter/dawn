@@ -42,14 +42,22 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function handleTransitionEnd() {
-    // seamless looping between cloned edges and real slides
-    track.style.transition = 'none';
+    // seamless looping between cloned edges and real slides without visible flicker
     if (currentIndex === 0) {
+      track.style.transition = 'none';
       currentIndex = slideCount;
       setPositionByIndex();
+      // restore transition on next frame so user never sees the jump
+      window.requestAnimationFrame(function () {
+        track.style.transition = 'transform 0.35s ease-out';
+      });
     } else if (currentIndex === slideCount + 1) {
+      track.style.transition = 'none';
       currentIndex = 1;
       setPositionByIndex();
+      window.requestAnimationFrame(function () {
+        track.style.transition = 'transform 0.35s ease-out';
+      });
     }
   }
 
