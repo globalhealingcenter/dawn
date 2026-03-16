@@ -219,12 +219,12 @@
     padding: 0 24px;
   }
 
-  .standards-cards__swiper {
-    overflow: visible;
+  .standards-cards__slider {
+    overflow: hidden;
   }
 
-  .standards-cards__list {
-    /* becomes Swiper wrapper */
+  .standards-cards__track {
+    display: flex;
   }
 
   .standards-cards__item {
@@ -342,9 +342,9 @@
 
 <section class="standards-cards">
   <div class="standards-cards__inner">
-    <div class="swiper standards-cards__swiper">
-      <div class="standards-cards__list swiper-wrapper">
-        <article class="standards-cards__item swiper-slide">
+    <div class="standards-cards__slider">
+      <div class="standards-cards__track">
+        <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -363,7 +363,7 @@
         </div>
         </article>
 
-        <article class="standards-cards__item swiper-slide">
+        <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -382,7 +382,7 @@
         </div>
         </article>
 
-        <article class="standards-cards__item swiper-slide">
+        <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -404,39 +404,7 @@
     </div>
   </div>
 </section>
-
-<link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
-<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var sliderEl = document.querySelector('.standards-cards__swiper');
-    if (!sliderEl) return;
-
-    new Swiper(sliderEl, {
-      loop: true,
-      speed: 500,
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 3,
-      spaceBetween: 0,
-      breakpoints: {
-        0: {
-          slidesPerView: 1.2,
-          centeredSlides: true,
-          spaceBetween: 16,
-        },
-        768: {
-          slidesPerView: 3,
-          centeredSlides: false,
-          spaceBetween: 0,
-        },
-      },
-      allowTouchMove: true,
-      pagination: false,
-      navigation: false,
-    });
-  });
-</script>
+<script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {% schema %}
 {
   "name": "Testing Standards",
