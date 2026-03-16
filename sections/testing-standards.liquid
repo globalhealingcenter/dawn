@@ -16,24 +16,16 @@
   <div class="{% if section.settings.full_width %}static-html--full-width{% else %}page-width{% endif %} section-{{ section.id }}-padding">
     <div class="static-html__content rte">
       {% comment %} Page Sections {% endcomment %}
-
-      
     </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "gh/testimg-standards",
+  "name": "Testing Standards",
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "html",
-      "id": "html",
-      "label": "HTML content",
-      "info": "Paste your static HTML code here. Script and style tags are supported."
-    },
     {
       "type": "checkbox",
       "id": "full_width",
@@ -73,7 +65,7 @@
   ],
   "presets": [
     {
-      "name": "gh/testimg-standards",
+      "name": "Testing Standards",
       "category": "Custom"
     }
   ]
