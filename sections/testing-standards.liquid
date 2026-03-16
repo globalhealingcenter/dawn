@@ -286,21 +286,39 @@
       column-gap: 0;
     }
 
-    /* Mobile slide width so next/prev are always visible */
-    .standards-cards__item.swiper-slide {
-      width: 70% !important;
+    .standards-cards__slider .slick-list {
+      overflow: visible;
+      padding: 0 12% 0 12%;
+    }
+
+    .standards-cards__slider .slick-track {
+      display: flex;
+    }
+
+    .standards-cards__slider .slick-slide {
+      height: inherit;
+      margin: 0 10px;
+    }
+
+    .standards-cards__slider .slick-slide > div {
+      height: 100%;
+    }
+
+    .standards-cards__item {
+      width: 100%;
     }
   }
 
   @media screen and (min-width: 768px) {
     /* Desktop: show three cards in a row, no sliding */
-    .standards-cards__track.swiper-wrapper {
+    .standards-cards__track {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr);
+      column-gap: 20px;
       transform: none !important;
     }
 
-    .standards-cards__item.swiper-slide {
+    .standards-cards__item {
       width: auto !important;
       flex: 0 1 auto !important;
     }
@@ -368,9 +386,9 @@
 
 <section class="standards-cards">
   <div class="standards-cards__inner">
-    <div class="standards-cards__slider swiper standards-cards__swiper">
-      <div class="standards-cards__track swiper-wrapper">
-        <article class="standards-cards__item swiper-slide">
+    <div class="standards-cards__slider">
+      <div class="standards-cards__track">
+        <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -389,7 +407,7 @@
         </div>
         </article>
 
-        <article class="standards-cards__item swiper-slide">
+        <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             src="{{ 'standard_shutterstock_2431328193.jpg' | asset_url }}"
@@ -408,7 +426,7 @@
         </div>
       </article>
       
-      <article class="standards-cards__item swiper-slide">
+      <article class="standards-cards__item">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -434,54 +452,48 @@
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
 
-<link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
-<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    var sliderEl = document.querySelector('.standards-cards__swiper');
-    if (!sliderEl) return;
+    if (typeof window.jQuery === 'undefined') return;
 
-    function setupSwiper() {
-      if (typeof Swiper === 'undefined') return;
+    var $ = window.jQuery;
+    var $track = $('.standards-cards__track');
+    if (!$track.length) return;
 
-      var swiperInstance;
+    function initSlick() {
+      if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
 
-      function initSwiper() {
-        if (window.innerWidth > 767 || swiperInstance) return;
-
-        swiperInstance = new Swiper(sliderEl, {
-          loop: true,
-          speed: 450,
-          grabCursor: true,
-          centeredSlides: true,
-          slidesPerView: 'auto',
-          spaceBetween: 16,
-          allowTouchMove: true,
-          pagination: false,
-          navigation: false,
-        });
-      }
-
-      function destroySwiper() {
-        if (swiperInstance && window.innerWidth > 767) {
-          swiperInstance.destroy(true, true);
-          swiperInstance = null;
-        }
-      }
-
-      initSwiper();
-
-      window.addEventListener('resize', function () {
-        destroySwiper();
-        initSwiper();
+      $track.slick({
+        infinite: true,
+        arrows: false,
+        dots: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: true,
+        centerPadding: '12%',
+        variableWidth: false,
+        speed: 450,
+        draggable: true,
+        swipe: true,
+        touchMove: true,
       });
     }
 
-    if (typeof Swiper !== 'undefined') {
-      setupSwiper();
-    } else {
-      window.addEventListener('load', setupSwiper);
+    function destroySlick() {
+      if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
+        $track.slick('unslick');
+      }
     }
+
+    initSlick();
+
+    window.addEventListener('resize', function () {
+      destroySlick();
+      initSlick();
+    });
   });
 </script>
 {% schema %}
