@@ -289,8 +289,8 @@
 
   @media screen and (min-width: 768px) {
     /* Desktop: show three cards in a row, no sliding */
-    .standards-cards__track {
-      display: grid;
+    .standards-cards__track.swiper-wrapper {
+      display: grid !important;
       grid-template-columns: repeat(3, 1fr);
       column-gap: 20px;
       transform: none !important;
@@ -298,6 +298,7 @@
 
     .standards-cards__item.swiper-slide {
       width: auto !important;
+      flex: 0 1 auto !important;
     }
   }
 {%- endstyle -%}
