@@ -64,6 +64,96 @@
       background-position: center;
     }
   }
+
+  .independent-company {
+    background-color: #f7f0e5;
+  }
+
+  .independent-company__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .independent-company__content {
+    flex: 1 1 55%;
+  }
+
+  .independent-company__eyebrow {
+    font-size: clamp(1.4rem, 2vw, 1.8rem);
+    line-height: 1.3;
+    color: #174f33;
+    margin-bottom: 0.75rem;
+  }
+
+  .independent-company__heading {
+    font-size: clamp(2.2rem, 3vw, 3rem);
+    line-height: 1.25;
+    color: #174f33;
+    margin: 0 0 1.5rem;
+    font-weight: 500;
+  }
+
+  .independent-company__heading em,
+  .independent-company__eyebrow em {
+    font-style: italic;
+  }
+
+  .independent-company__heading strong,
+  .independent-company__eyebrow strong {
+    font-weight: 700;
+  }
+
+  .independent-company__body {
+    font-size: clamp(1rem, 1.4vw, 1.1rem);
+    line-height: clamp(1.6, 2.2vw, 1.8);
+    color: #2f3b34;
+    margin: 0;
+  }
+
+  .independent-company__media {
+    flex: 1 1 45%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .independent-company__image-wrap {
+    width: clamp(260px, 32vw, 360px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .independent-company__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media screen and (max-width: 767px) {
+    .independent-company__inner {
+      padding: 56px 20px 48px;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .independent-company__content {
+      order: 1;
+    }
+
+    .independent-company__media {
+      order: 2;
+    }
+
+    .independent-company__image-wrap {
+      width: clamp(220px, 70vw, 280px);
+    }
+  }
 {%- endstyle -%}
 
 <section class="new-standard-banner section-{{ section.id }}-padding">
@@ -74,6 +164,35 @@
     <p class="new-standard-banner__subtitle">
       Meticulous Craftsmanship Meets Health First
     </p>
+  </div>
+</section>
+
+<section class="independent-company">
+  <div class="independent-company__inner">
+    <div class="independent-company__content">
+      <p class="independent-company__eyebrow">
+        The industry standard is too low.<sup>1</sup>
+      </p>
+      <h2 class="independent-company__heading">
+        As an <strong>independent company</strong>, we hold safety and quality to a <em>higher standard of trust.</em>
+      </h2>
+      <p class="independent-company__body">
+        Most supplement companies are owned, at least in part, by an outside investment firm, corporation, or conglomerate
+        that monitors and controls spending to ensure maximum profitability. Global Healing has been completely independent
+        from day one. That independence gives us the freedom to craft differently. To move deliberately instead of quickly.
+        To reject any batch that falls short, even at a loss. To test rigorously and manufacture in-house with care and
+        precision. Because we answer to no outside funding, health takes precedence over profit.
+      </p>
+    </div>
+    <div class="independent-company__media">
+      <div class="independent-company__image-wrap">
+        <img
+          class="independent-company__image"
+          src="{{ 'independentCompanyImage.jpg' | asset_url }}"
+          alt="Supplement bottle with dropper"
+        >
+      </div>
+    </div>
   </div>
 </section>
 {% schema %}
