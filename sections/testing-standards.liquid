@@ -388,6 +388,13 @@
   .non-negotiables__icon::after {
     transform: translate(-50%, -50%) rotate(-45deg);
   }
+  .hidden-desktop {
+    display: flex;
+  }
+  .hidden-mobile {
+    display: none;
+  }
+  
 
   @media screen and (max-width: 767px) {
     .non-negotiables {
@@ -426,6 +433,12 @@
     .non-negotiables__icon::after {
       width: 12px;
       height: 1px;
+    }
+    .hidden-desktop {
+      display: none;
+    }
+    .hidden-mobile {
+      display: flex;
     }
   }
 {%- endstyle -%}
@@ -571,6 +584,10 @@
             <span class="non-negotiables__icon" aria-hidden="true"></span>
             <span>No dairy</span>
           </div>
+          <div class="non-negotiables__item font-proxima hidden-desktop">
+            <span class="non-negotiables__icon" aria-hidden="true"></span>
+            <span>No binders</span>
+          </div>
         </div>
         <div class="non-negotiables__column">
           <div class="non-negotiables__item font-proxima">
@@ -585,8 +602,12 @@
             <span class="non-negotiables__icon" aria-hidden="true"></span>
             <span>No additives</span>
           </div>
+          <div class="non-negotiables__item font-proxima hidden-desktop">
+            <span class="non-negotiables__icon" aria-hidden="true"></span>
+            <span>No artificial ingredients</span>
+          </div>
         </div>
-        <div class="non-negotiables__column">
+        <div class="non-negotiables__column hidden-mobile">
           <div class="non-negotiables__item font-proxima">
             <span class="non-negotiables__icon" aria-hidden="true"></span>
             <span>No binders</span>
