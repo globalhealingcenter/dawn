@@ -282,8 +282,22 @@
       border-right: none;
       height: stretch;
     }
-    .standards-cards__track{
+    .standards-cards__track {
       column-gap: 20px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    /* Desktop: show three cards in a row, no sliding */
+    .standards-cards__track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 20px;
+      transform: none !important;
+    }
+
+    .standards-cards__item.swiper-slide {
+      width: auto !important;
     }
   }
 {%- endstyle -%}
