@@ -31,7 +31,6 @@
       "type": "testing-standards",
       "name": "Testing Standards",
       "settings": {
-        "full_width": false,
         "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
