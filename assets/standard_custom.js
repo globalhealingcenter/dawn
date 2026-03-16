@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Use actual slide width so math stays in sync with layout
     var firstSlideWidth = slides[0].getBoundingClientRect().width || sliderWidth * 0.7;
     slideWidth = firstSlideWidth;
-    centerOffset = (sliderWidth - slideWidth) / 2;
+    // Slightly bias to the right so we don't see background gap at the end
+    centerOffset = (sliderWidth - slideWidth) / 2 - 8;
   }
 
   function setPositionByIndex() {
