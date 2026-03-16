@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var currentTranslate = 0;
   var prevTranslate = 0;
   var slideWidth = 0;
+  var centerOffset = 0;
   var initialized = false;
 
   function isMobile() {
@@ -21,11 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function setSlideWidth() {
-    slideWidth = slider.offsetWidth * 0.8;
+    var sliderWidth = slider.offsetWidth;
+    slideWidth = sliderWidth * 0.7; // show ~30% of neighbors
+    centerOffset = (sliderWidth - slideWidth) / 2;
   }
 
   function setPositionByIndex() {
-    currentTranslate = -currentIndex * slideWidth;
+    currentTranslate = -currentIndex * slideWidth + centerOffset;
     track.style.transform = 'translateX(' + currentTranslate + 'px)';
   }
 
