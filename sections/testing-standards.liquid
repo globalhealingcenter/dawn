@@ -24,11 +24,22 @@
     background-image: url('{{ 'bannerImageStandard.jpg' | asset_url }}');
     background-size: cover;
     background-position: 0 24%;
+    overflow: hidden;
+  }
+
+  .new-standard-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 1;
   }
 
   .new-standard-banner__content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
   }
 
   .new-standard-banner__title {
