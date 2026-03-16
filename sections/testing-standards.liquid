@@ -389,18 +389,18 @@
     transform: translate(-50%, -50%) rotate(-45deg);
   }
   .hidden-desktop {
-    display: flex;
-  }
-  .hidden-mobile {
     display: none;
   }
+  .hidden-mobile {
+    display: flex;
+  }
   
-
+  
   @media screen and (max-width: 767px) {
     .non-negotiables {
       padding: 38px 28px 42px;
     }
-
+    
     .non-negotiables__title {
       margin-bottom: 22px;
       text-align: left;
@@ -435,10 +435,10 @@
       height: 1px;
     }
     .hidden-desktop {
-      display: none;
+      display: flex;
     }
     .hidden-mobile {
-      display: flex;
+      display: none;
     }
   }
 {%- endstyle -%}
