@@ -349,9 +349,9 @@
 
 <section class="standards-cards">
   <div class="standards-cards__inner">
-    <div class="standards-cards__slider">
-      <div class="standards-cards__track">
-        <article class="standards-cards__item">
+    <div class="standards-cards__slider swiper standards-cards__swiper">
+      <div class="standards-cards__track swiper-wrapper">
+        <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -370,7 +370,7 @@
         </div>
         </article>
 
-        <article class="standards-cards__item">
+        <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             src="{{ 'standard_shutterstock_2431328193.jpg' | asset_url }}"
@@ -389,7 +389,7 @@
         </div>
       </article>
       
-      <article class="standards-cards__item">
+      <article class="standards-cards__item swiper-slide">
         <div class="standards-cards__media">
           <img
             class="standards-cards__image"
@@ -411,7 +411,50 @@
     </div>
   </div>
 </section>
+{%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
+{%- endcomment -%}
+
+<link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css">
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var sliderEl = document.querySelector('.standards-cards__swiper');
+    if (!sliderEl || !window.Swiper) return;
+
+    var swiperInstance;
+
+    function initSwiper() {
+      if (window.innerWidth > 767 || swiperInstance) return;
+
+      swiperInstance = new Swiper(sliderEl, {
+        loop: true,
+        speed: 450,
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 1.3,
+        spaceBetween: 20,
+        allowTouchMove: true,
+        pagination: false,
+        navigation: false,
+      });
+    }
+
+    function destroySwiper() {
+      if (swiperInstance && window.innerWidth > 767) {
+        swiperInstance.destroy(true, true);
+        swiperInstance = null;
+      }
+    }
+
+    initSwiper();
+
+    window.addEventListener('resize', function () {
+      destroySwiper();
+      initSwiper();
+    });
+  });
+</script>
 {% schema %}
 {
   "name": "Testing Standards",
