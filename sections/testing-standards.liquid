@@ -285,6 +285,11 @@
     .standards-cards__track {
       column-gap: 0;
     }
+
+    /* Mobile slide width so next/prev are always visible */
+    .standards-cards__item.swiper-slide {
+      width: 70% !important;
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -446,13 +451,11 @@
 
         swiperInstance = new Swiper(sliderEl, {
           loop: true,
-          loopAdditionalSlides: 3,
-          watchOverflow: false,
           speed: 450,
           grabCursor: true,
           centeredSlides: true,
-          slidesPerView: 1.5,
-          spaceBetween: 20,
+          slidesPerView: 'auto',
+          spaceBetween: 16,
           allowTouchMove: true,
           pagination: false,
           navigation: false,
