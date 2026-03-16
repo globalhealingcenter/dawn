@@ -24,11 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
   function setSlideWidth() {
     var sliderWidth = slider.offsetWidth;
     if (!slides || !slides.length || !sliderWidth) return;
-    // Use actual slide width so math stays in sync with layout
+    // Use actual slide width plus the column gap so math stays in sync with layout
     var firstSlideWidth = slides[0].getBoundingClientRect().width || sliderWidth * 0.7;
-    slideWidth = firstSlideWidth;
-    // Slightly bias to the right so we don't see background gap at the end
-    centerOffset = (sliderWidth - slideWidth) / 2 - 8;
+    var gap = 0;
+    var trackStyles = window.getComputedStyle(track);
+    if (trackStyles && trackStyles.columnGap) {
+      gap = parseFloat(trackStyles.columnGap) || 0;
+    }
+    slideWidth = firstSlideWidth + gap;
+    // Slightly bias so background edges are not visible
+    centerOffset = (sliderWidth - slideWidth) / 2 - gap / 2;
   }
 
   function setPositionByIndex() {
