@@ -26,11 +26,22 @@
       "type": "shogun-optimizer",
       "disabled": true,
       "settings": {}
+    },
+    "testing_standards_YE8zzU": {
+      "type": "testing-standards",
+      "name": "Testing Standards",
+      "settings": {
+        "full_width": false,
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "shogun-helper",
     "main",
-    "shogun-optimizer"
+    "shogun-optimizer",
+    "testing_standards_YE8zzU"
   ]
 }
