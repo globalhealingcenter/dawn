@@ -1061,16 +1061,17 @@
   background: rgba(249, 242, 232, 0.28);
   border-radius: 999px;
   overflow: hidden;
-  width: 30%;
+  width: 40%;
   margin: auto;
 }
 
 .src__progress-fill {
   width: 0;
   height: 100%;
-  background: #b99334;
+  background: #fff;
   border-radius: inherit;
   transition: width 300ms ease;
+  display: block;
 }
 
 .hide-on-mobile {
@@ -1213,7 +1214,7 @@
         aria-valuemax="3"
       >
         <div class="src__progress-track">
-          <div class="src__progress-fill"></div>
+          <span class="src__progress-fill"></span>
         </div>
       </div>
     </div>
