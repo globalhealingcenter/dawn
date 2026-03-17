@@ -925,7 +925,7 @@
 
 {% comment %} What we test for {% endcomment %}
 
-{{ 'static-reviews-carousel.js' | asset_url | script_tag }}
+<script src="{{ 'static-reviews-carousel.js' | asset_url }}" defer></script>
 
 <style>
   /* Static Reviews Carousel - infinite touch swipe, transform-based */
@@ -1106,12 +1106,7 @@
 }
 </style>
 
-<section
-  class="src static-reviews-carousel"
-  {% if block %}
-    {{- block.shopify_attributes -}}
-  {% endif %}
->
+<section class="src static-reviews-carousel">
   <div class="src__inner">
     <h2 class="src__heading font-proxima">What We Test For</h2>
 
