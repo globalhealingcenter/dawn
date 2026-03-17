@@ -1374,16 +1374,17 @@
     position: relative;
     max-width: min(960px, 90vw);
     max-height: 90vh;
-    background: #ffffff;
+    background: #ffffff00;
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
     border-radius: 4px;
-    overflow: hidden;
+    overflow: auto;
   }
 
   .methodology-cards-popup__image {
     display: block;
     width: 100%;
-    height: auto;
+    max-height: 700px;
+    object-fit: cover;
   }
 
   .methodology-cards-popup__close {
