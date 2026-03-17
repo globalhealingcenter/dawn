@@ -923,6 +923,190 @@
   </div>
 </section>
 
+{% comment %} What we test for {% endcomment %}
+
+<section
+  class="src static-reviews-carousel"
+  {% if block %}
+    {{- block.shopify_attributes -}}
+  {% endif %}
+>
+  <div class="src__inner">
+    <h2 class="src__heading font-proxima">Healing That Speaks <span class="font-miller">for Itself.</span></h2>
+
+    <div class="src__carousel-outer">
+      <div
+        class="src__track"
+        role="region"
+        aria-label="Customer reviews"
+        tabindex="0"
+      >
+        {% comment %} Review 1 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima"><a href="/products/probiotic">Ultimate Probiotic</a></h3>
+          <p class="src__text font-proxima">
+            "I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and
+            Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on
+            track. I’m truly grateful."
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Léonor N. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Léonor N. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Review 2 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima"><a href="/products/organic-black-seed-oil">Black Seed Oil</a></h3>
+          <p class="src__text font-proxima">
+            "I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint
+            stiffness in my knees. Since taking it daily, it has drastically reduced."
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Starr R. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Starr R. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Review 3 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima"><a href="/products/calcium-disodium-edta">Calcium Disodium EDTA</a></h3>
+          <p class="src__text font-proxima">
+            "This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep
+            better and feel like I’m 25 again. You have a loyal customer now! Donna W."
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Donna W. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Donna W. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Review 4 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima"><a href="/products/latero-flora">Latero-Flora®</a></h3>
+          <p class="src__text font-proxima">
+            "I’ve tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and
+            with celiac my gut was always off. After four months, my issues have been neutralized. This has been a
+            dramatic change. "
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Nicole P. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Nicole P. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Review 5 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima">
+            <a href="/products/organic-multivitamin-with-minerals">Multivitamin with Minerals</a>
+          </h3>
+          <p class="src__text font-proxima">
+            "I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost.
+            I’ll continue ordering it along with several other Global Healing supplements. They’ve earned my trust. "
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Caren R. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Caren R. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Review 6 {% endcomment %}
+        <div class="src__card" role="listitem">
+          <div class="src__stars" aria-hidden="true">
+            {% for i in (1..5) %}
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                <style>
+                	.s0 { fill: #cca72c }
+                </style>
+                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+              </svg>
+            {% endfor %}
+          </div>
+          <h3 class="src__product font-proxima"><a href="/products/oxy-powder">Oxy-Powder®</a></h3>
+          <p class="src__text font-proxima">
+            "I used to get sick after eating greasy foods. Now I take Oxy-Powder and don’t suffer. When I feel bloated,
+            it feels like I’ve done a cleanse. I can’t stand to be without it."
+          </p>
+          <p class="src__meta font-proxima hide-on-mobile">Nilsa G. | Verified Buyer</p>
+          <p class="src__meta font-proxima hide-on-desktop">
+            Nilsa G. <br>
+            <span>Ultimate Probiotic</span>
+          </p>
+        </div>
+
+        {% comment %} Add more reviews by duplicating the .src__card block {% endcomment %}
+      </div>
+
+      <div
+        class="src__progress"
+        aria-hidden="true"
+        role="progressbar"
+        aria-valuenow="1"
+        aria-valuemin="1"
+        aria-valuemax="4"
+      >
+        <div class="src__progress-track">
+          <div class="src__progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 {%- comment -%}
