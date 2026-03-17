@@ -158,7 +158,7 @@
                                 </div>
                                 <strong class="rebuy-product-label" v-if="isInputProduct(product)" v-html="'This item:'"></strong>
 								<a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '']"></a>
-                                <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                                <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
 								<div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
 								<div class="rebuy-product-review" v-if="hasProductReviews(product)">
 									<span class="rebuy-star-rating">
@@ -662,7 +662,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-review" v-if="hasProductReviews(product)">
                                 <span class="rebuy-star-rating">
@@ -1031,6 +1031,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
@@ -1913,7 +1914,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-review" v-if="hasProductReviews(product)">
                                 <span class="rebuy-star-rating">
@@ -2145,7 +2146,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
@@ -2363,7 +2364,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-review" v-if="hasProductReviews(product)">
                                 <span class="rebuy-star-rating">
@@ -2596,7 +2597,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
 
                             <div class="rebuy-product-price">
@@ -2825,7 +2826,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>      
     
                             <div class="rebuy-product-price">
@@ -3043,7 +3044,7 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-review" v-if="hasProductReviews(product)">
                                 <span class="rebuy-star-rating">
@@ -3264,7 +3265,7 @@
                                 </div>
                                 <strong class="rebuy-product-label" v-if="isInputProduct(product)" v-html="'This item:'"></strong>
 								<a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '']"></a>
-                                <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                                <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
 								<div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
 								<div class="rebuy-product-review" v-if="hasProductReviews(product)">
 									<span class="rebuy-star-rating">
@@ -3799,7 +3800,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
@@ -4028,7 +4029,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
@@ -4254,7 +4255,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
 
                             <div class="rebuy-product-price">
@@ -4481,7 +4482,7 @@
                                 </span>
                                 <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
                             </div>
-                            <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
