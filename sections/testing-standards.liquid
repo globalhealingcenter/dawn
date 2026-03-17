@@ -1832,16 +1832,16 @@
   }
 
   .facility-tabs__nav {
-    display: flex;
-    gap: 40px;
-    font-size: 1.3rem;
-    margin-bottom: 16px;
+    display: inline-flex;
+    gap: 32px;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
   }
 
   .facility-tabs__nav-button {
     background: none;
     border: none;
-    padding: 0;
+    padding: 0 0 4px;
     font: inherit;
     color: #a8afb0;
     cursor: pointer;
@@ -1855,7 +1855,7 @@
     height: 2px;
     background: #d5d9d8;
     position: relative;
-    margin-bottom: 32px;
+    margin-bottom: 28px;
   }
 
   .facility-tabs__underline-indicator {
@@ -2238,6 +2238,50 @@
     window.addEventListener('load', function () {
       tryInit(20);
     });
+  })();
+</script>
+<script>
+  (function () {
+    function initFacilityTabs() {
+      var root = document.querySelector('.facility-tabs');
+      if (!root) return;
+
+      var buttons = root.querySelectorAll('.facility-tabs__nav-button');
+      var panels = root.querySelectorAll('.facility-tabs__panel');
+      var underline = root.querySelector('.facility-tabs__underline-indicator');
+      if (!buttons.length || !panels.length || !underline) return;
+
+      function setActive(target) {
+        buttons.forEach(function (btn, index) {
+          var isActive = btn.getAttribute('data-tab-target') === target;
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+          if (isActive) {
+            underline.style.transform = 'translateX(' + (index * 100) + '%)';
+          }
+        });
+
+        panels.forEach(function (panel) {
+          var match = panel.getAttribute('data-tab-panel') === target;
+          panel.classList.toggle('is-active', match);
+        });
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var target = btn.getAttribute('data-tab-target');
+          if (!target) return;
+          setActive(target);
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFacilityTabs);
+    } else {
+      initFacilityTabs();
+    }
   })();
 </script>
 <script>
