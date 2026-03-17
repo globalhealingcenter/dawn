@@ -1109,7 +1109,6 @@
   </div>
 </section>
 
-{{ 'static-reviews-carousel.js' | asset_url  }}
 {%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
@@ -1187,6 +1186,8 @@
     });
   })();
 </script>
+
+{{ 'static-reviews-carousel.js' | asset_url  }}
 {% schema %}
 {
   "name": "Testing Standards",
