@@ -77,7 +77,6 @@
         },
         "custom_liquid_TxJtfK": {
           "type": "custom_liquid",
-          "disabled": true,
           "settings": {
             "custom_liquid": "<div style=\"margin-top:12px;font-size:12px;line-height:1.4;color:#545454;\">\n  Pay with <strong>HSA/FSA funds</strong> through Truemed.\n  <a href=\"https://app.truemed.com/qualify/tm_qual_0osddr2w2v\" \n     target=\"_blank\" \n     style=\"color:#21472D;font-weight:600;text-decoration:underline;\">\n     Check eligibility\n  </a>.\n</div>"
           }
