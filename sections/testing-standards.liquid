@@ -335,7 +335,7 @@
     margin: 0 0 40px;
     text-align: center;
     color: #f7f0e5;
-    font-size: clamp(2.8rem, 4.5vw, 4.6rem);
+    font-size: clamp(2.8em, 4.5vw, 4.6em);
     line-height: clamp(1em, 1.2vw, 1.15em);
     font-weight: 400;
     font-style: normal;
@@ -808,7 +808,7 @@
   background: #ffffffc4;
   border-radius: inherit;
   transition: width 300ms ease;
-  display: block;
+  display: block !important;
 }
 
 .hide-on-mobile {
@@ -846,7 +846,559 @@
     line-height: 1.1;
   }
 
+  .src__progress-fill{
+    display: block !important;
+  }
+
 }
+
+.methodology-cards {
+    padding: 72px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .methodology-cards__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .methodology-cards__heading {
+    font-size: clamp(2.8rem, 3.4vw, 4.3rem);
+    line-height: 1.2;
+    color: #1f5939;
+    text-align: left;
+    margin: 0 0 32px;
+    font-weight: 400;
+  }
+
+  .methodology-cards__slider {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .methodology-cards__track {
+    display: flex;
+  }
+
+  .methodology-cards__item {
+    background-color: #ffffff;
+    border: 2px solid #174f33;
+    height: 100%;
+  }
+
+  .methodology-cards__item:last-child {
+    border-right: 2px solid #174f33;
+  }
+
+  .methodology-cards__media {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .methodology-cards__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .methodology-cards__content {
+    padding: 24px 24px 28px;
+  }
+
+  .methodology-cards__title {
+    font-size: clamp(1.4em, 3vw, 1.7em);
+    line-height: 1.2;
+    color: #174f33;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .methodology-cards__text {
+    font-size: clamp(1.6rem, 1.4vw, 1.8rem);
+    line-height: clamp(1.2em, 2.2vw, 1.2em);
+    color: #2f3b34;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .methodology-cards__cta {
+    text-align: center;
+    margin: 32px 0 0;
+  }
+
+  .methodology-cards__popup-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: clamp(1.5em, 1.2vw, 1.7em);
+    line-height: 1.4;
+    color: #1f5939;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .methodology-cards__popup-trigger:hover,
+  .methodology-cards__popup-trigger:focus-visible {
+    color: #174f33;
+  }
+
+  .methodology-cards__progress {
+    margin: 24px auto 0;
+    max-width: 260px;
+  }
+
+  .methodology-cards__progress-track {
+    width: 100%;
+    height: 4px;
+    background: #e3e6e2;
+    border-radius: 999px;
+    overflow: hidden; 
+    display: none
+  }
+
+  .methodology-cards__progress-fill {
+    width: 0;
+    height: 100%;
+    background: #1f5939;
+    border-radius: inherit;
+    transition: width 280ms ease;
+  }
+
+  @media screen and (min-width: 768px) {
+    .methodology-cards__track {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr);
+      transform: none !important;
+    }
+
+    .methodology-cards__item {
+      width: auto !important;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .methodology-cards__inner {
+      padding: 0;
+    }
+
+    .methodology-cards__item {
+      height: stretch;
+    }
+
+    .methodology-cards__slider .slick-list {
+      overflow: visible;
+      padding: 0 12% 0 12%;
+    }
+
+    .methodology-cards__slider .slick-track {
+      display: flex;
+    }
+
+    .methodology-cards__slider .slick-slide {
+      height: inherit;
+      margin: 0 10px;
+    }
+
+    .methodology-cards__item {
+      width: 100%;
+    }
+    .methodology-cards__heading {
+      padding: 0 40px;
+    }
+    .methodology-cards__progress-fill{
+      display: block !important;
+    }
+    .methodology-cards__progress-track{
+      display: block;
+    }
+  }
+
+  .methodology-cards-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .methodology-cards-popup.is-open {
+    display: flex;
+  }
+
+  .methodology-cards-popup__dialog {
+    position: relative;
+    max-width: min(960px, 90vw);
+    max-height: 90vh;
+    background: #ffffff00;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    border-radius: 4px;
+    overflow: auto;
+  }
+
+  .methodology-cards-popup__image {
+    display: block;
+    width: 100%;
+    max-height: 700px;
+    object-fit: cover;
+  }
+
+  .methodology-cards-popup__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.58);
+    border: none;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .methodology-cards-popup__close:hover,
+  .methodology-cards-popup__close:focus-visible {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .inhouse-manufacturing {
+    padding: 30px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .inhouse-manufacturing__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 56px;
+    align-items: center;
+    border-top: 1px solid #174f33;
+    padding-top: 100px;
+  }
+
+  .inhouse-manufacturing__media {
+    order: 2;
+  }
+
+  .inhouse-manufacturing__image-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .inhouse-manufacturing__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .inhouse-manufacturing__content {
+    order: 1;
+  }
+
+  .inhouse-manufacturing__eyebrow {
+    font-family: "Miller Text", Georgia, serif;
+    font-size: clamp(2.1rem, 2.4vw, 2.6rem);
+    line-height: 1.3;
+    color: #1f5939;
+    margin: 0 0 1rem;
+  }
+
+  .inhouse-manufacturing__heading {
+    font-size: clamp(2.2rem, 2.5vw, 2.9rem);
+    line-height: 1.15;
+    color: #1f5939;
+    margin: 0 0 1.5rem;
+    font-weight: 500;
+  }
+
+  p.inhouse-manufacturing__number {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2.5em, 3vw, 4em);
+    line-height: clamp(0.9em, 1.5vw, 1.3em);
+    color: #174f33;
+    font-style: italic;
+  }
+
+  h2.inhouse-manufacturing__title {
+      margin: 0 0 2.5rem;
+      font-size: clamp(2.5em, 3vw, 4em);
+      line-height: clamp(1em, 1.5vw, 1.3em);
+      color: #174f33;
+      font-weight: 500;
+  }
+
+  .inhouse-manufacturing__subheading {
+    margin: 0 0 2.5rem;
+    font-size: clamp(2rem, 1.4vw, 2.4rem);
+    line-height: clamp(1.3em, 1vw, 2.4em);
+    color: #616161;
+    font-weight: 600;
+    max-width: 420px;
+  }
+
+  .inhouse-manufacturing__body {
+    margin: 0 0 1.75rem;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    color: #2f3b34;
+    font-weight: 300;
+    max-width: 510px;
+  }
+
+  .inhouse-manufacturing__cert-copy {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    color: #2a3530;
+    text-align: center;
+    margin: 1.5rem 0 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .inhouse-manufacturing__icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .inhouse-manufacturing__icon {
+    flex: 0 0 auto;
+    width: 85px;
+    height: 85px;
+  }
+
+  .inhouse-manufacturing__icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .inhouse-only-desktop {
+    display: none;
+  }
+
+  .inhouse-only-mobile {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .inhouse-only-desktop {
+      display: block;
+    }
+
+    .inhouse-only-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .inhouse-manufacturing__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .inhouse-manufacturing {
+      padding: 0px 0 64px;
+    }
+
+    .inhouse-manufacturing__inner {
+      margin: 0 20px;
+      padding-top: 70px;
+    }
+
+    .inhouse-manufacturing__media {
+      order: 1;
+    }
+
+    .inhouse-manufacturing__content {
+      order: 2;
+      text-align: left;
+    }
+
+    .inhouse-manufacturing__cert-copy {
+      margin-top: 1.75rem;
+    }
+
+    .inhouse-manufacturing__icons {
+      margin-top: 0.5rem;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+    .inhouse-manufacturing__icon {
+      width: 100%;
+      max-width: 55px;
+      height: 55px;
+  }
+  
+  
+  }
+  @media (max-width: 375px) {
+    .inhouse-manufacturing__icon {
+      width: 100%;
+      max-width: 45px;
+      height: 55px;
+    }
+    .inhouse-manufacturing__icons {
+      flex-wrap: wrap;
+      row-gap: 0;
+  }
+  }
+
+  .facility-tabs {
+    padding: 72px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .facility-tabs__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .facility-tabs__nav {
+    display: inline-flex;
+    gap: 0;
+    margin-bottom: 10px;
+    font-size: clamp(1.5em, 2vw, 3em);
+    line-height: clamp(1em, 1.5vw, 1.3em);
+    width: 100%;
+  }
+
+  .facility-tabs__nav-button {
+    background: none;
+    border: none;
+    padding: 0 0 24px;
+    font: inherit;
+    color: #a8afb0;
+    cursor: pointer;
+    border-bottom: 1px solid;
+    width: 100%;
+    flex: 0 0 33%;
+  }
+
+  .facility-tabs__nav-button.is-active {
+    color: #454a4c;
+    font-weight: 600;
+  }
+
+  .facility-tabs__underline {
+    display: none;
+  }
+
+  .facility-tabs__panels {
+    margin-top: 20px;
+  }
+
+  .facility-tabs__panel {
+    display: none;
+  }
+
+  .facility-tabs__panel.is-active {
+    display: block;
+  }
+
+  .facility-tabs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .facility-tabs__item-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .facility-tabs__item-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+
+  .facility-tabs__item-title {
+    font-weight: 600;
+    color: #174f33;
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.4em, 3vw, 2em);
+    line-height: clamp(1em, 1.5vw, 1.3em);
+  }
+
+  .facility-tabs__item-text {
+    color: #2a3530;
+    margin: 0;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-top: 13px;
+  }
+
+  @media (max-width: 767px) {
+    .facility-tabs {
+      padding: 56px 0 64px;
+    }
+
+    .facility-tabs__inner {
+      padding: 0 20px;
+    }
+
+    .facility-tabs__nav {
+      display: inline-flex;
+      margin-bottom: 10px;
+      width: 100%;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .facility-tabs__nav-button {
+      padding: 0 0 18px;
+  }
+
+    .facility-tabs__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+
+    .facility-tabs__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .facility-tabs__item-icon {
+      flex: 0 0 auto;
+      margin-bottom: 0;
+    }
+
+    .facility-tabs__item-content {
+      flex: 1 1 auto;
+    }
+  }
+  @media (max-width: 375px) {
+    .facility-tabs__nav-button {
+      text-align: left;
+  }
+  }
 {%- endstyle -%}
 
 {% comment %} Hero Banner Section {% endcomment %}
@@ -933,8 +1485,8 @@
             Vetted Suppliers
           </h3>
           <p class="standards-cards__text font-proxima">
-            We begin with a strict vendor qualification process, only choosing those that meet our requirements for
-            sustainable growing and ethical working conditions.
+            We begin with a strict vendor qualification process, only choosing those that meet
+our requirements for sustainable growing and ethical working conditions.
           </p>
         </div>
         </article>
@@ -954,8 +1506,7 @@
               Traceable Ingredients
             </h3>
             <p class="standards-cards__text font-proxima">
-              We can tell you where every single ingredient came from, how it was grown and harvested, what it was tested
-              for, and why it’s included in a supplement.
+              We can tell you where every single ingredient came from, how it was grown and harvested, what it was tested for, and why it’s included in a supplement.
           </p>
         </div>
       </article>
@@ -975,8 +1526,8 @@
             Verified Quality
           </h3>
           <p class="standards-cards__text font-proxima">
-            Our in-house lab holds a library of herbs that we have verified for identity and purity. We test against these
-            standards to rule out any misidentifications or adulterants.
+            Our in-house lab holds a library of herbs that we have
+verified for identity and purity. We test against these standards to rule out any misidentifications or adulterants.
           </p>
         </div>
         </article>
@@ -1213,7 +1764,429 @@
         aria-valuemax="3"
       >
         <div class="src__progress-track">
-          <div class="src__progress-fill" style="display: block;"></div>
+          <div class="src__progress-fill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="methodology-cards">
+  <div class="methodology-cards__inner">
+    <h2 class="methodology-cards__heading font-proxima">
+      Our Methodology
+    </h2>
+
+    <div class="methodology-cards__slider">
+      <div class="methodology-cards__track">
+        <article class="methodology-cards__item">
+          <div class="methodology-cards__media">
+            <img
+              class="methodology-cards__image"
+              src="{{ 'standard_Testing Standards Page_HPTLC.png' | asset_url }}"
+              alt="FTIR Spectroscopy"
+              width="800"
+              height="440"
+            >
+          </div>
+          <div class="methodology-cards__content">
+            <h3 class="methodology-cards__title font-proxima">
+              FTIR Spectroscopy
+            </h3>
+            <p class="methodology-cards__text font-proxima">
+              Using an infrared light, we scan an ingredient’s unique “fingerprint” to confirm a raw ingredient is what it’s
+              supposed to be.
+            </p>
+          </div>
+        </article>
+
+        <article class="methodology-cards__item">
+          <div class="methodology-cards__media">
+            <img
+              class="methodology-cards__image"
+              src="{{ 'Standard_Testing_Standards_Page_FTIR_Spectroscopy.png' | asset_url }}"
+              alt="HPTLC"
+              width="800"
+              height="440"
+            >
+          </div>
+          <div class="methodology-cards__content">
+            <h3 class="methodology-cards__title font-proxima">
+              HPTLC
+            </h3>
+            <p class="methodology-cards__text font-proxima">
+              We separate a plant’s compounds and compare them to a pre‑verified reference, allowing us to rule out
+              adulterants or fillers.
+            </p>
+          </div>
+        </article>
+
+        <article class="methodology-cards__item">
+          <div class="methodology-cards__media">
+            <img
+              class="methodology-cards__image"
+              src="{{ 'standard_Testing_Standards_Page_Microscopy.png' | asset_url }}"
+              alt="Microscopy"
+              width="800"
+              height="440"
+            >
+          </div>
+          <div class="methodology-cards__content">
+            <h3 class="methodology-cards__title font-proxima">
+              Microscopy
+            </h3>
+            <p class="methodology-cards__text font-proxima">
+              Using a microscope, we verify characteristics that cannot be identified by chemical analysis, such as cellular
+              structure.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div class="methodology-cards__progress" aria-hidden="true">
+      <div class="methodology-cards__progress-track">
+        <div class="methodology-cards__progress-fill"></div>
+      </div>
+    </div>
+
+    <div class="methodology-cards__cta">
+      <button type="button" class="methodology-cards__popup-trigger font-proxima">
+        See the Complete Testing Process
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="methodology-cards-popup" aria-hidden="true">
+  <div class="methodology-cards-popup__dialog" role="dialog" aria-modal="true" aria-label="Complete testing process">
+    <button type="button" class="methodology-cards-popup__close" aria-label="Close">
+      &times;
+    </button>
+    <img
+      class="methodology-cards-popup__image"
+      src="{{ 'Standard_Complete_Testing_Process_Chart.jpg' | asset_url }}"
+      alt="Diagram showing the complete testing process"
+      width="100%"
+      height="100%"
+    >
+  </div>
+</div>
+
+
+<section class="inhouse-manufacturing">
+  <div class="inhouse-manufacturing__inner">
+    <div class="inhouse-manufacturing__media">
+      <div class="inhouse-manufacturing__image-wrap">
+        <img
+          class="inhouse-manufacturing__image"
+          src="{{ 'standard_Testing_Standards_Page_In-House_Manufacturing.png' | asset_url }}"
+          alt="In-house manufacturing equipment"
+          width="960"
+          height="640"
+        >
+      </div>
+
+      <div class="inhouse-only-desktop">
+        <p class="inhouse-manufacturing__cert-copy font-proxima">
+          We maintain third-party certifications that reflect our commitment to quality & safety
+        </p>
+
+        <div class="inhouse-manufacturing__icons">
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon1.svg' | asset_url }}" alt="Certification 1">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon2.svg' | asset_url }}" alt="Certification 2">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon3.svg' | asset_url }}" alt="Certification 3">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon4.svg' | asset_url }}" alt="Certification 4">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon5.svg' | asset_url }}" alt="Certification 5">
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="inhouse-manufacturing__content">
+      <p class="inhouse-manufacturing__number font-miller">03.</p>
+      <h2 class="inhouse-manufacturing__title font-proxima">
+        In-House<br>
+        Manufacturing
+      </h2>
+      <p class="inhouse-manufacturing__subheading font-proxima">
+        The facility we wanted didn’t exist. So we built two.
+      </p>
+      <p class="inhouse-manufacturing__body font-proxima">
+        We’re one of the few supplement companies that manufacture its own products. Why? Because we want to control every step of making the most trusted products on the market.
+      </p>
+      <p class="inhouse-manufacturing__body font-proxima">
+        We make our supplements in two FDA-registered facilities monitored under strict cGMP and USDA Organic requirements—one in Phoenix, Arizona, and one in Houston, Texas. Both are built using environmentally friendly materials that don’t emit VOCs or other toxic chemicals. Every inch was designed for the health and safety of our staff and customers.
+      </p>
+
+      <div class="inhouse-only-mobile">
+        <p class="inhouse-manufacturing__cert-copy font-proxima">
+          We maintain third-party certifications that reflect our commitment to quality & safety
+        </p>
+
+        <div class="inhouse-manufacturing__icons">
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon1.svg' | asset_url }}" alt="Certification 1">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon2.svg' | asset_url }}" alt="Certification 2">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon3.svg' | asset_url }}" alt="Certification 3">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon4.svg' | asset_url }}" alt="Certification 4">
+          </span>
+          <span class="inhouse-manufacturing__icon">
+            <img src="{{ 'standard_icon5.svg' | asset_url }}" alt="Certification 5">
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="facility-tabs">
+  <div class="facility-tabs__inner">
+    <div class="facility-tabs__nav" role="tablist">
+      <button
+        type="button"
+        class="facility-tabs__nav-button is-active"
+        data-tab-target="facility"
+        role="tab"
+        aria-selected="true"
+      >
+        Facility
+      </button>
+      <button
+        type="button"
+        class="facility-tabs__nav-button"
+        data-tab-target="process"
+        role="tab"
+        aria-selected="false"
+      >
+        Process
+      </button>
+      <button
+        type="button"
+        class="facility-tabs__nav-button"
+        data-tab-target="innovations"
+        role="tab"
+        aria-selected="false"
+      >
+        Innovations
+      </button>
+    </div>
+
+    <div class="facility-tabs__panels">
+      <div
+        class="facility-tabs__panel is-active"
+        data-tab-panel="facility"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Facility: 3 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'Toxin-Free-Construction.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Toxin-Free Construction
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                We built using magnesium oxide board instead of standard drywall. All grout, epoxy flooring, and paint
+                throughout the facility are VOC-free.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Healthy-Work-Environment.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Healthy Work Environment
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                An advanced air purification system and overhead lights mimic sunlight to support our teams’ physical and
+                mental well-being.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Climate-Controlled-Storage.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Climate-Controlled Storage
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                All raw and finished products are stored at controlled temperatures to preserve freshness and prevent early
+                degradation.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div
+        class="facility-tabs__panel"
+        data-tab-panel="process"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Process: 5 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Gentle-Blending.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Gentle Blending
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                V-blenders mix thoroughly without generating heat.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Energetic-Water.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Energetic Water
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Triple-distilled, biophotonic structured water in our liquid formulas supports hydration and energy flow.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_12Hour-Cold-Filtration.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                12+ Hour Cold Filtration
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Liquid mixtures are pressed through fine mesh filter bags using a customized wine-making press.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Non-Leaching-Materials.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Non-Leaching Materials
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Platinum-cured silicone tubing and borosilicate glass vessels eliminate chemical and metallic interference.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Encapsulation.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Encapsulation
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Semi-automatic machines minimize friction, heat, and product loss.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div
+        class="facility-tabs__panel"
+        data-tab-panel="innovations"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Innovations: 4 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Raw-Herbal-Extract.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Raw Herbal Extract™
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Powdered herbs macerate for several days in triple-distilled biophotonic structured water and organic
+                vegetable glycerin. No heat, alcohol, or harsh chemicals.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_MicroSomal-Technology.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                MicroSomal® Technology
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Ultrasonic sound frequencies encapsulate beneficial compounds in microscopic lipid vesicles that can pass
+                the blood-brain barrier.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_ORMUS-Earth-Minerals.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                ORMUS Earth Minerals™
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                Our liquid formulas include a proprietary blend of minerals to improve absorption and raise vibrational
+                energy.
+              </p>
+            </div>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_Healing-Frequencies.svg' | asset_url }}" alt="">
+            </div>
+            <div class="facility-tabs__item-content">
+              <h3 class="facility-tabs__item-title font-proxima">
+                Healing Frequencies
+              </h3>
+              <p class="facility-tabs__item-text font-proxima">
+                In the liquid maceration room, speakers play solfeggio tones to infuse our formulas with healing energies.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -1291,6 +2264,178 @@
       });
     } else {
       tryInit(20);
+    }
+
+    window.addEventListener('load', function () {
+      tryInit(20);
+    });
+  })();
+</script>
+<script>
+  (function () {
+    function initFacilityTabs() {
+      var root = document.querySelector('.facility-tabs');
+      if (!root) return;
+
+      var buttons = root.querySelectorAll('.facility-tabs__nav-button');
+      var panels = root.querySelectorAll('.facility-tabs__panel');
+      if (!buttons.length || !panels.length) return;
+
+      function setActive(target) {
+        buttons.forEach(function (btn) {
+          var isActive = btn.getAttribute('data-tab-target') === target;
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        panels.forEach(function (panel) {
+          var match = panel.getAttribute('data-tab-panel') === target;
+          panel.classList.toggle('is-active', match);
+        });
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var target = btn.getAttribute('data-tab-target');
+          if (!target) return;
+          setActive(target);
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFacilityTabs);
+    } else {
+      initFacilityTabs();
+    }
+  })();
+</script>
+<script>
+  (function () {
+    function initMethodologyCardsSlick() {
+      if (typeof window.jQuery === 'undefined') return false;
+
+      var $ = window.jQuery;
+      if (!$.fn || !$.fn.slick) return false;
+
+      var $track = $('.methodology-cards__track');
+      if (!$track.length) return true;
+      var $progressFill = $('.methodology-cards__progress-fill');
+
+      function enableSlick() {
+        if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
+
+        $track.slick({
+          infinite: true,
+          arrows: false,
+          dots: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '12%',
+          variableWidth: false,
+          speed: 450,
+          draggable: true,
+          swipe: true,
+          touchMove: true,
+          mobileFirst: true
+        });
+
+        if ($progressFill.length) {
+          var updateProgress = function (currentSlide, slick) {
+            slick = slick || $track.slick('getSlick');
+            var total = slick.slideCount || 1;
+            var idx = (currentSlide || 0) + 1;
+            var pct = (idx / total) * 100;
+            $progressFill.css('width', pct + '%');
+          };
+
+          $track.on('init reInit afterChange', function (event, slick, current) {
+            updateProgress(current, slick);
+          });
+
+          // In case init already fired before binding
+          var existing = $track.slick('getSlick');
+          updateProgress(existing.currentSlide, existing);
+        }
+      }
+
+      function disableSlick() {
+        if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
+          $track.slick('unslick');
+        }
+      }
+
+      enableSlick();
+
+      if (!$track.data('slick-bound')) {
+        window.addEventListener('resize', function () {
+          disableSlick();
+          enableSlick();
+        });
+        $track.data('slick-bound', true);
+      }
+
+      return true;
+    }
+
+    function initMethodologyPopup() {
+      var trigger = document.querySelector('.methodology-cards__popup-trigger');
+      var popup = document.querySelector('.methodology-cards-popup');
+      if (!trigger || !popup) return;
+
+      var dialog = popup.querySelector('.methodology-cards-popup__dialog');
+      var closeBtn = popup.querySelector('.methodology-cards-popup__close');
+
+      function openPopup() {
+        popup.classList.add('is-open');
+        popup.setAttribute('aria-hidden', 'false');
+      }
+
+      function closePopup() {
+        popup.classList.remove('is-open');
+        popup.setAttribute('aria-hidden', 'true');
+      }
+
+      trigger.addEventListener('click', function () {
+        openPopup();
+      });
+
+      popup.addEventListener('click', function (e) {
+        if (!dialog.contains(e.target)) {
+          closePopup();
+        }
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          closePopup();
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          closePopup();
+        }
+      });
+    }
+
+    function tryInit(attemptsLeft) {
+      if (initMethodologyCardsSlick() || attemptsLeft <= 0) return;
+      window.setTimeout(function () {
+        tryInit(attemptsLeft - 1);
+      }, 200);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        tryInit(20);
+        initMethodologyPopup();
+      });
+    } else {
+      tryInit(20);
+      initMethodologyPopup();
     }
 
     window.addEventListener('load', function () {
