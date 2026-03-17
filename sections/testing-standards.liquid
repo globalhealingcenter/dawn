@@ -1640,6 +1640,24 @@
     height: auto;
   }
 
+  .inhouse-only-desktop {
+    display: none;
+  }
+
+  .inhouse-only-mobile {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .inhouse-only-desktop {
+      display: block;
+    }
+
+    .inhouse-only-mobile {
+      display: none;
+    }
+  }
+
   @media (max-width: 899px) {
     .inhouse-manufacturing__inner {
       grid-template-columns: minmax(0, 1fr);
