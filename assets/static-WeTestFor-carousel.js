@@ -47,7 +47,7 @@
         if (window.innerWidth >= 768) {
           peekOffset = 0;
         } else {
-          peekOffset = (containerW - fullVisible * step + gap) / 2.5;
+          peekOffset = (containerW - fullVisible * step + gap) / 4;
         }
       }
   
