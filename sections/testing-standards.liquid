@@ -925,6 +925,7 @@
 
 {% comment %} What we test for {% endcomment %}
 
+<script src="{{ 'static-reviews-carousel.js' | asset_url }}" defer></script>
 
 <section
   class="src static-reviews-carousel"
@@ -1109,6 +1110,7 @@
   </div>
 </section>
 
+
 {%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
@@ -1186,8 +1188,6 @@
     });
   })();
 </script>
-
-{{ 'static-reviews-carousel.js' | asset_url  }}
 {% schema %}
 {
   "name": "Testing Standards",
