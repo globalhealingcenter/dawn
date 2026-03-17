@@ -487,7 +487,10 @@
     {% endif %}
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  {% include "huk-mega-menu-pro" %}
   </head>
+							
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -627,7 +630,15 @@
 
     <!-- Widget : 2025 BFCM Free Tote on New Sub -->
     <!-- <div data-rebuy-id="253569"></div> -->
-    <!-- End Widget : 2025 BFCM Free Tote on New Sub -->
+ 
+    <!-- Widget : 2026 Earth Day Wk1 Free Toiletry Bag on $150 -->
+    <!-- <div data-rebuy-id="274075"></div>  -->
+
+    <!-- Widget : 2026 Earth Day Wk2 Free Tote on $125 -->
+    <!--  <div data-rebuy-id="278006"></div> -->
+
+    <!-- Widget : 2026 Earth Day Wk3 Free OP + VITC samples no min -->
+    <!--  <div data-rebuy-id="278008"></div> -->
 
     <!-- influencer page countdown -->
     {% if request.path contains '/pages/influencer' %}

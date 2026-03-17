@@ -42,6 +42,16 @@ section h3.eyebrow span {
     /* border-bottom: 1px solid var(--gh-color-gray); */
 }
 
+.button,
+.button-label,
+.shopify-challenge__button,
+.customer button {
+    font-size: clamp(16px, 1.563vw, 2.5rem);
+    font-family: 'proxima-nova';
+    min-height: 6rem;
+    line-height: calc(1 + 0.2 / var(--font-body-scale));
+}
+
 .ghd--logos .ghd--flex {
     align-items: center;
     justify-content: space-between;

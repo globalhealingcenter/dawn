@@ -77,7 +77,7 @@ This file can be re-written at any time.
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
+        {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
     </title>
 
     <!-- Google tag (gtag.js) -->
@@ -491,6 +491,8 @@ This file can be re-written at any time.
     {% endif %}
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  
+  {% include "huk-mega-menu-pro" %}
   </head>
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     {% include 'shogun-content-handler' %}
