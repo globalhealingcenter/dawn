@@ -1623,6 +1623,7 @@
 
       var $track = $('.methodology-cards__track');
       if (!$track.length) return true;
+      var $progressFill = $('.methodology-cards__progress-fill');
 
       function enableSlick() {
         if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
@@ -1642,6 +1643,24 @@
           touchMove: true,
           mobileFirst: true
         });
+
+        if ($progressFill.length) {
+          var updateProgress = function (currentSlide, slick) {
+            slick = slick || $track.slick('getSlick');
+            var total = slick.slideCount || 1;
+            var idx = (currentSlide || 0) + 1;
+            var pct = (idx / total) * 100;
+            $progressFill.css('width', pct + '%');
+          };
+
+          $track.on('init reInit afterChange', function (event, slick, current) {
+            updateProgress(current, slick);
+          });
+
+          // In case init already fired before binding
+          var existing = $track.slick('getSlick');
+          updateProgress(existing.currentSlide, existing);
+        }
       }
 
       function disableSlick() {
