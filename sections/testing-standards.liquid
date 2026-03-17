@@ -1833,11 +1833,9 @@
 
   .facility-tabs__nav {
     display: inline-flex;
-    gap: 0;
+    gap: 32px;
+    font-size: 1.1rem;
     margin-bottom: 10px;
-    font-size: clamp(1.5em, 2vw, 3em);
-    line-height: clamp(1em, 1.5vw, 1.3em);
-    width: 100%;
   }
 
   .facility-tabs__nav-button {
@@ -1989,6 +1987,9 @@
       </button>
     </div>
 
+    <div class="facility-tabs__underline" aria-hidden="true">
+      <div class="facility-tabs__underline-indicator"></div>
+    </div>
 
     <div class="facility-tabs__panels">
       <div
