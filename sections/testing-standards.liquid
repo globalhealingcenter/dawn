@@ -269,28 +269,6 @@
     font-weight: 300;
   }
 
-  .standards-cards__cta {
-    text-align: center;
-    margin: 32px 0 0;
-  }
-
-  .standards-cards__popup-trigger {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: 1rem;
-    line-height: 1.4;
-    color: #1f5939;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    cursor: pointer;
-  }
-
-  .standards-cards__popup-trigger:hover,
-  .standards-cards__popup-trigger:focus-visible {
-    color: #174f33;
-  }
-
   @media screen and (max-width: 767px) {
     .standards-cards {
       padding: 0 0 0;
@@ -341,59 +319,6 @@
       width: auto !important;
       flex: 0 1 auto !important;
     }
-  }
-
-  .standards-cards-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .standards-cards-popup.is-open {
-    display: flex;
-  }
-
-  .standards-cards-popup__dialog {
-    position: relative;
-    max-width: min(960px, 90vw);
-    max-height: 90vh;
-    background: #ffffff;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .standards-cards-popup__image {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .standards-cards-popup__close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    background: rgba(0, 0, 0, 0.58);
-    border: none;
-    color: #ffffff;
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    font-size: 18px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .standards-cards-popup__close:hover,
-  .standards-cards-popup__close:focus-visible {
-    background: rgba(0, 0, 0, 0.8);
   }
 
   .non-negotiables {
@@ -936,21 +861,6 @@
   </div>
 </section>
 
-<div class="standards-cards-popup" aria-hidden="true">
-  <div class="standards-cards-popup__dialog" role="dialog" aria-modal="true" aria-label="Complete testing process">
-    <button type="button" class="standards-cards-popup__close" aria-label="Close">
-      &times;
-    </button>
-    <img
-      class="standards-cards-popup__image"
-      src="{{ 'standard_complete_testing_process.png' | asset_url }}"
-      alt="Diagram showing the complete testing process"
-      width="960"
-      height="540"
-    >
-  </div>
-</div>
-
 {% comment %} Independent Company Section {% endcomment %}
 <section class="independent-company">
   <div class="independent-company__inner">
@@ -1072,11 +982,6 @@
         </article>
       </div>
     </div>
-  </div>
-  <div class="standards-cards__cta">
-    <button type="button" class="standards-cards__popup-trigger font-proxima">
-      See the Complete Testing Process
-    </button>
   </div>
   <div class="non-negotiables">
     <div class="non-negotiables__inner">
@@ -1314,58 +1219,6 @@
     </div>
   </div>
 </section>
-
-<script>
-  (function () {
-    function initStandardsPopup() {
-      var trigger = document.querySelector('.standards-cards__popup-trigger');
-      var popup = document.querySelector('.standards-cards-popup');
-      if (!trigger || !popup) return;
-
-      var dialog = popup.querySelector('.standards-cards-popup__dialog');
-      var closeBtn = popup.querySelector('.standards-cards-popup__close');
-
-      function openPopup() {
-        popup.classList.add('is-open');
-        popup.setAttribute('aria-hidden', 'false');
-      }
-
-      function closePopup() {
-        popup.classList.remove('is-open');
-        popup.setAttribute('aria-hidden', 'true');
-      }
-
-      trigger.addEventListener('click', function () {
-        openPopup();
-      });
-
-      popup.addEventListener('click', function (e) {
-        if (!dialog.contains(e.target)) {
-          closePopup();
-        }
-      });
-
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          closePopup();
-        });
-      }
-
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' || e.key === 'Esc') {
-          closePopup();
-        }
-      });
-    }
-
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initStandardsPopup);
-    } else {
-      initStandardsPopup();
-    }
-  })();
-</script>
 
 
 {%- comment -%}
