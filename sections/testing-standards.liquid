@@ -1939,8 +1939,19 @@
       row-gap: 24px;
     }
 
+    .facility-tabs__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
     .facility-tabs__item-icon {
-      margin-bottom: 8px;
+      flex: 0 0 auto;
+      margin-bottom: 0;
+    }
+
+    .facility-tabs__item-content {
+      flex: 1 1 auto;
     }
   }
   @media (max-width: 375px) {
