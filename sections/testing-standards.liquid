@@ -1818,6 +1818,351 @@
   </div>
 </section>
 
+
+<style>
+  .facility-tabs {
+    padding: 72px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .facility-tabs__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .facility-tabs__nav {
+    display: flex;
+    gap: 40px;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .facility-tabs__nav-button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: #a8afb0;
+    cursor: pointer;
+  }
+
+  .facility-tabs__nav-button.is-active {
+    color: #454a4c;
+  }
+
+  .facility-tabs__underline {
+    height: 2px;
+    background: #d5d9d8;
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .facility-tabs__underline-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 33.3333%;
+    height: 2px;
+    background: #454a4c;
+    transition: transform 250ms ease;
+  }
+
+  .facility-tabs__panels {
+    margin-top: 8px;
+  }
+
+  .facility-tabs__panel {
+    display: none;
+  }
+
+  .facility-tabs__panel.is-active {
+    display: block;
+  }
+
+  .facility-tabs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .facility-tabs__item-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid #d5d9d8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .facility-tabs__item-icon img {
+    max-width: 32px;
+    max-height: 32px;
+    display: block;
+  }
+
+  .facility-tabs__item-title {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    font-weight: 600;
+    color: #174f33;
+    margin: 0 0 0.5rem;
+  }
+
+  .facility-tabs__item-text {
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: #2a3530;
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .facility-tabs {
+      padding: 56px 0 64px;
+    }
+
+    .facility-tabs__inner {
+      padding: 0 20px;
+    }
+
+    .facility-tabs__nav {
+      gap: 24px;
+      font-size: 1.1rem;
+      overflow-x: auto;
+    }
+
+    .facility-tabs__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+
+    .facility-tabs__item-icon {
+      margin-bottom: 8px;
+    }
+  }
+</style>
+
+<section class="facility-tabs">
+  <div class="facility-tabs__inner">
+    <div class="facility-tabs__nav" role="tablist">
+      <button
+        type="button"
+        class="facility-tabs__nav-button is-active"
+        data-tab-target="facility"
+        role="tab"
+        aria-selected="true"
+      >
+        Facility
+      </button>
+      <button
+        type="button"
+        class="facility-tabs__nav-button"
+        data-tab-target="process"
+        role="tab"
+        aria-selected="false"
+      >
+        Process
+      </button>
+      <button
+        type="button"
+        class="facility-tabs__nav-button"
+        data-tab-target="innovations"
+        role="tab"
+        aria-selected="false"
+      >
+        Innovations
+      </button>
+    </div>
+
+    <div class="facility-tabs__underline" aria-hidden="true">
+      <div class="facility-tabs__underline-indicator"></div>
+    </div>
+
+    <div class="facility-tabs__panels">
+      <div
+        class="facility-tabs__panel is-active"
+        data-tab-panel="facility"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Facility: 3 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_facility_icon_1.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Toxin-Free Construction
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              We built using magnesium oxide board instead of standard drywall. All grout, epoxy flooring, and paint
+              throughout the facility are VOC-free.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_facility_icon_2.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Healthy Work Environment
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              An advanced air purification system and overhead lights mimic sunlight to support our teams’ physical and
+              mental well-being.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_facility_icon_3.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Climate-Controlled Storage
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              All raw and finished products are stored at controlled temperatures to preserve freshness and prevent early
+              degradation.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div
+        class="facility-tabs__panel"
+        data-tab-panel="process"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Process: 5 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_process_icon_1.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Raw Material Qualification
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              Each ingredient is evaluated against our internal standards for identity, purity, and ethical sourcing before
+              it ever enters production.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_process_icon_2.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Small-Batch Production
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              We manufacture in smaller batches to maintain tighter control over consistency, quality, and freshness.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_process_icon_3.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              In-Process Checks
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              Critical control points are monitored throughout blending, encapsulation, and bottling to ensure every batch
+              stays within spec.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_process_icon_4.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Finished Product Testing
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              We verify label claims and screen for contaminants on the finished product before it’s cleared for release.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_process_icon_5.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Batch Traceability
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              Every lot can be traced back to the farms and suppliers we partner with, along with the tests it passed.
+            </p>
+          </article>
+        </div>
+      </div>
+
+      <div
+        class="facility-tabs__panel"
+        data-tab-panel="innovations"
+        role="tabpanel"
+      >
+        <div class="facility-tabs__grid">
+          <!-- Innovations: 4 items -->
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_innovations_icon_1.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Custom Equipment Design
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              We work with engineers to design equipment around our formulas instead of forcing formulas to fit standard
+              machines.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_innovations_icon_2.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Gentle Processing
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              Low-heat processes help protect heat-sensitive botanicals and nutrients, preserving their natural profile.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_innovations_icon_3.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Thoughtful Packaging
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              We use glass bottles and recyclable materials wherever possible to better protect your supplements and the
+              planet.
+            </p>
+          </article>
+
+          <article class="facility-tabs__item">
+            <div class="facility-tabs__item-icon">
+              <img src="{{ 'standard_innovations_icon_4.png' | asset_url }}" alt="">
+            </div>
+            <h3 class="facility-tabs__item-title font-proxima">
+              Continuous Improvement
+            </h3>
+            <p class="facility-tabs__item-text font-proxima">
+              Feedback from our in-house team and customers feeds back into product and process improvements over time.
+            </p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 {%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
