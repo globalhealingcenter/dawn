@@ -1841,14 +1841,18 @@
   .facility-tabs__nav-button {
     background: none;
     border: none;
-    padding: 0 0 4px;
+    padding: 0 0 24px;
     font: inherit;
     color: #a8afb0;
     cursor: pointer;
+    border-bottom: 1px solid;
+    width: 100%;
+    flex: 0 0 33%;
   }
 
   .facility-tabs__nav-button.is-active {
     color: #454a4c;
+    font-weight: 600;
   }
 
   .facility-tabs__underline {
@@ -1869,7 +1873,7 @@
   }
 
   .facility-tabs__panels {
-    margin-top: 8px;
+    margin-top: 20px;
   }
 
   .facility-tabs__panel {
@@ -1904,18 +1908,21 @@
   }
 
   .facility-tabs__item-title {
-    font-size: 1.1rem;
-    line-height: 1.4;
     font-weight: 600;
     color: #174f33;
     margin: 0 0 0.5rem;
+    font-size: clamp(1.4em, 3vw, 2em);
+    line-height: clamp(1em, 1.5vw, 1.3em);
   }
 
   .facility-tabs__item-text {
-    font-size: 0.98rem;
-    line-height: 1.5;
     color: #2a3530;
     margin: 0;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-top: 13px;
   }
 
   @media (max-width: 767px) {
@@ -1928,9 +1935,13 @@
     }
 
     .facility-tabs__nav {
-      gap: 20px;
-      font-size: 1rem;
-      overflow-x: auto;
+      display: inline-flex;
+      margin-bottom: 10px;
+      font-size: clamp(2.5em, 2vw, 4em);
+      line-height: clamp(1em, 1.5vw, 1.3em);
+      width: 100%;
+      font-weight: 400;
+      letter-spacing: 0;
     }
 
     .facility-tabs__grid {
@@ -1976,9 +1987,6 @@
       </button>
     </div>
 
-    <div class="facility-tabs__underline" aria-hidden="true">
-      <div class="facility-tabs__underline-indicator"></div>
-    </div>
 
     <div class="facility-tabs__panels">
       <div
