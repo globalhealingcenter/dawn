@@ -1583,6 +1583,120 @@
     });
   })();
 </script>
+<script>
+  (function () {
+    function initMethodologyCardsSlick() {
+      if (typeof window.jQuery === 'undefined') return false;
+
+      var $ = window.jQuery;
+      if (!$.fn || !$.fn.slick) return false;
+
+      var $track = $('.methodology-cards__track');
+      if (!$track.length) return true;
+
+      function enableSlick() {
+        if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
+
+        $track.slick({
+          infinite: true,
+          arrows: false,
+          dots: false,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '12%',
+          variableWidth: false,
+          speed: 450,
+          draggable: true,
+          swipe: true,
+          touchMove: true,
+          mobileFirst: true
+        });
+      }
+
+      function disableSlick() {
+        if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
+          $track.slick('unslick');
+        }
+      }
+
+      enableSlick();
+
+      if (!$track.data('slick-bound')) {
+        window.addEventListener('resize', function () {
+          disableSlick();
+          enableSlick();
+        });
+        $track.data('slick-bound', true);
+      }
+
+      return true;
+    }
+
+    function initMethodologyPopup() {
+      var trigger = document.querySelector('.methodology-cards__popup-trigger');
+      var popup = document.querySelector('.methodology-cards-popup');
+      if (!trigger || !popup) return;
+
+      var dialog = popup.querySelector('.methodology-cards-popup__dialog');
+      var closeBtn = popup.querySelector('.methodology-cards-popup__close');
+
+      function openPopup() {
+        popup.classList.add('is-open');
+        popup.setAttribute('aria-hidden', 'false');
+      }
+
+      function closePopup() {
+        popup.classList.remove('is-open');
+        popup.setAttribute('aria-hidden', 'true');
+      }
+
+      trigger.addEventListener('click', function () {
+        openPopup();
+      });
+
+      popup.addEventListener('click', function (e) {
+        if (!dialog.contains(e.target)) {
+          closePopup();
+        }
+      });
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          closePopup();
+        });
+      }
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          closePopup();
+        }
+      });
+    }
+
+    function tryInit(attemptsLeft) {
+      if (initMethodologyCardsSlick() || attemptsLeft <= 0) return;
+      window.setTimeout(function () {
+        tryInit(attemptsLeft - 1);
+      }, 200);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', function () {
+        tryInit(20);
+        initMethodologyPopup();
+      });
+    } else {
+      tryInit(20);
+      initMethodologyPopup();
+    }
+
+    window.addEventListener('load', function () {
+      tryInit(20);
+    });
+  })();
+</script>
 {% schema %}
 {
   "name": "Testing Standards",
