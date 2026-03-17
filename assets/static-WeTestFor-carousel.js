@@ -43,7 +43,12 @@
         step = cardW + gap;
         var containerW = outer.offsetWidth;
         var fullVisible = Math.floor(containerW / step);
-        peekOffset = (containerW - fullVisible * step + gap) / 2;
+
+        if (window.innerWidth >= 768) {
+          peekOffset = 0;
+        } else {
+          peekOffset = (containerW - fullVisible * step + gap) / 2;
+        }
       }
   
       function tx(idx, drag) {
