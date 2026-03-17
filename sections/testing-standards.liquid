@@ -851,6 +851,221 @@
   }
 
 }
+
+.methodology-cards {
+    padding: 72px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .methodology-cards__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .methodology-cards__heading {
+    font-size: clamp(2.8rem, 3.4vw, 4.3rem);
+    line-height: 1.2;
+    color: #1f5939;
+    text-align: left;
+    margin: 0 0 32px;
+    font-weight: 400;
+  }
+
+  .methodology-cards__slider {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .methodology-cards__track {
+    display: flex;
+  }
+
+  .methodology-cards__item {
+    background-color: #ffffff;
+    border: 2px solid #174f33;
+    height: 100%;
+  }
+
+  .methodology-cards__item:last-child {
+    border-right: 2px solid #174f33;
+  }
+
+  .methodology-cards__media {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .methodology-cards__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .methodology-cards__content {
+    padding: 24px 24px 28px;
+  }
+
+  .methodology-cards__title {
+    font-size: clamp(1.4em, 3vw, 1.7em);
+    line-height: 1.2;
+    color: #174f33;
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .methodology-cards__text {
+    font-size: clamp(1.6rem, 1.4vw, 1.8rem);
+    line-height: clamp(1.2em, 2.2vw, 1.2em);
+    color: #2f3b34;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .methodology-cards__cta {
+    text-align: center;
+    margin: 32px 0 0;
+  }
+
+  .methodology-cards__popup-trigger {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: clamp(1.5em, 1.2vw, 1.7em);
+    line-height: 1.4;
+    color: #1f5939;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .methodology-cards__popup-trigger:hover,
+  .methodology-cards__popup-trigger:focus-visible {
+    color: #174f33;
+  }
+
+  .methodology-cards__progress {
+    margin: 24px auto 0;
+    max-width: 260px;
+  }
+
+  .methodology-cards__progress-track {
+    width: 100%;
+    height: 4px;
+    background: #e3e6e2;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .methodology-cards__progress-fill {
+    width: 0;
+    height: 100%;
+    background: #1f5939;
+    border-radius: inherit;
+    transition: width 280ms ease;
+  }
+
+  @media screen and (min-width: 768px) {
+    .methodology-cards__track {
+      display: grid !important;
+      grid-template-columns: repeat(3, 1fr);
+      transform: none !important;
+    }
+
+    .methodology-cards__item {
+      width: auto !important;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .methodology-cards__inner {
+      padding: 0;
+    }
+
+    .methodology-cards__item {
+      height: stretch;
+    }
+
+    .methodology-cards__slider .slick-list {
+      overflow: visible;
+      padding: 0 12% 0 12%;
+    }
+
+    .methodology-cards__slider .slick-track {
+      display: flex;
+    }
+
+    .methodology-cards__slider .slick-slide {
+      height: inherit;
+      margin: 0 10px;
+    }
+
+    .methodology-cards__item {
+      width: 100%;
+    }
+    .methodology-cards__heading {
+      padding: 0 40px;
+    }
+    .methodology-cards__progress-fill{
+      display: block !important;
+    }
+  }
+
+  .methodology-cards-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .methodology-cards-popup.is-open {
+    display: flex;
+  }
+
+  .methodology-cards-popup__dialog {
+    position: relative;
+    max-width: min(960px, 90vw);
+    max-height: 90vh;
+    background: #ffffff00;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+    border-radius: 4px;
+    overflow: auto;
+  }
+
+  .methodology-cards-popup__image {
+    display: block;
+    width: 100%;
+    max-height: 700px;
+    object-fit: cover;
+  }
+
+  .methodology-cards-popup__close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.58);
+    border: none;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    font-size: 18px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .methodology-cards-popup__close:hover,
+  .methodology-cards-popup__close:focus-visible {
+    background: rgba(0, 0, 0, 0.8);
+  }
 {%- endstyle -%}
 
 {% comment %} Hero Banner Section {% endcomment %}
@@ -1223,223 +1438,6 @@
     </div>
   </div>
 </section>
-
-<style>
-  .methodology-cards {
-    padding: 72px 0 80px;
-    background-color: #ffffff;
-  }
-
-  .methodology-cards__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .methodology-cards__heading {
-    font-size: clamp(2.8rem, 3.4vw, 4.3rem);
-    line-height: 1.2;
-    color: #1f5939;
-    text-align: left;
-    margin: 0 0 32px;
-    font-weight: 400;
-  }
-
-  .methodology-cards__slider {
-    overflow: hidden;
-    position: relative;
-  }
-
-  .methodology-cards__track {
-    display: flex;
-  }
-
-  .methodology-cards__item {
-    background-color: #ffffff;
-    border: 2px solid #174f33;
-    height: 100%;
-  }
-
-  .methodology-cards__item:last-child {
-    border-right: 2px solid #174f33;
-  }
-
-  .methodology-cards__media {
-    width: 100%;
-    height: 220px;
-    overflow: hidden;
-  }
-
-  .methodology-cards__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .methodology-cards__content {
-    padding: 24px 24px 28px;
-  }
-
-  .methodology-cards__title {
-    font-size: clamp(1.4em, 3vw, 1.7em);
-    line-height: 1.2;
-    color: #174f33;
-    margin: 0 0 0.75rem;
-    font-weight: 600;
-  }
-
-  .methodology-cards__text {
-    font-size: clamp(1.6rem, 1.4vw, 1.8rem);
-    line-height: clamp(1.2em, 2.2vw, 1.2em);
-    color: #2f3b34;
-    margin: 0;
-    font-weight: 300;
-  }
-
-  .methodology-cards__cta {
-    text-align: center;
-    margin: 32px 0 0;
-  }
-
-  .methodology-cards__popup-trigger {
-    background: none;
-    border: none;
-    padding: 0;
-    font-size: clamp(1.5em, 1.2vw, 1.7em);
-    line-height: 1.4;
-    color: #1f5939;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    cursor: pointer;
-  }
-
-  .methodology-cards__popup-trigger:hover,
-  .methodology-cards__popup-trigger:focus-visible {
-    color: #174f33;
-  }
-
-  .methodology-cards__progress {
-    margin: 24px auto 0;
-    max-width: 260px;
-  }
-
-  .methodology-cards__progress-track {
-    width: 100%;
-    height: 4px;
-    background: #e3e6e2;
-    border-radius: 999px;
-    overflow: hidden;
-  }
-
-  .methodology-cards__progress-fill {
-    width: 0;
-    height: 100%;
-    background: #1f5939;
-    border-radius: inherit;
-    transition: width 280ms ease;
-  }
-
-  @media screen and (min-width: 768px) {
-    .methodology-cards__track {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr);
-      transform: none !important;
-    }
-
-    .methodology-cards__item {
-      width: auto !important;
-    }
-  }
-
-  @media screen and (max-width: 767px) {
-    .methodology-cards__inner {
-      padding: 0;
-    }
-
-    .methodology-cards__item {
-      height: stretch;
-    }
-
-    .methodology-cards__slider .slick-list {
-      overflow: visible;
-      padding: 0 12% 0 12%;
-    }
-
-    .methodology-cards__slider .slick-track {
-      display: flex;
-    }
-
-    .methodology-cards__slider .slick-slide {
-      height: inherit;
-      margin: 0 10px;
-    }
-
-    .methodology-cards__item {
-      width: 100%;
-    }
-    .methodology-cards__heading {
-      padding: 0 40px;
-    }
-    .methodology-cards__progress-fill{
-      display: block !important;
-    }
-  }
-
-  .methodology-cards-popup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-  }
-
-  .methodology-cards-popup.is-open {
-    display: flex;
-  }
-
-  .methodology-cards-popup__dialog {
-    position: relative;
-    max-width: min(960px, 90vw);
-    max-height: 90vh;
-    background: #ffffff00;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
-    border-radius: 4px;
-    overflow: auto;
-  }
-
-  .methodology-cards-popup__image {
-    display: block;
-    width: 100%;
-    max-height: 700px;
-    object-fit: cover;
-  }
-
-  .methodology-cards-popup__close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    background: rgba(0, 0, 0, 0.58);
-    border: none;
-    color: #ffffff;
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
-    font-size: 18px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
-
-  .methodology-cards-popup__close:hover,
-  .methodology-cards-popup__close:focus-visible {
-    background: rgba(0, 0, 0, 0.8);
-  }
-</style>
 
 <section class="methodology-cards">
   <div class="methodology-cards__inner">
