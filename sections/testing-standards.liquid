@@ -977,16 +977,14 @@
 
 .src__card {
   flex: 0 0 calc((100% - 2 * 2.4rem) / 3);
-  min-width: calc((100% - 2 * 2.4rem) / 3);
-  background: rgba(14, 29, 14, 0.58);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 8px;
-  padding: 2rem 2rem 2.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+    min-width: calc((100% - 2 * 2.4rem) / 3);
+    background: rgb(0 0 0 / 36%);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 2rem 2rem 2.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
 }
 
 .src__stars {
@@ -1003,34 +1001,35 @@
 
 .src__product,
 .src__product a {
-  font-size: clamp(1.55rem, 1.7vw, 2.05rem);
+  font-size: clamp(1.55rem, 1.7vw, 2.45rem);
   line-height: 1.2;
   font-weight: 700;
   color: #F9F2E8;
   margin: 0;
   text-align: left;
   text-decoration: none;
+  border-bottom: 1px solid #ffac00;
+  padding-bottom: 10px;
 }
 
 .src__text {
   font-size: clamp(1rem, 0.86vw, 1.75em);
     line-height: clamp(1.15em, 1vw, 1.6em);
     color: #F9F2E8;
-    margin: 0;
-    min-height: 7rem;
+    margin: 0 0 15px;
     text-align: left;
     font-weight: 300;
     opacity: 0.96;
 }
 
 .src__meta {
-  font-size: clamp(1rem, 1vw, 1.15rem);
-  line-height: clamp(1.25rem, 1.3vw, 1.5rem);
-  color: #f9f2e8;
-  margin: 0;
-  text-align: left;
-  font-weight: 400;
-  opacity: 0.96;
+  font-size: clamp(1rem, 0.86vw, 1.75em);
+    line-height: clamp(1.15em, 1vw, 1.6em);
+    color: #f9f2e8;
+    margin: 0;
+    text-align: left;
+    font-weight: 400;
+    opacity: 0.96;
 }
 
 .src__meta strong {
@@ -1041,7 +1040,10 @@
 
 .src__meta ul {
   margin: 0;
-  padding-left: 1.4rem;
+    padding-left: 22px;
+    /* list-style: none; */
+    line-height: 1.4;
+    font-weight: 300;
 }
 
 .src__meta li {
