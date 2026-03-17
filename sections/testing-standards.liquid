@@ -1545,6 +1545,192 @@
   </div>
 </div>
 
+
+<style>
+  .inhouse-manufacturing {
+    padding: 80px 0;
+    background-color: #ffffff;
+  }
+
+  .inhouse-manufacturing__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 56px;
+    align-items: center;
+  }
+
+  .inhouse-manufacturing__media {
+    order: 1;
+  }
+
+  .inhouse-manufacturing__image-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .inhouse-manufacturing__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .inhouse-manufacturing__content {
+    order: 2;
+  }
+
+  .inhouse-manufacturing__eyebrow {
+    font-family: "Miller Text", Georgia, serif;
+    font-size: clamp(2.1rem, 2.4vw, 2.6rem);
+    line-height: 1.3;
+    color: #1f5939;
+    margin: 0 0 1rem;
+  }
+
+  .inhouse-manufacturing__heading {
+    font-size: clamp(2.2rem, 2.5vw, 2.9rem);
+    line-height: 1.15;
+    color: #1f5939;
+    margin: 0 0 1.5rem;
+    font-weight: 500;
+  }
+
+  .inhouse-manufacturing__subheading {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #2a3530;
+    font-weight: 600;
+    margin: 0 0 1rem;
+  }
+
+  .inhouse-manufacturing__body {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #2a3530;
+    margin: 0 0 1.75rem;
+  }
+
+  .inhouse-manufacturing__cert-copy {
+    font-size: 0.96rem;
+    line-height: 1.5;
+    color: #2a3530;
+    text-align: center;
+    margin: 1.5rem 0 1.25rem;
+  }
+
+  .inhouse-manufacturing__icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .inhouse-manufacturing__icon {
+    flex: 0 0 auto;
+    width: 64px;
+    height: 64px;
+  }
+
+  .inhouse-manufacturing__icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 899px) {
+    .inhouse-manufacturing__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .inhouse-manufacturing {
+      padding: 56px 0 64px;
+    }
+
+    .inhouse-manufacturing__inner {
+      padding: 0 20px;
+    }
+
+    .inhouse-manufacturing__media {
+      order: 1;
+    }
+
+    .inhouse-manufacturing__content {
+      order: 2;
+      text-align: left;
+    }
+
+    .inhouse-manufacturing__cert-copy {
+      margin-top: 1.75rem;
+    }
+
+    .inhouse-manufacturing__icons {
+      margin-top: 0.5rem;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+  }
+</style>
+
+<section class="inhouse-manufacturing">
+  <div class="inhouse-manufacturing__inner">
+    <div class="inhouse-manufacturing__media">
+      <div class="inhouse-manufacturing__image-wrap">
+        <img
+          class="inhouse-manufacturing__image"
+          src="{{ 'standard_inhouse_manufacturing.jpg' | asset_url }}"
+          alt="In-house manufacturing equipment"
+          width="960"
+          height="640"
+        >
+      </div>
+    </div>
+
+    <div class="inhouse-manufacturing__content">
+      <p class="inhouse-manufacturing__eyebrow font-miller">
+        03.<br>
+        In-House<br>
+        Manufacturing
+      </p>
+      <p class="inhouse-manufacturing__subheading font-proxima">
+        The facility we wanted didn’t exist. So we built two.
+      </p>
+      <p class="inhouse-manufacturing__body font-proxima">
+        We’re one of the few supplement companies that manufacture their own products. That gives us control over every
+        step, from sourcing to bottling, so you can trust what ends up in your hands.
+      </p>
+      <p class="inhouse-manufacturing__body font-proxima">
+        Our two facilities are monitored under strict cGMP and USDA Organic requirements and are designed to minimize
+        environmental impact while prioritizing the health and safety of our staff and customers.
+      </p>
+
+      <p class="inhouse-manufacturing__cert-copy font-proxima">
+        We maintain third-party certifications that reflect our commitment to quality &amp; safety.
+      </p>
+
+      <div class="inhouse-manufacturing__icons">
+        <span class="inhouse-manufacturing__icon">
+          <img src="{{ 'standard_cert_icon_1.png' | asset_url }}" alt="Certification 1">
+        </span>
+        <span class="inhouse-manufacturing__icon">
+          <img src="{{ 'standard_cert_icon_2.png' | asset_url }}" alt="Certification 2">
+        </span>
+        <span class="inhouse-manufacturing__icon">
+          <img src="{{ 'standard_cert_icon_3.png' | asset_url }}" alt="Certification 3">
+        </span>
+        <span class="inhouse-manufacturing__icon">
+          <img src="{{ 'standard_cert_icon_4.png' | asset_url }}" alt="Certification 4">
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
 {%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
