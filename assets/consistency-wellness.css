@@ -196,6 +196,7 @@
     width: 240px;
     font-size: 16px;
     line-height: 19.2px;
+    border-radius: 4px;
     color: #22472D;
     display: flex;
     justify-content: center;
