@@ -1070,6 +1070,335 @@
   .methodology-cards-popup__close:focus-visible {
     background: rgba(0, 0, 0, 0.8);
   }
+
+  .inhouse-manufacturing {
+    padding: 30px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .inhouse-manufacturing__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+    gap: 56px;
+    align-items: center;
+    border-top: 1px solid #174f33;
+    padding-top: 100px;
+  }
+
+  .inhouse-manufacturing__media {
+    order: 2;
+  }
+
+  .inhouse-manufacturing__image-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .inhouse-manufacturing__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .inhouse-manufacturing__content {
+    order: 1;
+  }
+
+  .inhouse-manufacturing__eyebrow {
+    font-family: "Miller Text", Georgia, serif;
+    font-size: clamp(2.1rem, 2.4vw, 2.6rem);
+    line-height: 1.3;
+    color: #1f5939;
+    margin: 0 0 1rem;
+  }
+
+  .inhouse-manufacturing__heading {
+    font-size: clamp(2.2rem, 2.5vw, 2.9rem);
+    line-height: 1.15;
+    color: #1f5939;
+    margin: 0 0 1.5rem;
+    font-weight: 500;
+  }
+
+  p.inhouse-manufacturing__number {
+    margin: 0 0 0.75rem;
+    font-size: clamp(2.5em, 3vw, 4em);
+    line-height: clamp(0.9em, 1.5vw, 1.3em);
+    color: #174f33;
+    font-style: italic;
+  }
+
+  h2.inhouse-manufacturing__title {
+      margin: 0 0 2.5rem;
+      font-size: clamp(2.5em, 3vw, 4em);
+      line-height: clamp(1em, 1.5vw, 1.3em);
+      color: #174f33;
+      font-weight: 500;
+  }
+
+  .inhouse-manufacturing__subheading {
+    margin: 0 0 2.5rem;
+    font-size: clamp(2rem, 1.4vw, 2.4rem);
+    line-height: clamp(1.3em, 1vw, 2.4em);
+    color: #616161;
+    font-weight: 600;
+    max-width: 420px;
+  }
+
+  .inhouse-manufacturing__body {
+    margin: 0 0 1.75rem;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    color: #2f3b34;
+    font-weight: 300;
+    max-width: 510px;
+  }
+
+  .inhouse-manufacturing__cert-copy {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    color: #2a3530;
+    text-align: center;
+    margin: 1.5rem 0 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .inhouse-manufacturing__icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: nowrap;
+  }
+
+  .inhouse-manufacturing__icon {
+    flex: 0 0 auto;
+    width: 85px;
+    height: 85px;
+  }
+
+  .inhouse-manufacturing__icon img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .inhouse-only-desktop {
+    display: none;
+  }
+
+  .inhouse-only-mobile {
+    display: block;
+  }
+
+  @media (min-width: 768px) {
+    .inhouse-only-desktop {
+      display: block;
+    }
+
+    .inhouse-only-mobile {
+      display: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .inhouse-manufacturing__inner {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .inhouse-manufacturing {
+      padding: 0px 0 64px;
+    }
+
+    .inhouse-manufacturing__inner {
+      margin: 0 20px;
+      padding-top: 70px;
+    }
+
+    .inhouse-manufacturing__media {
+      order: 1;
+    }
+
+    .inhouse-manufacturing__content {
+      order: 2;
+      text-align: left;
+    }
+
+    .inhouse-manufacturing__cert-copy {
+      margin-top: 1.75rem;
+    }
+
+    .inhouse-manufacturing__icons {
+      margin-top: 0.5rem;
+      justify-content: center;
+      flex-wrap: nowrap;
+    }
+    .inhouse-manufacturing__icon {
+      width: 100%;
+      max-width: 55px;
+      height: 55px;
+  }
+  
+  
+  }
+  @media (max-width: 375px) {
+    .inhouse-manufacturing__icon {
+      width: 100%;
+      max-width: 45px;
+      height: 55px;
+    }
+    .inhouse-manufacturing__icons {
+      flex-wrap: wrap;
+      row-gap: 0;
+  }
+  }
+
+  .facility-tabs {
+    padding: 72px 0 80px;
+    background-color: #ffffff;
+  }
+
+  .facility-tabs__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .facility-tabs__nav {
+    display: inline-flex;
+    gap: 0;
+    margin-bottom: 10px;
+    font-size: clamp(1.5em, 2vw, 3em);
+    line-height: clamp(1em, 1.5vw, 1.3em);
+    width: 100%;
+  }
+
+  .facility-tabs__nav-button {
+    background: none;
+    border: none;
+    padding: 0 0 24px;
+    font: inherit;
+    color: #a8afb0;
+    cursor: pointer;
+    border-bottom: 1px solid;
+    width: 100%;
+    flex: 0 0 33%;
+  }
+
+  .facility-tabs__nav-button.is-active {
+    color: #454a4c;
+    font-weight: 600;
+  }
+
+  .facility-tabs__underline {
+    display: none;
+  }
+
+  .facility-tabs__panels {
+    margin-top: 20px;
+  }
+
+  .facility-tabs__panel {
+    display: none;
+  }
+
+  .facility-tabs__panel.is-active {
+    display: block;
+  }
+
+  .facility-tabs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+  }
+
+  .facility-tabs__item-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 14px;
+  }
+
+  .facility-tabs__item-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+  }
+
+  .facility-tabs__item-title {
+    font-weight: 600;
+    color: #174f33;
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.4em, 3vw, 2em);
+    line-height: clamp(1em, 1.5vw, 1.3em);
+  }
+
+  .facility-tabs__item-text {
+    color: #2a3530;
+    margin: 0;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+    font-weight: 300;
+    letter-spacing: 0;
+    margin-top: 13px;
+  }
+
+  @media (max-width: 767px) {
+    .facility-tabs {
+      padding: 56px 0 64px;
+    }
+
+    .facility-tabs__inner {
+      padding: 0 20px;
+    }
+
+    .facility-tabs__nav {
+      display: inline-flex;
+      margin-bottom: 10px;
+      width: 100%;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .facility-tabs__nav-button {
+      padding: 0 0 18px;
+  }
+
+    .facility-tabs__grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 24px;
+    }
+
+    .facility-tabs__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .facility-tabs__item-icon {
+      flex: 0 0 auto;
+      margin-bottom: 0;
+    }
+
+    .facility-tabs__item-content {
+      flex: 1 1 auto;
+    }
+  }
+  @media (max-width: 375px) {
+    .facility-tabs__nav-button {
+      text-align: left;
+  }
+  }
 {%- endstyle -%}
 
 {% comment %} Hero Banner Section {% endcomment %}
@@ -1545,197 +1874,6 @@ verified for identity and purity. We test against these standards to rule out an
 </div>
 
 
-<style>
-  .inhouse-manufacturing {
-    padding: 30px 0 80px;
-    background-color: #ffffff;
-  }
-
-  .inhouse-manufacturing__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-    gap: 56px;
-    align-items: center;
-    border-top: 1px solid #174f33;
-    padding-top: 100px;
-  }
-
-  .inhouse-manufacturing__media {
-    order: 2;
-  }
-
-  .inhouse-manufacturing__image-wrap {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .inhouse-manufacturing__image {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .inhouse-manufacturing__content {
-    order: 1;
-  }
-
-  .inhouse-manufacturing__eyebrow {
-    font-family: "Miller Text", Georgia, serif;
-    font-size: clamp(2.1rem, 2.4vw, 2.6rem);
-    line-height: 1.3;
-    color: #1f5939;
-    margin: 0 0 1rem;
-  }
-
-  .inhouse-manufacturing__heading {
-    font-size: clamp(2.2rem, 2.5vw, 2.9rem);
-    line-height: 1.15;
-    color: #1f5939;
-    margin: 0 0 1.5rem;
-    font-weight: 500;
-  }
-
-  p.inhouse-manufacturing__number {
-    margin: 0 0 0.75rem;
-    font-size: clamp(2.5em, 3vw, 4em);
-    line-height: clamp(0.9em, 1.5vw, 1.3em);
-    color: #174f33;
-    font-style: italic;
-  }
-
-  h2.inhouse-manufacturing__title {
-      margin: 0 0 2.5rem;
-      font-size: clamp(2.5em, 3vw, 4em);
-      line-height: clamp(1em, 1.5vw, 1.3em);
-      color: #174f33;
-      font-weight: 500;
-  }
-
-  .inhouse-manufacturing__subheading {
-    margin: 0 0 2.5rem;
-    font-size: clamp(2rem, 1.4vw, 2.4rem);
-    line-height: clamp(1.3em, 1vw, 2.4em);
-    color: #616161;
-    font-weight: 600;
-    max-width: 420px;
-  }
-
-  .inhouse-manufacturing__body {
-    margin: 0 0 1.75rem;
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2f3b34;
-    font-weight: 300;
-    max-width: 510px;
-  }
-
-  .inhouse-manufacturing__cert-copy {
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2a3530;
-    text-align: center;
-    margin: 1.5rem 0 1.25rem;
-    font-weight: 600;
-    letter-spacing: 0;
-  }
-
-  .inhouse-manufacturing__icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: nowrap;
-  }
-
-  .inhouse-manufacturing__icon {
-    flex: 0 0 auto;
-    width: 85px;
-    height: 85px;
-  }
-
-  .inhouse-manufacturing__icon img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .inhouse-only-desktop {
-    display: none;
-  }
-
-  .inhouse-only-mobile {
-    display: block;
-  }
-
-  @media (min-width: 768px) {
-    .inhouse-only-desktop {
-      display: block;
-    }
-
-    .inhouse-only-mobile {
-      display: none;
-    }
-  }
-
-  @media (max-width: 899px) {
-    .inhouse-manufacturing__inner {
-      grid-template-columns: minmax(0, 1fr);
-      gap: 32px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .inhouse-manufacturing {
-      padding: 0px 0 64px;
-    }
-
-    .inhouse-manufacturing__inner {
-      margin: 0 20px;
-      padding-top: 70px;
-    }
-
-    .inhouse-manufacturing__media {
-      order: 1;
-    }
-
-    .inhouse-manufacturing__content {
-      order: 2;
-      text-align: left;
-    }
-
-    .inhouse-manufacturing__cert-copy {
-      margin-top: 1.75rem;
-    }
-
-    .inhouse-manufacturing__icons {
-      margin-top: 0.5rem;
-      justify-content: center;
-      flex-wrap: nowrap;
-    }
-    .inhouse-manufacturing__icon {
-      width: 100%;
-      max-width: 55px;
-      height: 55px;
-  }
-  
-  
-  }
-  @media (max-width: 375px) {
-    .inhouse-manufacturing__icon {
-      width: 100%;
-      max-width: 45px;
-      height: 55px;
-    }
-    .inhouse-manufacturing__icons {
-      flex-wrap: wrap;
-      row-gap: 0;
-  }
-  }
-</style>
-
 <section class="inhouse-manufacturing">
   <div class="inhouse-manufacturing__inner">
     <div class="inhouse-manufacturing__media">
@@ -1817,148 +1955,6 @@ verified for identity and purity. We test against these standards to rule out an
   </div>
 </section>
 
-
-<style>
-  .facility-tabs {
-    padding: 72px 0 80px;
-    background-color: #ffffff;
-  }
-
-  .facility-tabs__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  .facility-tabs__nav {
-    display: inline-flex;
-    gap: 0;
-    margin-bottom: 10px;
-    font-size: clamp(1.5em, 2vw, 3em);
-    line-height: clamp(1em, 1.5vw, 1.3em);
-    width: 100%;
-  }
-
-  .facility-tabs__nav-button {
-    background: none;
-    border: none;
-    padding: 0 0 24px;
-    font: inherit;
-    color: #a8afb0;
-    cursor: pointer;
-    border-bottom: 1px solid;
-    width: 100%;
-    flex: 0 0 33%;
-  }
-
-  .facility-tabs__nav-button.is-active {
-    color: #454a4c;
-    font-weight: 600;
-  }
-
-  .facility-tabs__underline {
-    display: none;
-  }
-
-  .facility-tabs__panels {
-    margin-top: 20px;
-  }
-
-  .facility-tabs__panel {
-    display: none;
-  }
-
-  .facility-tabs__panel.is-active {
-    display: block;
-  }
-
-  .facility-tabs__grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 40px;
-  }
-
-  .facility-tabs__item-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 14px;
-  }
-
-  .facility-tabs__item-icon img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-  }
-
-  .facility-tabs__item-title {
-    font-weight: 600;
-    color: #174f33;
-    margin: 0 0 0.5rem;
-    font-size: clamp(1.4em, 3vw, 2em);
-    line-height: clamp(1em, 1.5vw, 1.3em);
-  }
-
-  .facility-tabs__item-text {
-    color: #2a3530;
-    margin: 0;
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    font-weight: 300;
-    letter-spacing: 0;
-    margin-top: 13px;
-  }
-
-  @media (max-width: 767px) {
-    .facility-tabs {
-      padding: 56px 0 64px;
-    }
-
-    .facility-tabs__inner {
-      padding: 0 20px;
-    }
-
-    .facility-tabs__nav {
-      display: inline-flex;
-      margin-bottom: 10px;
-      width: 100%;
-      font-weight: 400;
-      letter-spacing: 0;
-    }
-
-    .facility-tabs__nav-button {
-      padding: 0 0 18px;
-  }
-
-    .facility-tabs__grid {
-      grid-template-columns: minmax(0, 1fr);
-      row-gap: 24px;
-    }
-
-    .facility-tabs__item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .facility-tabs__item-icon {
-      flex: 0 0 auto;
-      margin-bottom: 0;
-    }
-
-    .facility-tabs__item-content {
-      flex: 1 1 auto;
-    }
-  }
-  @media (max-width: 375px) {
-    .facility-tabs__nav-button {
-      text-align: left;
-  }
-  }
-</style>
 
 <section class="facility-tabs">
   <div class="facility-tabs__inner">
