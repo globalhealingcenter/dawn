@@ -68,17 +68,17 @@
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
+        "custom_liquid_TxJtfK": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div style=\"margin-top:12px;font-size:12px;line-height:1.4;color:#545454;\">\n  Pay with <strong>HSA/FSA funds</strong> through Truemed.\n  <a href=\"https://app.truemed.com/qualify/tm_qual_0osddr2w2v\" \n     target=\"_blank\" \n     style=\"color:#21472D;font-weight:600;text-decoration:underline;\">\n     Check eligibility\n  </a>.\n</div>"
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
-          }
-        },
-        "custom_liquid_TxJtfK": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div style=\"margin-top:12px;font-size:12px;line-height:1.4;color:#545454;\">\n  Pay with <strong>HSA/FSA funds</strong> through Truemed.\n  <a href=\"https://app.truemed.com/qualify/tm_qual_0osddr2w2v\" \n     target=\"_blank\" \n     style=\"color:#21472D;font-weight:600;text-decoration:underline;\">\n     Check eligibility\n  </a>.\n</div>"
           }
         },
         "gh_out_of_stock_form_dAeEPR": {
@@ -136,8 +136,8 @@
         "variant_picker",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
-        "buy_buttons",
         "custom_liquid_TxJtfK",
+        "buy_buttons",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
         "abra_promotions_banner_gift_RQAc3p"
