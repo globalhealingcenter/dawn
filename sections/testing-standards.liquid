@@ -442,8 +442,71 @@
       display: none;
     }
   }
+
+  .quality-evidence {
+    position: relative;
+    background-image: linear-gradient(rgba(55, 72, 18, 0.42), rgba(55, 72, 18, 0.42)),
+      url('{{ 'quality_evidence_banner.jpg' | asset_url }}');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #ffffff;
+    min-height: 310px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 24px;
+  }
+
+  .quality-evidence__inner {
+    max-width: 930px;
+    margin: 0 auto;
+  }
+
+  .quality-evidence__title {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: clamp(2.2rem, 3.2vw, 3.4rem);
+    line-height: clamp(1.05em, 1.4vw, 1.2em);
+    font-weight: 400;
+  }
+
+  .quality-evidence__text {
+    margin: 0 auto;
+    max-width: 760px;
+    color: #ffffff;
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
+    line-height: clamp(1.3em, 1.8vw, 1.45em);
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 767px) {
+    .quality-evidence {
+      min-height: 520px;
+      padding: 56px 22px;
+      background-position: center;
+    }
+
+    .quality-evidence__inner {
+      max-width: 100%;
+    }
+
+    .quality-evidence__title {
+      margin-bottom: 22px;
+      font-size: clamp(2.2rem, 7vw, 3.2rem);
+      line-height: 1.15;
+    }
+
+    .quality-evidence__text {
+      max-width: 100%;
+      font-size: clamp(1.4rem, 5.6vw, 2.2rem);
+      line-height: 1.35;
+    }
+  }
 {%- endstyle -%}
 
+{% comment %} Hero Banner Section {% endcomment %}
 <section class="new-standard-banner section-{{ section.id }}-padding">
   <div class="new-standard-banner__content">
     <h1 class="new-standard-banner__title font-miller">
@@ -455,6 +518,7 @@
   </div>
 </section>
 
+{% comment %} Independent Company Section {% endcomment %}
 <section class="independent-company">
   <div class="independent-company__inner">
     <div class="independent-company__content">
@@ -484,6 +548,7 @@
   </div>
 </section>
 
+{% comment %} Direct-Sourced Ingredients Section {% endcomment %}
 <section class="independent-company-detail">
   <div class="independent-company-detail__inner">
     <p class="independent-company-detail__number font-miller">
@@ -503,6 +568,7 @@
   </div>
 </section>
 
+{% comment %} Standards Cards Section {% endcomment %}
 <section class="standards-cards">
   <div class="standards-cards__inner">
     <div class="standards-cards__slider">
@@ -567,66 +633,84 @@
       </div>
     </div>
   </div>
-  <div class="non-negotiables">
-    <div class="non-negotiables__inner">
-      <h2 class="non-negotiables__title font-miller">
-        Our Non-Negotiables.
-      </h2>
-      <div class="non-negotiables__grid">
-        <div class="non-negotiables__column">
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No gluten</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No soy</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No dairy</span>
-          </div>
-          <div class="non-negotiables__item font-proxima hidden-desktop">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No binders</span>
-          </div>
+</section>
+
+{% comment %} Non-Negotiables Section {% endcomment %}
+<section class="non-negotiables">
+  <div class="non-negotiables__inner">
+    <h2 class="non-negotiables__title font-miller">
+      Our Non-Negotiables.
+    </h2>
+    <div class="non-negotiables__grid">
+      <div class="non-negotiables__column">
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No gluten</span>
         </div>
-        <div class="non-negotiables__column">
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No fillers</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No preservatives</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No additives</span>
-          </div>
-          <div class="non-negotiables__item font-proxima hidden-desktop">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No artificial ingredients</span>
-          </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No soy</span>
         </div>
-        <div class="non-negotiables__column hidden-mobile">
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No binders</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No excipients</span>
-          </div>
-          <div class="non-negotiables__item font-proxima">
-            <span class="non-negotiables__icon" aria-hidden="true"></span>
-            <span>No artificial ingredients</span>
-          </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No dairy</span>
+        </div>
+        <div class="non-negotiables__item font-proxima hidden-desktop">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No binders</span>
+        </div>
+      </div>
+      <div class="non-negotiables__column">
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No fillers</span>
+        </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No preservatives</span>
+        </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No additives</span>
+        </div>
+        <div class="non-negotiables__item font-proxima hidden-desktop">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No artificial ingredients</span>
+        </div>
+      </div>
+      <div class="non-negotiables__column hidden-mobile">
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No binders</span>
+        </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No excipients</span>
+        </div>
+        <div class="non-negotiables__item font-proxima">
+          <span class="non-negotiables__icon" aria-hidden="true"></span>
+          <span>No artificial ingredients</span>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+{% comment %} Evidence of Quality Section {% endcomment %}
+<section class="quality-evidence">
+  <div class="quality-evidence__inner">
+    <h2 class="quality-evidence__title font-proxima">
+      Evidence of Quality
+    </h2>
+    <p class="quality-evidence__text font-proxima">
+      Slight variations in taste, color, aroma, and texture from batch to batch are a sign that you’re getting a 100%
+      natural supplement made from seasonally harvested ingredients.
+    </p>
+  </div>
+</section>
+
+
+
 {%- comment -%}
 <script src="{{ 'standard_custom.js' | asset_url }}" defer="defer"></script>
 {%- endcomment -%}
