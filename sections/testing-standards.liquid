@@ -1925,12 +1925,14 @@
     .facility-tabs__nav {
       display: inline-flex;
       margin-bottom: 10px;
-      font-size: clamp(2.5em, 2vw, 4em);
-      line-height: clamp(1em, 1.5vw, 1.3em);
       width: 100%;
       font-weight: 400;
       letter-spacing: 0;
     }
+
+    .facility-tabs__nav-button {
+      padding: 0 0 18px;
+  }
 
     .facility-tabs__grid {
       grid-template-columns: minmax(0, 1fr);
@@ -1940,6 +1942,11 @@
     .facility-tabs__item-icon {
       margin-bottom: 8px;
     }
+  }
+  @media (max-width: 375px) {
+    .facility-tabs__nav-button {
+      text-align: left;
+  }
   }
 </style>
 
