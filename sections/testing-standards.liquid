@@ -927,6 +927,185 @@
 
 {{ 'static-reviews-carousel.js' | asset_url | script_tag }}
 
+<style>
+  /* Static Reviews Carousel - infinite touch swipe, transform-based */
+
+.src.static-reviews-carousel {
+  position: relative;
+  padding: 7rem 2.4rem 7.5rem;
+  background:
+    linear-gradient(rgba(16, 22, 10, 0.48), rgba(16, 22, 10, 0.48)),
+    url('{{ 'standard_Page_Evidence_of_Quality_Background.png' | asset_url }}') center center / cover no-repeat;
+}
+
+.src__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 3rem;
+}
+
+/* Heading */
+.src__heading {
+  font-size: clamp(2.8rem, 3.4vw, 4.4rem);
+  line-height: clamp(1em, 1.1vw, 1.15em);
+  color: #f7f0e5;
+  margin: 0 0 0 6rem;
+  font-weight: 400;
+}
+
+/* Carousel wrapper - clips overflow */
+.src__carousel-outer {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Track - positioned via JS transform, no native scroll */
+.src__track {
+  display: flex;
+  gap: 2.2rem;
+  will-change: transform;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.src__track.is-dragging {
+  cursor: grabbing;
+}
+
+/* Desktop: 3.5 slides visible (3 full + ~0.25 peek each side) */
+.src__card {
+  flex: 0 0 calc((100% - 2 * 2.2rem) / 3);
+  min-width: calc((100% - 2 * 2.2rem) / 3);
+  background: rgba(16, 32, 18, 0.66);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 2.2rem 2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.src__stars {
+  width: 100%;
+  height: 2px;
+  background: #b5933f;
+  margin: 0 0 0.25rem;
+}
+
+.src__stars svg,
+.src__star {
+  display: none;
+}
+
+.src__product,
+.src__product a {
+  font-size: clamp(1.6rem, 1.75vw, 2.1rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: #F9F2E8;
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.src__text {
+  font-size: clamp(1rem, 1.12vw, 1.2rem);
+  line-height: clamp(1.35rem, 1.45vw, 1.7rem);
+  color: #F9F2E8;
+  margin: 0;
+  min-height: 7.2rem;
+  text-align: left;
+  font-weight: 400;
+  opacity: 0.96;
+}
+
+.src__meta {
+  font-size: clamp(1rem, 1.05vw, 1.15rem);
+  line-height: clamp(1.3rem, 1.35vw, 1.6rem);
+  color: #f9f2e8;
+  margin: 0;
+  text-align: left;
+  opacity: 0.96;
+}
+
+.src__meta strong {
+  font-weight: 700;
+}
+
+.src__meta ul {
+  margin: 0.6rem 0 0;
+  padding-left: 1.5rem;
+}
+
+.src__meta li {
+  margin: 0;
+}
+
+.src__progress {
+  display: none;
+}
+
+.hide-on-mobile {
+  display: none;
+}
+
+.hide-on-desktop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .src.static-reviews-carousel {
+    padding: 3.4rem 0 4rem;
+    background-position: 62% center;
+  }
+
+  .src__inner {
+    gap: 2.2rem;
+  }
+
+  .src__heading {
+    margin: 0 2rem;
+    font-size: clamp(2.1rem, 7vw, 2.8rem);
+    line-height: 1.1;
+  }
+
+  .src__card {
+    flex: 0 0 calc((100% - 1.6rem) / 1.1);
+    min-width: calc((100% - 1.6rem) / 1.1);
+    padding: 1.8rem 1.5rem 2rem;
+    gap: 0.8rem;
+  }
+
+  .src__track {
+    gap: 1.6rem;
+  }
+
+  .src__product,
+  .src__product a {
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .src__meta {
+    font-size: 0.92rem;
+    line-height: 1.35;
+  }
+
+  .src__text {
+    min-height: 0;
+    font-size: 0.93rem;
+    line-height: 1.35;
+  }
+}
+</style>
+
 <section
   class="src static-reviews-carousel"
   {% if block %}
@@ -934,7 +1113,7 @@
   {% endif %}
 >
   <div class="src__inner">
-    <h2 class="src__heading font-proxima">Healing That Speaks <span class="font-miller">for Itself.</span></h2>
+    <h2 class="src__heading font-proxima">What We Test For</h2>
 
     <div class="src__carousel-outer">
       <div
