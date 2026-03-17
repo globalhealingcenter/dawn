@@ -483,9 +483,12 @@
 
   @media screen and (max-width: 767px) {
     .quality-evidence {
-      min-height: 520px;
-      padding: 56px 22px;
-      background-position: center;
+              min-height: 520px;
+        padding: 56px 22px;
+        background-position: 0% 0%;
+        background: linear-gradient(rgba(55, 72, 18, 0.42), rgba(55, 72, 18, 0.42)), url('{{ 'standard_mobile_shutterstock_2182336037.jpg' | asset_url }}');
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 
     .quality-evidence__inner {
