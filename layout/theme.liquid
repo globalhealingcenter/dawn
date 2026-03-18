@@ -588,6 +588,13 @@
       {% render 'ss-intellisuggest' %}
     {% endif %}
 
+  <!-- Begin: Northbeam metadata info -->
+  <script>
+    localStorage.setItem('nb__region_code', "{{ localization.country.iso_code }}");
+    localStorage.setItem('nb__currency_code', "{{ localization.country.currency.iso_code }}");
+  </script>
+  <!-- End: Northbeam metadata info -->
+
     <!-- Widget : Gift with Purchase: 5 OP Samples on orders $100+ -->
     <!-- <div data-rebuy-id="124103"></div> -->
 
