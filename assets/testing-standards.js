@@ -49,23 +49,23 @@
     return true;
   }
 
-  function tryInit(attemptsLeft) {
+  function tryInitStandards(attemptsLeft) {
     if (initStandardsCardsSlick() || attemptsLeft <= 0) return;
     window.setTimeout(function () {
-      tryInit(attemptsLeft - 1);
+      tryInitStandards(attemptsLeft - 1);
     }, 200);
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      tryInit(20);
+      tryInitStandards(20);
     });
   } else {
-    tryInit(20);
+    tryInitStandards(20);
   }
 
   window.addEventListener('load', function () {
-    tryInit(20);
+    tryInitStandards(20);
   });
 
   function initFacilityTabs() {
@@ -213,25 +213,25 @@
     });
   }
 
-  function tryInit(attemptsLeft) {
+  function tryInitMethodology(attemptsLeft) {
     if (initMethodologyCardsSlick() || attemptsLeft <= 0) return;
     window.setTimeout(function () {
-      tryInit(attemptsLeft - 1);
+      tryInitMethodology(attemptsLeft - 1);
     }, 200);
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      tryInit(20);
+      tryInitMethodology(20);
       initMethodologyPopup();
     });
   } else {
-    tryInit(20);
+    tryInitMethodology(20);
     initMethodologyPopup();
   }
 
   window.addEventListener('load', function () {
-    tryInit(20);
+    tryInitMethodology(20);
   });
 
   // Reviews Carousel
