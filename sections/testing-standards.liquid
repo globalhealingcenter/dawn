@@ -14,8 +14,6 @@
 
 {{ 'testing-standards.css' | asset_url | stylesheet_tag }}
 {{ 'slick.css' | asset_url | stylesheet_tag }}
-{{ 'jquery-3.7.1.min.js' | asset_url | script_tag }}
-{{ 'slick.min.js' | asset_url | script_tag }}
 {{ 'testing-standards.js' | asset_url | script_tag }}
 
 {% comment %} Hero Banner Section {% endcomment %}
@@ -958,6 +956,9 @@
     that baseline industry standards don't always prevent quality or safety errors. (Sources: FDA, Congress, JAMA)
   </p>
 </section>
+
+<script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer></script>
+<script src="{{ 'slick.min.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
