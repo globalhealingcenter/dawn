@@ -35,12 +35,18 @@
         "padding_top": 40,
         "padding_bottom": 52
       }
+    },
+    "testing_standard2_BVUAF9": {
+      "type": "testing-standard2",
+      "name": "Testing Standard 2",
+      "settings": {}
     }
   },
   "order": [
     "shogun-helper",
     "main",
     "shogun-optimizer",
-    "testing_standards_YE8zzU"
+    "testing_standards_YE8zzU",
+    "testing_standard2_BVUAF9"
   ]
 }
