@@ -14,7 +14,6 @@
 
 {{ 'testing-standards.css' | asset_url | stylesheet_tag }}
 {{ 'slick.css' | asset_url | stylesheet_tag }}
-{{ 'testing-standards.js' | asset_url | script_tag }}
 
 {% comment %} Hero Banner Section {% endcomment %}
 <section
@@ -957,8 +956,13 @@
   </p>
 </section>
 
-<script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer></script>
-<script src="{{ 'slick.min.js' | asset_url }}" defer></script>
+{% comment %}
+  <script src="{{ 'jquery-3.7.1.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'slick.min.js' | asset_url }}" defer></script>
+{% endcomment %}
+{{ 'jquery-3.7.1.min.js' | asset_url | script_tag }}
+{{ 'slick.min.js' | asset_url | script_tag }}
+{{ 'testing-standards.js' | asset_url | script_tag }}
 
 {% schema %}
 {
