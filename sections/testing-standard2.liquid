@@ -1,393 +1,7 @@
-<style type="text/css">
-  .references-section {
-    padding: 70px 0px;
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .references-section__title,
-  .faqs-section__title,
-  .take-their-word-section__title,
-  .coa-section__title {
-    margin: 0 0 3rem;
-    font-size: clamp(2.5em, 3vw, 4em);
-    line-height: clamp(0.9em, 1.5vw, 1.3em);
-    color: #174f33;
-    font-weight: 400;
-  }
-  .references-section__body {
-    margin: 0;
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2f3b34;
-    font-weight: 300;
-  }
+{{ 'testing-standards.css' | asset_url | stylesheet_tag }}
+{{ 'testing-standards.js' | asset_url | script_tag }}
 
-  /*
-            FAQ
-         */
-  .ghd--block--faq {
-    padding: 9rem 1rem 5rem;
-  }
-  .ghd--block--faq h2 {
-    text-align: center;
-    padding-bottom: 2rem;
-  }
-  .ghd--block--faq .mw {
-    max-width: 1000px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .ghd--block--faq label {
-    font-weight: bold;
-    border-bottom: 1px solid var(--gh-color-gray);
-    display: block;
-    padding: 1rem 1rem;
-  }
-  .ghd--block--faq label:after {
-    content: '+';
-    float: right;
-  }
-  .ghd--block--faq .ghd--details > details:nth-child(n + 6) {
-    display: none;
-  }
-  .ghd--block--faq [name='view-more']:checked + .ghd--details label {
-    display: none;
-  }
-  .ghd--block--faq [name='view-more']:checked + .ghd--details > details:nth-child(n + 6) {
-    display: block;
-  }
-  .faqs-section .ghd--details details summary h3 {
-    font-weight: 700;
-  }
-  .faqs-section .ghd--details details[open] summary h3 {
-    margin-bottom: 5px;
-  }
-  .faqs-section details {
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2f3b34;
-    font-weight: 400;
-    padding: 1.4rem 1rem;
-  }
-  .faqs-section .ghd--details details summary:after {
-    font-size: 3.5rem;
-    font-weight: 100;
-  }
-
-  /*
-        ** Dive Deeper
-        */
-  .dive-deep-section {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 7rem 1rem 4rem;
-  }
-
-  .dive-deep-section__title {
-    font-size: clamp(2.5em, 3vw, 4em);
-    line-height: clamp(1.2em, 1.5vw, 1.6em);
-    color: #174f33;
-    font-weight: 400;
-    text-align: center;
-  }
-  .text-grids {
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    width: 80%;
-    text-align: center;
-    margin: 0 auto;
-    padding-top: 20px;
-  }
-  .text-grid-item a {
-    font-size: 20px;
-    text-align: center;
-    display: block;
-    line-height: 27px;
-  }
-
-  /*
-        ** Reviews Carousel
-      */
-  .rc-carousel {
-    padding: 5rem 0 4rem;
-    overflow: hidden; /* clips the peeking prev/next slides */
-  }
-  .rc-track {
-    display: flex;
-    gap: 7rem;
-    cursor: grab;
-    touch-action: pan-y;
-    user-select: none;
-    will-change: transform;
-  }
-  .rc-track.rc-grabbing {
-    cursor: grabbing;
-  }
-  .rc-card {
-    flex: 0 0 50%;
-    min-width: 50%;
-    background: rgb(239 229 217);
-    border-radius: 12px;
-    padding: 2.5rem 1.75rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    box-sizing: border-box;
-  }
-  .rc-stars {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
-  }
-  .rc-stars svg {
-    width: 32px;
-    height: 32px;
-  }
-  .rc-text,
-  .rc-meta {
-    margin: 10px 0px 0px;
-    text-align: center;
-    font-size: clamp(1.6rem, 1.563vw, 2.3rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2f3b34;
-    font-weight: 400;
-  }
-  .rc-meta {
-    margin-top: 3rem;
-    text-align: center;
-  }
-  .rc-progress {
-    display: flex;
-    justify-content: center;
-    margin-top: 6rem;
-  }
-  .rc-progress-track {
-    width: 500px;
-    max-width: 100%;
-    height: 4px;
-    background: #22472d33;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .rc-progress-fill {
-    height: 100%;
-    background: var(--gh-color-green, #22472d);
-    display: block !important;
-    border-radius: 2px;
-    transition: width 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-  .take-their-word-section__title,
-  .take-their-word-tagline {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    display: block;
-  }
-  .take-their-word-tagline {
-    color: rgb(204 167 15);
-    font-weight: 700;
-    font-size: 20px;
-    padding: 10px 0px;
-  }
-  .take-their-word-section {
-    padding-top: 70px;
-  }
-
-  /*
-        ** COA Section
-      */
-  .coa-section {
-    background-color: #faf3e7;
-    padding: 10rem 2rem 6rem;
-  }
-  .coa-section__inner {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-  }
-  .coa-section__content {
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-  .coa-section__subtitle {
-    font-size: clamp(1.6rem, 2vw, 3rem);
-    color: #2f3b34;
-    font-weight: 400;
-    margin: 0;
-  }
-  .coa-section__body {
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
-    color: #2f3b34;
-    font-weight: 400;
-  }
-  .coa-section__title {
-    margin-bottom: 0;
-  }
-  .coa-section__btn {
-    display: inline-block;
-    background-color: #1a3d29;
-    color: #ffffff;
-    font-size: clamp(1.4rem, 1.4vw, 1.7rem);
-    font-weight: 500;
-    text-decoration: none;
-    padding: 1.4rem 2.8rem;
-    border-radius: 4px;
-    align-self: flex-start;
-    letter-spacing: 0.02em;
-    transition: background-color 0.2s ease;
-    width: 97%;
-    text-align: center;
-  }
-  .coa-section__btn:hover {
-    background-color: #22472d;
-    color: #ffffff;
-  }
-  .coa-section__image-wrap {
-    flex: 0 0 450px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .coa-section__image-circle {
-    width: 430px;
-    height: 430px;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #d6c4a8;
-    flex-shrink: 0;
-  }
-  .coa-section__image-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .coa-section__inner .display-on-desktop {
-    display: block;
-  }
-  .coa-section__inner .display-on-mobile {
-    display: none;
-  }
-
-  /*
-        ** Responsive  
-      */
-  @media (max-width: 900px) {
-    .coa-section__inner {
-      flex-direction: column;
-      gap: 3rem;
-      text-align: center;
-    }
-    .coa-section__body {
-      max-width: 100%;
-    }
-    .coa-section__btn {
-      align-self: center;
-    }
-    .coa-section__image-wrap {
-      flex: none;
-    }
-    .coa-section__image-circle {
-      width: 280px;
-      height: 280px;
-    }
-    .coa-section__title {
-      font-size: clamp(2.8rem, 6vw, 4rem);
-    }
-  }
-
-  @media (max-width: 768px) {
-    .text-grids {
-      width: 100%;
-      flex-flow: column;
-    }
-    .text-grid-item a {
-      font-size: 16px;
-    }
-    .text-grid-item a br {
-      display: none;
-    }
-    .references-section {
-      padding: 1rem 2rem 8rem;
-    }
-    .faqs-section .ghd--details details summary:after {
-      font-size: 2.5rem;
-      font-weight: 300;
-    }
-    .ghd--details details summary,
-    .ghd--details details summary h3,
-    .ghd--details > span {
-      font-size: 1.6rem;
-    }
-    .references-section__title,
-    .faqs-section__title {
-      line-height: clamp(1.2em, 1.5vw, 1.3em);
-    }
-    .faqs-section details:first-child {
-      border-top: none;
-    }
-    .ghd--block--faq h2 {
-      padding-bottom: 0;
-    }
-    .ghd--block--faq {
-      padding: 2rem 2rem 5rem;
-    }
-    .take-their-word-section .take-their-word-section__title,
-    .take-their-word-section .take-their-word-tagline {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    .take-their-word-tagline {
-      line-height: 23px;
-    }
-    .take-their-word-section .rc-carousel {
-      padding: 2rem 0 1rem;
-    }
-    .rc-carousel .rc-track {
-      gap: 3rem;
-    }
-    .rc-card {
-      flex: 0 0 75%;
-      min-width: 75%;
-      padding: 1.5rem 1rem;
-    }
-    .rc-stars svg {
-      width: 18px;
-      height: 18px;
-    }
-    .rc-text {
-      font-size: 14px;
-      line-height: 1.4;
-    }
-    .rc-progress {
-      margin-top: 5rem;
-      padding: 0px 30px;
-    }
-    .rc-progress-track {
-      width: 70%;
-    }
-
-    .coa-section {
-      padding: 6rem 2rem 1rem;
-    }
-    .coa-section__inner .display-on-desktop {
-      display: none;
-    }
-    .coa-section__inner .display-on-mobile {
-      display: block;
-    }
-  }
-</style>
-
+{% comment %} ── COA Section ──────────────────────────────────────── {% endcomment %}
 <section class="coa-section section-{{ section.id }}">
   <div class="coa-section__inner">
     <div class="coa-section__content">
@@ -425,11 +39,11 @@
   </div>
 </section>
 
+{% comment %} ── Take Their Word + Reviews Carousel ───────────────── {% endcomment %}
 <section class="take-their-word-section section-{{ section.id }}" id="section-{{ section.id }}">
   <h2 class="take-their-word-section__title font-proxima">Take <span class="font-miller">Their </span>Word for It</h2>
   <span class="take-their-word-tagline">Trust verified in over 50,000 5-star reviews.</span>
 
-  {% comment %} Reviews Carousel {% endcomment %}
   <div class="rc-carousel" id="rc-{{ section.id }}">
     <div class="rc-track" role="region" aria-label="Customer reviews">
       <div class="rc-card" role="listitem">
@@ -441,7 +55,7 @@
           {% endfor %}
         </div>
         <p class="rc-text font-proxima">
-          "Global Healing is one that hasn’t sold out to a larger corp. They still have their integrity. There aren’t
+          "Global Healing is one that hasn't sold out to a larger corp. They still have their integrity. There aren't
           many left to choose from."
         </p>
         <p class="rc-meta font-proxima">Heidi S.</p>
@@ -470,7 +84,7 @@
           {% endfor %}
         </div>
         <p class="rc-text font-proxima">
-          "Love the Global Healing products. The glass bottles ensure that we are getting a above average clean
+          "Love the Global Healing products. The glass bottles ensure that we are getting an above average clean
           product."
         </p>
         <p class="rc-meta font-proxima">Larry T.</p>
@@ -511,170 +125,14 @@
       </div>
     </div>
   </div>
-
-  <script>
-    (function () {
-      var wrap = document.getElementById('rc-{{ section.id }}');
-      if (!wrap || wrap.dataset.rcInit) return;
-      wrap.dataset.rcInit = '1';
-
-      var track = wrap.querySelector('.rc-track');
-      var fill = wrap.querySelector('.rc-progress-fill');
-      var cards = Array.prototype.slice.call(track.querySelectorAll('.rc-card'));
-      var count = cards.length;
-      if (count < 2) return;
-
-      var current = 0;
-      var cardW = 0;
-      var gapPx = 0;
-
-      // Measure once and cache — only re-run on resize
-      function measure() {
-        var first = cards[0];
-        cardW = first.offsetWidth;
-        gapPx = parseFloat(getComputedStyle(track).gap) || 0;
-      }
-
-      function targetX(i) {
-        var step = cardW + gapPx;
-        var trackW = track.offsetWidth;
-        var peekLeft = (trackW - cardW) / 2;
-        return -(i * step) + peekLeft;
-      }
-
-      function moveTo(i, animate) {
-        track.style.transition = animate ? 'transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)' : 'none';
-        track.style.transform = 'translateX(' + targetX(i) + 'px)';
-        if (fill) fill.style.width = ((i + 1) / count) * 100 + '%';
-      }
-
-      // Init
-      function init() {
-        measure();
-        moveTo(current, false);
-      }
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function () {
-          requestAnimationFrame(function () {
-            requestAnimationFrame(init);
-          });
-        });
-      } else {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(init);
-        });
-      }
-
-      // Drag / swipe
-      var startX = 0,
-        startY = 0,
-        dragX = 0,
-        dragging = false,
-        locked = null,
-        hasDragged = false;
-      var STEP_RATIO = 0.2;
-
-      function dragStart(x, y) {
-        measure();
-        track.style.transition = 'none';
-        startX = x;
-        startY = y;
-        dragX = 0;
-        dragging = true;
-        locked = null;
-        hasDragged = false;
-      }
-
-      function dragMove(x, y) {
-        if (!dragging) return false;
-        var dx = x - startX,
-          dy = y - startY;
-        if (locked === null) {
-          if (Math.abs(dx) > 5 && Math.abs(dx) >= Math.abs(dy)) locked = 'h';
-          else if (Math.abs(dy) > 5 && Math.abs(dy) > Math.abs(dx)) locked = 'v';
-          else return false;
-        }
-        if (locked !== 'h') return false;
-        dragX = dx;
-        hasDragged = true;
-        track.style.transform = 'translateX(' + (targetX(current) + dragX) + 'px)';
-        return true;
-      }
-
-      function dragEnd() {
-        if (!dragging) return;
-        dragging = false;
-        if (locked === 'h') {
-          var step = cardW + gapPx;
-          if (Math.abs(dragX) > step * STEP_RATIO) {
-            current = Math.max(0, Math.min(count - 1, current + (dragX < 0 ? 1 : -1)));
-          }
-        }
-        moveTo(current, true);
-      }
-
-      // Touch
-      track.addEventListener(
-        'touchstart',
-        function (e) {
-          dragStart(e.touches[0].clientX, e.touches[0].clientY);
-        },
-        { passive: true }
-      );
-      track.addEventListener(
-        'touchmove',
-        function (e) {
-          if (dragMove(e.touches[0].clientX, e.touches[0].clientY)) e.preventDefault();
-        },
-        { passive: false }
-      );
-      track.addEventListener('touchend', dragEnd);
-      track.addEventListener('touchcancel', dragEnd);
-
-      // Mouse
-      track.addEventListener('mousedown', function (e) {
-        dragStart(e.pageX, e.pageY);
-        track.classList.add('rc-grabbing');
-        e.preventDefault();
-      });
-      document.addEventListener('mousemove', function (e) {
-        dragMove(e.pageX, e.pageY);
-      });
-      document.addEventListener('mouseup', function () {
-        if (!dragging) return;
-        track.classList.remove('rc-grabbing');
-        dragEnd();
-      });
-      track.addEventListener(
-        'click',
-        function (e) {
-          if (hasDragged) {
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        },
-        true
-      );
-
-      // Resize
-      var rt;
-      window.addEventListener('resize', function () {
-        clearTimeout(rt);
-        rt = setTimeout(function () {
-          measure();
-          moveTo(current, false);
-        }, 150);
-      });
-    })();
-  </script>
 </section>
 
+{% comment %} ── Dive Deeper ──────────────────────────────────────── {% endcomment %}
 <section class="dive-deep-section section-{{ section.id }}" id="section-{{ section.id }}">
   <h2 class="dive-deep-section__title font-proxima">
     <span class="font-miller">Dive Deeper</span> Into How We <br>
     Source, Test, and Manufacture
   </h2>
-
   <div class="text-grids">
     <div class="text-grid-item">
       <a href="https://globalhealing.com/blogs/education/global-healings-standards-for-raw-ingredient-suppliers"
@@ -682,14 +140,12 @@
         Ingredient Suppliers</a
       >
     </div>
-
     <div class="text-grid-item">
       <a href="https://globalhealing.com/blogs/education/how-global-healing-ensures-purity-safety-and-quality-with-rigorous-testing"
         >Our Rigorous <br>
         Testing Process</a
       >
     </div>
-
     <div class="text-grid-item">
       <a href="https://globalhealing.com/blogs/education/what-makes-global-healings-manufacturing-facility-state-of-the-art"
         >Inside Our <br>
@@ -698,38 +154,29 @@
     </div>
   </div>
 </section>
+
+{% comment %} ── FAQs ─────────────────────────────────────────────── {% endcomment %}
 <section class="faqs-section section-{{ section.id }}" id="section-{{ section.id }}">
   <div class="ghd--block--faq ghd--block">
     <h2 class="faqs-section__title font-proxima">Frequently Asked Questions</h2>
     <div class="ghd--details mw">
       <details open>
-        <summary>
-          <h3>Does Global Healing make its own supplements?</h3>
-        </summary>
+        <summary><h3>Does Global Healing make its own supplements?</h3></summary>
         Yes. Global Healing is one of the few retail supplement companies in the world that does not use contract
         manufacturers. We formulate, manufacture, bottle, package, and distribute 100% of our products.
       </details>
-
       <details>
-        <summary>
-          <h3>Where are Global Healing supplements made?</h3>
-        </summary>
+        <summary><h3>Where are Global Healing supplements made?</h3></summary>
         Global Healing supplements are made in independently-owned and operated facilities in Phoenix, Arizona, and
         Houston, Texas.
       </details>
-
       <details>
-        <summary>
-          <h3>Are Global Healing supplements third-party tested?</h3>
-        </summary>
+        <summary><h3>Are Global Healing supplements third-party tested?</h3></summary>
         Yes, Global Healing partners with several third-party laboratories to verify ingredient identity, purity, and
         safety and final formula safety.
       </details>
-
       <details>
-        <summary>
-          <h3>Are Global Healing supplements organic?</h3>
-        </summary>
+        <summary><h3>Are Global Healing supplements organic?</h3></summary>
         Every plant-based ingredient and formula is certified organic by the USDA. Our manufacturing facilities in
         Phoenix and Houston are closely monitored by USDA Organic certifying agents to ensure we abide by organic
         manufacturing practices.
@@ -738,12 +185,13 @@
   </div>
 </section>
 
+{% comment %} ── References ───────────────────────────────────────── {% endcomment %}
 <section class="references-section section-{{ section.id }}" id="section-{{ section.id }}">
   <h2 class="references-section__title font-proxima">References</h2>
   <p class="references-section__body font-proxima">
     ¹ Under U.S. law (DSHEA 1994), supplements are not required to be proven safe or effective before sale, and FDA
     oversight is largely post-market. Documented cases of mislabeling, adulteration, and manufacturing violations show
-    that baseline industry standards don’t always prevent quality or safety errors. (Sources: FDA, Congress, JAMA)
+    that baseline industry standards don't always prevent quality or safety errors. (Sources: FDA, Congress, JAMA)
   </p>
 </section>
 
