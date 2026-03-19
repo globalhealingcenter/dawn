@@ -547,6 +547,10 @@ This file can be re-written at any time.
         console.log('pointer events back');
       }, 3500);
     </script>
+<script>
+    localStorage.setItem('nb__region_code', "{{ localization.country.iso_code }}");
+    localStorage.setItem('nb__currency_code', "{{ localization.country.currency.iso_code }}");
+  </script>
 <script src="{{ 'gh-countdown.js' | asset_url }}" defer></script>
 <script src="{{ 'og-subscribe-click.js' | asset_url }}" defer></script>
 <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
