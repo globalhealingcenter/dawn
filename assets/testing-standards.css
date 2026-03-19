@@ -401,12 +401,12 @@
 }
 
 .independent-company__body {
-  font-size: clamp(1.6rem, 1.4vw, 1.93rem);
+  font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
   margin: 0;
   font-weight: 300;
-  width: 87%;
+  width: 98%;
 }
 
 .independent-company__media {
@@ -483,6 +483,8 @@
   margin: 0;
   font-weight: 300;
   margin-top: 1.5rem;
+  width: 720px;
+  max-width: 100%;
 }
 
 .standards-cards {
@@ -550,7 +552,7 @@
 }
 
 .non-negotiables__inner {
-  max-width: 980px;
+  max-width: 750px;
   margin: 0 auto;
 }
 
@@ -567,7 +569,7 @@
 .non-negotiables__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  column-gap: 48px;
+  column-gap: 38px;
   row-gap: 12px;
 }
 
@@ -582,7 +584,7 @@
   align-items: center;
   gap: 12px;
   color: #f7f0e5;
-  font-size: clamp(1.2rem, 2vw, 1.4em);
+  font-size: clamp(1.2rem, 2vw, 1.2em);
   line-height: clamp(1.2em, 1.6vw, 1.35em);
   font-weight: 600;
 }
