@@ -146,15 +146,28 @@
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
           "settings": {
             "name": "Default",
-            "banner_background_color": "#119D52",
-            "banner_border_color": "#119D52",
-            "banner_color": "#FFFFFF",
-            "banner_icon_color": "#FFFFFF",
+            "banner_background_color": "#119d52",
+            "banner_border_color": "#119d52",
+            "banner_color": "#ffffff",
+            "banner_icon_color": "#ffffff",
             "banner_border_radius": 0,
             "banner_font_size": 16,
             "banner_icon_size": 16,
             "banner_padding_y": 10,
             "banner_padding_x": 10,
+            "text_align": "left"
+          }
+        },
+        "abra_promotions_dynamic_text_qHxcwi": {
+          "type": "shopify://apps/abra-promotions/blocks/dynamic-text/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "settings": {
+            "name": "Default",
+            "dynamic_text_color": "#000000",
+            "dynamic_text_icon_color": "#000000",
+            "dynamic_text_font_size": 14,
+            "dynamic_text_icon_size": 16,
+            "dynamic_text_padding_y": 0,
+            "dynamic_text_padding_x": 0,
             "text_align": "left"
           }
         }
@@ -174,7 +187,8 @@
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
         "abra_promotions_banner_gift_RQAc3p",
         "abra_promotions_banner_f4iJ7z",
-        "abra_promotions_banner_nUzYdW"
+        "abra_promotions_banner_nUzYdW",
+        "abra_promotions_dynamic_text_qHxcwi"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
