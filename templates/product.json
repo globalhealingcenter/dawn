@@ -125,6 +125,22 @@
             "add_variant_disabled_color": "#000000",
             "add_variant_disabled_text_color": "#ffffff"
           }
+        },
+        "abra_promotions_banner_f4iJ7z": {
+          "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "settings": {
+            "name": "Default",
+            "banner_background_color": "#119D52",
+            "banner_border_color": "#119D52",
+            "banner_color": "#FFFFFF",
+            "banner_icon_color": "#FFFFFF",
+            "banner_border_radius": 0,
+            "banner_font_size": 16,
+            "banner_icon_size": 16,
+            "banner_padding_y": 10,
+            "banner_padding_x": 10,
+            "text_align": "left"
+          }
         }
       },
       "block_order": [
@@ -140,7 +156,8 @@
         "buy_buttons",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
-        "abra_promotions_banner_gift_RQAc3p"
+        "abra_promotions_banner_gift_RQAc3p",
+        "abra_promotions_banner_f4iJ7z"
       ],
       "custom_css": [
         ".shopify-block > .yotpo-widget-instance:first-child {min-height: 18px;}"
