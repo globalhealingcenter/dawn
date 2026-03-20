@@ -1,6 +1,9 @@
 (function () {
   'use strict';
 
+  var standardsInitOK = false;
+  var methodologyInitOK = false;
+
   // Top Sections
   function initStandardsCardsSlick() {
     if (typeof window.jQuery === 'undefined') return false;
@@ -48,6 +51,7 @@
       $track.data('slick-bound', true);
     }
 
+    standardsInitOK = true;
     return true;
   }
 
@@ -59,8 +63,9 @@
   }
 
   var standardsInitStarted = false;
-  function startStandardsInit() {
-    if (standardsInitStarted) return;
+  function startStandardsInit(force) {
+    if (standardsInitOK) return;
+    if (standardsInitStarted && !force) return;
     standardsInitStarted = true;
     tryInitStandards(20);
   }
@@ -70,7 +75,7 @@
   } else {
     startStandardsInit();
   }
-  window.addEventListener('load', startStandardsInit);
+  window.addEventListener('load', function () { startStandardsInit(true); });
 
   function initFacilityTabs() {
     document.querySelectorAll('.facility-tabs').forEach(function (root) {
@@ -188,6 +193,7 @@
       $track.data('slick-bound', true);
     }
 
+    methodologyInitOK = true;
     return true;
   }
 
@@ -244,22 +250,23 @@
   }
 
   var methodologyInitStarted = false;
-  function startMethodologyInit() {
-    if (methodologyInitStarted) return;
+  function startMethodologyInit(force) {
+    if (methodologyInitOK) return;
+    if (methodologyInitStarted && !force) return;
     methodologyInitStarted = true;
     tryInitMethodology(20);
   }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      startMethodologyInit();
+      startMethodologyInit(false);
       initMethodologyPopup();
     });
   } else {
-    startMethodologyInit();
+    startMethodologyInit(false);
     initMethodologyPopup();
   }
-  window.addEventListener('load', startMethodologyInit);
+  window.addEventListener('load', function () { startMethodologyInit(true); });
 
   // Reviews Carousel
   function initCarousel(wrap) {
