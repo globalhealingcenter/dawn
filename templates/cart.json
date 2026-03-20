@@ -167,19 +167,19 @@
             "reward_tier_display": "next",
             "enable_reward_hover_preview": true,
             "enable_gift_title_click": true,
-            "banner_background_color": "#FFFFFF",
+            "banner_background_color": "#ffffff",
             "progress_bar_text_and_icon_color": "#000000",
-            "progress_bar_color": "#119E52",
-            "reward_tier_color": "#CFECDC",
-            "active_reward_tier_color": "#119E52",
+            "progress_bar_color": "#119e52",
+            "reward_tier_color": "#cfecdc",
+            "active_reward_tier_color": "#119e52",
             "reward_tier_icon_color": "#000000",
-            "active_reward_tier_icon_color": "#FFFFFF",
+            "active_reward_tier_icon_color": "#ffffff",
             "progress_bar_text_size": 13,
             "progress_bar_icon_size": 16,
-            "summary_background_color": "#CFECDC",
+            "summary_background_color": "#cfecdc",
             "summary_text_size": 13,
-            "gift_badge_background_color": "#119E52",
-            "gift_badge_text_and_icon_color": "#FFFFFF",
+            "gift_badge_background_color": "#119e52",
+            "gift_badge_text_and_icon_color": "#ffffff",
             "gift_product_text_color": "#000000",
             "gift_badge_border_radius": 48,
             "gift_badge_text_size": 12,
@@ -207,19 +207,19 @@
             "reward_tier_display": "next",
             "enable_reward_hover_preview": true,
             "enable_gift_title_click": true,
-            "banner_background_color": "#FFFFFF",
+            "banner_background_color": "#ffffff",
             "progress_bar_text_and_icon_color": "#000000",
-            "progress_bar_color": "#119E52",
-            "reward_tier_color": "#CFECDC",
-            "active_reward_tier_color": "#119E52",
+            "progress_bar_color": "#119e52",
+            "reward_tier_color": "#cfecdc",
+            "active_reward_tier_color": "#119e52",
             "reward_tier_icon_color": "#000000",
-            "active_reward_tier_icon_color": "#FFFFFF",
+            "active_reward_tier_icon_color": "#ffffff",
             "progress_bar_text_size": 13,
             "progress_bar_icon_size": 16,
-            "summary_background_color": "#CFECDC",
+            "summary_background_color": "#cfecdc",
             "summary_text_size": 13,
-            "gift_badge_background_color": "#119E52",
-            "gift_badge_text_and_icon_color": "#FFFFFF",
+            "gift_badge_background_color": "#119e52",
+            "gift_badge_text_and_icon_color": "#ffffff",
             "gift_product_text_color": "#000000",
             "gift_badge_border_radius": 48,
             "gift_badge_text_size": 12,
@@ -236,6 +236,30 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "1774039059af818a5e": {
+      "type": "apps",
+      "blocks": {
+        "abra_promotions_dynamic_text_D6qgWV": {
+          "type": "shopify://apps/abra-promotions/blocks/dynamic-text/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "settings": {
+            "name": "Default",
+            "dynamic_text_color": "#000000",
+            "dynamic_text_icon_color": "#000000",
+            "dynamic_text_font_size": 14,
+            "dynamic_text_icon_size": 16,
+            "dynamic_text_padding_y": 0,
+            "dynamic_text_padding_x": 0,
+            "text_align": "left"
+          }
+        }
+      },
+      "block_order": [
+        "abra_promotions_dynamic_text_D6qgWV"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -247,6 +271,7 @@
     "177403560668280fef",
     "1774035634b9b1657c",
     "17740389574e8136de",
-    "17740389631eab04d4"
+    "17740389631eab04d4",
+    "1774039059af818a5e"
   ]
 }
