@@ -22,7 +22,7 @@
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* ─── FAQ ────────────────────────────────────────────────── */
@@ -405,7 +405,7 @@
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
   width: 98%;
 }
 
@@ -481,7 +481,7 @@
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 1.5rem;
   width: 720px;
   max-width: 100%;
@@ -543,7 +543,7 @@
   line-height: clamp(1em, 2.2vw, 1.2em);
   color: #2f3b34;
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .non-negotiables {
@@ -656,7 +656,7 @@
   color: #ffffff;
   font-size: clamp(1.6rem, 2vw, 2.2rem);
   line-height: clamp(1.3em, 1.8vw, 1.45em);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .comprehensive-testing {
@@ -708,7 +708,7 @@
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .comprehensive-testing__stats {
@@ -857,7 +857,7 @@
   color: #F9F2E8;
   margin: 0 0 15px;
   text-align: left;
-  font-weight: 300;
+  font-weight: 400;
   opacity: 0.96;
 }
 
@@ -882,7 +882,7 @@
   padding-left: 22px;
   /* list-style: none; */
   line-height: 1.4;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .src__meta li {
@@ -991,7 +991,7 @@
   line-height: clamp(1.2em, 2.2vw, 1.2em);
   color: #2f3b34;
   margin: 0;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .methodology-cards__cta {
@@ -1174,7 +1174,7 @@ h2.inhouse-manufacturing__title {
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2f3b34;
-  font-weight: 300;
+  font-weight: 400;
   max-width: 510px;
 }
 
@@ -1304,7 +1304,7 @@ h2.inhouse-manufacturing__title {
   margin: 0;
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0;
   margin-top: 13px;
 }
@@ -1407,7 +1407,7 @@ h2.inhouse-manufacturing__title {
 
   .faqs-section .ghd--details details summary:after {
     font-size: 2.5rem;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .ghd--details details summary,
