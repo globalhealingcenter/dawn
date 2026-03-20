@@ -1,4 +1,5 @@
 (function () {
+  'use strict';
 
   // Top Sections
   function initStandardsCardsSlick() {
@@ -8,7 +9,8 @@
     if (!$.fn || !$.fn.slick) return false;
 
     var $track = $('.standards-cards__track');
-    if (!$track.length) return true;
+    // Return false so the retry mechanism can keep waiting for the element.
+    if (!$track.length) return false;
 
     function enableSlick() {
       if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
@@ -56,44 +58,50 @@
     }, 200);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      tryInitStandards(20);
-    });
-  } else {
+  var standardsInitStarted = false;
+  function startStandardsInit() {
+    if (standardsInitStarted) return;
+    standardsInitStarted = true;
     tryInitStandards(20);
   }
 
-  window.addEventListener('load', function () {
-    tryInitStandards(20);
-  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startStandardsInit);
+  } else {
+    startStandardsInit();
+  }
+  window.addEventListener('load', startStandardsInit);
 
   function initFacilityTabs() {
-    var root = document.querySelector('.facility-tabs');
-    if (!root) return;
+    document.querySelectorAll('.facility-tabs').forEach(function (root) {
+      if (!root || root.dataset.tabsInit === '1') return;
 
-    var buttons = root.querySelectorAll('.facility-tabs__nav-button');
-    var panels = root.querySelectorAll('.facility-tabs__panel');
-    if (!buttons.length || !panels.length) return;
+      var buttons = root.querySelectorAll('.facility-tabs__nav-button');
+      var panels = root.querySelectorAll('.facility-tabs__panel');
+      if (!buttons.length || !panels.length) return;
 
-    function setActive(target) {
+      // Prevent duplicate listeners when Shopify re-loads sections.
+      root.dataset.tabsInit = '1';
+
+      function setActive(target) {
+        buttons.forEach(function (btn) {
+          var isActive = btn.getAttribute('data-tab-target') === target;
+          btn.classList.toggle('is-active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        panels.forEach(function (panel) {
+          var match = panel.getAttribute('data-tab-panel') === target;
+          panel.classList.toggle('is-active', match);
+        });
+      }
+
       buttons.forEach(function (btn) {
-        var isActive = btn.getAttribute('data-tab-target') === target;
-        btn.classList.toggle('is-active', isActive);
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-
-      panels.forEach(function (panel) {
-        var match = panel.getAttribute('data-tab-panel') === target;
-        panel.classList.toggle('is-active', match);
-      });
-    }
-
-    buttons.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var target = btn.getAttribute('data-tab-target');
-        if (!target) return;
-        setActive(target);
+        btn.addEventListener('click', function () {
+          var target = btn.getAttribute('data-tab-target');
+          if (!target) return;
+          setActive(target);
+        });
       });
     });
   }
@@ -111,8 +119,28 @@
     if (!$.fn || !$.fn.slick) return false;
 
     var $track = $('.methodology-cards__track');
-    if (!$track.length) return true;
+    // Return false so the retry mechanism can keep waiting for the element.
+    if (!$track.length) return false;
     var $progressFill = $('.methodology-cards__progress-fill');
+
+    function updateProgress(currentSlide, slickInst) {
+      slickInst = slickInst || $track.slick('getSlick');
+      var total = slickInst.slideCount || 1;
+      var idx = (currentSlide || 0) + 1;
+      var pct = (idx / total) * 100;
+      $progressFill.css('width', pct + '%');
+    }
+
+    // Bind progress updates once (avoid stacking handlers on resize / re-init).
+    if ($progressFill.length && !$track.data('progress-bound')) {
+      $track.data('progress-bound', true);
+      $track.on(
+        'init.skpMethodologyProgress reInit.skpMethodologyProgress afterChange.skpMethodologyProgress',
+        function (event, slickInst, current) {
+          updateProgress(current, slickInst);
+        }
+      );
+    }
 
     function enableSlick() {
       if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
@@ -132,24 +160,6 @@
         touchMove: true,
         mobileFirst: true,
       });
-
-      if ($progressFill.length) {
-        var updateProgress = function (currentSlide, slick) {
-          slick = slick || $track.slick('getSlick');
-          var total = slick.slideCount || 1;
-          var idx = (currentSlide || 0) + 1;
-          var pct = (idx / total) * 100;
-          $progressFill.css('width', pct + '%');
-        };
-
-        $track.on('init reInit afterChange', function (event, slick, current) {
-          updateProgress(current, slick);
-        });
-
-        // In case init already fired before binding
-        var existing = $track.slick('getSlick');
-        updateProgress(existing.currentSlide, existing);
-      }
     }
 
     function disableSlick() {
@@ -159,6 +169,16 @@
     }
 
     enableSlick();
+
+    // In case init already fired before binding, force one update.
+    if ($progressFill.length && $track.hasClass('slick-initialized')) {
+      try {
+        var existing = $track.slick('getSlick');
+        updateProgress(existing.currentSlide, existing);
+      } catch (e) {
+        // Ignore if slick isn't ready yet.
+      }
+    }
 
     if (!$track.data('slick-bound')) {
       window.addEventListener('resize', function () {
@@ -175,6 +195,9 @@
     var trigger = document.querySelector('.methodology-cards__popup-trigger');
     var popup = document.querySelector('.methodology-cards-popup');
     if (!trigger || !popup) return;
+
+    if (popup.dataset && popup.dataset.popupInit === '1') return;
+    if (popup.dataset) popup.dataset.popupInit = '1';
 
     var dialog = popup.querySelector('.methodology-cards-popup__dialog');
     var closeBtn = popup.querySelector('.methodology-cards-popup__close');
@@ -220,19 +243,23 @@
     }, 200);
   }
 
+  var methodologyInitStarted = false;
+  function startMethodologyInit() {
+    if (methodologyInitStarted) return;
+    methodologyInitStarted = true;
+    tryInitMethodology(20);
+  }
+
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      tryInitMethodology(20);
+      startMethodologyInit();
       initMethodologyPopup();
     });
   } else {
-    tryInitMethodology(20);
+    startMethodologyInit();
     initMethodologyPopup();
   }
-
-  window.addEventListener('load', function () {
-    tryInitMethodology(20);
-  });
+  window.addEventListener('load', startMethodologyInit);
 
   // Reviews Carousel
   function initCarousel(wrap) {
@@ -387,7 +414,17 @@
 
   /* re-init when Shopify loads a section in the theme editor */
   document.addEventListener('shopify:section:load', function (e) {
-    var wrap = e.target.querySelector('.rc-carousel');
-    if (wrap) initCarousel(wrap);
+    var section = e && e.target;
+    if (!section || !section.querySelectorAll) return;
+
+    section.querySelectorAll('.rc-carousel').forEach(function (wrap) {
+      initCarousel(wrap);
+    });
+
+    // Re-init slick + tabs/popup for editor dynamic loads.
+    initStandardsCardsSlick();
+    initMethodologyCardsSlick();
+    initFacilityTabs();
+    initMethodologyPopup();
   });
 })();
