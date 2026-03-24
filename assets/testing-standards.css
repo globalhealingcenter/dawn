@@ -531,7 +531,7 @@
 }
 
 .standards-cards__title {
-  font-size: clamp(1.3em, 1.8vw, 1.8em);
+  font-size: clamp(1.3em,1.8vw,1.6em);
   line-height: clamp(1.1em, 2vw, 1.4em);
   color: #434343;
   margin: 0 0 0.75rem;
