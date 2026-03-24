@@ -1582,7 +1582,7 @@ h2.inhouse-manufacturing__title {
     height: stretch;
   }
   .methodology-cards__item:not(:last-child) {
-      border-right: initial;
+      border-right: 1px solid #174f33;
   }
 
   .methodology-cards__slider .slick-list {
