@@ -572,7 +572,7 @@ body{
 }
 
 .non-negotiables__inner {
-  max-width: 750px;
+  max-width: 780px;
   margin: 0 auto;
 }
 
@@ -587,7 +587,7 @@ body{
 }
 
 .non-negotiables__grid {
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: 38px;
   row-gap: 12px;
@@ -595,16 +595,19 @@ body{
 
 .non-negotiables__column {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+    flex-direction: column;
+    gap: 12px;
+    flex-basis: 33.3%;
 }
+
+.non-negotiables__column:first-child {flex-basis: 21%;}
 
 .non-negotiables__item {
   display: flex;
   align-items: center;
   gap: 12px;
   color: #f9f2e8;
-  font-size: clamp(1.2rem, 2vw, 1.1em);
+  font-size: clamp(1.2rem, 2vw, 1.4em);
   line-height: clamp(1.2em, 1.6vw, 1.35em);
   font-weight: 500;
 }
