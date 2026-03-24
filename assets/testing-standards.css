@@ -1718,9 +1718,10 @@ h2.inhouse-manufacturing__title {
   }
 
   .new-standard-banner {
-    min-height: 240px;
+    min-height: 210px;
     padding: 40px 16px;
-    background-position: center;
+    background-position: right center !important;
+    background-size: cover !important;
   }
 
   .independent-company-detail__inner {
