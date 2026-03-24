@@ -370,6 +370,7 @@ body{
   font-size: clamp(1em, 3vw, 2.8em);
   color: #ffffff;
   margin: 0;
+  line-height: clamp(1em, 3.7vw, 2.8em);
 }
 
 .independent-company {
