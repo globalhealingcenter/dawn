@@ -1,4 +1,8 @@
 /* ─── References ─────────────────────────────────────────── */
+body{
+  letter-spacing: 0;
+}
+
 .references-section {
   padding: 70px 0;
   max-width: 1000px;
