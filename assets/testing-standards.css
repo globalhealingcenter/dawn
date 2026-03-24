@@ -1255,7 +1255,7 @@ h2.inhouse-manufacturing__title {
   display: inline-flex;
   gap: 0;
   margin-bottom: 10px;
-  font-size: clamp(1.5em, 2vw, 3em);
+  font-size: clamp(1.3em, 2vw, 3em);
   line-height: clamp(1em, 1.5vw, 1.3em);
   width: 100%;
 }
