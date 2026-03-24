@@ -42,7 +42,6 @@
         gap = parseFloat(getComputedStyle(track).gap) || 0;
         step = cardW + gap;
         var containerW = outer.offsetWidth;
-        var fullVisible = Math.floor(containerW / step);
 
         if (window.innerWidth >= 768) {
           peekOffset = 0;
