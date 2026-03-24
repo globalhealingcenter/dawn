@@ -1030,7 +1030,7 @@ body{
   padding: 0;
   font-size: clamp(1.5em, 1.2vw, 1.7em);
   line-height: 1.4;
-  color: #1f5939;
+  color: #21472d;
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -1058,7 +1058,7 @@ body{
 .methodology-cards__progress-fill {
   width: 0;
   height: 100%;
-  background: #1f5939;
+  background: #21472d;
   border-radius: inherit;
   transition: width 280ms ease;
 }
@@ -1223,8 +1223,8 @@ h2.inhouse-manufacturing__title {
 
 .inhouse-manufacturing__icon {
   flex: 0 0 auto;
-  width: 85px;
-  height: 85px;
+  width: 70px;
+  height: 70px;
 }
 
 .inhouse-manufacturing__icon img {
