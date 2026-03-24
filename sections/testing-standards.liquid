@@ -10,6 +10,10 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  :root {
+    --quality-evidence-mobile-bg: url('{{ 'standard_mobile_shutterstock_2182336037.jpg' | asset_url }}');
+  }
 {%- endstyle -%}
 
 {{ 'testing-standards.css' | asset_url | stylesheet_tag }}
