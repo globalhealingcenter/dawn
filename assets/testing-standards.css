@@ -667,18 +667,18 @@ body{
 
 .quality-evidence__title {
   margin: 0 0 20px;
-    color: #fff;
-    font-size: clamp(1.2em, 3.2vw, 5.2rem);
-    line-height: clamp(1.05em, 1.4vw, 1.2em);
-    font-weight: 400;
-    letter-spacing: 0;
+  color: #fff;
+  font-size: clamp(1.2em, 3.2vw, 5.2rem);
+  line-height: clamp(1.05em, 1.4vw, 1.2em);
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .quality-evidence__text {
   margin: 0 auto;
     max-width: 1050px;
     color: #fff;
-    font-size: clamp(1.4rem, 1.9vw, 4rem);
+    font-size: clamp(1.3rem, 1.9vw, 4rem);
     line-height: clamp(1.4em, 1.8vw, 1.45em);
     font-weight: 400;
     letter-spacing: 0;
@@ -1823,6 +1823,10 @@ h2.inhouse-manufacturing__title {
 
   .quality-evidence__inner {
     max-width: 100%;
+  }
+
+  .quality-evidence__text {
+    max-width: 285px;
   }
 
   .quality-evidence__title {
