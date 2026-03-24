@@ -540,7 +540,7 @@
 }
 
 .standards-cards__text {
-  font-size: clamp(1em, 1.4vw, 1.1em);
+  font-size: clamp(1em, 1.4vw, 1.2em);
   line-height: clamp(1em, 2.2vw, 1.2em);
   color: #2f3b34;
   margin: 0;
