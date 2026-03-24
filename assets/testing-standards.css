@@ -262,7 +262,7 @@ body{
 
 .coa-section__subtitle {
   font-size: clamp(1.6rem, 2.1vw, 3em);
-  color: #4e5450;
+  color: #545454;
   font-weight: 400;
   margin: 0;
 }
