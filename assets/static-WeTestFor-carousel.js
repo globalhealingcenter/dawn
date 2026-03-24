@@ -46,7 +46,7 @@
         if (window.innerWidth >= 768) {
           peekOffset = 0;
         } else {
-          peekOffset = (containerW - cardW) / 2;
+          peekOffset = (containerW - cardW) / 1.5;
         }
       }
   
