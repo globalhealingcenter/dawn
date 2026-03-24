@@ -996,11 +996,11 @@ body{
 }
 
 .methodology-cards__text {
-  font-size: clamp(1.6rem, 1.4vw, 1.8rem);
-  line-height: clamp(1.2em, 2.2vw, 1.2em);
   color: #2f3b34;
   margin: 0;
   font-weight: 400;
+  font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+  line-height: clamp(1.3em, 2.2vw, 1.3em);
 }
 
 .methodology-cards__cta {
