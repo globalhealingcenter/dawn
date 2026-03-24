@@ -110,7 +110,7 @@ body{
   display: flex;
     gap: 20px;
     justify-content: space-between;
-    width: 95%;
+    width: 100%;
     text-align: center;
     margin: 0 auto;
     padding-top: 20px;
