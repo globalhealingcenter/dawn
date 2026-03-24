@@ -108,12 +108,12 @@ body{
 
 .text-grids {
   display: flex;
-  gap: 20px;
-  justify-content: space-between;
-  width: 80%;
-  text-align: center;
-  margin: 0 auto;
-  padding-top: 20px;
+    gap: 20px;
+    justify-content: space-between;
+    width: 95%;
+    text-align: center;
+    margin: 0 auto;
+    padding-top: 20px;
 }
 
 .text-grid-item a {
