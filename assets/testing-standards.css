@@ -1204,7 +1204,7 @@ h2.inhouse-manufacturing__title {
 }
 
 .inhouse-manufacturing__cert-copy {
-  font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+  font-size: clamp(1.6rem, 1.4vw, 1.1em);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #2a3530;
   text-align: center;
@@ -1223,8 +1223,8 @@ h2.inhouse-manufacturing__title {
 
 .inhouse-manufacturing__icon {
   flex: 0 0 auto;
-  width: 70px;
-  height: 70px;
+  width: 75px;
+  height: 75px;
 }
 
 .inhouse-manufacturing__icon img {
