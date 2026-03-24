@@ -969,6 +969,9 @@ body{
 .methodology-cards__item:last-child {
   border-right: 2px solid #174f33;
 }
+.methodology-cards__item:not(:last-child) {
+  border-right: 0;
+}
 
 .methodology-cards__media {
   width: 100%;
@@ -1005,7 +1008,7 @@ body{
 
 .methodology-cards__cta {
   text-align: center;
-  margin: 32px 0 0;
+  margin: 50px 0 0;
 }
 
 .methodology-cards__popup-trigger {
