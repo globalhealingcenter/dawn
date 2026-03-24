@@ -1774,7 +1774,10 @@ h2.inhouse-manufacturing__title {
 
   .non-negotiables__column {
     gap: 10px;
+    flex-basis: 50%;
   }
+
+  .non-negotiables__column:first-child {flex-basis: 50%;}
 
   .non-negotiables__item {
     gap: 10px;
