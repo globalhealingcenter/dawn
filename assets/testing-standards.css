@@ -17,7 +17,7 @@ body{
   margin: 0 0 3rem;
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1.1em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-weight: 400;
 }
 
@@ -110,7 +110,7 @@ body{
 .dive-deep-section__title {
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1.2em, 1.5vw, 1.6em);
-  color: #174f33;
+  color: #21472d;
   font-weight: 400;
   text-align: center;
 }
@@ -393,14 +393,14 @@ body{
 .independent-company__eyebrow {
   font-size: clamp(2.3rem, 3vw, 3.5rem);
   line-height: 1.3;
-  color: #174f33;
+  color: #21472d;
   margin-bottom: 0;
 }
 
 .independent-company__heading {
   font-size: clamp(2.2rem, 3vw, 3.5rem);
   line-height: 1.25;
-  color: #174f33;
+  color: #21472d;
   margin: 0 0 1.5rem;
   font-weight: 400;
   width: 90%
@@ -464,14 +464,14 @@ body{
   transform: translateX(-50%);
   width: calc(100% - 70px);
   height: 1px;
-  background-color: #174f33;
+  background-color: #21472d;
   display: block;
 }
 
 .independent-company-detail__number {
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-style: italic;
   margin: 0 0 0.75rem;
 }
@@ -479,7 +479,7 @@ body{
 .independent-company-detail__title {
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   margin: 0 0 1.25rem;
   font-weight: 500;
 }
@@ -703,7 +703,7 @@ body{
   margin: 0 0 0.75rem;
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-style: italic;
 }
 
@@ -711,7 +711,7 @@ body{
   margin: 0 0 1rem;
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-weight: 500;
 }
 
@@ -974,12 +974,12 @@ body{
 
 .methodology-cards__item {
   background-color: #ffffff;
-  border: 2px solid #174f33;
+  border: 2px solid #21472d;
   height: 100%;
 }
 
 .methodology-cards__item:last-child {
-  border-right: 2px solid #174f33;
+  border-right: 2px solid #21472d;
 }
 .methodology-cards__item:not(:last-child) {
   border-right: 0;
@@ -1037,7 +1037,7 @@ body{
 
 .methodology-cards__popup-trigger:hover,
 .methodology-cards__popup-trigger:focus-visible {
-  color: #174f33;
+  color: #21472d;
 }
 
 .methodology-cards__progress {
@@ -1129,7 +1129,7 @@ body{
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
   gap: 56px;
   align-items: center;
-  border-top: 1px solid #174f33;
+  border-top: 1px solid #21472d;
   padding-top: 100px;
 }
 
@@ -1172,7 +1172,7 @@ p.inhouse-manufacturing__number {
   margin: 0 0 0.75rem;
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-style: italic;
 }
 
@@ -1180,7 +1180,7 @@ h2.inhouse-manufacturing__title {
   margin: 0 0 2.5rem;
   font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1em, 1.5vw, 1.3em);
-  color: #174f33;
+  color: #21472d;
   font-weight: 500;
 }
 
@@ -1318,7 +1318,7 @@ h2.inhouse-manufacturing__title {
 
 .facility-tabs__item-title {
   font-weight: 600;
-  color: #174f33;
+  color: #21472d;
   margin: 0 0 0.5rem;
   font-size: clamp(1.4em, 3vw, 2em);
   line-height: clamp(1.1em, 1.5vw, 1.3em);
@@ -1596,7 +1596,7 @@ h2.inhouse-manufacturing__title {
     height: stretch;
   }
   .methodology-cards__item:not(:last-child) {
-      border-right: 2px solid #174f33;
+      border-right: 2px solid #21472d;
   }
 
   .methodology-cards__slider .slick-list {
