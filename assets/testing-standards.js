@@ -247,20 +247,37 @@
     var count = origCards.length;
     if (count < 2) return;
 
-    // Prepend clone of last card, append clone of first card so the track
-    // layout is: [lastClone · orig0 · orig1 · … · origN-1 · firstClone]
-    // Animating into a clone then silently jumping to its real counterpart
-    // produces seamless infinite scrolling in both directions.
-    var lastClone  = origCards[count - 1].cloneNode(true);
-    var firstClone = origCards[0].cloneNode(true);
-    lastClone.setAttribute('aria-hidden', 'true');
-    firstClone.setAttribute('aria-hidden', 'true');
-    track.insertBefore(lastClone, origCards[0]);
-    track.appendChild(firstClone);
+    // Clone 2 cards at each end so that even while the transition is playing
+    // INTO a clone there is always an adjacent clone filling the peek area.
+    // With only 1 clone, when the animation reached firstClone the slot to
+    // its right was empty, producing the visible gap/glitch.
+    //
+    // DOM layout (cloneDepth = 2):
+    //   [cN-2 · cN-1 · orig0 · orig1 · … · origN-1 · c0 · c1]
+    //    idx 0    1      2      3    …    count+1   count+2  count+3
+    //
+    // Real cards live at indices  offset … offset+count-1  (offset = 2).
+    // transitionend jumps back into that range whenever we land on a clone.
+    var cloneDepth = Math.min(2, count);
+    var offset     = cloneDepth;
 
-    // DOM indices: 0 = lastClone, 1..count = real cards, count+1 = firstClone
-    var current = 0;   // logical index 0..count-1
-    var domIdx  = 1;   // DOM position of centred slide; starts at 1 (orig0)
+    // Prepend: insert clones of the last `cloneDepth` originals in order.
+    // Inserting repeatedly at firstChild builds the list front-to-back.
+    for (var pi = cloneDepth - 1; pi >= 0; pi--) {
+      var pc = origCards[count - cloneDepth + pi].cloneNode(true);
+      pc.setAttribute('aria-hidden', 'true');
+      track.insertBefore(pc, track.firstChild);
+    }
+
+    // Append: clones of the first `cloneDepth` originals.
+    for (var ai = 0; ai < cloneDepth; ai++) {
+      var ac = origCards[ai].cloneNode(true);
+      ac.setAttribute('aria-hidden', 'true');
+      track.appendChild(ac);
+    }
+
+    var current = 0;          // logical index 0..count-1
+    var domIdx  = offset;     // DOM position of centred slide; starts at offset (= orig0)
     var cardW   = 0;
     var gapPx   = 0;
 
@@ -293,16 +310,16 @@
       setFill();
     }
 
-    // After animating into a clone, silently reposition to its real counterpart.
-    // Filter to 'transform' only — transitionend fires once per property and
-    // responding to any other property would snap at the wrong moment.
+    // After animating into a clone zone, silently reposition to the matching
+    // real card.  Filter to 'transform' only — transitionend fires once per
+    // CSS property and acting on any other property would snap too early.
     track.addEventListener('transitionend', function (e) {
       if (e.propertyName !== 'transform') return;
-      if (domIdx === 0) {
-        domIdx = count;
+      if (domIdx < offset) {
+        domIdx += count;
         moveTo(domIdx, false);
-      } else if (domIdx === count + 1) {
-        domIdx = 1;
+      } else if (domIdx >= offset + count) {
+        domIdx -= count;
         moveTo(domIdx, false);
       }
     });
