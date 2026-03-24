@@ -667,21 +667,21 @@ body{
 
 .quality-evidence__title {
   margin: 0 0 20px;
-  color: #fff;
-  font-size: clamp(2.2rem, 3.2vw, 5.2rem);
-  line-height: clamp(1.05em, 1.4vw, 1.2em);
-  font-weight: 400;
-  letter-spacing: 0;
+    color: #fff;
+    font-size: clamp(1.2em, 3.2vw, 5.2rem);
+    line-height: clamp(1.05em, 1.4vw, 1.2em);
+    font-weight: 400;
+    letter-spacing: 0;
 }
 
 .quality-evidence__text {
   margin: 0 auto;
-  max-width: 1050px;
-  color: #fff;
-  font-size: clamp(1.6rem, 1.9vw, 4rem);
-  line-height: clamp(1.2em, 1.8vw, 1.45em);
-  font-weight: 400;
-  letter-spacing: 0;
+    max-width: 1050px;
+    color: #fff;
+    font-size: clamp(1.4rem, 1.9vw, 4rem);
+    line-height: clamp(1.4em, 1.8vw, 1.45em);
+    font-weight: 400;
+    letter-spacing: 0;
 }
 
 .comprehensive-testing {
@@ -1813,13 +1813,12 @@ h2.inhouse-manufacturing__title {
   }
 
   .quality-evidence {
-    min-height: 520px;
-    padding: 56px 22px;
-    background-position: 0% 0%;
-    background: linear-gradient(rgba(55, 72, 18, 0.42), rgba(55, 72, 18, 0.42)),
-    var(--quality-evidence-mobile-bg);
-    background-size: cover;
-    background-repeat: no-repeat;
+    min-height: 300px;
+    padding: 36px 22px;
+    background: linear-gradient(rgb(24 31 8 / 42%), rgb(38 51 11 / 42%)), var(--quality-evidence-mobile-bg) !important;
+    background-size: 200% !important;
+    background-repeat: no-repeat !important;
+    background-position: 40% 50% !important;
   }
 
   .quality-evidence__inner {
@@ -1827,15 +1826,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .quality-evidence__title {
-    margin-bottom: 22px;
-    font-size: clamp(1.9em, 5vw, 3.2em);
-    line-height: 1.15;
-  }
-
-  .quality-evidence__text {
-    max-width: 100%;
-    font-size: clamp(1.2em, 2vw, 2.2em);
-    line-height: 1.35;
+    margin-bottom: 8px;
   }
 
   .independent-company-detail__inner:before {
