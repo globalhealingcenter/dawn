@@ -990,7 +990,7 @@ body{
 .methodology-cards__title {
   font-size: clamp(1.4em, 3vw, 1.7em);
   line-height: 1.2;
-  color: #174f33;
+  color: #434343;
   margin: 0 0 0.75rem;
   font-weight: 600;
 }
