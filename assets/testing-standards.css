@@ -1187,11 +1187,11 @@ h2.inhouse-manufacturing__title {
 
 .inhouse-manufacturing__subheading {
   margin: 0 0 2.5rem;
-  font-size: clamp(2rem, 1.4vw, 2.4rem);
-  line-height: clamp(1.3em, 1vw, 2.4em);
-  color: #545454;
-  font-weight: 600;
-  max-width: 420px;
+    font-size: clamp(2rem, 1.55vw, 2.4em);
+    line-height: clamp(1.3em, 1vw, 2.4em);
+    color: #545454;
+    font-weight: 600;
+    max-width: 470px;
 }
 
 .inhouse-manufacturing__body {
