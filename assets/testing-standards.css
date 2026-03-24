@@ -872,7 +872,7 @@ body{
   padding-bottom: 10px;
 }
 
-.src__text {
+.src__text, .src__text a {
   color: #F9F2E8;
   margin: 0 0 15px;
   text-align: left;
