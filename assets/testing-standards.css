@@ -16,7 +16,7 @@ body{
 .coa-section__title {
   margin: 0 0 3rem;
   font-size: clamp(2.5em, 3vw, 4em);
-  line-height: clamp(0.9em, 1.5vw, 1.3em);
+  line-height: clamp(1.1em, 1.5vw, 1.3em);
   color: #174f33;
   font-weight: 400;
 }
@@ -249,7 +249,7 @@ body{
 }
 
 .coa-section__subtitle {
-  font-size: clamp(1.6rem, 2vw, 3rem);
+  font-size: clamp(1.6rem, 2.1vw, 3em);
   color: #2f3b34;
   font-weight: 400;
   margin: 0;
