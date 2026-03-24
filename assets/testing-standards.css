@@ -1351,6 +1351,7 @@ h2.inhouse-manufacturing__title {
     align-self: center;
     padding: 0.4rem 2.8rem;
     width: max-content;
+    margin-top: 10px;
   }
 
   .coa-section__image-wrap {
@@ -1838,6 +1839,13 @@ h2.inhouse-manufacturing__title {
 
   .independent-company__image-wrap {
     width: clamp(220px, 70vw, 280px);
+  }
+  .coa-section__content {
+    gap: 0;
+  }
+
+  .coa-section__subtitle {
+      margin: 10px 0;
   }
 }
 
