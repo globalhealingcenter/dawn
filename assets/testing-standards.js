@@ -411,6 +411,45 @@
       if (hasDragged) { e.preventDefault(); e.stopPropagation(); }
     }, true);
 
+    /* ── Autoplay ── */
+    var AUTOPLAY_DELAY = 4000;
+    var autoplayTimer  = null;
+
+    function autoplayNext() {
+      domIdx  += 1;
+      current  = ((current + 1) % count + count) % count;
+      moveTo(domIdx, true);
+    }
+
+    function startAutoplay() {
+      if (autoplayTimer) return;
+      autoplayTimer = setInterval(autoplayNext, AUTOPLAY_DELAY);
+    }
+
+    function stopAutoplay() {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
+    // Pause while the user is hovering or touching.
+    wrap.addEventListener('mouseenter', stopAutoplay);
+    wrap.addEventListener('mouseleave', startAutoplay);
+    wrap.addEventListener('touchstart', stopAutoplay, { passive: true });
+    wrap.addEventListener('touchend',   startAutoplay);
+    wrap.addEventListener('touchcancel', startAutoplay);
+
+    // Restart autoplay after a manual drag so the timer doesn't fire
+    // immediately after the user lets go.
+    var origDragEnd = dragEnd;
+    dragEnd = function () {
+      origDragEnd();
+      stopAutoplay();
+      startAutoplay();
+    };
+
+    // Kick off autoplay once the carousel is positioned.
+    requestAnimationFrame(function () { startAutoplay(); });
+
     /* resize */
     var rt;
     window.addEventListener('resize', function () {
