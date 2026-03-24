@@ -1817,7 +1817,7 @@ h2.inhouse-manufacturing__title {
     padding: 56px 22px;
     background-position: 0% 0%;
     background: linear-gradient(rgba(55, 72, 18, 0.42), rgba(55, 72, 18, 0.42)),
-    url('{{ ' standard_mobile_shutterstock_2182336037.jpg' | asset_url }}');
+    url('{{ 'standard_mobile_shutterstock_2182336037.jpg' | asset_url }}');
     background-size: cover;
     background-repeat: no-repeat;
   }
