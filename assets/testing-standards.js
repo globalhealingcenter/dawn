@@ -243,53 +243,75 @@
     var fill = wrap.querySelector('.rc-progress-fill');
     if (!track) return;
 
-    var cards = Array.prototype.slice.call(track.querySelectorAll('.rc-card'));
-    var count = cards.length;
+    var origCards = Array.prototype.slice.call(track.querySelectorAll('.rc-card'));
+    var count = origCards.length;
     if (count < 2) return;
 
-    var current = 0;
-    var cardW = 0;
-    var gapPx = 0;
+    // Prepend clone of last card, append clone of first card so the track
+    // layout is: [lastClone · orig0 · orig1 · … · origN-1 · firstClone]
+    // Animating into a clone then silently jumping to its real counterpart
+    // produces seamless infinite scrolling in both directions.
+    var lastClone  = origCards[count - 1].cloneNode(true);
+    var firstClone = origCards[0].cloneNode(true);
+    lastClone.setAttribute('aria-hidden', 'true');
+    firstClone.setAttribute('aria-hidden', 'true');
+    track.insertBefore(lastClone, origCards[0]);
+    track.appendChild(firstClone);
+
+    // DOM indices: 0 = lastClone, 1..count = real cards, count+1 = firstClone
+    var current = 0;   // logical index 0..count-1
+    var domIdx  = 1;   // DOM position of centred slide; starts at 1 (orig0)
+    var cardW   = 0;
+    var gapPx   = 0;
 
     function measure() {
-      cardW = cards[0].offsetWidth;
+      cardW = track.querySelectorAll('.rc-card')[0].offsetWidth;
       gapPx = parseFloat(getComputedStyle(track).gap) || 0;
     }
 
-    function targetX(i) {
-      var step = cardW + gapPx;
-      var trackW = track.offsetWidth;
-      var peekLeft = (trackW - cardW) / 2;
-      return -(i * step) + peekLeft;
+    function targetX(di) {
+      var step     = cardW + gapPx;
+      var peekLeft = (track.offsetWidth - cardW) / 2;
+      return -(di * step) + peekLeft;
     }
 
-    function moveTo(i, animate) {
+    function setFill() {
+      if (fill) fill.style.width = ((current + 1) / count) * 100 + '%';
+    }
+
+    function moveTo(di, animate) {
       track.style.transition = animate
         ? 'transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)'
         : 'none';
-      track.style.transform = 'translateX(' + targetX(i) + 'px)';
-      if (fill) fill.style.width = ((i + 1) / count) * 100 + '%';
+      track.style.transform = 'translateX(' + targetX(di) + 'px)';
+      setFill();
     }
+
+    // After animating into a clone, silently reposition to its real counterpart.
+    track.addEventListener('transitionend', function () {
+      if (domIdx === 0) {
+        domIdx = count;
+        moveTo(domIdx, false);
+      } else if (domIdx === count + 1) {
+        domIdx = 1;
+        moveTo(domIdx, false);
+      }
+    });
 
     function init() {
       measure();
-      moveTo(current, false);
+      moveTo(domIdx, false);
+      setFill();
     }
 
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', function () {
-        requestAnimationFrame(function () { requestAnimationFrame(init); });
-      });
-    } else {
-      requestAnimationFrame(function () { requestAnimationFrame(init); });
-    }
+    requestAnimationFrame(function () { requestAnimationFrame(init); });
 
     /* ── Drag / swipe ── */
-    var startX = 0;
-    var startY = 0;
-    var dragX = 0;
-    var dragging = false;
-    var locked = null;
+    var startX    = 0;
+    var startY    = 0;
+    var dragX     = 0;
+    var dragging  = false;
+    var locked    = null;
     var hasDragged = false;
     var STEP_RATIO = 0.2;
 
@@ -312,7 +334,7 @@
       if (locked !== 'h') return false;
       dragX = dx;
       hasDragged = true;
-      track.style.transform = 'translateX(' + (targetX(current) + dragX) + 'px)';
+      track.style.transform = 'translateX(' + (targetX(domIdx) + dragX) + 'px)';
       return true;
     }
 
@@ -322,10 +344,12 @@
       if (locked === 'h') {
         var step = cardW + gapPx;
         if (Math.abs(dragX) > step * STEP_RATIO) {
-          current = (current + (dragX < 0 ? 1 : -1) + count) % count;
+          var dir = dragX < 0 ? 1 : -1;
+          domIdx  = domIdx + dir;
+          current = ((current + dir) % count + count) % count;
         }
       }
-      moveTo(current, true);
+      moveTo(domIdx, true);
     }
 
     /* touch */
@@ -367,7 +391,7 @@
       clearTimeout(rt);
       rt = setTimeout(function () {
         measure();
-        moveTo(current, false);
+        moveTo(domIdx, false);
       }, 150);
     });
   }
