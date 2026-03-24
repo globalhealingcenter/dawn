@@ -1541,6 +1541,7 @@ h2.inhouse-manufacturing__title {
     flex: 0 0 calc((100% - 1.6rem) / 1.12);
     min-width: calc((100% - 1.6rem) / 1.12);
     gap: 0.75rem;
+    padding: 20px;
   }
 
   .src__track {
