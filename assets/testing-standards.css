@@ -1538,8 +1538,8 @@ h2.inhouse-manufacturing__title {
   }
 
   .src__card {
-    flex: 0 0 58%;
-    min-width: 58%;
+    flex: 0 0 68%;
+    min-width: 68%;
     gap: 0.75rem;
     padding: 20px;
   }
