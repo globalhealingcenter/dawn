@@ -722,14 +722,15 @@ body{
 
 .comprehensive-testing__stats {
   position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  max-width: 940px;
-  margin-top: 34px;
-  background-color: #f2f2f0;
-  padding: 28px 34px;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    max-width: 940px;
+    margin-top: 34px;
+    background-color: #f2f2f0;
+    padding: 45px 34px;
+    padding-right: 100px;
 }
 
 .comprehensive-testing__stat {
@@ -748,7 +749,7 @@ body{
 .comprehensive-testing__stat-label {
   margin: 0.25rem 0 0;
   color: #6a6a6a;
-  font-size: clamp(1.1em, 2vw, 1.5em);
+  font-size: clamp(1.1em, 2vw, 1.7em);
   line-height: 1.25;
   font-weight: 400;
 }
