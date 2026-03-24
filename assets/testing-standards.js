@@ -322,7 +322,7 @@
       if (locked === 'h') {
         var step = cardW + gapPx;
         if (Math.abs(dragX) > step * STEP_RATIO) {
-          current = Math.max(0, Math.min(count - 1, current + (dragX < 0 ? 1 : -1)));
+          current = (current + (dragX < 0 ? 1 : -1) + count) % count;
         }
       }
       moveTo(current, true);
