@@ -485,7 +485,7 @@ body{
 }
 
 .independent-company-detail__subtitle {
-  font-size: clamp(1.6em, 1.45vw, 2.4rem);
+  font-size: clamp(1.73em, 1.45vw, 2.4rem);
   line-height: clamp(1.6em, 2.2vw, 2.4em);
   color: #545454;
   margin: 0;
