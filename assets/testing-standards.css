@@ -1864,6 +1864,9 @@ h2.inhouse-manufacturing__title {
       margin: 10px 0;
   }
   .independent-company-detail__subtitle {max-width: 270px;}
+  .src__progress-track{
+    margin: 30px auto 0;
+  }
 }
 
 @media (max-width: 375px) {
