@@ -1596,11 +1596,11 @@ h2.inhouse-manufacturing__title {
 
 
   .comprehensive-testing__image-wrap {
-    right: -100px;
-    bottom: 29px;
-    width: 42%;
-    min-width: 150px;
-    transform: rotate(-31deg);
+    right: -80px;
+        bottom: 29px;
+        width: 42%;
+        min-width: 200px;
+        transform: rotate(-31deg);
   }
 
   .methodology-cards__inner {
