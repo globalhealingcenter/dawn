@@ -1,8 +1,4 @@
 (function () {
-  'use strict';
-
-  var standardsInitOK = false;
-  var methodologyInitOK = false;
 
   // Top Sections
   function initStandardsCardsSlick() {
@@ -12,8 +8,7 @@
     if (!$.fn || !$.fn.slick) return false;
 
     var $track = $('.standards-cards__track');
-    // Return false so the retry mechanism can keep waiting for the element.
-    if (!$track.length) return false;
+    if (!$track.length) return true;
 
     function enableSlick() {
       if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
@@ -51,7 +46,6 @@
       $track.data('slick-bound', true);
     }
 
-    standardsInitOK = true;
     return true;
   }
 
@@ -62,51 +56,44 @@
     }, 200);
   }
 
-  var standardsInitStarted = false;
-  function startStandardsInit(force) {
-    if (standardsInitOK) return;
-    if (standardsInitStarted && !force) return;
-    standardsInitStarted = true;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      tryInitStandards(20);
+    });
+  } else {
     tryInitStandards(20);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', startStandardsInit);
-  } else {
-    startStandardsInit();
-  }
-  window.addEventListener('load', function () { startStandardsInit(true); });
+  window.addEventListener('load', function () {
+    tryInitStandards(20);
+  });
 
   function initFacilityTabs() {
-    document.querySelectorAll('.facility-tabs').forEach(function (root) {
-      if (!root || root.dataset.tabsInit === '1') return;
+    var root = document.querySelector('.facility-tabs');
+    if (!root) return;
 
-      var buttons = root.querySelectorAll('.facility-tabs__nav-button');
-      var panels = root.querySelectorAll('.facility-tabs__panel');
-      if (!buttons.length || !panels.length) return;
+    var buttons = root.querySelectorAll('.facility-tabs__nav-button');
+    var panels = root.querySelectorAll('.facility-tabs__panel');
+    if (!buttons.length || !panels.length) return;
 
-      // Prevent duplicate listeners when Shopify re-loads sections.
-      root.dataset.tabsInit = '1';
-
-      function setActive(target) {
-        buttons.forEach(function (btn) {
-          var isActive = btn.getAttribute('data-tab-target') === target;
-          btn.classList.toggle('is-active', isActive);
-          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-        });
-
-        panels.forEach(function (panel) {
-          var match = panel.getAttribute('data-tab-panel') === target;
-          panel.classList.toggle('is-active', match);
-        });
-      }
-
+    function setActive(target) {
       buttons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          var target = btn.getAttribute('data-tab-target');
-          if (!target) return;
-          setActive(target);
-        });
+        var isActive = btn.getAttribute('data-tab-target') === target;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      panels.forEach(function (panel) {
+        var match = panel.getAttribute('data-tab-panel') === target;
+        panel.classList.toggle('is-active', match);
+      });
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var target = btn.getAttribute('data-tab-target');
+        if (!target) return;
+        setActive(target);
       });
     });
   }
@@ -124,28 +111,8 @@
     if (!$.fn || !$.fn.slick) return false;
 
     var $track = $('.methodology-cards__track');
-    // Return false so the retry mechanism can keep waiting for the element.
-    if (!$track.length) return false;
+    if (!$track.length) return true;
     var $progressFill = $('.methodology-cards__progress-fill');
-
-    function updateProgress(currentSlide, slickInst) {
-      slickInst = slickInst || $track.slick('getSlick');
-      var total = slickInst.slideCount || 1;
-      var idx = (currentSlide || 0) + 1;
-      var pct = (idx / total) * 100;
-      $progressFill.css('width', pct + '%');
-    }
-
-    // Bind progress updates once (avoid stacking handlers on resize / re-init).
-    if ($progressFill.length && !$track.data('progress-bound')) {
-      $track.data('progress-bound', true);
-      $track.on(
-        'init.skpMethodologyProgress reInit.skpMethodologyProgress afterChange.skpMethodologyProgress',
-        function (event, slickInst, current) {
-          updateProgress(current, slickInst);
-        }
-      );
-    }
 
     function enableSlick() {
       if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
@@ -165,6 +132,24 @@
         touchMove: true,
         mobileFirst: true,
       });
+
+      if ($progressFill.length) {
+        var updateProgress = function (currentSlide, slick) {
+          slick = slick || $track.slick('getSlick');
+          var total = slick.slideCount || 1;
+          var idx = (currentSlide || 0) + 1;
+          var pct = (idx / total) * 100;
+          $progressFill.css('width', pct + '%');
+        };
+
+        $track.on('init reInit afterChange', function (event, slick, current) {
+          updateProgress(current, slick);
+        });
+
+        // In case init already fired before binding
+        var existing = $track.slick('getSlick');
+        updateProgress(existing.currentSlide, existing);
+      }
     }
 
     function disableSlick() {
@@ -175,16 +160,6 @@
 
     enableSlick();
 
-    // In case init already fired before binding, force one update.
-    if ($progressFill.length && $track.hasClass('slick-initialized')) {
-      try {
-        var existing = $track.slick('getSlick');
-        updateProgress(existing.currentSlide, existing);
-      } catch (e) {
-        // Ignore if slick isn't ready yet.
-      }
-    }
-
     if (!$track.data('slick-bound')) {
       window.addEventListener('resize', function () {
         disableSlick();
@@ -193,7 +168,6 @@
       $track.data('slick-bound', true);
     }
 
-    methodologyInitOK = true;
     return true;
   }
 
@@ -201,9 +175,6 @@
     var trigger = document.querySelector('.methodology-cards__popup-trigger');
     var popup = document.querySelector('.methodology-cards-popup');
     if (!trigger || !popup) return;
-
-    if (popup.dataset && popup.dataset.popupInit === '1') return;
-    if (popup.dataset) popup.dataset.popupInit = '1';
 
     var dialog = popup.querySelector('.methodology-cards-popup__dialog');
     var closeBtn = popup.querySelector('.methodology-cards-popup__close');
@@ -249,24 +220,19 @@
     }, 200);
   }
 
-  var methodologyInitStarted = false;
-  function startMethodologyInit(force) {
-    if (methodologyInitOK) return;
-    if (methodologyInitStarted && !force) return;
-    methodologyInitStarted = true;
-    tryInitMethodology(20);
-  }
-
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      startMethodologyInit(false);
+      tryInitMethodology(20);
       initMethodologyPopup();
     });
   } else {
-    startMethodologyInit(false);
+    tryInitMethodology(20);
     initMethodologyPopup();
   }
-  window.addEventListener('load', function () { startMethodologyInit(true); });
+
+  window.addEventListener('load', function () {
+    tryInitMethodology(20);
+  });
 
   // Reviews Carousel
   function initCarousel(wrap) {
