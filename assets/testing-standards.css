@@ -1762,7 +1762,7 @@ h2.inhouse-manufacturing__title {
   .non-negotiables__title {
     margin-bottom: 22px;
     text-align: left;
-    font-size: clamp(3rem, 4vw, 4em);
+    font-size: clamp(1.1em, 4vw, 4em);
     line-height: 1.2;
   }
 
@@ -1773,7 +1773,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .non-negotiables__column {
-    gap: 10px;
+    gap: 6px;
     flex-basis: 65%;
   }
 
