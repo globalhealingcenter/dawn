@@ -1,5 +1,9 @@
 (function () {
 
+  // Top Sections
+  function initStandardsCardsSlick() {
+    if (typeof window.jQuery === 'undefined') return false;
+
     var $ = window.jQuery;
     if (!$.fn || !$.fn.slick) return false;
 
@@ -8,7 +12,8 @@
 
     function enableSlick() {
       if (window.innerWidth > 767 || $track.hasClass('slick-initialized')) return;
-    if (!$track.length) return true;
+
+      $track.slick({
         infinite: true,
         arrows: false,
         dots: false,
@@ -46,6 +51,7 @@
 
   function tryInitStandards(attemptsLeft) {
     if (initStandardsCardsSlick() || attemptsLeft <= 0) return;
+    window.setTimeout(function () {
       tryInitStandards(attemptsLeft - 1);
     }, 200);
   }
@@ -56,44 +62,51 @@
     });
   } else {
     tryInitStandards(20);
-    if (!root) return;
-    document.addEventListener('DOMContentLoaded', function () {
-      tryInitStandards(20);
-    });
-    var buttons = root.querySelectorAll('.facility-tabs__nav-button');
-    tryInitStandards(20);
-    if (!buttons.length || !panels.length) return;
+  }
 
   window.addEventListener('load', function () {
     tryInitStandards(20);
   });
-    function setActive(target) {
-      buttons.forEach(function (btn) {
+
+  function initFacilityTabs() {
     var root = document.querySelector('.facility-tabs');
     if (!root) return;
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
     var buttons = root.querySelectorAll('.facility-tabs__nav-button');
     var panels = root.querySelectorAll('.facility-tabs__panel');
     if (!buttons.length || !panels.length) return;
-        var match = panel.getAttribute('data-tab-panel') === target;
+
     function setActive(target) {
       buttons.forEach(function (btn) {
         var isActive = btn.getAttribute('data-tab-target') === target;
         btn.classList.toggle('is-active', isActive);
         btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
-      });
+
       panels.forEach(function (panel) {
         var match = panel.getAttribute('data-tab-panel') === target;
         panel.classList.toggle('is-active', match);
       });
     }
-  } else {
+
     buttons.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var target = btn.getAttribute('data-tab-target');
         if (!target) return;
         setActive(target);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFacilityTabs);
+  } else {
+    initFacilityTabs();
+  }
+
+  function initMethodologyCardsSlick() {
+    if (typeof window.jQuery === 'undefined') return false;
+
     var $ = window.jQuery;
     if (!$.fn || !$.fn.slick) return false;
 
@@ -111,26 +124,13 @@
         slidesToShow: 1,
         slidesToScroll: 1,
         centerMode: true,
-    if (!$track.length) return true;
+        centerPadding: '12%',
+        variableWidth: false,
         speed: 450,
         draggable: true,
-        var existing = $track.slick('getSlick');
-        updateProgress(existing.currentSlide, existing);
-      }
-    }
-
-    function disableSlick() {
-      if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
-        $track.slick('unslick');
-      }
-    }
-
-    enableSlick();
-
-    if (!$track.data('slick-bound')) {
-      window.addEventListener('resize', function () {
-        disableSlick();
-        enableSlick();
+        swipe: true,
+        touchMove: true,
+        mobileFirst: true,
       });
 
       if ($progressFill.length) {
@@ -150,6 +150,21 @@
         var existing = $track.slick('getSlick');
         updateProgress(existing.currentSlide, existing);
       }
+    }
+
+    function disableSlick() {
+      if (window.innerWidth > 767 && $track.hasClass('slick-initialized')) {
+        $track.slick('unslick');
+      }
+    }
+
+    enableSlick();
+
+    if (!$track.data('slick-bound')) {
+      window.addEventListener('resize', function () {
+        disableSlick();
+        enableSlick();
+      });
       $track.data('slick-bound', true);
     }
 
@@ -160,6 +175,16 @@
     var trigger = document.querySelector('.methodology-cards__popup-trigger');
     var popup = document.querySelector('.methodology-cards-popup');
     if (!trigger || !popup) return;
+
+    var dialog = popup.querySelector('.methodology-cards-popup__dialog');
+    var closeBtn = popup.querySelector('.methodology-cards-popup__close');
+
+    function openPopup() {
+      popup.classList.add('is-open');
+      popup.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePopup() {
       popup.classList.remove('is-open');
       popup.setAttribute('aria-hidden', 'true');
     }
@@ -168,6 +193,7 @@
       openPopup();
     });
 
+    popup.addEventListener('click', function (e) {
       if (!dialog.contains(e.target)) {
         closePopup();
       }
@@ -176,6 +202,9 @@
     if (closeBtn) {
       closeBtn.addEventListener('click', function (e) {
         e.stopPropagation();
+        closePopup();
+      });
+    }
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' || e.key === 'Esc') {
@@ -220,19 +249,24 @@
 
     var current = 0;
     var cardW = 0;
+    var gapPx = 0;
+
+    function measure() {
+      cardW = cards[0].offsetWidth;
+      gapPx = parseFloat(getComputedStyle(track).gap) || 0;
+    }
+
+    function targetX(i) {
       var step = cardW + gapPx;
       var trackW = track.offsetWidth;
-      tryInitMethodology(20);
+      var peekLeft = (trackW - cardW) / 2;
       return -(i * step) + peekLeft;
     }
 
-    tryInitMethodology(20);
+    function moveTo(i, animate) {
       track.style.transition = animate
         ? 'transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)'
-
-  window.addEventListener('load', function () {
-    tryInitMethodology(20);
-  });
+        : 'none';
       track.style.transform = 'translateX(' + targetX(i) + 'px)';
       if (fill) fill.style.width = ((i + 1) / count) * 100 + '%';
     }
@@ -357,5 +391,3 @@
     if (wrap) initCarousel(wrap);
   });
 })();
-    var wrap = e.target.querySelector('.rc-carousel');
-    if (wrap) initCarousel(wrap);
