@@ -71,6 +71,7 @@ body{
 
 .faqs-section .ghd--details details summary h3 {
   font-weight: 700;
+  letter-spacing: 0;
 }
 
 .faqs-section .ghd--details details[open] summary h3 {
