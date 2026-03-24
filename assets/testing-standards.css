@@ -335,14 +335,14 @@
 }
 
 .new-standard-banner__content {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
 .new-standard-banner__title {
-  font-size: clamp(2.5em, 4.8vw, 5em);
+  font-size: clamp(2.5em, 5.8vw, 7em);
   margin-bottom: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.03em;
@@ -351,7 +351,7 @@
 }
 
 .new-standard-banner__subtitle {
-  font-size: clamp(1em, 2vw, 2.5em);
+  font-size: clamp(1em, 3vw, 2.8em);
   color: #ffffff;
   margin: 0;
 }
