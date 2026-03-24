@@ -218,9 +218,10 @@ body{
 
 .take-their-word-tagline {
   color: rgb(204 167 15);
-  font-weight: 700;
-  font-size: 20px;
-  padding: 10px 0;
+    font-weight: 700;
+    font-size: 27px;
+    padding: 10px 0;
+    font-family: 'proxima-nova';
 }
 
 /* ─── COA Section ────────────────────────────────────────── */
