@@ -567,7 +567,7 @@ body{
 }
 
 .non-negotiables {
-  color: #f7f0e5;
+  color: #f9f2e8;
   padding: 72px 24px 80px;
 }
 
@@ -579,7 +579,7 @@ body{
 .non-negotiables__title {
   margin: 0 0 40px;
   text-align: center;
-  color: #f7f0e5;
+  color: #f9f2e8;
   font-size: clamp(2.8em, 4.5vw, 4.6em);
   line-height: clamp(1em, 1.2vw, 1.15em);
   font-weight: 400;
@@ -603,7 +603,7 @@ body{
   display: flex;
   align-items: center;
   gap: 12px;
-  color: #f7f0e5;
+  color: #f9f2e8;
   font-size: clamp(1.2rem, 2vw, 1.1em);
   line-height: clamp(1.2em, 1.6vw, 1.35em);
   font-weight: 500;
