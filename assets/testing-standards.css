@@ -45,6 +45,14 @@ body{
   margin: 0 auto;
 }
 
+.ghd--block--faq .mw summary {
+  margin-bottom: 0 !important;
+}
+
+.ghd--block--faq .mw summary h3 {
+  margin-bottom: 0 !important;
+}
+
 .ghd--block--faq label {
   font-weight: bold;
   border-bottom: 1px solid var(--gh-color-gray);
