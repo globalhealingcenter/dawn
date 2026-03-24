@@ -1206,7 +1206,7 @@ h2.inhouse-manufacturing__title {
 .inhouse-manufacturing__cert-copy {
   font-size: clamp(1.6rem, 1.4vw, 1.1em);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2a3530;
+  color: #545454;
   text-align: center;
   margin: 1.5rem 0 1.25rem;
   font-weight: 600;
@@ -1326,7 +1326,7 @@ h2.inhouse-manufacturing__title {
 }
 
 .facility-tabs__item-text {
-  color: #2a3530;
+  color: #545454;
   margin: 0;
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
