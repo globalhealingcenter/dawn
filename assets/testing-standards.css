@@ -1710,7 +1710,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .independent-company-detail__inner {
-    padding: 32px 20px 56px;
+    padding: 32px 10px 56px;
     margin: 0 20px;
   }
 
@@ -1821,6 +1821,10 @@ h2.inhouse-manufacturing__title {
     max-width: 100%;
     font-size: clamp(1.2em, 2vw, 2.2em);
     line-height: 1.35;
+  }
+
+  .independent-company-detail__inner:before {
+      width: calc(100% - 10px);
   }
 
   .independent-company__inner {
