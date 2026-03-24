@@ -607,7 +607,7 @@ body{
   align-items: center;
   gap: 12px;
   color: #f9f2e8;
-  font-size: clamp(1.2rem, 2vw, 1.4em);
+  font-size: clamp(1em, 2vw, 1.4em);
   line-height: clamp(1.2em, 1.6vw, 1.35em);
   font-weight: 500;
 }
@@ -1780,8 +1780,6 @@ h2.inhouse-manufacturing__title {
   .non-negotiables__column:first-child {flex-basis: 35%;}
 
   .non-negotiables__item {
-    gap: 10px;
-    font-size: 1.05em;
     line-height: 1.5;
   }
 
