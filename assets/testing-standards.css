@@ -25,7 +25,7 @@ body{
   margin: 0;
   font-size: clamp(1.6rem, 1.4vw, 1.8rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
 }
 
@@ -89,7 +89,7 @@ body{
 .faqs-section details {
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
   padding: 1.4rem 1rem;
 }
@@ -130,7 +130,7 @@ body{
     text-align: center;
     display: block;
     line-height: 35px;
-    color: #2f3b34;
+    color: #545454;
 }
 
 /* ─── Reviews Carousel ───────────────────────────────────── */
@@ -182,7 +182,7 @@ body{
   text-align: center;
   font-size: clamp(1.6rem, 1.563vw, 2.3em);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
   width: 90%;
 }
@@ -270,7 +270,7 @@ body{
 .coa-section__body {
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
 }
 
@@ -419,7 +419,7 @@ body{
 .independent-company__body {
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   margin: 0;
   font-weight: 400;
   width: 98%;
@@ -495,7 +495,7 @@ body{
 .independent-company-detail__body {
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   margin: 0;
   font-weight: 400;
   margin-top: 1.5rem;
@@ -559,7 +559,7 @@ body{
 .standards-cards__text {
   font-size: clamp(1em, 1.4vw, 1.2em);
   line-height: clamp(1em, 2.2vw, 1.2em);
-  color: #2f3b34;
+  color: #545454;
   margin: 0;
   font-weight: 400;
   letter-spacing: 0;
@@ -728,7 +728,7 @@ body{
   margin: 0;
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
 }
 
@@ -1011,7 +1011,7 @@ body{
 }
 
 .methodology-cards__text {
-  color: #2f3b34;
+  color: #545454;
   margin: 0;
   font-weight: 400;
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
@@ -1197,7 +1197,7 @@ h2.inhouse-manufacturing__title {
   margin: 0 0 1.75rem;
   font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   line-height: clamp(1.3em, 2.2vw, 1.3em);
-  color: #2f3b34;
+  color: #545454;
   font-weight: 400;
   max-width: 510px;
 }
