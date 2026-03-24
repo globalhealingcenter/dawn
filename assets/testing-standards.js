@@ -280,15 +280,24 @@
     }
 
     function moveTo(di, animate) {
-      track.style.transition = animate
-        ? 'transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)'
-        : 'none';
+      if (animate) {
+        track.style.transition = 'transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1)';
+      } else {
+        track.style.transition = 'none';
+        // Force a reflow so the browser commits transition:none before the
+        // next transform change — without this the browser batches both style
+        // writes and can still animate the "instant" snap.
+        void track.offsetWidth;
+      }
       track.style.transform = 'translateX(' + targetX(di) + 'px)';
       setFill();
     }
 
     // After animating into a clone, silently reposition to its real counterpart.
-    track.addEventListener('transitionend', function () {
+    // Filter to 'transform' only — transitionend fires once per property and
+    // responding to any other property would snap at the wrong moment.
+    track.addEventListener('transitionend', function (e) {
+      if (e.propertyName !== 'transform') return;
       if (domIdx === 0) {
         domIdx = count;
         moveTo(domIdx, false);
