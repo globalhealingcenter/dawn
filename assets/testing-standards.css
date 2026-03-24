@@ -1581,6 +1581,9 @@ h2.inhouse-manufacturing__title {
   .methodology-cards__item {
     height: stretch;
   }
+  .methodology-cards__item:not(:last-child) {
+      border-right: initial;
+  }
 
   .methodology-cards__slider .slick-list {
     overflow: visible;
