@@ -535,7 +535,6 @@ body {
 }
 
 .independent-company-detail__number {
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
   color: #21472d;
   font-style: italic;
