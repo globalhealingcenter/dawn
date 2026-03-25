@@ -1376,8 +1376,6 @@ h2.inhouse-manufacturing__title {
   font-weight: 600;
   color: #21472d;
   margin: 0 0 0.5rem;
-  font-size: clamp(1.4em, 3vw, 2em);
-  line-height: clamp(1.1em, 1.5vw, 1.3em);
 }
 
 .facility-tabs__item-text {
