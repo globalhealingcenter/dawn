@@ -2,9 +2,9 @@
 root {
   --gh-font-primary: "miller-display", serif;
   --gh-font-secondary: "proxima-nova", sans-serif;
-  --h0: 5.61em;
+  --h0: 7.47em;
   --h1: 4.209em;
-  --h2: clamp(1.43em, 1.45vw, 2.4rem);
+  --h2: 3.157em;
   --h3: 2.369em;
   --h4: 1.777em;
   --h5: 1.333em;
@@ -21,7 +21,7 @@ h3,
 .h4,
 .h5,
 .h6 {
-  font-family: var(--gh-font-primary)
+  font-weight: 400;
 }
 
 .h0 {
@@ -33,7 +33,7 @@ h3,
 }
 
 .h2 {
-  font-size: var(--h2)
+  font-size: clamp(1.43em, 1.45vw, var(--h2));
 }
 
 .h3 {
