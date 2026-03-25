@@ -61,11 +61,12 @@ h6 {
 
 
 .gh-font-primary {
-  font-family: var(--gh-font-primary)
+  font-family: var(--gh-font-primary);
+  font-style: italic;
 }
 
 .gh-font-secondary {
-  font-family: var(--gh-font-secondary)
+  font-family: var(--gh-font-secondary);
 }
 
 body {
@@ -84,7 +85,6 @@ body {
 .take-their-word-section__title,
 .coa-section__title {
   margin: 0 0 3rem;
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1.1em, 1.5vw, 1.3em);
   color: #21472d;
   font-weight: 400;
@@ -177,7 +177,6 @@ body {
 }
 
 .dive-deep-section__title {
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1.2em, 1.5vw, 1.6em);
   color: #21472d;
   font-weight: 400;
@@ -1243,7 +1242,6 @@ body {
 
 p.inhouse-manufacturing__number {
   margin: 0 0 0.75rem;
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
   color: #21472d;
   font-style: italic;
@@ -1251,7 +1249,6 @@ p.inhouse-manufacturing__number {
 
 h2.inhouse-manufacturing__title {
   margin: 0 0 2.5rem;
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(1em, 1.5vw, 1.3em);
   color: #21472d;
   font-weight: 500;
@@ -1433,10 +1430,6 @@ h2.inhouse-manufacturing__title {
   .coa-section__image-circle {
     width: 280px;
     height: 280px;
-  }
-
-  .coa-section__title {
-    font-size: clamp(2.8rem, 6vw, 4rem);
   }
 }
 
