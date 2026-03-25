@@ -5,7 +5,7 @@ root {
   --h0: 7.47em;
   --h1: 4.209em;
   --h2: 3.157em;
-  --h3: 2.369em;
+  --h3: 2.4em;
   --h4: 1.777em;
   --h5: 1.333em;
   --h6: 1em;
@@ -732,8 +732,9 @@ body {
   margin: 0 auto;
   max-width: 680px;
   color: #fff;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0;
+  line-height: clamp(1.2em, 1.8vw, 1.45em);
 }
 
 .comprehensive-testing {
