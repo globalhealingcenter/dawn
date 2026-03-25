@@ -33,7 +33,7 @@ h3,
 }
 
 .h2 {
-  font-size: clamp(1.43em, 1.45vw, var(--h2));
+  font-size: clamp(1.43em, 3.157vw, var(--h2));
 }
 
 .h3 {
