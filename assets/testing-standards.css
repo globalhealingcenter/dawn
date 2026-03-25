@@ -36,7 +36,7 @@ h1 {
 
 .h2,
 h2 {
-  font-size: clamp(2.2rem, 2.28vw, var(--h2));
+  font-size: clamp(2.2em, 2.28vw, var(--h2));
 }
 
 .h3,
@@ -1863,7 +1863,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .quality-evidence__text {
-    max-width: 285px;
+    max-width: 90%;
   }
 
   .quality-evidence__title {
