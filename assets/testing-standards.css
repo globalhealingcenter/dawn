@@ -36,7 +36,7 @@ h1 {
 
 .h2,
 h2 {
-  font-size: clamp(2em, 2.28vw, var(--h2));
+  font-size: clamp(1.6em, 2.28vw, var(--h2));
 }
 
 .h3,
@@ -1807,7 +1807,7 @@ h2.inhouse-manufacturing__title {
   .non-negotiables__title {
     margin-bottom: 18px;
     text-align: left;
-    font-size: clamp(1.1em, 4vw, 4em);
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
     line-height: 1.2;
   }
 
@@ -1907,7 +1907,8 @@ h2.inhouse-manufacturing__title {
   }
 
   .independent-company-detail__subtitle {
-    max-width: 270px;
+    max-width: 300px;
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .src__progress-track {
