@@ -30,7 +30,7 @@ h3,
 
 .h1,
 h1 {
-  font-size: var(--h1)
+  font-size: clamp(2.5em, 3vw, var(--h1));
 }
 
 .h2,
@@ -543,7 +543,6 @@ body {
 }
 
 .independent-company-detail__title {
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
   color: #21472d;
   margin: 0 0 1.25rem;
@@ -637,7 +636,7 @@ body {
 }
 
 .non-negotiables__inner {
-  max-width: 780px;
+  max-width: 860px;
   margin: 0 auto;
 }
 
@@ -663,10 +662,6 @@ body {
   flex-direction: column;
   gap: 12px;
   flex-basis: 33.3%;
-}
-
-.non-negotiables__column:first-child {
-  flex-basis: 21%;
 }
 
 .non-negotiables__item {
