@@ -4,7 +4,7 @@ root {
   --gh-font-secondary: "proxima-nova", sans-serif;
   --h0: 5.61em;
   --h1: 4.209em;
-  --h2: clamp(2.3rem, 3vw, 3.5rem);
+  --h2: clamp(1.43em, 1.45vw, 2.4rem);
   --h3: 2.369em;
   --h4: 1.777em;
   --h5: 1.333em;
