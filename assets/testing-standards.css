@@ -323,7 +323,6 @@ body {
 }
 
 .coa-section__subtitle {
-  font-size: clamp(1.6rem, 2.1vw, 3em);
   color: #545454;
   font-weight: 400;
   margin: 0;
@@ -460,7 +459,6 @@ body {
 }
 
 .independent-company__heading {
-  font-size: clamp(2.2rem, 3vw, 3.5rem);
   line-height: 1.25;
   color: #21472d;
   margin: 0 0 1.5rem;
@@ -874,7 +872,6 @@ body {
 
 /* Heading */
 .src__heading {
-  font-size: clamp(2.8rem, 3.4vw, 4.3rem);
   line-height: 1.1;
   color: #f4efe5;
   margin: 0 0 0 6rem;
@@ -1023,7 +1020,6 @@ body {
 }
 
 .methodology-cards__heading {
-  font-size: clamp(2.8rem, 3.4vw, 4.3rem);
   line-height: 1.2;
   color: #1f5939;
   text-align: left;
@@ -1343,7 +1339,6 @@ h2.inhouse-manufacturing__title {
   background: none;
   border: none;
   padding: 0 0 24px;
-  font: inherit;
   color: #a8afb0;
   cursor: pointer;
   border-bottom: 1px solid;
@@ -1616,7 +1611,6 @@ h2.inhouse-manufacturing__title {
 
   .src__heading {
     margin: 0 2rem;
-    font-size: clamp(2.1rem, 7vw, 2.8rem);
     line-height: 1.1;
   }
 
