@@ -1308,8 +1308,6 @@ h2.inhouse-manufacturing__title {
   display: inline-flex;
   gap: 0;
   margin-bottom: 10px;
-  font-size: clamp(1.3em, 2vw, 3em);
-  line-height: clamp(1em, 1.5vw, 1.3em);
   width: 100%;
 }
 
@@ -1574,7 +1572,7 @@ h2.inhouse-manufacturing__title {
 
 
   .src__heading {
-    margin: 0 2rem;
+    margin: 0 3rem;
     line-height: 1.1;
   }
 
@@ -1692,7 +1690,8 @@ h2.inhouse-manufacturing__title {
   }
 
   .inhouse-manufacturing__cert-copy {
-    margin-top: 1.75rem;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
   }
 
   .inhouse-manufacturing__icons {
@@ -1725,6 +1724,7 @@ h2.inhouse-manufacturing__title {
 
   .facility-tabs__nav-button {
     padding: 0 0 18px;
+    font-size: 20px;
   }
 
   .facility-tabs__grid {
