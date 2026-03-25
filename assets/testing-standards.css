@@ -616,8 +616,8 @@ body {
 }
 
 .standards-cards__text {
-  font-size: clamp(1em, 1.4vw, 1.2em);
-  line-height: clamp(1em, 2.2vw, 1.2em);
+  font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+  line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #545454;
   margin: 0;
   font-weight: 400;
@@ -1623,6 +1623,11 @@ h2.inhouse-manufacturing__title {
     width: 42%;
     min-width: 200px;
     transform: rotate(-31deg);
+  }
+
+  .comprehensive-testing__subtitle {
+    width: 325px;
+    max-width: 100%;
   }
 
   .methodology-cards__inner {
