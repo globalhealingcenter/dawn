@@ -432,6 +432,7 @@ body {
   letter-spacing: 0.03em;
   color: #ffffff;
   line-height: clamp(0.9em, 2vw, 1.2em);
+  font-style: italic;
 }
 
 .new-standard-banner__subtitle {
@@ -644,7 +645,6 @@ body {
   margin: 0 0 40px;
   text-align: center;
   color: #f9f2e8;
-  font-size: clamp(2.8em, 4.5vw, 4.6em);
   line-height: clamp(1em, 1.2vw, 1.15em);
   font-weight: 400;
   font-style: normal;
@@ -766,7 +766,6 @@ body {
 
 .comprehensive-testing__number {
   margin: 0 0 0.75rem;
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
   color: #21472d;
   font-style: italic;
@@ -774,7 +773,6 @@ body {
 
 .comprehensive-testing__title {
   margin: 0 0 1rem;
-  font-size: clamp(2.5em, 3vw, 4em);
   line-height: clamp(0.9em, 1.5vw, 1.3em);
   color: #21472d;
   font-weight: 500;
