@@ -1574,6 +1574,7 @@ h2.inhouse-manufacturing__title {
   .src__heading {
     margin: 0 3rem;
     line-height: 1.1;
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .src__progress-fill {
@@ -1627,6 +1628,12 @@ h2.inhouse-manufacturing__title {
   .comprehensive-testing__subtitle {
     width: 325px;
     max-width: 100%;
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
+    padding: 8px 0px 0px;
+  }
+
+  .comprehensive-testing__stat-value {
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .methodology-cards__inner {
