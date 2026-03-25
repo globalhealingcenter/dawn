@@ -915,8 +915,6 @@ body {
 
 .src__product,
 .src__product a {
-  font-size: clamp(1.55em, 1.5vw, 2.45em);
-  line-height: 1.2;
   font-weight: 700;
   color: #F9F2E8;
   margin: 0;
@@ -1058,8 +1056,6 @@ body {
 }
 
 .methodology-cards__title {
-  font-size: clamp(1.4em, 3vw, 1.7em);
-  line-height: 1.2;
   color: #545454;
   margin: 0 0 0.75rem;
   font-weight: 600;
@@ -1249,8 +1245,6 @@ h2.inhouse-manufacturing__title {
 
 .inhouse-manufacturing__subheading {
   margin: 0 0 2.5rem;
-  font-size: clamp(2rem, 1.55vw, 2.4em);
-  line-height: clamp(1.3em, 1vw, 2.4em);
   color: #545454;
   font-weight: 600;
   max-width: 470px;
