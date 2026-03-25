@@ -195,10 +195,8 @@ body {
 }
 
 .text-grid-item a {
-  font-size: 27px;
   text-align: center;
   display: block;
-  line-height: 35px;
   color: #545454;
 }
 
@@ -249,8 +247,6 @@ body {
 .rc-meta {
   margin: 10px 0 0;
   text-align: center;
-  font-size: clamp(1.6rem, 1.563vw, 2.3em);
-  line-height: clamp(1.3em, 2.2vw, 1.3em);
   color: #545454;
   font-weight: 400;
   width: 90%;
@@ -299,7 +295,6 @@ body {
 .take-their-word-tagline {
   color: rgb(204 167 15);
   font-weight: 700;
-  font-size: 27px;
   padding: 10px 0;
   font-family: 'proxima-nova';
 }
@@ -1464,10 +1459,6 @@ h2.inhouse-manufacturing__title {
     flex-flow: column;
   }
 
-  .text-grid-item a {
-    font-size: 16px;
-  }
-
   .text-grid-item a br {
     display: none;
   }
@@ -1508,10 +1499,6 @@ h2.inhouse-manufacturing__title {
   .take-their-word-section .take-their-word-tagline {
     padding-left: 20px;
     padding-right: 20px;
-  }
-
-  .take-their-word-tagline {
-    line-height: 23px;
   }
 
   .take-their-word-section .rc-carousel {
