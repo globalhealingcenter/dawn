@@ -1,5 +1,67 @@
 /* ─── References ─────────────────────────────────────────── */
-body{
+root {
+  --gh-font-primary: "miller-display", serif;
+  --gh-font-secondary: "proxima-nova", sans-serif;
+  --h0: 5.61em;
+  --h1: 4.209em;
+  --h2: 3.157em;
+  --h3: 2.369em;
+  --h4: 1.777em;
+  --h5: 1.333em;
+  --h6: 1em;
+}
+
+h1,
+h2,
+h3,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--gh-font-primary)
+}
+
+.h0 {
+  font-size: var(--h0)
+}
+
+.h1 {
+  font-size: var(--h1)
+}
+
+.h2 {
+  font-size: var(--h2)
+}
+
+.h3 {
+  font-size: var(--h3)
+}
+
+.h4 {
+  font-size: var(--h4)
+}
+
+.h5 {
+  font-size: var(--h5)
+}
+
+.h6 {
+  font-size: var(--h6)
+}
+
+
+.gh-font-primary {
+  font-family: var(--gh-font-primary)
+}
+
+.gh-font-secondary {
+  font-family: var(--gh-font-secondary)
+}
+
+body {
   letter-spacing: 0;
 }
 
@@ -117,20 +179,20 @@ body{
 
 .text-grids {
   display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-    padding-top: 20px;
+  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 20px;
 }
 
 .text-grid-item a {
   font-size: 27px;
-    text-align: center;
-    display: block;
-    line-height: 35px;
-    color: #545454;
+  text-align: center;
+  display: block;
+  line-height: 35px;
+  color: #545454;
 }
 
 /* ─── Reviews Carousel ───────────────────────────────────── */
@@ -229,10 +291,10 @@ body{
 
 .take-their-word-tagline {
   color: rgb(204 167 15);
-    font-weight: 700;
-    font-size: 27px;
-    padding: 10px 0;
-    font-family: 'proxima-nova';
+  font-weight: 700;
+  font-size: 27px;
+  padding: 10px 0;
+  font-family: 'proxima-nova';
 }
 
 /* ─── COA Section ────────────────────────────────────────── */
@@ -367,7 +429,7 @@ body{
 }
 
 .new-standard-banner__subtitle {
-  font-size: clamp(1em, 3vw, 2.8em);
+  font-size: clamp(1em, 3vw, 2.6em);
   color: #ffffff;
   margin: 0;
   line-height: clamp(1em, 3.7vw, 2.8em);
@@ -487,10 +549,10 @@ body{
 
 .independent-company-detail__subtitle {
   font-size: clamp(1.43em, 1.45vw, 2.4rem);
-    line-height: clamp(1.1em, 2.2vw, 2.4em);
-    color: #545454;
-    margin: 0;
-    font-weight: 600;
+  line-height: clamp(1.1em, 2.2vw, 2.4em);
+  color: #545454;
+  margin: 0;
+  font-weight: 600;
 }
 
 .independent-company-detail__body {
@@ -549,7 +611,7 @@ body{
 }
 
 .standards-cards__title {
-  font-size: clamp(1.3em,1.8vw,1.6em);
+  font-size: clamp(1.3em, 1.8vw, 1.6em);
   line-height: clamp(1.1em, 2vw, 1.4em);
   color: #545454;
   margin: 0;
@@ -595,12 +657,14 @@ body{
 
 .non-negotiables__column {
   display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex-basis: 33.3%;
+  flex-direction: column;
+  gap: 12px;
+  flex-basis: 33.3%;
 }
 
-.non-negotiables__column:first-child {flex-basis: 21%;}
+.non-negotiables__column:first-child {
+  flex-basis: 21%;
+}
 
 .non-negotiables__item {
   display: flex;
@@ -676,12 +740,12 @@ body{
 
 .quality-evidence__text {
   margin: 0 auto;
-    max-width: 1050px;
-    color: #fff;
-    font-size: clamp(1.3rem, 1.9vw, 4rem);
-    line-height: clamp(1.4em, 1.8vw, 1.45em);
-    font-weight: 400;
-    letter-spacing: 0;
+  max-width: 1050px;
+  color: #fff;
+  font-size: clamp(1.3rem, 1.9vw, 4rem);
+  line-height: clamp(1.4em, 1.8vw, 1.45em);
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .comprehensive-testing {
@@ -738,15 +802,15 @@ body{
 
 .comprehensive-testing__stats {
   position: relative;
-    z-index: 2;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    max-width: 940px;
-    margin-top: 34px;
-    background-color: #f2f2f0;
-    padding: 45px 34px;
-    padding-right: 100px;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  max-width: 940px;
+  margin-top: 34px;
+  background-color: #f2f2f0;
+  padding: 45px 34px;
+  padding-right: 100px;
 }
 
 .comprehensive-testing__stat {
@@ -876,7 +940,8 @@ body{
   padding-bottom: 10px;
 }
 
-.src__text, .src__text a {
+.src__text,
+.src__text a {
   color: #F9F2E8;
   margin: 0 0 15px;
   text-align: left;
@@ -985,6 +1050,7 @@ body{
 .methodology-cards__item:last-child {
   border-right: 2px solid #21472d;
 }
+
 .methodology-cards__item:not(:last-child) {
   border-right: 0;
 }
@@ -1200,11 +1266,11 @@ h2.inhouse-manufacturing__title {
 
 .inhouse-manufacturing__subheading {
   margin: 0 0 2.5rem;
-    font-size: clamp(2rem, 1.55vw, 2.4em);
-    line-height: clamp(1.3em, 1vw, 2.4em);
-    color: #545454;
-    font-weight: 600;
-    max-width: 470px;
+  font-size: clamp(2rem, 1.55vw, 2.4em);
+  line-height: clamp(1.3em, 1vw, 2.4em);
+  color: #545454;
+  font-weight: 600;
+  max-width: 470px;
 }
 
 .inhouse-manufacturing__body {
@@ -1597,10 +1663,10 @@ h2.inhouse-manufacturing__title {
 
   .comprehensive-testing__image-wrap {
     right: -80px;
-        bottom: 29px;
-        width: 42%;
-        min-width: 200px;
-        transform: rotate(-31deg);
+    bottom: 29px;
+    width: 42%;
+    min-width: 200px;
+    transform: rotate(-31deg);
   }
 
   .methodology-cards__inner {
@@ -1610,8 +1676,9 @@ h2.inhouse-manufacturing__title {
   .methodology-cards__item {
     height: stretch;
   }
+
   .methodology-cards__item:not(:last-child) {
-      border-right: 2px solid #21472d;
+    border-right: 2px solid #21472d;
   }
 
   .methodology-cards__slider .slick-list {
@@ -1719,10 +1786,14 @@ h2.inhouse-manufacturing__title {
   }
 
   .new-standard-banner {
-    min-height: 210px;
+    min-height: 580px;
     padding: 40px 16px;
     background-position: right center !important;
     background-size: cover !important;
+  }
+
+  .new-standard-banner__title {
+    margin-bottom: 1.5rem;
   }
 
   .independent-company-detail__inner {
@@ -1789,7 +1860,9 @@ h2.inhouse-manufacturing__title {
     flex-basis: 65%;
   }
 
-  .non-negotiables__column:first-child {flex-basis: 35%;}
+  .non-negotiables__column:first-child {
+    flex-basis: 35%;
+  }
 
   .non-negotiables__item {
     line-height: 1.5;
@@ -1836,7 +1909,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .independent-company-detail__inner:before {
-      width: calc(100% - 10px);
+    width: calc(100% - 10px);
   }
 
   .independent-company__inner {
@@ -1856,15 +1929,20 @@ h2.inhouse-manufacturing__title {
   .independent-company__image-wrap {
     width: clamp(220px, 70vw, 280px);
   }
+
   .coa-section__content {
     gap: 0;
   }
 
   .coa-section__subtitle {
-      margin: 10px 0;
+    margin: 10px 0;
   }
-  .independent-company-detail__subtitle {max-width: 270px;}
-  .src__progress-track{
+
+  .independent-company-detail__subtitle {
+    max-width: 270px;
+  }
+
+  .src__progress-track {
     margin: 30px auto 0;
   }
 }
