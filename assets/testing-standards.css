@@ -1400,6 +1400,7 @@ h2.inhouse-manufacturing__title {
     padding: 0.4rem 2.8rem;
     width: max-content;
     margin-top: 10px;
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .coa-section__image-wrap {
@@ -1498,6 +1499,10 @@ h2.inhouse-manufacturing__title {
   .take-their-word-section .take-their-word-tagline {
     padding-left: 30px;
     padding-right: 30px;
+  }
+
+  .take-their-word-tagline {
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .take-their-word-section .rc-carousel {
@@ -1712,6 +1717,10 @@ h2.inhouse-manufacturing__title {
     height: 55px;
   }
 
+  .inhouse-manufacturing__subheading {
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
+  }
+
   .facility-tabs {
     padding: 0px 0 34px;
   }
@@ -1730,7 +1739,7 @@ h2.inhouse-manufacturing__title {
 
   .facility-tabs__nav-button {
     padding: 0 0 18px;
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .facility-tabs__grid {
