@@ -1467,11 +1467,6 @@ h2.inhouse-manufacturing__title {
     padding: 1rem 2rem 8rem;
   }
 
-  .references-section__title,
-  .faqs-section__title {
-    line-height: clamp(1.2em, 1.5vw, 1.3em);
-  }
-
   .faqs-section .ghd--details details summary:after {
     font-size: 2.5rem;
     font-weight: 400;
@@ -1507,6 +1502,10 @@ h2.inhouse-manufacturing__title {
 
   .take-their-word-section .rc-carousel {
     padding: 2rem 0 1rem;
+  }
+
+  .text-grid-item a {
+    font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
   .rc-carousel .rc-track {
