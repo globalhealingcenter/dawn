@@ -1428,6 +1428,10 @@ h2.inhouse-manufacturing__title {
     transform: none !important;
   }
 
+  .new-standard-banner__subtitle br {
+    display: none;
+  }
+
   .methodology-cards__item {
     width: auto !important;
   }
