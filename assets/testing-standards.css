@@ -1243,6 +1243,7 @@ h2.inhouse-manufacturing__title {
   color: #545454;
   font-weight: 600;
   max-width: 410px;
+  line-height: 1.3em;
 }
 
 .inhouse-manufacturing__body {
@@ -1699,6 +1700,11 @@ h2.inhouse-manufacturing__title {
 
   .methodology-cards__progress-track {
     display: block;
+  }
+
+  .methodology-cards__title {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
   }
 
   .inhouse-manufacturing {
