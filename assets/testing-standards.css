@@ -1764,7 +1764,7 @@ h2.inhouse-manufacturing__title {
 
   .facility-tabs__nav-button {
     padding: 0 0 18px;
-    font-size: 21px;
+    font-size: 18px;
   }
 
   .facility-tabs__grid {
@@ -1785,6 +1785,10 @@ h2.inhouse-manufacturing__title {
 
   .facility-tabs__item-content {
     flex: 1 1 auto;
+  }
+
+  .facility-tabs__item-title {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   }
 
   .new-standard-banner {
