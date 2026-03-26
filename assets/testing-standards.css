@@ -1966,6 +1966,18 @@ h2.inhouse-manufacturing__title {
   }
 }
 
+@media (max-width: 600px) {
+  .comprehensive-testing__body {
+    padding-right: 30%;
+  }
+}
+
+@media (max-width: 500px) {
+  .comprehensive-testing__body {
+    padding-right: 0%;
+  }
+}
+
 @media (max-width: 375px) {
   .inhouse-manufacturing__icon {
     width: 100%;
