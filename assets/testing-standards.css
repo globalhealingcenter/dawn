@@ -1387,6 +1387,22 @@ h2.inhouse-manufacturing__title {
 
 
 /* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1400px) {
+  .comprehensive-testing__content {
+    padding-right: 50px;
+  }
+
+  .comprehensive-testing__stats {
+    padding-right: 180px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .comprehensive-testing__stats {
+    padding-right: 300px;
+  }
+}
+
 @media (max-width: 900px) {
   .coa-section__inner {
     flex-direction: column;
@@ -1607,6 +1623,7 @@ h2.inhouse-manufacturing__title {
   .comprehensive-testing__body {
     max-width: 100%;
     line-height: 1.35;
+    padding-right: 230px;
   }
 
   .comprehensive-testing__stats {
