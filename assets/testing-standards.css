@@ -1660,6 +1660,11 @@ h2.inhouse-manufacturing__title {
     font-size: clamp(1.6em, 2.28vw, var(--h2));
   }
 
+  .methodology-cards__title {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
+  }
+
   .methodology-cards__inner {
     padding: 0;
   }
@@ -1700,11 +1705,6 @@ h2.inhouse-manufacturing__title {
 
   .methodology-cards__progress-track {
     display: block;
-  }
-
-  .methodology-cards__title {
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
-    line-height: clamp(1.3em, 2.2vw, 1.3em);
   }
 
   .inhouse-manufacturing {
