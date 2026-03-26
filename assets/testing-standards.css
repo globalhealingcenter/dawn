@@ -1525,7 +1525,8 @@ h2.inhouse-manufacturing__title {
   }
 
   .text-grid-item a {
-    font-size: clamp(1.6em, 2.28vw, var(--h2));
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
   }
 
   .rc-carousel .rc-track {
@@ -1975,6 +1976,11 @@ h2.inhouse-manufacturing__title {
 
   .dive-deep-section__title br {
     display: none;
+  }
+
+  .dive-deep-section {
+    padding-left: 30px;
+    padding-right: 30px;
   }
 }
 
