@@ -1837,6 +1837,7 @@ h2.inhouse-manufacturing__title {
     text-align: left;
     font-size: clamp(1.6em, 2.28vw, var(--h2));
     line-height: 1.2;
+    font-family: var(--gh-font-secondary);
   }
 
   .non-negotiables__grid {
