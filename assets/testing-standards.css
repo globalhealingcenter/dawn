@@ -1382,6 +1382,10 @@ h2.inhouse-manufacturing__title {
   margin-top: 13px;
 }
 
+.new-standard-banner__subtitle br {
+  display: none;
+}
+
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -1426,10 +1430,6 @@ h2.inhouse-manufacturing__title {
     display: grid !important;
     grid-template-columns: repeat(3, 1fr);
     transform: none !important;
-  }
-
-  .new-standard-banner__subtitle br {
-    display: none;
   }
 
   .methodology-cards__item {
@@ -1781,6 +1781,10 @@ h2.inhouse-manufacturing__title {
   .new-standard-banner__subtitle {
     font-size: clamp(1em, 6vw, 1.777em);
     line-height: clamp(1em, 7vw, 1.777em);
+  }
+
+  .new-standard-banner__subtitle br {
+    display: block;
   }
 
   .independent-company-detail__inner {
