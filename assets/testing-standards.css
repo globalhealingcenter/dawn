@@ -1910,6 +1910,7 @@ h2.inhouse-manufacturing__title {
 
   .quality-evidence__text {
     max-width: 90%;
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
   }
 
   .quality-evidence__title {
