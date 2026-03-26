@@ -1543,9 +1543,10 @@ h2.inhouse-manufacturing__title {
     height: 18px;
   }
 
-  .rc-text {
-    font-size: 14px;
-    line-height: 1.4;
+  .rc-text,
+  .rc-meta {
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    line-height: clamp(1.3em, 2.2vw, 1.3em);
   }
 
   .rc-progress {
