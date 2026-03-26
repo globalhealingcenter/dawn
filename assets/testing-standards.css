@@ -459,22 +459,21 @@ body {
   line-height: 1.3;
   color: #21472d;
   margin-bottom: 0;
-}
-
-.independent-company__heading {
-  line-height: 1.25;
-  color: #21472d;
-  margin: 0 0 1.5rem;
   font-weight: 400;
   width: 90%
 }
 
-.independent-company__heading em,
+/* .independent-company__heading {
+  line-height: 1.25;
+  color: #21472d;
+  margin: 0 0 1.5rem;
+  
+} */
+
 .independent-company__eyebrow em {
   font-style: italic;
 }
 
-.independent-company__heading strong,
 .independent-company__eyebrow strong {
   font-weight: 700;
 }
