@@ -1661,7 +1661,7 @@ h2.inhouse-manufacturing__title {
   }
 
   .methodology-cards__title {
-    font-size: clamp(1.6rem, 1.4vw, 1.9rem);
+    font-size: clamp(1.6rem, 1.4vw, 1.9rem) !important;
     line-height: clamp(1.3em, 2.2vw, 1.3em);
   }
 
