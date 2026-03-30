@@ -27,6 +27,10 @@
         "ordergroove_offer": {
           "disabled": false,
           "settings": {}
+        },
+        "custom_liquid_TxJtfK": {
+          "disabled": true,
+          "settings": {}
         }
       }
     },
