@@ -35,14 +35,14 @@
           window.__IN_TAPCART__ = IN_TAPCART;
           window.__IS_PDP__ = IS_PDP;
 
-          // ✅ Fix C: ensure safe product object so Yotpo doesn’t crash
+          // Fix C: ensure safe product object so Yotpo doesn’t crash
           if (IN_TAPCART && !IS_PDP) {
             window.product = window.product || {};
             window.product.reviews = window.product.reviews || {};
             window.product.reviews.bottomline = window.product.reviews.bottomline || {};
           }
 
-          // ✅ Fix D: flag Tapcart environment to skip Yotpo Reviews init
+          // Fix D: flag Tapcart environment to skip Yotpo Reviews init
           if (IN_TAPCART && !IS_PDP) {
             window.__SKIP_YOTPO_REVIEWS__ = true;
           }
@@ -489,6 +489,25 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   
   {% include "huk-mega-menu-pro" %}
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '820609922000629');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=820609922000629&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
   </head>
 							
 
