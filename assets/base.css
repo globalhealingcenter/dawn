@@ -1352,6 +1352,11 @@ body.gradient.index .customer button {
   border-radius: 4px;
 }
 
+.button,
+.button-label,
+body.gradient.index .shopify-challenge__button,
+body.gradient.index .customer button
+
 .button--tertiary {
   font-size: 1.2rem;
   padding: 1rem 1.5rem;
