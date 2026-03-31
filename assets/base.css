@@ -1341,10 +1341,10 @@ button.shopify-payment-button__button--unbranded {
   background-color: rgba(var(--color-button-text), 0.3);
 }
 
-.button,
-.button-label,
-.shopify-challenge__button,
-.customer button {
+body.gradient.index .button,
+body.gradient.index .button-label,
+body.gradient.index .shopify-challenge__button,
+body.gradient.index .customer button {
   font-size: clamp(16px, 1.563vw, 2.5rem);
   font-family: 'proxima-nova';
   min-height: 6rem;
