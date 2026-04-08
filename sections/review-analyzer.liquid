@@ -215,7 +215,7 @@ async function runAnalysis(){
   var prompt='You are a conversion copywriter and data analyst specializing in supplement ecommerce. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON with this structure:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [{ "stat": "X% reported Y", "percentage": number, "theme": "Theme", "color": "gold", "count": number }],\n  "themes": [{ "label": "theme", "count": number }],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar" }],\n  "verbatims": [{ "quote": "short customer quote under 25 words", "theme": "theme" }]\n}\nRules: outcome_stats 4-6 items with real percentages. themes 6-8 items. copy_snippets 4-5 conversion-focused items. verbatims 4 specific emotional quotes.\n\nReviews:\n'+reviewTexts;
   stepDone('step1'); stepActive('step2');
   try{
-    var response=await fetch('https://api.anthropic.com/v1/messages',{
+    var response = await fetch('https://ecom-claude-proxy.globalhealing.workers.dev', {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
