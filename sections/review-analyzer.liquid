@@ -208,7 +208,7 @@ async function runAnalysis(){
   var reviews=getReviewsForProduct(product);
   if(!reviews.length){showError('No reviews found.');return;}
   hideError(); showLoading(reviews.length); hideResults();
-  var sample=reviews.length>300?reviews.sort(function(){return Math.random()-0.5;}).slice(0,300):reviews;
+  var sample=reviews.length>2000?reviews.sort(function(){return Math.random()-0.5;}).slice(0,2000):reviews;
   var reviewTexts=sample.map(function(r){return getReviewText(r);}).filter(function(t){return t.length>20;}).join('\n---\n');
   stepActive('step1');
   var focusLine=focus?'Pay special attention to mentions of: '+focus+'.':'';
@@ -218,7 +218,7 @@ async function runAnalysis(){
     var response = await fetch('https://ecom-claude-proxy.globalhealing.workers.dev', {
       method:'POST',
       headers: {'Content-Type': 'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
     });
     stepDone('step2'); stepActive('step3');
     if(!response.ok){var err=await response.json();throw new Error(err.error&&err.error.message||'API error');}
