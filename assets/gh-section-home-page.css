@@ -102,7 +102,7 @@ section h3.eyebrow span {
 
 /* Hero Carousel (homepage banners) - 1430×475px, fixed aspect-ratio for CLS */
 .ghd--hero-carousel {
-    padding-top: 4rem;
+    padding-top: 2.5rem;
     padding-bottom: 4rem;
 }
 
@@ -389,7 +389,7 @@ section h3.eyebrow span {
     }
 
     .ghd--hero-carousel {
-        padding-top: 60px;
+        padding-top: 26px;
     }
 
     .ghd--hero-carousel__stars {

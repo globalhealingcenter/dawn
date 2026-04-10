@@ -179,7 +179,7 @@
     margin: 10px auto 0px;
     text-align: center;
     flex-flow: column;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .src__stars svg {
@@ -190,7 +190,7 @@
   .src__text {
     width: 90%;
     margin: auto;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 17px;
   }
 

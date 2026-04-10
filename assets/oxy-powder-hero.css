@@ -92,7 +92,7 @@
 }
 
 .oph__social-proof {
-  font-size: clamp(12px, 1.875vw, 3rem);
+  font-size: clamp(14px, 1.875vw, 3rem);
   line-height: clamp(19.2px, 2.25vw, 3.6rem);
   font-weight: bold;
   color: #F9F2E8;
@@ -219,7 +219,7 @@
 }
 
 .oph__bottom-sub {
-  font-size: clamp(11px, 1.063vw, 1.7rem);
+  font-size: clamp(12px, 1.063vw, 1.7rem);
   line-height: clamp(15px, 1.938vw, 3.1rem);
   color: #545554;
   font-weight: bold;
@@ -334,15 +334,15 @@
   }
 
   .oph__bottom-logo img {
-    width: 39px;
-    height: 39px;
+    width: 50px;
+    height: 50px;
   }
 
   .oph__description {
     word-break: break-word;
     text-align: left;
     padding: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 20px;
   }
 

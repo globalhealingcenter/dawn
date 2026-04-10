@@ -135,7 +135,7 @@
 }
 
 .cw__card-text {
-  font-size: clamp(1.6rem, 1.25vw, 2rem);
+  font-size: clamp(1.7rem, 1.25vw, 2rem);
   line-height: clamp(2.4rem, 1.5vw, 3.3rem);
   color: #F9F2E8;
   margin: 0 0 auto;
