@@ -277,7 +277,7 @@
           "settings": {
             "background_video": "shopify://files/videos/oxy-section-video.mov",
             "badge_image": "shopify://shop_images/oxy-powder-tag-logo.png",
-            "product_name": "Oxy-Powder",
+            "product_name": "Oxy-Powder®",
             "tagline": "Support for Your Foundation of Healing",
             "social_proof": "1M+ Bottles Sold | 10,000+ 5-Star Reviews",
             "product_image": "shopify://shop_images/oxy-powder-img.png",
@@ -293,7 +293,7 @@
           }
         },
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
             "publishId": "dhknd9e74ir2m"
           }
@@ -342,6 +342,8 @@
             "product_url": "/products/probiotic",
             "review_text": "\"I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on track. I'm truly grateful.\"",
             "author": "Léonor N.",
+            "star_rating": 3,
+            "verified_buyer_text": "Verified Buyersss",
             "meta_product": "Ultimate Probiotic"
           }
         },
@@ -352,6 +354,8 @@
             "product_url": "/products/organic-black-seed-oil",
             "review_text": "\"I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint stiffness in my knees. Since taking it daily, it has drastically reduced.\"",
             "author": "Starr R.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
             "meta_product": "Black Seed Oil"
           }
         },
@@ -362,6 +366,8 @@
             "product_url": "/products/calcium-disodium-edta",
             "review_text": "\"This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep better and feel like I'm 25 again. You have a loyal customer now! Donna W.\"",
             "author": "Donna W.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
             "meta_product": "Calcium Disodium EDTA"
           }
         },
@@ -372,6 +378,8 @@
             "product_url": "/products/latero-flora",
             "review_text": "\"I've tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and with celiac my gut was always off. After four months, my issues have been neutralized. This has been a dramatic change.\"",
             "author": "Nicole P.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
             "meta_product": "Latero-Flora®"
           }
         },
@@ -382,6 +390,8 @@
             "product_url": "/products/organic-multivitamin-with-minerals",
             "review_text": "\"I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost. I'll continue ordering it along with several other Global Healing supplements. They've earned my trust.\"",
             "author": "Caren R.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
             "meta_product": "Multivitamin with Minerals"
           }
         },
@@ -392,6 +402,8 @@
             "product_url": "/products/oxy-powder",
             "review_text": "\"I used to get sick after eating greasy foods. Now I take Oxy-Powder and don't suffer. When I feel bloated, it feels like I've done a cleanse. I can't stand to be without it.\"",
             "author": "Nilsa G.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
             "meta_product": "Oxy-Powder®"
           }
         },
