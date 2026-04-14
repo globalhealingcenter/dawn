@@ -33,11 +33,13 @@
             {% assign text = review_block.settings.review_text %}
             {% assign author = review_block.settings.author %}
             {% assign meta_prod = review_block.settings.meta_product %}
+            {% assign star_rating = review_block.settings.star_rating | default: 5 | at_least: 1 | at_most: 5 %}
+            {% assign verified_buyer_text = review_block.settings.verified_buyer_text | default: 'Verified Buyer' %}
 
             {% if prod != blank or text != blank %}
               <div class="src__card" role="listitem" {{ review_block.shopify_attributes }}>
                 <div class="src__stars" aria-hidden="true">
-                  {% for star in (1..5) %}
+                  {% for star in (1..star_rating) %}
                     <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
                       <style>.s0 { fill: #cca72c }</style>
                       <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
@@ -57,7 +59,10 @@
                   <p class="src__text font-proxima">{{ text }}</p>
                 {% endif %}
                 {% if author != blank %}
-                  <p class="src__meta font-proxima hide-on-mobile">{{ author }} | Verified Buyer</p>
+                  <p class="src__meta font-proxima hide-on-mobile">
+                    {{ author }}
+                    {% if verified_buyer_text != blank %} | {{ verified_buyer_text }}{% endif %}
+                  </p>
                   <p class="src__meta font-proxima hide-on-desktop">
                     {{ author }}<br>
                     {% if meta_prod != blank %}<span>{{ meta_prod }}</span>{% endif %}
