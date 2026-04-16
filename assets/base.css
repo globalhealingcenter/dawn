@@ -3849,7 +3849,7 @@ div[id^="shopify-block-"][id*="tolstoy"] {
 
   .tolstoy-carousel-video-container,
   .tolstoy-carousel-videos-container {
-    min-height: 300px !important;
+    min-height: 420px !important;
   }
 }
 
@@ -3861,7 +3861,7 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   }
 
   .tolstoy-carousel-tile {
-    height: 300px !important;
+    height: 420px !important;
   }
 
   .tolstoy-product-tile-title,

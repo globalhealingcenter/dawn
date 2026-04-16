@@ -62,6 +62,10 @@
     height: 100%;
   }
 
+  .gh-footer-signup__left {
+    max-width: 100%;
+  }
+
   .gh-footer-signup__left .gh-footer-signup__heading {
     color: #fff;
     font-size: clamp(3rem, 4vw, 6.4rem);
@@ -78,6 +82,7 @@
     line-height: clamp(1.9rem, 2.25vw, 3.6rem);
     margin: 0;
     width: 460px;
+    max-width: 100%;
   }
   .gh-footer-signup__left .gh-footer-signup__description em {
     font-style: italic;
@@ -219,6 +224,13 @@
     .gh-footer-signup__form .gh-footer-signup__input-row,
     .gh-footer-signup__form label{
       justify-content: flex-start !important;
+    }
+    .gh-footer-signup__form label{
+      flex-wrap: wrap;
+    }
+    .gh-footer-signup__form label a {
+      font-size: 12px;
+      margin-top: 5px;
     }
   }
 </style>

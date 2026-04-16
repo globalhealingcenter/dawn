@@ -98,6 +98,63 @@
       scrollToIndex(currentIndex + 1);
     });
 
+    // Mobile swipe support (keeps arrow controls active)
+    var touchStartX = 0;
+    var touchStartY = 0;
+    var touchDeltaX = 0;
+    var touchDeltaY = 0;
+    var isSwiping = false;
+    var didSwipe = false;
+    var SWIPE_THRESHOLD = 40;
+
+    track.addEventListener('touchstart', function(event) {
+      if (!event.touches || !event.touches.length) return;
+      var touch = event.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      touchDeltaX = 0;
+      touchDeltaY = 0;
+      isSwiping = false;
+      didSwipe = false;
+    }, { passive: true });
+
+    track.addEventListener('touchmove', function(event) {
+      if (!event.touches || !event.touches.length) return;
+      var touch = event.touches[0];
+      touchDeltaX = touch.clientX - touchStartX;
+      touchDeltaY = touch.clientY - touchStartY;
+
+      // Lock to horizontal swipes so vertical page scroll keeps working.
+      if (!isSwiping && Math.abs(touchDeltaX) > 8 && Math.abs(touchDeltaX) > Math.abs(touchDeltaY)) {
+        isSwiping = true;
+      }
+
+      if (isSwiping) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    track.addEventListener('touchend', function() {
+      if (!isSwiping || isTransitioning) return;
+
+      if (Math.abs(touchDeltaX) >= SWIPE_THRESHOLD) {
+        didSwipe = true;
+        if (touchDeltaX < 0) {
+          scrollToIndex(currentIndex + 1);
+        } else {
+          scrollToIndex(currentIndex - 1);
+        }
+      }
+    }, { passive: true });
+
+    // Prevent accidental click-through after a swipe on slide links.
+    track.addEventListener('click', function(event) {
+      if (!didSwipe) return;
+      event.preventDefault();
+      event.stopPropagation();
+      didSwipe = false;
+    }, true);
+
     // Handle Window Resize and Orientation change
     window.addEventListener('resize', syncWidths);
     

@@ -1284,6 +1284,8 @@ section h3.eyebrow span {
 /* (Optional) add breathing room above the whole carousel */
 .gh--home-page [class*="tolstoy-carousel-container"] {
     padding-top: 1rem !important;
+    z-index: 9;
+    position: relative;
 }
 
 
