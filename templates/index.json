@@ -47,21 +47,21 @@
             "banner_1_mobile_video": "",
             "banner_1_url": "shopify://pages/shop-by-health-benefit",
             "banner_1_visible": true,
-            "banner_1_order": 1,
+            "banner_1_order": 2,
             "banner_2_desktop_image": "shopify://shop_images/GH-Home-Banner.jpg",
             "banner_2_desktop_video": "",
             "banner_2_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner_1af1659f-3440-4ead-8273-8653d961d820.jpg",
             "banner_2_mobile_video": "",
             "banner_2_url": "shopify://products/nad",
             "banner_2_visible": true,
-            "banner_2_order": 2,
-            "banner_3_desktop_image": "shopify://shop_images/GH-28th_Anniversary_Banner-Desktop-1430x475.jpg",
+            "banner_2_order": 3,
+            "banner_3_desktop_image": "shopify://shop_images/2026-earth-day-desktop-banner.jpg",
             "banner_3_desktop_video": "",
-            "banner_3_mobile_image": "shopify://shop_images/gh-28th_anniversar_hafy58.idlk.jpg",
+            "banner_3_mobile_image": "shopify://shop_images/2026-earth-day-mobile-banner.jpg",
             "banner_3_mobile_video": "",
-            "banner_3_url": "https://globalhealing.com/collections/best-sellers",
+            "banner_3_url": "shopify://pages/earth-day-2026",
             "banner_3_visible": true,
-            "banner_3_order": 3,
+            "banner_3_order": 1,
             "banner_4_desktop_image": "shopify://shop_images/040626-veritree-homepage-banner.jpg",
             "banner_4_desktop_video": "",
             "banner_4_mobile_image": "shopify://shop_images/040626-veritree-homepage-banner-mobile.jpg",
@@ -129,7 +129,7 @@
           "settings": {}
         },
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
             "publishId": "qoqax285bu91b"
           }
