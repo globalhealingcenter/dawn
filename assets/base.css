@@ -1341,18 +1341,21 @@ button.shopify-payment-button__button--unbranded {
   background-color: rgba(var(--color-button-text), 0.3);
 }
 
-.button,
-.button-label,
-.shopify-challenge__button,
-.customer button {
-  font-size: clamp(16px, 1.563vw, 2.5rem);
+body.gradient.index .button,
+body.gradient.index .button-label,
+body.gradient.index .shopify-challenge__button,
+body.gradient.index .customer button {
+  font-size: clamp(16px, 1.563vw, 1.7rem);
   font-family: 'proxima-nova';
   min-height: 6rem;
   line-height: calc(1 + 0.2 / var(--font-body-scale));
 }
 
-.button--tertiary {
-  font-size: 1.2rem;
+.button,
+.button-label,
+body.gradient.index .shopify-challenge__button,
+body.gradient.index .customer button .button--tertiary {
+  font-size: 1.7rem;
   padding: 1rem 1.5rem;
   min-width: calc(9rem + var(--buttons-border-width) * 2);
   min-height: calc(3.5rem + var(--buttons-border-width) * 2);
