@@ -10,24 +10,9 @@
 {
   "sections": {
     "main": {
-      "type": "main-page",
-      "settings": {
-        "padding_top": 28,
-        "padding_bottom": 28
-      }
-    },
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "settings": {}
-    },
-    "shogun-optimizer": {
-      "type": "shogun-optimizer",
+      "type": "review-analyzer",
       "settings": {}
     }
   },
-  "order": [
-    "shogun-helper",
-    "main",
-    "shogun-optimizer"
-  ]
+  "order": ["main"]
 }

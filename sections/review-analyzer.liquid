@@ -1,0 +1,348 @@
+{% assign page_title = 'Review Intelligence' %}
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #1a1208;
+    --paper: #faf7f2;
+    --cream: #f2ede4;
+    --gold: #c8952a;
+    --gold-light: #e8b84b;
+    --sage: #4a6741;
+    --sage-light: #6a8f60;
+    --rust: #b84c2a;
+    --mist: #e8e2d9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .upload-zone { border: 2px dashed var(--mist); background: var(--cream); border-radius: 4px; padding: 52px 40px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; margin-bottom: 32px; }
+  .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: #f5ede0; }
+  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+  .upload-icon { width: 48px; height: 48px; margin: 0 auto 16px; color: var(--gold); }
+  .upload-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; }
+  .upload-sub { font-size: 13px; color: #8a7a68; font-family: 'DM Mono', monospace; }
+  .file-loaded { display: flex; align-items: center; gap: 14px; background: var(--ink); color: var(--paper); padding: 16px 24px; border-radius: 4px; margin-bottom: 32px; font-family: 'DM Mono', monospace; font-size: 13px; }
+  .file-loaded .dot { width: 8px; height: 8px; background: var(--gold-light); border-radius: 50%; flex-shrink: 0; }
+  .file-loaded strong { color: var(--gold-light); }
+  .ra-controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; margin-bottom: 40px; align-items: end; }
+  .ra-label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 8px; }
+  .ra-select, .ra-input { width: 100%; padding: 12px 16px; border: 1px solid var(--mist); background: white; font-size: 14px; color: var(--ink); border-radius: 2px; appearance: none; outline: none; transition: border-color 0.2s; }
+  .ra-select:focus, .ra-input:focus { border-color: var(--gold); }
+  .btn-analyze { padding: 13px 32px; background: var(--gold); color: var(--ink); font-weight: 600; font-size: 14px; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .btn-analyze:hover { background: var(--gold-light); }
+  .btn-analyze:disabled { background: var(--mist); color: #aaa; cursor: not-allowed; }
+  .ra-loading { display: none; text-align: center; padding: 64px 0; }
+  .ra-loading.active { display: block; }
+  .loading-ring { width: 48px; height: 48px; border: 3px solid var(--mist); border-top-color: var(--gold); border-radius: 50%; animation: raspin 0.8s linear infinite; margin: 0 auto 20px; }
+  @keyframes raspin { to { transform: rotate(360deg); } }
+  .loading-text { font-family: 'DM Mono', monospace; font-size: 13px; color: #8a7a68; }
+  .loading-step { font-size: 12px; color: #aaa; transition: color 0.3s; margin: 4px 0; }
+  .loading-step.active { color: var(--gold); }
+  .loading-step.done { color: var(--sage); }
+  .ra-results { display: none; }
+  .ra-results.active { display: block; }
+  .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--mist); }
+  .results-title { font-family: 'DM Serif Display', serif; font-size: 28px; }
+  .results-meta { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a7a68; }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat-card { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 24px; position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+  .stat-card.sage::before { background: var(--sage); }
+  .stat-card.rust::before { background: var(--rust); }
+  .stat-pct { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
+  .stat-card.sage .stat-pct { color: var(--sage); }
+  .stat-card.rust .stat-pct { color: var(--rust); }
+  .stat-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+  .stat-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
+  .pain-section { background: #fff8f6; border: 1px solid #f5ddd8; border-radius: 4px; padding: 32px; margin-bottom: 40px; }
+  .pain-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--rust); margin-bottom: 4px; }
+  .pain-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #b87a68; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .pain-card { border-left: 3px solid var(--rust); background: white; padding: 18px 20px; margin-bottom: 12px; border-radius: 0 4px 4px 0; }
+  .pain-rank { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--rust); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .pain-label { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .pain-language { font-size: 13px; color: #5a4a38; line-height: 1.6; font-style: italic; margin-bottom: 8px; }
+  .pain-copy-hook { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
+  .pain-copy-hook span { color: var(--rust); font-style: normal; }
+  .copy-section { background: var(--ink); border-radius: 4px; padding: 36px; margin-bottom: 32px; }
+  .copy-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold-light); margin-bottom: 6px; }
+  .copy-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6e5e; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .copy-snippet { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); padding: 16px 20px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .copy-snippet p { font-size: 15px; color: var(--paper); line-height: 1.5; flex: 1; }
+  .copy-snippet p strong { color: var(--gold-light); }
+  .btn-copy { flex-shrink: 0; padding: 6px 14px; background: transparent; border: 1px solid #4a3e2e; color: #8a7a68; font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .btn-copy:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-copy.copied { border-color: var(--sage); color: var(--sage-light); }
+  .themes-section { margin-bottom: 40px; }
+  .themes-title, .verbatims-title, .sentiment-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 16px; }
+  .theme-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+  .theme-pill { padding: 8px 16px; background: var(--cream); border: 1px solid var(--mist); border-radius: 100px; font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .theme-pill .pill-count { font-family: 'DM Mono', monospace; font-size: 11px; background: var(--ink); color: var(--gold-light); padding: 2px 7px; border-radius: 100px; }
+  .sentiment-bar-wrap { margin-bottom: 32px; }
+  .sentiment-bar { height: 12px; background: var(--mist); border-radius: 100px; overflow: hidden; display: flex; }
+  .sentiment-fill { height: 100%; transition: width 1s ease; }
+  .s-positive { background: var(--sage); }
+  .s-neutral { background: var(--gold); }
+  .s-negative { background: var(--rust); }
+  .sentiment-legend { display: flex; gap: 20px; margin-top: 8px; font-family: 'DM Mono', monospace; font-size: 11px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .verbatims { margin-bottom: 40px; }
+  .verbatim-card { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 20px 24px; margin-bottom: 12px; font-size: 14px; line-height: 1.7; color: #3a2e20; font-style: italic; }
+  .verbatim-card .v-meta { font-style: normal; font-family: 'DM Mono', monospace; font-size: 11px; color: #aaa; margin-top: 8px; }
+  .error-box { display: none; background: #fff5f3; border: 1px solid #f5c6bb; border-radius: 4px; padding: 20px 24px; font-size: 14px; color: var(--rust); margin-bottom: 24px; }
+  .error-box.active { display: block; }
+  .export-bar { display: flex; gap: 12px; padding-top: 24px; border-top: 1px solid var(--mist); }
+  .btn-export { padding: 10px 24px; background: transparent; border: 1px solid var(--mist); color: var(--ink); font-size: 13px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .btn-export:hover { border-color: var(--gold); color: var(--gold); }
+</style>
+
+<div class="review-analyzer-wrapper" style="max-width:1100px;margin:0 auto;padding:52px 32px;">
+
+  <h1 style="font-family:'DM Serif Display',serif;font-size:48px;line-height:1.1;margin-bottom:10px;">Turn reviews into<br><em style="color:var(--gold);">conversion copy.</em></h1>
+  <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV export. Select a product. Get statistics, pain points, and ready-to-use copy snippets backed by real customer language.</p>
+
+  <div class="upload-zone" id="uploadZone">
+    <input type="file" id="csvFile" accept=".csv">
+    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12V4m0 0L8 8m4-4l4 4"/></svg>
+    <div class="upload-title">Drop your Yotpo CSV here</div>
+    <div class="upload-sub">or click to browse — .csv files only</div>
+  </div>
+
+  <div class="file-loaded" id="fileLoaded" style="display:none">
+    <div class="dot"></div>
+    <div><strong id="fileName">file.csv</strong> loaded — <span id="reviewCount">0</span> reviews across <span id="productCount">0</span> products</div>
+  </div>
+
+  <div class="ra-controls">
+    <div><span class="ra-label">Select Product</span><select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select></div>
+    <div><span class="ra-label">Focus Theme (optional)</span><input class="ra-input" type="text" id="focusTheme" placeholder="e.g. gut health, energy, sleep…" disabled></div>
+    <div><button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button></div>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+
+  <div class="ra-loading" id="raLoading">
+    <div class="loading-ring"></div>
+    <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
+    <div style="margin-top:12px">
+      <div class="loading-step" id="step1">↳ Parsing review data</div>
+      <div class="loading-step" id="step2">↳ Identifying pain points</div>
+      <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
+      <div class="loading-step" id="step4">↳ Generating copy snippets</div>
+    </div>
+  </div>
+
+  <div class="ra-results" id="raResults">
+    <div class="results-header">
+      <div class="results-title" id="resultsTitle">Product</div>
+      <div class="results-meta" id="resultsMeta"></div>
+    </div>
+
+    <div class="sentiment-bar-wrap">
+      <div class="sentiment-label">Overall Sentiment</div>
+      <div class="sentiment-bar">
+        <div class="sentiment-fill s-positive" id="sentimentPos" style="width:0%"></div>
+        <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
+        <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
+      </div>
+      <div class="sentiment-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--sage)"></div><span id="posLabel">0% positive</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div><span id="neuLabel">0% neutral</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--rust)"></div><span id="negLabel">0% negative</span></div>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="pain-section" id="painSection">
+      <div class="pain-section-title">Top 3 Pain Points</div>
+      <div class="pain-section-sub">What customers struggled with before buying — use for About section openers and PDP descriptions</div>
+      <div id="painCards"></div>
+    </div>
+
+    <div class="themes-section"><div class="themes-title">Top Reported Themes</div><div class="theme-pills" id="themePills"></div></div>
+
+    <div class="copy-section">
+      <div class="copy-section-title">Copy-Ready Statistics</div>
+      <div class="copy-section-sub">Drop these directly into PDPs, landing pages, or ads</div>
+      <div id="copySnippets"></div>
+    </div>
+
+    <div class="verbatims"><div class="verbatims-title">Standout Customer Quotes</div><div id="verbatimCards"></div></div>
+
+    <div class="export-bar">
+      <button class="btn-export" onclick="exportTxt()">↓ Export as TXT</button>
+      <button class="btn-export" onclick="window.print()">↓ Print / Save PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script>
+var allReviews = [], lastAnalysis = null;
+
+document.getElementById('uploadZone').addEventListener('dragover', function(e){ e.preventDefault(); this.classList.add('drag-over'); });
+document.getElementById('uploadZone').addEventListener('dragleave', function(){ this.classList.remove('drag-over'); });
+document.getElementById('uploadZone').addEventListener('drop', function(e){ e.preventDefault(); this.classList.remove('drag-over'); if(e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]); });
+document.getElementById('csvFile').addEventListener('change', function(e){ if(e.target.files[0]) processFile(e.target.files[0]); });
+
+function processFile(file){
+  Papa.parse(file,{ header:true, skipEmptyLines:true, complete:function(r){
+    allReviews = r.data;
+    var products = getProducts(allReviews);
+    var sel = document.getElementById('productSelect');
+    sel.innerHTML = '<option value="">— choose a product —</option>';
+    products.forEach(function(p){ var o=document.createElement('option'); o.value=p; o.textContent=p; sel.appendChild(o); });
+    sel.disabled=false; document.getElementById('focusTheme').disabled=false; document.getElementById('analyzeBtn').disabled=false;
+    document.getElementById('uploadZone').style.display='none';
+    document.getElementById('fileLoaded').style.display='flex';
+    document.getElementById('fileName').textContent=file.name;
+    document.getElementById('reviewCount').textContent=allReviews.length.toLocaleString();
+    document.getElementById('productCount').textContent=products.length.toLocaleString();
+  }, error:function(){ showError("Couldn't parse CSV."); }});
+}
+
+function getProducts(reviews){
+  var keys=['product_title','Product Title','product_name','Product Name','title','name'], col=null;
+  for(var i=0;i<keys.length;i++){ if(reviews[0]&&reviews[0][keys[i]]!==undefined){col=keys[i];break;} }
+  if(!col) return['All Reviews'];
+  var set=new Set(reviews.map(function(r){return r[col];}).filter(Boolean));
+  return Array.from(set).sort();
+}
+
+function getReviewsForProduct(product){
+  if(product==='All Reviews') return allReviews;
+  var keys=['product_title','Product Title','product_name','Product Name','title','name'], col=null;
+  for(var i=0;i<keys.length;i++){ if(allReviews[0]&&allReviews[0][keys[i]]!==undefined){col=keys[i];break;} }
+  if(!col) return allReviews;
+  return allReviews.filter(function(r){return r[col]===product;});
+}
+
+function getReviewText(review){
+  var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];
+  for(var i=0;i<keys.length;i++){ if(review[keys[i]]&&review[keys[i]].trim()) return review[keys[i]].trim(); }
+  return Object.values(review).find(function(v){return v&&v.length>40;})||'';
+}
+
+async function runAnalysis(){
+  var product=document.getElementById('productSelect').value;
+  var focus=document.getElementById('focusTheme').value.trim();
+  if(!product){showError('Please select a product.');return;}
+  var reviews=getReviewsForProduct(product);
+  if(!reviews.length){showError('No reviews found.');return;}
+  hideError(); showLoading(reviews.length); hideResults();
+  var sample=reviews.length>2000?reviews.sort(function(){return Math.random()-0.5;}).slice(0,2000):reviews;
+  var reviewTexts=sample.map(function(r){return getReviewText(r);}).filter(function(t){return t.length>20;}).join('\n---\n');
+  stepActive('step1');
+  var focusLine=focus?'Pay special attention to mentions of: '+focus+'.':'';
+  var prompt='You are a conversion copywriter and VoC analyst specializing in supplement ecommerce. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON with this exact structure:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [{ "stat": "X% reported Y", "percentage": number, "theme": "Theme", "color": "gold", "count": number }],\n  "pain_points": [\n    {\n      "rank": 1,\n      "label": "Short pain point name",\n      "customer_language": "The exact words customers use to describe this problem before buying — pull real phrases from the reviews",\n      "copy_hook": "A ready-to-use PDP opener that acknowledges this pain point"\n    }\n  ],\n  "themes": [{ "label": "theme", "count": number }],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar|about section" }],\n  "verbatims": [{ "quote": "short customer quote under 25 words", "theme": "theme" }]\n}\n\nRules:\n- outcome_stats: 4-6 items with real percentages calculated from reviews\n- pain_points: exactly 3 items ranked by frequency. customer_language must use real phrases from reviews, not generic descriptions. copy_hook should be a sentence that opens the About/description section by acknowledging the pain before introducing the solution.\n- themes: 6-8 items sorted by count\n- copy_snippets: 4-5 conversion-focused items\n- verbatims: 4 specific emotional quotes\n\nReviews:\n'+reviewTexts;
+  stepDone('step1'); stepActive('step2');
+  try{
+    var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
+    });
+    stepDone('step2'); stepActive('step3');
+    if(!response.ok){var err=await response.json();throw new Error(err.error&&err.error.message||'API error');}
+    var data=await response.json();
+    var raw=data.content.map(function(b){return b.text||'';}).join('');
+    stepDone('step3'); stepActive('step4');
+    var clean=raw.replace(/```json|```/g,'').trim();
+    var analysis=JSON.parse(clean);
+    lastAnalysis={product:product,analysis:analysis,count:reviews.length};
+    stepDone('step4');
+    setTimeout(function(){hideLoading();renderResults(product,reviews.length,sample.length,analysis);},400);
+  }catch(err){hideLoading();showError('Analysis failed: '+err.message);}
+}
+
+function renderResults(product,total,analyzed,a){
+  document.getElementById('resultsTitle').textContent=product;
+  document.getElementById('resultsMeta').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed';
+  var s=a.sentiment||{positive:0,neutral:0,negative:0}, sum=s.positive+s.neutral+s.negative||1;
+  setTimeout(function(){
+    document.getElementById('sentimentPos').style.width=(s.positive/sum*100)+'%';
+    document.getElementById('sentimentNeu').style.width=(s.neutral/sum*100)+'%';
+    document.getElementById('sentimentNeg').style.width=(s.negative/sum*100)+'%';
+  },100);
+  document.getElementById('posLabel').textContent=Math.round(s.positive/sum*100)+'% positive';
+  document.getElementById('neuLabel').textContent=Math.round(s.neutral/sum*100)+'% neutral';
+  document.getElementById('negLabel').textContent=Math.round(s.negative/sum*100)+'% negative';
+  var grid=document.getElementById('statsGrid'); grid.innerHTML='';
+  var colors=['','sage','rust','','sage','rust'];
+  (a.outcome_stats||[]).forEach(function(s,i){
+    var card=document.createElement('div'); card.className='stat-card '+(colors[i]||'');
+    card.innerHTML='<div class="stat-pct">'+s.percentage+'%</div><div class="stat-label">'+s.theme+'</div><div class="stat-sub">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>';
+    grid.appendChild(card);
+  });
+  var painContainer=document.getElementById('painCards'); painContainer.innerHTML='';
+  (a.pain_points||[]).forEach(function(p){
+    var card=document.createElement('div'); card.className='pain-card';
+    card.innerHTML='<div class="pain-rank">Pain point #'+p.rank+'</div><div class="pain-label">'+p.label+'</div><div class="pain-language">"'+p.customer_language+'"</div><div class="pain-copy-hook">Copy hook: <span>'+p.copy_hook+'</span></div>';
+    painContainer.appendChild(card);
+  });
+  var pills=document.getElementById('themePills'); pills.innerHTML='';
+  (a.themes||[]).forEach(function(t){
+    var p=document.createElement('div'); p.className='theme-pill';
+    p.innerHTML=t.label+'<span class="pill-count">'+t.count+'</span>'; pills.appendChild(p);
+  });
+  var snips=document.getElementById('copySnippets'); snips.innerHTML='';
+  (a.copy_snippets||[]).forEach(function(s){
+    var d=document.createElement('div'); d.className='copy-snippet';
+    var safeText=s.text.replace(/'/g,"&#39;");
+    d.innerHTML='<p>'+s.text+' <span style="color:#4a3e2e;font-size:12px;font-family:monospace">— '+s.placement+'</span></p><button class="btn-copy" onclick="copyText(this,\''+safeText+'\')">Copy</button>';
+    snips.appendChild(d);
+  });
+  var verbs=document.getElementById('verbatimCards'); verbs.innerHTML='';
+  (a.verbatims||[]).forEach(function(v){
+    var c=document.createElement('div'); c.className='verbatim-card';
+    c.innerHTML='"'+v.quote+'"<div class="v-meta">'+v.theme+'</div>'; verbs.appendChild(c);
+  });
+  showResults();
+}
+
+function copyText(btn,text){
+  var clean=text.replace(/<[^>]+>/g,'');
+  navigator.clipboard.writeText(clean).then(function(){
+    btn.textContent='Copied!'; btn.classList.add('copied');
+    setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
+  });
+}
+
+function exportTxt(){
+  if(!lastAnalysis)return;
+  var a=lastAnalysis.analysis, out='REVIEW INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.count+' reviews analyzed\n\n';
+  out+='=== TOP 3 PAIN POINTS ===\n';
+  (a.pain_points||[]).forEach(function(p){
+    out+='#'+p.rank+' '+p.label+'\n';
+    out+='Customer language: "'+p.customer_language+'"\n';
+    out+='Copy hook: '+p.copy_hook+'\n\n';
+  });
+  out+='=== OUTCOME STATISTICS ===\n';
+  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.stat+'\n';});
+  out+='\n=== COPY-READY SNIPPETS ===\n';
+  (a.copy_snippets||[]).forEach(function(s){out+='• '+s.text.replace(/<[^>]+>/g,'')+' ['+s.placement+']\n';});
+  out+='\n=== STANDOUT QUOTES ===\n';
+  (a.verbatims||[]).forEach(function(v){out+='"'+v.quote+'" — '+v.theme+'\n';});
+  var blob=new Blob([out],{type:'text/plain'}), url=URL.createObjectURL(blob), link=document.createElement('a');
+  link.href=url; link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-review-intel.txt'; link.click();
+}
+
+function showLoading(c){document.getElementById('raLoading').classList.add('active');document.getElementById('loadingCount').textContent=c.toLocaleString();['step1','step2','step3','step4'].forEach(function(s){document.getElementById(s).className='loading-step';});}
+function hideLoading(){document.getElementById('raLoading').classList.remove('active');}
+function showResults(){document.getElementById('raResults').classList.add('active');}
+function hideResults(){document.getElementById('raResults').classList.remove('active');}
+function showError(m){var b=document.getElementById('errorBox');b.textContent=m;b.classList.add('active');}
+function hideError(){document.getElementById('errorBox').classList.remove('active');}
+function stepActive(id){document.getElementById(id).classList.add('active');}
+function stepDone(id){document.getElementById(id).classList.remove('active');document.getElementById(id).classList.add('done');}
+</script>
+
+{% schema %}
+{
+  "name": "Review Analyzer",
+  "settings": []
+}
+{% endschema %}
+```
