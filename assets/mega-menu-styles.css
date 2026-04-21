@@ -12,6 +12,11 @@
     border-top: 1px solid rgb(255 255 255 / 10%);
 }
 
+.header__inline-menu .huk_menu_item--root>.huk_menu_submenu.menu_submenu_type_mega {
+    height: calc(100vh - 91px) !important;
+    overflow-y: auto;
+}
+
 /* .huk_menu_item_display_header.huk_menu_item_level_1.huk_menu_item_has_child .huk_menu_item_link span.huk_menu_item_text {
     font-family: var(--gh-font-primary) !important;
     font-weight: 500 !important;

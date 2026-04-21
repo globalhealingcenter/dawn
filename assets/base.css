@@ -3701,6 +3701,10 @@ ul.related_post.wp_rp li {
 
 
 /* Tolstoy homepage styling revisions */
+tolstoy-carousel.tolstoy-carousel {
+  z-index: 1;
+  position: relative;
+}
 
 .tolstoy-product-tile-button svg rect {
   fill: #21472D !important;
