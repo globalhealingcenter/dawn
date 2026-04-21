@@ -1,3 +1,6 @@
+Here's the full code:
+
+```liquid
 {% assign page_title = 'Review Intelligence' %}
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -13,11 +16,8 @@
     --sage-light: #6a8f60;
     --rust: #b84c2a;
     --mist: #e8e2d9;
-    --shadow: rgba(26,18,8,0.12);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   .upload-zone { border: 2px dashed var(--mist); background: var(--cream); border-radius: 4px; padding: 52px 40px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; margin-bottom: 32px; }
   .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: #f5ede0; }
   .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
@@ -57,6 +57,15 @@
   .stat-card.rust .stat-pct { color: var(--rust); }
   .stat-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
   .stat-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
+  .pain-section { background: #fff8f6; border: 1px solid #f5ddd8; border-radius: 4px; padding: 32px; margin-bottom: 40px; }
+  .pain-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--rust); margin-bottom: 4px; }
+  .pain-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #b87a68; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .pain-card { border-left: 3px solid var(--rust); background: white; padding: 18px 20px; margin-bottom: 12px; border-radius: 0 4px 4px 0; }
+  .pain-rank { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--rust); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .pain-label { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+  .pain-language { font-size: 13px; color: #5a4a38; line-height: 1.6; font-style: italic; margin-bottom: 8px; }
+  .pain-copy-hook { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
+  .pain-copy-hook span { color: var(--rust); font-style: normal; }
   .copy-section { background: var(--ink); border-radius: 4px; padding: 36px; margin-bottom: 32px; }
   .copy-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold-light); margin-bottom: 6px; }
   .copy-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6e5e; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
@@ -74,7 +83,9 @@
   .sentiment-bar-wrap { margin-bottom: 32px; }
   .sentiment-bar { height: 12px; background: var(--mist); border-radius: 100px; overflow: hidden; display: flex; }
   .sentiment-fill { height: 100%; transition: width 1s ease; }
-  .s-positive { background: var(--sage); } .s-neutral { background: var(--gold); } .s-negative { background: var(--rust); }
+  .s-positive { background: var(--sage); }
+  .s-neutral { background: var(--gold); }
+  .s-negative { background: var(--rust); }
   .sentiment-legend { display: flex; gap: 20px; margin-top: 8px; font-family: 'DM Mono', monospace; font-size: 11px; }
   .legend-item { display: flex; align-items: center; gap: 6px; }
   .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -91,7 +102,7 @@
 <div class="review-analyzer-wrapper" style="max-width:1100px;margin:0 auto;padding:52px 32px;">
 
   <h1 style="font-family:'DM Serif Display',serif;font-size:48px;line-height:1.1;margin-bottom:10px;">Turn reviews into<br><em style="color:var(--gold);">conversion copy.</em></h1>
-  <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV export. Select a product. Get statistics and ready-to-use copy snippets backed by real customer language.</p>
+  <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV export. Select a product. Get statistics, pain points, and ready-to-use copy snippets backed by real customer language.</p>
 
   <div class="upload-zone" id="uploadZone">
     <input type="file" id="csvFile" accept=".csv">
@@ -118,8 +129,8 @@
     <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
     <div style="margin-top:12px">
       <div class="loading-step" id="step1">↳ Parsing review data</div>
-      <div class="loading-step" id="step2">↳ Identifying outcome themes</div>
-      <div class="loading-step" id="step3">↳ Calculating statistics</div>
+      <div class="loading-step" id="step2">↳ Identifying pain points</div>
+      <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
       <div class="loading-step" id="step4">↳ Generating copy snippets</div>
     </div>
   </div>
@@ -129,6 +140,7 @@
       <div class="results-title" id="resultsTitle">Product</div>
       <div class="results-meta" id="resultsMeta"></div>
     </div>
+
     <div class="sentiment-bar-wrap">
       <div class="sentiment-label">Overall Sentiment</div>
       <div class="sentiment-bar">
@@ -142,14 +154,25 @@
         <div class="legend-item"><div class="legend-dot" style="background:var(--rust)"></div><span id="negLabel">0% negative</span></div>
       </div>
     </div>
+
     <div class="stats-grid" id="statsGrid"></div>
+
+    <div class="pain-section" id="painSection">
+      <div class="pain-section-title">Top 3 Pain Points</div>
+      <div class="pain-section-sub">What customers struggled with before buying — use for About section openers and PDP descriptions</div>
+      <div id="painCards"></div>
+    </div>
+
     <div class="themes-section"><div class="themes-title">Top Reported Themes</div><div class="theme-pills" id="themePills"></div></div>
+
     <div class="copy-section">
       <div class="copy-section-title">Copy-Ready Statistics</div>
       <div class="copy-section-sub">Drop these directly into PDPs, landing pages, or ads</div>
       <div id="copySnippets"></div>
     </div>
+
     <div class="verbatims"><div class="verbatims-title">Standout Customer Quotes</div><div id="verbatimCards"></div></div>
+
     <div class="export-bar">
       <button class="btn-export" onclick="exportTxt()">↓ Export as TXT</button>
       <button class="btn-export" onclick="window.print()">↓ Print / Save PDF</button>
@@ -182,6 +205,7 @@ function processFile(file){
     document.getElementById('productCount').textContent=products.length.toLocaleString();
   }, error:function(){ showError("Couldn't parse CSV."); }});
 }
+
 function getProducts(reviews){
   var keys=['product_title','Product Title','product_name','Product Name','title','name'], col=null;
   for(var i=0;i<keys.length;i++){ if(reviews[0]&&reviews[0][keys[i]]!==undefined){col=keys[i];break;} }
@@ -189,6 +213,7 @@ function getProducts(reviews){
   var set=new Set(reviews.map(function(r){return r[col];}).filter(Boolean));
   return Array.from(set).sort();
 }
+
 function getReviewsForProduct(product){
   if(product==='All Reviews') return allReviews;
   var keys=['product_title','Product Title','product_name','Product Name','title','name'], col=null;
@@ -196,11 +221,13 @@ function getReviewsForProduct(product){
   if(!col) return allReviews;
   return allReviews.filter(function(r){return r[col]===product;});
 }
+
 function getReviewText(review){
   var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];
   for(var i=0;i<keys.length;i++){ if(review[keys[i]]&&review[keys[i]].trim()) return review[keys[i]].trim(); }
   return Object.values(review).find(function(v){return v&&v.length>40;})||'';
 }
+
 async function runAnalysis(){
   var product=document.getElementById('productSelect').value;
   var focus=document.getElementById('focusTheme').value.trim();
@@ -212,12 +239,12 @@ async function runAnalysis(){
   var reviewTexts=sample.map(function(r){return getReviewText(r);}).filter(function(t){return t.length>20;}).join('\n---\n');
   stepActive('step1');
   var focusLine=focus?'Pay special attention to mentions of: '+focus+'.':'';
-  var prompt='You are a conversion copywriter and data analyst specializing in supplement ecommerce. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON with this structure:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [{ "stat": "X% reported Y", "percentage": number, "theme": "Theme", "color": "gold", "count": number }],\n  "themes": [{ "label": "theme", "count": number }],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar" }],\n  "verbatims": [{ "quote": "short customer quote under 25 words", "theme": "theme" }]\n}\nRules: outcome_stats 4-6 items with real percentages. themes 6-8 items. copy_snippets 4-5 conversion-focused items. verbatims 4 specific emotional quotes.\n\nReviews:\n'+reviewTexts;
+  var prompt='You are a conversion copywriter and VoC analyst specializing in supplement ecommerce. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON with this exact structure:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [{ "stat": "X% reported Y", "percentage": number, "theme": "Theme", "color": "gold", "count": number }],\n  "pain_points": [\n    {\n      "rank": 1,\n      "label": "Short pain point name",\n      "customer_language": "The exact words customers use to describe this problem before buying — pull real phrases from the reviews",\n      "copy_hook": "A ready-to-use PDP opener that acknowledges this pain point"\n    }\n  ],\n  "themes": [{ "label": "theme", "count": number }],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar|about section" }],\n  "verbatims": [{ "quote": "short customer quote under 25 words", "theme": "theme" }]\n}\n\nRules:\n- outcome_stats: 4-6 items with real percentages calculated from reviews\n- pain_points: exactly 3 items ranked by frequency. customer_language must use real phrases from reviews, not generic descriptions. copy_hook should be a sentence that opens the About/description section by acknowledging the pain before introducing the solution.\n- themes: 6-8 items sorted by count\n- copy_snippets: 4-5 conversion-focused items\n- verbatims: 4 specific emotional quotes\n\nReviews:\n'+reviewTexts;
   stepDone('step1'); stepActive('step2');
   try{
-    var response = await fetch('https://ecom-claude-proxy.globalhealing.workers.dev', {
+    var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
     });
     stepDone('step2'); stepActive('step3');
@@ -232,6 +259,7 @@ async function runAnalysis(){
     setTimeout(function(){hideLoading();renderResults(product,reviews.length,sample.length,analysis);},400);
   }catch(err){hideLoading();showError('Analysis failed: '+err.message);}
 }
+
 function renderResults(product,total,analyzed,a){
   document.getElementById('resultsTitle').textContent=product;
   document.getElementById('resultsMeta').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed';
@@ -250,6 +278,12 @@ function renderResults(product,total,analyzed,a){
     var card=document.createElement('div'); card.className='stat-card '+(colors[i]||'');
     card.innerHTML='<div class="stat-pct">'+s.percentage+'%</div><div class="stat-label">'+s.theme+'</div><div class="stat-sub">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>';
     grid.appendChild(card);
+  });
+  var painContainer=document.getElementById('painCards'); painContainer.innerHTML='';
+  (a.pain_points||[]).forEach(function(p){
+    var card=document.createElement('div'); card.className='pain-card';
+    card.innerHTML='<div class="pain-rank">Pain point #'+p.rank+'</div><div class="pain-label">'+p.label+'</div><div class="pain-language">"'+p.customer_language+'"</div><div class="pain-copy-hook">Copy hook: <span>'+p.copy_hook+'</span></div>';
+    painContainer.appendChild(card);
   });
   var pills=document.getElementById('themePills'); pills.innerHTML='';
   (a.themes||[]).forEach(function(t){
@@ -270,6 +304,7 @@ function renderResults(product,total,analyzed,a){
   });
   showResults();
 }
+
 function copyText(btn,text){
   var clean=text.replace(/<[^>]+>/g,'');
   navigator.clipboard.writeText(clean).then(function(){
@@ -277,9 +312,17 @@ function copyText(btn,text){
     setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);
   });
 }
+
 function exportTxt(){
   if(!lastAnalysis)return;
-  var a=lastAnalysis.analysis, out='REVIEW INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.count+' reviews analyzed\n\n=== STATISTICS ===\n';
+  var a=lastAnalysis.analysis, out='REVIEW INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.count+' reviews analyzed\n\n';
+  out+='=== TOP 3 PAIN POINTS ===\n';
+  (a.pain_points||[]).forEach(function(p){
+    out+='#'+p.rank+' '+p.label+'\n';
+    out+='Customer language: "'+p.customer_language+'"\n';
+    out+='Copy hook: '+p.copy_hook+'\n\n';
+  });
+  out+='=== OUTCOME STATISTICS ===\n';
   (a.outcome_stats||[]).forEach(function(s){out+='• '+s.stat+'\n';});
   out+='\n=== COPY-READY SNIPPETS ===\n';
   (a.copy_snippets||[]).forEach(function(s){out+='• '+s.text.replace(/<[^>]+>/g,'')+' ['+s.placement+']\n';});
@@ -288,6 +331,7 @@ function exportTxt(){
   var blob=new Blob([out],{type:'text/plain'}), url=URL.createObjectURL(blob), link=document.createElement('a');
   link.href=url; link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-review-intel.txt'; link.click();
 }
+
 function showLoading(c){document.getElementById('raLoading').classList.add('active');document.getElementById('loadingCount').textContent=c.toLocaleString();['step1','step2','step3','step4'].forEach(function(s){document.getElementById(s).className='loading-step';});}
 function hideLoading(){document.getElementById('raLoading').classList.remove('active');}
 function showResults(){document.getElementById('raResults').classList.add('active');}
@@ -304,3 +348,4 @@ function stepDone(id){document.getElementById(id).classList.remove('active');doc
   "settings": []
 }
 {% endschema %}
+```
