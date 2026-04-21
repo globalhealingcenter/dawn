@@ -15,20 +15,21 @@
     --mist: #e8e2d9;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--paper); }
   .upload-zone { border: 2px dashed var(--mist); background: var(--cream); border-radius: 4px; padding: 52px 40px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; margin-bottom: 32px; }
   .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: #f5ede0; }
   .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
   .upload-icon { width: 48px; height: 48px; margin: 0 auto 16px; color: var(--gold); }
-  .upload-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; }
+  .upload-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; color: var(--ink); }
   .upload-sub { font-size: 13px; color: #8a7a68; font-family: 'DM Mono', monospace; }
   .file-loaded { display: flex; align-items: center; gap: 14px; background: var(--ink); color: var(--paper); padding: 16px 24px; border-radius: 4px; margin-bottom: 32px; font-family: 'DM Mono', monospace; font-size: 13px; }
   .file-loaded .dot { width: 8px; height: 8px; background: var(--gold-light); border-radius: 50%; flex-shrink: 0; }
   .file-loaded strong { color: var(--gold-light); }
   .ra-controls { display: grid; grid-template-columns: 1fr 1fr auto; gap: 16px; margin-bottom: 40px; align-items: end; }
   .ra-label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 8px; }
-  .ra-select, .ra-input { width: 100%; padding: 12px 16px; border: 1px solid var(--mist); background: white; font-size: 14px; color: var(--ink); border-radius: 2px; appearance: none; outline: none; transition: border-color 0.2s; }
+  .ra-select, .ra-input { width: 100%; padding: 12px 16px; border: 1px solid var(--mist); background: white; font-size: 14px; color: var(--ink); border-radius: 2px; appearance: none; outline: none; transition: border-color 0.2s; font-family: 'Instrument Sans', sans-serif; }
   .ra-select:focus, .ra-input:focus { border-color: var(--gold); }
-  .btn-analyze { padding: 13px 32px; background: var(--gold); color: var(--ink); font-weight: 600; font-size: 14px; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+  .btn-analyze { padding: 13px 32px; background: var(--gold); color: var(--ink); font-weight: 600; font-size: 14px; border: none; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; font-family: 'Instrument Sans', sans-serif; }
   .btn-analyze:hover { background: var(--gold-light); }
   .btn-analyze:disabled { background: var(--mist); color: #aaa; cursor: not-allowed; }
   .ra-loading { display: none; text-align: center; padding: 64px 0; }
@@ -41,65 +42,123 @@
   .loading-step.done { color: var(--sage); }
   .ra-results { display: none; }
   .ra-results.active { display: block; }
-  .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--mist); }
-  .results-title { font-family: 'DM Serif Display', serif; font-size: 28px; }
+  .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--mist); }
+  .results-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--ink); }
   .results-meta { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a7a68; }
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-bottom: 40px; }
-  .stat-card { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 24px; position: relative; overflow: hidden; }
-  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
-  .stat-card.sage::before { background: var(--sage); }
-  .stat-card.rust::before { background: var(--rust); }
-  .stat-pct { font-family: 'DM Serif Display', serif; font-size: 52px; line-height: 1; color: var(--gold); margin-bottom: 8px; }
-  .stat-card.sage .stat-pct { color: var(--sage); }
-  .stat-card.rust .stat-pct { color: var(--rust); }
-  .stat-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
-  .stat-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
-  .pain-section { background: #fff8f6; border: 1px solid #f5ddd8; border-radius: 4px; padding: 32px; margin-bottom: 40px; }
-  .pain-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--rust); margin-bottom: 4px; }
-  .pain-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #b87a68; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .pain-card { border-left: 3px solid var(--rust); background: white; padding: 18px 20px; margin-bottom: 12px; border-radius: 0 4px 4px 0; }
+  .sentiment-wrap { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 32px; margin-bottom: 40px; }
+  .sentiment-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7a68; margin-bottom: 6px; }
+  .sentiment-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
+  .sentiment-explainer { font-size: 13px; color: #6b5e4a; line-height: 1.6; margin-bottom: 24px; max-width: 680px; }
+  .sentiment-explainer strong { color: var(--ink); font-weight: 600; }
+  .sentiment-divider { height: 0.5px; background: var(--mist); margin-bottom: 24px; }
+  .sentiment-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--mist); border-radius: 2px; overflow: hidden; margin-bottom: 20px; }
+  .sentiment-stat { padding: 24px 20px; text-align: center; border-right: 1px solid var(--mist); }
+  .sentiment-stat:last-child { border-right: none; }
+  .sentiment-stat-pct { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1; color: var(--ink); margin-bottom: 6px; }
+  .sentiment-stat-label { font-size: 13px; color: #6b5e4a; margin-bottom: 4px; }
+  .sentiment-stat-dot { width: 8px; height: 8px; border-radius: 50%; margin: 0 auto; }
+  .sentiment-bar { height: 8px; background: var(--mist); border-radius: 100px; overflow: hidden; display: flex; margin-bottom: 10px; }
+  .sentiment-fill { height: 100%; transition: width 1s ease; }
+  .s-positive { background: var(--ink); }
+  .s-neutral { background: #8a7a68; }
+  .s-negative { background: var(--rust); }
+  .sentiment-note { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; line-height: 1.6; background: var(--cream); padding: 12px 16px; border-radius: 2px; }
+  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #8a7a68; margin-bottom: 6px; }
+  .section-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
+  .section-sub { font-size: 13px; color: #6b5e4a; margin-bottom: 24px; line-height: 1.6; }
+  .ra-section { margin-bottom: 48px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--mist); border: 1px solid var(--mist); margin-bottom: 12px; }
+  .stat-card { background: white; padding: 28px 24px; position: relative; }
+  .stat-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ink); }
+  .stat-pct { font-family: 'DM Serif Display', serif; font-size: 56px; line-height: 1; color: var(--ink); margin-bottom: 8px; }
+  .stat-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+  .stat-detail { font-size: 12px; color: #8a7a68; margin-bottom: 2px; }
+  .stats-footnote { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; font-style: italic; }
+  .pain-wrap { background: #fff8f6; border: 1px solid #f5ddd8; border-radius: 4px; padding: 32px; margin-bottom: 48px; }
+  .pain-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--rust); margin-bottom: 4px; }
+  .pain-sub { font-size: 13px; color: #8a6a60; margin-bottom: 24px; line-height: 1.6; }
+  .pain-card { border-left: 3px solid var(--rust); background: white; padding: 20px 24px; margin-bottom: 12px; border-radius: 0 4px 4px 0; }
   .pain-rank { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--rust); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
-  .pain-label { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-  .pain-language { font-size: 13px; color: #5a4a38; line-height: 1.6; font-style: italic; margin-bottom: 8px; }
+  .pain-label { font-size: 16px; font-weight: 600; color: var(--ink); margin-bottom: 8px; }
+  .pain-language { font-size: 13px; color: #5a4a38; line-height: 1.7; font-style: italic; margin-bottom: 10px; }
   .pain-copy-hook { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
-  .pain-copy-hook span { color: var(--rust); font-style: normal; }
-  .copy-section { background: var(--ink); border-radius: 4px; padding: 36px; margin-bottom: 32px; }
-  .copy-section-title { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--gold-light); margin-bottom: 6px; }
-  .copy-section-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6e5e; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .copy-snippet { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); padding: 16px 20px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .copy-snippet p { font-size: 15px; color: var(--paper); line-height: 1.5; flex: 1; }
+  .pain-copy-hook span { color: var(--rust); }
+  .benefits-wrap { margin-bottom: 48px; }
+  .benefit-source-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--mist); }
+  .benefit-tab { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 16px; color: #8a7a68; cursor: default; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .benefit-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
+  .benefit-card { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 20px; }
+  .benefit-card.placeholder { background: var(--cream); border: 1px dashed var(--mist); }
+  .benefit-num { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; margin-bottom: 8px; }
+  .benefit-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+  .benefit-proof { font-size: 12px; color: #6b5e4a; line-height: 1.6; }
+  .benefit-placeholder-label { font-size: 12px; color: #8a7a68; font-style: italic; line-height: 1.6; }
+  .benefits-fold { margin-top: 4px; }
+  .fold-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 10px; padding-top: 16px; border-top: 1px dashed var(--mist); }
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 12px; }
+  .review-card { background: #1a2e1a; border-radius: 6px; padding: 28px 24px; display: flex; flex-direction: column; }
+  .review-stars { color: var(--gold-light); font-size: 14px; letter-spacing: 2px; margin-bottom: 16px; }
+  .review-text { font-size: 14px; color: #c8d8c8; line-height: 1.8; font-style: italic; flex: 1; margin-bottom: 20px; }
+  .review-author { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a9e7a; padding-top: 16px; border-top: 1px solid #2a4a2a; }
+  .review-author strong { color: #a8c4a8; display: block; margin-bottom: 2px; font-style: normal; }
+  .review-theme-tag { display: inline-block; font-size: 10px; background: #2a4a2a; color: #7a9e7a; padding: 3px 8px; border-radius: 20px; margin-top: 6px; }
+  .theme-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .theme-pill { padding: 7px 14px; background: white; border: 1px solid var(--mist); border-radius: 100px; font-size: 12px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .theme-pill .pill-count { font-family: 'DM Mono', monospace; font-size: 10px; background: var(--ink); color: var(--gold-light); padding: 2px 7px; border-radius: 100px; }
+  .copy-wrap { background: var(--ink); border-radius: 4px; padding: 36px; margin-bottom: 48px; }
+  .copy-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--gold-light); margin-bottom: 4px; }
+  .copy-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6e5e; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .copy-snippet { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); padding: 16px 20px; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .copy-snippet p { font-size: 14px; color: var(--paper); line-height: 1.6; flex: 1; }
   .copy-snippet p strong { color: var(--gold-light); }
+  .copy-placement { font-family: 'DM Mono', monospace; font-size: 10px; color: #4a3e2e; display: block; margin-top: 4px; }
   .btn-copy { flex-shrink: 0; padding: 6px 14px; background: transparent; border: 1px solid #4a3e2e; color: #8a7a68; font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
   .btn-copy:hover { border-color: var(--gold); color: var(--gold); }
   .btn-copy.copied { border-color: var(--sage); color: var(--sage-light); }
-  .themes-section { margin-bottom: 40px; }
-  .themes-title, .verbatims-title, .sentiment-label { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 16px; }
-  .theme-pills { display: flex; flex-wrap: wrap; gap: 10px; }
-  .theme-pill { padding: 8px 16px; background: var(--cream); border: 1px solid var(--mist); border-radius: 100px; font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
-  .theme-pill .pill-count { font-family: 'DM Mono', monospace; font-size: 11px; background: var(--ink); color: var(--gold-light); padding: 2px 7px; border-radius: 100px; }
-  .sentiment-bar-wrap { margin-bottom: 32px; }
-  .sentiment-bar { height: 12px; background: var(--mist); border-radius: 100px; overflow: hidden; display: flex; }
-  .sentiment-fill { height: 100%; transition: width 1s ease; }
-  .s-positive { background: var(--sage); }
-  .s-neutral { background: var(--gold); }
-  .s-negative { background: var(--rust); }
-  .sentiment-legend { display: flex; gap: 20px; margin-top: 8px; font-family: 'DM Mono', monospace; font-size: 11px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; }
-  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
-  .verbatims { margin-bottom: 40px; }
-  .verbatim-card { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 20px 24px; margin-bottom: 12px; font-size: 14px; line-height: 1.7; color: #3a2e20; font-style: italic; }
-  .verbatim-card .v-meta { font-style: normal; font-family: 'DM Mono', monospace; font-size: 11px; color: #aaa; margin-top: 8px; }
+  .curated-wrap { background: var(--cream); border: 1px solid var(--mist); border-radius: 4px; padding: 32px; margin-bottom: 48px; }
+  .curated-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
+  .curated-sub { font-size: 13px; color: #6b5e4a; margin-bottom: 6px; line-height: 1.6; }
+  .curated-note { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; margin-bottom: 24px; font-style: italic; }
+  .curated-suggestions { display: flex; flex-direction: column; gap: 10px; }
+  .curated-suggestion { background: white; border: 1px solid var(--mist); border-radius: 4px; padding: 16px 20px; }
+  .curated-suggestion-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .curated-suggestion-text { font-size: 14px; color: var(--ink); line-height: 1.6; }
+  .curated-suggestion-context { font-size: 12px; color: #8a7a68; margin-top: 4px; font-style: italic; }
+  .btn-copy-suggestion { float: right; padding: 4px 12px; background: transparent; border: 1px solid var(--mist); color: #8a7a68; font-family: 'DM Mono', monospace; font-size: 10px; border-radius: 2px; cursor: pointer; transition: all 0.2s; margin-top: 2px; }
+  .btn-copy-suggestion:hover { border-color: var(--gold); color: var(--gold); }
+  .faq-wrap { margin-bottom: 48px; }
+  .faq-heading { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
+  .faq-sub { font-size: 13px; color: #6b5e4a; margin-bottom: 8px; line-height: 1.6; max-width: 680px; }
+  .faq-instructions { background: #1a2e1a; color: #a8c4a8; font-size: 13px; line-height: 1.7; padding: 16px 20px; border-radius: 4px; margin-bottom: 24px; }
+  .faq-instructions strong { color: var(--gold-light); }
+  .faq-card { background: white; border: 1px solid var(--mist); border-radius: 4px; margin-bottom: 10px; overflow: hidden; }
+  .faq-card-header { padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; }
+  .faq-rank-badge { font-family: 'DM Mono', monospace; font-size: 10px; background: var(--rust); color: white; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; margin-top: 2px; }
+  .faq-question { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; flex: 1; }
+  .faq-card-body { padding: 16px 20px 18px 20px; border-top: 1px solid var(--mist); }
+  .faq-source { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--rust); margin-bottom: 6px; }
+  .faq-source-quote { font-size: 13px; color: #5a4a38; font-style: italic; line-height: 1.6; margin-bottom: 10px; }
+  .faq-answer-prompt { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
+  .faq-answer-prompt span { color: var(--sage); }
   .error-box { display: none; background: #fff5f3; border: 1px solid #f5c6bb; border-radius: 4px; padding: 20px 24px; font-size: 14px; color: var(--rust); margin-bottom: 24px; }
   .error-box.active { display: block; }
   .export-bar { display: flex; gap: 12px; padding-top: 24px; border-top: 1px solid var(--mist); }
-  .btn-export { padding: 10px 24px; background: transparent; border: 1px solid var(--mist); color: var(--ink); font-size: 13px; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+  .btn-export { padding: 10px 24px; background: transparent; border: 1px solid var(--mist); color: var(--ink); font-size: 13px; border-radius: 2px; cursor: pointer; transition: all 0.2s; font-family: 'Instrument Sans', sans-serif; }
   .btn-export:hover { border-color: var(--gold); color: var(--gold); }
+  @media (max-width: 700px) {
+    .ra-controls { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .sentiment-stats-row { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="review-analyzer-wrapper" style="max-width:1100px;margin:0 auto;padding:52px 32px;">
 
-  <h1 style="font-family:'DM Serif Display',serif;font-size:48px;line-height:1.1;margin-bottom:10px;">Turn reviews into<br><em style="color:var(--gold);">conversion copy.</em></h1>
-  <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV export. Select a product. Get statistics, pain points, and ready-to-use copy snippets backed by real customer language.</p>
+  <h1 style="font-family:'DM Serif Display',serif;font-size:48px;line-height:1.1;margin-bottom:10px;color:var(--ink);">Turn reviews into<br><em style="color:var(--gold);">conversion copy.</em></h1>
+  <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV export. Select a product. Get outcome stats, pain points, benefits, objection map, and copy-ready snippets — all from real customer language.</p>
 
   <div class="upload-zone" id="uploadZone">
     <input type="file" id="csvFile" accept=".csv">
@@ -126,56 +185,126 @@
     <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
     <div style="margin-top:12px">
       <div class="loading-step" id="step1">↳ Parsing review data</div>
-      <div class="loading-step" id="step2">↳ Identifying pain points</div>
+      <div class="loading-step" id="step2">↳ Identifying pain points and objections</div>
       <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
-      <div class="loading-step" id="step4">↳ Generating copy snippets</div>
+      <div class="loading-step" id="step4">↳ Generating copy and FAQ</div>
     </div>
   </div>
 
   <div class="ra-results" id="raResults">
+
     <div class="results-header">
       <div class="results-title" id="resultsTitle">Product</div>
       <div class="results-meta" id="resultsMeta"></div>
     </div>
 
-    <div class="sentiment-bar-wrap">
-      <div class="sentiment-label">Overall Sentiment</div>
+    <div class="sentiment-wrap">
+      <div class="sentiment-eyebrow">Overall sentiment</div>
+      <div class="sentiment-heading">How do customers feel about this product?</div>
+      <div class="sentiment-explainer">Sentiment is calculated by reading the <strong>tone and language</strong> of each review — not the star rating. A 5-star review can still contain neutral or negative language about a specific aspect (e.g. taste, shipping). These percentages reflect how many reviews read as primarily positive, neutral, or mixed/negative in tone.</div>
+      <div class="sentiment-divider"></div>
+      <div class="sentiment-stats-row">
+        <div class="sentiment-stat">
+          <div class="sentiment-stat-pct" id="posNum">—</div>
+          <div class="sentiment-stat-label">Positive tone</div>
+          <div class="sentiment-stat-dot" style="background:var(--ink);"></div>
+        </div>
+        <div class="sentiment-stat" style="background:#fafaf8;">
+          <div class="sentiment-stat-pct" id="neuNum">—</div>
+          <div class="sentiment-stat-label">Neutral tone</div>
+          <div class="sentiment-stat-dot" style="background:#8a7a68;"></div>
+        </div>
+        <div class="sentiment-stat">
+          <div class="sentiment-stat-pct" id="negNum">—</div>
+          <div class="sentiment-stat-label">Mixed / negative tone</div>
+          <div class="sentiment-stat-dot" style="background:var(--rust);"></div>
+        </div>
+      </div>
       <div class="sentiment-bar">
         <div class="sentiment-fill s-positive" id="sentimentPos" style="width:0%"></div>
         <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
         <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
       </div>
-      <div class="sentiment-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:var(--sage)"></div><span id="posLabel">0% positive</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div><span id="neuLabel">0% neutral</span></div>
-        <div class="legend-item"><div class="legend-dot" style="background:var(--rust)"></div><span id="negLabel">0% negative</span></div>
-      </div>
+      <div class="sentiment-note">Note: sentiment percentages will always total 100% but may appear low individually when a product has a healthy mix of reviews. A product with 86% positive, 11% neutral, and 3% negative is performing very well — the numbers simply reflect that most reviews are clearly positive with few mixed signals.</div>
     </div>
 
-    <div class="stats-grid" id="statsGrid"></div>
+    <div class="ra-section">
+      <div class="section-eyebrow">Based on verified reviews</div>
+      <div class="section-heading">Real results. From real customers.</div>
+      <div class="section-sub">Percentages reflect how many reviewers mentioned each outcome. Calculated from review language, not star ratings.</div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="stats-footnote" id="statsFootnote"></div>
+    </div>
 
-    <div class="pain-section" id="painSection">
-      <div class="pain-section-title">Top 3 Pain Points</div>
-      <div class="pain-section-sub">What customers struggled with before buying — use for About section openers and PDP descriptions</div>
+    <div class="pain-wrap">
+      <div class="section-eyebrow" style="color:#b87a68;">Before they found this product</div>
+      <div class="pain-heading">Top 3 pain points</div>
+      <div class="pain-sub">What customers struggled with before buying — use these for About section openers, PDP descriptions, and ad hooks. Lead with the pain before introducing the solution.</div>
       <div id="painCards"></div>
     </div>
 
-    <div class="themes-section"><div class="themes-title">Top Reported Themes</div><div class="theme-pills" id="themePills"></div></div>
+    <div class="benefits-wrap ra-section">
+      <div class="section-eyebrow">Product benefits</div>
+      <div class="section-heading">Key benefits</div>
+      <div class="section-sub">Top 3 are sourced from reviews. Wiki benefits are placeholders until sourced — replace with the science-backed benefit + proof line from the product wiki.</div>
+      <div class="benefit-source-tabs">
+        <div class="benefit-tab active">From reviews</div>
+        <div class="benefit-tab" style="margin-left:16px;">Wiki placeholders</div>
+      </div>
+      <div class="benefits-grid" id="reviewBenefitsGrid"></div>
+      <div class="benefits-grid" id="wikiBenefitsGrid">
+        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 01</div><div class="benefit-title">[Benefit name from wiki]</div><div class="benefit-placeholder-label">Replace with: one science line from product wiki + one proof line from review data once wiki is sourced.</div></div>
+        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 02</div><div class="benefit-title">[Benefit name from wiki]</div><div class="benefit-placeholder-label">Replace with: one science line from product wiki + one proof line from review data once wiki is sourced.</div></div>
+        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 03</div><div class="benefit-title">[Benefit name from wiki]</div><div class="benefit-placeholder-label">Replace with: one science line from product wiki + one proof line from review data once wiki is sourced.</div></div>
+      </div>
+      <div class="benefits-fold">
+        <div class="fold-label">3 additional benefit options (choose or discard)</div>
+        <div class="benefits-grid" id="extraBenefitsGrid"></div>
+      </div>
+    </div>
 
-    <div class="copy-section">
-      <div class="copy-section-title">Copy-Ready Statistics</div>
-      <div class="copy-section-sub">Drop these directly into PDPs, landing pages, or ads</div>
+    <div class="ra-section">
+      <div class="section-eyebrow">What customers talk about</div>
+      <div class="section-heading">Top themes</div>
+      <div class="section-sub">Most frequently mentioned topics across all reviews.</div>
+      <div class="theme-pills" id="themePills"></div>
+    </div>
+
+    <div class="ra-section">
+      <div class="section-eyebrow">From verified buyers</div>
+      <div class="section-heading">Standout customer quotes</div>
+      <div class="section-sub">Pull these directly into PDP review carousels or social proof sections. Chosen for specificity and emotional resonance.</div>
+      <div class="reviews-grid" id="verbatimCards"></div>
+    </div>
+
+    <div class="copy-wrap">
+      <div class="copy-heading">Copy-ready statistics</div>
+      <div class="copy-sub">Drop directly into PDPs, landing pages, or ads — edit for brand voice</div>
       <div id="copySnippets"></div>
     </div>
 
-    <div class="verbatims"><div class="verbatims-title">Standout Customer Quotes</div><div id="verbatimCards"></div></div>
+    <div class="curated-wrap">
+      <div class="section-eyebrow">Section 7 — Curated products</div>
+      <div class="curated-heading">Subtitle suggestions</div>
+      <div class="curated-sub">Subtitle copy options grounded in customer language — not internal team positioning.</div>
+      <div class="curated-note">(Note: some products have 1–3 curated companions. Not all products support "these 3 help finish it" framing — select the suggestion that fits the actual product count and customer journey.)</div>
+      <div class="curated-suggestions" id="curatedSuggestions"></div>
+    </div>
+
+    <div class="faq-wrap">
+      <div class="section-eyebrow">FAQ — Objection map</div>
+      <div class="faq-heading">Purchase hesitations</div>
+      <div class="faq-sub">Top 10 objections, hesitations, and concerns surfaced from review language — ranked by frequency.</div>
+      <div class="faq-instructions"><strong>Why we do this proactively:</strong> Most FAQs answer safety and sourcing questions customers ask after buying. The bigger conversion opportunity is answering the questions that stop customers from buying in the first place. Negative reviews and hedging language in positive reviews tell us exactly what those hesitations are. By addressing them before the customer thinks to ask, we remove friction at the point of decision — turning the FAQ from a compliance section into a conversion section.</div>
+      <div id="faqCards"></div>
+    </div>
 
     <div class="export-bar">
       <button class="btn-export" onclick="exportTxt()">↓ Export as TXT</button>
       <button class="btn-export" onclick="window.print()">↓ Print / Save PDF</button>
     </div>
-  </div>
 
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -225,6 +354,12 @@ function getReviewText(review){
   return Object.values(review).find(function(v){return v&&v.length>40;})||'';
 }
 
+function getReviewAuthor(review){
+  var keys=['reviewer_name','Reviewer Name','author','Author','name','Name','user_name','User Name'];
+  for(var i=0;i<keys.length;i++){ if(review[keys[i]]&&review[keys[i]].trim()) return review[keys[i]].trim(); }
+  return 'Verified Buyer';
+}
+
 async function runAnalysis(){
   var product=document.getElementById('productSelect').value;
   var focus=document.getElementById('focusTheme').value.trim();
@@ -236,13 +371,13 @@ async function runAnalysis(){
   var reviewTexts=sample.map(function(r){return getReviewText(r);}).filter(function(t){return t.length>20;}).join('\n---\n');
   stepActive('step1');
   var focusLine=focus?'Pay special attention to mentions of: '+focus+'.':'';
-  var prompt='You are a conversion copywriter and VoC analyst specializing in supplement ecommerce. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON with this exact structure:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [{ "stat": "X% reported Y", "percentage": number, "theme": "Theme", "color": "gold", "count": number }],\n  "pain_points": [\n    {\n      "rank": 1,\n      "label": "Short pain point name",\n      "customer_language": "The exact words customers use to describe this problem before buying — pull real phrases from the reviews",\n      "copy_hook": "A ready-to-use PDP opener that acknowledges this pain point"\n    }\n  ],\n  "themes": [{ "label": "theme", "count": number }],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar|about section" }],\n  "verbatims": [{ "quote": "short customer quote under 25 words", "theme": "theme" }]\n}\n\nRules:\n- outcome_stats: 4-6 items with real percentages calculated from reviews\n- pain_points: exactly 3 items ranked by frequency. customer_language must use real phrases from reviews, not generic descriptions. copy_hook should be a sentence that opens the About/description section by acknowledging the pain before introducing the solution.\n- themes: 6-8 items sorted by count\n- copy_snippets: 4-5 conversion-focused items\n- verbatims: 4 specific emotional quotes\n\nReviews:\n'+reviewTexts;
+  var prompt='You are a conversion copywriter and VoC analyst for a supplement ecommerce brand. Analyze these '+sample.length+' customer reviews for "'+product+'".\n\n'+focusLine+'\n\nReturn ONLY valid JSON, no markdown, no explanation:\n{\n  "total_analyzed": number,\n  "sentiment": { "positive": number, "neutral": number, "negative": number },\n  "outcome_stats": [\n    { "percentage": number, "theme": "Outcome label", "detail": "reported [specific outcome]", "count": number }\n  ],\n  "pain_points": [\n    { "rank": 1, "label": "Pain point name", "customer_language": "2-3 exact phrases customers use to describe this problem, pulled verbatim from reviews", "copy_hook": "A PDP opener sentence that acknowledges this pain before introducing the solution" }\n  ],\n  "benefits": [\n    { "rank": 1, "title": "Benefit title", "proof": "One line of customer-reported proof for this benefit", "pct": number }\n  ],\n  "themes": [{ "label": "theme", "count": number }],\n  "verbatims": [\n    { "quote": "Full customer quote — do NOT truncate, include complete review text up to 80 words", "author": "Customer name or Verified Buyer", "theme": "theme label" }\n  ],\n  "copy_snippets": [{ "text": "PDP copy with <strong>bold stat</strong>", "placement": "PDP hero|benefit bullet|social proof bar|about section" }],\n  "curated_subtitles": [\n    { "num": 1, "text": "Subtitle suggestion in customer language", "context": "Best used when: [scenario]" }\n  ],\n  "objections": [\n    { "rank": 1, "question": "The hesitation phrased as a customer question", "source_language": "Exact phrase from a review that surfaces this hesitation", "answer_prompt": "Key point the copywriter should address in the FAQ answer" }\n  ]\n}\n\nRules:\n- outcome_stats: 4-6 items, real percentages from review language\n- pain_points: exactly 3, ranked by frequency, customer_language must be real phrases from reviews\n- benefits: exactly 6 — top 3 primary benefits from reviews (rank 1-3), next 3 additional options (rank 4-6)\n- themes: 6-8 sorted by count\n- verbatims: exactly 4, full quotes up to 80 words, do NOT truncate\n- copy_snippets: 4-5 items\n- curated_subtitles: exactly 3 suggestions grounded in customer language\n- objections: exactly 10, ranked by frequency, sourced from negative reviews and hedging language\n\nReviews:\n'+reviewTexts;
   stepDone('step1'); stepActive('step2');
   try{
     var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:2000,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:4000,messages:[{role:'user',content:prompt}]})
     });
     stepDone('step2'); stepActive('step3');
     if(!response.ok){var err=await response.json();throw new Error(err.error&&err.error.message||'API error');}
@@ -251,7 +386,7 @@ async function runAnalysis(){
     stepDone('step3'); stepActive('step4');
     var clean=raw.replace(/```json|```/g,'').trim();
     var analysis=JSON.parse(clean);
-    lastAnalysis={product:product,analysis:analysis,count:reviews.length};
+    lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length};
     stepDone('step4');
     setTimeout(function(){hideLoading();renderResults(product,reviews.length,sample.length,analysis);},400);
   }catch(err){hideLoading();showError('Analysis failed: '+err.message);}
@@ -261,43 +396,71 @@ function renderResults(product,total,analyzed,a){
   document.getElementById('resultsTitle').textContent=product;
   document.getElementById('resultsMeta').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed';
   var s=a.sentiment||{positive:0,neutral:0,negative:0}, sum=s.positive+s.neutral+s.negative||1;
+  var posPct=Math.round(s.positive/sum*100), neuPct=Math.round(s.neutral/sum*100), negPct=Math.round(s.negative/sum*100);
+  document.getElementById('posNum').textContent=posPct+'%';
+  document.getElementById('neuNum').textContent=neuPct+'%';
+  document.getElementById('negNum').textContent=negPct+'%';
   setTimeout(function(){
-    document.getElementById('sentimentPos').style.width=(s.positive/sum*100)+'%';
-    document.getElementById('sentimentNeu').style.width=(s.neutral/sum*100)+'%';
-    document.getElementById('sentimentNeg').style.width=(s.negative/sum*100)+'%';
+    document.getElementById('sentimentPos').style.width=posPct+'%';
+    document.getElementById('sentimentNeu').style.width=neuPct+'%';
+    document.getElementById('sentimentNeg').style.width=negPct+'%';
   },100);
-  document.getElementById('posLabel').textContent=Math.round(s.positive/sum*100)+'% positive';
-  document.getElementById('neuLabel').textContent=Math.round(s.neutral/sum*100)+'% neutral';
-  document.getElementById('negLabel').textContent=Math.round(s.negative/sum*100)+'% negative';
   var grid=document.getElementById('statsGrid'); grid.innerHTML='';
-  var colors=['','sage','rust','','sage','rust'];
-  (a.outcome_stats||[]).forEach(function(s,i){
-    var card=document.createElement('div'); card.className='stat-card '+(colors[i]||'');
-    card.innerHTML='<div class="stat-pct">'+s.percentage+'%</div><div class="stat-label">'+s.theme+'</div><div class="stat-sub">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>';
+  (a.outcome_stats||[]).forEach(function(s){
+    var card=document.createElement('div'); card.className='stat-card';
+    card.innerHTML='<div class="stat-card-accent"></div><div class="stat-pct">'+s.percentage+'%</div><div class="stat-label">'+s.detail+'</div><div class="stat-detail">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>';
     grid.appendChild(card);
   });
+  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews. Results reflect customer-reported outcomes — individual experiences may vary.';
   var painContainer=document.getElementById('painCards'); painContainer.innerHTML='';
   (a.pain_points||[]).forEach(function(p){
     var card=document.createElement('div'); card.className='pain-card';
-    card.innerHTML='<div class="pain-rank">Pain point #'+p.rank+'</div><div class="pain-label">'+p.label+'</div><div class="pain-language">"'+p.customer_language+'"</div><div class="pain-copy-hook">Copy hook: <span>'+p.copy_hook+'</span></div>';
+    card.innerHTML='<div class="pain-rank">Pain point #'+p.rank+'</div><div class="pain-label">'+p.label+'</div><div class="pain-language">"'+p.customer_language+'"</div><div class="pain-copy-hook">Copy hook → <span>'+p.copy_hook+'</span></div>';
     painContainer.appendChild(card);
+  });
+  var reviewBenefits=document.getElementById('reviewBenefitsGrid'); reviewBenefits.innerHTML='';
+  var allBenefits=a.benefits||[];
+  allBenefits.slice(0,3).forEach(function(b){
+    var card=document.createElement('div'); card.className='benefit-card';
+    card.innerHTML='<div class="benefit-num">Benefit 0'+b.rank+'</div><div class="benefit-title">'+b.title+'</div><div class="benefit-proof">'+b.proof+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div>';
+    reviewBenefits.appendChild(card);
+  });
+  var extraBenefits=document.getElementById('extraBenefitsGrid'); extraBenefits.innerHTML='';
+  allBenefits.slice(3,6).forEach(function(b,i){
+    var card=document.createElement('div'); card.className='benefit-card';
+    card.innerHTML='<div class="benefit-num">Option 0'+(i+4)+'</div><div class="benefit-title">'+b.title+'</div><div class="benefit-proof">'+b.proof+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div>';
+    extraBenefits.appendChild(card);
   });
   var pills=document.getElementById('themePills'); pills.innerHTML='';
   (a.themes||[]).forEach(function(t){
     var p=document.createElement('div'); p.className='theme-pill';
     p.innerHTML=t.label+'<span class="pill-count">'+t.count+'</span>'; pills.appendChild(p);
   });
+  var verbs=document.getElementById('verbatimCards'); verbs.innerHTML='';
+  (a.verbatims||[]).forEach(function(v){
+    var c=document.createElement('div'); c.className='review-card';
+    c.innerHTML='<div class="review-stars">★★★★★</div><div class="review-text">"'+v.quote+'"</div><div class="review-author"><strong>'+v.author+'</strong>Verified Buyer<span class="review-theme-tag">'+v.theme+'</span></div>';
+    verbs.appendChild(c);
+  });
   var snips=document.getElementById('copySnippets'); snips.innerHTML='';
   (a.copy_snippets||[]).forEach(function(s){
     var d=document.createElement('div'); d.className='copy-snippet';
     var safeText=s.text.replace(/'/g,"&#39;");
-    d.innerHTML='<p>'+s.text+' <span style="color:#4a3e2e;font-size:12px;font-family:monospace">— '+s.placement+'</span></p><button class="btn-copy" onclick="copyText(this,\''+safeText+'\')">Copy</button>';
+    d.innerHTML='<div style="flex:1"><p>'+s.text+'</p><span class="copy-placement">— '+s.placement+'</span></div><button class="btn-copy" onclick="copyText(this,\''+safeText+'\')">Copy</button>';
     snips.appendChild(d);
   });
-  var verbs=document.getElementById('verbatimCards'); verbs.innerHTML='';
-  (a.verbatims||[]).forEach(function(v){
-    var c=document.createElement('div'); c.className='verbatim-card';
-    c.innerHTML='"'+v.quote+'"<div class="v-meta">'+v.theme+'</div>'; verbs.appendChild(c);
+  var curated=document.getElementById('curatedSuggestions'); curated.innerHTML='';
+  (a.curated_subtitles||[]).forEach(function(s){
+    var d=document.createElement('div'); d.className='curated-suggestion';
+    var safeText=s.text.replace(/'/g,"&#39;");
+    d.innerHTML='<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;"><div><div class="curated-suggestion-num">Suggestion '+s.num+'</div><div class="curated-suggestion-text">'+s.text+'</div><div class="curated-suggestion-context">'+s.context+'</div></div><button class="btn-copy-suggestion" onclick="copyText(this,\''+safeText+'\')">Copy</button></div>';
+    curated.appendChild(d);
+  });
+  var faqContainer=document.getElementById('faqCards'); faqContainer.innerHTML='';
+  (a.objections||[]).forEach(function(o){
+    var card=document.createElement('div'); card.className='faq-card';
+    card.innerHTML='<div class="faq-card-header"><span class="faq-rank-badge">#'+o.rank+'</span><div class="faq-question">'+o.question+'</div></div><div class="faq-card-body"><div class="faq-source">From review language:</div><div class="faq-source-quote">"'+o.source_language+'"</div><div class="faq-answer-prompt">Copywriter should address: <span>'+o.answer_prompt+'</span></div></div>';
+    faqContainer.appendChild(card);
   });
   showResults();
 }
@@ -312,19 +475,26 @@ function copyText(btn,text){
 
 function exportTxt(){
   if(!lastAnalysis)return;
-  var a=lastAnalysis.analysis, out='REVIEW INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.count+' reviews analyzed\n\n';
-  out+='=== TOP 3 PAIN POINTS ===\n';
-  (a.pain_points||[]).forEach(function(p){
-    out+='#'+p.rank+' '+p.label+'\n';
-    out+='Customer language: "'+p.customer_language+'"\n';
-    out+='Copy hook: '+p.copy_hook+'\n\n';
-  });
+  var a=lastAnalysis.analysis, out='REVIEW INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' reviews analyzed\n\n';
+  out+='=== SENTIMENT ===\n';
+  var s=a.sentiment||{positive:0,neutral:0,negative:0}, sum=s.positive+s.neutral+s.negative||1;
+  out+='Positive: '+Math.round(s.positive/sum*100)+'% | Neutral: '+Math.round(s.neutral/sum*100)+'% | Negative: '+Math.round(s.negative/sum*100)+'%\n\n';
   out+='=== OUTCOME STATISTICS ===\n';
-  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.stat+'\n';});
-  out+='\n=== COPY-READY SNIPPETS ===\n';
-  (a.copy_snippets||[]).forEach(function(s){out+='• '+s.text.replace(/<[^>]+>/g,'')+' ['+s.placement+']\n';});
+  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' reviewers)\n';});
+  out+='\n=== TOP 3 PAIN POINTS ===\n';
+  (a.pain_points||[]).forEach(function(p){out+='#'+p.rank+' '+p.label+'\nCustomer language: "'+p.customer_language+'"\nCopy hook: '+p.copy_hook+'\n\n';});
+  out+='=== BENEFITS FROM REVIEWS (top 3) ===\n';
+  (a.benefits||[]).slice(0,3).forEach(function(b){out+='• '+b.title+': '+b.proof+'\n';});
+  out+='\n=== ADDITIONAL BENEFIT OPTIONS ===\n';
+  (a.benefits||[]).slice(3,6).forEach(function(b){out+='• '+b.title+': '+b.proof+'\n';});
   out+='\n=== STANDOUT QUOTES ===\n';
-  (a.verbatims||[]).forEach(function(v){out+='"'+v.quote+'" — '+v.theme+'\n';});
+  (a.verbatims||[]).forEach(function(v){out+='"'+v.quote+'" — '+v.author+' ('+v.theme+')\n\n';});
+  out+='=== COPY-READY SNIPPETS ===\n';
+  (a.copy_snippets||[]).forEach(function(s){out+='• '+s.text.replace(/<[^>]+>/g,'')+' ['+s.placement+']\n';});
+  out+='\n=== CURATED PRODUCT SUBTITLE SUGGESTIONS ===\n';
+  (a.curated_subtitles||[]).forEach(function(s){out+='Option '+s.num+': '+s.text+'\n('+s.context+')\n\n';});
+  out+='=== FAQ — OBJECTION MAP (top 10) ===\n';
+  (a.objections||[]).forEach(function(o){out+='#'+o.rank+' '+o.question+'\nSource: "'+o.source_language+'"\nAddress: '+o.answer_prompt+'\n\n';});
   var blob=new Blob([out],{type:'text/plain'}), url=URL.createObjectURL(blob), link=document.createElement('a');
   link.href=url; link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-review-intel.txt'; link.click();
 }
@@ -345,4 +515,3 @@ function stepDone(id){document.getElementById(id).classList.remove('active');doc
   "settings": []
 }
 {% endschema %}
-```
