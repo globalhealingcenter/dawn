@@ -385,7 +385,14 @@ async function runAnalysis(){
     var raw=data.content.map(function(b){return b.text||'';}).join('');
     stepDone('step3'); stepActive('step4');
     var clean=raw.replace(/```json|```/g,'').trim();
-    var analysis=JSON.parse(clean);
+var analysis;
+try {
+  analysis=JSON.parse(clean);
+} catch(parseErr) {
+  hideLoading();
+  showError('JSON parse error. Raw response: '+clean.substring(0,500));
+  return;
+}
     lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length};
     stepDone('step4');
     setTimeout(function(){hideLoading();renderResults(product,reviews.length,sample.length,analysis);},400);
