@@ -143,51 +143,61 @@
           </div>
         </section>
       {% when 'banners' %}
-        {% comment %} Hero carousel - Display when today is between start/end, or always when both dates are blank {% endcomment %}
-        {% assign section_start = block.settings.banner_start_date | strip %}
-        {% assign section_end = block.settings.banner_end_date | strip %}
-        {% assign section_in_range = true %}
-        {% if section_start != blank or section_end != blank %}
-          {% assign now_ts = 'now' | date: '%s' | plus: 0 %}
-          {% if section_start != blank %}
-            {% assign start_ts = section_start | date: '%s' | plus: 0 %}
-            {% if start_ts != 0 and now_ts < start_ts %}{% assign section_in_range = false %}{% endif %}
-          {% endif %}
-          {% if section_end != blank %}
-            {% assign end_ts = section_end | date: '%s' | plus: 0 %}
-            {% if end_ts != 0 and now_ts > end_ts %}{% assign section_in_range = false %}{% endif %}
-          {% endif %}
+        {% comment %} Hero carousel - each slot has its own schedule (start/end date). Section always shows; slots display when today is in range or both dates blank. {% endcomment %}
+        {% assign now_ts = 'now' | date: '%s' | plus: 0 %}
+        {% assign slide_count = 0 %}
+        {% assign fallback_slot_num = 0 %}
+        {% assign should_render_fallback_banner = false %}
+        {% for target_order in (1..4) %}
+          {% for slot_num in (1..4) %}
+            {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
+            {% assign slot_order = block.settings[order_key] | default: slot_num %}
+            {% if slot_order == target_order %}
+              {% assign visible_key = 'banner_' | append: slot_num | append: '_visible' %}
+              {% assign start_key = 'banner_' | append: slot_num | append: '_start_date' %}
+              {% assign end_key = 'banner_' | append: slot_num | append: '_end_date' %}
+              {% assign desktop_img_key = 'banner_' | append: slot_num | append: '_desktop_image' %}
+              {% assign mobile_img_key = 'banner_' | append: slot_num | append: '_mobile_image' %}
+              {% assign desktop_video_key = 'banner_' | append: slot_num | append: '_desktop_video' %}
+              {% assign mobile_video_key = 'banner_' | append: slot_num | append: '_mobile_video' %}
+              {% assign url_key = 'banner_' | append: slot_num | append: '_url' %}
+              {% assign visible = block.settings[visible_key] %}
+              {% assign slot_start = block.settings[start_key] | strip %}
+              {% assign slot_end = block.settings[end_key] | strip %}
+              {% assign slot_in_range = true %}
+              {% if slot_start != blank or slot_end != blank %}
+                {% if slot_start != blank %}
+                  {% assign start_ts = slot_start | date: '%s' | plus: 0 %}
+                  {% if start_ts != 0 and now_ts < start_ts %}{% assign slot_in_range = false %}{% endif %}
+                {% endif %}
+                {% if slot_end != blank %}
+                  {% assign end_ts = slot_end | date: '%s' | plus: 0 %}
+                  {% if end_ts != 0 and now_ts > end_ts %}{% assign slot_in_range = false %}{% endif %}
+                {% endif %}
+              {% endif %}
+              {% assign desktop_img = block.settings[desktop_img_key] %}
+              {% assign mobile_img = block.settings[mobile_img_key] %}
+              {% assign desktop_video = block.settings[desktop_video_key] %}
+              {% assign mobile_video = block.settings[mobile_video_key] %}
+              {% assign has_media = false %}
+              {% if desktop_img != blank or desktop_video != blank %}{% assign has_media = true %}{% endif %}
+              {% if mobile_img != blank or mobile_video != blank %}{% assign has_media = true %}{% endif %}
+              {% if visible and has_media and slot_in_range %}
+                {% assign slide_count = slide_count | plus: 1 %}
+              {% endif %}
+              {% if fallback_slot_num == 0 and has_media and slot_in_range %}
+                {% assign fallback_slot_num = slot_num %}
+              {% endif %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        {% if slide_count == 0 and block.settings.banner_force_fallback_when_empty and fallback_slot_num > 0 %}
+          {% assign should_render_fallback_banner = true %}
+          {% assign slide_count = 1 %}
         {% endif %}
 
-        {% if section_in_range %}
-          {% assign slide_count = 0 %}
-          {% for target_order in (1..4) %}
-            {% for slot_num in (1..4) %}
-              {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
-              {% assign slot_order = block.settings[order_key] | default: slot_num %}
-              {% if slot_order == target_order %}
-                {% assign visible_key = 'banner_' | append: slot_num | append: '_visible' %}
-                {% assign desktop_img_key = 'banner_' | append: slot_num | append: '_desktop_image' %}
-                {% assign mobile_img_key = 'banner_' | append: slot_num | append: '_mobile_image' %}
-                {% assign desktop_video_key = 'banner_' | append: slot_num | append: '_desktop_video' %}
-                {% assign mobile_video_key = 'banner_' | append: slot_num | append: '_mobile_video' %}
-                {% assign url_key = 'banner_' | append: slot_num | append: '_url' %}
-                {% assign visible = block.settings[visible_key] %}
-                {% assign desktop_img = block.settings[desktop_img_key] %}
-                {% assign mobile_img = block.settings[mobile_img_key] %}
-                {% assign desktop_video = block.settings[desktop_video_key] %}
-                {% assign mobile_video = block.settings[mobile_video_key] %}
-                {% assign has_media = false %}
-                {% if desktop_img != blank or desktop_video != blank %}{% assign has_media = true %}{% endif %}
-                {% if mobile_img != blank or mobile_video != blank %}{% assign has_media = true %}{% endif %}
-                {% if visible and has_media %}
-                  {% assign slide_count = slide_count | plus: 1 %}
-                {% endif %}
-                {% break %}
-              {% endif %}
-            {% endfor %}
-          {% endfor %}
-
+        {% if slide_count > 0 %}
           <section
             class="ghd--hero-carousel ghd--bg-white"
             {{ block.shopify_attributes }}
@@ -364,50 +374,77 @@
                     {% endfor %}
                   {% endcomment %}
                   {% assign slide_idx = 0 %}
-
-                  {% for slot_num in (1..3) %}
-                    {% assign desktop_img_key = 'banner_' | append: slot_num | append: '_desktop_image' %}
-                    {% assign mobile_img_key = 'banner_' | append: slot_num | append: '_mobile_image' %}
-                    {% assign desktop_video_key = 'banner_' | append: slot_num | append: '_desktop_video' %}
-                    {% assign mobile_video_key = 'banner_' | append: slot_num | append: '_mobile_video' %}
-                    {% assign slot_url_key = 'banner_' | append: slot_num | append: '_url' %}
-                    {% assign visible_key = 'banner_' | append: slot_num | append: '_visible' %}
-
-                    {% assign desktop_img = block.settings[desktop_img_key] %}
-                    {% assign mobile_img = block.settings[mobile_img_key] %}
-                    {% assign desktop_video = block.settings[desktop_video_key] %}
-                    {% assign mobile_video = block.settings[mobile_video_key] %}
-                    {% assign slot_url = block.settings[slot_url_key] %}
-                    {% assign visible = block.settings[visible_key] %}
-
-                    {% assign has_media = false %}
-                    {% if desktop_img != blank
-                      or desktop_video != blank
-                      or mobile_img != blank
-                      or mobile_video != blank
-                    %}
-                      {% assign has_media = true %}
-                    {% endif %}
-
-                    {% if visible and has_media %}
-                      {% if slide_idx == 0 %}
-                        {% assign is_first = true %}
-                      {% else %}
-                        {% assign is_first = false %}
+                  {% for target_order in (1..4) %}
+                    {% for slot_num in (1..4) %}
+                      {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
+                      {% assign slot_order = block.settings[order_key] | default: slot_num %}
+                      {% if slot_order == target_order %}
+                        {% assign visible_key = 'banner_' | append: slot_num | append: '_visible' %}
+                        {% assign start_key = 'banner_' | append: slot_num | append: '_start_date' %}
+                        {% assign end_key = 'banner_' | append: slot_num | append: '_end_date' %}
+                        {% assign desktop_img_key = 'banner_' | append: slot_num | append: '_desktop_image' %}
+                        {% assign mobile_img_key = 'banner_' | append: slot_num | append: '_mobile_image' %}
+                        {% assign desktop_video_key = 'banner_' | append: slot_num | append: '_desktop_video' %}
+                        {% assign mobile_video_key = 'banner_' | append: slot_num | append: '_mobile_video' %}
+                        {% assign slot_url_key = 'banner_' | append: slot_num | append: '_url' %}
+                        {% assign visible = block.settings[visible_key] %}
+                        {% assign slot_start = block.settings[start_key] | strip %}
+                        {% assign slot_end = block.settings[end_key] | strip %}
+                        {% assign slot_in_range = true %}
+                        {% if slot_start != blank or slot_end != blank %}
+                          {% if slot_start != blank %}
+                            {% assign start_ts = slot_start | date: '%s' | plus: 0 %}
+                            {% if start_ts != 0 and now_ts < start_ts %}{% assign slot_in_range = false %}{% endif %}
+                          {% endif %}
+                          {% if slot_end != blank %}
+                            {% assign end_ts = slot_end | date: '%s' | plus: 0 %}
+                            {% if end_ts != 0 and now_ts > end_ts %}{% assign slot_in_range = false %}{% endif %}
+                          {% endif %}
+                        {% endif %}
+                        {% assign desktop_img = block.settings[desktop_img_key] %}
+                        {% assign mobile_img = block.settings[mobile_img_key] %}
+                        {% assign desktop_video = block.settings[desktop_video_key] %}
+                        {% assign mobile_video = block.settings[mobile_video_key] %}
+                        {% assign slot_url = block.settings[slot_url_key] %}
+                        {% assign has_media = false %}
+                        {% if desktop_img != blank
+                          or desktop_video != blank
+                          or mobile_img != blank
+                          or mobile_video != blank
+                        %}
+                          {% assign has_media = true %}
+                        {% endif %}
+                        {% assign render_slot = false %}
+                        {% if visible and has_media and slot_in_range %}
+                          {% assign render_slot = true %}
+                        {% endif %}
+                        {% if should_render_fallback_banner
+                          and slot_num == fallback_slot_num
+                          and has_media
+                          and slot_in_range
+                        %}
+                          {% assign render_slot = true %}
+                        {% endif %}
+                        {% if render_slot %}
+                          {% if slide_idx == 0 %}
+                            {% assign is_first = true %}
+                          {% else %}
+                            {% assign is_first = false %}
+                          {% endif %}
+                          {% render 'gh-hero-carousel-slide',
+                            desktop_image: desktop_img,
+                            mobile_image: mobile_img,
+                            desktop_video: desktop_video,
+                            mobile_video: mobile_video,
+                            url: slot_url,
+                            index: slide_idx,
+                            is_first: is_first
+                          %}
+                          {% assign slide_idx = slide_idx | plus: 1 %}
+                        {% endif %}
+                        {% break %}
                       {% endif %}
-
-                      {% render 'gh-hero-carousel-slide',
-                        desktop_image: desktop_img,
-                        mobile_image: mobile_img,
-                        desktop_video: desktop_video,
-                        mobile_video: mobile_video,
-                        url: slot_url,
-                        index: slide_idx,
-                        is_first: is_first
-                      %}
-
-                      {% assign slide_idx = slide_idx | plus: 1 %}
-                    {% endif %}
+                    {% endfor %}
                   {% endfor %}
                 </div>
                 {% if slide_count > 1 %}
@@ -929,20 +966,11 @@
           "default": 5
         },
         {
-          "type": "header",
-          "content": "Schedule"
-        },
-        {
-          "type": "text",
-          "id": "banner_start_date",
-          "label": "Start date (YYYY-MM-DD)",
-          "info": "Section shows on or after this date. Leave blank to show from the beginning."
-        },
-        {
-          "type": "text",
-          "id": "banner_end_date",
-          "label": "End date (YYYY-MM-DD)",
-          "info": "Section shows on or before this date. Leave blank for no end. Both blank = always show."
+          "type": "checkbox",
+          "id": "banner_force_fallback_when_empty",
+          "label": "Fallback to first scheduled banner when all slots are hidden",
+          "default": true,
+          "info": "Prevents blank homepage hero for market-specific settings by showing the first in-range slot with media."
         },
         {
           "type": "header",
@@ -989,6 +1017,18 @@
           "default": 1
         },
         {
+          "type": "text",
+          "id": "banner_1_start_date",
+          "label": "Start date (YYYY-MM-DD)",
+          "info": "Slot shows on or after this date. Leave blank for no start."
+        },
+        {
+          "type": "text",
+          "id": "banner_1_end_date",
+          "label": "End date (YYYY-MM-DD)",
+          "info": "Slot shows on or before this date. Leave blank for no end. Both blank = always show."
+        },
+        {
           "type": "header",
           "content": "Slot 2"
         },
@@ -1031,6 +1071,18 @@
           "step": 1,
           "label": "Order",
           "default": 2
+        },
+        {
+          "type": "text",
+          "id": "banner_2_start_date",
+          "label": "Start date (YYYY-MM-DD)",
+          "info": "Slot shows on or after this date. Leave blank for no start."
+        },
+        {
+          "type": "text",
+          "id": "banner_2_end_date",
+          "label": "End date (YYYY-MM-DD)",
+          "info": "Slot shows on or before this date. Leave blank for no end. Both blank = always show."
         },
         {
           "type": "header",
@@ -1077,6 +1129,18 @@
           "default": 3
         },
         {
+          "type": "text",
+          "id": "banner_3_start_date",
+          "label": "Start date (YYYY-MM-DD)",
+          "info": "Slot shows on or after this date. Leave blank for no start."
+        },
+        {
+          "type": "text",
+          "id": "banner_3_end_date",
+          "label": "End date (YYYY-MM-DD)",
+          "info": "Slot shows on or before this date. Leave blank for no end. Both blank = always show."
+        },
+        {
           "type": "header",
           "content": "Slot 4 (staging)"
         },
@@ -1120,6 +1184,18 @@
           "step": 1,
           "label": "Order",
           "default": 4
+        },
+        {
+          "type": "text",
+          "id": "banner_4_start_date",
+          "label": "Start date (YYYY-MM-DD)",
+          "info": "Slot shows on or after this date. Leave blank for no start."
+        },
+        {
+          "type": "text",
+          "id": "banner_4_end_date",
+          "label": "End date (YYYY-MM-DD)",
+          "info": "Slot shows on or before this date. Leave blank for no end. Both blank = always show."
         }
       ]
     },
