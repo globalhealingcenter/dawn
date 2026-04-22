@@ -584,17 +584,27 @@ function renderResults(product,total,analyzed,a,dateRange){
   document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
 
   // Warning + transformation
-  if(maxPct < THRESHOLD && a.transformation){
+  var strongStats=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
+  var showWarning=strongStats.length<=1;
+
+  if(showWarning){
     var warn=document.getElementById('statsWarning');
     warn.style.display='block';
-    document.getElementById('statsWarningText').textContent='The highest outcome stat for this product is '+maxPct+'% — below the 72% threshold for strong PDP positioning. Jane: consider leading with transformation timeframe framing instead of raw outcome percentages. See suggested alternative below.';
+    if(maxPct<THRESHOLD){
+      document.getElementById('statsWarningText').textContent='All outcome stats for this product are below 72%. Jane: avoid leading with raw percentages on the PDP. Use the transformation timeframe framing below instead.';
+    } else {
+      document.getElementById('statsWarningText').textContent='Only one stat clears 72% — the overall stat picture is weak. Jane: the transformation timeframe below may be stronger as the lead claim on this PDP.';
+    }
+  } else {
+    document.getElementById('statsWarning').style.display='none';
+  }
+
+  // Transformation card always shows
+  if(a.transformation){
     var tc=document.getElementById('transformationCard');
     tc.style.display='block';
     document.getElementById('transformationStat').textContent=a.transformation.stat;
-    document.getElementById('transformationSub').textContent=a.transformation.sub+' — use this as the lead stat in the social proof bar instead of outcome percentages.';
-  } else {
-    document.getElementById('statsWarning').style.display='none';
-    document.getElementById('transformationCard').style.display='none';
+    document.getElementById('transformationSub').textContent=a.transformation.sub+(showWarning?' — Jane: consider using this as the lead stat instead of outcome percentages.':' — Jane: use this as a supporting stat alongside the outcome percentages.');
   }
 
   // Pain points
