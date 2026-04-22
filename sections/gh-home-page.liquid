@@ -276,8 +276,14 @@
                   {% comment %} {% assign slide_idx = 0 %}
                   {% for target_order in (1..4) %}
                     {% for slot_num in (1..4) %}
+                      {% if should_render_fallback_banner and slot_num != fallback_slot_num %}
+                        {% continue %}
+                      {% endif %}
                       {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
                       {% assign slot_order = block.settings[order_key] | default: slot_num %}
+                      {% if should_render_fallback_banner and target_order != fallback_slot_order %}
+                        {% continue %}
+                      {% endif %}
                       {% if slot_order == target_order %}
                         {% case slot_num %}
                           {% when 1 %}
@@ -900,6 +906,17 @@
           "step": 1,
           "label": "Star rating",
           "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "banner_force_fallback_when_empty",
+          "label": "Fallback to first scheduled banner when all slots are hidden",
+          "default": true,
+          "info": "Prevents blank homepage hero in market-specific settings by showing the first in-range slot with media."
+        },
+        {
+          "type": "paragraph",
+          "content": "Market check tip: when swapping campaigns globally, confirm at least one slot is visible per market (US, UK, etc.). If all slot visibility toggles are off for a market, fallback above will show the first in-range slot with media."
         },
         {
           "type": "header",
