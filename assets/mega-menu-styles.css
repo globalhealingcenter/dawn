@@ -206,10 +206,6 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
     padding: 0 !important;
 }
 
-.remove-img-bg {
-    background: transparent !important;
-}
-
 /* corrected hover selector — background belongs on the <a> */
 /* div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link:hover {
     background: rgba(255, 255, 255, 0.06) !important;
@@ -287,9 +283,10 @@ div.huk_menu_submenu_tab_image ul li a {
 
 /* rounded product image card */
 .huk_menu_image {
-    border-radius: 18px !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
     padding: 0 !important;
+    width: 100%;
     transition: background 0.25s ease !important;
 }
 
@@ -300,9 +297,15 @@ div.huk_menu_submenu_tab_image ul li a {
     object-position: center !important;
     padding: 14px !important;
     margin: 0 !important;
-    background: #f9f2e8 !important;
     display: block !important;
     transition: transform 0.38s ease !important;
+    min-width: 100% !important;
+    border-radius: 10px !important;
+}
+
+.header__inline-menu .huk_menu_image--above .huk_menu_item_text {
+    display: flex !important;
+    justify-content: center;
 }
 
 div.huk_menu_submenu_tab_image ul li a:hover .huk_menu_image img {
