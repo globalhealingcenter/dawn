@@ -206,7 +206,7 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
     padding: 0 !important;
 }
 
-.remove-img-bg .huk_menu_image {
+.remove-img-bg {
     background: transparent !important;
 }
 
@@ -289,7 +289,6 @@ div.huk_menu_submenu_tab_image ul li a {
 .huk_menu_image {
     border-radius: 18px !important;
     overflow: hidden !important;
-    background: #f9f2e8 !important;
     padding: 0 !important;
     transition: background 0.25s ease !important;
 }
@@ -301,6 +300,7 @@ div.huk_menu_submenu_tab_image ul li a {
     object-position: center !important;
     padding: 14px !important;
     margin: 0 !important;
+    background: #f9f2e8 !important;
     display: block !important;
     transition: transform 0.38s ease !important;
 }
