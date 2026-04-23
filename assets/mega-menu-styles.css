@@ -206,7 +206,7 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
     padding: 0 !important;
 }
 
-.remove-img-bg {
+.remove-img-bg .huk_menu_image {
     background: transparent !important;
 }
 
