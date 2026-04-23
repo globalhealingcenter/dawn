@@ -183,7 +183,7 @@ div.huk_menu_submenu_tab_content li.huk_menu_item_display_header>a span.huk_menu
     text-transform: uppercase !important;
     color: rgba(255, 255, 255, 0.5) !important;
     display: block !important;
-    padding: 0 !important;
+    padding: 0 0 6px !important;
     margin: 0 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
     pointer-events: none !important;
@@ -202,7 +202,7 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
     background: transparent !important;
 }
 
-.huk_menu_submenu_type_mega .huk_menu_submenu {
+.header__inline-menu .huk_menu_submenu_type_mega .huk_menu_submenu {
     padding: 0 !important;
 }
 
