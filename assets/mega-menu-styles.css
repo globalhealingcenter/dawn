@@ -206,6 +206,10 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
     padding: 0 !important;
 }
 
+.remove-img-bg {
+    background: transparent !important;
+}
+
 /* corrected hover selector — background belongs on the <a> */
 /* div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link:hover {
     background: rgba(255, 255, 255, 0.06) !important;
