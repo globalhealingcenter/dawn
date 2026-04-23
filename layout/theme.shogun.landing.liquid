@@ -6,7 +6,7 @@ This file can be re-written at any time.
 {% include 'shogun-content-handler' %}
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-  {% render 'elevateab' %}
+    {% render 'elevateab' %}
     <!-- Google Consent Mode V2 (Consentmo) -->
     {% render 'gcm-integration-script' %}
     <meta charset="utf-8">
@@ -496,6 +496,10 @@ This file can be re-written at any time.
     {% endif %}
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    {% include 'huk-mega-menu-pro' %}
+  
+  {% include "huk-mega-menu-pro" %}
   </head>
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     {% include 'shogun-content-handler' %}
@@ -553,6 +557,55 @@ This file can be re-written at any time.
 <script src="{{ 'gh-countdown.js' | asset_url }}" defer></script>
 <script src="{{ 'og-subscribe-click.js' | asset_url }}" defer></script>
 <script src="{{ 'yotpo-ppw-shadow-sync.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer></script>
+<script>
+      (function () {
+        var THUMB_WIDTH = '500';
+        var tolstoyScopeSelector =
+          'div[id^="shopify-block-"][id*="tolstoy"], tolstoy-carousel, .tolstoy-carousel-container';
+
+        function updateWidthParam(url) {
+          if (!url || url.indexOf('cdn.shopify.com') === -1) return url;
+          if (url.indexOf('width=') === -1) return url;
+          return url.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
+        }
+
+        function updateImageAttributes(el) {
+          ['src', 'data-src', 'href'].forEach(function (attr) {
+            var val = el.getAttribute(attr);
+            if (!val) return;
+            var updated = updateWidthParam(val);
+            if (updated !== val) el.setAttribute(attr, updated);
+          });
+
+          var srcset = el.getAttribute('srcset');
+          if (srcset && srcset.indexOf('width=') !== -1) {
+            var updatedSrcset = srcset.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
+            if (updatedSrcset !== srcset) el.setAttribute('srcset', updatedSrcset);
+          }
+        }
+
+        function updateTolstoyMedia(root) {
+          var scope = root || document;
+          scope.querySelectorAll('img, source, a').forEach(function (el) {
+            var className = typeof el.className === 'string' ? el.className : '';
+            if (!el.closest(tolstoyScopeSelector) && className.indexOf('tolstoy') === -1) return;
+            updateImageAttributes(el);
+          });
+        }
+
+        var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            mutation.addedNodes.forEach(function (node) {
+              if (node.nodeType !== 1) return;
+              updateTolstoyMedia(node);
+            });
+          });
+        });
+
+        updateTolstoyMedia(document);
+        observer.observe(document.body, { childList: true, subtree: true });
+      })();
+    </script>
     <style type="text/css">
       body, html {
         width: 100% !important;
