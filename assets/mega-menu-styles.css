@@ -295,7 +295,7 @@ div.huk_menu_submenu_tab_image ul li a {
     height: 225px !important;
     object-fit: contain !important;
     object-position: center !important;
-    padding: 14px !important;
+    padding: 0px !important;
     margin: 0 !important;
     display: block !important;
     transition: transform 0.38s ease !important;
