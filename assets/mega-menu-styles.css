@@ -358,6 +358,13 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
     color: var(--gh-color-gold) !important;
 }
 
+a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
+    display: flex !important;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100% !important;
+}
+
 /* --- MOBILE --- */
 body.overflow-hidden-tablet {
     overflow: hidden !important;
@@ -366,6 +373,7 @@ body.overflow-hidden-tablet {
     left: 0 !important;
     width: 100% !important;
 }
+
 
 @media (max-width: 989px) {
 
