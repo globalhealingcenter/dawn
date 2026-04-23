@@ -292,7 +292,7 @@ div.huk_menu_submenu_tab_image ul li a {
 
 .huk_menu_image img {
     width: 100% !important;
-    height: 218px !important;
+    height: 225px !important;
     object-fit: contain !important;
     object-position: center !important;
     padding: 14px !important;
@@ -363,6 +363,7 @@ a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
     justify-content: flex-start;
     flex-wrap: nowrap;
     width: 100% !important;
+    gap: 10px;
 }
 
 /* --- MOBILE --- */
