@@ -110,81 +110,17 @@
       }
     }
 
-    function normalizeHandle(raw){
-      if( !raw ) return null;
-
-      let value = String(raw).trim();
-      if( !value ) return null;
-
-      try {
-        value = decodeURIComponent(value);
-      } catch(e) {}
-
-      value = value
-        .replace(/^\/+|\/+$/g, '')
-        .replace(/^products\//i, '')
-        .split('?')[0]
-        .split('#')[0]
-        .split('%3F')[0]
-        .split('%23')[0]
-        .trim()
-        .toLowerCase();
-
-      return value || null;
-    }
-
-    function getProductHandle(urlObj){
-      let pathname = urlObj.pathname || '';
-      let segments = pathname.split('/').filter(Boolean);
-      let productsIndex = segments.indexOf('products');
-
-      if( productsIndex !== -1 ){
-        let handleFromPath = normalizeHandle(segments[productsIndex + 1]);
-        if( handleFromPath ) return handleFromPath;
-      }
-
-      // Tapcart and ad redirects can pass the destination as a query param.
-      let candidates = ['url', 'redirect', 'path', 'product', 'handle'];
-      for( let key of candidates ){
-        let paramValue = urlObj.searchParams.get(key);
-        if( !paramValue ) continue;
-
-        try {
-          let nested = new URL(paramValue, window.location.origin);
-          let nestedSegments = nested.pathname.split('/').filter(Boolean);
-          let nestedProductsIndex = nestedSegments.indexOf('products');
-          if( nestedProductsIndex !== -1 ){
-            let handleFromNestedPath = normalizeHandle(nestedSegments[nestedProductsIndex + 1]);
-            if( handleFromNestedPath ) return handleFromNestedPath;
-          }
-        } catch(e) {}
-
-        let fromRaw = normalizeHandle(paramValue);
-        if( fromRaw ) return fromRaw;
-      }
-
-      return null;
-    }
-
     function preLoad()
     {
       if( !url.pathname.includes('products/') ){
         storage.redirectUrl();
         preloaded = true;
-        return;
       }
 
-      const product_url = getProductHandle(url);
-      if( !product_url ){
-        preloaded = true;
-        return;
-      }
+      const product_url = url.pathname.replace('/products/', '').replace('/', '');
 
       const product = gh_products[product_url];
-      if( !product ){
-        preloaded = true;
-        return;
-      }
+      if( !product ) preloaded = true;
 
       let matched = markets.goToMatchedProduct(product_url);
       if( matched ) preloaded = true;
@@ -236,11 +172,8 @@
       product_content_container = document.getElementById('gh-product-content-container-404');
       localization_form = document.getElementById('gh-localization-form');
 
-      const product_url = getProductHandle(url);
-      if( !product_url ) return;
-
+      const product_url = url.pathname.replace('/products/', '').replace('/', '');
       const product = gh_products[product_url];
-      if( !product ) return;
 
       storage.storeUrl(product_url);
 
@@ -331,7 +264,7 @@
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
 
-      fetch('https://shopify-product-content.globalhealing.workers.dev/?product=' + encodeURIComponent(product_url))
+      fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
         .then( d => d.text())
         .then( h => {
           if( h === 'undefined' ) return;
