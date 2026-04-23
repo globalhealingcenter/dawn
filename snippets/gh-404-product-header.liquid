@@ -110,11 +110,60 @@
       }
     }
 
-    function getProductHandle(pathname){
+    function normalizeHandle(raw){
+      if( !raw ) return null;
+
+      let value = String(raw).trim();
+      if( !value ) return null;
+
+      try {
+        value = decodeURIComponent(value);
+      } catch(e) {}
+
+      value = value
+        .replace(/^\/+|\/+$/g, '')
+        .replace(/^products\//i, '')
+        .split('?')[0]
+        .split('#')[0]
+        .split('%3F')[0]
+        .split('%23')[0]
+        .trim()
+        .toLowerCase();
+
+      return value || null;
+    }
+
+    function getProductHandle(urlObj){
+      let pathname = urlObj.pathname || '';
       let segments = pathname.split('/').filter(Boolean);
       let productsIndex = segments.indexOf('products');
-      if( productsIndex === -1 ) return null;
-      return segments[productsIndex + 1] || null;
+
+      if( productsIndex !== -1 ){
+        let handleFromPath = normalizeHandle(segments[productsIndex + 1]);
+        if( handleFromPath ) return handleFromPath;
+      }
+
+      // Tapcart and ad redirects can pass the destination as a query param.
+      let candidates = ['url', 'redirect', 'path', 'product', 'handle'];
+      for( let key of candidates ){
+        let paramValue = urlObj.searchParams.get(key);
+        if( !paramValue ) continue;
+
+        try {
+          let nested = new URL(paramValue, window.location.origin);
+          let nestedSegments = nested.pathname.split('/').filter(Boolean);
+          let nestedProductsIndex = nestedSegments.indexOf('products');
+          if( nestedProductsIndex !== -1 ){
+            let handleFromNestedPath = normalizeHandle(nestedSegments[nestedProductsIndex + 1]);
+            if( handleFromNestedPath ) return handleFromNestedPath;
+          }
+        } catch(e) {}
+
+        let fromRaw = normalizeHandle(paramValue);
+        if( fromRaw ) return fromRaw;
+      }
+
+      return null;
     }
 
     function preLoad()
@@ -125,7 +174,7 @@
         return;
       }
 
-      const product_url = getProductHandle(url.pathname);
+      const product_url = getProductHandle(url);
       if( !product_url ){
         preloaded = true;
         return;
@@ -187,7 +236,7 @@
       product_content_container = document.getElementById('gh-product-content-container-404');
       localization_form = document.getElementById('gh-localization-form');
 
-      const product_url = getProductHandle(url.pathname);
+      const product_url = getProductHandle(url);
       if( !product_url ) return;
 
       const product = gh_products[product_url];
