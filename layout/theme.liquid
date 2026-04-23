@@ -28,8 +28,59 @@
     <script>
       (function () {
         try {
+          function getTapcartProductPath(loc) {
+            var pathname = (loc.pathname || '').toLowerCase();
+            var segments = pathname.split('/').filter(Boolean);
+            var productsIndex = segments.indexOf('products');
+            if (productsIndex !== -1 && segments[productsIndex + 1]) {
+              return '/products/' + segments[productsIndex + 1];
+            }
+
+            var params = new URLSearchParams(loc.search || '');
+            var candidates = ['url', 'redirect', 'path', 'product', 'handle'];
+            for (var i = 0; i < candidates.length; i++) {
+              var value = params.get(candidates[i]);
+              if (!value) continue;
+
+              try {
+                value = decodeURIComponent(value);
+              } catch (e) {}
+
+              try {
+                var nested = new URL(value, loc.origin);
+                var nestedSegments = (nested.pathname || '').toLowerCase().split('/').filter(Boolean);
+                var nestedProductsIndex = nestedSegments.indexOf('products');
+                if (nestedProductsIndex !== -1 && nestedSegments[nestedProductsIndex + 1]) {
+                  return '/products/' + nestedSegments[nestedProductsIndex + 1];
+                }
+              } catch (e) {}
+
+              var directMatch = value.toLowerCase().match(/\/products\/([^/?#]+)/);
+              if (directMatch && directMatch[1]) {
+                return '/products/' + directMatch[1];
+              }
+            }
+
+            return null;
+          }
+
           var IN_TAPCART = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
-          var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
+          var tapcartProductPath = getTapcartProductPath(window.location);
+
+          // Normalize product deep links in Tapcart before other scripts read location.
+          if (IN_TAPCART && tapcartProductPath) {
+            var hasSearch = !!window.location.search;
+            var pathNeedsNormalize = window.location.pathname.toLowerCase() !== tapcartProductPath;
+            if (pathNeedsNormalize || hasSearch) {
+              if (pathNeedsNormalize) {
+                window.location.replace(tapcartProductPath);
+                return;
+              }
+              window.history.replaceState({}, '', tapcartProductPath);
+            }
+          }
+
+          var IS_PDP = /\/products\//.test(tapcartProductPath || location.pathname) || !!(window.meta && window.meta.product);
 
           // Store flags globally for later use
           window.__IN_TAPCART__ = IN_TAPCART;

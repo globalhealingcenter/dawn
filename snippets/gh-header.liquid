@@ -215,10 +215,16 @@
       },
       url: {
         paramsAsObject: function () {
-          var e = window.location.search.substring(1);
-          return e
-            ? JSON.parse('{"' + decodeURI(e).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-            : {};
+          var params = {};
+          try {
+            var searchParams = new URLSearchParams(window.location.search || '');
+            searchParams.forEach(function (value, key) {
+              params[key] = value;
+            });
+          } catch (err) {
+            console.warn('gh.utils.url.paramsAsObject parse error', err);
+          }
+          return params;
         },
       },
       dev: {
