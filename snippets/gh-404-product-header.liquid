@@ -110,17 +110,32 @@
       }
     }
 
+    function getProductHandle(pathname){
+      let segments = pathname.split('/').filter(Boolean);
+      let productsIndex = segments.indexOf('products');
+      if( productsIndex === -1 ) return null;
+      return segments[productsIndex + 1] || null;
+    }
+
     function preLoad()
     {
       if( !url.pathname.includes('products/') ){
         storage.redirectUrl();
         preloaded = true;
+        return;
       }
 
-      const product_url = url.pathname.replace('/products/', '').replace('/', '');
+      const product_url = getProductHandle(url.pathname);
+      if( !product_url ){
+        preloaded = true;
+        return;
+      }
 
       const product = gh_products[product_url];
-      if( !product ) preloaded = true;
+      if( !product ){
+        preloaded = true;
+        return;
+      }
 
       let matched = markets.goToMatchedProduct(product_url);
       if( matched ) preloaded = true;
@@ -172,8 +187,11 @@
       product_content_container = document.getElementById('gh-product-content-container-404');
       localization_form = document.getElementById('gh-localization-form');
 
-      const product_url = url.pathname.replace('/products/', '').replace('/', '');
+      const product_url = getProductHandle(url.pathname);
+      if( !product_url ) return;
+
       const product = gh_products[product_url];
+      if( !product ) return;
 
       storage.storeUrl(product_url);
 
@@ -264,7 +282,7 @@
       localization_form.classList.remove('hide');
       new_container.classList.remove('hide');
 
-      fetch('https://shopify-product-content.globalhealing.workers.dev/?product='+product_url)
+      fetch('https://shopify-product-content.globalhealing.workers.dev/?product=' + encodeURIComponent(product_url))
         .then( d => d.text())
         .then( h => {
           if( h === 'undefined' ) return;
