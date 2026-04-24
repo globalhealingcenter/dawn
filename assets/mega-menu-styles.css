@@ -369,18 +369,6 @@ a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
     width: calc(33.33% - 6px);
 }
 
-/* a.huk_menu_item_link:has(.five-items-per-row)+ul.huk_menu_submenu li {
-    width: calc(20% - 10px) !important;
-}
-
-a.huk_menu_item_link:has(.five-items-per-row)+ul.huk_menu_submenu {
-    gap: 10px;
-}
-
-a.huk_menu_item_link:has(.five-items-per-row)+ul.huk_menu_submenu li .huk_menu_image img {
-    height: 215px;
-} */
-
 /* --- MOBILE --- */
 body.overflow-hidden-tablet {
     overflow: hidden !important;
