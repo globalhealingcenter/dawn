@@ -341,12 +341,15 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
 
 ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop li.huk_menu_item.huk_menu_col.huk_menu_item_level_1 {
     padding-bottom: 0 !important;
-    border-left: 2px solid transparent !important;
 }
 
 .huk_menu_item_submenu_type_flyout .huk_menu_submenu {
     max-width: 250px !important;
     width: 250px !important;
+}
+
+.huk_menu_item_submenu_type_flyout .huk_menu_submenu li a {
+    border-left: 2px solid transparent !important;
 }
 
 .huk_menu_submenu_type_flyout .huk_menu_item_link span {
