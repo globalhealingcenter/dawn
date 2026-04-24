@@ -82,7 +82,8 @@ ul.huk_menu_submenu_tab_control>li>a.huk_menu_item_link {
     border-radius: 0 !important;
 }
 
-ul.huk_menu_submenu_tab_control>li>a.huk_menu_item_link:hover {
+ul.huk_menu_submenu_tab_control>li>a.huk_menu_item_link:hover,
+ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop li:hover>a.huk_menu_item_link {
     background: rgba(255, 255, 255, 0.06) !important;
     border-left-color: var(--gh-color-gold) !important;
 }
@@ -332,8 +333,9 @@ div.huk_menu_submenu_tab_image ul li a:hover span.huk_menu_item_text {
 ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop {
     padding: 8px 0 !important;
     top: 70px !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 6px !important;
+    border-radius: 0px !important;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45) !important;
+    border-top: 2px solid var(--gh-color-gold) !important;
     background: var(--gh-color-green) !important;
 }
 
