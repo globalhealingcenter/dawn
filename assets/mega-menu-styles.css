@@ -83,7 +83,7 @@ ul.huk_menu_submenu_tab_control>li>a.huk_menu_item_link {
 }
 
 ul.huk_menu_submenu_tab_control>li>a.huk_menu_item_link:hover,
-ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop li:hover>a.huk_menu_item_link {
+ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_position_left.huk_menu_submenu--desktop li>a.huk_menu_item_link:hover {
     background: rgba(255, 255, 255, 0.06) !important;
     border-left-color: var(--gh-color-gold) !important;
 }
