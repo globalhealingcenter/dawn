@@ -366,7 +366,7 @@ a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
 }
 
 a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
-    width: calc(33.33% - 6px);
+    width: calc(33.33% - 10px) !important;
 }
 
 /* --- MOBILE --- */
