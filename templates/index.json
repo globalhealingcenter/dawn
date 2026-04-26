@@ -45,7 +45,7 @@
             "banner_1_mobile_image": "shopify://shop_images/2026-earth-day-mobile-banner.jpg",
             "banner_1_mobile_video": "",
             "banner_1_url": "shopify://pages/earth-day-2026",
-            "banner_1_visible": true,
+            "banner_1_visible": false,
             "banner_1_order": 2,
             "banner_1_start_date": "",
             "banner_1_end_date": "",
