@@ -284,7 +284,7 @@ div.huk_menu_submenu_tab_image ul li a {
 
 /* rounded product image card */
 .huk_menu_image {
-    border-radius: 10px !important;
+    border-radius: 14px !important;
     overflow: hidden !important;
     padding: 0 !important;
     width: 100%;
