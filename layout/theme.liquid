@@ -29,21 +29,73 @@
     <script>
       (function () {
         try {
+          function getTapcartProductPath(loc) {
+            var pathname = (loc.pathname || '').toLowerCase();
+            var segments = pathname.split('/').filter(Boolean);
+            var productsIndex = segments.indexOf('products');
+            if (productsIndex !== -1 && segments[productsIndex + 1]) {
+              return '/products/' + segments[productsIndex + 1];
+            }
+
+            var params = new URLSearchParams(loc.search || '');
+            var candidates = ['url', 'redirect', 'path', 'product', 'handle'];
+            for (var i = 0; i < candidates.length; i++) {
+              var value = params.get(candidates[i]);
+              if (!value) continue;
+
+              try {
+                value = decodeURIComponent(value);
+              } catch (e) {}
+
+              try {
+                var nested = new URL(value, loc.origin);
+                var nestedSegments = (nested.pathname || '').toLowerCase().split('/').filter(Boolean);
+                var nestedProductsIndex = nestedSegments.indexOf('products');
+                if (nestedProductsIndex !== -1 && nestedSegments[nestedProductsIndex + 1]) {
+                  return '/products/' + nestedSegments[nestedProductsIndex + 1];
+                }
+              } catch (e) {}
+
+              var directMatch = value.toLowerCase().match(/\/products\/([^/?#]+)/);
+              if (directMatch && directMatch[1]) {
+                return '/products/' + directMatch[1];
+              }
+            }
+
+            return null;
+          }
+
           var IN_TAPCART = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
-          var IS_PDP = /\/products\//.test(location.pathname) || !!(window.meta && window.meta.product);
+          var tapcartProductPath = getTapcartProductPath(window.location);
+
+          // Normalize product deep links in Tapcart before other scripts read location.
+          if (IN_TAPCART && tapcartProductPath) {
+            var hasSearch = !!window.location.search;
+            var pathNeedsNormalize = window.location.pathname.toLowerCase() !== tapcartProductPath;
+            if (pathNeedsNormalize || hasSearch) {
+              if (pathNeedsNormalize) {
+                window.location.replace(tapcartProductPath);
+                return;
+              }
+              window.history.replaceState({}, '', tapcartProductPath);
+            }
+          }
+
+          var IS_PDP =
+            /\/products\//.test(tapcartProductPath || location.pathname) || !!(window.meta && window.meta.product);
 
           // Store flags globally for later use
           window.__IN_TAPCART__ = IN_TAPCART;
           window.__IS_PDP__ = IS_PDP;
 
-          // ✅ Fix C: ensure safe product object so Yotpo doesn’t crash
+          // Fix C: ensure safe product object so Yotpo doesn’t crash
           if (IN_TAPCART && !IS_PDP) {
             window.product = window.product || {};
             window.product.reviews = window.product.reviews || {};
             window.product.reviews.bottomline = window.product.reviews.bottomline || {};
           }
 
-          // ✅ Fix D: flag Tapcart environment to skip Yotpo Reviews init
+          // Fix D: flag Tapcart environment to skip Yotpo Reviews init
           if (IN_TAPCART && !IS_PDP) {
             window.__SKIP_YOTPO_REVIEWS__ = true;
           }
@@ -74,9 +126,7 @@
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {% comment %}
-        {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-      {% endcomment %}
+      {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
     </title>
 
     <!-- Google tag (gtag.js) -->
@@ -410,6 +460,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'mega-menu-styles.css' | asset_url | stylesheet_tag }}
 
     {{ 'mega-menu-styles.css' | asset_url | stylesheet_tag }}
 
@@ -494,10 +545,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     {% include 'huk-mega-menu-pro' %}
-  
-  {% include "huk-mega-menu-pro" %}
+
+    {% include 'huk-mega-menu-pro' %}
   </head>
-							
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -595,6 +645,13 @@
       {% render 'ss-intellisuggest' %}
     {% endif %}
 
+    <!-- Begin: Northbeam metadata info -->
+    <script>
+      localStorage.setItem('nb__region_code', '{{ localization.country.iso_code }}');
+      localStorage.setItem('nb__currency_code', '{{ localization.country.currency.iso_code }}');
+    </script>
+    <!-- End: Northbeam metadata info -->
+
     <!-- Widget : Gift with Purchase: 5 OP Samples on orders $100+ -->
     <!-- <div data-rebuy-id="124103"></div> -->
 
@@ -636,7 +693,18 @@
 
     <!-- Widget : 2025 BFCM Free Tote on New Sub -->
     <!-- <div data-rebuy-id="253569"></div> -->
-    <!-- End Widget : 2025 BFCM Free Tote on New Sub -->
+
+    <!-- Widget : 2026 Earth Day Wk1 Free Toiletry Bag on $150 -->
+    <!-- <div data-rebuy-id="274075"></div> -->
+
+    <!-- Widget : 2026 Earth Day Wk2 Free Tote on $125 -->
+    <!-- <div data-rebuy-id="278006"></div> -->
+
+    <!-- Widget : 2026 Earth Day Wk3 Free OP + VITC samples no min -->
+    <!-- <div data-rebuy-id="278008"></div> -->
+
+    <!-- Widget : 2026 Earth Day Wk4 Free Tote on New Sub -->
+    <div data-rebuy-id="278280"></div>
 
     <!-- influencer page countdown -->
     {% if request.path contains '/pages/influencer' %}

@@ -17,6 +17,15 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
+    },
+    "main": {
+      "settings": {},
+      "blocks": {
+        "custom_liquid_TxJtfK": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
     }
   }
 }

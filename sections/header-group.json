@@ -14,13 +14,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "778775ac-0fd5-4070-8198-2dec1665d8fc": {
-          "type": "announcement",
-          "settings": {
-            "text": "✨ Support your digestive health with Ultimate Probiotic",
-            "link": "shopify://products/probiotic"
-          }
-        },
         "announcement_GGCHez": {
           "type": "announcement",
           "settings": {
@@ -30,7 +23,6 @@
         }
       },
       "block_order": [
-        "778775ac-0fd5-4070-8198-2dec1665d8fc",
         "announcement_GGCHez"
       ],
       "custom_css": [
