@@ -200,6 +200,24 @@
             "hide_on_mobile": false
           }
         },
+        "health_goal_link_P3EFUR": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Immune Support",
+            "url": "/collections/immune-support",
+            "column": "1",
+            "hide_on_mobile": false
+          }
+        },
+        "health_goal_link_Mbyyi8": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Brain & Cognitive Health",
+            "url": "/collections/brain-cognitive-health",
+            "column": "1",
+            "hide_on_mobile": false
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "disabled": true,
@@ -362,6 +380,8 @@
         "health_goal_link_fGFqMf",
         "health_goal_link_CrNxFh",
         "health_goal_link_cYQhVY",
+        "health_goal_link_P3EFUR",
+        "health_goal_link_Mbyyi8",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
