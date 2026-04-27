@@ -372,6 +372,18 @@
             "meta_product": "Calcium Disodium EDTA"
           }
         },
+        "review_card_VbBzif": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Latero-Flora®",
+            "product_url": "/products/latero-flora",
+            "review_text": "\"I've tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and with celiac my gut was always off. After four months, my issues have been neutralized. This has been a dramatic change.\"",
+            "author": "Nicole P.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Latero-Flora®"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -471,6 +483,7 @@
         "review_card_CwQnDD",
         "review_card_GA4x7y",
         "review_card_YGH6qG",
+        "review_card_VbBzif",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
