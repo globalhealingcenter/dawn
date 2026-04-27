@@ -360,6 +360,18 @@
             "meta_product": "Black Seed Oil"
           }
         },
+        "review_card_YGH6qG": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Calcium Disodium EDTA",
+            "product_url": "/products/calcium-disodium-edta",
+            "review_text": "\"This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep better and feel like I'm 25 again. You have a loyal customer now! Donna W.\"",
+            "author": "Donna W.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Calcium Disodium EDTA"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -458,6 +470,7 @@
         "static_reviews_carousel_yURM78",
         "review_card_CwQnDD",
         "review_card_GA4x7y",
+        "review_card_YGH6qG",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
