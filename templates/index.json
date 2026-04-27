@@ -281,14 +281,17 @@
         "oxy_powder_hero_Ee7FXg": {
           "type": "oxy_powder_hero",
           "settings": {
-            "product_name": "Oxy-Powder",
+            "background_video": "shopify://files/videos/oxy-section-video.mov",
+            "badge_image": "shopify://shop_images/oxy-powder-tag-logo.png",
+            "product_name": "Oxy-Powder®",
             "tagline": "Support for Your Foundation of Healing",
-            "social_proof": "1M + Bottles Sold | 10,000 5-Star Reviews",
+            "social_proof": "1M+ Bottles Sold | 10,000+ 5-Star Reviews",
+            "product_image": "shopify://shop_images/oxy-powder-img.png",
             "description": "<p>Health begins in the gut. <strong>Oxy-Powder®</strong> uses gentle, non-habit-forming ingredients to support elimination and refresh the starting point of your overall health.</p>",
             "cta_primary_text": "Add to Cart",
-            "cta_primary_url": "",
+            "cta_primary_url": "https://globalhealing.com/cart/39862723117256:1",
             "cta_secondary_text": "Read the Study",
-            "cta_secondary_url": "",
+            "cta_secondary_url": "https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf",
             "bottom_stat": "92.5% Overall Satisfaction",
             "bottom_sub_text": "Backed by independent clinical research.",
             "bottom_sub_url": ""
