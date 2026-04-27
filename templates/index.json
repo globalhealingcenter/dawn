@@ -348,6 +348,18 @@
             "meta_product": "Ultimate Probiotic"
           }
         },
+        "review_card_GA4x7y": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Black Seed Oil",
+            "product_url": "/products/organic-black-seed-oil",
+            "review_text": "\"I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint stiffness in my knees. Since taking it daily, it has drastically reduced.\"",
+            "author": "Starr R.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Black Seed Oil"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -445,6 +457,7 @@
         "consistency_wellness_QY9M6U",
         "static_reviews_carousel_yURM78",
         "review_card_CwQnDD",
+        "review_card_GA4x7y",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
