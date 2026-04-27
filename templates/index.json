@@ -53,7 +53,7 @@
             "banner_2_mobile_image": "shopify://shop_images/nad-mobile-october-2025-banner_1af1659f-3440-4ead-8273-8653d961d820.jpg",
             "banner_2_mobile_video": "",
             "banner_2_url": "shopify://products/nad",
-            "banner_2_visible": false,
+            "banner_2_visible": true,
             "banner_2_order": 4,
             "banner_2_start_date": "",
             "banner_2_end_date": "",
