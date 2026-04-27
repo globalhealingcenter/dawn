@@ -266,6 +266,7 @@
         },
         "quiz_cta_U8Yhf4": {
           "type": "quiz_cta",
+          "disabled": true,
           "settings": {
             "background": "shopify://shop_images/Quiz-section-bg.jpg",
             "background_mobile": "shopify://shop_images/Quiz-section-bg.jpg",
