@@ -384,6 +384,18 @@
             "meta_product": "Latero-Flora®"
           }
         },
+        "review_card_hXgypq": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Multivitamin with Minerals",
+            "product_url": "/products/organic-multivitamin-with-minerals",
+            "review_text": "\"I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost. I'll continue ordering it along with several other Global Healing supplements. They've earned my trust.\"",
+            "author": "Caren R.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Multivitamin with Minerals"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -484,6 +496,7 @@
         "review_card_GA4x7y",
         "review_card_YGH6qG",
         "review_card_VbBzif",
+        "review_card_hXgypq",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
