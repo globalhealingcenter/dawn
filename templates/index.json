@@ -336,6 +336,18 @@
             "heading_span": "for Itself."
           }
         },
+        "review_card_CwQnDD": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Ultimate Probiotic",
+            "product_url": "/products/probiotic",
+            "review_text": "\"I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on track. I'm truly grateful.\"",
+            "author": "Léonor N.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Ultimate Probiotic"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -432,6 +444,7 @@
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji",
         "consistency_wellness_QY9M6U",
         "static_reviews_carousel_yURM78",
+        "review_card_CwQnDD",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
