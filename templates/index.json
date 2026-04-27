@@ -264,6 +264,19 @@
             "link": "/pages/quality-purity"
           }
         },
+        "quiz_cta_U8Yhf4": {
+          "type": "quiz_cta",
+          "settings": {
+            "background": "shopify://shop_images/Quiz-section-bg.jpg",
+            "background_mobile": "shopify://shop_images/Quiz-section-bg.jpg",
+            "text_color": "#f9f2e8",
+            "heading_1": "Find Your",
+            "heading_2": "Starting Point",
+            "content": "<p><strong>Not sure where to begin? </strong><br/>Our guided quiz helps you find a thoughtful <br/>starting point for your healing journey.</p>",
+            "button_text": "Take the Quiz",
+            "button_url": ""
+          }
+        },
         "oxy_powder_hero_Ee7FXg": {
           "type": "oxy_powder_hero",
           "settings": {
@@ -414,6 +427,7 @@
         "health_goal_link_BYHWpJ",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
+        "quiz_cta_U8Yhf4",
         "oxy_powder_hero_Ee7FXg",
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji",
         "consistency_wellness_QY9M6U",
