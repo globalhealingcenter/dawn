@@ -44,7 +44,7 @@
             "banner_1_mobile_image": "shopify://shop_images/040926-veritree-homepage-banner-mobile.jpg",
             "banner_1_mobile_video": "",
             "banner_1_url": "shopify://pages/veritree",
-            "banner_1_visible": false,
+            "banner_1_visible": true,
             "banner_1_order": 1,
             "banner_1_start_date": "",
             "banner_1_end_date": "",
