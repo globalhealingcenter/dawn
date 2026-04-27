@@ -301,7 +301,7 @@ div.huk_menu_submenu_tab_image ul li a {
     display: block !important;
     transition: transform 0.38s ease !important;
     min-width: 100% !important;
-    border-radius: 10px !important;
+    border-radius: 14px !important;
 }
 
 .header__inline-menu .huk_menu_image--above .huk_menu_item_text {
