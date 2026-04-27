@@ -214,7 +214,16 @@
           "settings": {
             "title": "Brain & Cognitive Health",
             "url": "/collections/brain-cognitive-health",
-            "column": "1",
+            "column": "2",
+            "hide_on_mobile": false
+          }
+        },
+        "health_goal_link_Q9gVgm": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Hormones & Thyroid",
+            "url": "/collections/hormones-thyroid",
+            "column": "2",
             "hide_on_mobile": false
           }
         },
@@ -382,6 +391,7 @@
         "health_goal_link_cYQhVY",
         "health_goal_link_P3EFUR",
         "health_goal_link_Mbyyi8",
+        "health_goal_link_Q9gVgm",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
