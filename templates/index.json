@@ -227,6 +227,15 @@
             "hide_on_mobile": false
           }
         },
+        "health_goal_link_x3nRQx": {
+          "type": "health_goal_link",
+          "settings": {
+            "title": "Stress, Sleep & Mood",
+            "url": "/collections/sleep-stress-mood",
+            "column": "2",
+            "hide_on_mobile": false
+          }
+        },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "disabled": true,
@@ -392,6 +401,7 @@
         "health_goal_link_P3EFUR",
         "health_goal_link_Mbyyi8",
         "health_goal_link_Q9gVgm",
+        "health_goal_link_x3nRQx",
         "rebuy_personalization_engine_rebuy_widget_CadKRH",
         "e10c7322-7eab-438a-a4fb-087f5dca4764",
         "oxy_powder_hero_Ee7FXg",
