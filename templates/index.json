@@ -396,6 +396,18 @@
             "meta_product": "Multivitamin with Minerals"
           }
         },
+        "review_card_MB8mDg": {
+          "type": "review_card",
+          "settings": {
+            "product_name": "Oxy-Powder®",
+            "product_url": "/products/oxy-powder",
+            "review_text": "\"I used to get sick after eating greasy foods. Now I take Oxy-Powder and don't suffer. When I feel bloated, it feels like I've done a cleanse. I can't stand to be without it.\"",
+            "author": "Nilsa G.",
+            "star_rating": 5,
+            "verified_buyer_text": "Verified Buyer",
+            "meta_product": "Oxy-Powder®"
+          }
+        },
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608": {
           "type": "journey",
           "disabled": true,
@@ -497,6 +509,7 @@
         "review_card_YGH6qG",
         "review_card_VbBzif",
         "review_card_hXgypq",
+        "review_card_MB8mDg",
         "0fcf3824-da9b-4fdc-b3ea-e0fe6b834608",
         "f6b3c029-5d02-4e58-b13b-d168889906a5",
         "8bb9f77b-9600-4aa3-aaea-c66afd3693ea",
