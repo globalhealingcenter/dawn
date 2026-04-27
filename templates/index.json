@@ -215,7 +215,7 @@
             "title": "Brain & Cognitive Health",
             "url": "/collections/brain-cognitive-health",
             "column": "2",
-            "hide_on_mobile": false
+            "hide_on_mobile": true
           }
         },
         "health_goal_link_Q9gVgm": {
