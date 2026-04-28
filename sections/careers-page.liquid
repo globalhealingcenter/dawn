@@ -216,9 +216,7 @@
     try {
       const res = await fetch(PROXY_URL);
       if (!res.ok) throw new Error('Network error');
-      const data = await res.json();
-      const parsed = JSON.parse(data.contents);
-      // V2 API wraps jobs in { jobs: [...] }
+      const parsed = await res.json();
       allJobs = parsed.jobs || parsed || [];
       populateFilters();
       renderJobs(allJobs);
