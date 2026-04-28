@@ -49,6 +49,7 @@ div.huk_menu_submenu.huk_menu_submenu_type_tab.huk_menu_submenu--desktop {
 div.huk_menu_submenu.huk_menu_submenu_type_tab.huk_menu_submenu--desktop *:not(.huk_menu_image):not(.huk_menu_image *) {
     text-decoration: none !important;
     border-bottom: none !important;
+    font-weight: 400 !important;
 }
 
 /* --- LEFT COLUMN / tab control --- */
