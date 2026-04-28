@@ -145,7 +145,7 @@ a.huk_menu_item_link[title="Take the Quiz"] span.huk_menu_item_text {
     font-weight: 400 !important;
 }
 
-.marketing-banners img {
+.huk_menu_submenu--desktop .huk_menu_item_link:has(.marketing-banners)+ul.huk_menu_submenu img {
     object-fit: cover !important;
 }
 
