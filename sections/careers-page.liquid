@@ -1,4 +1,4 @@
-{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
+{% comment %} {{ 'section-rich-text.css' | asset_url | stylesheet_tag }}
 
 <style>
   .careers-hero {
@@ -305,4 +305,37 @@
   }
 
   fetchJobs();
-</script>
+</script> {% endcomment %}
+
+
+<style>
+  .careers-wrapper {
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .careers-iframe {
+    width: 100%;
+    height: 900px;
+    border: none;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .careers-iframe {
+      height: 700px;
+    }
+  }
+</style>
+
+<div class="careers-wrapper">
+  {{ page.content }}
+  <iframe 
+    class="careers-iframe"
+    src="https://recruiting.paylocity.com/recruiting/jobs/All/67d4bd01-0e39-418f-9ae8-96a5867061ca/Global-Healing-Center-LP"
+    title="Global Healing Careers"
+    loading="lazy"
+    allowfullscreen>
+  </iframe>
+</div>
