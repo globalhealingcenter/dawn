@@ -142,7 +142,7 @@ a.huk_menu_item_link[title="Take the Quiz"] span.huk_menu_item_text {
     color: #163a24 !important;
     text-align: center !important;
     width: 100% !important;
-    font-weight: 700 !important;
+    font-weight: 400 !important;
 }
 
 a.huk_menu_item_link[title="Take the Quiz"]:hover {
