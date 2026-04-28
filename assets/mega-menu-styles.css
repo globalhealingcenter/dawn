@@ -145,6 +145,10 @@ a.huk_menu_item_link[title="Take the Quiz"] span.huk_menu_item_text {
     font-weight: 400 !important;
 }
 
+.marketing-banners img {
+    object-fit: cover !important;
+}
+
 a.huk_menu_item_link[title="Take the Quiz"]:hover {
     background: #cca72d !important;
     filter: brightness(1.08) !important;
