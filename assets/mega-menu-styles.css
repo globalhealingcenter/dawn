@@ -49,7 +49,6 @@ div.huk_menu_submenu.huk_menu_submenu_type_tab.huk_menu_submenu--desktop {
 div.huk_menu_submenu.huk_menu_submenu_type_tab.huk_menu_submenu--desktop *:not(.huk_menu_image):not(.huk_menu_image *) {
     text-decoration: none !important;
     border-bottom: none !important;
-    font-weight: 400 !important;
 }
 
 /* --- LEFT COLUMN / tab control --- */
@@ -350,6 +349,10 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
 
 .huk_menu_item_submenu_type_flyout .huk_menu_submenu li a {
     border-left: 2px solid transparent !important;
+}
+
+div.huk_menu_submenu_tab_content li.huk_menu_item ul.huk_menu_submenu li a.huk_menu_item_link span.huk_menu_item_text {
+    font-weight: 400 !important;
 }
 
 .huk_menu_submenu_type_flyout .huk_menu_item_link span {
