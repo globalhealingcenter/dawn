@@ -353,9 +353,9 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
 }
 
 .huk_menu_submenu_type_flyout .huk_menu_item_link span {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    color: #F9F2E8 !important;
     transition: color 0.15s ease !important;
     text-decoration: none !important;
 }
