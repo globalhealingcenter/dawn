@@ -398,6 +398,17 @@ body.overflow-hidden-tablet {
 
 
 @media (max-width: 989px) {
+    .huk_menu_image img {
+        height: auto !important;
+    }
+
+    a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
+        padding: 0 !important;
+    }
+
+    a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
+        width: 100%;
+    }
 
     .menu-drawer__localization.header-localization,
     .menu-drawer .list-social {
@@ -407,7 +418,7 @@ body.overflow-hidden-tablet {
     .huk_menu_item_link .huk_menu_item_text,
     .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account {
         font-weight: 400 !important;
-        font-family: var(--gh-font-primary) !important;
+        font-family: var(--gh-font-secondary) !important;
         color: rgba(var(--color-foreground), .75) !important;
     }
 
