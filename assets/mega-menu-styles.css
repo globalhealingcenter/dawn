@@ -297,8 +297,8 @@ div.huk_menu_submenu_tab_image ul li a {
 
 .huk_menu_image img {
     width: 100% !important;
-    height: 225px !important;
-    object-fit: contain !important;
+    height: 285px !important;
+    object-fit: cover !important;
     object-position: left !important;
     padding: 0px !important;
     margin: 0 !important;
@@ -309,7 +309,13 @@ div.huk_menu_submenu_tab_image ul li a {
 }
 
 .header__inline-menu .huk_menu_image--above .huk_menu_item_text {
-    margin-top: 5px !important;
+    margin-top: 10px !important;
+}
+
+div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text.trending-images,
+div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text.marketing-banners {
+    font-size: 20px !important;
+    font-weight: 700 !important;
 }
 
 div.huk_menu_submenu_tab_image ul li a:hover .huk_menu_image img {
