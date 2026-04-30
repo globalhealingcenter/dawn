@@ -414,7 +414,6 @@ body.overflow-hidden-tablet {
     }
 
     a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
-        padding: 0 !important;
         gap: 0;
     }
 
