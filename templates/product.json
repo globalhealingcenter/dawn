@@ -71,7 +71,7 @@
         "custom_liquid_TxJtfK": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div style=\"margin-top:12px;font-size:12px;line-height:1.4;color:#545454;\">\n  Pay with <strong>HSA/FSA funds</strong> through Truemed.\n  <a href=\"https://app.truemed.com/qualify/tm_qual_0osddr2w2v\" \n     target=\"_blank\" \n     style=\"color:#21472D;font-weight:600;text-decoration:underline;\">\n     Check eligibility\n  </a>.\n</div>"
+            "custom_liquid": "<div style=\"margin-top:12px;font-size:12px;line-height:1.4;color:#545454;\">\n  Pay with <strong>HSA/FSA funds</strong> through Truemed.\n  <a href=\"https://app.truemed.com/qualify/tm_qual_0osddr2w2v\" \n     target=\"_blank\" \n     style=\"color:#21472D;font-weight:600;text-decoration:underline;\">\n     Learn more\n  </a>.\n</div>"
           }
         },
         "buy_buttons": {
@@ -91,7 +91,7 @@
           }
         },
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
@@ -110,12 +110,6 @@
             "discount_background_color": "#f9f2e8",
             "discount_padding_y": 10,
             "discount_padding_x": 10,
-            "badge_background_color": "#00260f",
-            "badge_color": "#ffffff",
-            "badge_icon_color": "#ffffff",
-            "badge_border_radius": 48,
-            "badge_font_size": 12,
-            "badge_icon_size": 10,
             "discount_title_color": "#000000",
             "discount_price_color": "#404040",
             "discount_title_font_size": 14,
@@ -290,7 +284,7 @@
       "type": "apps",
       "blocks": {
         "tolstoy_shoppable_video_quiz_stories_block_gCYGWz": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
