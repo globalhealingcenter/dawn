@@ -147,6 +147,8 @@
         {% comment %} Hero carousel - each slot has its own schedule (start/end date). Section always shows; slots display when today is in range or both dates blank. {% endcomment %}
         {% assign now_ts = 'now' | date: '%s' | plus: 0 %}
         {% assign slide_count = 0 %}
+        {% assign fallback_slot_num = 0 %}
+        {% assign should_render_fallback_banner = false %}
         {% for target_order in (1..4) %}
           {% for slot_num in (1..4) %}
             {% assign order_key = 'banner_' | append: slot_num | append: '_order' %}
@@ -184,10 +186,17 @@
               {% if visible and has_media and slot_in_range %}
                 {% assign slide_count = slide_count | plus: 1 %}
               {% endif %}
+              {% if fallback_slot_num == 0 and has_media and slot_in_range %}
+                {% assign fallback_slot_num = slot_num %}
+              {% endif %}
               {% break %}
             {% endif %}
           {% endfor %}
         {% endfor %}
+        {% if slide_count == 0 and block.settings.banner_force_fallback_when_empty and fallback_slot_num > 0 %}
+          {% assign should_render_fallback_banner = true %}
+          {% assign slide_count = 1 %}
+        {% endif %}
 
         {% if slide_count > 0 %}
           <section
@@ -406,7 +415,18 @@
                         %}
                           {% assign has_media = true %}
                         {% endif %}
+                        {% assign render_slot = false %}
                         {% if visible and has_media and slot_in_range %}
+                          {% assign render_slot = true %}
+                        {% endif %}
+                        {% if should_render_fallback_banner
+                          and slot_num == fallback_slot_num
+                          and has_media
+                          and slot_in_range
+                        %}
+                          {% assign render_slot = true %}
+                        {% endif %}
+                        {% if render_slot %}
                           {% if slide_idx == 0 %}
                             {% assign is_first = true %}
                           {% else %}
@@ -1022,6 +1042,13 @@
           "step": 1,
           "label": "Star rating",
           "default": 5
+        },
+        {
+          "type": "checkbox",
+          "id": "banner_force_fallback_when_empty",
+          "label": "Fallback to first scheduled banner when all slots are hidden",
+          "default": true,
+          "info": "Prevents blank homepage hero for market-specific settings by showing the first in-range slot with media."
         },
         {
           "type": "header",
