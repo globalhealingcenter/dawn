@@ -218,7 +218,6 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
 
 div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text {
     font-size: 17px !important;
-    font-weight: 500 !important;
     color: rgba(255, 255, 255, 0.8) !important;
     transition: color 0.15s ease !important;
     text-align: left !important;
