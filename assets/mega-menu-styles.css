@@ -415,10 +415,11 @@ body.overflow-hidden-tablet {
 
     a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
         padding: 0 !important;
+        gap: 0;
     }
 
     a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
-        width: 100%;
+        width: 100% !important;
     }
 
     .menu-drawer__localization.header-localization,
