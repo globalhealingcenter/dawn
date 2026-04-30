@@ -402,7 +402,7 @@ body.overflow-hidden-tablet {
     .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link+ul.huk_menu_submenu--mobile {
         background: rgba(0, 0, 0, .05) !important;
         border-radius: 14px;
-        width: calc(100% - 14px);
+        width: calc(100% - 31px);
     }
 
     .huk_menu_item_mobile.huk_menu_item_active>.huk_menu_item_link {
