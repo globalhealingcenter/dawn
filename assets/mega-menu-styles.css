@@ -142,11 +142,7 @@ a.huk_menu_item_link[title="Take the Quiz"] span.huk_menu_item_text {
     color: #163a24 !important;
     text-align: center !important;
     width: 100% !important;
-    font-weight: 400 !important;
-}
-
-.huk_menu_submenu--desktop .huk_menu_item_link:has(.marketing-banners)+ul.huk_menu_submenu img {
-    object-fit: cover !important;
+    font-weight: 700 !important;
 }
 
 a.huk_menu_item_link[title="Take the Quiz"]:hover {
@@ -218,6 +214,7 @@ div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_men
 
 div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text {
     font-size: 17px !important;
+    font-weight: 500 !important;
     color: rgba(255, 255, 255, 0.8) !important;
     transition: color 0.15s ease !important;
     text-align: left !important;
@@ -287,7 +284,7 @@ div.huk_menu_submenu_tab_image ul li a {
 
 /* rounded product image card */
 .huk_menu_image {
-    border-radius: 14px !important;
+    border-radius: 10px !important;
     overflow: hidden !important;
     padding: 0 !important;
     width: 100%;
@@ -296,25 +293,20 @@ div.huk_menu_submenu_tab_image ul li a {
 
 .huk_menu_image img {
     width: 100% !important;
-    height: 15vw !important;
-    object-fit: cover !important;
-    object-position: left !important;
+    height: 225px !important;
+    object-fit: contain !important;
+    object-position: center !important;
     padding: 0px !important;
     margin: 0 !important;
     display: block !important;
     transition: transform 0.38s ease !important;
     min-width: 100% !important;
-    border-radius: 14px !important;
+    border-radius: 10px !important;
 }
 
 .header__inline-menu .huk_menu_image--above .huk_menu_item_text {
-    margin-top: 10px !important;
-}
-
-div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text.trending-images,
-div.huk_menu_submenu_tab_content li:not(.huk_menu_item_display_header)>a.huk_menu_item_link span.huk_menu_item_text.marketing-banners {
-    font-size: 20px !important;
-    font-weight: 700 !important;
+    display: flex !important;
+    justify-content: center;
 }
 
 div.huk_menu_submenu_tab_image ul li a:hover .huk_menu_image img {
@@ -360,14 +352,10 @@ ul.huk_menu_submenu.huk_menu_submenu_type_flyout.huk_menu_submenu_flyout_positio
     border-left: 2px solid transparent !important;
 }
 
-div.huk_menu_submenu_tab_content li.huk_menu_item ul.huk_menu_submenu li a.huk_menu_item_link span.huk_menu_item_text {
-    font-weight: 400 !important;
-}
-
 .huk_menu_submenu_type_flyout .huk_menu_item_link span {
-    font-size: 17px !important;
-    font-weight: 400 !important;
-    color: #F9F2E8 !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.75) !important;
     transition: color 0.15s ease !important;
     text-decoration: none !important;
 }
@@ -398,16 +386,13 @@ body.overflow-hidden-tablet {
 
 
 @media (max-width: 989px) {
-    .huk_menu_image img {
-        height: auto !important;
+    .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link+ul.huk_menu_submenu--mobile {
+        background: rgba(0, 0, 0, .05) !important;
+        border-radius: 14px;
     }
 
-    a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu {
-        padding: 0 !important;
-    }
-
-    a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
-        width: 100%;
+    .huk_menu_item_mobile.huk_menu_item_active>.huk_menu_item_link {
+        background: none !important
     }
 
     .menu-drawer__localization.header-localization,
@@ -418,7 +403,7 @@ body.overflow-hidden-tablet {
     .huk_menu_item_link .huk_menu_item_text,
     .menu-drawer__utility-links:has(.menu-drawer__localization) .menu-drawer__account {
         font-weight: 400 !important;
-        font-family: var(--gh-font-secondary) !important;
+        font-family: var(--gh-font-primary) !important;
         color: rgba(var(--color-foreground), .75) !important;
     }
 
