@@ -39,6 +39,7 @@
             "hero_review_stars_text": "5-Star Reviews",
             "hero_show_stars": true,
             "hero_star_rating": 5,
+            "banner_force_fallback_when_empty": true,
             "banner_1_desktop_image": "shopify://shop_images/040626-veritree-homepage-banner.jpg",
             "banner_1_desktop_video": "",
             "banner_1_mobile_image": "shopify://shop_images/040926-veritree-homepage-banner-mobile.jpg",
@@ -83,7 +84,6 @@
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "108417",
@@ -595,12 +595,6 @@
             "discount_background_color": "#e7f5ee",
             "discount_padding_y": 10,
             "discount_padding_x": 10,
-            "badge_background_color": "#119e52",
-            "badge_color": "#ffffff",
-            "badge_icon_color": "#ffffff",
-            "badge_border_radius": 48,
-            "badge_font_size": 12,
-            "badge_icon_size": 10,
             "discount_title_color": "#000000",
             "discount_price_color": "#404040",
             "discount_title_font_size": 14,
