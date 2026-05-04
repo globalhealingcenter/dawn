@@ -10,6 +10,20 @@
   let gh_404 = (() => {
 
     const url = new URL(window.location);
+
+    /** Product handle from pathname (locale-prefixed /en/products/slug, encoded segments, etc.). Query string is ignored. */
+    const getProductHandleFromUrl = (locationUrl) => {
+      const segments = locationUrl.pathname.split('/').filter(Boolean);
+      const productsIndex = segments.findIndex((segment) => segment.toLowerCase() === 'products');
+      if (productsIndex === -1 || !segments[productsIndex + 1]) return '';
+
+      try {
+        return decodeURIComponent(segments[productsIndex + 1]).toLowerCase();
+      } catch (e) {
+        return segments[productsIndex + 1].toLowerCase();
+      }
+    };
+
     let replace_container;
     let new_container;
     let product_header_left;
@@ -117,7 +131,7 @@
         preloaded = true;
       }
 
-      const product_url = url.pathname.replace('/products/', '').replace('/', '');
+      const product_url = getProductHandleFromUrl(url);
 
       const product = gh_products[product_url];
       if( !product ) preloaded = true;
@@ -172,8 +186,9 @@
       product_content_container = document.getElementById('gh-product-content-container-404');
       localization_form = document.getElementById('gh-localization-form');
 
-      const product_url = url.pathname.replace('/products/', '').replace('/', '');
+      const product_url = getProductHandleFromUrl(url);
       const product = gh_products[product_url];
+      if( !product ) return;
 
       storage.storeUrl(product_url);
 
