@@ -406,7 +406,7 @@ body.overflow-hidden-tablet {
         background: #21472D !important;
     }
 
-    .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link:has(.open-on-mobile)+span.huk_menu_indicator {
+    .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link>.open-on-mobile+span.huk_menu_indicator {
         display: none !important;
     }
 
