@@ -406,6 +406,10 @@ body.overflow-hidden-tablet {
         background: #21472D !important;
     }
 
+    .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link:has(.open-on-mobile)+span.huk_menu_indicator {
+        display: none !important;
+    }
+
     .huk_menu_item_mobile .huk_menu_item_active>.huk_menu_item_link+ul.huk_menu_submenu--mobile .huk_menu_item_link+ul.huk_menu_submenu--mobile {
         background: rgba(0, 0, 0, .05) !important;
         border-radius: 14px;
