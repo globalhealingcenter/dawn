@@ -1,0 +1,85 @@
+{{ 'quiz-cta-section.css' | asset_url | stylesheet_tag }}
+
+{% assign text_color = block.settings.text_color | default: '#231f20' %}
+
+<style>
+  .quiz-cta-section--{{ block.id }} .quiz-cta__heading,
+  .quiz-cta-section--{{ block.id }} .quiz-cta__heading-plain,
+  .quiz-cta-section--{{ block.id }} .quiz-cta__heading-em,
+  .quiz-cta-section--{{ block.id }} .quiz-cta__body,
+  .quiz-cta-section--{{ block.id }} .quiz-cta__body p {
+    color: {{ text_color }};
+  }
+  .quiz-cta-section--{{ block.id }} .quiz-cta__button {
+    color: {{ text_color }};
+    border-color: {{ text_color }};
+  }
+  .quiz-cta-section--{{ block.id }} .quiz-cta__button:hover {
+    color: {{ text_color }};
+  }
+</style>
+
+<section class="quiz-cta-section quiz-cta-section--{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="quiz-cta__bg-wrap">
+    {% if block.settings.background != blank or block.settings.background_mobile != blank %}
+      <picture>
+        {% if block.settings.background_mobile != blank %}
+          <source
+            media="(max-width: 749px)"
+            srcset="{{ block.settings.background_mobile | image_url: width: 800 }}"
+          >
+        {% endif %}
+        {% if block.settings.background != blank %}
+          <img
+            src="{{ block.settings.background | image_url: width: 1920 }}"
+            alt=""
+            class="quiz-cta__bg-img"
+            width="1920"
+            height="910"
+            loading="lazy"
+          >
+        {% elsif block.settings.background_mobile != blank %}
+          <img
+            src="{{ block.settings.background_mobile | image_url: width: 1920 }}"
+            alt=""
+            class="quiz-cta__bg-img"
+            width="1920"
+            height="910"
+            loading="lazy"
+          >
+        {% endif %}
+      </picture>
+    {% endif %}
+    {% if block.settings.background == blank and block.settings.background_mobile == blank %}
+      <div class="quiz-cta__bg-placeholder"></div>
+    {% endif %}
+  </div>
+
+  <div class="quiz-cta__inner page-width">
+    <div class="quiz-cta__content">
+      {% if block.settings.heading_1 != blank or block.settings.heading_2 != blank %}
+        <h2 class="quiz-cta__heading font-proxima">
+          {% if block.settings.heading_1 != blank %}
+            <span class="quiz-cta__heading-plain">{{ block.settings.heading_1 }}</span>
+          {% endif %}
+          {% if block.settings.heading_2 != blank %}
+            <span class="quiz-cta__heading-em">{{ block.settings.heading_2 }}</span>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.content != blank %}
+        <div class="quiz-cta__body font-proxima">{{ block.settings.content }}</div>
+      {% endif %}
+
+      {% if block.settings.button_text != blank %}
+        <a
+          href="{{ block.settings.button_url | default: '#' }}"
+          class="quiz-cta__button button"
+        >
+          {{ block.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>

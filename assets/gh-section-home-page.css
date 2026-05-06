@@ -1,3 +1,7 @@
+main#MainContent {
+    overflow-x: hidden;
+}
+
 .ghd--foundation h2.eyebrow span {
     color: #fff;
 }
@@ -98,7 +102,7 @@ section h3.eyebrow span {
 
 /* Hero Carousel (homepage banners) - 1430×475px, fixed aspect-ratio for CLS */
 .ghd--hero-carousel {
-    padding-top: 4rem;
+    padding-top: 2.5rem;
     padding-bottom: 4rem;
 }
 
@@ -385,7 +389,7 @@ section h3.eyebrow span {
     }
 
     .ghd--hero-carousel {
-        padding-top: 60px;
+        padding-top: 26px;
     }
 
     .ghd--hero-carousel__stars {
@@ -917,16 +921,14 @@ section h3.eyebrow span {
         padding-right: 5rem;
     }
 
-    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
-        padding-right: 0;
-    }
-
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
     }
 
-
+    .ghd--logos:hover .ghd--logos-track {
+        animation-play-state: paused;
+    }
 }
 
 @media (max-width: 800px) {
@@ -982,13 +984,17 @@ section h3.eyebrow span {
         padding-right: 5rem;
     }
 
-    .ghd--logos .ghd--logos-track .ghd--logos-set:last-child {
-        padding-right: 0;
-    }
-
     .ghd--logos .ghd--flex.ghd--logos-track {
         justify-content: flex-start;
         gap: 0;
+    }
+
+    .ghd--logos:hover .ghd--logos-track {
+        animation-play-state: paused;
+    }
+
+    .ghd--logos.ghd--logos-touch .ghd--logos-track {
+        animation: none;
     }
 }
 
@@ -1270,13 +1276,16 @@ section h3.eyebrow span {
 
 /* Extra space for Tolstoy UGC title on the homepage only */
 .gh--home-page [class*="tolstoy-carousel-title"] {
-    margin-top: 2rem !important;
-    /* = 32px if 1rem = 16px */
+    margin-top: 0 !important;
+    top: 3rem;
+    position: relative;
 }
 
 /* (Optional) add breathing room above the whole carousel */
 .gh--home-page [class*="tolstoy-carousel-container"] {
     padding-top: 1rem !important;
+    z-index: 9;
+    position: relative;
 }
 
 
@@ -1293,6 +1302,16 @@ section h3.eyebrow span {
 .gh--home-page [class*="tolstoy-carousel-title"] span {
     font-family: 'miller-display' !important;
     font-style: italic;
+}
+
+@media (max-width: 1024px) {
+    .section-footer-signup>div {
+        padding-bottom: 0;
+    }
+
+    .color-accent-1.gradient>div {
+        padding-top: 20px;
+    }
 }
 
 @media screen and (max-width: 768px) {

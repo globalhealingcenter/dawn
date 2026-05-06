@@ -1,5 +1,14 @@
 {{ 'shop-by-health-goals.css' | asset_url | stylesheet_tag }}
 
+{% assign link_blocks = section.blocks | where: 'type', 'health_goal_link' %}
+{% assign col1_links = link_blocks | where: 'settings.column', '1' %}
+{% assign col2_links = link_blocks | where: 'settings.column', '2' %}
+
+{% assign has_links = false %}
+{% if link_blocks.size > 0 %}
+  {% assign has_links = true %}
+{% endif %}
+
 <section class="health-goals-section" {{ block.shopify_attributes }}>
   <img src="{{ 'section-bg-texture.png' | asset_url }}" alt="Section Background" class="health-goals-section__bg">
   <div class="health-goals__inner">
@@ -10,21 +19,39 @@
 
     <div class="health-goals__grid">
       <div class="health-goals__column">
-        <a href="/collections/gut-digestion" class="health-goals__link health-goals__link--active">Gut & Digestion</a>
-        <a href="/collections/longevity-cellular-health" class="health-goals__link">Longevity & Cellular Health</a>
-        <a href="/collections/cleanse-detox-supplements" class="health-goals__link">Detox & Cleansing</a>
-        <a href="/collections/immune-support" class="health-goals__link">Immune Support</a>
+        {% if has_links %}
+          {% for link_block in section.blocks %}
+            {% if link_block.type == 'health_goal_link' and link_block.settings.column == '1' %}
+              <a
+                href="{{ link_block.settings.url | default: '#' }}"
+                class="health-goals__link{% if forloop.first %} health-goals__link--active{% endif %}{% if link_block.settings.hide_on_mobile %} mobile--hide{% endif %}"
+              >
+                {{ link_block.settings.title }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+
+        {% endif %}
       </div>
 
       <div class="health-goals__divider"></div>
 
-      <div class="health-goals__column health-goals__column">
-        <a href="/collections/brain-cognitive-health" class="health-goals__link mobile--hide"
-          >Brain & Cognitive Health</a
-        >
-        <a href="/collections/hormones-thyroid" class="health-goals__link mobile--hide">Hormones & Thyroid</a>
-        <a href="/collections/sleep-stress-mood" class="health-goals__link">Stress, Sleep & Mood</a>
-        <a href="/collections/energy-performance" class="health-goals__link mobile--hide">Energy & Performance</a>
+      <div class="health-goals__column">
+        {% if has_links %}
+          {% for link_block in section.blocks %}
+            {% if link_block.type == 'health_goal_link' and link_block.settings.column == '2' %}
+              <a
+                href="{{ link_block.settings.url | default: '#' }}"
+                class="health-goals__link{% if forloop.first %} health-goals__link--active{% endif %}{% if link_block.settings.hide_on_mobile %} mobile--hide{% endif %}"
+              >
+                {{ link_block.settings.title }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+
+        {% endif %}
       </div>
     </div>
 

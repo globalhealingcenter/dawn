@@ -11,7 +11,7 @@
 
   <!-- Product Page Widget -->
 {% if product %}
-  <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+  <!-- <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
 
 <!-- Add-on Widget -->
   <div data-rebuy-id="115516" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
@@ -1028,28 +1028,10 @@
                   </a>
 
 <!-- Beauty Shot Image Code END -->
-    
-    <button
-                                class="rebuy-button"
-                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
-                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
-                                v-bind:alt="'Add ' + product.title + ' to Cart'"
-                                v-on:click="addToCart(product)"
-                                type="button">
-                                    <span v-html="buttonLabel(product)"></span>
-                            </button>
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
-                            <div class="rebuy-product-review" v-if="hasProductReviews(product)">
-                                <span class="rebuy-star-rating">
-                                    <span class="rebuy-star-rating-background"></span>
-                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
-                                </span>
-                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
-                            </div>
     
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
@@ -1060,6 +1042,16 @@
                                     <span class="rebuy-money" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
                                 </div>
                             </div>
+
+                             <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:alt="'Add ' + product.title + ' to Cart'"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
     
                             <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
                                 <label class="rebuy-checkbox-label">
@@ -1260,27 +1252,10 @@
                                 <img v-else class="primary-image" v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="'View ' + product.title">
                         </a>
    <!-- Beauty Shot Image Code END -->
-    
-    <button
-                                class="rebuy-button"
-                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
-                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
-                                v-bind:alt="'Add ' + product.title + ' to Cart'"
-                                v-on:click="addToCart(product)"
-                                type="button">
-                                    <span v-html="buttonLabel(product)"></span>
-                            </button>
+
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <div class="rebuy-product-review" v-if="hasProductReviews(product)">
-                                <span class="rebuy-star-rating">
-                                    <span class="rebuy-star-rating-background"></span>
-                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
-                                </span>
-                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
-                            </div>
-                            <div class="rebuy-tagline" v-if="product?.metafields?.gh_product?.data?.tagline"v-html="product?.metafields?.gh_product?.data?.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
     
                             <div class="rebuy-product-price">
@@ -1292,6 +1267,16 @@
                                     <span class="rebuy-money" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
                                 </div>
                             </div>
+
+                            <button
+                                class="rebuy-button"
+                                v-bind:class="{ working: (product.status != 'ready' && product.status != 'selecting') }"
+                                v-bind:disabled="!(variantAvailable(product.selected_variant)) || (product.status != 'ready' && product.status != 'selecting')"
+                                v-bind:alt="'Add ' + product.title + ' to Cart'"
+                                v-on:click="addToCart(product)"
+                                type="button">
+                                    <span v-html="buttonLabel(product)"></span>
+                            </button>
     
                             <div class="subscription-checkbox" v-if="showSubscriptionOptions(product)">
                                 <label class="rebuy-checkbox-label">

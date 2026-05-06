@@ -1,0 +1,117 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+    position: relative;
+    top: 12vw;
+  }
+  .footer-signup-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    width: 87.81vw;
+    max-width: 140.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+  }
+
+  @media (max-width: 1024px){
+    .footer-signup-{{ section.id }} {
+      width: 100%;
+      max-width: 100%;
+    }
+    #shopify-section-{{ section.id }} {
+      top: 0px;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign footer_signup_bg = section.settings.background_image
+  if footer_signup_bg != blank
+    assign footer_signup_bg_url = footer_signup_bg | image_url: width: 1920
+  else
+    assign footer_signup_bg_url = ''
+  endif
+-%}
+<div class="footer-signup-{{ section.id }}">
+  {% render 'gh-block-footer-signup', section: section, background_image_url: footer_signup_bg_url %}
+</div>
+
+{% schema %}
+{
+  "name": "Footer Signup",
+  "tag": "section",
+  "class": "section-footer-signup",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Join the"
+    },
+    {
+      "type": "text",
+      "id": "heading_em",
+      "label": "Heading (italic part)",
+      "default": "Healing"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Thoughtful guidance, educational articles, and updates to support your journey."
+    },
+    {
+      "type": "text",
+      "id": "form_action",
+      "label": "Form action URL",
+      "default": "https://hooks.zapier.com/hooks/catch/1153851/byx96rz/"
+    },
+    {
+      "type": "text",
+      "id": "privacy_url",
+      "label": "Privacy Policy URL",
+      "default": "/pages/privacy-policy"
+    },
+    {
+      "type": "text",
+      "id": "stay_connected_text",
+      "label": "Stay connected text",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer Signup"
+    }
+  ]
+}
+{% endschema %}

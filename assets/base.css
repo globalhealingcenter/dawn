@@ -3701,6 +3701,10 @@ ul.related_post.wp_rp li {
 
 
 /* Tolstoy homepage styling revisions */
+tolstoy-carousel.tolstoy-carousel {
+  z-index: 1;
+  position: relative;
+}
 
 .tolstoy-product-tile-button svg rect {
   fill: #21472D !important;
@@ -3712,15 +3716,38 @@ ul.related_post.wp_rp li {
 
 .tolstoy-product-tile-title {
   font-family: var(--gh-font-secondary) !important;
+  font-weight: 700 !important;
 }
 
-.tolstoy-product-content {
-  overflow: visible !important;
-  background-color: #F9F2E8 !important;
-
+.tolstoy-carousel-video-container {
+  height: 100% !important;
 }
 
-.tolstoy-product-tile-image {
+img.tolstoy-product-tile-image {
+  width: 103px;
+  height: 103px;
+  object-fit: contain;
+  position: relative;
+  top: -27px;
+}
+
+img.tolstoy-product-tile-image+div {
+  padding: 0px !important;
+}
+
+img.tolstoy-product-tile-image+div>div:first-child div:last-child {
+  display: none !important;
+}
+
+img.tolstoy-product-tile-image+div>div:first-child {
+  max-height: 25px;
+}
+
+.tolstoy-product-tile>div {
+  gap: 0px;
+}
+
+/* .tolstoy-product-tile-image {
   position: absolute !important;
   padding: 10px !important;
   background: #FAECE1 !important;
@@ -3730,12 +3757,12 @@ ul.related_post.wp_rp li {
   top: -40px !important;
   left: 12px !important;
   height: unset !important;
-}
+} */
 
-.tolstoy-product-tile>div>div {
+/* .tolstoy-product-tile>div>div {
   padding-left: 12px !important;
   height: unset !important;
-}
+} */
 
 .tolstoy-product-tile-subtitle {
   color: red !important;
@@ -3746,16 +3773,26 @@ ul.related_post.wp_rp li {
 }
 
 .tolstoy-carousel-container {
-  max-width: 1060px !important;
   margin: 0 auto !important;
 }
 
 .tolstoy-product-content {
-  border-radius: 0 0 8px 8px !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  background-color: #f9f2e8 !important;
+  position: absolute !important;
+  bottom: 0px !important;
+  left: 0px !important;
+  width: 100% !important;
+  max-height: unset !important;
+  height: 89px;
+  border-bottom-left-radius: 8px !important;
+  border-bottom-right-radius: 8px !important;
+  padding: 10px 0px !important;
 }
 
 .tolstoy-carousel-video {
-  border-radius: 8px 8px 0px 0px !important;
+  border-radius: 8px !important;
 }
 
 .tolstoy-product-tile-price {
@@ -3764,16 +3801,33 @@ ul.related_post.wp_rp li {
 
 .tolstoy-carousel-videos-container {
   overflow-y: hidden !important;
+  max-width: 130rem !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.tolstoy-carousel-progress-bar-container {
+  width: 580px !important;
+  margin: 50px auto 0px;
 }
 
 .tolstoy-stories-main-container {
   width: 438px !important;
 }
 
-/* Tolstoy carousel spacing (targets any Tolstoy app block on the page) */
+/* Tolstoy carousel: constrain width and center */
 div[id^="shopify-block-"][id*="tolstoy"] {
   padding-top: 0 !important;
   padding-bottom: 72px !important;
+  max-width: 130rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.tolstoy-carousel-controls-container {
+  bottom: unset;
+  top: 16px;
 }
 
 /* Tolstoy homepage carousel spacing */
@@ -3795,6 +3849,15 @@ div[id^="shopify-block-"][id*="tolstoy"] {
     margin-bottom: 48px;
     padding-bottom: 0 !important;
   }
+
+  img.tolstoy-product-tile-image {
+    display: none !important;
+  }
+
+  .tolstoy-carousel-video-container,
+  .tolstoy-carousel-videos-container {
+    min-height: 420px !important;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3803,6 +3866,45 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   .tolstoy-carousel-tile {
     gap: 0 !important;
   }
+
+  .tolstoy-carousel-tile {
+    height: 420px !important;
+  }
+
+  .tolstoy-product-tile-title,
+  .tolstoy-product-tile-price {
+    font-size: 12px !important;
+    line-height: 15px !important;
+    text-align: center;
+  }
+
+  .tolstoy-carousel-progress-bar-container {
+    display: none !important;
+  }
+
+  .tolstoy-carousel-videos-container {
+    top: 50px;
+    z-index: 1;
+    margin-bottom: 0 !important;
+  }
+
+  .tolstoy-product-tile>div,
+  img.tolstoy-product-tile-image+div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tolstoy-product-content {
+    height: 50px;
+    min-height: 50px !important;
+  }
+
+  .tolstoy-product-tile {
+    padding: 0px !important;
+    min-height: unset !important;
+  }
+
+
 }
 
 /* Homepage: keep Rebuy aligned with the main content column (not full-bleed) */
@@ -3838,19 +3940,7 @@ div[id^="shopify-block-"][id*="tolstoy"] {
   }
 }
 
-@media (max-width: 600px) {
-  .tolstoy-carousel-videos-container {
-    top: 5rem;
-    z-index: 1;
-    margin-bottom: 0 !important;
-  }
-}
-
 @media (max-width: 450px) {
-  .tolstoy-carousel-videos-container {
-    min-height: 420px !important;
-    overflow: visible !important;
-  }
 
   body.gradient.index,
   html {

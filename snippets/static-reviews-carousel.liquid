@@ -1,7 +1,11 @@
 {% comment %}
-  Static Reviews Carousel - no schema, fully code-driven.
-  Customize heading and review data below.
+  Static Reviews Carousel - editable via theme customizer.
+  Uses review_card blocks for unlimited reviews.
 {% endcomment %}
+
+{% assign heading = block.settings.heading | default: 'Healing That Speaks' %}
+{% assign heading_span = block.settings.heading_span | default: 'for Itself.' %}
+{% assign review_blocks = section.blocks | where: 'type', 'review_card' %}
 
 <section
   class="src static-reviews-carousel"
@@ -10,7 +14,10 @@
   {% endif %}
 >
   <div class="src__inner">
-    <h2 class="src__heading font-proxima">Healing That Speaks <span class="font-miller">for Itself.</span></h2>
+    <h2 class="src__heading font-proxima">
+      {% if heading != blank %}{{ heading }}{% endif %}
+      {% if heading_span != blank %}<span class="font-miller">{{ heading_span }}</span>{% endif %}
+    </h2>
 
     <div class="src__carousel-outer">
       <div
@@ -19,155 +26,66 @@
         aria-label="Customer reviews"
         tabindex="0"
       >
-        {% comment %} Review 1 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
-          </div>
-          <h3 class="src__product font-proxima"><a href="/products/probiotic">Ultimate Probiotic</a></h3>
-          <p class="src__text font-proxima">
-            "I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and
-            Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on
-            track. I’m truly grateful."
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Léonor N. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Léonor N. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
+        {% if review_blocks.size > 0 %}
+          {% for review_block in review_blocks %}
+            {% assign prod = review_block.settings.product_name %}
+            {% assign url = review_block.settings.product_url %}
+            {% assign text = review_block.settings.review_text %}
+            {% assign author = review_block.settings.author %}
+            {% assign meta_prod = review_block.settings.meta_product %}
+            {% assign star_rating = review_block.settings.star_rating | default: 5 | at_least: 1 | at_most: 5 %}
+            {% assign verified_buyer_text = review_block.settings.verified_buyer_text | default: 'Verified Buyer' %}
 
-        {% comment %} Review 2 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
+            {% if prod != blank or text != blank %}
+              <div class="src__card" role="listitem" {{ review_block.shopify_attributes }}>
+                <div class="src__stars" aria-hidden="true">
+                  {% for star in (1..star_rating) %}
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                      <style>.s0 { fill: #cca72c }</style>
+                      <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+                    </svg>
+                  {% endfor %}
+                </div>
+                {% if prod != blank %}
+                  <h3 class="src__product font-proxima">
+                    {% if url != blank %}
+                      <a href="{{ url }}">{{ prod }}</a>
+                    {% else %}
+                      {{ prod }}
+                    {% endif %}
+                  </h3>
+                {% endif %}
+                {% if text != blank %}
+                  <p class="src__text font-proxima">{{ text }}</p>
+                {% endif %}
+                {% if author != blank %}
+                  <p class="src__meta font-proxima hide-on-mobile">
+                    {{ author }}
+                    {% if verified_buyer_text != blank %} | {{ verified_buyer_text }}{% endif %}
+                  </p>
+                  <p class="src__meta font-proxima hide-on-desktop">
+                    {{ author }}<br>
+                    {% if meta_prod != blank %}<span>{{ meta_prod }}</span>{% endif %}
+                  </p>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {% comment %} Fallback when no review_card blocks exist (e.g. after migration) {% endcomment %}
+          <div class="src__card" role="listitem">
+            <div class="src__stars" aria-hidden="true">
+              {% for star in (1..5) %}
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
+                  <style>.s0 { fill: #cca72c }</style>
+                  <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
+                </svg>
+              {% endfor %}
+            </div>
+            <h3 class="src__product font-proxima"><a href="/collections/all">Add reviews</a></h3>
+            <p class="src__text font-proxima">Add "Review card" blocks in the theme customizer to display customer reviews.</p>
           </div>
-          <h3 class="src__product font-proxima"><a href="/products/organic-black-seed-oil">Black Seed Oil</a></h3>
-          <p class="src__text font-proxima">
-            "I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint
-            stiffness in my knees. Since taking it daily, it has drastically reduced."
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Starr R. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Starr R. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
-
-        {% comment %} Review 3 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
-          </div>
-          <h3 class="src__product font-proxima"><a href="/products/calcium-disodium-edta">Calcium Disodium EDTA</a></h3>
-          <p class="src__text font-proxima">
-            "This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep
-            better and feel like I’m 25 again. You have a loyal customer now! Donna W."
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Donna W. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Donna W. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
-
-        {% comment %} Review 4 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
-          </div>
-          <h3 class="src__product font-proxima"><a href="/products/latero-flora">Latero-Flora®</a></h3>
-          <p class="src__text font-proxima">
-            "I’ve tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and
-            with celiac my gut was always off. After four months, my issues have been neutralized. This has been a
-            dramatic change. "
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Nicole P. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Nicole P. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
-
-        {% comment %} Review 5 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
-          </div>
-          <h3 class="src__product font-proxima">
-            <a href="/products/organic-multivitamin-with-minerals">Multivitamin with Minerals</a>
-          </h3>
-          <p class="src__text font-proxima">
-            "I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost.
-            I’ll continue ordering it along with several other Global Healing supplements. They’ve earned my trust. "
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Caren R. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Caren R. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
-
-        {% comment %} Review 6 {% endcomment %}
-        <div class="src__card" role="listitem">
-          <div class="src__stars" aria-hidden="true">
-            {% for i in (1..5) %}
-              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 105 99" width="105" height="99">
-                <style>
-                	.s0 { fill: #cca72c }
-                </style>
-                <path fill-rule="evenodd" class="s0" d="m52.75-0.3l12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81l12.3-37.86z"/>
-              </svg>
-            {% endfor %}
-          </div>
-          <h3 class="src__product font-proxima"><a href="/products/oxy-powder">Oxy-Powder®</a></h3>
-          <p class="src__text font-proxima">
-            "I used to get sick after eating greasy foods. Now I take Oxy-Powder and don’t suffer. When I feel bloated,
-            it feels like I’ve done a cleanse. I can’t stand to be without it."
-          </p>
-          <p class="src__meta font-proxima hide-on-mobile">Nilsa G. | Verified Buyer</p>
-          <p class="src__meta font-proxima hide-on-desktop">
-            Nilsa G. <br>
-            <span>Ultimate Probiotic</span>
-          </p>
-        </div>
-
-        {% comment %} Add more reviews by duplicating the .src__card block {% endcomment %}
+        {% endif %}
       </div>
 
       <div

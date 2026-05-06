@@ -1,63 +1,127 @@
 {{ 'oxy-powder-hero.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign bg_video = block.settings.background_video
+  assign bg_img = block.settings.background_image
+  assign badge_img = block.settings.badge_image
+  assign product_img = block.settings.product_image
+  assign bottom_logo_img = block.settings.bottom_logo
+-%}
+
 <section class="oph oxy-powder-hero" {{ block.shopify_attributes }}>
-  {%- comment -%} Background image with overlay {%- endcomment -%}
+  {%- comment -%} Background video or image with overlay {%- endcomment -%}
   <div class="oph__bg-wrap">
-    <img
-      src="{{ 'Bubble-Background.png' | asset_url }}"
-      alt=""
-      loading="eager"
-      class="oph__bg-img"
-      width="1920"
-      height="910"
-    >
+    {% if bg_video != blank %}
+      {{
+        bg_video
+        | video_tag:
+          image_size: '1920x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          controls: false,
+          class: 'oph__bg-video'
+      }}
+    {% elsif bg_img != blank %}
+      <img
+        src="{{ bg_img | image_url: width: 1920 }}"
+        alt=""
+        loading="eager"
+        class="oph__bg-img"
+        width="1920"
+        height="910"
+      >
+    {% else %}
+      <img
+        src="{{ 'Bubble-Background.png' | asset_url }}"
+        alt=""
+        loading="eager"
+        class="oph__bg-img"
+        width="1920"
+        height="910"
+      >
+    {% endif %}
   </div>
 
   <div class="oph__content">
     {%- comment -%} Top row: logo, tagline, description {%- endcomment -%}
     <div class="oph__top">
       <div class="oph__oxy_logo">
-        <img
-          src="{{ 'oxy-powder-tag-logo.png' | asset_url }}"
-          alt="BEST SELLER"
-          width="140"
-          height="40"
-          loading="lazy"
-          class="oph__badge"
-        >
-        <span>Oxy-Powder<span class="text-icons">®</span></span>
+        {% if badge_img != blank %}
+          <img
+            src="{{ badge_img | image_url: width: 280 }}"
+            alt="{{ block.settings.product_name | default: 'BEST SELLER' | escape }}"
+            width="140"
+            height="40"
+            loading="lazy"
+            class="oph__badge"
+          >
+        {% else %}
+          <img
+            src="{{ 'oxy-powder-tag-logo.png' | asset_url }}"
+            alt="{{ block.settings.product_name | default: 'BEST SELLER' | escape }}"
+            width="140"
+            height="40"
+            loading="lazy"
+            class="oph__badge"
+          >
+        {% endif %}
+        <span>
+          {{- block.settings.product_name | default: 'Oxy-Powder' -}}
+          {% comment %}<span class="text-icons">®</span>{% endcomment %}
+        </span>
       </div>
-      <p class="oph__tagline font-proxima">Support for Your Foundation of Healing</p>
-      <p class="oph__social-proof font-proxima">1M + Bottles Sold | 10,000 5-Star Reviews</p>
+      {% if block.settings.tagline != blank %}
+        <p class="oph__tagline font-proxima">{{ block.settings.tagline }}</p>
+      {% endif %}
+      {% if block.settings.social_proof != blank %}
+        <p class="oph__social-proof font-proxima">{{ block.settings.social_proof }}</p>
+      {% endif %}
     </div>
 
     {%- comment -%} Middle row: image left, content + CTAs right {%- endcomment -%}
     <div class="oph__middle ghd--flex">
       <div class="oph__image-col">
-        <img
-          src="{{ 'oxy-powder-img.png' | asset_url }}"
-          alt="Oxy-Powder® Natural Digestive Cleanse"
-          width="400"
-          height="500"
-          loading="lazy"
-          class="oph__product-img"
-        >
+        {% if product_img != blank %}
+          <img
+            src="{{ product_img | image_url: width: 800 }}"
+            alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
+            width="400"
+            height="500"
+            loading="lazy"
+            class="oph__product-img"
+          >
+        {% else %}
+          <img
+            src="{{ 'oxy-powder-img.png' | asset_url }}"
+            alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
+            width="400"
+            height="500"
+            loading="lazy"
+            class="oph__product-img"
+          >
+        {% endif %}
       </div>
       <div class="oph__content-col">
-        <p class="oph__description font-proxima">
-          Health begins in the gut. <strong>Oxy-Powder®</strong> uses gentle, non-habit-forming ingredients to support
-          elimination and refresh the starting point of your overall health.
-        </p>
+        {% if block.settings.description != blank %}
+          <div class="oph__description font-proxima">{{ block.settings.description }}</div>
+        {% endif %}
         <div class="oph__ctas">
-          <a href="https://globalhealing.com/cart/39862723117256:1" class="oph__cta button button--primary"
-            >Add to Cart</a
-          >
-          <a
-            href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
-            target="_blank"
-            class="oph__cta button button--secondary"
-            >Read the Study</a
-          >
+          {% if block.settings.cta_primary_text != blank and block.settings.cta_primary_url != blank %}
+            <a href="{{ block.settings.cta_primary_url }}" class="oph__cta button button--primary">
+              {{- block.settings.cta_primary_text -}}
+            </a>
+          {% endif %}
+          {% if block.settings.cta_secondary_text != blank and block.settings.cta_secondary_url != blank %}
+            <a
+              href="{{ block.settings.cta_secondary_url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="oph__cta button button--secondary"
+            >
+              {{- block.settings.cta_secondary_text -}}
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -68,24 +132,44 @@
         <div class="oph__bottom-left"></div>
         <div class="oph__bottom-right">
           <div class="oph__bottom-content">
-            <span class="oph__bottom-stat font-proxima">92.5% Overall Satisfaction</span>
-            <span class="oph__bottom-sub font-proxima"
-              ><a
-                href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
-                target="_blank"
-                class="oph-anchors"
-                >Backed by independent clinical research.</a
-              ></span
-            >
+            {% if block.settings.bottom_stat != blank %}
+              <span class="oph__bottom-stat font-proxima">{{ block.settings.bottom_stat }}</span>
+            {% endif %}
+            {% if block.settings.bottom_sub_text != blank %}
+              <span class="oph__bottom-sub font-proxima">
+                {% if block.settings.bottom_sub_url != blank %}
+                  <a
+                    href="{{ block.settings.bottom_sub_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="oph-anchors"
+                  >
+                    {{- block.settings.bottom_sub_text -}}
+                  </a>
+                {% else %}
+                  {{ block.settings.bottom_sub_text }}
+                {% endif %}
+              </span>
+            {% endif %}
           </div>
           <div class="oph__bottom-logo">
-            <img
-              src="{{ 'oxy-pw-tags.png' | asset_url }}"
-              alt="CITRUSLABS TESTED"
-              width="120"
-              height="120"
-              loading="lazy"
-            >
+            {% if bottom_logo_img != blank %}
+              <img
+                src="{{ bottom_logo_img | image_url: width: 240 }}"
+                alt="CITRUSLABS TESTED"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            {% else %}
+              <img
+                src="{{ 'oxy-pw-tags.png' | asset_url }}"
+                alt="CITRUSLABS TESTED"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            {% endif %}
           </div>
         </div>
       </div>

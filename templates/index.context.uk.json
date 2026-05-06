@@ -24,9 +24,11 @@
         },
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "settings": {
-            "banner_1_visible": true,
+            "banner_1_visible": false,
             "banner_2_visible": false,
-            "banner_3_url": "https://globalhealing.co.uk/collections/products-for-uk"
+            "banner_3_url": "https://globalhealing.co.uk/pages/veritree",
+            "banner_3_visible": false,
+            "banner_1_order": 1
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {

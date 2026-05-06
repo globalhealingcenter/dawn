@@ -1,7 +1,7 @@
 /* New Standard block - shared with new-standard-section.liquid */
 .new-standard-section {
   background: #fff;
-  padding: 60px 40px;
+  padding: 20px 40px 60px;
   font-family: 'Georgia', serif;
 }
 
@@ -21,8 +21,8 @@
 
 .ns-title,
 .ns-tagline {
-  font-size: clamp(36px,4vw,6.4rem);.new-standard-inner
-  font-weight: 400;
+  font-size: clamp(36px, 4vw, 6.4rem);
+  .new-standard-inner font-weight: 400;
   line-height: clamp(33px, 4.438vw, 7.1rem);
   color: #22472D;
   margin: 0;
@@ -50,8 +50,8 @@
   letter-spacing: 0;
 }
 
-.new-standard-inner .button::after{
-  display:none
+.new-standard-inner .button::after {
+  display: none
 }
 
 .ns-accordion {
@@ -59,7 +59,7 @@
 }
 
 .ns-accordion:last-child {
-    border: 0;
+  border: 0;
 }
 
 .ns-accordion__trigger {
@@ -187,10 +187,10 @@
 }
 
 .ns-accordion__copy {
-  font-size: clamp(12px, 1.25vw, 2rem);
+  font-size: clamp(14px, 1.25vw, 2rem);
   font-weight: 400;
   color: #22472D;
-  line-height: clamp(14.4px, 1.563vw, 2.4rem);
+  line-height: clamp(16px, 1.563vw, 2.4rem);
 }
 
 .hide-on-desktop {
@@ -227,7 +227,7 @@
   }
 
   .ns-accordion__text-wrap {
-    max-height: 80px;
+    max-height: 90px;
     margin-right: 5px;
     padding-top: 0
   }
@@ -256,24 +256,27 @@
   .ns-accordions {
     margin-bottom: 20px;
   }
+
   .new-standard-section .ns-right {
-      width: 100%;
+    width: 100%;
   }
 
   /* width */
   .ns-accordion__text-wrap::-webkit-scrollbar {
     width: 5px;
   }
-  .ns-accordion__icon{
+
+  .ns-accordion__icon {
     right: initial
   }
+
   .new-standard-inner .button {
     width: 75%;
     margin: auto;
     padding: 12px;
   }
 
-  .ns-accordion__icon-wrap--default{
+  .ns-accordion__icon-wrap--default {
     margin-top: 0
   }
 

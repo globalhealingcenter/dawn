@@ -1,88 +1,371 @@
+{% comment %}
+  Footer Signup - two-column layout with background image.
+  Left: heading + description. Right: form + stay connected + social icons.
+  Pass section for editable content via customizer.
+{% endcomment %}
+
+{%- if section != blank -%}
+  {%- assign heading = section.settings.heading | default: 'Join the' -%}
+  {%- assign heading_em = section.settings.heading_em | default: 'Healing' -%}
+  {%- assign description = section.settings.description
+    | default: 'Thoughtful guidance, educational articles, and updates to support your journey.'
+  -%}
+  {%- assign form_action = section.settings.form_action
+    | default: 'https://hooks.zapier.com/hooks/catch/1153851/byx96rz/'
+  -%}
+  {%- assign privacy_url = section.settings.privacy_url | default: '/pages/privacy-policy' -%}
+  {%- assign stay_connected = section.settings.stay_connected_text | default: 'Stay Connected' -%}
+  {%- assign bg_image_url = background_image_url | default: nil -%}
+{%- else -%}
+  {%- assign heading = 'Join the' -%}
+  {%- assign heading_em = 'Healing' -%}
+  {%- assign description = 'Thoughtful guidance, educational articles, and updates to support your journey.' -%}
+  {%- assign form_action = 'https://hooks.zapier.com/hooks/catch/1153851/byx96rz/' -%}
+  {%- assign privacy_url = '/pages/privacy-policy' -%}
+  {%- assign stay_connected = 'Stay Connected' -%}
+  {%- assign bg_image_url = nil -%}
+{%- endif -%}
+
 <style>
-    .gh-footer-newsletter-form{
-        display: flex;
-        justify-content: center;
-        gap: 5%;
-        align-items: center;
-        flex-wrap: wrap;
-        padding: 0 2rem;
+  .gh-footer-signup {
+    position: relative;
+    overflow: hidden;
+    height: clamp(35rem, 27.69vw, 44.3rem);
+    width: 100%;
+  }
+  .gh-footer-signup__bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
+  }
+  .gh-footer-signup__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 10%);
+    border-radius: 12px;
+  }
+  .gh-footer-signup__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem 12rem;
+    margin: 0 auto;
+    height: 100%;
+  }
+
+  .gh-footer-signup__left {
+    max-width: 100%;
+  }
+
+  .gh-footer-signup__left .gh-footer-signup__heading {
+    color: #fff;
+    font-size: clamp(3rem, 4vw, 6.4rem);
+    font-weight: 400;
+    margin: 0 0 1rem;
+    line-height: clamp(3.3rem, 4.69vw, 7.5rem);
+  }
+  .gh-footer-signup__left .gh-footer-signup__heading .font-miller {
+    font-style: italic;
+  }
+  .gh-footer-signup__left .gh-footer-signup__description {
+    color: #fff;
+    font-size: clamp(1.6rem, 1.88vw, 3rem);
+    line-height: clamp(1.9rem, 2.25vw, 3.6rem);
+    margin: 0;
+    width: 460px;
+    max-width: 100%;
+  }
+  .gh-footer-signup__left .gh-footer-signup__description em {
+    font-style: italic;
+  }
+  .gh-footer-signup__right {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(3.5rem, 3.75vw, 6rem);
+    width: 100%;
+  }
+  .gh-footer-signup__form .gh-footer-signup__input-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 2rem;
+    justify-content: flex-end;
+  }
+  .gh-footer-signup__form input[type='email'] {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: clamp(14.53px, 1.25vw, 2rem);
+    line-height: clamp(17.44px, 1.5vw, 2.4rem);
+    width: clamp(18.9rem, 19.63vw, 31.4rem);
+    max-width: clamp(18.9rem, 19.63vw, 31.4rem);
+    height: clamp(28px, 3.75vw, 6rem);
+    text-align: center;
+    min-height: 6rem;
+  }
+  .gh-footer-signup__form input[type='email']::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .gh-footer-signup__form .button--primary {
+    background: #10331D;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+    height: clamp(28px, 3.75vw, 6rem);
+    min-height: clamp(28px, 3.75vw, 6rem);
+    width: clamp(11.6rem, 16.94vw, 27.1rem);
+    font-size: clamp(14.53px, 1.56vw, 2.5rem);
+    line-height: clamp(17.44px, 1.88vw, 3rem);
+  }
+  .gh-footer-signup__form .button--primary:hover {
+    background: #10331D;
+  }
+  .gh-footer-signup__form label {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 47px;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: clamp(14.53px, 1.25vw, 2rem);
+    line-height: clamp(17.44px, 1.5vw, 2.4rem);
+  }
+  .gh-footer-signup__form label a {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .pre-submit input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 100%;
+    background: transparent;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ffffff;
+    margin: 0 5px 0 0;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .pre-submit input[type="checkbox"]:checked {
+    background: #ffffff;
+    background-color: #ffffff;
+  }
+  .gh-footer-signup__stay-connected {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    color: #fff;
+    font-size: clamp(1.6rem, 1.88vw, 3rem);
+    line-height: clamp(1.9rem, 2.25vw, 3.6rem);
+  }
+  .gh-footer-signup__social {
+    display: flex;
+    gap: 1.1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gh-footer-signup__social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: background 0.2s;
+  }
+  .gh-footer-signup__social .icon {
+    width: clamp(19px, 2.19vw, 3.5rem);
+    height: clamp(19px, 2.19vw, 3.5rem);
+  }
+  .gh-footer-signup__bar {
+    height: 8px;
+    background: #22472d;
+    border-radius: 0 0 12px 12px;
+  }
+  .gh-footer-signup .success {
+    color: #fff;
+    font-size: clamp(1.6rem, 1.88vw, 3rem);
+    line-height: clamp(1.9rem, 2.25vw, 3.6rem);
+    text-align: center;
+  }
+  .gh-footer-signup .hide {
+    display: none !important;
+  }
+
+  @media (max-width: 1024px){
+    .gh-footer-signup__inner{
+      padding: 3rem;
     }
-    .gh-footer-newsletter-form > form{
-        min-width: 300px;
+  }
+  @media (max-width: 768px) {
+    .gh-footer-signup__inner {
+      flex-flow: column;
+      padding: 3rem 2rem;
+      gap: 3rem;
+      align-items: flex-start;
     }
-    .gh-footer-newsletter-form .input-group{
-        display: flex;
-        gap: 10px;
-        margin-bottom: 1rem;
+    .gh-footer-signup__bg{
+      border-radius: 0;
     }
-    .gh-footer-newsletter-form input[type="email"]{
-        border: 1px solid #fff;
-        padding: 10px 15px;
-        background: transparent;
-        color: #fff;
+    .gh-footer-signup__form .gh-footer-signup__input-row,
+    .gh-footer-signup__form label{
+      justify-content: flex-start !important;
     }
-    .gh-footer-newsletter-form label{
-        font-size: 14px;
+    .gh-footer-signup__form label{
+      flex-wrap: wrap;
     }
-    .gh-footer-newsletter-form a{
-        color: #fff
+    .gh-footer-signup__form label a {
+      font-size: 12px;
+      margin-top: 5px;
     }
-    @media (max-width: 768px) {
-        .gh-footer-newsletter-form input[type="email"]{
-            font-size: 16px;
-        }
-    }
+  }
 </style>
 
-<div class='gh-footer-newsletter-form' id='gh-footer-newsletter-form'>
-    <p class='h4 my2'>Your journey to health starts here.</p>
-    <form id="footer-newsletter-form" method="post" data-action="https://hooks.zapier.com/hooks/catch/1153851/byx96rz/">
+<div class="gh-footer-signup" id="gh-footer-newsletter-form">
+  <div
+    class="gh-footer-signup__bg{% if bg_image_url != blank %} gh-footer-signup__bg--has-image{% endif %}"
+    {% if bg_image_url != blank %}style="background-image: url('{{ bg_image_url }}');"{% endif %}
+  >
+
+  <div class="gh-footer-signup__inner">
+    <div class="gh-footer-signup__left">
+      {% if heading != blank or heading_em != blank %}
+        <h2 class="gh-footer-signup__heading font-proxima">
+          {{ heading }}
+          <span class="font-miller">{{ heading_em }}</span>
+        </h2>
+      {% endif %}
+      {% if description != blank %}
+        <p class="gh-footer-signup__description font-proxima">{{ description }}</p>
+      {% endif %}
+    </div>
+
+    <div class="gh-footer-signup__right">
+      <form id="footer-newsletter-form" class="gh-footer-signup__form" method="post" data-action="{{ form_action }}">
         <div class="pre-submit">
-            <div class="input-group">
-                <input type="email" placeholder="Enter Your Email" name="email" required="">
-                <button class="button button--secondary" type="submit">Sign Up</button>
-            </div>
-            <label style="margin-top: 10px">
-                <input type="checkbox" name="GDPR" value="1" required=""> I agree to receive marketing emails. <a style="text-decoration: underline" href="https://globalhealing.com/pages/privacy-policy">View Privacy Policy</a>.
-            </label>
+          <div class="gh-footer-signup__input-row">
+            <input type="email" placeholder="Enter Your Email" name="email" required>
+            <button class="button button--primary" type="submit">Sign Up</button>
+          </div>
+          <label>
+            <input type="checkbox" name="GDPR" value="1" required>
+            I agree to receive marketing emails. <a href="{{ privacy_url }}">View Privacy Policy.</a>
+          </label>
         </div>
-        <div class="success hide">
-            Success! You'll be receiving an email shortly.
+        <div class="success hide">Success! You'll be receiving an email shortly.</div>
+      </form>
+
+      {% if stay_connected != blank
+        or settings.social_facebook_link != blank
+        or settings.social_instagram_link != blank
+        or settings.social_threads_link != blank
+      %}
+        <div class="gh-footer-signup__stay-connected">
+          {% if stay_connected != blank %}
+            <span class="font-proxima">{{ stay_connected }}</span>
+          {% endif %}
+          <ul class="gh-footer-signup__social list-unstyled" role="list">
+            {%- if settings.social_facebook_link != blank -%}
+              <li>
+                <a href="{{ settings.social_facebook_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-facebook' -%}
+                  <span class="visually-hidden">Facebook</span></a
+                >
+              </li>
+            {%- endif -%}
+            {%- if settings.social_instagram_link != blank -%}
+              <li>
+                <a href="{{ settings.social_instagram_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-instagram' -%}
+                  <span class="visually-hidden">Instagram</span></a
+                >
+              </li>
+            {%- endif -%}
+            {%- if settings.social_threads_link != blank -%}
+              <li>
+                <a href="{{ settings.social_threads_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-threads' -%}
+                  <span class="visually-hidden">Threads</span></a
+                >
+              </li>
+            {%- endif -%}
+            {%- if settings.social_youtube_link != blank -%}
+              <li>
+                <a href="{{ settings.social_youtube_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-youtube' -%}
+                  <span class="visually-hidden">YouTube</span></a
+                >
+              </li>
+            {%- endif -%}
+            {%- if settings.social_tiktok_link != blank -%}
+              <li>
+                <a href="{{ settings.social_tiktok_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-tiktok' -%}
+                  <span class="visually-hidden">TikTok</span></a
+                >
+              </li>
+            {%- endif -%}
+            {%- if settings.social_pinterest_link != blank -%}
+              <li>
+                <a href="{{ settings.social_pinterest_link }}" class="link" target="_blank" rel="noopener">
+                  {%- render 'icon-pinterest' -%}
+                  <span class="visually-hidden">Pinterest</span></a
+                >
+              </li>
+            {%- endif -%}
+          </ul>
         </div>
-    </form>
+      {% endif %}
+    </div>
+  </div>
 </div>
 
+<div class="gh-footer-signup__bar"></div>
+
 <script>
-  {
-    let newsletter_form = document.getElementById('footer-newsletter-form');
-    let preSubmit = newsletter_form.querySelector('.pre-submit');
-    let success = newsletter_form.querySelector('.success');
-    let button = newsletter_form.querySelector('button');
+  (function () {
+    const form = document.getElementById('footer-newsletter-form');
+    if (!form) return;
+    const preSubmit = form.querySelector('.pre-submit');
+    const success = form.querySelector('.success');
+    const btn = form.querySelector('button[type="submit"]');
 
-    newsletter_form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
-      let email = newsletter_form.querySelector('[name="email"]').value;
-      let url = newsletter_form.getAttribute('data-action');
+      const email = form.querySelector('[name="email"]').value;
+      const url = form.getAttribute('data-action');
 
-      button.classList.add('btn--loading');
+      if (btn) btn.classList.add('btn--loading');
 
       fetch(url, {
         method: 'post',
-        body: JSON.stringify({
-          email: email,
-          GDPR: 1
+        body: JSON.stringify({ email: email, GDPR: 1 }),
+      })
+        .then(function (r) {
+          return r.json();
         })
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        console.log(data);
-
-        const event_data = {type: 'newsletter-signup'};
-        Shopify.analytics.publish('gh:event', event_data);
-
-        preSubmit.classList.add('hide');
-        success.classList.remove('hide');
-      });
-    })
-  }
+        .then(function () {
+          if (window.Shopify && Shopify.analytics) {
+            Shopify.analytics.publish('gh:event', { type: 'newsletter-signup' });
+          }
+          if (preSubmit) preSubmit.classList.add('hide');
+          if (success) success.classList.remove('hide');
+        });
+    });
+  })();
 </script>
