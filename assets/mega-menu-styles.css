@@ -387,6 +387,10 @@ a.huk_menu_item_link:has(.trending-images)+ul.huk_menu_submenu li {
     width: calc(33.33% - 10px) !important;
 }
 
+.satcb_quick_container {
+    z-index: 1 !important;
+}
+
 /* --- MOBILE --- */
 body.overflow-hidden-tablet {
     overflow: hidden !important;
