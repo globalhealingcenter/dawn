@@ -1,183 +1,208 @@
 <style>
-    .careers-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 24px;
+  .careers-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .careers-page .page-content {
+    margin-bottom: 48px;
+  }
+
+  .section-title {
+    font-size: 36px;
+    margin-bottom: 40px;
+    font-family: var(--gh-font-primary);
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+    text-align: center;
+  }
+
+  .state-group {
+    margin-bottom: 48px;
+  }
+
+  .state-heading {
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-family: var(--gh-font-primary);
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+  }
+
+  .jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
+  }
+
+  .job-card .job-title a {
+    font-size: 16px;
+    font-weight: 700;
+    color: #21472d;
+    text-decoration: underline;
+    line-height: 1.4;
+    display: block;
+    font-family: var(--gh-font-secondary);
+  }
+
+  .job-card .job-title a:hover {
+    color: #2a5a2a;
+  }
+
+  .job-card .job-meta {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .job-card .job-team,
+  .job-card .job-location {
+    font-size: 16px;
+    color: rgb(var(--color-foreground));
+    font-weight: 500;
+  }
+
+  .job-card .job-type {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #3a6b3a;
+    background: #eef5ee;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .jobs-status {
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+    font-size: 16px;
+  }
+
+  .jobs-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #3a6b3a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 16px;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
     }
-  
-    .careers-page .page-content {
-      margin-bottom: 48px;
-    }
-  
-    .section-title {
-      font-size: 36px;
-      font-weight: 700;
-      color: #1a1a1a;
-      margin-bottom: 40px;
-      text-align: left;
-    }
-  
-    .state-group { margin-bottom: 48px; }
-  
-    .state-heading {
-      font-size: 20px;
-      font-weight: 600;
-      color: #1a1a1a;
-      border-bottom: 2px solid #e0e0e0;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-  
+  }
+
+  @media (max-width: 900px) {
     .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
     }
-  
-    .job-card {
-      background: #fff;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 24px;
-      transition: box-shadow 0.2s;
+  }
+  @media (max-width: 600px) {
+    .jobs-grid {
+      grid-template-columns: 1fr;
     }
-  
-    .job-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-  
-    .job-card .job-title a {
-      font-size: 16px;
-      font-weight: 700;
-      color: #3a6b3a;
-      text-decoration: underline;
-      line-height: 1.4;
-      display: block;
+    .section-title {
+      font-size: 26px;
     }
-  
-    .job-card .job-title a:hover { color: #2a5a2a; }
-  
-    .job-card .job-meta {
-      margin-top: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-  
-    .job-card .job-team,
-    .job-card .job-location { font-size: 14px; color: #666; }
-  
-    .job-card .job-type {
-      display: inline-block;
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      color: #3a6b3a;
-      background: #eef5ee;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-  
-    .jobs-status {
-      text-align: center;
-      padding: 60px 20px;
-      color: #888;
-      font-size: 16px;
-    }
-  
-    .jobs-spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid #e0e0e0;
-      border-top-color: #3a6b3a;
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 16px;
-    }
-  
-    @keyframes spin { to { transform: rotate(360deg); } }
-  
-    @media (max-width: 900px) { .jobs-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .jobs-grid { grid-template-columns: 1fr; } .section-title { font-size: 26px; } }
-  </style>
-  
-  <div class="careers-page">
-    <div class="page-content">{{ page.content }}</div>
-    <h2 class="section-title">Current Openings</h2>
-    <div id="jobs-container">
-      <div class="jobs-status">
-        <div class="jobs-spinner"></div>
-        <p>Loading open positions...</p>
-      </div>
+  }
+</style>
+
+<div class="careers-page">
+  <div class="page-content">{{ page.content }}</div>
+  <h2 class="section-title">Current Openings</h2>
+  <div id="jobs-container">
+    <div class="jobs-status">
+      <div class="jobs-spinner"></div>
+      <p>Loading open positions...</p>
     </div>
   </div>
-  
-  <script>
-    const WORKER_URL = 'https://staging.globalhealing-codup.workers.dev/';
-  
-    const STATE_NAMES = {
-      'TX': 'Texas','AZ': 'Arizona','CA': 'California','NY': 'New York',
-      'FL': 'Florida','IL': 'Illinois','WA': 'Washington','CO': 'Colorado',
-      'GA': 'Georgia','NC': 'North Carolina','OH': 'Ohio','PA': 'Pennsylvania'
-    };
-  
-    async function fetchJobs() {
-      try {
-        const res = await fetch(WORKER_URL);
-        if (!res.ok) throw new Error('Network error');
-        const data = await res.json();
-        const jobs = data.jobs || [];
-        if (!jobs.length) {
-          document.getElementById('jobs-container').innerHTML =
-            '<div class="jobs-status">No open positions at this time. Check back soon!</div>';
-          return;
-        }
-        renderJobs(jobs);
-      } catch (err) {
+</div>
+
+<script>
+  const WORKER_URL = 'https://staging.globalhealing-codup.workers.dev/';
+
+  const STATE_NAMES = {
+    TX: 'Texas',
+    AZ: 'Arizona',
+    CA: 'California',
+    NY: 'New York',
+    FL: 'Florida',
+    IL: 'Illinois',
+    WA: 'Washington',
+    CO: 'Colorado',
+    GA: 'Georgia',
+    NC: 'North Carolina',
+    OH: 'Ohio',
+    PA: 'Pennsylvania',
+  };
+
+  async function fetchJobs() {
+    try {
+      const res = await fetch(WORKER_URL);
+      if (!res.ok) throw new Error('Network error');
+      const data = await res.json();
+      const jobs = data.jobs || [];
+      if (!jobs.length) {
         document.getElementById('jobs-container').innerHTML =
-          '<div class="jobs-status">Unable to load positions. Please try again later.</div>';
+          '<div class="jobs-status">No open positions at this time. Check back soon!</div>';
+        return;
       }
+      renderJobs(jobs);
+    } catch (err) {
+      document.getElementById('jobs-container').innerHTML =
+        '<div class="jobs-status">Unable to load positions. Please try again later.</div>';
     }
-  
-    function renderJobs(jobs) {
-      const grouped = {};
-      jobs.forEach(job => {
-        const state = (job.JobLocation && job.JobLocation.State) || 'Other';
-        if (!grouped[state]) grouped[state] = [];
-        grouped[state].push(job);
+  }
+
+  function renderJobs(jobs) {
+    const grouped = {};
+    jobs.forEach((job) => {
+      const state = (job.JobLocation && job.JobLocation.State) || 'Other';
+      if (!grouped[state]) grouped[state] = [];
+      grouped[state].push(job);
+    });
+
+    const states = Object.keys(grouped).sort();
+    let html = '';
+    states.forEach((state) => {
+      const stateName = STATE_NAMES[state] || state;
+      html += '<div class="state-group">';
+      html += '<h3 class="state-heading">' + stateName + '</h3>';
+      html += '<div class="jobs-grid">';
+      grouped[state].forEach((job) => {
+        html += jobCard(job);
       });
-  
-      const states = Object.keys(grouped).sort();
-      let html = '';
-      states.forEach(state => {
-        const stateName = STATE_NAMES[state] || state;
-        html += '<div class="state-group">';
-        html += '<h3 class="state-heading">' + stateName + '</h3>';
-        html += '<div class="jobs-grid">';
-        grouped[state].forEach(job => { html += jobCard(job); });
-        html += '</div></div>';
-      });
-  
-      document.getElementById('jobs-container').innerHTML = html;
-    }
-  
-    function jobCard(job) {
-      const title = job.Title || 'Open Position';
-      const applyUrl = job.DisplayUrl || job.ApplyUrl || '#';
-      const team = job.HiringDepartment || '';
-      const city = (job.JobLocation && job.JobLocation.City) || '';
-      const state = (job.JobLocation && job.JobLocation.State) || '';
-      const location = [city, state].filter(Boolean).join(', ') || 'Location TBD';
-      const jobType = (job.JobTypesArray && job.JobTypesArray.length) ? job.JobTypesArray[0] : '';
-  
-      let html = '<div class="job-card">';
-      html += '<div class="job-title"><a href="' + applyUrl + '" target="_blank" rel="noopener">' + title + '</a></div>';
-      html += '<div class="job-meta">';
-      if (team) html += '<span class="job-team">Team: ' + team + '</span>';
-      html += '<span class="job-location">📍 ' + location + '</span>';
-      html += '</div>';
-      if (jobType) html += '<span class="job-type">' + jobType + '</span>';
-      html += '</div>';
-      return html;
-    }
-  
-    fetchJobs();
-  </script>
+      html += '</div></div>';
+    });
+
+    document.getElementById('jobs-container').innerHTML = html;
+  }
+
+  function jobCard(job) {
+    const title = job.Title || 'Open Position';
+    const applyUrl = job.DisplayUrl || job.ApplyUrl || '#';
+    const team = job.HiringDepartment || '';
+    const city = (job.JobLocation && job.JobLocation.City) || '';
+    const state = (job.JobLocation && job.JobLocation.State) || '';
+    const location = [city, state].filter(Boolean).join(', ') || 'Location TBD';
+    const jobType = job.JobTypesArray && job.JobTypesArray.length ? job.JobTypesArray[0] : '';
+
+    let html = '<div class="job-card">';
+    html += '<div class="job-title"><a href="' + applyUrl + '" target="_blank" rel="noopener">' + title + '</a></div>';
+    html += '<div class="job-meta">';
+    if (team) html += '<span class="job-team">Team: ' + team + '</span>';
+    html += '<span class="job-location">Location: ' + location + '</span>';
+    html += '</div>';
+    {% comment %} if (jobType) html += '<span class="job-type">' + jobType + '</span>'; {% endcomment %}
+    html += '</div>';
+    return html;
+  }
+
+  fetchJobs();
+</script>
