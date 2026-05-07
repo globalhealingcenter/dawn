@@ -161,7 +161,7 @@
 
   function jobCard(job) {
     const title = job.Title || 'Open Position';
-    const applyUrl = job.ApplyUrl || job.DisplayUrl || '#';
+    const applyUrl = job.DisplayUrl || job.ApplyUrl || '#';
     const team = job.HiringDepartment || '';
     const city = (job.JobLocation && job.JobLocation.City) || '';
     const state = (job.JobLocation && job.JobLocation.State) || '';
