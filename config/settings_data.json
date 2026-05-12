@@ -512,8 +512,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".tapcart-webbridge .announcement-bar {display: none !important;}",
-      ".tapcart-webbridge .isense-reopen-widget-icon {display: none;}"
+      ".tapcart-webbridge .announcement-bar {display: none !important;}"
     ]
   }
 }
