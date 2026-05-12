@@ -542,7 +542,6 @@
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
     <!-- Post Pilot -->
     <script type="text/javascript">
         var script = document.createElement('script');
@@ -550,10 +549,15 @@
         document.getElementsByTagName('head')[0].appendChild(script);
      </script>
 
-  {% if request.locale.iso_code == 'US' %}
-    {% include "huk-mega-menu-pro" %}
-  {% endif %}
-  
+  {% unless request.locate.iso_code == 'us' %}
+  <style>
+  .huk-mega-menu,
+  #huk-menu {
+    display: none !important;
+  }
+  </style>
+  {% endunless %}
+  {% include "huk-mega-menu-pro" %}
   </head>
 							
 							
