@@ -512,7 +512,8 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".tapcart-webbridge .announcement-bar {display: none !important;}"
+      ".tapcart-webbridge .announcement-bar {display: none !important;}",
+      ".tapcart-webbridge #open_widget,.tapcart-webbridge [aria-label=\"Change consent\"] {display: none !important;}"
     ]
   }
 }
