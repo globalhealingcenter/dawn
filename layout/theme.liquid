@@ -782,5 +782,28 @@
 
     {% render 'klaviyo-out-of-stock' %}
     {% render 'speedshopify-body' %}
+
+    <script>
+(function() {
+  // Only runs in Tapcart webbridge
+  if (!document.body.classList.contains('tapcart-webbridge')) return;
+
+  function hideConsentmoIcon() {
+    const csm = document.querySelector('csm-cookie-consent');
+    if (csm && csm.shadowRoot) {
+      if (!csm.shadowRoot.querySelector('#gh-hide-reopen')) {
+        const style = document.createElement('style');
+        style.id = 'gh-hide-reopen';
+        style.textContent = '#reopen_widget { display: none !important; }';
+        csm.shadowRoot.appendChild(style);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', hideConsentmoIcon);
+  setTimeout(hideConsentmoIcon, 1000);
+  setTimeout(hideConsentmoIcon, 3000);
+})();
+</script>
   </body>
 </html>
