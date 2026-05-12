@@ -549,14 +549,7 @@
         document.getElementsByTagName('head')[0].appendChild(script);
      </script>
 
-  {% unless request.locate.iso_code == 'us' %}
-  <style>
-  .huk-mega-menu,
-  #huk-menu {
-    display: none !important;
-  }
-  </style>
-  {% endunless %}
+  
   {% include "huk-mega-menu-pro" %}
   </head>
 							
