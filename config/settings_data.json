@@ -511,6 +511,8 @@
     }
   },
   "platform_customizations": {
-    "custom_css": []
+    "custom_css": [
+      ".tapcart-webbridge .announcement-bar {display: none !important;}"
+    ]
   }
 }
