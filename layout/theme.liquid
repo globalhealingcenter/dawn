@@ -550,7 +550,7 @@
         document.getElementsByTagName('head')[0].appendChild(script);
      </script>
 
-  {% if localization.country.iso_code == 'US' %}
+  {% if request.locale.iso_code == 'US' %}
     {% include "huk-mega-menu-pro" %}
   {% endif %}
   
