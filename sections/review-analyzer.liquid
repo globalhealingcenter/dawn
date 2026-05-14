@@ -502,7 +502,7 @@ async function runAnalysis(){
     var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:8000,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:8000,messages:[{role:'user',content:prompt}]})
     });
     stepDone('step2');stepActive('step3');
     if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
