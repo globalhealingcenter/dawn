@@ -507,8 +507,10 @@ async function runAnalysis(){
     stepDone('step2');stepActive('step3');
     if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
     var rawText=await response.text();
-    stepDone('step3');stepActive('step4');
-    var jm=rawText.replace(/```json|```/g,'').trim().match(/\{[\s\S]*\}/);
+stepDone('step3');stepActive('step4');
+var envelope=JSON.parse(rawText);
+var inner=envelope.content&&envelope.content[0]&&envelope.content[0].text||rawText;
+var jm=inner.replace(/```json|```/g,'').trim().match(/\{[\s\S]*\}/);
     if(!jm){hideLoading();showError('Could not parse response. Try again.');return;}
     var analysis;
     try{analysis=JSON.parse(jm[0]);}
