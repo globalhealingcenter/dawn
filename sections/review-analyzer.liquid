@@ -1,253 +1,208 @@
 {% assign page_title = 'Review Intelligence' %}
-
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
   :root {
-    --ink: #1a1208;
-    --paper: #faf7f2;
-    --cream: #f2ede4;
-    --gold: #c8952a;
-    --gold-light: #e8b84b;
-    --sage: #4a6741;
-    --sage-light: #6a8f60;
-    --rust: #b84c2a;
-    --mist: #e8e2d9;
-    --radius: 12px;
-    --shadow: 0 2px 8px rgba(26,18,8,0.08), 0 1px 2px rgba(26,18,8,0.04);
-    --shadow-md: 0 4px 16px rgba(26,18,8,0.10), 0 2px 4px rgba(26,18,8,0.06);
+    --ink:#1a1208;--paper:#faf7f2;--cream:#f2ede4;--gold:#c8952a;--gold-light:#e8b84b;
+    --sage:#4a6741;--sage-light:#6a8f60;--rust:#b84c2a;--mist:#e8e2d9;
+    --radius:12px;--shadow:0 2px 8px rgba(26,18,8,0.08),0 1px 2px rgba(26,18,8,0.04);
+    --shadow-md:0 4px 16px rgba(26,18,8,0.10),0 2px 4px rgba(26,18,8,0.06);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--paper); font-family: 'Instrument Sans', sans-serif; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--paper);font-family:'Instrument Sans',sans-serif;}
 
-  .upload-zone { border: 2px dashed var(--mist); background: var(--cream); border-radius: var(--radius); padding: 52px 40px; text-align: center; cursor: pointer; transition: all 0.2s ease; position: relative; margin-bottom: 32px; }
-  .upload-zone:hover, .upload-zone.drag-over { border-color: var(--gold); background: #f5ede0; }
-  .upload-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-  .upload-icon { width: 48px; height: 48px; margin: 0 auto 16px; color: var(--gold); }
-  .upload-title { font-family: 'DM Serif Display', serif; font-size: 20px; margin-bottom: 6px; color: var(--ink); }
-  .upload-sub { font-size: 13px; color: #8a7a68; font-family: 'DM Mono', monospace; }
-  .file-loaded { display: flex; align-items: center; gap: 14px; background: var(--ink); color: var(--paper); padding: 16px 24px; border-radius: var(--radius); margin-bottom: 32px; font-family: 'DM Mono', monospace; font-size: 13px; box-shadow: var(--shadow); }
-  .file-loaded .dot { width: 8px; height: 8px; background: var(--gold-light); border-radius: 50%; flex-shrink: 0; }
-  .file-loaded strong { color: var(--gold-light); }
+  .upload-zone{border:2px dashed var(--mist);background:var(--cream);border-radius:var(--radius);padding:52px 40px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;margin-bottom:32px;}
+  .upload-zone:hover,.upload-zone.drag-over{border-color:var(--gold);background:#f5ede0;}
+  .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+  .upload-icon{width:48px;height:48px;margin:0 auto 16px;color:var(--gold);}
+  .upload-title{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:6px;color:var(--ink);}
+  .upload-sub{font-size:13px;color:#8a7a68;font-family:'DM Mono',monospace;}
+  .file-loaded{display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);padding:16px 24px;border-radius:var(--radius);margin-bottom:32px;font-family:'DM Mono',monospace;font-size:13px;box-shadow:var(--shadow);}
+  .file-loaded .dot{width:8px;height:8px;background:var(--gold-light);border-radius:50%;flex-shrink:0;}
+  .file-loaded strong{color:var(--gold-light);}
 
-  .ra-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; align-items: end; }
-  .ra-label { display: block; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 8px; }
-  .ra-select { width: 100%; padding: 12px 16px; border: 1px solid var(--mist); background: white; font-size: 14px; color: var(--ink); border-radius: 8px; appearance: none; outline: none; transition: border-color 0.2s; font-family: 'Instrument Sans', sans-serif; box-shadow: var(--shadow); }
-  .ra-select:focus { border-color: var(--gold); }
-  .ra-textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--mist); background: white; font-size: 13px; color: var(--ink); border-radius: 8px; outline: none; transition: border-color 0.2s; font-family: 'Instrument Sans', sans-serif; box-shadow: var(--shadow); resize: vertical; min-height: 90px; line-height: 1.5; }
-  .ra-textarea:focus { border-color: var(--gold); }
+  .ra-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;align-items:end;}
+  .ra-label{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:8px;}
+  .ra-select{width:100%;padding:12px 16px;border:1px solid var(--mist);background:white;font-size:14px;color:var(--ink);border-radius:8px;appearance:none;outline:none;transition:border-color 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);}
+  .ra-select:focus{border-color:var(--gold);}
+  .ra-textarea{width:100%;padding:12px 16px;border:1px solid var(--mist);background:white;font-size:13px;color:var(--ink);border-radius:8px;outline:none;transition:border-color 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);resize:vertical;min-height:90px;line-height:1.5;}
+  .ra-textarea:focus{border-color:var(--gold);}
 
-  .collapsible-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; width: fit-content; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 0; }
-  .collapsible-arrow { font-size: 11px; transition: transform 0.2s; }
-  .collapsible-arrow.open { transform: rotate(180deg); }
-  .collapsible-panel { display: none; margin-top: 10px; }
-  .collapsible-panel.open { display: block; }
-  .panel-note { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; margin-top: 6px; line-height: 1.5; }
+  .collapsible-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;}
+  .collapsible-arrow{font-size:11px;transition:transform 0.2s;}
+  .collapsible-arrow.open{transform:rotate(180deg);}
+  .collapsible-panel{display:none;margin-top:10px;}
+  .collapsible-panel.open{display:block;}
+  .panel-note{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;margin-top:6px;line-height:1.5;}
+  .settings-panel-inner{background:var(--cream);border:1px solid var(--mist);border-radius:var(--radius);padding:24px;}
+  .settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .settings-field label{display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:6px;line-height:1.4;}
+  .settings-field input{width:100%;padding:8px 12px;border:1px solid var(--mist);background:white;font-size:13px;color:var(--ink);border-radius:6px;outline:none;font-family:'DM Mono',monospace;}
+  .settings-field input:focus{border-color:var(--gold);}
 
-  .settings-panel-inner { background: var(--cream); border: 1px solid var(--mist); border-radius: var(--radius); padding: 24px; }
-  .settings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .settings-field label { display: block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 6px; line-height: 1.4; }
-  .settings-field input { width: 100%; padding: 8px 12px; border: 1px solid var(--mist); background: white; font-size: 13px; color: var(--ink); border-radius: 6px; outline: none; font-family: 'DM Mono', monospace; }
-  .settings-field input:focus { border-color: var(--gold); }
+  .btn-analyze{padding:13px 32px;background:var(--gold);color:var(--ink);font-weight:600;font-size:14px;border:none;border-radius:8px;cursor:pointer;transition:background 0.2s;white-space:nowrap;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);width:100%;}
+  .btn-analyze:hover{background:var(--gold-light);}
+  .btn-analyze:disabled{background:var(--mist);color:#aaa;cursor:not-allowed;box-shadow:none;}
 
-  .btn-analyze { padding: 13px 32px; background: var(--gold); color: var(--ink); font-weight: 600; font-size: 14px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; white-space: nowrap; font-family: 'Instrument Sans', sans-serif; box-shadow: var(--shadow); width: 100%; }
-  .btn-analyze:hover { background: var(--gold-light); }
-  .btn-analyze:disabled { background: var(--mist); color: #aaa; cursor: not-allowed; box-shadow: none; }
+  .ra-loading{display:none;text-align:center;padding:64px 0;}
+  .ra-loading.active{display:block;}
+  .loading-ring{width:48px;height:48px;border:3px solid var(--mist);border-top-color:var(--gold);border-radius:50%;animation:raspin 0.8s linear infinite;margin:0 auto 20px;}
+  @keyframes raspin{to{transform:rotate(360deg);}}
+  .loading-text{font-family:'DM Mono',monospace;font-size:13px;color:#8a7a68;}
+  .loading-step{font-size:12px;color:#aaa;transition:color 0.3s;margin:4px 0;}
+  .loading-step.active{color:var(--gold);}
+  .loading-step.done{color:var(--sage);}
 
-  .ra-loading { display: none; text-align: center; padding: 64px 0; }
-  .ra-loading.active { display: block; }
-  .loading-ring { width: 48px; height: 48px; border: 3px solid var(--mist); border-top-color: var(--gold); border-radius: 50%; animation: raspin 0.8s linear infinite; margin: 0 auto 20px; }
-  @keyframes raspin { to { transform: rotate(360deg); } }
-  .loading-text { font-family: 'DM Mono', monospace; font-size: 13px; color: #8a7a68; }
-  .loading-step { font-size: 12px; color: #aaa; transition: color 0.3s; margin: 4px 0; }
-  .loading-step.active { color: var(--gold); }
-  .loading-step.done { color: var(--sage); }
+  .ra-results{display:none;}
+  .ra-results.active{display:block;}
+  .results-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--mist);}
+  .results-title{font-family:'DM Serif Display',serif;font-size:32px;color:var(--ink);}
+  .results-meta{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;text-align:right;line-height:1.6;}
 
-  .ra-results { display: none; }
-  .ra-results.active { display: block; }
-  .results-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--mist); }
-  .results-title { font-family: 'DM Serif Display', serif; font-size: 32px; color: var(--ink); }
-  .results-meta { font-family: 'DM Mono', monospace; font-size: 12px; color: #8a7a68; text-align: right; line-height: 1.6; }
+  .section-nav{display:flex;gap:6px;flex-wrap:wrap;background:white;border:1px solid var(--mist);border-radius:var(--radius);padding:12px 16px;margin-bottom:40px;box-shadow:var(--shadow);}
+  .nav-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid var(--mist);background:transparent;color:#8a7a68;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+  .nav-btn:hover{background:var(--cream);color:var(--ink);border-color:var(--gold);}
 
-  .section-nav { display: flex; gap: 6px; flex-wrap: wrap; background: white; border: 1px solid var(--mist); border-radius: var(--radius); padding: 12px 16px; margin-bottom: 40px; box-shadow: var(--shadow); }
-  .nav-btn { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 10px; border-radius: 6px; border: 1px solid var(--mist); background: transparent; color: #8a7a68; cursor: pointer; transition: all 0.15s; white-space: nowrap; }
-  .nav-btn:hover { background: var(--cream); color: var(--ink); border-color: var(--gold); }
+  .ra-section{margin-bottom:56px;scroll-margin-top:20px;}
+  .section-label{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:white;background:var(--ink);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
+  .section-heading{font-family:'DM Serif Display',serif;font-size:28px;color:var(--ink);margin-bottom:6px;}
+  .section-sub{font-size:13px;color:#6b5e4a;margin-bottom:24px;line-height:1.6;max-width:720px;}
+  .jane-note{background:#1a2e1a;color:#a8c4a8;font-size:13px;line-height:1.7;padding:14px 18px;border-radius:var(--radius);margin-bottom:20px;}
+  .jane-note strong{color:var(--gold-light);}
 
-  .ra-section { margin-bottom: 48px; scroll-margin-top: 20px; }
-  .section-label { display: inline-block; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: white; background: var(--ink); padding: 4px 10px; border-radius: 20px; margin-bottom: 10px; }
-  .section-heading { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--ink); margin-bottom: 6px; }
-  .section-sub { font-size: 13px; color: #6b5e4a; margin-bottom: 24px; line-height: 1.6; max-width: 720px; }
-  .jane-note { background: #1a2e1a; color: #a8c4a8; font-size: 13px; line-height: 1.7; padding: 14px 18px; border-radius: var(--radius); margin-bottom: 20px; }
-  .jane-note strong { color: var(--gold-light); }
+  .btn-copy,.btn-copy-sm{flex-shrink:0;padding:6px 14px;background:transparent;border:1px solid var(--mist);color:#8a7a68;font-family:'DM Mono',monospace;font-size:11px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
+  .btn-copy-sm{padding:4px 10px;font-size:10px;}
+  .btn-copy:hover,.btn-copy-sm:hover{border-color:var(--gold);color:var(--gold);}
+  .btn-copy.copied,.btn-copy-sm.copied{border-color:var(--sage);color:var(--sage-light);}
 
-  .btn-copy, .btn-copy-sm { flex-shrink: 0; padding: 6px 14px; background: transparent; border: 1px solid var(--mist); color: #8a7a68; font-family: 'DM Mono', monospace; font-size: 11px; border-radius: 6px; cursor: pointer; transition: all 0.2s; }
-  .btn-copy-sm { padding: 4px 10px; font-size: 10px; }
-  .btn-copy:hover, .btn-copy-sm:hover { border-color: var(--gold); color: var(--gold); }
-  .btn-copy.copied, .btn-copy-sm.copied { border-color: var(--sage); color: var(--sage-light); }
+  /* CHOICE CARDS — used for About, MWP, Ingredients */
+  .choice-list{display:flex;flex-direction:column;gap:12px;}
+  .choice-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .choice-card-body{flex:1;}
+  .choice-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;margin-bottom:6px;letter-spacing:0.06em;text-transform:uppercase;}
+  .choice-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;line-height:1.4;}
+  .choice-text{font-size:14px;color:#3a2e20;line-height:1.7;}
+  .choice-desc{font-size:13px;color:#6b5e4a;line-height:1.6;margin-top:4px;}
+  .choice-charcount{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;margin-top:6px;}
+  .choice-charcount.over{color:var(--rust);}
+  .badge-wiki{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);background:#f0f5ee;border:1px solid #c8ddc4;padding:3px 8px;border-radius:20px;margin-top:6px;display:inline-block;}
+  .badge-verify{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);background:#fffbf0;border:1px solid #f0d080;padding:3px 8px;border-radius:20px;margin-top:6px;display:inline-block;}
 
-  /* SENTIMENT */
-  .sentiment-wrap { padding: 32px; margin-bottom: 48px; }
-  .sentiment-explainer { font-size: 13px; color: #6b5e4a; line-height: 1.6; margin-bottom: 24px; max-width: 680px; }
-  .sentiment-explainer strong { color: var(--ink); }
-  .sentiment-divider { height: 1px; background: var(--mist); margin-bottom: 24px; }
-  .sentiment-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-  .sentiment-stat { background: var(--cream); border-radius: 10px; padding: 24px 20px; text-align: center; }
-  .sentiment-stat-pct { font-family: 'DM Serif Display', serif; font-size: 48px; line-height: 1; color: var(--ink); margin-bottom: 6px; }
-  .sentiment-stat-label { font-size: 13px; color: #6b5e4a; margin-bottom: 8px; }
-  .sentiment-bar { height: 10px; background: var(--mist); border-radius: 100px; overflow: hidden; display: flex; margin-bottom: 10px; }
-  .sentiment-fill { height: 100%; transition: width 1s ease; }
-  .s-positive { background: var(--ink); }
-  .s-neutral { background: #8a7a68; }
-  .s-negative { background: var(--rust); }
-  .sentiment-note { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; line-height: 1.6; background: var(--cream); padding: 12px 16px; border-radius: 8px; }
-
-  /* OUTCOME STATS */
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-  .stat-card { background: white; padding: 28px 24px; position: relative; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(232,226,217,0.6); overflow: hidden; }
-  .stat-card-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--ink); border-radius: var(--radius) var(--radius) 0 0; }
-  .stat-pct { font-family: 'DM Serif Display', serif; font-size: 56px; line-height: 1; color: var(--ink); margin-bottom: 8px; }
-  .stat-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
-  .stat-detail { font-size: 12px; color: #8a7a68; }
-  .stats-footnote { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; font-style: italic; margin-bottom: 12px; }
-  .stats-warning { background: #fffbf0; border: 1px solid #f0d080; border-radius: 10px; padding: 16px 20px; margin-top: 12px; }
-  .stats-warning-title { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
-  .stats-warning-text { font-size: 13px; color: #6b5040; line-height: 1.6; }
-  .transformation-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid rgba(232,226,217,0.6); padding: 24px; margin-top: 12px; }
-  .transformation-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--sage); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 8px; }
-  .transformation-stat { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--ink); margin-bottom: 4px; }
-  .transformation-sub { font-size: 12px; color: #8a7a68; }
-
-  /* ABOUT */
-  .about-card { background: white; border: 1px solid rgba(232,226,217,0.6); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
-  .about-field { background: var(--cream); border-radius: 10px; padding: 18px 20px; }
-  .about-field-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 8px; }
-  .about-field-text { font-size: 14px; color: var(--ink); line-height: 1.7; flex: 1; }
-  .about-field-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-top: 6px; }
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
-
-  /* PAIN POINTS */
-  .pain-wrap { background: #fff8f6; border: 1px solid #f5ddd8; border-radius: var(--radius); padding: 32px; margin-bottom: 48px; box-shadow: var(--shadow); }
-  .pain-heading { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--rust); margin-bottom: 6px; }
-  .pain-sub { font-size: 13px; color: #8a6a60; margin-bottom: 24px; line-height: 1.6; }
-  .pain-card { border-left: 3px solid var(--rust); background: white; padding: 20px 24px; margin-bottom: 12px; border-radius: 0 var(--radius) var(--radius) 0; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
-  .pain-rank { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--rust); letter-spacing: 0.08em; text-transform: uppercase; }
-  .pain-label { font-size: 16px; font-weight: 600; color: var(--ink); }
-  .pain-language { font-size: 13px; color: #5a4a38; line-height: 1.7; font-style: italic; }
-  .pain-hook-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .pain-copy-hook { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; flex: 1; }
-  .pain-copy-hook span { color: var(--rust); }
-
-  /* MADE WITH PURPOSE */
-  .mwp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
-  .mwp-card { background: white; border: 1px solid rgba(232,226,217,0.6); border-radius: var(--radius); padding: 22px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
-  .mwp-num { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; }
-  .mwp-title { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-  .mwp-desc { font-size: 13px; color: #6b5e4a; line-height: 1.6; }
-  .mwp-proof { font-size: 12px; color: #8a7a68; font-style: italic; line-height: 1.5; padding-top: 8px; border-top: 1px dashed var(--mist); }
-  .mwp-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-  .mwp-charcount { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; }
-  .badge-wiki { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--sage); background: #f0f5ee; border: 1px solid #c8ddc4; padding: 3px 8px; border-radius: 20px; margin-top: 4px; display: inline-block; }
-  .badge-verify { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); background: #fffbf0; border: 1px solid #f0d080; padding: 3px 8px; border-radius: 20px; margin-top: 4px; display: inline-block; }
-
-  /* BENEFITS */
-  .benefits-wrap { margin-bottom: 48px; }
-  .benefit-source-tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid var(--mist); }
-  .benefit-tab { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 8px 16px; color: #8a7a68; cursor: default; border-bottom: 2px solid transparent; margin-bottom: -1px; }
-  .benefit-tab.active { color: var(--ink); border-bottom-color: var(--ink); }
-  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 12px; }
-  .benefit-card { background: white; border: 1px solid rgba(232,226,217,0.6); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 6px; }
-  .benefit-card.placeholder { background: var(--cream); border: 1px dashed var(--mist); box-shadow: none; }
-  .benefit-num { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; }
-  .benefit-title { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-  .benefit-proof { font-size: 12px; color: #6b5e4a; line-height: 1.6; flex: 1; }
-  .benefit-footer { display: flex; justify-content: flex-end; margin-top: 8px; }
-  .fold-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #8a7a68; margin-bottom: 10px; padding-top: 16px; border-top: 1px dashed var(--mist); }
-
-  /* COPY STATS */
-  .copy-wrap { background: var(--ink); border-radius: var(--radius); padding: 36px; margin-bottom: 48px; box-shadow: var(--shadow-md); }
-  .copy-heading { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--gold-light); margin-bottom: 6px; }
-  .copy-sub { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a6e5e; margin-bottom: 24px; letter-spacing: 0.06em; text-transform: uppercase; }
-  .copy-snippet { background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold); padding: 16px 20px; margin-bottom: 12px; display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; border-radius: 0 8px 8px 0; }
-  .copy-snippet p { font-size: 14px; color: var(--paper); line-height: 1.6; flex: 1; }
-  .copy-snippet p strong { color: var(--gold-light); }
-  .copy-placement { font-family: 'DM Mono', monospace; font-size: 10px; color: #4a3e2e; display: block; margin-top: 4px; }
+  /* REAL CUSTOMERS */
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(232,226,217,0.8);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;}
+  .stat-card{background:white;padding:32px 28px;border-right:1px solid rgba(232,226,217,0.8);border-bottom:1px solid rgba(232,226,217,0.8);display:flex;flex-direction:column;gap:8px;}
+  .stat-card:nth-child(3n){border-right:none;}
+  .stat-card:nth-last-child(-n+3){border-bottom:none;}
+  .stat-pct{font-family:'DM Serif Display',serif;font-size:64px;line-height:1;color:var(--ink);}
+  .stat-label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;}
+  .stat-detail{font-size:12px;color:#8a7a68;}
+  .stat-copy-row{display:flex;justify-content:flex-end;margin-top:8px;}
+  .stats-footnote{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;font-style:italic;margin-bottom:16px;}
+  .warn-yellow{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:14px 18px;margin-bottom:16px;}
+  .warn-yellow-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+  .warn-red{background:#fff5f3;border:1px solid #f5c6bb;border-radius:10px;padding:14px 18px;margin-bottom:16px;}
+  .warn-red-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--rust);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
+  .warn-text{font-size:13px;color:#5a4a38;line-height:1.6;}
+  .transform-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(232,226,217,0.6);padding:24px;margin-top:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .transform-inner{flex:1;}
+  .transform-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+  .transform-stat{font-family:'DM Serif Display',serif;font-size:24px;color:var(--ink);margin-bottom:4px;}
+  .transform-sub{font-size:12px;color:#8a7a68;}
+  .alt-stat-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:28px;margin-bottom:12px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .alt-stat-inner{flex:1;}
+  .alt-stat-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+  .alt-stat-text{font-family:'DM Serif Display',serif;font-size:22px;color:var(--ink);margin-bottom:6px;line-height:1.3;}
+  .alt-stat-sub{font-size:13px;color:#6b5e4a;line-height:1.5;}
 
   /* REVIEWS */
-  .reviews-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 12px; }
-  .review-card { background: #1a2e1a; border-radius: var(--radius); padding: 28px 24px; display: flex; flex-direction: column; box-shadow: var(--shadow-md); }
-  .review-card-title { font-size: 14px; font-weight: 600; color: #e8d8a8; margin-bottom: 10px; line-height: 1.4; }
-  .review-stars { color: var(--gold-light); font-size: 14px; letter-spacing: 2px; margin-bottom: 12px; }
-  .review-text { font-size: 14px; color: #c8d8c8; line-height: 1.8; font-style: italic; flex: 1; margin-bottom: 20px; }
-  .review-author-block { padding-top: 16px; border-top: 1px solid #2a4a2a; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .review-author-name { font-family: 'DM Mono', monospace; font-size: 12px; color: #a8c4a8; font-weight: 600; margin-bottom: 2px; }
-  .review-author-label { font-family: 'DM Mono', monospace; font-size: 11px; color: #7a9e7a; margin-bottom: 6px; }
-  .review-theme-tag { display: inline-block; font-size: 10px; background: #2a4a2a; color: #7a9e7a; padding: 3px 8px; border-radius: 20px; }
+  .reviews-list{display:flex;flex-direction:column;gap:12px;}
+  .review-card{background:#1a2e1a;border-radius:var(--radius);padding:24px 28px;display:flex;align-items:flex-start;gap:20px;box-shadow:var(--shadow-md);}
+  .review-card-body{flex:1;}
+  .review-num{font-family:'DM Mono',monospace;font-size:10px;color:#6a9e6a;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;}
+  .review-title{font-size:14px;font-weight:600;color:#e8d8a8;margin-bottom:8px;line-height:1.4;}
+  .review-stars{color:var(--gold-light);font-size:13px;letter-spacing:2px;margin-bottom:10px;}
+  .review-text{font-size:14px;color:#c8d8c8;line-height:1.8;font-style:italic;margin-bottom:14px;}
+  .review-author-row{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid #2a4a2a;}
+  .review-author-name{font-family:'DM Mono',monospace;font-size:12px;color:#a8c4a8;font-weight:600;}
+  .review-author-label{font-family:'DM Mono',monospace;font-size:11px;color:#7a9e7a;}
+  .review-theme-tag{display:inline-block;font-size:10px;background:#2a4a2a;color:#7a9e7a;padding:3px 8px;border-radius:20px;}
+  .review-copy-col{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;}
+  .review-charcount{font-family:'DM Mono',monospace;font-size:10px;color:#6a9e6a;}
 
-  /* INGREDIENTS */
-  .ing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 12px; }
-  .ing-card { background: white; border: 1px solid rgba(232,226,217,0.6); border-radius: var(--radius); padding: 22px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
-  .ing-card.placeholder { background: var(--cream); border: 1px dashed var(--mist); box-shadow: none; }
-  .ing-num { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; }
-  .ing-title { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.3; }
-  .ing-desc { font-size: 13px; color: #6b5e4a; line-height: 1.6; flex: 1; }
-  .ing-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
-  .ing-charcount { font-family: 'DM Mono', monospace; font-size: 10px; color: #8a7a68; }
-
-  /* THEMES */
-  .theme-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-  .theme-pill { padding: 7px 14px; background: white; border: 1px solid var(--mist); border-radius: 100px; font-size: 12px; color: var(--ink); display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow); }
-  .theme-pill .pill-count { font-family: 'DM Mono', monospace; font-size: 10px; background: var(--ink); color: var(--gold-light); padding: 2px 7px; border-radius: 100px; }
+  /* KEY BENEFITS (under MWP) */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
+  .benefit-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;}
+  .benefit-card.placeholder{background:var(--cream);border:1px dashed var(--mist);box-shadow:none;}
+  .benefit-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;}
+  .benefit-title{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;}
+  .benefit-proof{font-size:12px;color:#6b5e4a;line-height:1.6;flex:1;}
+  .benefit-footer{display:flex;justify-content:flex-end;margin-top:8px;}
+  .fold-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:10px;padding-top:16px;border-top:1px dashed var(--mist);}
 
   /* CURATED */
-  .curated-wrap { background: var(--cream); border: 1px solid var(--mist); border-radius: var(--radius); padding: 32px; margin-bottom: 48px; box-shadow: var(--shadow); }
-  .curated-suggestion { background: white; border: 1px solid var(--mist); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 10px; box-shadow: var(--shadow); }
-  .curated-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-  .curated-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
-  .curated-subhead { font-size: 13px; color: #6b5e4a; line-height: 1.6; margin-bottom: 4px; }
-  .curated-context { font-size: 11px; color: #8a7a68; font-style: italic; font-family: 'DM Mono', monospace; }
-  .curated-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .curated-wrap{background:var(--cream);border:1px solid var(--mist);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);}
+  .curated-card{background:white;border:1px solid var(--mist);border-radius:var(--radius);padding:18px 20px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .curated-body{flex:1;}
+  .curated-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+  .curated-title{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .curated-subhead{font-size:13px;color:#6b5e4a;line-height:1.6;margin-bottom:4px;}
+  .curated-context{font-size:11px;color:#8a7a68;font-style:italic;font-family:'DM Mono',monospace;}
 
-  /* FAQ */
-  .faq-wrap { margin-bottom: 48px; }
-  .faq-instructions { background: #1a2e1a; color: #a8c4a8; font-size: 13px; line-height: 1.7; padding: 16px 20px; border-radius: var(--radius); margin-bottom: 24px; }
-  .faq-instructions strong { color: var(--gold-light); }
-  .faq-card { background: white; border: 1px solid rgba(232,226,217,0.6); border-radius: var(--radius); margin-bottom: 10px; overflow: hidden; box-shadow: var(--shadow); }
-  .faq-card-header { padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; cursor: pointer; user-select: none; }
-  .faq-card-header:hover { background: #faf8f4; }
-  .faq-rank-badge { font-family: 'DM Mono', monospace; font-size: 10px; background: var(--rust); color: white; padding: 3px 8px; border-radius: 20px; flex-shrink: 0; margin-top: 2px; }
-  .faq-question { font-size: 14px; font-weight: 600; color: var(--ink); line-height: 1.4; flex: 1; }
-  .faq-toggle { font-size: 16px; color: #8a7a68; flex-shrink: 0; transition: transform 0.2s; }
-  .faq-toggle.open { transform: rotate(180deg); }
-  .faq-card-body { padding: 16px 20px 18px; border-top: 1px solid var(--mist); display: none; }
-  .faq-card-body.open { display: block; }
-  .faq-source { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--rust); margin-bottom: 6px; }
-  .faq-source-quote { font-size: 13px; color: #5a4a38; font-style: italic; line-height: 1.6; margin-bottom: 12px; }
-  .faq-suggested-answer { background: var(--cream); border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
-  .faq-suggested-label { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--sage); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; }
-  .faq-answer-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .faq-suggested-text { font-size: 13px; color: var(--ink); line-height: 1.6; flex: 1; }
-  .faq-answer-prompt { font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; }
-  .faq-answer-prompt span { color: var(--sage); }
+  /* OBJECTION MAP */
+  .objection-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
+  .objection-header{padding:18px 20px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;}
+  .objection-header:hover{background:#faf8f4;}
+  .objection-rank{font-family:'DM Mono',monospace;font-size:10px;background:var(--rust);color:white;padding:3px 8px;border-radius:20px;flex-shrink:0;margin-top:2px;}
+  .objection-question{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;flex:1;}
+  .objection-toggle{font-size:16px;color:#8a7a68;flex-shrink:0;transition:transform 0.2s;}
+  .objection-toggle.open{transform:rotate(180deg);}
+  .objection-body{padding:16px 20px 18px;border-top:1px solid var(--mist);display:none;}
+  .objection-body.open{display:block;}
+  .objection-source-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--rust);margin-bottom:6px;}
+  .objection-source-quote{font-size:13px;color:#5a4a38;font-style:italic;line-height:1.6;margin-bottom:14px;}
+  .objection-answer-wrap{background:var(--cream);border-radius:8px;padding:14px 16px;margin-bottom:10px;}
+  .objection-answer-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--sage);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:6px;}
+  .objection-answer-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .objection-answer-text{font-size:13px;color:var(--ink);line-height:1.7;flex:1;}
+  .objection-note{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;}
+  .objection-note span{color:var(--sage);}
 
-  .error-box { display: none; background: #fff5f3; border: 1px solid #f5c6bb; border-radius: var(--radius); padding: 20px 24px; font-size: 14px; color: var(--rust); margin-bottom: 24px; }
-  .error-box.active { display: block; }
+  /* REFERENCE SECTIONS */
+  .ref-divider{border:none;border-top:2px dashed var(--mist);margin:48px 0 32px;}
+  .ref-label{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;margin-bottom:32px;letter-spacing:0.06em;text-transform:uppercase;}
+  .sentiment-wrap{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:28px 32px;box-shadow:var(--shadow);}
+  .sentiment-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
+  .sentiment-stat{background:var(--cream);border-radius:10px;padding:20px;text-align:center;}
+  .sentiment-stat-pct{font-family:'DM Serif Display',serif;font-size:40px;line-height:1;color:var(--ink);margin-bottom:6px;}
+  .sentiment-stat-label{font-size:13px;color:#6b5e4a;}
+  .sentiment-bar{height:8px;background:var(--mist);border-radius:100px;overflow:hidden;display:flex;margin-bottom:8px;}
+  .sentiment-fill{height:100%;transition:width 1s ease;}
+  .s-positive{background:var(--ink);}
+  .s-neutral{background:#8a7a68;}
+  .s-negative{background:var(--rust);}
+  .pain-card{border-left:3px solid var(--rust);background:white;padding:18px 22px;margin-bottom:10px;border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .pain-body{flex:1;}
+  .pain-rank{font-family:'DM Mono',monospace;font-size:10px;color:var(--rust);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
+  .pain-label{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:4px;}
+  .pain-language{font-size:13px;color:#5a4a38;line-height:1.7;font-style:italic;}
+  .theme-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .theme-pill{padding:7px 14px;background:white;border:1px solid var(--mist);border-radius:100px;font-size:12px;color:var(--ink);display:flex;align-items:center;gap:8px;box-shadow:var(--shadow);}
+  .theme-pill .pill-count{font-family:'DM Mono',monospace;font-size:10px;background:var(--ink);color:var(--gold-light);padding:2px 7px;border-radius:100px;}
 
-  .export-bar { display: flex; gap: 12px; padding-top: 24px; border-top: 1px solid var(--mist); }
-  .btn-export { padding: 10px 24px; background: white; border: 1px solid var(--mist); color: var(--ink); font-size: 13px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-family: 'Instrument Sans', sans-serif; box-shadow: var(--shadow); }
-  .btn-export:hover { border-color: var(--gold); color: var(--gold); }
+  .error-box{display:none;background:#fff5f3;border:1px solid #f5c6bb;border-radius:var(--radius);padding:20px 24px;font-size:14px;color:var(--rust);margin-bottom:24px;}
+  .error-box.active{display:block;}
+  .export-bar{display:flex;gap:12px;padding-top:24px;border-top:1px solid var(--mist);}
+  .btn-export{padding:10px 24px;background:white;border:1px solid var(--mist);color:var(--ink);font-size:13px;border-radius:8px;cursor:pointer;transition:all 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);}
+  .btn-export:hover{border-color:var(--gold);color:var(--gold);}
+  .date-range-badge{display:inline-flex;align-items:center;gap:6px;background:var(--cream);border:1px solid var(--mist);border-radius:20px;padding:4px 12px;font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;margin-top:8px;}
 
-  .date-range-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--cream); border: 1px solid var(--mist); border-radius: 20px; padding: 4px 12px; font-family: 'DM Mono', monospace; font-size: 11px; color: #8a7a68; margin-top: 8px; }
-
-  @media (max-width: 700px) {
-    .ra-controls, .about-grid { grid-template-columns: 1fr; }
-    .stats-grid, .benefits-grid, .reviews-grid, .mwp-grid, .ing-grid, .sentiment-stats-row { grid-template-columns: 1fr 1fr; }
-    .settings-grid { grid-template-columns: 1fr 1fr; }
-    .section-nav { display: none; }
+  @media(max-width:700px){
+    .ra-controls,.stats-grid,.benefits-grid,.sentiment-stats-row{grid-template-columns:1fr 1fr;}
+    .settings-grid{grid-template-columns:1fr 1fr;}
+    .section-nav{display:none;}
   }
 </style>
 
 <div class="review-analyzer-wrapper" style="max-width:1100px;margin:0 auto;padding:52px 32px;">
-
   <h1 style="font-family:'DM Serif Display',serif;font-size:48px;line-height:1.1;margin-bottom:10px;color:var(--ink);">Turn reviews into<br><em style="color:var(--gold);">conversion copy.</em></h1>
   <p style="font-size:15px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.6;">Upload your Yotpo CSV. Paste the product wiki (optional). Get PDP-ready copy for every section — grounded in real customer language.</p>
 
@@ -264,41 +219,28 @@
   </div>
 
   <div class="ra-controls">
-    <div>
-      <span class="ra-label">Select Product</span>
-      <select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select>
-    </div>
-    <div style="display:flex;align-items:flex-end;">
-      <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button>
-    </div>
+    <div><span class="ra-label">Select Product</span><select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select></div>
+    <div style="display:flex;align-items:flex-end;"><button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button></div>
   </div>
 
   <div style="margin-bottom:16px;">
-    <span class="collapsible-toggle" onclick="togglePanel('wikiPanel','wikiArrow')">
-      Product Wiki (optional) <span class="collapsible-arrow" id="wikiArrow">▾</span>
-    </span>
+    <span class="collapsible-toggle" onclick="togglePanel('wikiPanel','wikiArrow')">Product Wiki (optional) <span class="collapsible-arrow" id="wikiArrow">▾</span></span>
     <div class="collapsible-panel" id="wikiPanel">
-      <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc and paste. Feeds Made With Purpose and Ingredient descriptions. Leave blank to use review language only."></textarea>
-      <div class="panel-note">Plain text only. Formatting doesn't matter. Cards informed by wiki will be marked ✓ Wiki-informed.</div>
+      <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Used for Made With Purpose, Ingredients, and Key Benefits. Leave blank to use review language only."></textarea>
+      <div class="panel-note">Plain text only. Formatting doesn't matter. Wiki-informed cards will be marked ✓ Wiki-informed.</div>
     </div>
   </div>
 
   <div style="margin-bottom:40px;">
-    <span class="collapsible-toggle" onclick="togglePanel('settingsPanel','settingsArrow')">
-      Output settings <span class="collapsible-arrow" id="settingsArrow">▾</span>
-    </span>
+    <span class="collapsible-toggle" onclick="togglePanel('settingsPanel','settingsArrow')">Output settings <span class="collapsible-arrow" id="settingsArrow">▾</span></span>
     <div class="collapsible-panel" id="settingsPanel">
       <div class="settings-panel-inner">
         <div class="settings-grid">
-          <div class="settings-field"><label>About — max words</label><input type="number" id="set_about_words" value="30" min="10" max="80"></div>
-          <div class="settings-field"><label>Made With — desc max chars</label><input type="number" id="set_mwp_chars" value="73" min="40" max="150"></div>
-          <div class="settings-field"><label>Made With — title max words</label><input type="number" id="set_mwp_title_words" value="3" min="2" max="5"></div>
-          <div class="settings-field"><label>Review title — max words</label><input type="number" id="set_review_title_words" value="10" min="5" max="20"></div>
-          <div class="settings-field"><label>Ingredient title — max chars</label><input type="number" id="set_ing_title_chars" value="40" min="20" max="80"></div>
-          <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_desc_chars" value="120" min="60" max="200"></div>
-          <div class="settings-field"><label>FAQs — number of questions</label><input type="number" id="set_faq_count" value="10" min="5" max="15"></div>
-          <div class="settings-field"><label>Copy snippets — count</label><input type="number" id="set_copy_count" value="4" min="2" max="8"></div>
-          <div class="settings-field"><label>Reviews — number of quotes</label><input type="number" id="set_review_count" value="4" min="2" max="6"></div>
+          <div class="settings-field"><label>About — max words</label><input type="number" id="set_about_words" value="60" min="20" max="120"></div>
+          <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="73" min="40" max="150"></div>
+          <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="200" min="80" max="400"></div>
+          <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
+          <div class="settings-field"><label>Objections — count</label><input type="number" id="set_obj_count" value="15" min="8" max="20"></div>
         </div>
         <div class="panel-note" style="margin-top:16px;">Defaults are set. Change before running — won't affect results already on screen.</div>
       </div>
@@ -312,14 +254,13 @@
     <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
     <div style="margin-top:12px">
       <div class="loading-step" id="step1">↳ Sorting and parsing recent reviews</div>
-      <div class="loading-step" id="step2">↳ Extracting pain points and customer language</div>
-      <div class="loading-step" id="step3">↳ Calculating outcome statistics and copy</div>
-      <div class="loading-step" id="step4">↳ Building all PDP sections for Jane</div>
+      <div class="loading-step" id="step2">↳ Mining pain points and customer language</div>
+      <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
+      <div class="loading-step" id="step4">↳ Writing PDP copy for all sections</div>
     </div>
   </div>
 
   <div class="ra-results" id="raResults">
-
     <div class="results-header">
       <div>
         <div class="results-title" id="resultsTitle">Product</div>
@@ -329,209 +270,169 @@
     </div>
 
     <nav class="section-nav">
-      <button class="nav-btn" onclick="scrollTo('sec-sentiment')">Sentiment</button>
-      <button class="nav-btn" onclick="scrollTo('sec-outcomes')">Outcomes</button>
-      <button class="nav-btn" onclick="scrollTo('sec-about')">About</button>
-      <button class="nav-btn" onclick="scrollTo('sec-pain')">Pain Points</button>
-      <button class="nav-btn" onclick="scrollTo('sec-mwp')">Made With Purpose</button>
-      <button class="nav-btn" onclick="scrollTo('sec-benefits')">Benefits</button>
-      <button class="nav-btn" onclick="scrollTo('sec-copy')">Copy Stats</button>
-      <button class="nav-btn" onclick="scrollTo('sec-reviews')">Reviews</button>
-      <button class="nav-btn" onclick="scrollTo('sec-ingredients')">Ingredients</button>
-      <button class="nav-btn" onclick="scrollTo('sec-themes')">Themes</button>
-      <button class="nav-btn" onclick="scrollTo('sec-curated')">Curated</button>
-      <button class="nav-btn" onclick="scrollTo('sec-faq')">FAQs</button>
+      <button class="nav-btn" onclick="scrollTo('sec-about')">S1 · About</button>
+      <button class="nav-btn" onclick="scrollTo('sec-mwp')">S2 · Made With Purpose</button>
+      <button class="nav-btn" onclick="scrollTo('sec-stats')">S3 · Real Customers</button>
+      <button class="nav-btn" onclick="scrollTo('sec-reviews')">S4 · Reviews</button>
+      <button class="nav-btn" onclick="scrollTo('sec-ingredients')">S5 · Ingredients</button>
+      <button class="nav-btn" onclick="scrollTo('sec-curated')">S6 · Curate Collection</button>
+      <button class="nav-btn" onclick="scrollTo('sec-objections')">S7 · Objection Map</button>
+      <button class="nav-btn" onclick="scrollTo('sec-ref')">↓ Reference</button>
     </nav>
 
-    <!-- SENTIMENT -->
-    <div class="ra-section card sentiment-wrap" id="sec-sentiment">
-      <div class="section-label">Sentiment</div>
-      <div class="section-heading">How Do Customers Feel?</div>
-      <div class="sentiment-explainer">Sentiment is calculated by reading the <strong>tone and language</strong> of each review — not the star rating. These percentages reflect tone, not ratings.</div>
-      <div class="sentiment-divider"></div>
-      <div class="sentiment-stats-row">
-        <div class="sentiment-stat"><div class="sentiment-stat-pct" id="posNum">—</div><div class="sentiment-stat-label">Positive tone</div></div>
-        <div class="sentiment-stat"><div class="sentiment-stat-pct" id="neuNum">—</div><div class="sentiment-stat-label">Neutral tone</div></div>
-        <div class="sentiment-stat"><div class="sentiment-stat-pct" id="negNum">—</div><div class="sentiment-stat-label">Mixed / negative</div></div>
-      </div>
-      <div class="sentiment-bar">
-        <div class="sentiment-fill s-positive" id="sentimentPos" style="width:0%"></div>
-        <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
-        <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
-      </div>
-      <div class="sentiment-note">Note: A product with 86% positive, 11% neutral, and 3% negative is performing very well — the numbers look low because most reviews are clearly positive.</div>
-    </div>
-
-    <!-- OUTCOMES -->
-    <div class="ra-section" id="sec-outcomes">
-      <div class="section-label">PDP Section 3 — Real Customers. Real Results.</div>
-      <div class="section-heading">Real Results. From Real Customers.</div>
-      <div class="section-sub">Percentages reflect how many reviewers mentioned each outcome — from review language, not star ratings.</div>
-      <div class="stats-grid" id="statsGrid"></div>
-      <div class="stats-footnote" id="statsFootnote"></div>
-      <div id="statsWarning" style="display:none" class="stats-warning">
-        <div class="stats-warning-title">⚠ Jane — Low Outcome Percentages</div>
-        <div class="stats-warning-text" id="statsWarningText"></div>
-      </div>
-      <div id="transformationCard" style="display:none" class="transformation-card">
-        <div class="transformation-label">Alternative Positioning — Transformation Timeframe</div>
-        <div class="transformation-stat" id="transformationStat"></div>
-        <div class="transformation-sub" id="transformationSub"></div>
-      </div>
-    </div>
-
-    <!-- ABOUT -->
-    <div class="about-card ra-section" id="sec-about">
+    <!-- S1 ABOUT -->
+    <div class="ra-section" id="sec-about">
       <div class="section-label">PDP Section 1 — About</div>
       <div class="section-heading">About</div>
-      <div class="section-sub">Pain opener + main benefit + description. Jane: edit for brand voice before publishing.</div>
-      <div class="about-field" style="margin-bottom:12px;">
-        <div class="about-field-label">Pain opener — leads with the customer's before state</div>
-        <div class="about-field-row">
-          <div class="about-field-text" id="aboutPainOpener"></div>
-          <button class="btn-copy-sm" onclick="copyById(this,'aboutPainOpener')">Copy</button>
-        </div>
-      </div>
-      <div class="about-grid">
-        <div class="about-field">
-          <div class="about-field-label">Main benefit</div>
-          <div class="about-field-row">
-            <div class="about-field-text" id="aboutMainBenefit"></div>
-            <button class="btn-copy-sm" onclick="copyById(this,'aboutMainBenefit')">Copy</button>
-          </div>
-        </div>
-        <div class="about-field">
-          <div class="about-field-label">Description (<span id="aboutWordCount">0</span> words)</div>
-          <div class="about-field-row">
-            <div class="about-field-text" id="aboutDescription"></div>
-            <button class="btn-copy-sm" onclick="copyById(this,'aboutDescription')">Copy</button>
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;justify-content:flex-end;margin-top:12px;">
-        <button class="btn-copy" onclick="copyAboutFull(this)">Copy full About section</button>
-      </div>
+      <div class="section-sub">5 description options — each opens with a pain point and leads into the main benefit. Jane: pick one, edit for brand voice.</div>
+      <div class="jane-note"><strong>Jane:</strong> Each option is a complete About description — pain opener + main benefit combined. Pick the one that best matches the PDP angle you're going for. Copy button on each.</div>
+      <div class="choice-list" id="aboutList"></div>
     </div>
 
-    <!-- PAIN POINTS -->
-    <div class="pain-wrap ra-section" id="sec-pain">
-      <div class="section-label" style="background:var(--rust);">PDP Section 1 — About · Pain Points</div>
-      <div class="pain-heading">Top 3 Pain Points</div>
-      <div class="pain-sub">What customers struggled with before buying. Jane: use these as About section openers and ad hooks. Lead with the pain before the solution.</div>
-      <div id="painCards"></div>
-    </div>
-
-    <!-- MADE WITH PURPOSE -->
+    <!-- S2 MADE WITH PURPOSE -->
     <div class="ra-section" id="sec-mwp">
       <div class="section-label">PDP Section 2 — Made With Purpose</div>
       <div class="section-heading">Made With Purpose</div>
-      <div class="section-sub">2–3 word benefit title + short description + proof line from reviews. Wiki-informed where available.</div>
-      <div class="jane-note"><strong>Jane:</strong> Titles are 2–3 words max. Descriptions stay under <span id="mwpCharLimit">73</span> chars. Cards marked "Verify wiki" should be cross-checked before publishing.</div>
-      <div class="mwp-grid" id="mwpGrid"></div>
-    </div>
+      <div class="section-sub">5 benefit card options — title 2–3 words, description 73 chars max. Blends review language with wiki where available. Jane: pick 3.</div>
+      <div class="jane-note"><strong>Jane:</strong> Pick 3 of the 5 options below for the PDP. Each card has a title (2–3 words) and a description (73 chars max). Cards marked ✓ Wiki-informed have been verified against product facts.</div>
+      <div class="choice-list" id="mwpList"></div>
 
-    <!-- BENEFITS -->
-    <div class="benefits-wrap ra-section" id="sec-benefits">
-      <div class="section-label">PDP Section 4 — Benefits</div>
-      <div class="section-heading">Key Benefits</div>
-      <div class="section-sub">Top 3 from reviews. Wiki placeholders for Jane to enrich once wiki is sourced. 3 additional options below.</div>
-      <div class="benefit-source-tabs">
-        <div class="benefit-tab active">From Reviews</div>
-        <div class="benefit-tab" style="margin-left:16px;">Wiki Placeholders</div>
-      </div>
-      <div class="benefits-grid" id="reviewBenefitsGrid"></div>
-      <div class="benefits-grid" id="wikiBenefitsGrid">
-        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 01</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: one science line + one proof line from review data once wiki is sourced.</div></div>
-        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 02</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: one science line + one proof line from review data once wiki is sourced.</div></div>
-        <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 03</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: one science line + one proof line from review data once wiki is sourced.</div></div>
-      </div>
-      <div style="margin-top:4px;">
+      <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--mist);">
+        <div class="section-label" style="background:var(--sage);">Key Benefits</div>
+        <div class="section-heading" style="font-size:22px;margin-top:8px;">Key Benefits</div>
+        <div class="section-sub">Top 3 from reviews with proof lines. Wiki placeholders below. 3 additional options at bottom.</div>
+        <div class="benefits-grid" id="reviewBenefitsGrid"></div>
+        <div class="benefits-grid" id="wikiBenefitsGrid">
+          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 01</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
+          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 02</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
+          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 03</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
+        </div>
         <div class="fold-label">3 Additional Benefit Options (Jane: choose or discard)</div>
         <div class="benefits-grid" id="extraBenefitsGrid"></div>
       </div>
     </div>
 
-    <!-- COPY STATS -->
-    <div class="copy-wrap ra-section" id="sec-copy">
-      <div class="section-label" style="background:var(--gold);color:var(--ink);">PDP Section 3 — Real Customers · Copy-Ready Statistics</div>
-      <div class="copy-heading">Copy-Ready Statistics</div>
-      <div class="copy-sub">Jane: drop directly into PDPs, landing pages, or ads — edit for brand voice</div>
-      <div id="copySnippets"></div>
+    <!-- S3 REAL CUSTOMERS -->
+    <div class="ra-section" id="sec-stats">
+      <div class="section-label">PDP Section 3 — Real Customers. Real Results.</div>
+      <div class="section-heading">Real Customers. Real Results.</div>
+      <div class="section-sub">Outcome stats from review language — not star ratings.</div>
+      <div id="statsWarnYellow" style="display:none" class="warn-yellow">
+        <div class="warn-yellow-title">⚠ Consider using transformation timeline</div>
+        <div class="warn-text" id="statsWarnYellowText"></div>
+      </div>
+      <div id="statsWarnRed" style="display:none" class="warn-red">
+        <div class="warn-red-title">✕ Exclude this section from the PDP</div>
+        <div class="warn-text" id="statsWarnRedText"></div>
+      </div>
+      <div class="stats-grid" id="statsGrid"></div>
+      <div class="stats-footnote" id="statsFootnote"></div>
+      <div id="altStatsWrap" style="display:none">
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Alternative — "3 in 4" Framing</div>
+        <div id="altStatsList"></div>
+      </div>
+      <div id="transformCard" style="display:none" class="transform-card">
+        <div class="transform-inner">
+          <div class="transform-label">Transformation Timeline — always show this</div>
+          <div class="transform-stat" id="transformStat"></div>
+          <div class="transform-sub" id="transformSub"></div>
+        </div>
+        <button class="btn-copy-sm" id="transformCopyBtn">Copy</button>
+      </div>
     </div>
 
-    <!-- REVIEWS -->
+    <!-- S4 REVIEWS -->
     <div class="ra-section" id="sec-reviews">
       <div class="section-label">PDP Section 4 — Reviews</div>
-      <div class="section-heading">Standout Customer Quotes</div>
-      <div class="section-sub">AI-generated title + lightly rephrased review text (essence preserved) + original author name. Jane: if a quote reads better verbatim, pull it from Yotpo.</div>
-      <div class="reviews-grid" id="verbatimCards"></div>
+      <div class="section-heading">Reviews</div>
+      <div class="section-sub">10 options — named verified buyers only, AI-rephrased for clarity and copy quality. Jane: pick the strongest for the PDP.</div>
+      <div class="jane-note"><strong>Jane:</strong> Only reviews from customers with real names are included — no anonymous "Verified Buyer" placeholders. Each review has been lightly rephrased to fit character limits while preserving the customer's meaning and voice. Copy the full card or just the quote.</div>
+      <div class="reviews-list" id="reviewsList"></div>
     </div>
 
-    <!-- INGREDIENTS -->
+    <!-- S5 INGREDIENTS -->
     <div class="ra-section" id="sec-ingredients">
       <div class="section-label">PDP Section 5 — Ingredients</div>
       <div class="section-heading">Ingredients</div>
-      <div class="section-sub">Title and description for each key ingredient. Paste the product wiki above and re-run for best results.</div>
-      <div class="jane-note"><strong>Jane:</strong> Title max <span id="ingTitleLimit">40</span> chars · Desc max <span id="ingDescLimit">120</span> chars. Cards marked "Verify wiki" should be enriched from the product wiki before publishing.</div>
-      <div class="ing-grid" id="ingGrid"></div>
+      <div class="section-sub">5 headline + description options for the ingredients section intro. Sourced from wiki where available. Jane: pick one.</div>
+      <div class="jane-note"><strong>Jane:</strong> These are the editorial headline and supporting line for the Ingredients section — like "One nutrient. Three bioavailable forms." Pick the option that best fits the product story. Wiki-informed cards pull from product formulation facts.</div>
+      <div class="choice-list" id="ingredientsList"></div>
     </div>
 
-    <!-- THEMES -->
-    <div class="ra-section" id="sec-themes">
+    <!-- S6 CURATE YOUR COLLECTION -->
+    <div class="curated-wrap ra-section" id="sec-curated">
+      <div class="section-label">PDP Section 6 — Curate Your Collection</div>
+      <div class="section-heading">Curate Your Collection</div>
+      <div class="section-sub">3 heading + subhead options grounded in customer language.</div>
+      <div class="jane-note"><strong>Jane:</strong> The heading frames the collection. The subhead should speak to the customer journey — not list what the products do. Pick the option that fits the actual products being curated.</div>
+      <div id="curatedList"></div>
+    </div>
+
+    <!-- S7 OBJECTION MAP -->
+    <div class="ra-section" id="sec-objections">
+      <div class="section-label">PDP Section 7 — Objection Map</div>
+      <div class="section-heading">Objection Map</div>
+      <div class="section-sub">15 purchase hesitations ranked by frequency — each with source language and a suggested answer. Jane: pick the most relevant for the FAQ section.</div>
+      <div class="jane-note"><strong>Why proactive objection mapping:</strong> Most FAQs answer questions customers ask after buying. These are ranked by what stops customers from buying in the first place. <strong>Jane:</strong> Suggested answers are starting points — edit for brand voice and accuracy. The goal is to remove friction at the moment of decision.</div>
+      <div id="objectionCards"></div>
+    </div>
+
+    <!-- REFERENCE -->
+    <hr class="ref-divider" id="sec-ref">
+    <div class="ref-label">↓ Reference data — not mapped to PDP sections</div>
+
+    <div class="ra-section">
+      <div class="section-label">Reference — Pain Points</div>
+      <div class="section-heading">Pain Points</div>
+      <div class="section-sub">Top pain points mined from review language. Used to inform the About copy options above.</div>
+      <div id="painCards"></div>
+    </div>
+
+    <div class="ra-section">
+      <div class="section-label">Reference — Sentiment</div>
+      <div class="section-heading">Sentiment</div>
+      <div class="section-sub">Tone-based analysis from review language — not star ratings.</div>
+      <div class="sentiment-wrap">
+        <div class="sentiment-stats-row">
+          <div class="sentiment-stat"><div class="sentiment-stat-pct" id="posNum">—</div><div class="sentiment-stat-label">Positive tone</div></div>
+          <div class="sentiment-stat"><div class="sentiment-stat-pct" id="neuNum">—</div><div class="sentiment-stat-label">Neutral tone</div></div>
+          <div class="sentiment-stat"><div class="sentiment-stat-pct" id="negNum">—</div><div class="sentiment-stat-label">Mixed / negative</div></div>
+        </div>
+        <div class="sentiment-bar">
+          <div class="sentiment-fill s-positive" id="sentimentPos" style="width:0%"></div>
+          <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
+          <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ra-section">
       <div class="section-label">Reference — Themes</div>
       <div class="section-heading">Top Themes</div>
       <div class="section-sub">Most frequently mentioned topics. For reference and future content planning.</div>
       <div class="theme-pills" id="themePills"></div>
     </div>
 
-    <!-- CURATED -->
-    <div class="curated-wrap ra-section" id="sec-curated">
-      <div class="section-label">PDP Section 6 — Curate Your Collection</div>
-      <div class="section-heading">Subtitle Suggestions</div>
-      <div class="section-sub">Title and subhead options grounded in customer language — not internal team positioning.</div>
-      <div class="jane-note"><strong>Jane:</strong> Pick the option that fits the actual products being curated. The subhead should frame the customer journey, not list what the products do.</div>
-      <div id="curatedSuggestions"></div>
-    </div>
-
-    <!-- FAQ -->
-    <div class="faq-wrap ra-section" id="sec-faq">
-      <div class="section-label">PDP Section 7 — FAQs</div>
-      <div class="section-heading">Purchase Hesitations</div>
-      <div class="section-sub">Top purchase hesitations ranked by frequency. Each includes source language, a suggested answer, and an editorial note. Click to expand.</div>
-      <div class="faq-instructions"><strong>Why we do this proactively:</strong> Most FAQs answer questions customers ask after buying. The bigger conversion opportunity is answering what stops them from buying in the first place. Jane: suggested answers are a starting point — edit for brand voice and accuracy before publishing.</div>
-      <div id="faqCards"></div>
-    </div>
-
     <div class="export-bar">
       <button class="btn-export" onclick="exportTxt()">↓ Export as TXT</button>
       <button class="btn-export" onclick="window.print()">↓ Print / Save PDF</button>
     </div>
-
   </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
-var allReviews=[], lastAnalysis=null;
+var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
-
-var DEFAULTS={
-  about_words:30, mwp_desc_chars:73, mwp_title_words:3,
-  review_title_words:10, ing_title_chars:40, ing_desc_chars:120,
-  faq_count:10, copy_count:4, review_count:4
-};
+var DEFAULTS={about_words:60,mwp_chars:73,review_chars:200,ing_chars:120,obj_count:15};
 
 function getSettings(){
   return {
     about_words:parseInt(document.getElementById('set_about_words').value)||DEFAULTS.about_words,
-    mwp_desc_chars:parseInt(document.getElementById('set_mwp_chars').value)||DEFAULTS.mwp_desc_chars,
-    mwp_title_words:parseInt(document.getElementById('set_mwp_title_words').value)||DEFAULTS.mwp_title_words,
-    review_title_words:parseInt(document.getElementById('set_review_title_words').value)||DEFAULTS.review_title_words,
-    ing_title_chars:parseInt(document.getElementById('set_ing_title_chars').value)||DEFAULTS.ing_title_chars,
-    ing_desc_chars:parseInt(document.getElementById('set_ing_desc_chars').value)||DEFAULTS.ing_desc_chars,
-    faq_count:parseInt(document.getElementById('set_faq_count').value)||DEFAULTS.faq_count,
-    copy_count:parseInt(document.getElementById('set_copy_count').value)||DEFAULTS.copy_count,
-    review_count:parseInt(document.getElementById('set_review_count').value)||DEFAULTS.review_count
+    mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||DEFAULTS.mwp_chars,
+    review_chars:parseInt(document.getElementById('set_review_chars').value)||DEFAULTS.review_chars,
+    ing_chars:parseInt(document.getElementById('set_ing_chars').value)||DEFAULTS.ing_chars,
+    obj_count:parseInt(document.getElementById('set_obj_count').value)||DEFAULTS.obj_count
   };
 }
 
@@ -582,16 +483,18 @@ async function runAnalysis(){
   var sample=sorted.slice(0,2000);
   var dateRange=getDateRange(sample);
   var authorCol=getAuthorCol(sample[0]);
+
   var reviewTexts=sample.map(function(r){
     var text=getReviewText(r);
     var author=authorCol&&r[authorCol]?r[authorCol].trim():'';
-    return (author?'['+author+']: ':'')+text;
+    var isAnon=!author||author.toLowerCase()==='verified buyer'||author.toLowerCase()==='anonymous'||author.length<2;
+    return (isAnon?'[ANON]: ':'['+author+']: ')+text;
   }).filter(function(t){return t.length>20;}).join('\n---\n');
 
   var wikiSection=wiki?'\n\nPRODUCT WIKI:\n'+wiki.substring(0,4000)+'\n':'';
   stepActive('step1');
 
-  var prompt='You are a conversion copywriter and VoC analyst for a premium supplement brand. Analyze these '+sample.length+' customer reviews for "'+product+'".'+wikiSection+'\n\nReturn ONLY valid JSON, no markdown, no preamble:\n{\n  "sentiment":{"positive":number,"neutral":number,"negative":number},\n  "outcome_stats":[{"percentage":number,"label":"2-word label","detail":"reported [outcome]","count":number}],\n  "transformation":{"stat":"X% noticed a difference within [timeframe]","timeframe":"string","percentage":number,"sub":"string"},\n  "about":{\n    "pain_opener":"1-2 sentences. Customer pain language. The before state. Max '+settings.about_words+' words.",\n    "main_benefit":"Single most powerful benefit from reviews. 1 punchy sentence.",\n    "description":"Transformation-led product description. Max '+settings.about_words+' words. Present tense, active voice."\n  },\n  "pain_points":[{"rank":1,"label":"short name","customer_language":"verbatim phrase from reviews","copy_hook":"ready-to-use PDP opener sentence in customer language"}],\n  "made_with_purpose":[{"title":"2-'+settings.mwp_title_words+' word benefit title","description":"Under '+settings.mwp_desc_chars+' chars. Specific and outcome-focused.","proof_line":"1 near-verbatim quote from reviews supporting this benefit","wiki_informed":false}],\n  "benefits":[{"rank":1,"title":"benefit title","proof":"customer proof line — outcome plus evidence","pct":number}],\n  "copy_snippets":[{"text":"copy-ready sentence with <strong>stat</strong> bolded","placement":"where to use it"}],\n  "reviews":[{"title":"Compelling title max '+settings.review_title_words+' words","rephrased_text":"Lightly rephrased for clarity. Preserve essence and factual claims. Max 80 words.","original_author":"verbatim from [author]: prefix or Verified Buyer","theme":"theme tag"}],\n  "ingredients":[{"title":"Ingredient name max '+settings.ing_title_chars+' chars","description":"Benefit-led, max '+settings.ing_desc_chars+' chars","wiki_informed":false}],\n  "themes":[{"label":"theme","count":number}],\n  "curated_subtitles":[{"num":1,"title":"Section title — frames customer journey","subhead":"1 sentence. Customer journey framing, not a product list.","context":"Best used when: ..."}],\n  "faqs":[{"rank":1,"question":"Purchase hesitation as a question","source_language":"verbatim phrase from reviews","suggested_answer":"Complete 2-3 sentence answer Jane can edit. Specific and reassuring.","answer_prompt":"Key point Jane must address"}]\n}\n\nRules:\n- outcome_stats: 4-6 real percentages\n- transformation: always include, mine time-to-result language\n- about.description: max '+settings.about_words+' words, count carefully\n- pain_points: exactly 3, real verbatim phrases, usable copy hooks\n- made_with_purpose: exactly 3. wiki_informed=true only if wiki text provided\n- benefits: exactly 6 (1-3 primary from reviews, 4-6 additional options)\n- copy_snippets: exactly '+settings.copy_count+'\n- reviews: exactly '+settings.review_count+', original_author verbatim\n- ingredients: exactly 3. wiki_informed=true only if wiki provided\n- themes: 6-8 by frequency\n- curated_subtitles: exactly 3\n- faqs: exactly '+settings.faq_count+', ranked by frequency, lead with purchase hesitations not safety questions, suggested_answer must be complete and usable\n\nReviews:\n'+reviewTexts;
+  var prompt='You are a conversion copywriter and VoC analyst for a premium supplement brand (Global Healing). Analyze these '+sample.length+' customer reviews for "'+product+'".'+wikiSection+'\n\nIMPORTANT: Return ONLY valid JSON. No markdown fences, no preamble, no trailing text.\n\n{\n  "sentiment":{"positive":number,"neutral":number,"negative":number},\n  "pain_points":[\n    {"rank":1,"label":"short name","customer_language":"verbatim phrase from reviews","copy_hook":"ready-to-use PDP opener in customer language"}\n  ],\n  "about_options":[\n    {"num":1,"text":"Complete About description. Opens with pain, leads into main benefit. Max '+settings.about_words+' words. Present tense, active voice. No product name needed."}\n  ],\n  "made_with_purpose":[\n    {"num":1,"title":"2-3 word benefit title","description":"Outcome-focused. Under '+settings.mwp_chars+' chars exactly.","wiki_informed":false}\n  ],\n  "benefits":[\n    {"rank":1,"title":"benefit title","proof":"customer proof line with outcome and evidence","pct":number}\n  ],\n  "outcome_stats":[\n    {"percentage":number,"label":"outcome label","detail":"reported [full outcome description]","count":number}\n  ],\n  "transformation":{"stat":"X% noticed a difference within [timeframe]","timeframe":"string","percentage":number,"sub":"Based on review language about time-to-result"},\n  "alt_stats":[\n    {"text":"3 in 4 customers [outcome] within [timeframe]","sub":"Based on [X]% of reviewers who mentioned [outcome]"}\n  ],\n  "reviews":[\n    {"num":1,"title":"Compelling title max 8 words","rephrased_text":"Lightly rephrased. Under '+settings.review_chars+' chars. Preserve essence and factual claims.","original_author":"verbatim — ONLY include if real name, not Verified Buyer","theme":"theme tag"}\n  ],\n  "ingredients":[\n    {"num":1,"headline":"Short punchy headline. 1-2 short sentences. Like: One nutrient. Three bioavailable forms.","subline":"1-2 sentence supporting description. Under '+settings.ing_chars+' chars.","wiki_informed":false}\n  ],\n  "curated_collection":[\n    {"num":1,"title":"Section heading — customer journey framing","subhead":"1 sentence. Frames the journey, not a product list.","context":"Best used when: ..."}\n  ],\n  "objections":[\n    {"rank":1,"question":"Purchase hesitation as a question","source_language":"verbatim phrase from reviews","suggested_answer":"Complete 2-3 sentence answer. Specific, reassuring, grounded in product facts. Edit before publishing.","answer_note":"Key point to make sure the answer addresses"}\n  ],\n  "themes":[\n    {"label":"theme","count":number}\n  ]\n}\n\nRules:\n- pain_points: exactly 5, real verbatim phrases, usable copy hooks\n- about_options: exactly 5 distinct options. Each a complete description, different pain angle each time.\n- made_with_purpose: exactly 5. title 2-3 words. description MUST be under '+settings.mwp_chars+' chars. wiki_informed=true only if wiki provided and used. Blend review outcomes with wiki facts where possible.\n- benefits: exactly 6 (1-3 primary from reviews with proof lines + pct, 4-6 additional options)\n- outcome_stats: 4-6 real percentages from review language\n- transformation: always include, mine "within X days/weeks" language\n- alt_stats: 2-3 "3 in 4" style reframings of the best stats\n- reviews: exactly 10. CRITICAL: only include reviews where original_author is a real name — skip any [ANON] reviews. If fewer than 10 named reviews exist, use the best available. Rephrase for copy quality under '+settings.review_chars+' chars.\n- ingredients: exactly 5 headline+subline options. If wiki provided, source from formulation facts. Make them editorial and evocative — like ad headlines.\n- curated_collection: exactly 3 options\n- objections: exactly '+settings.obj_count+' ranked by frequency. Lead with purchase hesitations not safety questions. suggested_answer must be complete and usable as-is.\n- themes: 6-8 by frequency\n\nReviews:\n'+reviewTexts;
 
   stepDone('step1');stepActive('step2');
 
@@ -599,7 +502,7 @@ async function runAnalysis(){
     var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:6000,messages:[{role:'user',content:prompt}]})
+      body:JSON.stringify({model:'claude-sonnet-4-5',max_tokens:8000,messages:[{role:'user',content:prompt}]})
     });
     stepDone('step2');stepActive('step3');
     if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
@@ -621,6 +524,210 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
   document.getElementById('resultsMeta').innerHTML=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed<br>(most recent first)';
   if(dateRange){document.getElementById('dateRangeBadge').style.display='inline-flex';document.getElementById('dateRangeText').textContent='Reviews: '+dateRange;}
 
+  // S1 ABOUT
+  var aboutList=document.getElementById('aboutList');aboutList.innerHTML='';
+  (a.about_options||[]).forEach(function(o){
+    var wc=(o.text||'').split(/\s+/).filter(Boolean).length;
+    var over=wc>settings.about_words;
+    var card=document.createElement('div');card.className='choice-card';
+    var st=esc(o.text);
+    card.innerHTML='<div class="choice-card-body">'
+      +'<div class="choice-num">Option '+o.num+'</div>'
+      +'<div class="choice-text">'+st+'</div>'
+      +'<div class="choice-charcount'+(over?' over':'')+'">'+wc+' / '+settings.about_words+' words'+(over?' — over limit':'')+'</div>'
+      +'</div>'
+      +'<button class="btn-copy-sm" onclick="copyText(this,\''+st+'\')">Copy</button>';
+    aboutList.appendChild(card);
+  });
+
+  // S2 MADE WITH PURPOSE
+  var mwpList=document.getElementById('mwpList');mwpList.innerHTML='';
+  (a.made_with_purpose||[]).forEach(function(m){
+    var cc=(m.description||'').length;
+    var over=cc>settings.mwp_chars;
+    var card=document.createElement('div');card.className='choice-card';
+    var st=esc(m.title),sd=esc(m.description);
+    card.innerHTML='<div class="choice-card-body">'
+      +'<div class="choice-num">Option '+m.num+'</div>'
+      +'<div class="choice-title">'+st+'</div>'
+      +'<div class="choice-desc">'+sd+'</div>'
+      +'<div class="choice-charcount'+(over?' over':'')+'">'+cc+' / '+settings.mwp_chars+' chars'+(over?' — over limit':'')+'</div>'
+      +(m.wiki_informed?'<div class="badge-wiki">✓ Wiki-informed</div>':'<div class="badge-verify">Verify wiki</div>')
+      +'</div>'
+      +'<button class="btn-copy-sm" onclick="copyText(this,\''+st+': '+sd+'\')">Copy</button>';
+    mwpList.appendChild(card);
+  });
+
+  // KEY BENEFITS (under MWP)
+  var rb=document.getElementById('reviewBenefitsGrid');rb.innerHTML='';
+  (a.benefits||[]).slice(0,3).forEach(function(b){
+    var sp=esc(b.title+': '+b.proof);
+    var card=document.createElement('div');card.className='benefit-card';
+    card.innerHTML='<div class="benefit-num">Benefit 0'+b.rank+'</div><div class="benefit-title">'+esc(b.title)+'</div><div class="benefit-proof">'+esc(b.proof)+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div><div class="benefit-footer"><button class="btn-copy-sm" onclick="copyText(this,\''+sp+'\')">Copy</button></div>';
+    rb.appendChild(card);
+  });
+  var eb=document.getElementById('extraBenefitsGrid');eb.innerHTML='';
+  (a.benefits||[]).slice(3,6).forEach(function(b,i){
+    var sp=esc(b.title+': '+b.proof);
+    var card=document.createElement('div');card.className='benefit-card';
+    card.innerHTML='<div class="benefit-num">Option 0'+(i+4)+'</div><div class="benefit-title">'+esc(b.title)+'</div><div class="benefit-proof">'+esc(b.proof)+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div><div class="benefit-footer"><button class="btn-copy-sm" onclick="copyText(this,\''+sp+'\')">Copy</button></div>';
+    eb.appendChild(card);
+  });
+
+  // S3 REAL CUSTOMERS
+  var grid=document.getElementById('statsGrid');grid.innerHTML='';
+  var maxPct=0;
+  (a.outcome_stats||[]).forEach(function(s){if(s.percentage>maxPct)maxPct=s.percentage;});
+  var strongStats=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
+  var numStrong=strongStats.length;
+
+  if(numStrong===0){
+    document.getElementById('statsWarnRed').style.display='block';
+    document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Jane: exclude the percentage stats from this PDP. Use the transformation timeline and "3 in 4" framing below instead.';
+    document.getElementById('statsWarnYellow').style.display='none';
+  } else if(numStrong<3){
+    document.getElementById('statsWarnYellow').style.display='block';
+    document.getElementById('statsWarnYellowText').textContent='Only '+numStrong+' stat'+(numStrong===1?' clears':'s clear')+' 72%. Jane: consider leading with the transformation timeline instead of raw percentages. The "3 in 4" alternatives below may be stronger on this PDP.';
+    document.getElementById('statsWarnRed').style.display='none';
+  } else {
+    document.getElementById('statsWarnYellow').style.display='none';
+    document.getElementById('statsWarnRed').style.display='none';
+  }
+
+  (a.outcome_stats||[]).forEach(function(s){
+    var card=document.createElement('div');card.className='stat-card';
+    var sc=esc(s.percentage+'% '+s.detail);
+    card.innerHTML='<div class="stat-pct">'+s.percentage+'%</div>'
+      +'<div class="stat-label">'+esc(s.detail)+'</div>'
+      +'<div class="stat-detail">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>'
+      +'<div class="stat-copy-row"><button class="btn-copy-sm" onclick="copyText(this,\''+sc+'\')">Copy</button></div>';
+    grid.appendChild(card);
+  });
+  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
+
+  // Alt stats
+  if((a.alt_stats||[]).length){
+    document.getElementById('altStatsWrap').style.display='block';
+    var altList=document.getElementById('altStatsList');altList.innerHTML='';
+    (a.alt_stats||[]).forEach(function(alt){
+      var d=document.createElement('div');d.className='alt-stat-card';
+      var st=esc(alt.text),ss=esc(alt.sub||'');
+      d.innerHTML='<div class="alt-stat-inner"><div class="alt-stat-label">Alternative framing</div><div class="alt-stat-text">'+st+'</div>'+(ss?'<div class="alt-stat-sub">'+ss+'</div>':'')+'</div>'
+        +'<button class="btn-copy-sm" onclick="copyText(this,\''+st+'\')">Copy</button>';
+      altList.appendChild(d);
+    });
+  }
+
+  if(a.transformation){
+    document.getElementById('transformCard').style.display='flex';
+    document.getElementById('transformStat').textContent=a.transformation.stat;
+    document.getElementById('transformSub').textContent=a.transformation.sub;
+    var ts=esc(a.transformation.stat);
+    document.getElementById('transformCopyBtn').setAttribute('onclick','copyText(this,\''+ts+'\')');
+  }
+
+  // S4 REVIEWS
+  var revList=document.getElementById('reviewsList');revList.innerHTML='';
+  (a.reviews||[]).forEach(function(v){
+    if(!v.original_author||v.original_author.toLowerCase()==='verified buyer'||v.original_author.toLowerCase()==='anonymous')return;
+    var cc=(v.rephrased_text||'').length;
+    var over=cc>settings.review_chars;
+    var card=document.createElement('div');card.className='review-card';
+    var sn=esc(v.num||''),stitle=esc(v.title),stext=esc(v.rephrased_text),sauthor=esc(v.original_author),stheme=esc(v.theme);
+    var cv=esc((v.title?v.title+': ':'')+'"'+v.rephrased_text+'"'+(v.original_author?' — '+v.original_author:''));
+    card.innerHTML='<div class="review-card-body">'
+      +'<div class="review-num">Option '+sn+'</div>'
+      +'<div class="review-title">'+stitle+'</div>'
+      +'<div class="review-stars">★★★★★</div>'
+      +'<div class="review-text">&#8220;'+stext+'&#8221;</div>'
+      +'<div class="review-author-row">'
+        +'<div class="review-author-name">'+sauthor+'</div>'
+        +'<div class="review-author-label">Verified Buyer</div>'
+        +'<span class="review-theme-tag">'+stheme+'</span>'
+      +'</div>'
+      +'<div class="review-charcount'+(over?' over':'')+'">'+cc+' / '+settings.review_chars+' chars'+(over?' — over limit':'')+'</div>'
+      +'</div>'
+      +'<div class="review-copy-col">'
+        +'<button class="btn-copy-sm" style="border-color:#2a4a2a;color:#7a9e7a;" onclick="copyText(this,\''+cv+'\')">Copy</button>'
+      +'</div>';
+    revList.appendChild(card);
+  });
+
+  // S5 INGREDIENTS
+  var ingList=document.getElementById('ingredientsList');ingList.innerHTML='';
+  (a.ingredients||[]).forEach(function(ing){
+    var sc=(ing.subline||'').length;
+    var over=sc>settings.ing_chars;
+    var card=document.createElement('div');card.className='choice-card';
+    var sh=esc(ing.headline),ss=esc(ing.subline);
+    card.innerHTML='<div class="choice-card-body">'
+      +'<div class="choice-num">Option '+ing.num+'</div>'
+      +'<div class="choice-title" style="font-family:\'DM Serif Display\',serif;font-size:18px;line-height:1.3;">'+sh+'</div>'
+      +'<div class="choice-desc">'+ss+'</div>'
+      +'<div class="choice-charcount'+(over?' over':'')+'">'+sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'')+'</div>'
+      +(ing.wiki_informed?'<div class="badge-wiki">✓ Wiki-informed</div>':'<div class="badge-verify">Verify wiki</div>')
+      +'</div>'
+      +'<button class="btn-copy-sm" onclick="copyText(this,\''+sh+'\\n'+ss+'\')">Copy</button>';
+    ingList.appendChild(card);
+  });
+
+  // S6 CURATED
+  var curList=document.getElementById('curatedList');curList.innerHTML='';
+  (a.curated_collection||[]).forEach(function(c){
+    var card=document.createElement('div');card.className='curated-card';
+    var ct=esc(c.title),cs=esc(c.subhead),cc2=esc(c.context||'');
+    var cv=esc(c.title+' — '+c.subhead);
+    card.innerHTML='<div class="curated-body">'
+      +'<div class="curated-num">Option '+c.num+'</div>'
+      +'<div class="curated-title">'+ct+'</div>'
+      +'<div class="curated-subhead">'+cs+'</div>'
+      +(cc2?'<div class="curated-context">'+cc2+'</div>':'')
+      +'</div>'
+      +'<button class="btn-copy-sm" onclick="copyText(this,\''+cv+'\')">Copy</button>';
+    curList.appendChild(card);
+  });
+
+  // S7 OBJECTIONS
+  var objCards=document.getElementById('objectionCards');objCards.innerHTML='';
+  (a.objections||[]).forEach(function(o){
+    var card=document.createElement('div');card.className='objection-card';
+    var bid='obj-body-'+o.rank,tid='obj-toggle-'+o.rank;
+    var sa=esc(o.suggested_answer||'');
+    var cv=esc((o.question||'')+'\n\n'+(o.suggested_answer||''));
+    card.innerHTML='<div class="objection-header" onclick="toggleObj('+o.rank+')">'
+        +'<span class="objection-rank">#'+o.rank+'</span>'
+        +'<div class="objection-question">'+esc(o.question)+'</div>'
+        +'<span class="objection-toggle" id="'+tid+'">▾</span>'
+      +'</div>'
+      +'<div class="objection-body" id="'+bid+'">'
+        +'<div class="objection-source-label">From review language:</div>'
+        +'<div class="objection-source-quote">&#8220;'+esc(o.source_language)+'&#8221;</div>'
+        +(sa?'<div class="objection-answer-wrap">'
+          +'<div class="objection-answer-label">Suggested answer — edit before publishing</div>'
+          +'<div class="objection-answer-row">'
+            +'<div class="objection-answer-text">'+sa+'</div>'
+            +'<button class="btn-copy-sm" onclick="copyText(this,\''+cv+'\')">Copy</button>'
+          +'</div>'
+          +'</div>':'')
+        +'<div class="objection-note">Must address: <span>'+esc(o.answer_note||'')+'</span></div>'
+      +'</div>';
+    objCards.appendChild(card);
+  });
+
+  // PAIN POINTS (reference)
+  var painContainer=document.getElementById('painCards');painContainer.innerHTML='';
+  (a.pain_points||[]).forEach(function(p){
+    var card=document.createElement('div');card.className='pain-card';
+    var sh=esc(p.copy_hook);
+    card.innerHTML='<div class="pain-body">'
+      +'<div class="pain-rank">Pain Point #'+p.rank+'</div>'
+      +'<div class="pain-label">'+esc(p.label)+'</div>'
+      +'<div class="pain-language">"'+esc(p.customer_language)+'"</div>'
+      +'</div>'
+      +'<button class="btn-copy-sm" onclick="copyText(this,\''+sh+'\')">Copy</button>';
+    painContainer.appendChild(card);
+  });
+
   // SENTIMENT
   var s=a.sentiment||{positive:0,neutral:0,negative:0},sum=s.positive+s.neutral+s.negative||1;
   var pp=Math.round(s.positive/sum*100),np=Math.round(s.neutral/sum*100),ngp=Math.round(s.negative/sum*100);
@@ -633,225 +740,48 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     document.getElementById('sentimentNeg').style.width=ngp+'%';
   },100);
 
-  // OUTCOMES
-  var grid=document.getElementById('statsGrid');grid.innerHTML='';
-  var maxPct=0;
-  (a.outcome_stats||[]).forEach(function(s){
-    if(s.percentage>maxPct)maxPct=s.percentage;
-    var card=document.createElement('div');card.className='stat-card';
-    card.innerHTML='<div class="stat-card-accent"></div><div class="stat-pct">'+s.percentage+'%</div><div class="stat-label">'+esc(s.detail)+'</div><div class="stat-detail">'+s.count+' of '+analyzed.toLocaleString()+' reviewers</div>';
-    grid.appendChild(card);
-  });
-  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
-  var strong=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
-  var showWarn=strong.length<=1;
-  document.getElementById('statsWarning').style.display=showWarn?'block':'none';
-  if(showWarn)document.getElementById('statsWarningText').textContent=maxPct<THRESHOLD?'All outcome stats are below 72%. Jane: avoid leading with raw percentages. Use the transformation timeframe below instead.':'Only one stat clears 72%. Jane: the transformation timeframe below may be stronger as the lead claim.';
-  if(a.transformation){
-    document.getElementById('transformationCard').style.display='block';
-    document.getElementById('transformationStat').textContent=a.transformation.stat;
-    document.getElementById('transformationSub').textContent=a.transformation.sub+(showWarn?' — Jane: consider using this as the lead stat instead of outcome percentages.':' — Jane: use this as a supporting stat alongside the outcome percentages.');
-  }
-
-  // ABOUT
-  if(a.about){
-    setText('aboutPainOpener',a.about.pain_opener);
-    setText('aboutMainBenefit',a.about.main_benefit);
-    setText('aboutDescription',a.about.description);
-    document.getElementById('aboutWordCount').textContent=(a.about.description||'').split(/\s+/).filter(Boolean).length;
-  }
-
-  // PAIN POINTS
-  var pc=document.getElementById('painCards');pc.innerHTML='';
-  (a.pain_points||[]).forEach(function(p){
-    var card=document.createElement('div');card.className='pain-card';
-    var sh=esc(p.copy_hook);
-    card.innerHTML='<div class="pain-rank">Pain Point #'+p.rank+'</div>'
-      +'<div class="pain-label">'+esc(p.label)+'</div>'
-      +'<div class="pain-language">"'+esc(p.customer_language)+'"</div>'
-      +'<div class="pain-hook-row"><div class="pain-copy-hook">Copy hook → <span>'+sh+'</span></div>'
-      +'<button class="btn-copy-sm" onclick="copyText(this,\''+sh+'\')">Copy</button></div>';
-    pc.appendChild(card);
-  });
-
-  // MADE WITH PURPOSE
-  document.getElementById('mwpCharLimit').textContent=settings.mwp_desc_chars;
-  var mg=document.getElementById('mwpGrid');mg.innerHTML='';
-  (a.made_with_purpose||[]).forEach(function(m,i){
-    var cc=(m.description||'').length,over=cc>settings.mwp_desc_chars;
-    var card=document.createElement('div');card.className='mwp-card';
-    var st=esc(m.title),sd=esc(m.description),sp=esc(m.proof_line||'');
-    card.innerHTML='<div class="mwp-num">Benefit 0'+(i+1)+'</div>'
-      +'<div class="mwp-title">'+st+'</div>'
-      +'<div class="mwp-desc">'+sd+'</div>'
-      +(sp?'<div class="mwp-proof">'+sp+'</div>':'')
-      +'<div class="mwp-footer"><div>'
-        +'<div class="mwp-charcount">'+(over?'<span style="color:var(--rust)">':'')+cc+'/'+settings.mwp_desc_chars+' chars'+(over?'</span>':'')+'</div>'
-        +(m.wiki_informed?'<div class="badge-wiki">✓ Wiki-informed</div>':'<div class="badge-verify">Verify wiki</div>')
-      +'</div>'
-      +'<button class="btn-copy-sm" onclick="copyText(this,\''+st+': '+sd+'\')">Copy</button></div>';
-    mg.appendChild(card);
-  });
-
-  // BENEFITS
-  var rb=document.getElementById('reviewBenefitsGrid');rb.innerHTML='';
-  (a.benefits||[]).slice(0,3).forEach(function(b){
-    var card=document.createElement('div');card.className='benefit-card';
-    var sp=esc(b.title+': '+b.proof);
-    card.innerHTML='<div class="benefit-num">Benefit 0'+b.rank+'</div><div class="benefit-title">'+esc(b.title)+'</div><div class="benefit-proof">'+esc(b.proof)+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div><div class="benefit-footer"><button class="btn-copy-sm" onclick="copyText(this,\''+sp+'\')">Copy</button></div>';
-    rb.appendChild(card);
-  });
-  var eb=document.getElementById('extraBenefitsGrid');eb.innerHTML='';
-  (a.benefits||[]).slice(3,6).forEach(function(b,i){
-    var card=document.createElement('div');card.className='benefit-card';
-    var sp=esc(b.title+': '+b.proof);
-    card.innerHTML='<div class="benefit-num">Option 0'+(i+4)+'</div><div class="benefit-title">'+esc(b.title)+'</div><div class="benefit-proof">'+esc(b.proof)+(b.pct?' ('+b.pct+'% of reviewers)':'')+'</div><div class="benefit-footer"><button class="btn-copy-sm" onclick="copyText(this,\''+sp+'\')">Copy</button></div>';
-    eb.appendChild(card);
-  });
-
-  // COPY SNIPPETS
-  var cs=document.getElementById('copySnippets');cs.innerHTML='';
-  (a.copy_snippets||[]).forEach(function(s){
-    var d=document.createElement('div');d.className='copy-snippet';
-    var st=esc(s.text.replace(/<[^>]+>/g,''));
-    d.innerHTML='<div style="flex:1"><p>'+s.text+'</p><span class="copy-placement">— '+esc(s.placement)+'</span></div>'
-      +'<button class="btn-copy" style="border-color:#4a3e2e;color:#8a7a68;" onclick="copyText(this,\''+st+'\')">Copy</button>';
-    cs.appendChild(d);
-  });
-
-  // REVIEWS
-  var vc=document.getElementById('verbatimCards');vc.innerHTML='';
-  (a.reviews||[]).forEach(function(v){
-    var an=v.original_author&&v.original_author.toLowerCase()!=='verified buyer'?v.original_author:'';
-    var c=document.createElement('div');c.className='review-card';
-    var st=esc(v.title),sr=esc(v.rephrased_text),sa=esc(an);
-    var cv=esc((v.title?v.title+': ':'')+'"'+v.rephrased_text+'"'+(an?' — '+an:''));
-    c.innerHTML='<div class="review-card-title">'+st+'</div>'
-      +'<div class="review-stars">★★★★★</div>'
-      +'<div class="review-text">&#8220;'+sr+'&#8221;</div>'
-      +'<div class="review-author-block"><div>'+(an?'<div class="review-author-name">'+sa+'</div>':'')
-      +'<div class="review-author-label">Verified Buyer</div>'
-      +'<span class="review-theme-tag">'+esc(v.theme)+'</span></div>'
-      +'<button class="btn-copy-sm" style="border-color:#2a4a2a;color:#7a9e7a;" onclick="copyText(this,\''+cv+'\')">Copy</button></div>';
-    vc.appendChild(c);
-  });
-
-  // INGREDIENTS
-  document.getElementById('ingTitleLimit').textContent=settings.ing_title_chars;
-  document.getElementById('ingDescLimit').textContent=settings.ing_desc_chars;
-  var ig=document.getElementById('ingGrid');ig.innerHTML='';
-  var ings=a.ingredients||[];
-  if(!ings.length){
-    for(var i=0;i<3;i++){var ic=document.createElement('div');ic.className='ing-card placeholder';ic.innerHTML='<div class="ing-num">Ingredient 0'+(i+1)+'</div><div class="ing-title">[Ingredient name]</div><div class="ing-desc">Paste the product wiki above and re-run.</div><div class="ing-footer"><div class="badge-verify">Needs wiki</div></div>';ig.appendChild(ic);}
-  }else{
-    ings.forEach(function(ing,i){
-      var tl=(ing.title||'').length,dl=(ing.description||'').length;
-      var to=tl>settings.ing_title_chars,dov=dl>settings.ing_desc_chars;
-      var card=document.createElement('div');card.className='ing-card';
-      var st=esc(ing.title),sd=esc(ing.description);
-      card.innerHTML='<div class="ing-num">Ingredient 0'+(i+1)+'</div>'
-        +'<div class="ing-title">'+st+'</div>'
-        +'<div class="ing-desc">'+sd+'</div>'
-        +'<div class="ing-footer"><div>'
-          +'<div class="ing-charcount">'+(to?'<span style="color:var(--rust)">':'')+tl+'/'+settings.ing_title_chars+(to?'</span>':'')+' title · '+(dov?'<span style="color:var(--rust)">':'')+dl+'/'+settings.ing_desc_chars+(dov?'</span>':'')+' desc</div>'
-          +(ing.wiki_informed?'<div class="badge-wiki">✓ Wiki-informed</div>':'<div class="badge-verify">Verify wiki</div>')
-        +'</div>'
-        +'<button class="btn-copy-sm" onclick="copyText(this,\''+st+': '+sd+'\')">Copy</button></div>';
-      ig.appendChild(card);
-    });
-  }
-
   // THEMES
   var tp=document.getElementById('themePills');tp.innerHTML='';
   (a.themes||[]).forEach(function(t){var p=document.createElement('div');p.className='theme-pill';p.innerHTML=esc(t.label)+'<span class="pill-count">'+t.count+'</span>';tp.appendChild(p);});
 
-  // CURATED
-  var cu=document.getElementById('curatedSuggestions');cu.innerHTML='';
-  (a.curated_subtitles||[]).forEach(function(s){
-    var d=document.createElement('div');d.className='curated-suggestion';
-    var st=esc(s.title),ss=esc(s.subhead),sc=esc(s.context||'');
-    var cv=esc(s.title+' — '+s.subhead);
-    d.innerHTML='<div class="curated-row"><div>'
-      +'<div class="curated-num">Suggestion '+s.num+'</div>'
-      +'<div class="curated-title">'+st+'</div>'
-      +'<div class="curated-subhead">'+ss+'</div>'
-      +(sc?'<div class="curated-context">'+sc+'</div>':'')
-      +'</div><button class="btn-copy-sm" onclick="copyText(this,\''+cv+'\')">Copy</button></div>';
-    cu.appendChild(d);
-  });
-
-  // FAQS
-  var fc=document.getElementById('faqCards');fc.innerHTML='';
-  (a.faqs||[]).forEach(function(o){
-    var card=document.createElement('div');card.className='faq-card';
-    var bid='faq-body-'+o.rank,tid='faq-toggle-'+o.rank;
-    var sa=esc(o.suggested_answer||'');
-    var cv=esc((o.question||'')+'\n\n'+(o.suggested_answer||''));
-    card.innerHTML='<div class="faq-card-header" onclick="toggleFaq('+o.rank+')">'
-        +'<span class="faq-rank-badge">#'+o.rank+'</span>'
-        +'<div class="faq-question">'+esc(o.question)+'</div>'
-        +'<span class="faq-toggle" id="'+tid+'">▾</span>'
-      +'</div>'
-      +'<div class="faq-card-body" id="'+bid+'">'
-        +'<div class="faq-source">From review language:</div>'
-        +'<div class="faq-source-quote">&#8220;'+esc(o.source_language)+'&#8221;</div>'
-        +(sa?'<div class="faq-suggested-answer"><div class="faq-suggested-label">Suggested answer — edit before publishing</div>'
-          +'<div class="faq-answer-row"><div class="faq-suggested-text">'+sa+'</div>'
-          +'<button class="btn-copy-sm" onclick="copyText(this,\''+cv+'\')">Copy</button></div></div>':'')
-        +'<div class="faq-answer-prompt">Jane must address: <span>'+esc(o.answer_prompt)+'</span></div>'
-      +'</div>';
-    fc.appendChild(card);
-  });
-
   showResults();
 }
 
-function toggleFaq(rank){var b=document.getElementById('faq-body-'+rank),t=document.getElementById('faq-toggle-'+rank);b.classList.toggle('open');t.classList.toggle('open');}
+function toggleObj(rank){var b=document.getElementById('obj-body-'+rank),t=document.getElementById('obj-toggle-'+rank);b.classList.toggle('open');t.classList.toggle('open');}
 
 function esc(str){if(!str)return'';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-function setText(id,text){var el=document.getElementById(id);if(el)el.textContent=text||'';}
 
 function copyText(btn,text){
   var clean=String(text).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
   navigator.clipboard.writeText(clean).then(function(){var o=btn.textContent;btn.textContent='Copied!';btn.classList.add('copied');setTimeout(function(){btn.textContent=o;btn.classList.remove('copied');},2000);});
-}
-function copyById(btn,id){var el=document.getElementById(id);if(!el)return;copyText(btn,el.textContent||el.innerText||'');}
-function copyAboutFull(btn){
-  var o=document.getElementById('aboutPainOpener').textContent||'';
-  var b=document.getElementById('aboutMainBenefit').textContent||'';
-  var d=document.getElementById('aboutDescription').textContent||'';
-  navigator.clipboard.writeText((o+'\n\n'+b+'\n\n'+d).trim()).then(function(){var orig=btn.textContent;btn.textContent='Copied!';setTimeout(function(){btn.textContent=orig;},2000);});
 }
 
 function exportTxt(){
   if(!lastAnalysis)return;
   var a=lastAnalysis.analysis,out='PDP INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' reviews\n';
   if(lastAnalysis.dateRange)out+='Date range: '+lastAnalysis.dateRange+'\n';
-  var s=a.sentiment||{positive:0,neutral:0,negative:0},sum=s.positive+s.neutral+s.negative||1;
-  out+='\n=== SENTIMENT ===\nPositive: '+Math.round(s.positive/sum*100)+'% | Neutral: '+Math.round(s.neutral/sum*100)+'% | Negative: '+Math.round(s.negative/sum*100)+'%\n';
-  out+='\n=== OUTCOME STATISTICS ===\n';
+  out+='\n=== S1 — ABOUT OPTIONS ===\n';
+  (a.about_options||[]).forEach(function(o){out+='Option '+o.num+':\n'+o.text+'\n\n';});
+  out+='\n=== S2 — MADE WITH PURPOSE ===\n';
+  (a.made_with_purpose||[]).forEach(function(m){out+='Option '+m.num+': '+m.title+'\n'+m.description+'\n\n';});
+  out+='\n=== KEY BENEFITS ===\n';
+  (a.benefits||[]).forEach(function(b){out+='• '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
+  out+='\n=== S3 — OUTCOME STATS ===\n';
   (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' reviewers)\n';});
+  if(a.alt_stats)out+='\nAlternative framing:\n'+(a.alt_stats||[]).map(function(s){return'• '+s.text;}).join('\n')+'\n';
   if(a.transformation)out+='\nTransformation: '+a.transformation.stat+'\n';
-  out+='\n=== PDP S1 — ABOUT ===\n';
-  if(a.about)out+='Pain opener: '+a.about.pain_opener+'\nMain benefit: '+a.about.main_benefit+'\nDescription: '+a.about.description+'\n';
-  out+='\n=== PAIN POINTS ===\n';
+  out+='\n=== S4 — REVIEWS ===\n';
+  (a.reviews||[]).forEach(function(v){if(!v.original_author||v.original_author.toLowerCase()==='verified buyer')return;out+='Option '+v.num+': '+v.title+'\n"'+v.rephrased_text+'"\n— '+v.original_author+'\n\n';});
+  out+='\n=== S5 — INGREDIENTS ===\n';
+  (a.ingredients||[]).forEach(function(ing){out+='Option '+ing.num+':\n'+ing.headline+'\n'+ing.subline+'\n\n';});
+  out+='\n=== S6 — CURATE YOUR COLLECTION ===\n';
+  (a.curated_collection||[]).forEach(function(c){out+='Option '+c.num+': '+c.title+'\n'+c.subhead+'\n('+c.context+')\n\n';});
+  out+='\n=== S7 — OBJECTION MAP ===\n';
+  (a.objections||[]).forEach(function(o){out+='#'+o.rank+' '+o.question+'\nSource: "'+o.source_language+'"\nAnswer: '+o.suggested_answer+'\n\n';});
+  out+='\n=== PAIN POINTS (reference) ===\n';
   (a.pain_points||[]).forEach(function(p){out+='#'+p.rank+' '+p.label+'\n"'+p.customer_language+'"\nHook: '+p.copy_hook+'\n\n';});
-  out+='\n=== PDP S2 — MADE WITH PURPOSE ===\n';
-  (a.made_with_purpose||[]).forEach(function(m,i){out+=(i+1)+'. '+m.title+': '+m.description+'\nProof: '+m.proof_line+'\n\n';});
-  out+='=== PDP S4 — BENEFITS ===\n';
-  (a.benefits||[]).forEach(function(b){out+='• '+b.title+': '+b.proof+'\n';});
-  out+='\n=== PDP S3 — COPY-READY STATISTICS ===\n';
-  (a.copy_snippets||[]).forEach(function(s){out+='• '+s.text.replace(/<[^>]+>/g,'')+' ['+s.placement+']\n';});
-  out+='\n=== PDP S4 — REVIEWS ===\n';
-  (a.reviews||[]).forEach(function(v){out+=v.title+'\n"'+v.rephrased_text+'"\n— '+v.original_author+'\n\n';});
-  out+='\n=== PDP S5 — INGREDIENTS ===\n';
-  (a.ingredients||[]).forEach(function(ing,i){out+=(i+1)+'. '+ing.title+': '+ing.description+'\n';});
   out+='\n=== THEMES ===\n';
   (a.themes||[]).forEach(function(t){out+='• '+t.label+' ('+t.count+')\n';});
-  out+='\n=== PDP S6 — CURATED COLLECTION ===\n';
-  (a.curated_subtitles||[]).forEach(function(s){out+='Option '+s.num+': '+s.title+' — '+s.subhead+'\n('+s.context+')\n\n';});
-  out+='\n=== PDP S7 — FAQS ===\n';
-  (a.faqs||[]).forEach(function(o){out+='#'+o.rank+' '+o.question+'\nSource: "'+o.source_language+'"\nSuggested answer: '+o.suggested_answer+'\nMust address: '+o.answer_prompt+'\n\n';});
   var blob=new Blob([out],{type:'text/plain'}),url=URL.createObjectURL(blob),link=document.createElement('a');
   link.href=url;link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-pdp-intel.txt';link.click();
 }
