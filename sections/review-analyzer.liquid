@@ -253,7 +253,13 @@
   <div class="ra-loading" id="raLoading">
     <div class="loading-ring"></div>
     <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
-    <div style="margin-top:12px">
+    <div style="margin-top:16px;margin-bottom:16px;">
+      <div style="background:var(--mist);border-radius:100px;height:4px;width:320px;margin:0 auto 10px;overflow:hidden;">
+        <div id="loadingBar" style="height:100%;width:0%;background:var(--gold);border-radius:100px;transition:width 0.8s ease;"></div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);" id="loadingTimer">0s elapsed</div>
+    </div>
+    <div style="margin-top:4px">
       <div class="loading-step" id="step1">↳ Sorting and parsing recent reviews</div>
       <div class="loading-step" id="step2">↳ Mining pain points and customer language</div>
       <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
@@ -842,8 +848,27 @@ function exportTxt(){
   link.href=url;link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-pdp-intel.txt';link.click();
 }
 
-function showLoading(c){document.getElementById('raLoading').classList.add('active');document.getElementById('loadingCount').textContent=c.toLocaleString();['step1','step2','step3','step4'].forEach(function(s){document.getElementById(s).className='loading-step';});}
-function hideLoading(){document.getElementById('raLoading').classList.remove('active');}
+var _loadTimer=null,_loadStart=0;
+function showLoading(c){
+  document.getElementById('raLoading').classList.add('active');
+  document.getElementById('loadingCount').textContent=c.toLocaleString();
+  ['step1','step2','step3','step4'].forEach(function(s){document.getElementById(s).className='loading-step';});
+  _loadStart=Date.now();
+  document.getElementById('loadingBar').style.width='0%';
+  document.getElementById('loadingTimer').textContent='0s elapsed';
+  if(_loadTimer)clearInterval(_loadTimer);
+  _loadTimer=setInterval(function(){
+    var elapsed=Math.round((Date.now()-_loadStart)/1000);
+    document.getElementById('loadingTimer').textContent=elapsed+'s elapsed';
+    var pct=Math.min(90,elapsed*3);
+    document.getElementById('loadingBar').style.width=pct+'%';
+  },1000);
+}
+function hideLoading(){
+  document.getElementById('raLoading').classList.remove('active');
+  if(_loadTimer){clearInterval(_loadTimer);_loadTimer=null;}
+  document.getElementById('loadingBar').style.width='100%';
+}
 function showResults(){document.getElementById('raResults').classList.add('active');}
 function hideResults(){document.getElementById('raResults').classList.remove('active');}
 function showError(m){var b=document.getElementById('errorBox');b.textContent=m;b.classList.add('active');}
