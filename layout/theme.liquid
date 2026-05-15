@@ -108,7 +108,10 @@
     </script>
     <!-- ============================================ -->
 
-    {% render 'speedshopify-head' %}
+    {% comment %}
+        {% render 'speedshopify-head' %}
+    {% endcomment %}
+
     {% comment %}
       <!-- moved to gh-header -->
       <link rel="canonical" href="{{ canonical_url }}">
@@ -551,12 +554,12 @@
      </script>
 
   {% include 'huk-mega-menu-pro' %}
-  
+
   {% include "huk-mega-menu-pro" %}
   </head>
-							
-							
-							
+
+
+
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -781,8 +784,9 @@
     </script>
 
     {% render 'klaviyo-out-of-stock' %}
-    {% render 'speedshopify-body' %}
 
-    
+    {% comment %}
+        {% render 'speedshopify-body' %}
+    {% endcomment %}
   </body>
 </html>
