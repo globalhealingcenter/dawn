@@ -108,7 +108,10 @@
     </script>
     <!-- ============================================ -->
 
-    {% render 'speedshopify-head' %}
+    {% comment %}
+        {% render 'speedshopify-head' %}
+    {% endcomment %}
+
     {% comment %}
       <!-- moved to gh-header -->
       <link rel="canonical" href="{{ canonical_url }}">
@@ -781,8 +784,9 @@
     </script>
 
     {% render 'klaviyo-out-of-stock' %}
-    {% render 'speedshopify-body' %}
 
-
+    {% comment %}
+        {% render 'speedshopify-body' %}
+    {% endcomment %}
   </body>
 </html>
