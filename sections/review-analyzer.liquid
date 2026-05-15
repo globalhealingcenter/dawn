@@ -510,7 +510,7 @@ async function runAnalysis(){
   hideError();showLoading(reviews.length);hideResults();
 
   var sorted=sortByDateDesc(reviews);
-  var sample=sorted.slice(0,1000);
+  var sample=sorted.slice(0,500);
   var dateRange=getDateRange(sample);
   var authorCol=getAuthorCol(sample[0]);
 
