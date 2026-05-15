@@ -555,7 +555,23 @@
 
   {% include 'huk-mega-menu-pro' %}
 
-  {% include "huk-mega-menu-pro" %}
+  <!-- Tapcart/Ordergroove scroll fix -->
+    <script>
+      if (document.documentElement.classList.contains('tapcart-webbridge')
+          && window.location.pathname.includes('/apps/subscriptions')) {
+        const s = document.createElement('style');
+        s.textContent = `
+          html.tapcart-webbridge, html.tapcart-webbridge body {
+            position: static !important;
+            inset: auto !important;
+            height: auto !important;
+            overflow: visible !important;
+          }
+        `;
+        document.head.appendChild(s);
+      }
+    </script>
+  
   </head>
 
 
