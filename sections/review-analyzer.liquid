@@ -467,7 +467,7 @@ function getReviewsForProduct(p){if(p==='All Reviews')return allReviews;var col=
 function getDateCol(r){var keys=['review creation date','Review Creation Date','created_at','Created At','date','Date','review_date'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
 function sortByDateDesc(reviews){var dc=getDateCol(reviews[0]);if(!dc)return reviews;return reviews.slice().sort(function(a,b){return new Date(b[dc]||0)-new Date(a[dc]||0);});}
 function getDateRange(reviews){var dc=getDateCol(reviews[0]);if(!dc)return null;var dates=reviews.map(function(r){return new Date(r[dc]);}).filter(function(d){return !isNaN(d);});if(!dates.length)return null;dates.sort(function(a,b){return a-b;});var fmt=function(d){return d.toLocaleDateString('en-US',{month:'short',year:'numeric'});};return fmt(dates[0])+' – '+fmt(dates[dates.length-1]);}
-function getAuthorCol(r){var keys=['display name','Display Name','reviewer_name','Reviewer Name','author','Author'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
+function getAuthorCol(r){var keys=['Reviewer Display Name','reviewer display name','display name','Display Name','reviewer_name','Reviewer Name','author','Author'];
 function getReviewText(r){var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];for(var i=0;i<keys.length;i++){if(r[keys[i]]&&r[keys[i]].trim())return r[keys[i]].trim();}return Object.values(r).find(function(v){return v&&v.length>40;})||'';}
 
 async function runAnalysis(){
