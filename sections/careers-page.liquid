@@ -115,8 +115,8 @@
   }
 </style>
 
+{% if page.handle == 'careers' %}
 <div class="careers-page">
-  <div class="page-content">{{ page.content }}</div>
   <h2 class="section-title">Current Openings</h2>
   <div id="jobs-container">
     <div class="jobs-status">
@@ -208,3 +208,4 @@
 
   fetchJobs();
 </script>
+{% endif %}
