@@ -94,7 +94,7 @@
   .stat-card:nth-child(3n){border-right:none;}
   .stat-card:nth-last-child(-n+3){border-bottom:none;}
   .stat-pct{font-family:'DM Serif Display',serif;font-size:64px;line-height:1;color:var(--ink);}
-  .stat-label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;}
+  .stat-label{font-size:13px;font-weight:600;color:var(--ink);line-height:1.3;}
   .stat-detail{font-size:12px;color:#8a7a68;}
   .stat-copy-row{display:flex;justify-content:flex-end;margin-top:4px;}
   .stats-footnote{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;font-style:italic;margin-bottom:16px;}
@@ -117,12 +117,11 @@
   /* BENEFITS */
   .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
   .benefit-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;}
-  .benefit-card.placeholder{background:var(--cream);border:1px dashed var(--mist);box-shadow:none;}
   .benefit-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;}
   .benefit-title{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;}
   .benefit-proof{font-size:12px;color:#6b5e4a;line-height:1.6;flex:1;}
   .benefit-footer{display:flex;justify-content:flex-end;margin-top:8px;}
-  .fold-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:10px;padding-top:16px;border-top:1px dashed var(--mist);}
+  .fold-divider{border:none;border-top:1px dashed var(--mist);margin:20px 0 16px;}
 
   /* REVIEWS */
   .reviews-list{display:flex;flex-direction:column;gap:12px;}
@@ -237,13 +236,14 @@
     <div class="collapsible-panel" id="settingsPanel">
       <div class="settings-panel-inner">
         <div class="settings-grid">
-          <div class="settings-field"><label>About — max words</label><input type="number" id="set_about_words" value="60" min="20" max="120"></div>
+          <div class="settings-field"><label>About — max words</label><input type="number" id="set_about_words" value="30" min="20" max="60"></div>
           <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="73" min="40" max="150"></div>
           <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="200" min="80" max="400"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
+          <div class="settings-field"><label>Stat label — max chars</label><input type="number" id="set_stat_chars" value="20" min="10" max="40"></div>
           <div class="settings-field"><label>FAQs — count</label><input type="number" id="set_faq_count" value="15" min="8" max="20"></div>
         </div>
-        <div class="panel-note" style="margin-top:16px;">Defaults are set. Change before running — won't affect results already on screen.</div>
+        <div class="panel-note" style="margin-top:16px;">Defaults are set. Change before running.</div>
       </div>
     </div>
   </div>
@@ -289,37 +289,32 @@
 
     <!-- S1 ABOUT -->
     <div class="ra-section" id="sec-about">
-      <div class="section-label">PDP Section 1 — About</div>
+      <div class="section-label">PDP Section 1</div>
       <div class="section-heading">About</div>
-      <div class="jane-note"><strong>Jane:</strong> 5 complete description options — each opens with a customer pain point and leads into the main benefit. Pick one and edit for brand voice.</div>
+      <div class="jane-note"><strong>Jane:</strong> 5 description options — each opens with a customer pain point and leads into the main benefit. Pick one and edit for brand voice. Max 30 words.</div>
       <div class="choice-list" id="aboutList"></div>
     </div>
 
     <!-- S2 MADE WITH PURPOSE -->
     <div class="ra-section" id="sec-mwp">
-      <div class="section-label">PDP Section 2 — Made With Purpose</div>
+      <div class="section-label">PDP Section 2</div>
       <div class="section-heading">Made With Purpose</div>
-      <div class="jane-note"><strong>Jane:</strong> 5 benefit card options — title 2–3 words, description 73 chars max. Blends review language with wiki where available. Pick 3 for the PDP.</div>
+      <div class="jane-note"><strong>Jane:</strong> 5 benefit card options focused on what this product specifically does — ingredients and mechanisms, not generic claims. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
       <div class="choice-list" id="mwpList"></div>
 
-      <div style="margin-top:36px;padding-top:28px;border-top:1px solid var(--mist);">
+      <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--mist);">
         <div class="section-label" style="background:var(--sage);">Key Benefits</div>
         <div class="section-heading" style="font-size:22px;margin-top:10px;margin-bottom:6px;">Key Benefits</div>
-        <div class="section-sub">Top 3 from reviews with proof lines. Wiki placeholders below. 3 additional options at bottom.</div>
+        <div class="section-sub">Top 3 from reviews with proof lines. 3 additional options below.</div>
         <div class="benefits-grid" id="reviewBenefitsGrid"></div>
-        <div class="benefits-grid" id="wikiBenefitsGrid">
-          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 01</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
-          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 02</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
-          <div class="benefit-card placeholder"><div class="benefit-num">Wiki benefit 03</div><div class="benefit-title">[Benefit from wiki]</div><div class="benefit-proof">Replace with: science line from product wiki + proof line from reviews.</div></div>
-        </div>
-        <div class="fold-label">3 Additional Benefit Options (Jane: choose or discard)</div>
+        <hr class="fold-divider">
         <div class="benefits-grid" id="extraBenefitsGrid"></div>
       </div>
     </div>
 
     <!-- S3 REAL CUSTOMERS -->
     <div class="ra-section" id="sec-stats">
-      <div class="section-label">PDP Section 3 — Real Customers. Real Results.</div>
+      <div class="section-label">PDP Section 3</div>
       <div class="section-heading">Real Customers. Real Results.</div>
       <div class="section-sub">Outcome stats calculated from review language — not star ratings.</div>
       <div id="statsWarnRed" style="display:none" class="warn-red">
@@ -333,7 +328,7 @@
       <div class="stats-grid" id="statsGrid"></div>
       <div class="stats-footnote" id="statsFootnote"></div>
       <div id="altStatsWrap" style="display:none">
-        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;text-transform:uppercase;letter-spacing:0.06em;margin:16px 0 10px;">"3 in 4" Alternative Framing</div>
+        <div style="font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;text-transform:uppercase;letter-spacing:0.06em;margin:16px 0 10px;">Alternative "X in Y" Framing</div>
         <div id="altStatsList"></div>
       </div>
       <div id="transformCard" style="display:none" class="transform-card">
@@ -348,7 +343,7 @@
 
     <!-- S4 REVIEWS -->
     <div class="ra-section" id="sec-reviews">
-      <div class="section-label">PDP Section 4 — Reviews</div>
+      <div class="section-label">PDP Section 4</div>
       <div class="section-heading">Reviews</div>
       <div class="jane-note"><strong>Jane:</strong> 10 review options — AI-rephrased for clarity while preserving the customer's meaning and voice. Pick the strongest for the PDP. Reviews with real customer names are prioritized.</div>
       <div class="reviews-list" id="reviewsList"></div>
@@ -356,7 +351,7 @@
 
     <!-- S5 INGREDIENTS -->
     <div class="ra-section" id="sec-ingredients">
-      <div class="section-label">PDP Section 5 — Ingredients</div>
+      <div class="section-label">PDP Section 5</div>
       <div class="section-heading">Ingredients</div>
       <div class="jane-note"><strong>Jane:</strong> 5 editorial headline + supporting line options for the Ingredients section. Sourced from wiki where available. Pick one — these are meant to read like ad headlines, not ingredient lists.</div>
       <div class="choice-list" id="ingredientsList"></div>
@@ -364,7 +359,7 @@
 
     <!-- S6 CURATE -->
     <div class="curated-wrap ra-section" id="sec-curated">
-      <div class="section-label">PDP Section 6 — Curate Your Collection</div>
+      <div class="section-label">PDP Section 6</div>
       <div class="section-heading">Curate Your Collection</div>
       <div class="jane-note"><strong>Jane:</strong> 3 heading + subhead options. The subhead frames the customer journey — not a product list. Pick the option that fits the actual products being curated.</div>
       <div id="curatedList"></div>
@@ -372,7 +367,7 @@
 
     <!-- S7 FAQS -->
     <div class="ra-section" id="sec-faqs">
-      <div class="section-label">PDP Section 7 — FAQs</div>
+      <div class="section-label">PDP Section 7</div>
       <div class="section-heading">FAQs</div>
       <div class="jane-note"><strong>Jane:</strong> 15 questions ranked by how often they appear in reviews — built using objection mapping, so they address what stops customers from buying, not just post-purchase questions. Pick the most relevant for the PDP FAQ section. Each includes a suggested answer ready to edit.</div>
       <div id="faqCards"></div>
@@ -425,7 +420,7 @@
 <script>
 var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
-var DEFAULTS={about_words:60,mwp_chars:73,review_chars:200,ing_chars:120,faq_count:15};
+var DEFAULTS={about_words:30,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:15};
 
 function getSettings(){
   return {
@@ -433,16 +428,16 @@ function getSettings(){
     mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||DEFAULTS.mwp_chars,
     review_chars:parseInt(document.getElementById('set_review_chars').value)||DEFAULTS.review_chars,
     ing_chars:parseInt(document.getElementById('set_ing_chars').value)||DEFAULTS.ing_chars,
+    stat_chars:parseInt(document.getElementById('set_stat_chars').value)||DEFAULTS.stat_chars,
     faq_count:parseInt(document.getElementById('set_faq_count').value)||DEFAULTS.faq_count
   };
 }
 
-// Nav scroll
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.nav-btn[data-target]').forEach(function(btn){
     btn.addEventListener('click',function(){
       var target=document.getElementById(btn.getAttribute('data-target'));
-      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+      if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
     });
   });
 });
@@ -480,23 +475,38 @@ function getDateRange(reviews){var dc=getDateCol(reviews[0]);if(!dc)return null;
 function getAuthorCol(r){var keys=['Reviewer Display Name','reviewer display name','display name','Display Name','reviewer_name','Reviewer Name','author','Author'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
 function getReviewText(r){var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];for(var i=0;i<keys.length;i++){if(r[keys[i]]&&r[keys[i]].trim())return r[keys[i]].trim();}return Object.values(r).find(function(v){return v&&v.length>40;})||'';}
 
+// Generic benefit terms to filter out from MWP
+var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives'];
+
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
     +'"pain_points":[{"rank":1,"label":"","customer_language":"","copy_hook":""}],'
     +'"about_options":[{"num":1,"text":""}],'
     +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_informed":false}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
-    +'"outcome_stats":[{"percentage":0,"label":"","detail":"","count":0}],'
-    +'"transformation":{"stat":"","timeframe":"","percentage":0,"sub":""},'
-    +'"alt_stats":[{"text":"","sub":""}],'
+    +'"outcome_stats":[{"percentage":0,"label":"","detail":"max 20 chars","count":0}],'
+    +'"transformation":{"stat":"X in Y customers noticed [specific result] within [timeframe e.g. 2 weeks]","timeframe":"e.g. within 2 weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews"},'
+    +'"alt_stats":[{"text":"X in Y customers [specific outcome with timeframe]","sub":"[timeframe] · [count] reviewers"}],'
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_author":"","theme":"","is_named":true}],'
     +'"ingredients":[{"num":1,"headline":"","subline":"","wiki_informed":false}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
     +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}],'
     +'"themes":[{"label":"","count":0}]}';
-  return 'Conversion copywriter for Global Healing. Analyze '+count+' reviews for "'+product+'".'+wikiSection
+
+  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
-    +'\nRules: pain_points=5; about_options=5 distinct each max '+s.about_words+' words; made_with_purpose=5 desc under '+s.mwp_chars+' chars wiki_informed only if wiki given; benefits=6; outcome_stats=4-6; transformation always; alt_stats=2-3; reviews=10 prioritize named authors use Verified Buyer for anon under '+s.review_chars+' chars; ingredients=5 editorial headlines subline under '+s.ing_chars+' chars; curated_collection=3; faqs='+s.faq_count+' purchase-blocking hesitations first; themes=6-8'
+    +'\nCRITICAL RULES:'
+    +'\n- about_options: exactly 5, max '+s.about_words+' words each, open with pain point then lead into benefit'
+    +'\n- made_with_purpose: exactly 5, desc under '+s.mwp_chars+' chars, focus on SPECIFIC product benefits like what the ingredient actually does — NOT generic claims like plant-based, made in USA, pharmaceutical-free, non-GMO, vegan, gluten-free, no fillers. Those are off-limits.'
+    +'\n- benefits: exactly 6 (rank 1-3 primary, 4-6 additional)'
+    +'\n- outcome_stats: 4-6 items, "detail" field must be 20 chars or fewer — short and specific like "constipation relief" or "energy boost"'
+    +'\n- transformation: MUST include a fraction (e.g. "3 in 4") AND a specific timeframe (e.g. "within 2 weeks"). stat field example: "3 in 4 customers noticed a difference within 2 weeks". Mine time-to-result language from reviews.'
+    +'\n- alt_stats: 2-3 items, each MUST have a fraction like "3 in 4" or "9 in 10" AND a timeframe. No vague statements.'
+    +'\n- reviews: 10, prioritize named authors, under '+s.review_chars+' chars'
+    +'\n- ingredients: 5 editorial headlines, subline under '+s.ing_chars+' chars'
+    +'\n- curated_collection: 3'
+    +'\n- faqs: '+s.faq_count+' purchase-blocking hesitations first with suggested answers'
+    +'\n- themes: 6-8'
     +'\nReviews:\n'+reviewTexts;
 }
 
@@ -524,7 +534,6 @@ async function runAnalysis(){
   var wikiSection=wiki?'\n\nPRODUCT WIKI:\n'+wiki.substring(0,4000)+'\n':'';
   stepActive('step1');
   var prompt=buildPrompt(product,sample.length,wikiSection,settings,reviewTexts);
-
   stepDone('step1');stepActive('step2');
 
   try{
@@ -568,7 +577,10 @@ function makeCopyBtn(text,darkMode){
   return btn;
 }
 
-function esc(str){if(!str)return'';return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function isGeneric(text){
+  var lower=(text||'').toLowerCase();
+  return GENERIC_TERMS.some(function(t){return lower.indexOf(t)!==-1;});
+}
 
 function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
   document.getElementById('resultsTitle').textContent=product;
@@ -591,9 +603,12 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     aboutList.appendChild(card);
   });
 
-  // S2 MADE WITH PURPOSE
+  // S2 MADE WITH PURPOSE — filter generic
   var mwpList=document.getElementById('mwpList');mwpList.innerHTML='';
-  (a.made_with_purpose||[]).forEach(function(m){
+  var mwpItems=(a.made_with_purpose||[]).filter(function(m){
+    return !isGeneric(m.title)&&!isGeneric(m.description);
+  });
+  mwpItems.forEach(function(m){
     var cc=(m.description||'').length;
     var over=cc>settings.mwp_chars;
     var card=document.createElement('div');card.className='choice-card';
@@ -609,7 +624,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     mwpList.appendChild(card);
   });
 
-  // KEY BENEFITS
+  // KEY BENEFITS — top 3 then additional 3 (no wiki placeholders)
   var rb=document.getElementById('reviewBenefitsGrid');rb.innerHTML='';
   (a.benefits||[]).slice(0,3).forEach(function(b){
     var card=document.createElement('div');card.className='benefit-card';
@@ -624,7 +639,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
   var eb=document.getElementById('extraBenefitsGrid');eb.innerHTML='';
   (a.benefits||[]).slice(3,6).forEach(function(b,i){
     var card=document.createElement('div');card.className='benefit-card';
-    var num=document.createElement('div');num.className='benefit-num';num.textContent='Option 0'+(i+4);
+    var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+(i+4);
     var title=document.createElement('div');title.className='benefit-title';title.textContent=b.title||'';
     var proof=document.createElement('div');proof.className='benefit-proof';proof.textContent=(b.proof||'')+(b.pct?' ('+b.pct+'% of reviewers)':'');
     var footer=document.createElement('div');footer.className='benefit-footer';
@@ -641,7 +656,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
   var numStrong=strongStats.length;
   if(numStrong===0){
     document.getElementById('statsWarnRed').style.display='block';
-    document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Jane: exclude the percentage grid from this PDP. Use the transformation timeline and "3 in 4" framing below instead.';
+    document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Jane: exclude the percentage grid from this PDP. Use the transformation timeline and "X in Y" framing below instead.';
     document.getElementById('statsWarnYellow').style.display='none';
   } else if(numStrong<3){
     document.getElementById('statsWarnYellow').style.display='block';
@@ -651,18 +666,23 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     document.getElementById('statsWarnYellow').style.display='none';
     document.getElementById('statsWarnRed').style.display='none';
   }
+
   (a.outcome_stats||[]).forEach(function(s){
+    var detail=s.detail||'';
+    // Enforce 20 char max on display
+    if(detail.length>20) detail=detail.substring(0,20).trim();
     var card=document.createElement('div');card.className='stat-card';
     var pct=document.createElement('div');pct.className='stat-pct';pct.textContent=s.percentage+'%';
-    var lbl=document.createElement('div');lbl.className='stat-label';lbl.textContent=s.detail||'';
+    var lbl=document.createElement('div');lbl.className='stat-label';lbl.textContent=detail;
     var det=document.createElement('div');det.className='stat-detail';det.textContent=s.count+' of '+analyzed.toLocaleString()+' reviewers';
     var row=document.createElement('div');row.className='stat-copy-row';
-    row.appendChild(makeCopyBtn(s.percentage+'% '+s.detail));
+    row.appendChild(makeCopyBtn(s.percentage+'% '+detail));
     card.appendChild(pct);card.appendChild(lbl);card.appendChild(det);card.appendChild(row);
     grid.appendChild(card);
   });
   document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
 
+  // Alt stats — "X in Y" framing with timeframe
   if((a.alt_stats||[]).length){
     document.getElementById('altStatsWrap').style.display='block';
     var altList=document.getElementById('altStatsList');altList.innerHTML='';
@@ -679,12 +699,19 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     });
   }
 
+  // Transformation timeline card
   if(a.transformation){
     document.getElementById('transformCard').style.display='flex';
-    document.getElementById('transformStat').textContent=a.transformation.stat||'';
-    document.getElementById('transformSub').textContent=a.transformation.sub||'';
+    var tStat=a.transformation.stat||'';
+    var tSub=a.transformation.sub||'';
+    // Ensure fraction and timeframe are visible
+    if(a.transformation.fraction&&a.transformation.timeframe){
+      if(tStat.indexOf(a.transformation.fraction)===-1) tStat=a.transformation.fraction+' customers noticed a difference '+a.transformation.timeframe;
+    }
+    document.getElementById('transformStat').textContent=tStat;
+    document.getElementById('transformSub').textContent=tSub;
     var tcBtn=document.getElementById('transformCopyBtn');
-    tcBtn.replaceWith(makeCopyBtn(a.transformation.stat||''));
+    tcBtn.replaceWith(makeCopyBtn(tStat));
   }
 
   // S4 REVIEWS
@@ -700,15 +727,17 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.rephrased_text||'')+'\u201d';
     var authRow=document.createElement('div');authRow.className='review-author-row';
     var authName=document.createElement('div');authName.className='review-author-name';authName.textContent=v.original_author||'Verified Buyer';
-    var authLabel=document.createElement('div');authLabel.className='review-author-label';authLabel.textContent='Verified Buyer';
     var themeTag=document.createElement('span');themeTag.className='review-theme-tag';themeTag.textContent=v.theme||'';
     authRow.appendChild(authName);
-    if(v.original_author&&v.original_author!=='Verified Buyer')authRow.appendChild(authLabel);
+    if(v.original_author&&v.original_author!=='Verified Buyer'){
+      var authLabel=document.createElement('div');authLabel.className='review-author-label';authLabel.textContent='Verified Buyer';
+      authRow.appendChild(authLabel);
+    }
     authRow.appendChild(themeTag);
     var meta=document.createElement('div');meta.className='review-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.review_chars+' chars'+(over?' — over limit':'');
     body.appendChild(num);body.appendChild(title);body.appendChild(stars);body.appendChild(text);body.appendChild(authRow);body.appendChild(meta);
     var col=document.createElement('div');col.style.cssText='display:flex;flex-direction:column;align-items:flex-end;flex-shrink:0;';
-    col.appendChild(makeCopyBtn((v.title?v.title+': ':'')+'\u201c'+(v.rephrased_text||'')+'\u201d — '+(v.original_author||'Verified Buyer'),true));
+    col.appendChild(makeCopyBtn((v.title?v.title+': ':'')+'\u201c'+(v.rephrased_text||'')+'\u201d \u2014 '+(v.original_author||'Verified Buyer'),true));
     card.appendChild(body);card.appendChild(col);
     revList.appendChild(card);
   });
@@ -760,7 +789,6 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     var q=document.createElement('div');q.className='faq-question';q.textContent=o.question||'';
     var tog=document.createElement('span');tog.className='faq-toggle';tog.id=tid;tog.textContent='▾';
     header.appendChild(rank);header.appendChild(q);header.appendChild(tog);
-
     var body=document.createElement('div');body.className='faq-body';body.id=bid;
     var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='From review language:';
     var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent='\u201c'+(o.source_language||'')+'\u201d';
@@ -775,12 +803,11 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     var noteSpan=document.createElement('span');noteSpan.textContent=o.answer_note||'';
     note.appendChild(document.createTextNode('Must address: '));note.appendChild(noteSpan);
     body.appendChild(srcLbl);body.appendChild(srcQ);body.appendChild(ansWrap);body.appendChild(note);
-
     card.appendChild(header);card.appendChild(body);
     faqContainer.appendChild(card);
   });
 
-  // PAIN POINTS
+  // REFERENCE — PAIN POINTS
   var painContainer=document.getElementById('painCards');painContainer.innerHTML='';
   (a.pain_points||[]).forEach(function(p){
     var card=document.createElement('div');card.className='pain-card';
@@ -794,7 +821,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     painContainer.appendChild(card);
   });
 
-  // SENTIMENT
+  // REFERENCE — SENTIMENT
   var s=a.sentiment||{positive:0,neutral:0,negative:0},sum=s.positive+s.neutral+s.negative||1;
   var pp=Math.round(s.positive/sum*100),np=Math.round(s.neutral/sum*100),ngp=Math.round(s.negative/sum*100);
   document.getElementById('posNum').textContent=pp+'%';
@@ -806,7 +833,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     document.getElementById('sentimentNeg').style.width=ngp+'%';
   },100);
 
-  // THEMES
+  // REFERENCE — THEMES
   var tp=document.getElementById('themePills');tp.innerHTML='';
   (a.themes||[]).forEach(function(t){
     var p=document.createElement('div');p.className='theme-pill';
@@ -827,11 +854,11 @@ function exportTxt(){
   out+='\n=== S2 — MADE WITH PURPOSE ===\n';
   (a.made_with_purpose||[]).forEach(function(m){out+='Option '+m.num+': '+m.title+'\n'+m.description+'\n\n';});
   out+='\n=== KEY BENEFITS ===\n';
-  (a.benefits||[]).forEach(function(b){out+='• '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
+  (a.benefits||[]).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
   out+='\n=== S3 — OUTCOME STATS ===\n';
   (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+'\n';});
   if(a.transformation)out+='\nTransformation: '+a.transformation.stat+'\n';
-  (a.alt_stats||[]).forEach(function(s){out+='Alt: '+s.text+'\n';});
+  (a.alt_stats||[]).forEach(function(s){out+='Alt framing: '+s.text+'\n';});
   out+='\n=== S4 — REVIEWS ===\n';
   (a.reviews||[]).forEach(function(v){out+='Option '+v.num+': '+v.title+'\n"'+v.rephrased_text+'"\n— '+(v.original_author||'Verified Buyer')+'\n\n';});
   out+='\n=== S5 — INGREDIENTS ===\n';
