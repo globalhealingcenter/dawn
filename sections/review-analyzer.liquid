@@ -60,7 +60,7 @@
 
   .ing-option{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;}
   .ing-option-body{flex:1;}
-  .ing-option-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;margin-bottom:12px;letter-spacing:0.06em;text-transform:uppercase;}
+  .ing-option-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:12px;letter-spacing:0.06em;text-transform:uppercase;}
   .ing-headline{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.3;color:var(--ink);margin-bottom:0;}
   .ing-headline em{font-style:italic;color:var(--gold);}
   .ing-subline{font-size:13px;color:#6b5e4a;line-height:1.6;margin-top:10px;max-width:480px;}
@@ -86,7 +86,7 @@
   .choice-list{display:flex;flex-direction:column;gap:12px;}
   .choice-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
   .choice-body{flex:1;}
-  .choice-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;}
+  .choice-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);margin-bottom:8px;letter-spacing:0.06em;text-transform:uppercase;}
   .choice-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.4;}
   .choice-text{font-size:14px;color:#3a2e20;line-height:1.8;}
   .choice-desc{font-size:13px;color:#6b5e4a;line-height:1.6;margin-top:4px;}
@@ -123,7 +123,7 @@
   /* BENEFITS */
   .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
   .benefit-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;}
-  .benefit-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;}
+  .benefit-num{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);}
   .benefit-title{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;}
   .benefit-proof{font-size:12px;color:#6b5e4a;line-height:1.6;flex:1;}
   .benefit-footer{display:flex;justify-content:flex-end;margin-top:8px;}
@@ -157,7 +157,7 @@
   .faq-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
   .faq-header{padding:18px 20px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;}
   .faq-header:hover{background:#faf8f4;}
-  .faq-rank{font-family:'DM Mono',monospace;font-size:10px;background:var(--rust);color:white;padding:3px 8px;border-radius:20px;flex-shrink:0;margin-top:2px;}
+  .faq-rank{font-family:'DM Mono',monospace;font-size:10px;background:var(--gold);color:var(--ink);padding:3px 8px;border-radius:20px;flex-shrink:0;margin-top:2px;}
   .faq-question{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;flex:1;}
   .faq-toggle{font-size:16px;color:#8a7a68;flex-shrink:0;transition:transform 0.2s;}
   .faq-toggle.open{transform:rotate(180deg);}
@@ -229,10 +229,10 @@
   </div>
 
   <div style="margin-bottom:16px;">
-    <span class="collapsible-toggle" onclick="togglePanel('wikiPanel','wikiArrow')">Product Wiki (optional) <span class="collapsible-arrow" id="wikiArrow">▾</span></span>
-    <div class="collapsible-panel" id="wikiPanel">
-      <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Used for Made With Purpose, Ingredients, and Key Benefits."></textarea>
-      <div class="panel-note">Plain text only. Formatting doesn't matter. Wiki-informed cards will be marked ✓ Wiki-informed.</div>
+    <span class="collapsible-toggle" onclick="togglePanel('wikiPanel','wikiArrow')">Product Wiki <span style="color:var(--rust);font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.06em;"> — REQUIRED</span> <span class="collapsible-arrow open" id="wikiArrow">▾</span></span>
+    <div class="collapsible-panel open" id="wikiPanel">
+      <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Required for Made With Purpose benefits and Ingredients section."></textarea>
+      <div class="panel-note">Plain text only. Wiki content drives the Made With Purpose benefits and Ingredients options. Wiki-informed cards will be marked ✓ Wiki-informed.</div>
     </div>
   </div>
 
@@ -295,13 +295,12 @@
     <div class="ra-section" id="sec-mwp">
       <div class="section-label">PDP Section 2</div>
       <div class="section-heading">Made With Purpose</div>
-      <div class="jane-note">5 benefit card options focused on what this product specifically does — ingredients and mechanisms, not generic claims. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
+      <div class="jane-note">5 benefit card options sourced from the product wiki — focused on what the specific ingredients actually do. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
       <div class="choice-list" id="mwpList"></div>
 
-      <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--mist);">
+      <div style="margin-top:56px;padding-top:36px;border-top:1px solid var(--mist);">
         <div class="section-label" style="background:var(--sage);">Key Benefits</div>
-        <div class="section-heading" style="font-size:22px;margin-top:10px;margin-bottom:6px;">Key Benefits</div>
-        <div class="section-sub">Top 3 from reviews with proof lines. 3 additional options below.</div>
+        <div class="section-heading" style="font-size:22px;margin-top:10px;margin-bottom:20px;">Key Benefits</div>
         <div class="benefits-grid" id="reviewBenefitsGrid"></div>
         <hr class="fold-divider">
         <div class="benefits-grid" id="extraBenefitsGrid"></div>
@@ -485,14 +484,14 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
   return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5, max '+s.about_words+' words each, open with pain point then lead into benefit'
-    +'\n- made_with_purpose: exactly 5, desc under '+s.mwp_chars+' chars, focus on SPECIFIC product benefits like what the ingredient actually does — NOT generic claims like plant-based, made in USA, pharmaceutical-free, non-GMO, vegan, gluten-free, no fillers. Those are off-limits.'
+    +'\n- about_options: exactly 5, max '+s.about_words+' words each, open with a customer pain point then lead into the main benefit. Write with confidence and precision — this is a premium supplement brand. No clinical language, no generic wellness clichés. Specific, credible, human.'
+    +'\n- made_with_purpose: exactly 5, sourced ONLY from the product wiki — use the actual ingredient names and mechanisms from the wiki. desc under '+s.mwp_chars+' chars. Focus on what the specific ingredients do. NOT generic claims like plant-based, made in USA, pharmaceutical-free, non-GMO, vegan, gluten-free, no fillers.'
     +'\n- benefits: exactly 6 (rank 1-3 primary, 4-6 additional)'
-    +'\n- outcome_stats: 4-6 items, "detail" field must be 20 chars or fewer — short and specific like "constipation relief" or "energy boost"'
-    +'\n- transformation: MUST include a fraction (e.g. "3 in 4") AND a specific timeframe (e.g. "within 2 weeks"). stat field example: "3 in 4 customers noticed a difference within 2 weeks". Mine time-to-result language from reviews.'
+    +'\n- outcome_stats: 4-6 items. "detail" field must be 20 chars or fewer. Make each label distinct and non-redundant — do not repeat the same theme across multiple cards. Each stat should name a different outcome.'
+    +'\n- transformation: MUST include a fraction (e.g. "3 in 4") AND a specific timeframe (e.g. "within 2 weeks"). stat field must read naturally e.g. "3 in 4 customers noticed a difference within 2 weeks". Mine time-to-result language from reviews.'
     +'\n- alt_stats: 2-3 items, each MUST have a fraction like "3 in 4" or "9 in 10" AND a timeframe. No vague statements.'
     +'\n- reviews: 10, prioritize named authors, under '+s.review_chars+' chars'
-    +'\n- ingredients: 5 combined editorial headline options treating ALL ingredients together as a unified story — like "One nutrient. Three *bioavailable* forms." or "The art of nature. The *insights* of science." Each option: headline field (1-2 short punchy lines, wrap the key italic word in *asterisks*), keyword field (the italic word), subline field (one supporting sentence under '+s.ing_chars+' chars). NOT a list of individual ingredients.'
+    +'\n- ingredients: 5 combined editorial headline options treating ALL ingredients as a unified story. Each option: headline field (1-2 short punchy lines — do NOT use asterisks or any special characters, just plain text where one key word per line will become italic in the UI), keyword field (the single most important word from that headline line to italicize), subline field (one supporting sentence under '+s.ing_chars+' chars). Examples of good headlines: "One nutrient. Three bioavailable forms." / "The art of nature. The insights of science." NOT individual ingredient lists.'
     +'\n- curated_collection: 3'
     +'\n- faqs: '+s.faq_count+' purchase-blocking hesitations first with suggested answers'
     +'\n- themes: 6-8'
@@ -505,6 +504,9 @@ async function runAnalysis(){
   var reviews=getReviewsForProduct(product);
   if(!reviews.length){showError('No reviews found.');return;}
   var wiki=document.getElementById('wikiText').value.trim();
+  if(!wiki){
+    if(!confirm('Product wiki is empty. Made With Purpose benefits will be less accurate without it. Continue anyway?')){return;}
+  }
   var settings=getSettings();
   hideError();showLoading(reviews.length);hideResults();
 
@@ -741,54 +743,33 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     var body=document.createElement('div');body.className='ing-option-body';
     var num=document.createElement('div');num.className='ing-option-num';num.textContent='Option '+ing.num;
 
-    // Headline: parse *keyword* markers or treat first word as keyword
-    var headlineRaw=ing.headline||'';
+    // Headline: render lines, italicize the keyword word wherever it appears
+    var headlineRaw=(ing.headline||'').replace(/\*/g,''); // strip any accidental asterisks
+    var keyword=(ing.keyword||'').replace(/\*/g,'').trim();
     var headlineEl=document.createElement('div');headlineEl.className='ing-headline';
-    var italicMatch=headlineRaw.match(/^(.*?)\*([\w\s]+)\*(.*?)(\n|$)([\s\S]*)/);
-    if(italicMatch){
-      // Has *keyword* markers
-      var lines=headlineRaw.split('\n');
-      lines.forEach(function(line,li){
-        var lm=line.match(/(.*?)\*([\w\s]+)\*(.*)/);
-        if(lm){
-          if(lm[1])headlineEl.appendChild(document.createTextNode(lm[1]));
-          var em=document.createElement('em');em.textContent=lm[2];headlineEl.appendChild(em);
-          if(lm[3])headlineEl.appendChild(document.createTextNode(lm[3]));
-        } else {
-          headlineEl.appendChild(document.createTextNode(line));
-        }
-        if(li<lines.length-1)headlineEl.appendChild(document.createElement('br'));
-      });
-    } else {
-      // No markers — italicize the last word of each line as the "keyword"
-      var lines=headlineRaw.split('\n');
-      lines.forEach(function(line,li){
-        var words=line.trim().split(' ');
-        if(words.length>1){
-          headlineEl.appendChild(document.createTextNode(words.slice(0,-1).join(' ')+' '));
-          var em=document.createElement('em');em.textContent=words[words.length-1];headlineEl.appendChild(em);
-        } else {
-          var em=document.createElement('em');em.textContent=line;headlineEl.appendChild(em);
-        }
-        if(li<lines.length-1)headlineEl.appendChild(document.createElement('br'));
-      });
-    }
+    var lines=headlineRaw.split('\n');
+    lines.forEach(function(line,li){
+      if(keyword&&line.toLowerCase().indexOf(keyword.toLowerCase())!==-1){
+        var idx=line.toLowerCase().indexOf(keyword.toLowerCase());
+        if(idx>0)headlineEl.appendChild(document.createTextNode(line.substring(0,idx)));
+        var em=document.createElement('em');em.textContent=line.substring(idx,idx+keyword.length);headlineEl.appendChild(em);
+        if(idx+keyword.length<line.length)headlineEl.appendChild(document.createTextNode(line.substring(idx+keyword.length)));
+      } else {
+        headlineEl.appendChild(document.createTextNode(line));
+      }
+      if(li<lines.length-1)headlineEl.appendChild(document.createElement('br'));
+    });
 
-    // Inline row: keyword italic + description beside it
-    var inlineRow=document.createElement('div');inlineRow.className='ing-inline-row';inlineRow.style.marginTop='14px';
-    var kw=document.createElement('span');kw.className='ing-inline-kw';kw.textContent=ing.keyword||'';
-    var desc=document.createElement('span');desc.className='ing-inline-desc';desc.textContent=ing.subline||'';
-    if(ing.keyword){inlineRow.appendChild(kw);inlineRow.appendChild(desc);}
+    // Inline row: italic keyword + subline description beside it
+    var sub=document.createElement('div');sub.className='ing-subline';sub.textContent=ing.subline||'';
 
-    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'');
+    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.style.marginTop='8px';meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'');
 
-    body.appendChild(num);body.appendChild(headlineEl);
-    if(ing.keyword)body.appendChild(inlineRow);
-    body.appendChild(meta);
+    body.appendChild(num);body.appendChild(headlineEl);body.appendChild(sub);body.appendChild(meta);
     if(ing.wiki_informed){var badge=document.createElement('div');badge.className='badge-wiki';badge.textContent='✓ Wiki-informed';body.appendChild(badge);}
 
     wrap.appendChild(body);
-    wrap.appendChild(makeCopyBtn((ing.headline||'')+'\n'+(ing.subline||'')));
+    wrap.appendChild(makeCopyBtn((headlineRaw)+'\n'+(ing.subline||'')));
     ingList.appendChild(wrap);
   });
 
