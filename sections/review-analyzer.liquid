@@ -295,7 +295,7 @@
     <div class="ra-section" id="sec-mwp">
       <div class="section-label">PDP Section 2</div>
       <div class="section-heading">Made With Purpose</div>
-      <div class="jane-note">5 benefit card options sourced from the product wiki — focused on what the specific ingredients actually do. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
+      <div class="jane-note">5 benefit card options sourced from the "Health Benefits & Function" section of the wiki — the functional bullets describing what the ingredients do in the body. Not sourcing, quality, or certification claims. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
       <div class="choice-list" id="mwpList"></div>
 
       <div style="margin-top:56px;padding-top:36px;border-top:1px solid var(--mist);">
@@ -464,7 +464,7 @@ function getAuthorCol(r){var keys=['Reviewer Display Name','reviewer display nam
 function getReviewText(r){var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];for(var i=0;i<keys.length;i++){if(r[keys[i]]&&r[keys[i]].trim())return r[keys[i]].trim();}return Object.values(r).find(function(v){return v&&v.length>40;})||'';}
 
 // Generic benefit terms to filter out from MWP
-var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives'];
+var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives','inner leaf only','freeze-dried potency','freeze dried','purity-tested','purity tested','made in the usa','cgmp','third-party tested','sourced','source &','source and quality','backed by research'];
 
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
@@ -485,7 +485,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
     +'\n- about_options: exactly 5, max '+s.about_words+' words each, open with a customer pain point then lead into the main benefit. Write with confidence and precision — this is a premium supplement brand. No clinical language, no generic wellness clichés. Specific, credible, human.'
-    +'\n- made_with_purpose: exactly 5, sourced ONLY from the product wiki — use the actual ingredient names and mechanisms from the wiki. desc under '+s.mwp_chars+' chars. Focus on what the specific ingredients do. NOT generic claims like plant-based, made in USA, pharmaceutical-free, non-GMO, vegan, gluten-free, no fillers.'
+    +'\n- made_with_purpose: exactly 5, sourced ONLY from the "Health Benefits & Function" section of the product wiki — use the functional benefit bullets that describe what the ingredients actually do in the body (e.g. "Calm and protect the gut lining", "Support microbial balance", "Strengthen immune defenses"). Do NOT use content from "Source & Quality", "Backed by Research", certifications, or manufacturing claims. Title 2–3 words max, description under '+s.mwp_chars+' chars, wiki_informed: true.'
     +'\n- benefits: exactly 6 (rank 1-3 primary, 4-6 additional)'
     +'\n- outcome_stats: 4-6 items. "detail" field must be 20 chars or fewer. Make each label distinct and non-redundant — do not repeat the same theme across multiple cards. Each stat should name a different outcome.'
     +'\n- transformation: MUST include a fraction (e.g. "3 in 4") AND a specific timeframe (e.g. "within 2 weeks"). stat field must read naturally e.g. "3 in 4 customers noticed a difference within 2 weeks". Mine time-to-result language from reviews.'
