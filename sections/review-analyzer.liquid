@@ -58,9 +58,15 @@
   .results-title{font-family:'DM Serif Display',serif;font-size:32px;color:var(--ink);}
   .results-meta{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;text-align:right;line-height:1.6;}
 
-  .section-nav{display:flex;gap:6px;flex-wrap:wrap;background:white;border:1px solid var(--mist);border-radius:var(--radius);padding:12px 16px;margin-bottom:40px;box-shadow:var(--shadow);}
-  .nav-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 10px;border-radius:6px;border:1px solid var(--mist);background:transparent;color:#8a7a68;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-  .nav-btn:hover{background:var(--cream);color:var(--ink);border-color:var(--gold);}
+  .ing-option{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;}
+  .ing-option-body{flex:1;}
+  .ing-option-num{font-family:'DM Mono',monospace;font-size:10px;color:#8a7a68;margin-bottom:12px;letter-spacing:0.06em;text-transform:uppercase;}
+  .ing-headline{font-family:'DM Serif Display',serif;font-size:24px;line-height:1.3;color:var(--ink);margin-bottom:0;}
+  .ing-headline em{font-style:italic;color:var(--gold);}
+  .ing-subline{font-size:13px;color:#6b5e4a;line-height:1.6;margin-top:10px;max-width:480px;}
+  .ing-inline-row{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;}
+  .ing-inline-kw{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);font-style:italic;white-space:nowrap;}
+  .ing-inline-desc{font-size:13px;color:#6b5e4a;line-height:1.5;}
 
   .ra-section{margin-bottom:56px;scroll-margin-top:24px;}
   .section-label{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:white;background:var(--ink);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
@@ -198,7 +204,6 @@
   @media(max-width:700px){
     .ra-controls,.stats-grid,.benefits-grid,.sentiment-stats-row{grid-template-columns:1fr 1fr;}
     .settings-grid{grid-template-columns:1fr 1fr;}
-    .section-nav{display:none;}
   }
 </style>
 
@@ -276,22 +281,13 @@
       <div class="results-meta" id="resultsMeta"></div>
     </div>
 
-    <nav class="section-nav">
-      <button class="nav-btn" data-target="sec-about">S1 · About</button>
-      <button class="nav-btn" data-target="sec-mwp">S2 · Made With Purpose</button>
-      <button class="nav-btn" data-target="sec-stats">S3 · Real Customers</button>
-      <button class="nav-btn" data-target="sec-reviews">S4 · Reviews</button>
-      <button class="nav-btn" data-target="sec-ingredients">S5 · Ingredients</button>
-      <button class="nav-btn" data-target="sec-curated">S6 · Curate Collection</button>
-      <button class="nav-btn" data-target="sec-faqs">S7 · FAQs</button>
-      <button class="nav-btn" data-target="sec-ref">↓ Reference</button>
-    </nav>
+
 
     <!-- S1 ABOUT -->
     <div class="ra-section" id="sec-about">
       <div class="section-label">PDP Section 1</div>
       <div class="section-heading">About</div>
-      <div class="jane-note"><strong>Jane:</strong> 5 description options — each opens with a customer pain point and leads into the main benefit. Pick one and edit for brand voice. Max 30 words.</div>
+      <div class="jane-note">5 options — each opens with a customer pain point and leads into the main benefit. Max 30 words. Pick one and edit for brand voice.</div>
       <div class="choice-list" id="aboutList"></div>
     </div>
 
@@ -299,7 +295,7 @@
     <div class="ra-section" id="sec-mwp">
       <div class="section-label">PDP Section 2</div>
       <div class="section-heading">Made With Purpose</div>
-      <div class="jane-note"><strong>Jane:</strong> 5 benefit card options focused on what this product specifically does — ingredients and mechanisms, not generic claims. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
+      <div class="jane-note">5 benefit card options focused on what this product specifically does — ingredients and mechanisms, not generic claims. Title 2–3 words, description 73 chars max. Pick 3 for the PDP.</div>
       <div class="choice-list" id="mwpList"></div>
 
       <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--mist);">
@@ -345,7 +341,7 @@
     <div class="ra-section" id="sec-reviews">
       <div class="section-label">PDP Section 4</div>
       <div class="section-heading">Reviews</div>
-      <div class="jane-note"><strong>Jane:</strong> 10 review options — AI-rephrased for clarity while preserving the customer's meaning and voice. Pick the strongest for the PDP. Reviews with real customer names are prioritized.</div>
+      <div class="jane-note">10 options — AI-rephrased for clarity while preserving the customer's meaning and voice. Reviews with real customer names are prioritized. Pick the strongest for the PDP.</div>
       <div class="reviews-list" id="reviewsList"></div>
     </div>
 
@@ -353,15 +349,15 @@
     <div class="ra-section" id="sec-ingredients">
       <div class="section-label">PDP Section 5</div>
       <div class="section-heading">Ingredients</div>
-      <div class="jane-note"><strong>Jane:</strong> 5 editorial headline + supporting line options for the Ingredients section. Sourced from wiki where available. Pick one — these are meant to read like ad headlines, not ingredient lists.</div>
-      <div class="choice-list" id="ingredientsList"></div>
+      <div class="jane-note">5 combined editorial headline options for the full ingredient story — treating all ingredients together, not as a list. Each option has a keyword in italics. Description sits beside it for quick visual matching. Pick one headline and edit for brand voice.</div>
+      <div id="ingredientsList"></div>
     </div>
 
     <!-- S6 CURATE -->
     <div class="curated-wrap ra-section" id="sec-curated">
       <div class="section-label">PDP Section 6</div>
       <div class="section-heading">Curate Your Collection</div>
-      <div class="jane-note"><strong>Jane:</strong> 3 heading + subhead options. The subhead frames the customer journey — not a product list. Pick the option that fits the actual products being curated.</div>
+      <div class="jane-note">3 heading + subhead options. The subhead frames the customer journey — not a product list. Pick the option that fits the actual products being curated.</div>
       <div id="curatedList"></div>
     </div>
 
@@ -369,7 +365,7 @@
     <div class="ra-section" id="sec-faqs">
       <div class="section-label">PDP Section 7</div>
       <div class="section-heading">FAQs</div>
-      <div class="jane-note"><strong>Jane:</strong> 15 questions ranked by how often they appear in reviews — built using objection mapping, so they address what stops customers from buying, not just post-purchase questions. Pick the most relevant for the PDP FAQ section. Each includes a suggested answer ready to edit.</div>
+      <div class="jane-note">15 questions ranked by frequency in reviews — built using objection mapping to address what stops customers from buying, not just post-purchase questions. Pick the most relevant. Each includes a suggested answer ready to edit.</div>
       <div id="faqCards"></div>
     </div>
 
@@ -433,14 +429,7 @@ function getSettings(){
   };
 }
 
-document.addEventListener('DOMContentLoaded',function(){
-  document.querySelectorAll('.nav-btn[data-target]').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var target=document.getElementById(btn.getAttribute('data-target'));
-      if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
-    });
-  });
-});
+
 
 function togglePanel(pId,aId){var p=document.getElementById(pId),a=document.getElementById(aId);p.classList.toggle('open');a.classList.toggle('open');}
 
@@ -488,7 +477,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"transformation":{"stat":"X in Y customers noticed [specific result] within [timeframe e.g. 2 weeks]","timeframe":"e.g. within 2 weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews"},'
     +'"alt_stats":[{"text":"X in Y customers [specific outcome with timeframe]","sub":"[timeframe] · [count] reviewers"}],'
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_author":"","theme":"","is_named":true}],'
-    +'"ingredients":[{"num":1,"headline":"","subline":"","wiki_informed":false}],'
+    +'"ingredients":[{"num":1,"headline":"One word. One *italic* word.","keyword":"italic","subline":"","wiki_informed":false}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
     +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}],'
     +'"themes":[{"label":"","count":0}]}';
@@ -503,7 +492,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\n- transformation: MUST include a fraction (e.g. "3 in 4") AND a specific timeframe (e.g. "within 2 weeks"). stat field example: "3 in 4 customers noticed a difference within 2 weeks". Mine time-to-result language from reviews.'
     +'\n- alt_stats: 2-3 items, each MUST have a fraction like "3 in 4" or "9 in 10" AND a timeframe. No vague statements.'
     +'\n- reviews: 10, prioritize named authors, under '+s.review_chars+' chars'
-    +'\n- ingredients: 5 editorial headlines, subline under '+s.ing_chars+' chars'
+    +'\n- ingredients: 5 combined editorial headline options treating ALL ingredients together as a unified story — like "One nutrient. Three *bioavailable* forms." or "The art of nature. The *insights* of science." Each option: headline field (1-2 short punchy lines, wrap the key italic word in *asterisks*), keyword field (the italic word), subline field (one supporting sentence under '+s.ing_chars+' chars). NOT a list of individual ingredients.'
     +'\n- curated_collection: 3'
     +'\n- faqs: '+s.faq_count+' purchase-blocking hesitations first with suggested answers'
     +'\n- themes: 6-8'
@@ -656,11 +645,11 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
   var numStrong=strongStats.length;
   if(numStrong===0){
     document.getElementById('statsWarnRed').style.display='block';
-    document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Jane: exclude the percentage grid from this PDP. Use the transformation timeline and "X in Y" framing below instead.';
+    document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Exclude the percentage grid from this PDP. Use the transformation timeline and "X in Y" framing below instead.';
     document.getElementById('statsWarnYellow').style.display='none';
   } else if(numStrong<3){
     document.getElementById('statsWarnYellow').style.display='block';
-    document.getElementById('statsWarnYellowText').textContent='Only '+numStrong+' stat'+(numStrong===1?' clears':'s clear')+' 72%. Jane: consider leading with the transformation timeline instead of raw percentages on this PDP.';
+    document.getElementById('statsWarnYellowText').textContent='Only '+numStrong+' stat'+(numStrong===1?' clears':'s clear')+' 72%. Consider leading with the transformation timeline instead of raw percentages on this PDP.';
     document.getElementById('statsWarnRed').style.display='none';
   } else {
     document.getElementById('statsWarnYellow').style.display='none';
@@ -742,22 +731,65 @@ function renderResults(product,total,analyzed,a,dateRange,settings,hasWiki){
     revList.appendChild(card);
   });
 
-  // S5 INGREDIENTS
+  // S5 INGREDIENTS — italic keyword + inline description
   var ingList=document.getElementById('ingredientsList');ingList.innerHTML='';
   (a.ingredients||[]).forEach(function(ing){
     var sc=(ing.subline||'').length;
     var over=sc>settings.ing_chars;
-    var card=document.createElement('div');card.className='choice-card';
-    var body=document.createElement('div');body.className='choice-body';
-    var num=document.createElement('div');num.className='choice-num';num.textContent='Option '+ing.num;
-    var hl=document.createElement('div');hl.className='choice-title';hl.style.cssText='font-family:\'DM Serif Display\',serif;font-size:20px;line-height:1.3;';hl.textContent=ing.headline||'';
-    var sub=document.createElement('div');sub.className='choice-desc';sub.textContent=ing.subline||'';
+    var wrap=document.createElement('div');wrap.className='ing-option';
+
+    var body=document.createElement('div');body.className='ing-option-body';
+    var num=document.createElement('div');num.className='ing-option-num';num.textContent='Option '+ing.num;
+
+    // Headline: parse *keyword* markers or treat first word as keyword
+    var headlineRaw=ing.headline||'';
+    var headlineEl=document.createElement('div');headlineEl.className='ing-headline';
+    var italicMatch=headlineRaw.match(/^(.*?)\*([\w\s]+)\*(.*?)(\n|$)([\s\S]*)/);
+    if(italicMatch){
+      // Has *keyword* markers
+      var lines=headlineRaw.split('\n');
+      lines.forEach(function(line,li){
+        var lm=line.match(/(.*?)\*([\w\s]+)\*(.*)/);
+        if(lm){
+          if(lm[1])headlineEl.appendChild(document.createTextNode(lm[1]));
+          var em=document.createElement('em');em.textContent=lm[2];headlineEl.appendChild(em);
+          if(lm[3])headlineEl.appendChild(document.createTextNode(lm[3]));
+        } else {
+          headlineEl.appendChild(document.createTextNode(line));
+        }
+        if(li<lines.length-1)headlineEl.appendChild(document.createElement('br'));
+      });
+    } else {
+      // No markers — italicize the last word of each line as the "keyword"
+      var lines=headlineRaw.split('\n');
+      lines.forEach(function(line,li){
+        var words=line.trim().split(' ');
+        if(words.length>1){
+          headlineEl.appendChild(document.createTextNode(words.slice(0,-1).join(' ')+' '));
+          var em=document.createElement('em');em.textContent=words[words.length-1];headlineEl.appendChild(em);
+        } else {
+          var em=document.createElement('em');em.textContent=line;headlineEl.appendChild(em);
+        }
+        if(li<lines.length-1)headlineEl.appendChild(document.createElement('br'));
+      });
+    }
+
+    // Inline row: keyword italic + description beside it
+    var inlineRow=document.createElement('div');inlineRow.className='ing-inline-row';inlineRow.style.marginTop='14px';
+    var kw=document.createElement('span');kw.className='ing-inline-kw';kw.textContent=ing.keyword||'';
+    var desc=document.createElement('span');desc.className='ing-inline-desc';desc.textContent=ing.subline||'';
+    if(ing.keyword){inlineRow.appendChild(kw);inlineRow.appendChild(desc);}
+
     var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'');
-    body.appendChild(num);body.appendChild(hl);body.appendChild(sub);body.appendChild(meta);
+
+    body.appendChild(num);body.appendChild(headlineEl);
+    if(ing.keyword)body.appendChild(inlineRow);
+    body.appendChild(meta);
     if(ing.wiki_informed){var badge=document.createElement('div');badge.className='badge-wiki';badge.textContent='✓ Wiki-informed';body.appendChild(badge);}
-    card.appendChild(body);
-    card.appendChild(makeCopyBtn((ing.headline||'')+'\n'+(ing.subline||'')));
-    ingList.appendChild(card);
+
+    wrap.appendChild(body);
+    wrap.appendChild(makeCopyBtn((ing.headline||'')+'\n'+(ing.subline||'')));
+    ingList.appendChild(wrap);
   });
 
   // S6 CURATED
