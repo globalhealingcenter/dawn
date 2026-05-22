@@ -269,7 +269,7 @@
           <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="200" min="80" max="400"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
           <div class="settings-field"><label>Stat label — max chars</label><input type="number" id="set_stat_chars" value="20" min="10" max="40"></div>
-          <div class="settings-field"><label>FAQs — count</label><input type="number" id="set_faq_count" value="15" min="8" max="20"></div>
+          
         </div>
         <div class="panel-note" style="margin-top:16px;">Defaults are set. Change before running.</div>
       </div>
@@ -418,12 +418,7 @@
       </div>
     </div>
 
-    <div class="ra-section">
-      <div class="section-label">Reference — Themes</div>
-      <div class="section-heading">Top Themes</div>
-      <div class="section-sub">Most frequently mentioned topics. For reference and future content planning.</div>
-      <div class="theme-pills" id="themePills"></div>
-    </div>
+
 
     <div class="export-bar">
       <button class="btn-export" onclick="exportTxt()">↓ Export as TXT</button>
@@ -436,7 +431,7 @@
 <script>
 var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
-var DEFAULTS={about_words:30,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:15};
+var DEFAULTS={about_words:30,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:8};
 
 function getSettings(){
   return {
@@ -445,7 +440,7 @@ function getSettings(){
     review_chars:parseInt(document.getElementById('set_review_chars').value)||DEFAULTS.review_chars,
     ing_chars:parseInt(document.getElementById('set_ing_chars').value)||DEFAULTS.ing_chars,
     stat_chars:parseInt(document.getElementById('set_stat_chars').value)||DEFAULTS.stat_chars,
-    faq_count:parseInt(document.getElementById('set_faq_count').value)||DEFAULTS.faq_count
+    faq_count:8
   };
 }
 
@@ -496,19 +491,19 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
-    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}],'
-    +'"themes":[{"label":"","count":0}]}';
+    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}],}]}';]}';
 
   return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
     +'\n- about_options: exactly 5, max '+s.about_words+' words each. Open with a specific customer pain point, then lead into the main benefit. Add pain_point_tag (2-4 words naming the pain) and benefit_tag (2-4 words naming the benefit). Premium brand — confident, specific, no wellness clichés. ZERO health claims: do not use words like diagnose, treat, cure, prevent, reverses, heals, clinically proven, or any language implying disease treatment.'
+    +'\n- pain_points: exactly 4, ranked by frequency'
     +'\n- made_with_purpose: exactly 5, from the "Health Benefits & Function" wiki section only — functional bullets about what ingredients do in the body. NOT Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card.'
     +'\n- benefits: exactly 6 (rank 1-3 primary, 4-6 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
     +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language.'
     +'\n- alt_stats: 2-3 items each with fraction AND timeframe.'
-    +'\n- reviews: exactly 10. rephrased_text is the AI-polished version for the PDP. original_text is the verbatim customer review. Prioritize named authors. Under '+s.review_chars+' chars for rephrased_text.'
+    +'\n- reviews: exactly 8. rephrased_text is the AI-polished version for the PDP. original_text is the verbatim customer review. Prioritize named authors. Under '+s.review_chars+' chars for rephrased_text.'
     +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
     +'\n- curated_collection: 3. No disease claims.'
     +'\n- faqs: '+s.faq_count+' purchase-blocking hesitations with suggested answers. No disease treatment claims in answers.'
@@ -543,15 +538,29 @@ async function runAnalysis(){
   var prompt=buildPrompt(product,sample.length,wikiSection,settings,reviewTexts);
   stepDone('step1');stepActive('step2');
 
-  try{
+  async function doFetch(prompt){
     var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:8000,messages:[{role:'user',content:prompt}]})
     });
-    stepDone('step2');stepActive('step3');
     if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
-    var rawText=await response.text();
+    return await response.text();
+  }
+
+  try{
+    var rawText;
+    try{
+      rawText=await doFetch(prompt);
+    }catch(e1){
+      // Auto-retry once on timeout or overloaded
+      if(e1.message.indexOf('524')!==-1||e1.message.indexOf('overloaded')!==-1||e1.message.indexOf('529')!==-1){
+        document.getElementById('loadingTimer').textContent='Retrying…';
+        await new Promise(function(r){setTimeout(r,3000);});
+        rawText=await doFetch(prompt);
+      } else { throw e1; }
+    }
+    stepDone('step2');stepActive('step3');
     stepDone('step3');stepActive('step4');
     var envelope;try{envelope=JSON.parse(rawText);}catch(e){envelope=null;}
     var inner=envelope&&envelope.content&&envelope.content[0]&&envelope.content[0].text||rawText;
@@ -641,7 +650,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
 
   // KEY BENEFITS
   var rb=document.getElementById('reviewBenefitsGrid');rb.innerHTML='';
-  (a.benefits||[]).slice(0,3).forEach(function(b){
+  (a.benefits||[]).slice(0,2).forEach(function(b){
     var card=document.createElement('div');card.className='benefit-card';
     var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+b.rank;
     var title=document.createElement('div');title.className='benefit-title';title.textContent=b.title||'';
@@ -650,9 +659,9 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     card.appendChild(num);card.appendChild(title);card.appendChild(proof);card.appendChild(footer);rb.appendChild(card);
   });
   var eb=document.getElementById('extraBenefitsGrid');eb.innerHTML='';
-  (a.benefits||[]).slice(3,6).forEach(function(b,i){
+  (a.benefits||[]).slice(2,4).forEach(function(b,i){
     var card=document.createElement('div');card.className='benefit-card';
-    var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+(i+4);
+    var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+(i+3);
     var title=document.createElement('div');title.className='benefit-title';title.textContent=b.title||'';
     var proof=document.createElement('div');proof.className='benefit-proof';proof.textContent=(b.proof||'')+(b.pct?' ('+b.pct+'% of reviewers)':'');
     var footer=document.createElement('div');footer.className='benefit-footer';footer.appendChild(makeCopyBtn((b.title||'')+': '+(b.proof||'')));
@@ -833,14 +842,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   document.getElementById('negNum').textContent=ngp+'%';
   setTimeout(function(){document.getElementById('sentimentPos').style.width=pp+'%';document.getElementById('sentimentNeu').style.width=np+'%';document.getElementById('sentimentNeg').style.width=ngp+'%';},100);
 
-  // REFERENCE — THEMES
-  var tp=document.getElementById('themePills');tp.innerHTML='';
-  (a.themes||[]).forEach(function(t){
-    var p=document.createElement('div');p.className='theme-pill';
-    p.appendChild(document.createTextNode(t.label||''));
-    var cnt=document.createElement('span');cnt.className='pill-count';cnt.textContent=t.count;
-    p.appendChild(cnt);tp.appendChild(p);
-  });
+
 
   showResults();
 }
@@ -869,8 +871,7 @@ function exportTxt(){
   (a.faqs||[]).forEach(function(o){out+='#'+o.rank+' '+o.question+'\nAnswer: '+o.suggested_answer+'\n\n';});
   out+='\n=== PAIN POINTS ===\n';
   (a.pain_points||[]).forEach(function(p){out+='#'+p.rank+' '+p.label+'\n"'+p.customer_language+'"\n\n';});
-  out+='\n=== THEMES ===\n';
-  (a.themes||[]).forEach(function(t){out+='• '+t.label+' ('+t.count+')\n';});
+
   var blob=new Blob([out],{type:'text/plain'}),url=URL.createObjectURL(blob),link=document.createElement('a');
   link.href=url;link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-pdp-intel.txt';link.click();
 }
