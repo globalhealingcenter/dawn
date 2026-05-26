@@ -491,9 +491,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
-    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}],}]}';]}';
-
-  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
+    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}]}';  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
     +'\n- about_options: exactly 5, max '+s.about_words+' words each. Open with a specific customer pain point, then lead into the main benefit. Add pain_point_tag (2-4 words naming the pain) and benefit_tag (2-4 words naming the benefit). Premium brand — confident, specific, no wellness clichés. ZERO health claims: do not use words like diagnose, treat, cure, prevent, reverses, heals, clinically proven, or any language implying disease treatment.'
