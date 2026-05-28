@@ -557,20 +557,37 @@
 
   <!-- Tapcart/Ordergroove scroll fix -->
     <script>
-      if (document.documentElement.classList.contains('tapcart-webbridge')
-          && window.location.pathname.includes('/apps/subscriptions')) {
-        const s = document.createElement('style');
-        s.textContent = `
-          html.tapcart-webbridge, html.tapcart-webbridge body {
-            position: static !important;
-            inset: auto !important;
-            height: auto !important;
-            overflow: visible !important;
-          }
-        `;
-        document.head.appendChild(s);
-      }
-    </script>
+  (function () {
+    if (!window.location.pathname.includes('/apps/subscriptions')) return;
+
+    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+
+    function inject() {
+      if (document.getElementById('tapcart-og-scroll-fix')) return;
+      var s = document.createElement('style');
+      s.id = 'tapcart-og-scroll-fix';
+      s.textContent = css;
+      (document.head || document.documentElement).appendChild(s);
+    }
+
+    // Apply immediately — beat Ordergroove's mount
+    inject();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', inject, { once: true });
+    }
+
+    // MutationObserver: re-assert if Ordergroove resets inline styles after mount
+    var mo = new MutationObserver(inject);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+    if (document.body) {
+      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+      }, { once: true });
+    }
+  })();
+</script>
   
   </head>
 
