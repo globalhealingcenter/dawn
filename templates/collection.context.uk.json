@@ -17,6 +17,13 @@
       "disabled": true,
       "settings": {},
       "blocks": {}
+    },
+    "product-grid": {
+      "settings": {
+        "sidebar_banner": "",
+        "sidebar_banner_link": ""
+      },
+      "blocks": {}
     }
   }
 }
