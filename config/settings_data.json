@@ -237,6 +237,13 @@
           "announcement_bar_padding_x": 10,
           "sale_price_color": "#ff0000"
         }
+      },
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+        "disabled": false,
+        "settings": {
+          "defer_script": true
+        }
       }
     },
     "color_schemes": {
