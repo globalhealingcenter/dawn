@@ -108,7 +108,10 @@
     </script>
     <!-- ============================================ -->
 
-    {% render 'speedshopify-head' %}
+    {% comment %}
+        {% render 'speedshopify-head' %}
+    {% endcomment %}
+
     {% comment %}
       <!-- moved to gh-header -->
       <link rel="canonical" href="{{ canonical_url }}">
@@ -542,7 +545,6 @@
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    {% include 'huk-mega-menu-pro' %}
 
     <!-- Post Pilot -->
     <script type="text/javascript">
@@ -551,11 +553,46 @@
         document.getElementsByTagName('head')[0].appendChild(script);
      </script>
 
+  {% include 'huk-mega-menu-pro' %}
+
+  <!-- Tapcart/Ordergroove scroll fix -->
+    <script>
+  (function () {
+    if (!window.location.pathname.includes('/apps/subscriptions')) return;
+
+    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+
+    function inject() {
+      if (document.getElementById('tapcart-og-scroll-fix')) return;
+      var s = document.createElement('style');
+      s.id = 'tapcart-og-scroll-fix';
+      s.textContent = css;
+      (document.head || document.documentElement).appendChild(s);
+    }
+
+    // Apply immediately — beat Ordergroove's mount
+    inject();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', inject, { once: true });
+    }
+
+    // MutationObserver: re-assert if Ordergroove resets inline styles after mount
+    var mo = new MutationObserver(inject);
+    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+    if (document.body) {
+      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+    } else {
+      document.addEventListener('DOMContentLoaded', function () {
+        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+      }, { once: true });
+    }
+  })();
+</script>
   
-  {% include "huk-mega-menu-pro" %}
   </head>
-							
-							
+
+
+
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -780,6 +817,9 @@
     </script>
 
     {% render 'klaviyo-out-of-stock' %}
-    {% render 'speedshopify-body' %}
+
+    {% comment %}
+        {% render 'speedshopify-body' %}
+    {% endcomment %}
   </body>
 </html>
