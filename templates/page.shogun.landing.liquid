@@ -6,4 +6,9 @@ This file can be re-written at any time.
 {% render 'shogun-products', content: page %}
 {% layout 'theme.shogun.landing' %}
 {{ page.content }}
+
+{% if page.handle == 'careers' %}
+  {% section 'careers-page' %}
+{% endif %}
+
 {{ page.metafields.shogun.optimizer }}
