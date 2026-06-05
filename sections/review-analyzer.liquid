@@ -94,6 +94,7 @@
   .about-tag{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:0.04em;}
   .about-tag-pain{background:#fff3f0;color:var(--rust);border:1px solid #f5c6bb;}
   .about-tag-benefit{background:var(--green-light);color:var(--sage);border:1px solid #b0d9c4;}
+  .about-tag-diff{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-mid);}
 
   /* STATS */
   .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(232,226,217,0.8);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;background:white;}
@@ -308,7 +309,7 @@
     <div class="ra-section" id="sec-about">
       <div class="section-label">PDP Section 1</div>
       <div class="section-heading">About</div>
-      <div class="jane-note">5 options — each opens with a real customer pain point, anchors the benefit in the ingredient mechanism, and contrasts against alternatives. Max 204 characters (~3 lines). Pain point and benefit tagged on each card.</div>
+      <div class="jane-note">5 options — each opens with a real customer pain point, anchors the benefit in the ingredient mechanism, and contrasts against alternatives. Max 204 characters (~3 lines). Pain point, benefit, and differentiator tagged on each card.</div>
       <div class="choice-list" id="aboutList"></div>
     </div>
 
@@ -482,7 +483,7 @@ var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical fre
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
     +'"pain_points":[{"rank":1,"label":"","customer_language":"","copy_hook":"","main_benefit":""}],'
-    +'"about_options":[{"num":1,"text":"max 204 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label"}],'
+    +'"about_options":[{"num":1,"text":"max 204 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label"}],'
     +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
@@ -494,8 +495,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}]}';  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5, max 204 characters each (roughly 3 lines of PDP copy). Each option must: (1) open with a specific customer pain point pulled from review language — not invented; (2) anchor the benefit in the actual ingredient mechanism — HOW the key ingredient works in the body, not just what it does; (3) include an implicit or explicit contrast against the alternative (laxatives, other supplements, or doing nothing). Tone: clinical credibility without clinical language — reads like an expert, not a marketer. BANNED words: supports, promotes, boosts, enhances, detox, cleanse, natural, powerful, or any vague wellness language. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven, or any language implying disease treatment. Add pain_point_tag (2-4 words) and benefit_tag (2-4 words) for each option.'
-    +'\n- pain_points: exactly 4, ranked by frequency'
+    +'\\n- about_options: exactly 5, max 204 characters each (roughly 3 lines of PDP copy). Each option must: (1) open by stating the customer condition or pain point as a plain declarative fact — pulled from review language, NOT invented, NO question marks, NO casual openers like Backed up? or Feeling heavy? — state it precisely: e.g. Chronic constipation signals compacted waste in the digestive tract.; (2) anchor the benefit in the actual ingredient mechanism — name the specific ingredient and HOW it works chemically in the body, not just what it does; (3) include an implicit or explicit contrast against the alternative (laxatives, fiber, stimulants, or doing nothing) — stated as fact, not as emotion. Tone: declarative, precise, reads like an expert who does not need to sell. BANNED: question marks to open, casual language, metaphors, words like reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances, detox, cleanse, natural, powerful, or any vague wellness language. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven. Add pain_point_tag (2-4 words), benefit_tag (2-4 words), and differentiator_tag (2-4 words naming the specific mechanism e.g. oxygen-based, methylcobalamin form, ozonated magnesium) for each option.\'\n    '+'\n- pain_points: exactly 4, ranked by frequency'
     +'\n- made_with_purpose: exactly 5, from the "Health Benefits & Function" wiki section only — functional bullets about what ingredients do in the body. NOT Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card.'
     +'\n- benefits: exactly 6 (rank 1-3 primary, 4-6 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
@@ -618,6 +618,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var tags=document.createElement('div');tags.className='about-tags';
     if(o.pain_point_tag){var pt=document.createElement('span');pt.className='about-tag about-tag-pain';pt.textContent='Pain: '+o.pain_point_tag;tags.appendChild(pt);}
     if(o.benefit_tag){var bt=document.createElement('span');bt.className='about-tag about-tag-benefit';bt.textContent='Benefit: '+o.benefit_tag;tags.appendChild(bt);}
+    if(o.differentiator_tag){var dt=document.createElement('span');dt.className='about-tag about-tag-diff';dt.textContent='Differentiator: '+o.differentiator_tag;tags.appendChild(dt);}
     var txt=document.createElement('div');txt.className='choice-text';txt.textContent=o.text||'';
     var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=wc+' / '+settings.about_chars+' chars'+(over?' — over limit':'');
     body.appendChild(num);if(tags.children.length)body.appendChild(tags);body.appendChild(txt);body.appendChild(meta);
