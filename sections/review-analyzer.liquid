@@ -100,6 +100,12 @@
   .transform-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
   .transform-stat{font-family:'DM Serif Display',serif;font-size:26px;color:var(--accent);margin-bottom:4px;}
   .transform-sub{font-size:13px;color:#8a7a68;}
+  .verification-block{margin-top:16px;padding-top:14px;border-top:1px dashed var(--mist);}
+  .verification-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px;}
+  .verification-row{font-family:'DM Mono',monospace;font-size:12px;color:#5a4a38;line-height:1.6;margin-bottom:4px;}
+  .v-label{color:#8a7a68;font-weight:600;}
+  .v-quotes-label{margin-top:6px;margin-bottom:4px;}
+  .verification-quote{font-size:12px;color:#3a2e20;font-style:italic;line-height:1.6;padding:6px 10px;background:var(--cream);border-left:2px solid var(--accent-mid);margin-bottom:4px;border-radius:0 4px 4px 0;}
   .alt-stat-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
   .alt-stat-inner{flex:1;}
   .alt-stat-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
@@ -287,7 +293,7 @@
     <div class="ra-section" id="sec-stats">
       <div class="section-label">PDP Section 3</div>
       <div class="section-heading">Real Customers. Real Results.</div>
-      <div class="section-sub">Outcome stats calculated from review language — not star ratings.</div>
+      <div class="section-sub">Outcome stats from review language. <strong>Stats Bar Option A (3-point percentages) is for products with a clinical study only.</strong> All other products use the transformation timeline below (Option B) — substantiation data shown beside each claim for the master sheet.</div>
       <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">✕ Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
       <div id="statsWarnYellow" style="display:none" class="warn-yellow"><div class="warn-yellow-title">⚠ Consider using transformation timeline instead</div><div class="warn-text" id="statsWarnYellowText"></div></div>
       <div class="stats-grid" id="statsGrid"></div>
@@ -428,8 +434,8 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
-    +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews"},'
-    +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers"}],'
+    +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"keywords_matched":["keyword1","keyword2"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
+    +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers","mention_count":0,"keywords_matched":["keyword1","keyword2"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]}],'
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
@@ -443,8 +449,8 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\n- made_with_purpose: exactly 5, from the "Health Benefits & Function" wiki section only — functional bullets about what ingredients do in the body. NOT Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card.'
     +'\n- benefits: exactly 4 (rank 1-2 primary, 3-4 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
-    +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language.'
-    +'\n- alt_stats: 2-3 items each with fraction AND timeframe.'
+    +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. REQUIRED for substantiation: mention_count (exact count of reviews containing the timeframe language), keywords_matched (array of 3-6 exact phrases searched for, e.g. ["within 2 weeks", "after 2 weeks", "by week 2"]), sample_quotes (3 verbatim quotes from reviews containing this timeframe, copied EXACTLY as written by the customer — do not paraphrase).'
+    +'\n- alt_stats: 2-3 items each with fraction AND timeframe. REQUIRED for substantiation: mention_count, keywords_matched (3-6 exact phrases), sample_quotes (3 verbatim quotes, EXACT customer wording).'
     +'\n- reviews: exactly 8. rephrased_text is the AI-polished version for the PDP. original_text is the verbatim customer review. Prioritize named authors. Under '+s.review_chars+' chars for rephrased_text.'
     +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
     +'\n- curated_collection: 3. No disease claims.'
@@ -616,6 +622,29 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       var txt=document.createElement('div');txt.className='alt-stat-text';txt.textContent=alt.text||'';
       var sub=document.createElement('div');sub.className='alt-stat-sub';sub.textContent=alt.sub||'';
       inner.appendChild(lbl);inner.appendChild(txt);inner.appendChild(sub);
+      // Add verification block
+      var vBlock=document.createElement('div');vBlock.className='verification-block';
+      var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='SUBSTANTIATION DATA';
+      vBlock.appendChild(vTitle);
+      if(alt.mention_count){
+        var vCount=document.createElement('div');vCount.className='verification-row';
+        vCount.innerHTML='<span class="v-label">Mentions:</span> '+alt.mention_count+' reviews';
+        vBlock.appendChild(vCount);
+      }
+      if(alt.keywords_matched&&alt.keywords_matched.length){
+        var vKw=document.createElement('div');vKw.className='verification-row';
+        vKw.innerHTML='<span class="v-label">Keywords:</span> '+alt.keywords_matched.map(function(k){return '"'+k+'"';}).join(', ');
+        vBlock.appendChild(vKw);
+      }
+      if(alt.sample_quotes&&alt.sample_quotes.length){
+        var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
+        vBlock.appendChild(vqLbl);
+        alt.sample_quotes.forEach(function(q){
+          var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='“'+q+'”';
+          vBlock.appendChild(vq);
+        });
+      }
+      inner.appendChild(vBlock);
       card.appendChild(inner);card.appendChild(makeCopyBtn(alt.text||''));altList.appendChild(card);
     });
   }
@@ -625,6 +654,32 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     if(a.transformation.fraction&&a.transformation.timeframe&&tStat.indexOf(a.transformation.fraction)===-1)tStat=a.transformation.fraction+' customers noticed a difference '+a.transformation.timeframe;
     document.getElementById('transformStat').textContent=tStat;
     document.getElementById('transformSub').textContent=a.transformation.sub||'';
+    // Add verification block
+    var transformInner=document.querySelector('#transformCard .transform-inner');
+    var existingVerif=transformInner.querySelector('.verification-block');
+    if(existingVerif)existingVerif.remove();
+    var vBlock=document.createElement('div');vBlock.className='verification-block';
+    var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='SUBSTANTIATION DATA';
+    vBlock.appendChild(vTitle);
+    if(a.transformation.mention_count){
+      var vCount=document.createElement('div');vCount.className='verification-row';
+      vCount.innerHTML='<span class="v-label">Mentions:</span> '+a.transformation.mention_count+' reviews';
+      vBlock.appendChild(vCount);
+    }
+    if(a.transformation.keywords_matched&&a.transformation.keywords_matched.length){
+      var vKw=document.createElement('div');vKw.className='verification-row';
+      vKw.innerHTML='<span class="v-label">Keywords:</span> '+a.transformation.keywords_matched.map(function(k){return '"'+k+'"';}).join(', ');
+      vBlock.appendChild(vKw);
+    }
+    if(a.transformation.sample_quotes&&a.transformation.sample_quotes.length){
+      var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
+      vBlock.appendChild(vqLbl);
+      a.transformation.sample_quotes.forEach(function(q){
+        var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='“'+q+'”';
+        vBlock.appendChild(vq);
+      });
+    }
+    transformInner.appendChild(vBlock);
     document.getElementById('transformCopyBtn').replaceWith(makeCopyBtn(tStat));
   }
 
@@ -758,8 +813,22 @@ function exportTxt(){
   (a.benefits||[]).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
   out+='\n=== S3 \u2014 OUTCOME STATS ===\n';
   (a.outcome_stats||[]).forEach(function(s){out+='\u2022 '+s.percentage+'% '+s.detail+'\n';});
-  if(a.transformation)out+='\nTransformation: '+a.transformation.stat+'\n';
-  (a.alt_stats||[]).forEach(function(s){out+='Alt framing: '+s.text+'\n';});
+  if(a.transformation){
+    out+='\nTRANSFORMATION TIMELINE:\n';
+    out+='Claim: '+a.transformation.stat+'\n';
+    if(a.transformation.mention_count)out+='Mentions: '+a.transformation.mention_count+' reviews\n';
+    if(a.transformation.keywords_matched)out+='Keywords: '+a.transformation.keywords_matched.join(', ')+'\n';
+    if(a.transformation.sample_quotes)a.transformation.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
+    out+='\n';
+  }
+  (a.alt_stats||[]).forEach(function(s){
+    out+='ALT FRAMING:\n';
+    out+='Claim: '+s.text+'\n';
+    if(s.mention_count)out+='Mentions: '+s.mention_count+' reviews\n';
+    if(s.keywords_matched)out+='Keywords: '+s.keywords_matched.join(', ')+'\n';
+    if(s.sample_quotes)s.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
+    out+='\n';
+  });
   out+='\n=== S4 \u2014 REVIEWS ===\n';
   (a.reviews||[]).forEach(function(v){out+='Option '+v.num+': '+v.title+'\nPDP: "'+v.rephrased_text+'"\nOriginal: "'+v.original_text+'"\n\u2014 '+(v.original_author||'Verified Buyer')+'\n\n';});
   out+='\n=== S5 \u2014 INGREDIENTS ===\n';
