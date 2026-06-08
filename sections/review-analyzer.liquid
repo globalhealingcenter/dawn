@@ -106,6 +106,7 @@
   .v-label{color:#8a7a68;font-weight:600;}
   .v-quotes-label{margin-top:6px;margin-bottom:4px;}
   .verification-quote{font-size:12px;color:#3a2e20;font-style:italic;line-height:1.6;padding:6px 10px;background:var(--cream);border-left:2px solid var(--accent-mid);margin-bottom:4px;border-radius:0 4px 4px 0;}
+  .v-note{font-size:11px;color:#8a7a68;margin-top:6px;margin-bottom:4px;}
   .alt-stat-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
   .alt-stat-inner{flex:1;}
   .alt-stat-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
@@ -434,8 +435,8 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
-    +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"keywords_matched":["keyword1","keyword2"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
-    +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers","mention_count":0,"keywords_matched":["keyword1","keyword2"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]}],'
+    +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"timeframe_keywords":["first night","overnight","by morning"],"outcome_keywords":["relief","worked","felt better"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
+    +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers","mention_count":0,"timeframe_keywords":["first night","overnight"],"outcome_keywords":["relief","worked"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]}],'
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
@@ -449,8 +450,8 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\n- made_with_purpose: exactly 5, from the "Health Benefits & Function" wiki section only — functional bullets about what ingredients do in the body. NOT Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card.'
     +'\n- benefits: exactly 4 (rank 1-2 primary, 3-4 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
-    +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. REQUIRED for substantiation: mention_count (exact count of reviews containing the timeframe language), keywords_matched (array of 3-6 exact phrases searched for, e.g. ["within 2 weeks", "after 2 weeks", "by week 2"]), sample_quotes (3 verbatim quotes from reviews containing this timeframe, copied EXACTLY as written by the customer — do not paraphrase).'
-    +'\n- alt_stats: 2-3 items each with fraction AND timeframe. REQUIRED for substantiation: mention_count, keywords_matched (3-6 exact phrases), sample_quotes (3 verbatim quotes, EXACT customer wording).'
+    +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. CRITICAL substantiation rules: mention_count must be the count of reviews containing BOTH a timeframe phrase AND an outcome phrase in the SAME review — not the count of reviews matching either one. Do NOT count a review that only mentions timing without outcome, or only mentions outcome without timing. timeframe_keywords: 3-6 exact phrases that capture the timeframe (e.g. ["first night", "overnight", "by morning", "next morning", "within a day"]). outcome_keywords: 3-6 exact phrases that capture the outcome (e.g. ["relief", "worked", "went", "results", "felt better"]). sample_quotes: 3 verbatim quotes copied EXACTLY from reviews that contain BOTH a timeframe phrase AND an outcome phrase — do not paraphrase, do not select quotes that only show one element.'
+    +'\n- alt_stats: 2-3 items each with fraction AND timeframe. Same intersection counting rule as transformation: mention_count = count of reviews containing BOTH a timeframe phrase AND an outcome phrase. Provide separate timeframe_keywords (3-6 phrases) and outcome_keywords (3-6 phrases). sample_quotes: 3 verbatim quotes containing BOTH elements.'
     +'\n- reviews: exactly 8. rephrased_text is the AI-polished version for the PDP. original_text is the verbatim customer review. Prioritize named authors. Under '+s.review_chars+' chars for rephrased_text.'
     +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
     +'\n- curated_collection: 3. No disease claims.'
@@ -631,11 +632,19 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
         vCount.innerHTML='<span class="v-label">Mentions:</span> '+alt.mention_count+' reviews';
         vBlock.appendChild(vCount);
       }
-      if(alt.keywords_matched&&alt.keywords_matched.length){
-        var vKw=document.createElement('div');vKw.className='verification-row';
-        vKw.innerHTML='<span class="v-label">Keywords:</span> '+alt.keywords_matched.map(function(k){return '"'+k+'"';}).join(', ');
-        vBlock.appendChild(vKw);
+      if(alt.timeframe_keywords&&alt.timeframe_keywords.length){
+        var vTk=document.createElement('div');vTk.className='verification-row';
+        vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+alt.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+        vBlock.appendChild(vTk);
       }
+      if(alt.outcome_keywords&&alt.outcome_keywords.length){
+        var vOk=document.createElement('div');vOk.className='verification-row';
+        vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+alt.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+        vBlock.appendChild(vOk);
+      }
+      var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
+      vMatchNote.innerHTML='<em>Count = reviews containing BOTH a timeframe and outcome keyword</em>';
+      vBlock.appendChild(vMatchNote);
       if(alt.sample_quotes&&alt.sample_quotes.length){
         var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
         vBlock.appendChild(vqLbl);
@@ -666,11 +675,19 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       vCount.innerHTML='<span class="v-label">Mentions:</span> '+a.transformation.mention_count+' reviews';
       vBlock.appendChild(vCount);
     }
-    if(a.transformation.keywords_matched&&a.transformation.keywords_matched.length){
-      var vKw=document.createElement('div');vKw.className='verification-row';
-      vKw.innerHTML='<span class="v-label">Keywords:</span> '+a.transformation.keywords_matched.map(function(k){return '"'+k+'"';}).join(', ');
-      vBlock.appendChild(vKw);
+    if(a.transformation.timeframe_keywords&&a.transformation.timeframe_keywords.length){
+      var vTk=document.createElement('div');vTk.className='verification-row';
+      vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+a.transformation.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+      vBlock.appendChild(vTk);
     }
+    if(a.transformation.outcome_keywords&&a.transformation.outcome_keywords.length){
+      var vOk=document.createElement('div');vOk.className='verification-row';
+      vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+a.transformation.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+      vBlock.appendChild(vOk);
+    }
+    var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
+    vMatchNote.innerHTML='<em>Count = reviews containing BOTH a timeframe and outcome keyword</em>';
+    vBlock.appendChild(vMatchNote);
     if(a.transformation.sample_quotes&&a.transformation.sample_quotes.length){
       var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
       vBlock.appendChild(vqLbl);
@@ -816,16 +833,18 @@ function exportTxt(){
   if(a.transformation){
     out+='\nTRANSFORMATION TIMELINE:\n';
     out+='Claim: '+a.transformation.stat+'\n';
-    if(a.transformation.mention_count)out+='Mentions: '+a.transformation.mention_count+' reviews\n';
-    if(a.transformation.keywords_matched)out+='Keywords: '+a.transformation.keywords_matched.join(', ')+'\n';
+    if(a.transformation.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+a.transformation.mention_count+' reviews\n';
+    if(a.transformation.timeframe_keywords)out+='Timeframe keywords: '+a.transformation.timeframe_keywords.join(', ')+'\n';
+    if(a.transformation.outcome_keywords)out+='Outcome keywords: '+a.transformation.outcome_keywords.join(', ')+'\n';
     if(a.transformation.sample_quotes)a.transformation.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   }
   (a.alt_stats||[]).forEach(function(s){
     out+='ALT FRAMING:\n';
     out+='Claim: '+s.text+'\n';
-    if(s.mention_count)out+='Mentions: '+s.mention_count+' reviews\n';
-    if(s.keywords_matched)out+='Keywords: '+s.keywords_matched.join(', ')+'\n';
+    if(s.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+s.mention_count+' reviews\n';
+    if(s.timeframe_keywords)out+='Timeframe keywords: '+s.timeframe_keywords.join(', ')+'\n';
+    if(s.outcome_keywords)out+='Outcome keywords: '+s.outcome_keywords.join(', ')+'\n';
     if(s.sample_quotes)s.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   });
