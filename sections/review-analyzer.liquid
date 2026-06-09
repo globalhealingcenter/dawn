@@ -120,16 +120,18 @@
   .benefit-footer{display:flex;justify-content:flex-end;margin-top:10px;}
   .fold-divider{border:none;border-top:1px dashed var(--mist);margin:24px 0 18px;}
   .reviews-list{display:flex;flex-direction:column;gap:14px;}
-  .review-card{background:white;border:1px solid var(--mist);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 28px;display:flex;flex-direction:column;gap:10px;}
+  .review-card{background:white;border:1px solid var(--mist);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center;}
+  .review-top-row{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:4px;}
   .review-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.06em;text-transform:uppercase;}
-  .review-title{font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;}
-  .review-stars{color:var(--gold);font-size:14px;letter-spacing:3px;}
-  .review-text{font-size:15px;color:#3a2e20;line-height:1.7;font-style:italic;}
-  .review-author-row{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--mist);flex-wrap:wrap;}
+  .review-orig-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:3px 10px;border-radius:20px;border:1px solid var(--accent-mid);}
+  .review-title{font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;text-align:center;}
+  .review-stars{color:var(--gold);font-size:14px;letter-spacing:3px;text-align:center;}
+  .review-text{font-size:15px;color:#3a2e20;line-height:1.7;font-style:italic;text-align:center;max-width:680px;}
+  .review-author-row{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:14px;border-top:1px solid var(--mist);flex-wrap:wrap;width:100%;}
   .review-author-name{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);font-weight:600;}
   .review-author-label{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;}
   .review-theme-tag{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:20px;}
-  .review-copy-row{display:flex;justify-content:flex-end;margin-top:8px;}
+  .review-copy-row{display:flex;justify-content:center;margin-top:8px;}
   .ing-option{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;}
   .ing-option-body{flex:1;}
   .ing-option-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);margin-bottom:14px;letter-spacing:0.06em;text-transform:uppercase;}
@@ -145,6 +147,8 @@
   .curated-subhead{font-size:14px;color:#6b5e4a;line-height:1.6;margin-bottom:4px;}
   .curated-context{font-size:12px;color:#8a7a68;font-style:italic;font-family:'DM Mono',monospace;}
   .faq-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
+  .faq-card-expect{border:2px solid var(--accent);background:linear-gradient(to right,var(--accent-light) 0%,white 100%);}
+  .faq-expect-pill{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:white;background:var(--accent);padding:4px 12px;border-radius:20px;font-weight:600;width:fit-content;}
   .faq-header{padding:20px 22px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;}
   .faq-header:hover{background:#faf8f4;}
   .faq-rank{font-family:'DM Mono',monospace;font-size:11px;background:var(--accent);color:white;padding:4px 10px;border-radius:20px;flex-shrink:0;margin-top:2px;}
@@ -223,7 +227,7 @@
     <div class="collapsible-panel" id="settingsPanel">
       <div class="settings-panel-inner">
         <div class="settings-grid">
-          <div class="settings-field"><label>About — max chars</label><input type="number" id="set_about_chars" value="204" min="100" max="300"></div>
+          <div class="settings-field"><label>About — max chars</label><input type="number" id="set_about_chars" value="205" min="100" max="300"></div>
           <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="73" min="40" max="150"></div>
           <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="200" min="80" max="400"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
@@ -263,14 +267,14 @@
     </div>
 
     <div class="ra-section" id="sec-about">
-      <div class="section-label">PDP Section 1</div>
+      <div class="section-label">About</div>
       <div class="section-heading">About</div>
-      <div class="jane-note">5 options — each states the condition precisely, then names the ingredient mechanism. Max 204 characters. Pain point, benefit, and differentiator tagged on each card.</div>
+      <div class="jane-note">5 options — each states the condition precisely, then names the ingredient mechanism. Max 205 characters. Pain point, benefit, and differentiator tagged on each card.</div>
       <div class="choice-list" id="aboutList"></div>
     </div>
 
     <div class="ra-section" id="sec-mwp">
-      <div class="section-label">PDP Section 2</div>
+      <div class="section-label">Made With Purpose</div>
       <div class="section-heading">Made With Purpose (Benefits)</div>
       <div class="jane-note">5 optimized benefit options. Foundation pulled from the live v1 PDP benefits (proven brand angles), rewritten with tighter conversion copy and proof from wiki/reviews. Title 2–3 words, description 73 chars max. Pick 3. v1 PDP source and wiki source shown beside each card.</div>
       <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">⚠ No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki + reviews only. Verify alignment with brand voice.</div></div>
@@ -285,7 +289,7 @@
     </div>
 
     <div class="ra-section" id="sec-stats">
-      <div class="section-label">PDP Section 3</div>
+      <div class="section-label">Real Customers</div>
       <div class="section-heading">Real Customers. Real Results.</div>
       <div class="section-sub">Outcome stats from review language. <strong>Stats Bar Option A (3-point percentages) is for products with a clinical study only.</strong> All other products use the transformation timeline below (Option B) — substantiation data shown beside each claim for the master sheet.</div>
       <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">✕ Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
@@ -307,30 +311,30 @@
     </div>
 
     <div class="ra-section" id="sec-reviews">
-      <div class="section-label">PDP Section 4</div>
+      <div class="section-label">Reviews</div>
       <div class="section-heading">Reviews</div>
       <div class="jane-note">8 verbatim reviews from 4–5 star ratings with strong, articulate language. AI-generated title only — review text is unchanged from the customer. Named authors prioritized.</div>
       <div class="reviews-list" id="reviewsList"></div>
     </div>
 
     <div class="ra-section" id="sec-ingredients">
-      <div class="section-label">PDP Section 5</div>
+      <div class="section-label">Ingredients</div>
       <div class="section-heading">Ingredients</div>
       <div class="jane-note">5 combined editorial headline options for the full ingredient story. Each option has a keyword in italics. The wiki sentence that informed it is shown beside each option. Pick one and edit for brand voice.</div>
       <div id="ingredientsList"></div>
     </div>
 
     <div class="curated-wrap ra-section" id="sec-curated">
-      <div class="section-label">PDP Section 6</div>
+      <div class="section-label">Curate Your Collection</div>
       <div class="section-heading">Curate Your Collection</div>
-      <div class="jane-note">3 heading + subhead options. The subhead frames the customer journey — not a product list. Pick the option that fits the actual products being curated.</div>
+      <div class="jane-note">3 heading + subhead options. Subhead max 190 characters. Language must be vague about specific products (we don't know which products will be paired) — focus on customer journey themes, not product names or formats.</div>
       <div class="curated-list" id="curatedList"></div>
     </div>
 
     <div class="ra-section" id="sec-faqs">
-      <div class="section-label">PDP Section 7</div>
+      <div class="section-label">FAQs</div>
       <div class="section-heading">FAQs</div>
-      <div class="jane-note">8 questions ranked by frequency in reviews — objection mapping to address what stops customers from buying. Each includes a suggested answer ready to edit.</div>
+      <div class="jane-note">8 questions ranked by purchase-blocking impact. FAQ #1 is always a "What to Expect" question that proactively sets expectations — highlighted in purple. Answers for dosing/instructions are sourced from the wiki; if the wiki doesn't cover something, the FAQ is flagged as needing manual answer instead of fabricated.</div>
       <div id="faqCards"></div>
     </div>
 
@@ -374,7 +378,7 @@
 var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
 var lastV1PdpBenefits=null;
-var DEFAULTS={about_chars:204,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:8};
+var DEFAULTS={about_chars:205,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:8};
 
 function getSettings(){
   return {
@@ -463,11 +467,17 @@ function findHandle(productName){
 async function fetchV1PdpBenefits(productName){
   var handle=findHandle(productName);
   if(!handle)return null;
-  var url='https://globalhealing.com/products/'+handle;
+  // Use Worker endpoint to bypass CORS
+  var url='https://ecom-claude-proxy.globalhealing.workers.dev/fetch-pdp?handle='+encodeURIComponent(handle);
   try{
-    var resp=await fetch(url,{mode:'cors'});
+    var resp=await fetch(url);
     if(!resp.ok)return null;
-    var html=await resp.text();
+    var data=await resp.json();
+    if(data.benefits&&data.benefits.length)return data.benefits;
+    if(data.error){console.log('PDP fetch error:',data.error);return null;}
+    // Fallback: if Worker returned raw HTML, parse it
+    var html=data.html||'';
+    if(!html)return null;
     // Find "The Benefits" section
     var benefitsMatch=html.match(/The Benefits[\s\S]*?(?=Made With|Uniquely Made|Ingredients|The Impact|Curate|<\/section)/i);
     if(!benefitsMatch)return null;
@@ -499,8 +509,8 @@ async function fetchV1PdpBenefits(productName){
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
     +'"pain_points":[{"rank":1,"label":"","customer_language":"","copy_hook":"","main_benefit":""}],'
-    +'"about_options":[{"num":1,"text":"max 204 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label"}],'
-    +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable"}],'
+    +'"about_options":[{"num":1,"text":"max 205 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label"}],'
+    +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable","source_type":"v1_pdp or wiki"}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
     +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"timeframe_keywords":["first night","overnight","by morning"],"outcome_keywords":["relief","worked","felt better"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
@@ -508,22 +518,22 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
     +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
-    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":""}]}';
+    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":"","is_what_to_expect":false}]}';
 
   return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5. HARD LIMIT: 204 characters maximum — count every character including spaces and punctuation. If over 204 characters, remove the least essential clause entirely, do not compress. Each option contains exactly TWO elements only: (1) the customer CONDITION as the customer experiences it — what they FEEL, not what is happening clinically and not what competitor products do wrong. Use customer-felt language: constipation, bloating, sluggish digestion, pressure, heaviness. DO NOT open with clinical concepts (microbiome disruption, intestinal inflammation, gut dysbiosis) or competitor problems (stimulant laxatives force contractions, fiber adds bulk) — those belong in the differentiator if anywhere. Stated as a plain declarative fact from review language — NO question marks, NO casual openers; (2) the ingredient mechanism — name the specific ingredient and the chemical or physiological action it takes in the body. After the mechanism, you may add a crisp 2-3 item outcome rhythm (e.g. "loosen impacted waste, soften buildup, promote complete bowel movements") but NO clunky connectors like "that breaks down" or "that reduces that feeling of" — use declarative outcome phrases. Do NOT add product name, stats, or contrast as a third element. Tone: declarative, precise, reads like an expert. BANNED: question marks, casual openers, metaphors, clunky connectors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances, detox, cleanse, natural, powerful. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven. Add pain_point_tag (2-4 words — must be customer-felt, e.g. "Chronic constipation", "Bloating pressure"; NOT "Stimulant laxative harm" or "Microbiome disruption"), benefit_tag (2-4 words), differentiator_tag (2-4 words naming the mechanism e.g. oxygen-based, methylcobalamin form, ozonated magnesium) for each option.'
+    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum — count every character including spaces and punctuation. If over 205 characters, remove the least essential clause entirely, do not compress. Each option contains exactly TWO elements only: (1) the customer CONDITION as the customer experiences it — what they FEEL, not what is happening clinically and not what competitor products do wrong. Use customer-felt language: constipation, bloating, sluggish digestion, pressure, heaviness. DO NOT open with clinical concepts (microbiome disruption, intestinal inflammation, gut dysbiosis) or competitor problems (stimulant laxatives force contractions, fiber adds bulk) — those belong in the differentiator if anywhere. Stated as a plain declarative fact from review language — NO question marks, NO casual openers; (2) the ingredient mechanism — name the specific ingredient and the chemical or physiological action it takes in the body. After the mechanism, you may add a crisp 2-3 item outcome rhythm (e.g. "loosen impacted waste, soften buildup, promote complete bowel movements") but NO clunky connectors like "that breaks down" or "that reduces that feeling of" — use declarative outcome phrases. Do NOT add product name, stats, or contrast as a third element. Tone: declarative, precise, reads like an expert. BANNED: question marks, casual openers, metaphors, clunky connectors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances, detox, cleanse, natural, powerful. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven. Add pain_point_tag (2-4 words — must be customer-felt, e.g. "Chronic constipation", "Bloating pressure"; NOT "Stimulant laxative harm" or "Microbiome disruption"), benefit_tag (2-4 words), differentiator_tag (2-4 words naming the mechanism e.g. oxygen-based, methylcobalamin form, ozonated magnesium) for each option.'
     +'\n- pain_points: exactly 4, ranked by frequency'
-    +'\n- made_with_purpose: exactly 5 optimized benefit options. PRIORITY HIERARCHY: (1) If v1 PDP benefits are provided in the V1 PDP BENEFITS section below, use those benefit themes as the foundation — same general benefit angles the brand has already published — but rewrite each one with stronger conversion copy, tighter language, and proof points from the wiki and review language. The v1 versions have been tested live, stay close to those angles. (2) Use the wiki Health Benefits & Function section to anchor the mechanism and provide proof — supply the chemical or physiological action language inside each description. (3) NOT from wiki Source & Quality, certifications, or manufacturing sections. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card. v1_pdp_source: copy the matching v1 PDP benefit text (title + description) that informed this option if there is one — otherwise empty string. If no v1 PDP benefits were provided, generate from wiki only and leave v1_pdp_source empty.'
+    +'\n- made_with_purpose: exactly 5 benefit options structured as 3 from V1 PDP + 2 from wiki. Options 1-3 (source_type="v1_pdp"): foundation is the v1 PDP benefits provided below — rewrite each with stronger conversion copy, tighter language, and proof from wiki/reviews. Stay close to the original benefit angle. Options 4-5 (source_type="wiki"): NEW benefit angles drawn purely from the wiki Health Benefits & Function section — surface mechanisms or proof points the v1 PDP does NOT already cover. Do NOT duplicate benefit themes between v1 and wiki options. NOT from Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: exact wiki sentence that informed the card (required for all 5). v1_pdp_source: matching v1 PDP benefit text for options 1-3 only, empty for 4-5. If no v1 PDP benefits were provided, generate all 5 from wiki only and label all as source_type="wiki" with empty v1_pdp_source.'
     +'\n- benefits: exactly 4 (rank 1-2 primary, 3-4 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
     +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. CRITICAL substantiation rules: mention_count must be the count of reviews containing BOTH a timeframe phrase AND an outcome phrase in the SAME review — not the count of reviews matching either one. Do NOT count a review that only mentions timing without outcome, or only mentions outcome without timing. timeframe_keywords: 3-6 exact phrases that capture the timeframe (e.g. ["first night", "overnight", "by morning", "next morning", "within a day"]). outcome_keywords: 3-6 exact phrases that capture the outcome (e.g. ["relief", "worked", "went", "results", "felt better"]). sample_quotes: 3 verbatim quotes copied EXACTLY from reviews that contain BOTH a timeframe phrase AND an outcome phrase — do not paraphrase, do not select quotes that only show one element.'
     +'\n- alt_stats: 2-3 items each with fraction AND timeframe. Same intersection counting rule as transformation: mention_count = count of reviews containing BOTH a timeframe phrase AND an outcome phrase. Provide separate timeframe_keywords (3-6 phrases) and outcome_keywords (3-6 phrases). sample_quotes: 3 verbatim quotes containing BOTH elements.'
     +'\n- reviews: exactly 8. ONLY select 4-star or 5-star reviews with strong, articulate, specific language. original_text is the verbatim customer review copied EXACTLY as written. title is a short AI-generated headline (5-10 words) summarizing the review. Prioritize named authors over anonymous. Prefer reviews under 200 chars but quality over length. rephrased_text should be the SAME as original_text (verbatim only, no rephrasing).'
     +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
-    +'\n- curated_collection: 3. No disease claims.'
-    +'\n- faqs: 8 purchase-blocking hesitations with suggested answers. No disease treatment claims in answers. PRODUCT-SPECIFIC RULE: if the product name contains "Oxy-Powder", one of the 8 FAQs MUST address diarrhea / watery stools / urgency concerns — this is a known objection for Oxy-Powder specifically.'
+    +'\n- curated_collection: exactly 3 options. Each subhead is HARD LIMITED to 190 characters. Language must be VAGUE about specific products — you do not know which products will be paired. DO NOT use specific format/protocol language: NO "take these capsules", NO "this cleanse", NO "these supplements", NO "this combination", NO "these three products". Instead use customer journey themes: "starts the work", "helps finish it", "continues the support", "rounds out the routine", "works alongside". Focus on outcomes/themes the customer cares about, not the products. No disease claims.'
+    +'\n- faqs: exactly 8 questions. FAQ #1 (rank 1) MUST ALWAYS be a "What to Expect" question framed proactively — set this as is_what_to_expect=true. The answer must cover: (1) typical onset timeframe based on review and wiki language, (2) any temporary effects customers commonly report explained by the mechanism (e.g. for Oxy-Powder: temporary gas, bloating, increased bowel movements, or loose stools as the oxygen-based cleanse begins working; for probiotics: digestive adjustment in first few days; for enzymes: variable response by diet), (3) individual variation note, (4) suggested use referenced from the wiki (exact dose, timing, with/without food) — copy these details directly from the wiki Suggested Use or FAQ section. CRITICAL: FAQ answers about dosing, instructions, ingredients, or product mechanics MUST be sourced from the wiki — never invent doses or contradict the wiki. If wiki says 4 capsules, the answer says 4 capsules. If the wiki does not cover a topic, set answer_note to "Needs manual answer — not in wiki" and leave suggested_answer empty rather than fabricating. FAQs 2-8: standard purchase-blocking hesitations ranked by frequency in reviews, with suggested answers also grounded in wiki where applicable. No disease treatment claims.'
     +'\nReviews:\n'+reviewTexts;
 }
 
@@ -652,11 +662,19 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var wrap=document.createElement('div');wrap.className='with-wiki-source';
     var main=document.createElement('div');main.style.cssText='padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex:1;';
     var body=document.createElement('div');body.className='choice-body';
-    var num=document.createElement('div');num.className='choice-num';num.textContent='Option '+m.num;
+    var topRow=document.createElement('div');topRow.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;';
+    var num=document.createElement('div');num.className='choice-num';num.style.margin='0';num.textContent='Option '+m.num;
+    topRow.appendChild(num);
+    if(m.source_type){
+      var srcBadge=document.createElement('span');
+      srcBadge.className='about-tag '+(m.source_type==='v1_pdp'?'about-tag-diff':'about-tag-benefit');
+      srcBadge.textContent=(m.source_type==='v1_pdp'?'From v1 PDP (optimized)':'From wiki (new angle)');
+      topRow.appendChild(srcBadge);
+    }
     var title=document.createElement('div');title.className='choice-title';title.textContent=m.title||'';
     var desc=document.createElement('div');desc.className='choice-desc';desc.textContent=m.description||'';
     var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.mwp_chars+' chars'+(over?' \u2014 over limit':'');
-    body.appendChild(num);body.appendChild(title);body.appendChild(desc);body.appendChild(meta);
+    body.appendChild(topRow);body.appendChild(title);body.appendChild(desc);body.appendChild(meta);
     main.appendChild(body);main.appendChild(makeCopyBtn((m.title||'')+': '+(m.description||'')));
     wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source,m.v1_pdp_source));mwpList.appendChild(wrap);
   });
@@ -787,32 +805,27 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     document.getElementById('transformCopyBtn').replaceWith(makeCopyBtn(tStat));
   }
 
-  // S4 REVIEWS
+  // S4 REVIEWS — verbatim only, single block centered
   var revList=document.getElementById('reviewsList');revList.innerHTML='';
   (a.reviews||[]).forEach(function(v){
-    var cc=(v.rephrased_text||'').length,over=cc>settings.review_chars;
     var card=document.createElement('div');card.className='review-card';
-    var leftCol=document.createElement('div');leftCol.className='review-col';
-    var colLabelAI=document.createElement('div');colLabelAI.className='review-col-label review-col-label-ai';colLabelAI.textContent='PDP copy';
+    var topRow=document.createElement('div');topRow.className='review-top-row';
     var num=document.createElement('div');num.className='review-num';num.textContent='Option '+(v.num||'');
+    var origTag=document.createElement('div');origTag.className='review-orig-tag';origTag.textContent='Original copy';
+    topRow.appendChild(num);topRow.appendChild(origTag);
     var title=document.createElement('div');title.className='review-title';title.textContent=v.title||'';
     var stars=document.createElement('div');stars.className='review-stars';stars.textContent='\u2605\u2605\u2605\u2605\u2605';
-    var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.rephrased_text||'')+'\u201d';
+    var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.original_text||'')+'\u201d';
     var authRow=document.createElement('div');authRow.className='review-author-row';
     var authName=document.createElement('div');authName.className='review-author-name';authName.textContent=v.original_author||'Verified Buyer';
     var themeTag=document.createElement('span');themeTag.className='review-theme-tag';themeTag.textContent=v.theme||'';
     authRow.appendChild(authName);
     if(v.original_author&&v.original_author!=='Verified Buyer'){var authLbl=document.createElement('div');authLbl.className='review-author-label';authLbl.textContent='Verified Buyer';authRow.appendChild(authLbl);}
     authRow.appendChild(themeTag);
-    var meta=document.createElement('div');meta.className='review-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.review_chars+' chars'+(over?' \u2014 over limit':'');
     var copyRow=document.createElement('div');copyRow.className='review-copy-row';
-    copyRow.appendChild(makeCopyBtn((v.title?v.title+': ':'')+'\u201c'+(v.rephrased_text||'')+'\u201d \u2014 '+(v.original_author||'Verified Buyer'),true));
-    leftCol.appendChild(colLabelAI);leftCol.appendChild(num);leftCol.appendChild(title);leftCol.appendChild(stars);leftCol.appendChild(text);leftCol.appendChild(authRow);leftCol.appendChild(meta);leftCol.appendChild(copyRow);
-    var rightCol=document.createElement('div');rightCol.className='review-col-original';
-    var colLabelOrig=document.createElement('div');colLabelOrig.className='review-col-label review-col-label-orig';colLabelOrig.textContent='Original review';
-    var origText=document.createElement('div');origText.className='review-text-orig';origText.textContent='\u201c'+(v.original_text||v.rephrased_text||'')+'\u201d';
-    rightCol.appendChild(colLabelOrig);rightCol.appendChild(origText);
-    card.appendChild(leftCol);card.appendChild(rightCol);revList.appendChild(card);
+    copyRow.appendChild(makeCopyBtn((v.title?v.title+': ':'')+'\u201c'+(v.original_text||'')+'\u201d \u2014 '+(v.original_author||'Verified Buyer')));
+    card.appendChild(topRow);card.appendChild(title);card.appendChild(stars);card.appendChild(text);card.appendChild(authRow);card.appendChild(copyRow);
+    revList.appendChild(card);
   });
 
   // S5 INGREDIENTS
@@ -859,13 +872,20 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   var faqContainer=document.getElementById('faqCards');faqContainer.innerHTML='';
   (a.faqs||[]).forEach(function(o){
     var card=document.createElement('div');card.className='faq-card';
+    if(o.is_what_to_expect)card.classList.add('faq-card-expect');
     var bid='faq-body-'+o.rank,tid='faq-tog-'+o.rank;
     var header=document.createElement('div');header.className='faq-header';
     header.addEventListener('click',function(){document.getElementById(bid).classList.toggle('open');document.getElementById(tid).classList.toggle('open');});
     var rank=document.createElement('span');rank.className='faq-rank';rank.textContent='#'+o.rank;
+    var qWrap=document.createElement('div');qWrap.style.cssText='flex:1;display:flex;flex-direction:column;gap:6px;';
+    if(o.is_what_to_expect){
+      var expectPill=document.createElement('span');expectPill.className='faq-expect-pill';expectPill.textContent='✨ What to Expect';
+      qWrap.appendChild(expectPill);
+    }
     var q=document.createElement('div');q.className='faq-question';q.textContent=o.question||'';
+    qWrap.appendChild(q);
     var tog=document.createElement('span');tog.className='faq-toggle';tog.id=tid;tog.textContent='\u25be';
-    header.appendChild(rank);header.appendChild(q);header.appendChild(tog);
+    header.appendChild(rank);header.appendChild(qWrap);header.appendChild(tog);
     var body=document.createElement('div');body.className='faq-body';body.id=bid;
     var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='From review language:';
     var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent='\u201c'+(o.source_language||'')+'\u201d';
