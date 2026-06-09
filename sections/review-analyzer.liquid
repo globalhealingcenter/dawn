@@ -119,25 +119,17 @@
   .benefit-proof{font-size:13px;color:#6b5e4a;line-height:1.6;flex:1;}
   .benefit-footer{display:flex;justify-content:flex-end;margin-top:10px;}
   .fold-divider{border:none;border-top:1px dashed var(--mist);margin:24px 0 18px;}
-  .reviews-list{display:flex;flex-direction:column;gap:16px;}
-  .review-card{background:var(--ink);border-radius:var(--radius);box-shadow:var(--shadow-md);display:grid;grid-template-columns:1fr 1fr;overflow:hidden;}
-  .review-col{padding:28px 28px 24px;}
-  .review-col-original{background:#14142a;padding:28px 28px 24px;}
-  .review-col-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
-  .review-col-label-ai{color:var(--accent-mid);}
-  .review-col-label-orig{color:#7c7caa;}
-  .review-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);margin-bottom:10px;letter-spacing:0.06em;text-transform:uppercase;}
-  .review-title{font-size:16px;font-weight:600;color:#e8d8a8;margin-bottom:10px;line-height:1.4;text-align:center;}
-  .review-stars{color:var(--gold-light);font-size:14px;letter-spacing:3px;margin-bottom:12px;text-align:center;}
-  .review-text{font-size:14px;color:#c8d8c8;line-height:1.8;font-style:italic;margin-bottom:16px;}
-  .review-text-orig{font-size:13px;color:#8ab89a;line-height:1.7;font-style:italic;}
-  .review-author-row{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:14px;border-top:1px solid #2a2a4a;flex-wrap:wrap;}
-  .review-author-name{font-family:'DM Mono',monospace;font-size:13px;color:#a8c4a8;font-weight:600;}
-  .review-author-label{font-family:'DM Mono',monospace;font-size:12px;color:#7a9e7a;}
-  .review-theme-tag{display:inline-block;font-size:11px;background:#2a2a5a;color:var(--accent-mid);padding:3px 10px;border-radius:20px;}
-  .review-meta{font-family:'DM Mono',monospace;font-size:11px;color:#6a9e6a;margin-top:10px;text-align:center;}
-  .review-meta.over{color:#c87a6a;}
-  .review-copy-row{display:flex;justify-content:center;margin-top:12px;}
+  .reviews-list{display:flex;flex-direction:column;gap:14px;}
+  .review-card{background:white;border:1px solid var(--mist);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 28px;display:flex;flex-direction:column;gap:10px;}
+  .review-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.06em;text-transform:uppercase;}
+  .review-title{font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;}
+  .review-stars{color:var(--gold);font-size:14px;letter-spacing:3px;}
+  .review-text{font-size:15px;color:#3a2e20;line-height:1.7;font-style:italic;}
+  .review-author-row{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--mist);flex-wrap:wrap;}
+  .review-author-name{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);font-weight:600;}
+  .review-author-label{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;}
+  .review-theme-tag{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:20px;}
+  .review-copy-row{display:flex;justify-content:flex-end;margin-top:8px;}
   .ing-option{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;}
   .ing-option-body{flex:1;}
   .ing-option-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);margin-bottom:14px;letter-spacing:0.06em;text-transform:uppercase;}
@@ -280,7 +272,8 @@
     <div class="ra-section" id="sec-mwp">
       <div class="section-label">PDP Section 2</div>
       <div class="section-heading">Made With Purpose (Benefits)</div>
-      <div class="jane-note">5 benefit card options from the "Health Benefits & Function" wiki section — functional bullets describing what the ingredients do. Not sourcing or certifications. Title 2–3 words, description 73 chars max. Pick 3. The wiki sentence that informed each card is shown beside it.</div>
+      <div class="jane-note">5 optimized benefit options. Foundation pulled from the live v1 PDP benefits (proven brand angles), rewritten with tighter conversion copy and proof from wiki/reviews. Title 2–3 words, description 73 chars max. Pick 3. v1 PDP source and wiki source shown beside each card.</div>
+      <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">⚠ No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki + reviews only. Verify alignment with brand voice.</div></div>
       <div id="mwpList"></div>
       <div style="margin-top:56px;padding-top:36px;border-top:1px solid var(--mist);">
         <div class="section-label" style="color:var(--sage);">Key Benefits</div>
@@ -316,7 +309,7 @@
     <div class="ra-section" id="sec-reviews">
       <div class="section-label">PDP Section 4</div>
       <div class="section-heading">Reviews</div>
-      <div class="jane-note">8 options — left column is the AI-rephrased version for the PDP. Right column is the original review for context. Reviews with real customer names are prioritized.</div>
+      <div class="jane-note">8 verbatim reviews from 4–5 star ratings with strong, articulate language. AI-generated title only — review text is unchanged from the customer. Named authors prioritized.</div>
       <div class="reviews-list" id="reviewsList"></div>
     </div>
 
@@ -380,6 +373,7 @@
 <script>
 var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
+var lastV1PdpBenefits=null;
 var DEFAULTS={about_chars:204,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:8};
 
 function getSettings(){
@@ -428,11 +422,85 @@ function getReviewText(r){var keys=['review_content','Review Content','body','Bo
 
 var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives','inner leaf only','freeze-dried potency','freeze dried','purity-tested','purity tested','made in the usa','cgmp','third-party tested','sourced','source &','source and quality','backed by research'];
 
+// Product handle map for live PDP fetching
+var PRODUCT_HANDLES={
+  'Acid Reflux Relief':'acid-reflux-relief-supplement','Aloe Vera':'aloe-vera-capsules','Ashwagandha':'organic-ashwagandha',
+  'Berberine':'berberine','Bio-Active Copper':'bio-active-copper-supplement','Biophotonic Liquid Gold':'biophotonic-liquid-gold',
+  'Biotin':'plant-based-biotin','Black Seed Oil':'organic-black-seed-oil','Boron':'boron','Brain Health':'herbal-brain-health-supplement',
+  'Calcium & Magnesium':'calcium-magnesium','Calcium Disodium EDTA':'calcium-disodium-edta','Candida Balance':'candida-balance',
+  'CoQ10 & BioPQQ® with Shilajit':'coq10-biopqq','Dr. Group\'s Foot Pads':'cleansing-foot-pads',
+  'Elderberry & Echinacea':'elderberry-echinacea','Foreign Protein Cleanse':'foreign-protein-cleanse','Ginseng':'ginseng',
+  'Glucose Oxidase':'glucose-oxidase','InsuLess':'insuless','Iron':'plant-based-iron-supplement','Kava Calm':'kava-calm',
+  'Kidney Health':'kidney-health','Latero-Flora™ Probiotic':'latero-flora','Liquid Multivitamin':'earth-harmony-liquid-multivitamin',
+  'Liquid Selenium':'liquid-selenium','Lithium Orotate':'lithium-orotate','Liver Health':'liver-health','Luminous':'luminous',
+  'Lung Health':'lung-health','Men\'s Hormone Support':'mens-hormone-support','Methylene Blue':'methylene-blue',
+  'MicroSomal B-17':'b-17','MicroSomal OncoGenX':'oncogenx','Moringa':'moringa','Multivitamin with Minerals':'organic-multivitamin-with-minerals',
+  'NAC':'nac','NAD+':'nad','Nano Detox':'nano-detox','Nascent Iodine Detoxadine®':'detoxadine',
+  'ORMUS Earth Minerals™':'ormus-earth-minerals','Omega 3•6•7•9':'organic-omega-supplement','Oregano Oil':'oregano-oil',
+  'Organic Mushroom Blend Powder':'organic-mushroom-blend-powder','Organic Super Greens Powder':'organic-super-greens-powder',
+  'Organic Vitamin D3 5000 IU':'organic-vitamin-d3-5000-iu','Oxy-Powder®':'oxy-powder',
+  'Ozonated Activated Charcoal':'ozonated-activated-charcoal','Ozonated Skin Therapy':'skin-therapy',
+  'Paratrex® I':'paratrex-targeted-cleanse','Paratrex® II':'paratrex-ii','Prostate Health':'prostate-health',
+  'Protein Powder':'protein-powder','Quercetin':'quercetin','Relief Serum':'relief-serum',
+  'Stress Relief':'stress-relief-supplement','Supercharged C60® Supplement':'supercharged-c60-supplement',
+  'Toxin Binder':'toxin-binder-detox','Tulsi/Holy Basil':'tulsi-holy-basil','Turmeric':'organic-liquid-turmeric',
+  'Ultimate Cellular Health':'ultimate-cellular-health','Ultimate Enzymes':'ultimate-enzymes','Ultimate Probiotic':'probiotic',
+  'Valerian':'valerian','Vein Health':'vein-health','Vitamin B12':'organic-vitamin-b12-liquid',
+  'Vitamin C':'organic-liquid-vitamin-c','Vitamin E':'vitamin-e','Wheatgrass':'wheatgrass',
+  'Women\'s Hormone Balance':'womens-hormone-balance','Yeast & Mold Cleanse':'yeast-mold-cleanse','Zinc':'zinc'
+};
+
+function findHandle(productName){
+  if(PRODUCT_HANDLES[productName])return PRODUCT_HANDLES[productName];
+  // Fuzzy match - strip trademarks and try
+  var clean=productName.replace(/[®™©]/g,'').trim();
+  for(var key in PRODUCT_HANDLES){
+    if(key.replace(/[®™©]/g,'').trim()===clean)return PRODUCT_HANDLES[key];
+  }
+  return null;
+}
+
+async function fetchV1PdpBenefits(productName){
+  var handle=findHandle(productName);
+  if(!handle)return null;
+  var url='https://globalhealing.com/products/'+handle;
+  try{
+    var resp=await fetch(url,{mode:'cors'});
+    if(!resp.ok)return null;
+    var html=await resp.text();
+    // Find "The Benefits" section
+    var benefitsMatch=html.match(/The Benefits[\s\S]*?(?=Made With|Uniquely Made|Ingredients|The Impact|Curate|<\/section)/i);
+    if(!benefitsMatch)return null;
+    var sectionHtml=benefitsMatch[0];
+    // Extract accordion items - look for headings + paragraphs
+    var benefits=[];
+    var itemRegex=/<h[2-4][^>]*>([^<]+)<\/h[2-4]>\s*<p[^>]*>([^<]+)<\/p>/gi;
+    var match;
+    while((match=itemRegex.exec(sectionHtml))!==null&&benefits.length<5){
+      var title=match[1].trim().replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+      var desc=match[2].trim().replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
+      if(title&&desc&&title.length<60&&desc.length>30)benefits.push({title:title,description:desc});
+    }
+    // Fallback: look for **### pattern from markdown-style scraping
+    if(benefits.length===0){
+      var mdRegex=/\*\*###\s*([^*]+?)\*\*\s*\n+([^*\n][^\n]*(?:\n(?!\*\*)[^\n]*)*)/g;
+      while((match=mdRegex.exec(sectionHtml))!==null&&benefits.length<5){
+        var t=match[1].trim();var d=match[2].trim();
+        if(t&&d)benefits.push({title:t,description:d});
+      }
+    }
+    return benefits.length?benefits:null;
+  }catch(e){
+    console.log('V1 PDP fetch failed (likely CORS):',e.message);
+    return null;
+  }
+}
+
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
     +'"pain_points":[{"rank":1,"label":"","customer_language":"","copy_hook":"","main_benefit":""}],'
     +'"about_options":[{"num":1,"text":"max 204 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label"}],'
-    +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki"}],'
+    +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable"}],'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
     +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"timeframe_keywords":["first night","overnight","by morning"],"outcome_keywords":["relief","worked","felt better"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
@@ -447,15 +515,15 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\nCRITICAL RULES:'
     +'\n- about_options: exactly 5. HARD LIMIT: 204 characters maximum — count every character including spaces and punctuation. If over 204 characters, remove the least essential clause entirely, do not compress. Each option contains exactly TWO elements only: (1) the customer CONDITION as the customer experiences it — what they FEEL, not what is happening clinically and not what competitor products do wrong. Use customer-felt language: constipation, bloating, sluggish digestion, pressure, heaviness. DO NOT open with clinical concepts (microbiome disruption, intestinal inflammation, gut dysbiosis) or competitor problems (stimulant laxatives force contractions, fiber adds bulk) — those belong in the differentiator if anywhere. Stated as a plain declarative fact from review language — NO question marks, NO casual openers; (2) the ingredient mechanism — name the specific ingredient and the chemical or physiological action it takes in the body. After the mechanism, you may add a crisp 2-3 item outcome rhythm (e.g. "loosen impacted waste, soften buildup, promote complete bowel movements") but NO clunky connectors like "that breaks down" or "that reduces that feeling of" — use declarative outcome phrases. Do NOT add product name, stats, or contrast as a third element. Tone: declarative, precise, reads like an expert. BANNED: question marks, casual openers, metaphors, clunky connectors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances, detox, cleanse, natural, powerful. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven. Add pain_point_tag (2-4 words — must be customer-felt, e.g. "Chronic constipation", "Bloating pressure"; NOT "Stimulant laxative harm" or "Microbiome disruption"), benefit_tag (2-4 words), differentiator_tag (2-4 words naming the mechanism e.g. oxygen-based, methylcobalamin form, ozonated magnesium) for each option.'
     +'\n- pain_points: exactly 4, ranked by frequency'
-    +'\n- made_with_purpose: exactly 5, from the "Health Benefits & Function" wiki section only — functional bullets about what ingredients do in the body. NOT Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card.'
+    +'\n- made_with_purpose: exactly 5 optimized benefit options. PRIORITY HIERARCHY: (1) If v1 PDP benefits are provided in the V1 PDP BENEFITS section below, use those benefit themes as the foundation — same general benefit angles the brand has already published — but rewrite each one with stronger conversion copy, tighter language, and proof points from the wiki and review language. The v1 versions have been tested live, stay close to those angles. (2) Use the wiki Health Benefits & Function section to anchor the mechanism and provide proof — supply the chemical or physiological action language inside each description. (3) NOT from wiki Source & Quality, certifications, or manufacturing sections. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: copy the exact sentence from the wiki that informed this card. v1_pdp_source: copy the matching v1 PDP benefit text (title + description) that informed this option if there is one — otherwise empty string. If no v1 PDP benefits were provided, generate from wiki only and leave v1_pdp_source empty.'
     +'\n- benefits: exactly 4 (rank 1-2 primary, 3-4 additional). No disease treatment claims.'
     +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
     +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. CRITICAL substantiation rules: mention_count must be the count of reviews containing BOTH a timeframe phrase AND an outcome phrase in the SAME review — not the count of reviews matching either one. Do NOT count a review that only mentions timing without outcome, or only mentions outcome without timing. timeframe_keywords: 3-6 exact phrases that capture the timeframe (e.g. ["first night", "overnight", "by morning", "next morning", "within a day"]). outcome_keywords: 3-6 exact phrases that capture the outcome (e.g. ["relief", "worked", "went", "results", "felt better"]). sample_quotes: 3 verbatim quotes copied EXACTLY from reviews that contain BOTH a timeframe phrase AND an outcome phrase — do not paraphrase, do not select quotes that only show one element.'
     +'\n- alt_stats: 2-3 items each with fraction AND timeframe. Same intersection counting rule as transformation: mention_count = count of reviews containing BOTH a timeframe phrase AND an outcome phrase. Provide separate timeframe_keywords (3-6 phrases) and outcome_keywords (3-6 phrases). sample_quotes: 3 verbatim quotes containing BOTH elements.'
-    +'\n- reviews: exactly 8. rephrased_text is the AI-polished version for the PDP. original_text is the verbatim customer review. Prioritize named authors. Under '+s.review_chars+' chars for rephrased_text.'
+    +'\n- reviews: exactly 8. ONLY select 4-star or 5-star reviews with strong, articulate, specific language. original_text is the verbatim customer review copied EXACTLY as written. title is a short AI-generated headline (5-10 words) summarizing the review. Prioritize named authors over anonymous. Prefer reviews under 200 chars but quality over length. rephrased_text should be the SAME as original_text (verbatim only, no rephrasing).'
     +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
     +'\n- curated_collection: 3. No disease claims.'
-    +'\n- faqs: 8 purchase-blocking hesitations with suggested answers. No disease treatment claims in answers.'
+    +'\n- faqs: 8 purchase-blocking hesitations with suggested answers. No disease treatment claims in answers. PRODUCT-SPECIFIC RULE: if the product name contains "Oxy-Powder", one of the 8 FAQs MUST address diarrhea / watery stools / urgency concerns — this is a known objection for Oxy-Powder specifically.'
     +'\nReviews:\n'+reviewTexts;
 }
 
@@ -473,6 +541,10 @@ async function runAnalysis(){
   var sample=sorted.slice(0,500);
   var dateRange=getDateRange(sample);
   var authorCol=getAuthorCol(sample[0]);
+  
+  // Fetch v1 PDP benefits (best effort, no blocking)
+  lastV1PdpBenefits=null;
+  try{lastV1PdpBenefits=await fetchV1PdpBenefits(product);}catch(e){lastV1PdpBenefits=null;}
 
   var reviewTexts=sample.map(function(r){
     var text=getReviewText(r);
@@ -482,6 +554,12 @@ async function runAnalysis(){
   }).filter(function(t){return t.length>20;}).join('\n---\n');
 
   var wikiSection=wiki?'\n\nPRODUCT WIKI:\n'+wiki.substring(0,4000)+'\n':'';
+  var v1Section='';
+  if(lastV1PdpBenefits&&lastV1PdpBenefits.length){
+    v1Section='\n\nV1 PDP BENEFITS (currently published, use as foundation for optimized rewrites):\n';
+    lastV1PdpBenefits.forEach(function(b,i){v1Section+=(i+1)+'. '+b.title+': '+b.description+'\n';});
+  }
+  wikiSection+=v1Section;
   stepActive('step1');
   var prompt=buildPrompt(product,sample.length,wikiSection,settings,reviewTexts);
   stepDone('step1');stepActive('step2');
@@ -529,8 +607,16 @@ function makeCopyBtn(text,darkMode){
   return btn;
 }
 function isGeneric(text){var lower=(text||'').toLowerCase();return GENERIC_TERMS.some(function(t){return lower.indexOf(t)!==-1;});}
-function makeWikiSourceCol(wikiSource){
+function makeWikiSourceCol(wikiSource,v1Source){
   var col=document.createElement('div');col.className='wiki-source-col';
+  if(v1Source){
+    var v1Lbl=document.createElement('div');v1Lbl.className='wiki-source-label';v1Lbl.textContent='From v1 PDP:';
+    v1Lbl.style.color='var(--accent)';
+    var v1Quote=document.createElement('div');v1Quote.className='wiki-source-quote';v1Quote.textContent=v1Source;
+    v1Quote.style.borderLeftColor='var(--accent)';
+    col.appendChild(v1Lbl);col.appendChild(v1Quote);
+    var spacer=document.createElement('div');spacer.style.height='10px';col.appendChild(spacer);
+  }
   var lbl=document.createElement('div');lbl.className='wiki-source-label';lbl.textContent='From wiki:';
   var quote=document.createElement('div');quote.className='wiki-source-quote';quote.textContent=wikiSource||'\u2014';
   col.appendChild(lbl);col.appendChild(quote);return col;
@@ -559,6 +645,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   });
 
   // S2 MWP
+  document.getElementById('v1WarnBanner').style.display = (lastV1PdpBenefits && lastV1PdpBenefits.length) ? 'none' : 'block';
   var mwpList=document.getElementById('mwpList');mwpList.innerHTML='';
   (a.made_with_purpose||[]).filter(function(m){return !isGeneric(m.title)&&!isGeneric(m.description);}).forEach(function(m){
     var cc=(m.description||'').length,over=cc>settings.mwp_chars;
@@ -571,7 +658,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.mwp_chars+' chars'+(over?' \u2014 over limit':'');
     body.appendChild(num);body.appendChild(title);body.appendChild(desc);body.appendChild(meta);
     main.appendChild(body);main.appendChild(makeCopyBtn((m.title||'')+': '+(m.description||'')));
-    wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source));mwpList.appendChild(wrap);
+    wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source,m.v1_pdp_source));mwpList.appendChild(wrap);
   });
 
   // KEY BENEFITS
@@ -825,7 +912,11 @@ function exportTxt(){
   out+='\n=== S1 \u2014 ABOUT ===\n';
   (a.about_options||[]).forEach(function(o){out+='Option '+o.num+(o.pain_point_tag?' [Pain: '+o.pain_point_tag+']':'')+(o.benefit_tag?' [Benefit: '+o.benefit_tag+']':'')+(o.differentiator_tag?' [Diff: '+o.differentiator_tag+']':'')+'\n'+o.text+'\n\n';});
   out+='\n=== S2 \u2014 MADE WITH PURPOSE (BENEFITS) ===\n';
-  (a.made_with_purpose||[]).forEach(function(m){out+='Option '+m.num+': '+m.title+'\n'+m.description+'\nWiki source: '+m.wiki_source+'\n\n';});
+  (a.made_with_purpose||[]).forEach(function(m){
+    out+='Option '+m.num+': '+m.title+'\n'+m.description+'\n';
+    if(m.v1_pdp_source)out+='V1 PDP source: '+m.v1_pdp_source+'\n';
+    out+='Wiki source: '+m.wiki_source+'\n\n';
+  });
   out+='\n=== KEY BENEFITS ===\n';
   (a.benefits||[]).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
   out+='\n=== S3 \u2014 OUTCOME STATS ===\n';
@@ -848,8 +939,8 @@ function exportTxt(){
     if(s.sample_quotes)s.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   });
-  out+='\n=== S4 \u2014 REVIEWS ===\n';
-  (a.reviews||[]).forEach(function(v){out+='Option '+v.num+': '+v.title+'\nPDP: "'+v.rephrased_text+'"\nOriginal: "'+v.original_text+'"\n\u2014 '+(v.original_author||'Verified Buyer')+'\n\n';});
+  out+='\n=== S4 \u2014 REVIEWS (VERBATIM) ===\n';
+  (a.reviews||[]).forEach(function(v){out+='Option '+v.num+': '+v.title+'\n"'+(v.original_text||'')+'"\n\u2014 '+(v.original_author||'Verified Buyer')+'\n\n';});
   out+='\n=== S5 \u2014 INGREDIENTS ===\n';
   (a.ingredients||[]).forEach(function(ing){out+='Option '+ing.num+':\n'+ing.headline+'\n'+ing.subline+'\nWiki source: '+ing.wiki_source+'\n\n';});
   out+='\n=== S6 \u2014 CURATE YOUR COLLECTION ===\n';
