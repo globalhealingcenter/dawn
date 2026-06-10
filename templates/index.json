@@ -58,11 +58,11 @@
             "banner_2_order": 4,
             "banner_2_start_date": "",
             "banner_2_end_date": "",
-            "banner_3_desktop_image": "shopify://shop_images/050126-womens-health-homepage-banner.jpg",
+            "banner_3_desktop_image": "shopify://shop_images/051426-symphony-of-wholeness-mind-banner-homepage-desktop.jpg",
             "banner_3_desktop_video": "",
-            "banner_3_mobile_image": "shopify://shop_images/050126-womens-health-homepage-banner-mobile.jpg",
+            "banner_3_mobile_image": "shopify://shop_images/051426-symphony-of-wholeness-mind-banner-homepage-mobile.jpg",
             "banner_3_mobile_video": "",
-            "banner_3_url": "https://globalhealing.com/products/womens-hormone-balance",
+            "banner_3_url": "https://globalhealing.com/pages/symphony-of-wholeness",
             "banner_3_visible": true,
             "banner_3_order": 1,
             "banner_3_start_date": "",
@@ -84,7 +84,6 @@
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "108417",
@@ -248,7 +247,6 @@
         },
         "rebuy_personalization_engine_rebuy_widget_CadKRH": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-          "disabled": true,
           "settings": {
             "enabled": true,
             "id": "108416",

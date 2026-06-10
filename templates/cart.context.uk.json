@@ -8,22 +8,19 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "collection.json",
   "context": {
     "market": "uk"
   },
+  "parent": "cart.json",
   "sections": {
-    "168777948032aeb944": {
-      "disabled": true,
+    "1687779380613f616b": {
       "settings": {},
-      "blocks": {}
-    },
-    "product-grid": {
-      "settings": {
-        "sidebar_banner": "",
-        "sidebar_banner_link": ""
-      },
-      "blocks": {}
+      "blocks": {
+        "b17ced85-f450-4f6f-8376-86722179ac14": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
     }
   }
 }

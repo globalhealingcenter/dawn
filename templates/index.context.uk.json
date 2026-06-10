@@ -25,10 +25,10 @@
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "settings": {
             "banner_1_visible": false,
+            "banner_1_order": 1,
             "banner_2_visible": false,
             "banner_3_url": "https://globalhealing.co.uk/pages/veritree",
-            "banner_3_visible": false,
-            "banner_1_order": 1
+            "banner_3_visible": false
           }
         },
         "a8990839-c3ba-4fe5-b483-ecb4ab3fc6d0": {
@@ -36,6 +36,10 @@
           "settings": {}
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
+          "disabled": true,
+          "settings": {}
+        },
+        "shop_by_health_goals_Em9nxw": {
           "disabled": true,
           "settings": {}
         },
@@ -62,6 +66,10 @@
             "row_1_img": "https://cdn.shopify.com/s/files/1/0539/5621/4984/files/premium-ingredients-1.svg",
             "row_1_text": "<p>Quality above all. We search the world for the best, no matter the cost.</p>"
           }
+        },
+        "oxy_powder_hero_Ee7FXg": {
+          "disabled": true,
+          "settings": {}
         }
       }
     },

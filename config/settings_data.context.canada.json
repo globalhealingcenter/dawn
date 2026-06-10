@@ -8,22 +8,8 @@
  * ------------------------------------------------------------
  */
 {
-  "parent": "collection.json",
   "context": {
-    "market": "uk"
+    "market": "canada"
   },
-  "sections": {
-    "168777948032aeb944": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
-    },
-    "product-grid": {
-      "settings": {
-        "sidebar_banner": "",
-        "sidebar_banner_link": ""
-      },
-      "blocks": {}
-    }
-  }
+  "current": {}
 }
