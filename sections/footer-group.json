@@ -11,6 +11,11 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "careers_page_VBwWyc": {
+      "type": "careers-page",
+      "name": "Careers Listing",
+      "settings": {}
+    },
     "17622757587d20ee8b": {
       "type": "apps",
       "settings": {
@@ -147,6 +152,7 @@
     }
   },
   "order": [
+    "careers_page_VBwWyc",
     "17622757587d20ee8b",
     "17368734953e81bbe2",
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02",
