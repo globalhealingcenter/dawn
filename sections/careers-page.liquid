@@ -116,96 +116,108 @@
 </style>
 
 {% if page.handle == 'careers' %}
-<div class="careers-page">
-  <h2 class="section-title">Current Openings</h2>
-  <div id="jobs-container">
-    <div class="jobs-status">
-      <div class="jobs-spinner"></div>
-      <p>Loading open positions...</p>
+  <div class="careers-page">
+    <h2 class="section-title">Current Openings</h2>
+    <div id="jobs-container">
+      <div class="jobs-status">
+        <div class="jobs-spinner"></div>
+        <p>Loading open positions...</p>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  const WORKER_URL = 'https://staging.globalhealing-codup.workers.dev/';
+  <script>
+    const WORKER_URL = 'https://staging.globalhealing-codup.workers.dev/';
 
-  const STATE_NAMES = {
-    TX: 'Texas',
-    AZ: 'Arizona',
-    CA: 'California',
-    NY: 'New York',
-    FL: 'Florida',
-    IL: 'Illinois',
-    WA: 'Washington',
-    CO: 'Colorado',
-    GA: 'Georgia',
-    NC: 'North Carolina',
-    OH: 'Ohio',
-    PA: 'Pennsylvania',
-  };
+    const STATE_NAMES = {
+      TX: 'Texas',
+      AZ: 'Arizona',
+      CA: 'California',
+      NY: 'New York',
+      FL: 'Florida',
+      IL: 'Illinois',
+      WA: 'Washington',
+      CO: 'Colorado',
+      GA: 'Georgia',
+      NC: 'North Carolina',
+      OH: 'Ohio',
+      PA: 'Pennsylvania',
+    };
 
-  async function fetchJobs() {
-    try {
-      const res = await fetch(WORKER_URL);
-      if (!res.ok) throw new Error('Network error');
-      const data = await res.json();
-      const jobs = data.jobs || [];
-      if (!jobs.length) {
+    async function fetchJobs() {
+      try {
+        const res = await fetch(WORKER_URL);
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const jobs = data.jobs || [];
+        if (!jobs.length) {
+          document.getElementById('jobs-container').innerHTML =
+            '<div class="jobs-status">No open positions at this time. Check back soon!</div>';
+          return;
+        }
+        renderJobs(jobs);
+      } catch (err) {
         document.getElementById('jobs-container').innerHTML =
-          '<div class="jobs-status">No open positions at this time. Check back soon!</div>';
-        return;
+          '<div class="jobs-status">Unable to load positions. Please try again later.</div>';
       }
-      renderJobs(jobs);
-    } catch (err) {
-      document.getElementById('jobs-container').innerHTML =
-        '<div class="jobs-status">Unable to load positions. Please try again later.</div>';
     }
-  }
 
-  function renderJobs(jobs) {
-    const grouped = {};
-    jobs.forEach((job) => {
-      const state = (job.JobLocation && job.JobLocation.State) || 'Other';
-      if (!grouped[state]) grouped[state] = [];
-      grouped[state].push(job);
-    });
-
-    const states = Object.keys(grouped).sort();
-    let html = '';
-    states.forEach((state) => {
-      const stateName = STATE_NAMES[state] || state;
-      html += '<div class="state-group">';
-      html += '<h3 class="state-heading">' + stateName + '</h3>';
-      html += '<div class="jobs-grid">';
-      grouped[state].forEach((job) => {
-        html += jobCard(job);
+    function renderJobs(jobs) {
+      const grouped = {};
+      jobs.forEach((job) => {
+        const state = (job.JobLocation && job.JobLocation.State) || 'Other';
+        if (!grouped[state]) grouped[state] = [];
+        grouped[state].push(job);
       });
-      html += '</div></div>';
-    });
 
-    document.getElementById('jobs-container').innerHTML = html;
-  }
+      const states = Object.keys(grouped).sort();
+      let html = '';
+      states.forEach((state) => {
+        const stateName = STATE_NAMES[state] || state;
+        html += '<div class="state-group">';
+        html += '<h3 class="state-heading">' + stateName + '</h3>';
+        html += '<div class="jobs-grid">';
+        grouped[state].forEach((job) => {
+          html += jobCard(job);
+        });
+        html += '</div></div>';
+      });
 
-  function jobCard(job) {
-    const title = job.Title || 'Open Position';
-    const applyUrl = job.DisplayUrl || job.ApplyUrl || '#';
-    const team = job.HiringDepartment || '';
-    const city = (job.JobLocation && job.JobLocation.City) || '';
-    const state = (job.JobLocation && job.JobLocation.State) || '';
-    const location = [city, state].filter(Boolean).join(', ') || 'Location TBD';
-    const jobType = job.JobTypesArray && job.JobTypesArray.length ? job.JobTypesArray[0] : '';
+      document.getElementById('jobs-container').innerHTML = html;
+    }
 
-    let html = '<div class="job-card">';
-    html += '<div class="job-title"><a href="' + applyUrl + '" target="_blank" rel="noopener">' + title + '</a></div>';
-    html += '<div class="job-meta">';
-    if (team) html += '<span class="job-team">Team: ' + team + '</span>';
-    html += '<span class="job-location">Location: ' + location + '</span>';
-    html += '</div>';
-    {% comment %} if (jobType) html += '<span class="job-type">' + jobType + '</span>'; {% endcomment %}
-    html += '</div>';
-    return html;
-  }
+    function jobCard(job) {
+      const title = job.Title || 'Open Position';
+      const applyUrl = job.DisplayUrl || job.ApplyUrl || '#';
+      const team = job.HiringDepartment || '';
+      const city = (job.JobLocation && job.JobLocation.City) || '';
+      const state = (job.JobLocation && job.JobLocation.State) || '';
+      const location = [city, state].filter(Boolean).join(', ') || 'Location TBD';
+      const jobType = job.JobTypesArray && job.JobTypesArray.length ? job.JobTypesArray[0] : '';
 
-  fetchJobs();
-</script>
+      let html = '<div class="job-card">';
+      html += '<div class="job-title"><a href="' + applyUrl + '" target="_blank" rel="noopener">' + title + '</a></div>';
+      html += '<div class="job-meta">';
+      if (team) html += '<span class="job-team">Team: ' + team + '</span>';
+      html += '<span class="job-location">Location: ' + location + '</span>';
+      html += '</div>';
+      {% comment %} if (jobType) html += '<span class="job-type">' + jobType + '</span>'; {% endcomment %}
+      html += '</div>';
+      return html;
+    }
+
+    fetchJobs();
+  </script>
 {% endif %}
+
+{% schema %}
+{
+  "name": "Careers Listing",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Careers Listing"
+    }
+  ]
+}
+{% endschema %}
