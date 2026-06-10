@@ -61,17 +61,11 @@
       "disabled": true,
       "name": "GH Mobile Nav",
       "settings": {}
-    },
-    "careers_page_X8BHRK": {
-      "type": "careers-page",
-      "name": "Careers Listing",
-      "settings": {}
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "gh_mobile_nav_gUThLY",
-    "careers_page_X8BHRK"
+    "gh_mobile_nav_gUThLY"
   ]
 }

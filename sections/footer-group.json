@@ -11,6 +11,11 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "careers_page_GgVNGr": {
+      "type": "careers-page",
+      "name": "Careers Listing",
+      "settings": {}
+    },
     "17622757587d20ee8b": {
       "type": "apps",
       "settings": {
@@ -65,21 +70,21 @@
           "type": "link_list",
           "settings": {
             "heading": "Customer Care",
-            "menu": "customer-care"
+            "menu": ""
           }
         },
         "6557986c-cb7f-4da5-af8b-efa4dfdee993": {
           "type": "link_list",
           "settings": {
             "heading": "Our Story",
-            "menu": "our-story"
+            "menu": ""
           }
         },
         "e7394b27-fac4-4247-9561-3f95b7c4725b": {
           "type": "link_list",
           "settings": {
             "heading": "Our Company",
-            "menu": "our-company"
+            "menu": ""
           }
         }
       },
@@ -147,6 +152,7 @@
     }
   },
   "order": [
+    "careers_page_GgVNGr",
     "17622757587d20ee8b",
     "17368734953e81bbe2",
     "d947e1ce-44fc-42ef-a922-8f7f3a559f02",
