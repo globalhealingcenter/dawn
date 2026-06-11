@@ -16,7 +16,7 @@
       },
       "type": "shogun-custom-html"
     },
-    "careers_page_37b2efd5-73ca-4e94-bcb9-2f108a99ec23": {
+    "careers_page_751f3975-9380-4b46-9cc7-12aefeeff1e1": {
       "type": "careers-page",
       "settings": {},
       "custom_css": []
@@ -30,7 +30,7 @@
   },
   "order": [
     "shogun-custom-html_9fbc34e8-44f4-4515-952d-ca6cc7a6444c",
-    "careers_page_37b2efd5-73ca-4e94-bcb9-2f108a99ec23",
+    "careers_page_751f3975-9380-4b46-9cc7-12aefeeff1e1",
     "shogun-custom-html_36b841a1-3fbe-48dd-aaa0-0c2bb5531a1c"
   ]
 }
