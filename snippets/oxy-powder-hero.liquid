@@ -66,7 +66,7 @@
             class="oph__badge"
           >
         {% endif %}
-        <a href="{{ block.settings.cta_secondary_url }}" target="_blank" rel="noopener noreferrer">
+        <a href="{{ block.settings.cta_pdp_detail_url }}" target="_blank" rel="noopener noreferrer">
           <span>
             {{- block.settings.product_name | default: 'Oxy-Powder' -}}
             {% comment %}<span class="text-icons">®</span>{% endcomment %}
@@ -75,14 +75,14 @@
       </div>
       {% if block.settings.tagline != blank %}
         <p class="oph__tagline font-proxima">
-          <a href="{{ block.settings.cta_secondary_url }}" target="_blank" rel="noopener noreferrer">
+          <a href="{{ block.settings.cta_pdp_detail_url }}" target="_blank" rel="noopener noreferrer">
             {{- block.settings.tagline -}}
           </a>
         </p>
       {% endif %}
       {% if block.settings.social_proof != blank %}
         <p class="oph__social-proof font-proxima">
-          <a href="{{ block.settings.cta_secondary_url }}" target="_blank" rel="noopener noreferrer">
+          <a href="{{ block.settings.cta_pdp_detail_url }}" target="_blank" rel="noopener noreferrer">
             {{- block.settings.social_proof -}}
           </a>
         </p>
@@ -93,7 +93,7 @@
     <div class="oph__middle ghd--flex">
       <div class="oph__image-col">
         {% if product_img != blank %}
-          <a href="{{ block.settings.cta_secondary_url }}" target="_blank" rel="noopener noreferrer">
+          <a href="{{ block.settings.cta_pdp_detail_url }}" target="_blank" rel="noopener noreferrer">
             <img
               src="{{ product_img | image_url: width: 800 }}"
               alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
