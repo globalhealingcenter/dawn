@@ -5,6 +5,8 @@
 
 <!-- Google Consent Mode V2 Advanced Mode integration script for Consentmo GDPR Compliance App -->
 <script id="consentmo-gcmv2-advanced-mode-integration">
+  var __IN_TAPCART_EARLY__ = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
+
   const consentOutOfRegion = {
     analytics: true,
     marketing: true,
@@ -18,41 +20,71 @@
     dataLayer.push(arguments);
   }
 
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_personalization: 'denied',
-    ad_user_data: 'denied',
-    analytics_storage: 'denied',
-    functionality_storage: 'denied',
-    personalization_storage: 'denied',
-    security_storage: 'granted',
-    wait_for_update: 1500,
-  });
+  if (__IN_TAPCART_EARLY__) {
+    // Inside the Tapcart native app webview – cookie consent UI is not applicable.
+    // Grant all consent states immediately so Consentmo skips its banner entirely.
+    gtag('consent', 'default', {
+      ad_storage: 'granted',
+      ad_personalization: 'granted',
+      ad_user_data: 'granted',
+      analytics_storage: 'granted',
+      functionality_storage: 'granted',
+      personalization_storage: 'granted',
+      security_storage: 'granted',
+    });
+    // Prevent Consentmo from treating this session as a new visitor that needs consent.
+    window.__consentmo_bypass__ = true;
+    console.log('[Consentmo] Tapcart detected – consent widget suppressed.');
+  } else {
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_personalization: 'denied',
+      ad_user_data: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 1500,
+    });
 
-  document.addEventListener('consentmoSignal_onLoad', function (eventData) {
-    const csmLoadSignal = eventData.detail || { isActive: false };
-    if (!csmLoadSignal.isActive) {
-      gtag('consent', 'update', {
-        ad_storage: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        ad_personalization: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        ad_user_data: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        analytics_storage: consentOutOfRegion.analytics ? 'granted' : 'denied',
-        functionality_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
-        personalization_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
-        security_storage: 'granted',
-      });
-      gtag('set', 'ads_data_redaction', consentOutOfRegion.adsDataRedaction);
-      gtag('set', 'url_passthrough', consentOutOfRegion.urlPassthrough);
-    } else {
-      document.addEventListener('consentmoSignal', function (event) {
-        const csmSignal = event.detail;
-        const consentState = csmSignal.integration?.gcm?.isEnabled ? csmSignal.integration.gcm.state : csmSignal.state;
-        gtag('consent', 'update', consentState);
-        if (csmSignal.integration?.gcm?.isEnabled) {
-          gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
-          gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
-        }
-      });
-    }
-  });
+    document.addEventListener('consentmoSignal_onLoad', function (eventData) {
+      const csmLoadSignal = eventData.detail || { isActive: false };
+      if (!csmLoadSignal.isActive) {
+        gtag('consent', 'update', {
+          ad_storage: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          ad_personalization: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          ad_user_data: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          analytics_storage: consentOutOfRegion.analytics ? 'granted' : 'denied',
+          functionality_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
+          personalization_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
+          security_storage: 'granted',
+        });
+        gtag('set', 'ads_data_redaction', consentOutOfRegion.adsDataRedaction);
+        gtag('set', 'url_passthrough', consentOutOfRegion.urlPassthrough);
+      } else {
+        document.addEventListener('consentmoSignal', function (event) {
+          const csmSignal = event.detail;
+          const consentState = csmSignal.integration?.gcm?.isEnabled
+            ? csmSignal.integration.gcm.state
+            : csmSignal.state;
+          gtag('consent', 'update', consentState);
+          if (csmSignal.integration?.gcm?.isEnabled) {
+            gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
+            gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
+          }
+        });
+      }
+    });
+  }
+</script>
+
+<!-- Tapcart: hide Consentmo cookie widget UI as a safety net -->
+<script>
+  if (__IN_TAPCART_EARLY__) {
+    var _tcStyle = document.createElement('style');
+    _tcStyle.id = 'tapcart-consentmo-hide';
+    _tcStyle.textContent =
+      '#consentmo-widget, #csmWidget, .consentmo-widget, [id^="consentmo"], [class^="consentmo"], iframe[src*="consentmo"] { display: none !important; visibility: hidden !important; }';
+    document.head.appendChild(_tcStyle);
+  }
 </script>
