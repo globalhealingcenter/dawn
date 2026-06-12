@@ -66,16 +66,26 @@
             class="oph__badge"
           >
         {% endif %}
-        <span>
-          {{- block.settings.product_name | default: 'Oxy-Powder' -}}
-          {% comment %}<span class="text-icons">®</span>{% endcomment %}
-        </span>
+        <a href="{{ block.settings.cta_pdp_detail_url }}" rel="noopener noreferrer">
+          <span>
+            {{- block.settings.product_name | default: 'Oxy-Powder' -}}
+            {% comment %}<span class="text-icons">®</span>{% endcomment %}
+          </span>
+        </a>
       </div>
       {% if block.settings.tagline != blank %}
-        <p class="oph__tagline font-proxima">{{ block.settings.tagline }}</p>
+        <p class="oph__tagline font-proxima">
+          <a href="{{ block.settings.cta_pdp_detail_url }}" rel="noopener noreferrer">
+            {{- block.settings.tagline -}}
+          </a>
+        </p>
       {% endif %}
       {% if block.settings.social_proof != blank %}
-        <p class="oph__social-proof font-proxima">{{ block.settings.social_proof }}</p>
+        <p class="oph__social-proof font-proxima">
+          <a href="{{ block.settings.cta_pdp_detail_url }}" rel="noopener noreferrer">
+            {{- block.settings.social_proof -}}
+          </a>
+        </p>
       {% endif %}
     </div>
 
@@ -83,23 +93,27 @@
     <div class="oph__middle ghd--flex">
       <div class="oph__image-col">
         {% if product_img != blank %}
-          <img
-            src="{{ product_img | image_url: width: 800 }}"
-            alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
-            width="400"
-            height="500"
-            loading="lazy"
-            class="oph__product-img"
-          >
+          <a href="{{ block.settings.cta_pdp_detail_url }}" rel="noopener noreferrer">
+            <img
+              src="{{ product_img | image_url: width: 800 }}"
+              alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
+              width="400"
+              height="500"
+              loading="lazy"
+              class="oph__product-img"
+            >
+          </a>
         {% else %}
-          <img
-            src="{{ 'oxy-powder-img.png' | asset_url }}"
-            alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
-            width="400"
-            height="500"
-            loading="lazy"
-            class="oph__product-img"
-          >
+          <a href="{{ block.settings.cta_pdp_detail_url }}" rel="noopener noreferrer">
+            <img
+              src="{{ 'oxy-powder-img.png' | asset_url }}"
+              alt="{{ block.settings.product_name | default: 'Oxy-Powder® Natural Digestive Cleanse' | escape }}"
+              width="400"
+              height="500"
+              loading="lazy"
+              class="oph__product-img"
+            >
+          </a>
         {% endif %}
       </div>
       <div class="oph__content-col">
