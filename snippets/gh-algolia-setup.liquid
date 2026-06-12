@@ -5,6 +5,7 @@
   endif
 
   assign market = localization.country.name
+  assign market_handle = localization.market.handle
 %}
 
 <script>
@@ -35,15 +36,15 @@
       return options;
     });
 
-    {% if market == 'United Kingdom' %}
+    {% if market_handle == 'uk' or market == 'United Kingdom' %}
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      console.log('default', _defaultFiltersString);
-      return 'tags:available-for-uk'
+      let filter = 'tags:available-for-uk';
+      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
+      return filter;
     });
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
       let filter = 'tags:available-for-uk';
       if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
-      console.log('instant default filter', filter);
       return filter;
     });
     {% endif %}
