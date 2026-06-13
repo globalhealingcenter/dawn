@@ -577,7 +577,7 @@ async function runAnalysis(){
   async function doFetch(p){
     var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:16000,messages:[{role:'user',content:p}]})
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:8000,messages:[{role:'user',content:p}]})
     });
     if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
     return await response.text();
