@@ -390,7 +390,7 @@
           <div class="settings-field"><label>Ingredient title — max chars</label><input type="number" id="set_ing_title_chars" value="40" min="20" max="80"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
           <div class="settings-field"><label>Curated subhead — max chars</label><input type="number" id="set_curated_chars" value="80" min="40" max="200"></div>
-          <div class="settings-field"><label>FAQ answer — max chars</label><input type="number" id="set_faq_chars" value="150" min="80" max="400"></div>
+          <div class="settings-field"><label>FAQ answer — max chars</label><input type="number" id="set_faq_chars" value="250" min="80" max="400"></div>
           <div class="settings-field"><label>Stat label — max chars</label><input type="number" id="set_stat_chars" value="20" min="10" max="40"></div>
         </div>
       </div>
@@ -430,7 +430,7 @@
     <div class="ra-section" id="sec-about">
       <div class="section-eyebrow">Section 01</div>
       <h2 class="section-heading">About</h2>
-      <p class="section-deck">Customer-facing copy options structured benefit → pain → differentiator, with the product named in each option.</p>
+      <p class="section-deck">Customer-facing copy options structured benefit → pain → differentiator.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howAbout')">How this section works <span class="how-arrow" id="howAboutArrow">▾</span></button>
         <div class="how-content" id="howAbout">
@@ -665,7 +665,7 @@
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
-              <li>Answer: 150 characters max (auto-rewritten if over)</li>
+              <li>Answer: 250 characters max (auto-rewritten if over)</li>
               <li>Wiki is source of truth — exact dose, timing, with/without food</li>
               <li>Banned words in answers: program, protocol</li>
               <li>No disease treatment claims</li>
@@ -728,7 +728,7 @@ function getSettings(){
     ing_title_chars:parseInt(document.getElementById('set_ing_title_chars').value)||40,
     ing_chars:parseInt(document.getElementById('set_ing_chars').value)||120,
     curated_chars:parseInt(document.getElementById('set_curated_chars').value)||80,
-    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||150,
+    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||250,
     stat_chars:parseInt(document.getElementById('set_stat_chars').value)||20,
     faq_count:8
   };
@@ -853,14 +853,14 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Structure: BENEFIT first (what the customer gets) → acknowledge PAIN (what it solves) → name DIFFERENTIATOR. Product name MUST appear in each option (e.g. "Oxy-Powder…", "Latero-Flora…"). Differentiator hierarchy: Mechanism > Form > Sourcing > Bioavailability > Combination > Use Case. Each of the 5 options should test a DIFFERENT differentiator angle when wiki supports it. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. BANNED WORDS in About text: program, programs, protocol, protocols, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims. No question marks or casual openers.'
     +'\n- pain_points: exactly 4, ranked by frequency'
     +'\n- made_with_purpose: exactly 5. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits. Options 4-5 (source_type="wiki"): NEW benefit angles from wiki Health Benefits the v1 PDP does not cover. Title 2-4 words (prefer 3), desc under '+s.mwp_chars+' chars. wiki_source required all 5. v1_pdp_source only for options 1-3. If no v1 PDP provided, generate all 5 from wiki only and label source_type="wiki" with empty v1_pdp_source. Do NOT fabricate v1_pdp_source quotes.'
-    +'\n- wiki_v1_alignment: compare wiki Health Benefits against v1 PDP. Set has_mismatch=true if mismatches exist.'
+    +'\n- wiki_v1_alignment: compare ONLY the wiki Health Benefits section against v1 PDP benefits. CRITICAL: wiki_only_adds must contain ONLY top-level entries from the wiki\'s Health Benefits section that do not appear in v1 PDP. DO NOT include content from: clinical study sections, "Backed by Research" subsections, mechanism explanations, formulation details, Source & Quality sections, certifications, manufacturing notes, or any section other than Health Benefits. v1_only_adds = v1 PDP benefits with no matching Health Benefits theme in the wiki. contradictions = direct conflicts in framing between wiki Health Benefits and v1 PDP. Set has_mismatch=true only if real mismatches exist within Health Benefits scope.'
     +'\n- benefits: EXACTLY 3 review-derived qualitative benefits. NO percentage field. title + proof only.'
     +'\n- outcome_stats: 4-6 items. detail max 20 chars. No disease claims.'
     +'\n- transformation: fraction AND timeframe. mention_count = reviews containing BOTH a timeframe phrase AND an outcome phrase. timeframe_keywords + outcome_keywords each 3-6 phrases. sample_quotes: 3 verbatim quotes containing BOTH elements.'
     +'\n- alt_stats: 2-3 items. Same intersection counting rule.'
     +'\n- reviews: exactly 8. ONLY 4-5 star with strong articulate language. original_text VERBATIM and UNDER 250 chars. Select for THEME VARIETY. Named authors preferred. title is short AI-generated headline.'
     +'\n- ingredients: 5 combined editorial headlines. headline MAX 40 chars (HARD LIMIT, no exceptions). headline must be DIRECTLY supported by wiki_source — wiki_source must be a sentence from the wiki that explicitly backs the headline claim. Do NOT use tangentially-related wiki sentences. If you cannot find a wiki sentence that directly supports a strong headline, write a softer headline the wiki actually supports. No asterisks. keyword = single word to italicize. subline under '+s.ing_chars+' chars.'
-    +'\n- curated_collection: Check the wiki for a "Recommended Pairings" section (table or list naming specific companion products). If present: set has_pairings=true and generate 3 options. Each option: heading 3-4 words naming the customer state, subhead max '+s.curated_chars+' chars naming the SPECIFIC companion products from the wiki (e.g. "Pair with Oxy-Powder and Aloe Vera to clear waste and soothe digestion"). wiki_source = exact quoted sentence from Recommended Pairings. If wiki has NO Recommended Pairings section: set has_pairings=false and leave options empty. BANNED WORDS: program, programs, protocol, protocols. No disease claims.'
+    +'\n- curated_collection: Look for a pairings section in the wiki under ANY of these labels: "Recommended Pairings", "Pairings", "Pairs Well With", "Companion Products", "Stack With", "Better Together", "Product Combinations", "Works Well With", "Recommended Companions" — or ANY structured table/list that names specific companion products alongside rationale and use case (e.g. columns like Supplement/Why It Works/Best For, or Product/Reason/For Whom). If ANY such section exists in any form (table, list, or paragraph naming multiple companion products with reasons): set has_pairings=true and generate 3 options. Each option: heading 3-4 words naming the customer state, subhead max '+s.curated_chars+' chars naming the SPECIFIC companion products from the wiki (e.g. "Pair with Latero-Flora and Aloe Vera to support sensitive digestion"). wiki_source = exact quoted text from the wiki pairings section. Only set has_pairings=false if you find absolutely no companion product recommendations anywhere in the wiki. BANNED WORDS: program, programs, protocol, protocols. No disease claims.'
     +'\n- faqs: exactly 8 questions. CRITICAL FAQ RULES: (1) Questions come from review patterns — what customers ask, worry about, hesitate on. (2) Answers come from the WIKI ONLY — never from review language. (3) Product name MUST appear in every answer (e.g. "Oxy-Powder helps…"). (4) FAQ #1 is always a "What to Expect" question with is_what_to_expect=true covering onset timeframe + temporary effects + individual variation + suggested use — all sourced from wiki. expectation_substantiation onset_quotes/effects_quotes are review quotes used as CONTEXT for why we ask, not as answer source. (5) For each FAQ: review_context = brief note on why reviewers prompted this question (used as "Why we\'re asking" display, NOT as answer source). suggested_answer comes from wiki only. wiki_source = exact wiki sentence used. (6) If the wiki does NOT cover a topic, set needs_manual_answer=true, manual_answer_reason="Wiki does not cover [specific gap]", leave suggested_answer and wiki_source empty. Do NOT fabricate answers from review language to fill the gap. (7) Banned words in answers: program, programs, protocol, protocols. (8) All FAQ answers under '+s.faq_chars+' chars. No disease treatment claims.'
     +'\nReviews:\n'+reviewTexts;
 }
@@ -962,6 +962,67 @@ function verifyReviewsAgainstCsv(analysis,sampleReviews){
   });
 }
 
+// Build a re-prompt asking Claude to replace unverified reviews with new picks from the verified pool
+function buildReviewReplacementPrompt(rejectedReviews,product,reviewTexts,wikiSection,settings){
+  var rejectedList=rejectedReviews.map(function(r){return '- "'+r.original_text.substring(0,80)+'..." (rejected: not found in source CSV)';}).join('\n');
+  var schema='{"reviews":[{"num":1,"title":"","original_text":"","original_author":"","theme":""}]}';
+  return 'You previously selected '+rejectedReviews.length+' reviews that could not be verified against the source CSV. Pick '+rejectedReviews.length+' NEW replacement reviews for "'+product+'" from the review pool below. Return ONLY valid JSON matching this schema:\n'+schema
+    +'\n\nREJECTED REVIEWS (do not pick these or anything similar):\n'+rejectedList
+    +'\n\nCRITICAL RULES for replacements:'
+    +'\n- ONLY select 4-5 star reviews with strong articulate language'
+    +'\n- original_text must be VERBATIM from the review pool below — copy character-for-character'
+    +'\n- original_text must be UNDER '+settings.review_chars+' chars'
+    +'\n- Named authors preferred over [ANON]'
+    +'\n- Cover different themes from the rejected ones'
+    +'\n- title = short AI-generated headline (5-10 words)'
+    +'\n- Number them starting from '+(8-rejectedReviews.length+1)+' to 8'
+    +'\n\nReview pool:\n'+reviewTexts;
+}
+
+async function replaceUnverifiedReviews(analysis,sampleReviews,product,reviewTexts,wikiSection,settings){
+  var MAX_ATTEMPTS=2;
+  var attempt=0;
+  while(attempt<MAX_ATTEMPTS){
+    var unverified=(analysis.reviews||[]).filter(function(v){return v._verified===false;});
+    if(unverified.length===0)return analysis;
+
+    // Remove unverified from output
+    var verified=(analysis.reviews||[]).filter(function(v){return v._verified===true;});
+
+    try{
+      var rejectPrompt=buildReviewReplacementPrompt(unverified,product,reviewTexts,wikiSection,settings);
+      var rawText=await doFetch(rejectPrompt,4000);
+      var parsed=parseEnvelope(rawText);
+      if(!parsed||!parsed.reviews||!parsed.reviews.length)break;
+
+      // Verify the new replacements
+      var csvTextBlob=sampleReviews.map(function(r){return getReviewText(r);}).join(' \n ').toLowerCase();
+      parsed.reviews.forEach(function(v){
+        if(!v.original_text){v._verified=false;return;}
+        var text=v.original_text.toLowerCase().trim();
+        var chunk=text.length>30?text.substring(5,Math.min(50,text.length-5)):text;
+        v._verified=csvTextBlob.indexOf(chunk)!==-1;
+      });
+
+      // Combine verified originals + verified replacements
+      analysis.reviews=verified.concat(parsed.reviews);
+      // Re-number sequentially
+      analysis.reviews.forEach(function(r,i){r.num=i+1;});
+    }catch(e){
+      console.log('Review replacement pass failed:',e.message);
+      analysis.reviews=verified; // ship with what's verified
+      analysis._replacement_failed_count=unverified.length;
+      break;
+    }
+    attempt++;
+  }
+  // Final filter — drop any still-unverified after all attempts
+  var finalUnverified=(analysis.reviews||[]).filter(function(v){return v._verified===false;});
+  analysis._dropped_count=finalUnverified.length;
+  analysis.reviews=(analysis.reviews||[]).filter(function(v){return v._verified===true;});
+  return analysis;
+}
+
 async function runAnalysis(){
   var product=document.getElementById('productSelect').value;
   if(!product){showError('Please select a product.');return;}
@@ -1019,6 +1080,7 @@ async function runAnalysis(){
 
     analysis=await enforceCharLimits(analysis,settings);
     verifyReviewsAgainstCsv(analysis,sample);
+    analysis=await replaceUnverifiedReviews(analysis,sample,product,reviewTexts,wikiSection,settings);
 
     lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length,dateRange:dateRange,settings:settings,v1Benefits:lastV1PdpBenefits};
     stepDone('step4');
@@ -1242,18 +1304,22 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   });
   document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent published). Results reflect customer-reported outcomes — individual experiences may vary.';
 
-  // REVIEWS
+  // REVIEWS — only verified shown; dropped count flagged if any
   var revList=document.getElementById('reviewsList');revList.innerHTML='';
+  if(a._dropped_count&&a._dropped_count>0){
+    var dropNote=document.createElement('div');
+    dropNote.style.cssText='grid-column:1 / -1;background:var(--warn-soft);border:1px solid #f0d785;border-left:3px solid var(--warn);border-radius:var(--radius);padding:14px 18px;font-size:13px;color:#7a5b08;font-family:var(--mono);letter-spacing:0.02em;';
+    dropNote.textContent=a._dropped_count+' review'+(a._dropped_count===1?'':'s')+' excluded — could not be verified against the source CSV';
+    revList.appendChild(dropNote);
+  }
   (a.reviews||[]).forEach(function(v){
     if((v.original_text||'').length>settings.review_chars)return;
     var card=document.createElement('div');card.className='review-card';
-    if(v._verified===false)card.classList.add('unverified');
     var topRow=document.createElement('div');topRow.className='review-top-row';
     var num=document.createElement('div');num.className='review-num';num.textContent='Review '+(v.num||'');
     var stars=document.createElement('div');stars.className='review-stars';stars.textContent='\u2605\u2605\u2605\u2605\u2605';
     var badge=document.createElement('span');
-    if(v._verified===false){badge.className='review-unverified-badge';badge.textContent='⚠ Not in CSV';}
-    else{badge.className='review-verified-badge';badge.textContent='✓ Verified';}
+    badge.className='review-verified-badge';badge.textContent='✓ Verified';
     topRow.appendChild(num);topRow.appendChild(badge);topRow.appendChild(stars);
     var title=document.createElement('div');title.className='review-title';title.textContent=v.title||'';
     var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.original_text||'')+'\u201d';
@@ -1479,8 +1545,9 @@ function exportTxt(){
   });
   out+='\n=== OUTCOME STATS (collapsed by default) ===\n';
   (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' of '+lastAnalysis.analyzed+' reviewers)\n';});
-  out+='\n=== REVIEWS (VERBATIM) ===\n';
-  (a.reviews||[]).forEach(function(v){out+='Review '+v.num+': '+v.title+(v._verified===false?' [UNVERIFIED]':' [✓ verified]')+'\n"'+(v.original_text||'')+'"\n— '+(v.original_author||'Verified Buyer')+' [Theme: '+(v.theme||'')+']\n\n';});
+  out+='\n=== REVIEWS (VERBATIM, VERIFIED IN SOURCE CSV) ===\n';
+  if(a._dropped_count&&a._dropped_count>0)out+='Note: '+a._dropped_count+' review(s) excluded — could not be verified against source CSV.\n\n';
+  (a.reviews||[]).forEach(function(v){out+='Review '+v.num+': '+v.title+'\n"'+(v.original_text||'')+'"\n— '+(v.original_author||'Verified Buyer')+' [Theme: '+(v.theme||'')+']\n\n';});
   out+='\n=== INGREDIENTS ===\n';
   (a.ingredients||[]).forEach(function(ing){out+='Option '+ing.num+':\n'+ing.headline+'\n'+ing.subline+'\nWiki source: '+ing.wiki_source+'\n\n';});
   out+='\n=== CURATE YOUR COLLECTION ===\n';
