@@ -1,303 +1,547 @@
 {% assign page_title = 'Review Intelligence' %}
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:#1a1a2e;--paper:#ffffff;--cream:#f6f6fb;--gold:#c8952a;--gold-light:#e8b84b;
-    --sage:#2d6a4f;--sage-light:#52b788;--rust:#c1440e;--mist:#e4e4f0;
-    --accent:#4a3f8f;--accent-light:#f0eeff;--accent-mid:#7c6fc4;
-    --radius:8px;--shadow:0 1px 4px rgba(26,26,46,0.08);
-    --shadow-md:0 4px 16px rgba(26,26,46,0.10);
+    --ink:#1a1a1f;            /* primary text — warm near-black */
+    --ink-soft:#3a3a42;        /* secondary text */
+    --ink-muted:#6b6b75;       /* tertiary, captions */
+    --ink-faint:#9a9aa3;       /* metadata */
+    --paper:#ffffff;
+    --cream:#faf7f2;           /* warm cream background */
+    --cream-deep:#f3ede3;      /* card backgrounds, panels */
+    --line:#e8e2d6;            /* borders, dividers */
+    --line-soft:#f0ebe1;
+    --accent:#a8553a;          /* muted terracotta — primary accent */
+    --accent-deep:#8a4530;     /* hover / pressed */
+    --accent-soft:#f5e8e1;     /* tinted backgrounds */
+    --accent-faint:#fbf3ee;
+    --warn:#b8860b;            /* warm amber for warnings */
+    --warn-soft:#fdf6e3;
+    --danger:#a83a2a;          /* deeper rust for errors */
+    --danger-soft:#fbeae5;
+    --success:#5a7a3e;         /* muted olive for OK states */
+    --success-soft:#eef2e6;
+    --radius:6px;
+    --radius-lg:10px;
+    --shadow-sm:0 1px 2px rgba(26,26,31,0.04);
+    --shadow:0 2px 8px rgba(26,26,31,0.06);
+    --shadow-md:0 8px 24px rgba(26,26,31,0.08);
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--paper);font-family:'Instrument Sans',sans-serif;font-size:16px;color:var(--ink);}
-  .upload-zone{border:2px dashed var(--mist);background:var(--cream);border-radius:var(--radius);padding:52px 40px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;margin-bottom:32px;}
-  .upload-zone:hover,.upload-zone.drag-over{border-color:var(--gold);background:#f5ede0;}
+  body{background:var(--cream);font-family:var(--sans);font-size:15px;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+  /* ───── HERO / INTAKE ───── */
+  .wrap{max-width:1140px;margin:0 auto;padding:64px 40px 120px;}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:16px;}
+  .hero-title{font-family:var(--serif);font-size:56px;line-height:1.05;letter-spacing:-0.02em;font-weight:400;color:var(--ink);margin-bottom:16px;}
+  .hero-title em{font-style:italic;color:var(--accent);font-weight:400;}
+  .hero-sub{font-size:17px;color:var(--ink-soft);margin-bottom:56px;max-width:580px;line-height:1.6;}
+
+  .step-num{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px;font-weight:500;}
+  .step-label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:12px;display:block;}
+  .step-block{margin-bottom:40px;}
+
+  .upload-zone{border:1.5px dashed var(--line);background:var(--paper);border-radius:var(--radius-lg);padding:48px 32px;text-align:center;cursor:pointer;transition:all 0.2s ease;position:relative;}
+  .upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-faint);}
   .upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-  .upload-icon{width:48px;height:48px;margin:0 auto 16px;color:var(--gold);}
-  .upload-title{font-family:'DM Serif Display',serif;font-size:22px;margin-bottom:6px;color:var(--ink);}
-  .upload-sub{font-size:14px;color:#8a7a68;font-family:'DM Mono',monospace;}
-  .file-loaded{display:flex;align-items:center;gap:14px;background:var(--accent);color:white;padding:18px 24px;border-radius:var(--radius);margin-bottom:32px;font-family:'DM Mono',monospace;font-size:14px;box-shadow:var(--shadow);}
-  .file-loaded .dot{width:8px;height:8px;background:var(--gold-light);border-radius:50%;flex-shrink:0;}
-  .file-loaded strong{color:#d4ccff;}
-  .ra-controls{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;align-items:end;}
-  .ra-label{display:block;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:8px;}
-  .ra-select{width:100%;padding:13px 16px;border:1px solid var(--mist);background:white;font-size:15px;color:var(--ink);border-radius:8px;appearance:none;outline:none;transition:border-color 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);}
-  .ra-select:focus{border-color:var(--gold);}
-  .ra-textarea{width:100%;padding:13px 16px;border:1px solid var(--mist);background:white;font-size:14px;color:var(--ink);border-radius:8px;outline:none;transition:border-color 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);resize:vertical;min-height:100px;line-height:1.6;}
-  .ra-textarea:focus{border-color:var(--gold);}
-  .collapsible-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;width:fit-content;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;}
-  .collapsible-arrow{font-size:12px;transition:transform 0.2s;}
+  .upload-icon{width:36px;height:36px;margin:0 auto 14px;color:var(--accent);}
+  .upload-title{font-family:var(--serif);font-size:22px;color:var(--ink);margin-bottom:6px;font-weight:500;}
+  .upload-sub{font-size:13px;color:var(--ink-muted);}
+
+  .file-loaded{display:flex;align-items:center;gap:14px;background:var(--ink);color:var(--cream);padding:18px 24px;border-radius:var(--radius);font-size:14px;}
+  .file-loaded .dot{width:7px;height:7px;background:var(--accent);border-radius:50%;flex-shrink:0;}
+  .file-loaded strong{color:white;font-weight:600;}
+
+  .ra-select{width:100%;padding:14px 16px;border:1px solid var(--line);background:var(--paper);font-size:15px;color:var(--ink);border-radius:var(--radius);appearance:none;outline:none;transition:border-color 0.15s;font-family:var(--sans);background-image:url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b6b75' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px;}
+  .ra-select:focus{border-color:var(--accent);}
+  .ra-select:disabled{background-color:var(--cream-deep);color:var(--ink-faint);cursor:not-allowed;}
+
+  .ra-textarea{width:100%;padding:16px 18px;border:1px solid var(--line);background:var(--paper);font-size:14px;color:var(--ink);border-radius:var(--radius);outline:none;transition:border-color 0.15s;font-family:var(--sans);resize:vertical;min-height:140px;line-height:1.6;}
+  .ra-textarea:focus{border-color:var(--accent);}
+
+  .required-tag{display:inline-block;font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;background:var(--accent-soft);padding:3px 8px;border-radius:3px;margin-left:8px;font-weight:500;}
+  .field-help{font-size:13px;color:var(--ink-muted);margin-top:10px;line-height:1.5;}
+
+  .btn-analyze{padding:18px 40px;background:var(--ink);color:white;font-weight:600;font-size:15px;border:none;border-radius:var(--radius);cursor:pointer;transition:all 0.2s ease;font-family:var(--sans);width:100%;letter-spacing:0.01em;}
+  .btn-analyze:hover{background:var(--accent);transform:translateY(-1px);box-shadow:var(--shadow-md);}
+  .btn-analyze:disabled{background:var(--cream-deep);color:var(--ink-faint);cursor:not-allowed;transform:none;box-shadow:none;}
+
+  .collapsible-toggle{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;user-select:none;transition:color 0.15s;}
+  .collapsible-toggle:hover{color:var(--accent);}
+  .collapsible-arrow{font-size:10px;transition:transform 0.2s;}
   .collapsible-arrow.open{transform:rotate(180deg);}
-  .collapsible-panel{display:none;margin-top:10px;}
+  .collapsible-panel{display:none;margin-top:14px;}
   .collapsible-panel.open{display:block;}
-  .panel-note{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;margin-top:6px;line-height:1.5;}
-  .settings-panel-inner{background:var(--cream);border:1px solid var(--mist);border-radius:var(--radius);padding:24px;}
-  .settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .settings-field label{display:block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#8a7a68;margin-bottom:6px;line-height:1.4;}
-  .settings-field input{width:100%;padding:9px 12px;border:1px solid var(--mist);background:white;font-size:14px;color:var(--ink);border-radius:6px;outline:none;font-family:'DM Mono',monospace;}
-  .settings-field input:focus{border-color:var(--gold);}
-  .btn-analyze{padding:14px 32px;background:var(--accent);color:white;font-weight:600;font-size:15px;border:none;border-radius:8px;cursor:pointer;transition:background 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);width:100%;}
-  .btn-analyze:hover{background:var(--accent-mid);}
-  .btn-analyze:disabled{background:var(--mist);color:#aaa;cursor:not-allowed;box-shadow:none;}
-  .ra-loading{display:none;text-align:center;padding:64px 0;}
+
+  .settings-panel-inner{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+  .settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .settings-field label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:8px;font-weight:500;}
+  .settings-field input{width:100%;padding:10px 12px;border:1px solid var(--line);background:var(--cream);font-size:14px;color:var(--ink);border-radius:4px;outline:none;font-family:var(--mono);}
+  .settings-field input:focus{border-color:var(--accent);}
+
+  /* ───── LOADING ───── */
+  .ra-loading{display:none;text-align:center;padding:80px 0;}
   .ra-loading.active{display:block;}
-  .loading-ring{width:48px;height:48px;border:3px solid var(--mist);border-top-color:var(--accent);border-radius:50%;animation:raspin 0.8s linear infinite;margin:0 auto 20px;}
+  .loading-ring{width:42px;height:42px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:raspin 0.9s linear infinite;margin:0 auto 24px;}
   @keyframes raspin{to{transform:rotate(360deg);}}
-  .loading-text{font-family:'DM Mono',monospace;font-size:14px;color:#8a7a68;}
-  .loading-step{font-size:13px;color:#aaa;transition:color 0.3s;margin:4px 0;}
-  .loading-step.active{color:var(--accent-mid);}
-  .loading-step.done{color:var(--sage);}
+  .loading-text{font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:500;margin-bottom:8px;}
+  .loading-text-meta{font-family:var(--mono);font-size:12px;color:var(--ink-muted);margin-bottom:24px;}
+  .loading-bar-track{background:var(--cream-deep);border-radius:100px;height:3px;width:320px;margin:0 auto 12px;overflow:hidden;}
+  .loading-bar{height:100%;width:0%;background:var(--accent);border-radius:100px;transition:width 0.8s ease;}
+  .loading-timer{font-family:var(--mono);font-size:12px;color:var(--ink-faint);margin-bottom:28px;}
+  .loading-step{font-size:13px;color:var(--ink-faint);transition:color 0.3s;margin:5px 0;font-family:var(--mono);letter-spacing:0.02em;}
+  .loading-step.active{color:var(--accent);}
+  .loading-step.done{color:var(--success);}
+
+  /* ───── REPORT HEADER ───── */
   .ra-results{display:none;}
   .ra-results.active{display:block;}
-  .results-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:3px solid var(--accent);}
-  .results-title{font-family:'DM Serif Display',serif;font-size:36px;color:var(--ink);font-weight:400;}
-  .results-meta{font-family:'DM Mono',monospace;font-size:13px;color:#8a7a68;text-align:right;line-height:1.6;}
-  .ra-section{margin-bottom:64px;scroll-margin-top:24px;}
-  .section-label{display:inline-block;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);background:transparent;padding:0;margin-bottom:6px;font-weight:600;}
-  .section-heading{font-family:'DM Serif Display',serif;font-size:30px;color:var(--ink);margin-bottom:8px;border-bottom:2px solid var(--accent);padding-bottom:12px;margin-bottom:20px;}
-  .section-sub{font-size:15px;color:#6b5e4a;margin-bottom:20px;line-height:1.6;max-width:720px;}
-  .jane-note{background:var(--accent-light);color:var(--accent);font-size:14px;line-height:1.7;padding:16px 20px;border-radius:var(--radius);margin-bottom:28px;border-left:4px solid var(--accent);}
-  .btn-copy{flex-shrink:0;padding:8px 18px;background:transparent;border:1px solid var(--mist);color:#8a7a68;font-family:'DM Mono',monospace;font-size:12px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
-  .btn-copy:hover{border-color:var(--gold);color:var(--gold);}
-  .btn-copy.copied{border-color:var(--sage);color:var(--sage-light);}
-  .btn-copy-dk{flex-shrink:0;padding:8px 18px;background:transparent;border:1px solid #3a5a3a;color:#7a9e7a;font-family:'DM Mono',monospace;font-size:12px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
-  .btn-copy-dk:hover{border-color:#6a9e6a;color:#a8c4a8;}
-  .btn-copy-dk.copied{border-color:var(--sage-light);color:#c8d8c8;}
-  .with-wiki-source{display:grid;grid-template-columns:1fr 280px;gap:0;background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;}
-  .wiki-source-col{background:var(--accent-light);border-left:1px solid var(--mist);padding:20px 18px;display:flex;flex-direction:column;gap:8px;}
-  .wiki-source-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent-mid);margin-bottom:4px;}
-  .wiki-source-quote{font-size:12px;color:#4a4a6a;line-height:1.6;font-style:italic;border-left:2px solid var(--accent-mid);padding-left:10px;}
-  .choice-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .choice-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+
+  .report-masthead{margin-bottom:64px;padding-bottom:36px;border-bottom:1px solid var(--line);}
+  .report-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:14px;}
+  .report-title{font-family:var(--serif);font-size:48px;line-height:1.05;letter-spacing:-0.02em;color:var(--ink);font-weight:400;margin-bottom:18px;}
+  .report-meta{display:flex;flex-wrap:wrap;gap:28px;font-family:var(--mono);font-size:12px;color:var(--ink-muted);letter-spacing:0.02em;}
+  .report-meta-item{display:flex;align-items:center;gap:8px;}
+  .report-meta-item strong{color:var(--ink);font-weight:600;}
+
+  /* ───── SECTIONS ───── */
+  .ra-section{margin-bottom:88px;scroll-margin-top:32px;}
+  .section-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
+  .section-heading{font-family:var(--serif);font-size:36px;color:var(--ink);font-weight:400;letter-spacing:-0.015em;line-height:1.15;margin-bottom:12px;}
+  .section-deck{font-size:16px;color:var(--ink-soft);max-width:680px;line-height:1.6;margin-bottom:32px;}
+
+  /* Collapsible "how this works" — restrained, sits beneath section header */
+  .how-this-works{margin-bottom:32px;}
+  .how-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;user-select:none;padding:6px 0;border:none;background:none;transition:color 0.15s;}
+  .how-toggle:hover{color:var(--accent);}
+  .how-arrow{font-size:9px;transition:transform 0.2s;}
+  .how-arrow.open{transform:rotate(180deg);}
+  .how-content{display:none;margin-top:14px;padding:20px 24px;background:var(--accent-faint);border-left:2px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;}
+  .how-content.open{display:block;}
+  .how-content ul{list-style:none;padding:0;margin:0;}
+  .how-content ul li{position:relative;padding-left:18px;margin-bottom:8px;font-size:14px;color:var(--ink-soft);line-height:1.6;}
+  .how-content ul li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:1px;background:var(--accent);}
+  .how-content ul li:last-child{margin-bottom:0;}
+  .how-constraints{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(168,85,58,0.3);}
+  .how-constraints-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px;}
+
+  /* ───── COPY BUTTON ───── */
+  .btn-copy{flex-shrink:0;padding:7px 14px;background:transparent;border:1px solid var(--line);color:var(--ink-muted);font-family:var(--mono);font-size:11px;border-radius:4px;cursor:pointer;transition:all 0.15s;letter-spacing:0.02em;}
+  .btn-copy:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-faint);}
+  .btn-copy.copied{border-color:var(--success);color:var(--success);background:var(--success-soft);}
+
+  /* ───── ABOUT CARDS ───── */
+  .choice-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .choice-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:border-color 0.15s, box-shadow 0.15s;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .choice-card:hover{border-color:var(--ink-faint);box-shadow:var(--shadow);}
   .choice-body{flex:1;}
-  .choice-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);margin-bottom:10px;letter-spacing:0.06em;text-transform:uppercase;}
-  .choice-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.4;}
-  .choice-text{font-size:16px;color:#3a2e20;line-height:1.8;}
-  .choice-desc{font-size:14px;color:#6b5e4a;line-height:1.6;margin-top:6px;}
-  .choice-meta{font-family:'DM Mono',monospace;font-size:11px;color:#8a7a68;margin-top:10px;}
-  .choice-meta.over{color:var(--rust);}
-  .about-tags{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
-  .about-tag{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:20px;letter-spacing:0.04em;}
-  .about-tag-pain{background:#fff3f0;color:var(--rust);border:1px solid #f5c6bb;}
-  .about-tag-benefit{background:#f0f7f4;color:var(--sage);border:1px solid #b0d9c4;}
-  .about-tag-diff{background:var(--accent-light);color:var(--accent);border:1px solid var(--accent-mid);}
-  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(232,226,217,0.8);border-radius:var(--radius);overflow:hidden;margin-bottom:12px;background:white;}
-  .stat-card{padding:32px 28px;border-right:1px solid rgba(232,226,217,0.8);border-bottom:1px solid rgba(232,226,217,0.8);display:flex;flex-direction:column;gap:8px;}
-  .stat-card:nth-child(3n){border-right:none;}
-  .stat-card:nth-last-child(-n+3){border-bottom:none;}
-  .stat-pct{font-family:'DM Serif Display',serif;font-size:60px;line-height:1;color:var(--accent);}
-  .stat-label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;}
-  .stat-detail{font-size:13px;color:#8a7a68;}
-  .stat-copy-row{display:flex;justify-content:flex-end;margin-top:4px;}
-  .stats-footnote{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;font-style:italic;margin-bottom:16px;}
-  .warn-yellow{background:#fffbf0;border:1px solid #f0d080;border-radius:8px;padding:16px 20px;margin-bottom:16px;border-left:4px solid #c8a000;}
-  .warn-yellow-title{font-family:'DM Mono',monospace;font-size:12px;color:#8a6a00;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
-  .warn-red{background:#fff5f3;border:1px solid #f5c6bb;border-radius:8px;padding:16px 20px;margin-bottom:16px;border-left:4px solid var(--rust);}
-  .warn-red-title{font-family:'DM Mono',monospace;font-size:12px;color:var(--rust);font-weight:600;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;}
-  .warn-text{font-size:14px;color:#5a4a38;line-height:1.6;}
-  .transform-card{background:white;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid rgba(232,226,217,0.6);padding:24px;margin-top:16px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .choice-num{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px;font-weight:500;}
+  .choice-num strong{color:var(--ink);font-weight:600;}
+  .choice-text{font-size:16px;color:var(--ink);line-height:1.65;font-family:var(--serif);font-weight:400;letter-spacing:-0.005em;}
+  .choice-desc{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:8px;}
+  .choice-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:14px;letter-spacing:0.04em;}
+  .choice-meta.over{color:var(--danger);}
+
+  .about-tags{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;}
+  .about-tag{font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:3px;letter-spacing:0.03em;font-weight:500;}
+  .about-tag-pain{background:var(--danger-soft);color:var(--danger);}
+  .about-tag-benefit{background:var(--success-soft);color:var(--success);}
+  .about-tag-diff{background:var(--accent-soft);color:var(--accent-deep);}
+
+  .diff-explanation{margin-top:16px;padding:14px 16px;background:var(--cream);border-radius:4px;border-left:2px solid var(--accent);}
+  .diff-explanation-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:8px;}
+  .diff-explanation-text{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+
+  /* ───── PAIN POINTS COLLAPSIBLE NEAR ABOUT ───── */
+  .pain-ref-panel{margin-bottom:28px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow:hidden;}
+  .pain-ref-header{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background 0.15s;}
+  .pain-ref-header:hover{background:var(--cream);}
+  .pain-ref-label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;}
+  .pain-ref-toggle{font-size:11px;color:var(--ink-faint);transition:transform 0.2s;}
+  .pain-ref-toggle.open{transform:rotate(180deg);}
+  .pain-ref-body{display:none;padding:6px 20px 18px;}
+  .pain-ref-body.open{display:block;}
+  .pain-ref-item{padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:13px;color:var(--ink-soft);line-height:1.6;}
+  .pain-ref-item:last-child{border-bottom:none;}
+  .pain-ref-item strong{color:var(--ink);font-weight:600;}
+
+  /* ───── MWP — wiki/v1 comparison ───── */
+  .with-wiki-source{display:grid;grid-template-columns:1fr 280px;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;transition:border-color 0.15s;}
+  .with-wiki-source:hover{border-color:var(--ink-faint);}
+  .wiki-source-col{background:var(--cream);border-left:1px solid var(--line);padding:22px 20px;display:flex;flex-direction:column;gap:10px;}
+  .wiki-source-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:4px;font-weight:500;}
+  .wiki-source-quote{font-size:12px;color:var(--ink-soft);line-height:1.65;font-style:italic;border-left:2px solid var(--accent);padding-left:12px;font-family:var(--serif);}
+
+  .choice-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.4;font-family:var(--sans);letter-spacing:-0.005em;}
+
+  /* Source comparison table */
+  .source-compare-wrap{margin-bottom:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow:hidden;}
+  .source-compare-header{padding:14px 20px;background:var(--cream);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background 0.15s;}
+  .source-compare-header:hover{background:var(--cream-deep);}
+  .source-compare-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;}
+  .source-compare-toggle{font-size:11px;color:var(--ink-faint);transition:transform 0.2s;}
+  .source-compare-toggle.open{transform:rotate(180deg);}
+  .source-compare-body{display:none;}
+  .source-compare-table{width:100%;border-collapse:collapse;}
+  .source-compare-table th{background:var(--cream);color:var(--ink-muted);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:0.1em;padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);font-weight:600;}
+  .source-compare-table td{padding:16px 18px;font-size:14px;color:var(--ink);border-bottom:1px solid var(--line-soft);vertical-align:top;}
+  .source-compare-table tr:last-child td{border-bottom:none;}
+  .source-compare-row{cursor:pointer;transition:background 0.15s;}
+  .source-compare-row:hover{background:var(--cream);}
+  .source-compare-detail{display:none;}
+  .source-compare-detail.open{display:table-row;}
+  .source-compare-detail td{background:var(--cream);font-size:13px;color:var(--ink-soft);font-style:italic;line-height:1.65;padding:12px 18px;font-family:var(--serif);}
+
+  .mismatch-callout{background:var(--warn-soft);border:1px solid #f0d785;border-radius:var(--radius);padding:18px 22px;margin-bottom:24px;border-left:3px solid var(--warn);}
+  .mismatch-title{font-family:var(--mono);font-size:11px;color:#7a5b08;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+  .mismatch-text{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-bottom:10px;}
+  .mismatch-list{margin:8px 0 0 0;padding-left:18px;font-size:13px;color:var(--ink-soft);line-height:1.8;}
+
+  /* ───── STATS ───── */
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;}
+  .stat-card{padding:36px 28px;background:var(--paper);display:flex;flex-direction:column;gap:10px;}
+  .stat-pct{font-family:var(--serif);font-size:64px;line-height:1;color:var(--ink);font-weight:400;letter-spacing:-0.03em;}
+  .stat-label{font-size:14px;font-weight:600;color:var(--ink);line-height:1.4;}
+  .stat-detail{font-size:12px;color:var(--ink-muted);font-family:var(--mono);}
+  .stat-copy-row{display:flex;justify-content:flex-end;margin-top:6px;}
+
+  .stats-footnote{font-family:var(--mono);font-size:11px;color:var(--ink-muted);font-style:italic;margin-bottom:18px;letter-spacing:0.02em;}
+
+  .warn-yellow{background:var(--warn-soft);border:1px solid #f0d785;border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;border-left:3px solid var(--warn);}
+  .warn-yellow-title{font-family:var(--mono);font-size:11px;color:#7a5b08;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+  .warn-red{background:var(--danger-soft);border:1px solid #e8b5a8;border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;border-left:3px solid var(--danger);}
+  .warn-red-title{font-family:var(--mono);font-size:11px;color:var(--danger);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
+  .warn-text{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+
+  .transform-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;margin-top:18px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;}
   .transform-inner{flex:1;}
-  .transform-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
-  .transform-stat{font-family:'DM Serif Display',serif;font-size:26px;color:var(--accent);margin-bottom:4px;}
-  .transform-sub{font-size:13px;color:#8a7a68;}
-  .verification-block{margin-top:16px;padding-top:14px;border-top:1px dashed var(--mist);}
-  .verification-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px;}
-  .verification-row{font-family:'DM Mono',monospace;font-size:12px;color:#5a4a38;line-height:1.6;margin-bottom:4px;}
-  .v-label{color:#8a7a68;font-weight:600;}
-  .v-quotes-label{margin-top:6px;margin-bottom:4px;}
-  .verification-quote{font-size:12px;color:#3a2e20;font-style:italic;line-height:1.6;padding:6px 10px;background:var(--cream);border-left:2px solid var(--accent-mid);margin-bottom:4px;border-radius:0 4px 4px 0;}
-  .v-note{font-size:11px;color:#8a7a68;margin-top:6px;margin-bottom:4px;}
-  .alt-stat-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px 24px;margin-bottom:10px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .transform-label{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px;font-weight:600;}
+  .transform-stat{font-family:var(--serif);font-size:28px;color:var(--ink);font-weight:400;line-height:1.25;margin-bottom:6px;letter-spacing:-0.01em;}
+  .transform-sub{font-size:13px;color:var(--ink-muted);font-family:var(--mono);}
+
+  /* Substantiation block — refined as editorial footnote */
+  .verification-block{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft);}
+  .verification-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:12px;}
+  .verification-row{font-family:var(--mono);font-size:12px;color:var(--ink-soft);line-height:1.7;margin-bottom:6px;}
+  .v-label{color:var(--ink-muted);font-weight:600;}
+  .v-quotes-label{margin-top:10px;margin-bottom:6px;}
+  .verification-quote{font-size:13px;color:var(--ink);font-style:italic;line-height:1.65;padding:10px 14px;background:var(--cream);border-left:2px solid var(--accent);margin-bottom:6px;border-radius:0 4px 4px 0;font-family:var(--serif);}
+  .v-note{font-size:11px;color:var(--ink-faint);margin-top:8px;margin-bottom:4px;font-style:italic;}
+
+  .alt-stat-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px 28px;margin-bottom:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;}
   .alt-stat-inner{flex:1;}
-  .alt-stat-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
-  .alt-stat-text{font-family:'DM Serif Display',serif;font-size:22px;color:var(--accent);margin-bottom:6px;line-height:1.3;}
-  .alt-stat-sub{font-size:14px;color:#6b5e4a;line-height:1.5;}
-  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px;}
-  .benefit-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px;}
-  .benefit-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);}
-  .benefit-title{font-size:15px;font-weight:600;color:var(--ink);line-height:1.3;}
-  .benefit-proof{font-size:13px;color:#6b5e4a;line-height:1.6;flex:1;}
-  .benefit-footer{display:flex;justify-content:flex-end;margin-top:10px;}
-  .fold-divider{border:none;border-top:1px dashed var(--mist);margin:24px 0 18px;}
-  .reviews-list{display:flex;flex-direction:column;gap:14px;}
-  .review-card{background:white;border:1px solid var(--mist);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;display:flex;flex-direction:column;gap:10px;text-align:center;align-items:center;}
-  .review-top-row{display:flex;justify-content:space-between;align-items:center;width:100%;margin-bottom:4px;}
-  .review-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.06em;text-transform:uppercase;}
-  .review-orig-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:3px 10px;border-radius:20px;border:1px solid var(--accent-mid);}
-  .review-title{font-size:18px;font-weight:600;color:var(--ink);line-height:1.3;text-align:center;}
-  .review-stars{color:var(--gold);font-size:14px;letter-spacing:3px;text-align:center;}
-  .review-text{font-size:15px;color:#3a2e20;line-height:1.7;font-style:italic;text-align:center;max-width:680px;}
-  .review-author-row{display:flex;align-items:center;justify-content:center;gap:10px;padding-top:14px;border-top:1px solid var(--mist);flex-wrap:wrap;width:100%;}
-  .review-author-name{font-family:'DM Mono',monospace;font-size:13px;color:var(--ink);font-weight:600;}
-  .review-author-label{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;}
-  .review-theme-tag{display:inline-block;font-size:11px;background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:20px;}
-  .review-copy-row{display:flex;justify-content:center;margin-top:8px;}
-  .ing-option{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:12px;}
-  .ing-option-body{flex:1;}
-  .ing-option-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);margin-bottom:14px;letter-spacing:0.06em;text-transform:uppercase;}
-  .ing-headline{font-family:'DM Serif Display',serif;font-size:26px;line-height:1.3;color:var(--ink);margin-bottom:0;}
+  .alt-stat-label{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;font-weight:600;}
+  .alt-stat-text{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;line-height:1.3;margin-bottom:6px;letter-spacing:-0.01em;}
+  .alt-stat-sub{font-size:13px;color:var(--ink-muted);font-family:var(--mono);}
+
+  /* ───── BENEFITS ───── */
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px;}
+  .benefit-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color 0.15s;}
+  .benefit-card:hover{border-color:var(--ink-faint);}
+  .benefit-num{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+  .benefit-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.35;letter-spacing:-0.005em;}
+  .benefit-proof{font-size:13px;color:var(--ink-soft);line-height:1.6;flex:1;}
+  .benefit-footer{display:flex;justify-content:flex-end;margin-top:8px;}
+  .fold-divider{border:none;border-top:1px solid var(--line-soft);margin:24px 0 18px;}
+
+  /* ───── REVIEWS (2x4 grid) ───── */
+  .reviews-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .review-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.15s;}
+  .review-card:hover{border-color:var(--ink-faint);}
+  .review-top-row{display:flex;justify-content:space-between;align-items:center;}
+  .review-num{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+  .review-stars{color:var(--accent);font-size:13px;letter-spacing:3px;}
+  .review-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.4;font-family:var(--sans);letter-spacing:-0.005em;}
+  .review-text{font-size:14px;color:var(--ink);line-height:1.7;font-style:italic;font-family:var(--serif);}
+  .review-author-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid var(--line-soft);flex-wrap:wrap;}
+  .review-author-block{display:flex;flex-direction:column;gap:2px;}
+  .review-author-name{font-family:var(--mono);font-size:12px;color:var(--ink);font-weight:600;}
+  .review-author-label{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:0.04em;}
+  .review-theme-tag{display:inline-block;font-family:var(--mono);font-size:10px;background:var(--accent-soft);color:var(--accent-deep);padding:3px 9px;border-radius:3px;letter-spacing:0.03em;font-weight:500;}
+  .review-copy-row{display:flex;justify-content:flex-end;}
+
+  /* ───── INGREDIENTS ───── */
+  .ing-headline{font-family:var(--serif);font-size:28px;line-height:1.2;color:var(--ink);font-weight:400;letter-spacing:-0.015em;}
   .ing-headline em{font-style:italic;color:var(--accent);}
-  .ing-subline{font-size:14px;color:#6b5e4a;line-height:1.6;margin-top:12px;max-width:480px;}
-  .curated-wrap{background:var(--cream);border:1px solid var(--mist);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border-top:4px solid var(--accent);}
-  .curated-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .curated-card{background:white;border:1px solid var(--mist);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .ing-subline{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:14px;max-width:520px;}
+  .ing-option-num{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:16px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
+  .ing-option-body{flex:1;}
+
+  /* ───── CURATED ───── */
+  .curated-wrap{background:var(--cream-deep);border:1px solid var(--line);border-radius:var(--radius);padding:36px;}
+  .curated-list{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+  .curated-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;transition:border-color 0.15s;}
+  .curated-card:hover{border-color:var(--ink-faint);}
   .curated-body{flex:1;}
-  .curated-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
-  .curated-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:6px;}
-  .curated-subhead{font-size:14px;color:#6b5e4a;line-height:1.6;margin-bottom:4px;}
-  .curated-context{font-size:12px;color:#8a7a68;font-style:italic;font-family:'DM Mono',monospace;}
-  .faq-card{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;box-shadow:var(--shadow);}
-  .faq-card-expect{border:2px solid var(--accent);background:linear-gradient(to right,var(--accent-light) 0%,white 100%);}
-  .faq-expect-pill{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:white;background:var(--accent);padding:4px 12px;border-radius:20px;font-weight:600;width:fit-content;}
-  .faq-header{padding:20px 22px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;}
-  .faq-header:hover{background:#faf8f4;}
-  .faq-rank{font-family:'DM Mono',monospace;font-size:11px;background:var(--accent);color:white;padding:4px 10px;border-radius:20px;flex-shrink:0;margin-top:2px;}
-  .faq-question{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4;flex:1;}
-  .faq-toggle{font-size:16px;color:#8a7a68;flex-shrink:0;transition:transform 0.2s;}
+  .curated-num{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;font-weight:500;}
+  .curated-title{font-size:18px;font-weight:600;color:var(--ink);margin-bottom:8px;font-family:var(--serif);letter-spacing:-0.01em;line-height:1.3;}
+  .curated-subhead{font-size:14px;color:var(--ink-soft);line-height:1.55;margin-bottom:6px;}
+  .curated-context{font-size:11px;color:var(--ink-faint);font-style:italic;font-family:var(--mono);margin-top:8px;line-height:1.5;}
+  .curated-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:10px;letter-spacing:0.04em;}
+  .curated-meta.over{color:var(--danger);}
+
+  /* ───── FAQs ───── */
+  .faq-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color 0.15s;}
+  .faq-card:hover{border-color:var(--ink-faint);}
+  .faq-card-expect{border:1px solid var(--accent);background:var(--accent-faint);}
+  .faq-expect-pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:white;background:var(--accent);padding:3px 10px;border-radius:3px;font-weight:600;width:fit-content;margin-bottom:6px;}
+  .faq-header{padding:20px 24px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;transition:background 0.15s;}
+  .faq-header:hover{background:var(--cream);}
+  .faq-card-expect .faq-header:hover{background:var(--accent-soft);}
+  .faq-rank{font-family:var(--mono);font-size:10px;background:var(--cream-deep);color:var(--ink-muted);padding:4px 9px;border-radius:3px;flex-shrink:0;margin-top:2px;font-weight:600;letter-spacing:0.04em;}
+  .faq-card-expect .faq-rank{background:var(--accent);color:white;}
+  .faq-question{font-size:15px;font-weight:600;color:var(--ink);line-height:1.45;flex:1;letter-spacing:-0.005em;}
+  .faq-toggle{font-size:14px;color:var(--ink-faint);flex-shrink:0;transition:transform 0.2s;margin-top:4px;}
   .faq-toggle.open{transform:rotate(180deg);}
-  .faq-body{padding:18px 22px 20px;border-top:1px solid var(--mist);display:none;}
+  .faq-body{padding:20px 24px 22px;border-top:1px solid var(--line-soft);display:none;background:var(--cream);}
   .faq-body.open{display:block;}
-  .faq-source-label{font-family:'DM Mono',monospace;font-size:12px;color:var(--rust);margin-bottom:6px;}
-  .faq-source-quote{font-size:14px;color:#5a4a38;font-style:italic;line-height:1.6;margin-bottom:14px;}
-  .faq-answer-wrap{background:var(--cream);border-radius:8px;padding:16px 18px;margin-bottom:10px;}
-  .faq-answer-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:10px;}
-  .faq-answer-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .faq-source-label{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-bottom:6px;letter-spacing:0.04em;}
+  .faq-source-quote{font-size:14px;color:var(--ink-soft);font-style:italic;line-height:1.6;margin-bottom:16px;font-family:var(--serif);}
+  .faq-answer-wrap{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:12px;}
+  .faq-answer-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;font-weight:600;}
+  .faq-answer-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;}
   .faq-answer-text{font-size:14px;color:var(--ink);line-height:1.7;flex:1;}
-  .faq-note{font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;}
-  .faq-note span{color:var(--accent-mid);}
-  .ref-divider{border:none;border-top:2px dashed var(--mist);margin:56px 0 36px;}
-  .ref-label-txt{font-family:'DM Mono',monospace;font-size:12px;color:#8a8aa8;margin-bottom:36px;letter-spacing:0.06em;text-transform:uppercase;}
-  .sentiment-wrap{background:white;border:1px solid rgba(232,226,217,0.6);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);}
-  .sentiment-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px;}
-  .sentiment-stat{background:var(--accent-light);border-radius:8px;padding:24px;text-align:center;}
-  .sentiment-stat-pct{font-family:'DM Serif Display',serif;font-size:44px;line-height:1;color:var(--ink);margin-bottom:6px;}
-  .sentiment-stat-label{font-size:14px;color:#6b5e4a;}
-  .sentiment-bar{height:8px;background:var(--mist);border-radius:100px;overflow:hidden;display:flex;}
+  .faq-answer-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:10px;letter-spacing:0.04em;}
+  .faq-answer-meta.over{color:var(--danger);}
+  .faq-note{font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:0.02em;}
+  .faq-note span{color:var(--accent);}
+
+  /* ───── REFERENCE ───── */
+  .ref-divider{border:none;border-top:1px solid var(--line);margin:80px 0 48px;}
+  .ref-label-txt{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:40px;letter-spacing:0.1em;text-transform:uppercase;}
+
+  .sentiment-wrap{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:36px;}
+  .sentiment-stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+  .sentiment-stat{background:var(--cream);border-radius:var(--radius);padding:28px;text-align:center;}
+  .sentiment-stat-pct{font-family:var(--serif);font-size:46px;line-height:1;color:var(--ink);font-weight:400;margin-bottom:8px;letter-spacing:-0.02em;}
+  .sentiment-stat-label{font-size:13px;color:var(--ink-muted);font-family:var(--mono);letter-spacing:0.04em;}
+  .sentiment-bar{height:6px;background:var(--line);border-radius:100px;overflow:hidden;display:flex;}
   .sentiment-fill{height:100%;transition:width 1s ease;}
   .s-positive{background:var(--accent);}
-  .s-neutral{background:#8a7a68;}
-  .s-negative{background:var(--rust);}
-  .pain-card{border-left:4px solid var(--accent);background:white;padding:20px 24px;margin-bottom:10px;border-radius:0 var(--radius) var(--radius) 0;box-shadow:var(--shadow);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+  .s-neutral{background:var(--ink-faint);}
+  .s-negative{background:var(--danger);}
+  .sentiment-note{font-family:var(--mono);font-size:11px;color:var(--ink-muted);font-style:italic;margin-top:16px;letter-spacing:0.02em;}
+
+  .pain-card{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--accent);padding:22px 26px;margin-bottom:10px;border-radius:0 var(--radius) var(--radius) 0;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;}
   .pain-body{flex:1;}
-  .pain-rank{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent-mid);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px;}
-  .pain-label-txt{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:4px;}
-  .pain-language{font-size:14px;color:#5a4a38;line-height:1.7;font-style:italic;}
-  .error-box{display:none;background:#fff5f3;border:1px solid #f5c6bb;border-radius:var(--radius);padding:22px 26px;font-size:15px;color:var(--rust);margin-bottom:24px;}
+  .pain-rank{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;font-weight:600;}
+  .pain-label-txt{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-0.005em;}
+  .pain-language{font-size:14px;color:var(--ink-soft);line-height:1.7;font-style:italic;font-family:var(--serif);}
+
+  /* ───── ERROR / EXPORT ───── */
+  .error-box{display:none;background:var(--danger-soft);border:1px solid #e8b5a8;border-radius:var(--radius);padding:22px 26px;font-size:15px;color:var(--danger);margin-bottom:24px;}
   .error-box.active{display:block;}
-  .export-bar{display:flex;gap:12px;padding-top:24px;border-top:1px solid var(--mist);}
-  .btn-export{padding:12px 28px;background:white;border:1px solid var(--mist);color:var(--ink);font-size:14px;border-radius:8px;cursor:pointer;transition:all 0.2s;font-family:'Instrument Sans',sans-serif;box-shadow:var(--shadow);}
-  .btn-export:hover{border-color:var(--accent);color:var(--accent);}
-  .date-range-badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);border:1px solid var(--mist);border-radius:20px;padding:5px 14px;font-family:'DM Mono',monospace;font-size:12px;color:var(--accent-mid);margin-top:8px;}
-  @media(max-width:900px){.choice-list,.curated-list{grid-template-columns:1fr;}.review-card{grid-template-columns:1fr;}.with-wiki-source{grid-template-columns:1fr;}.wiki-source-col{border-left:none;border-top:1px solid rgba(232,226,217,0.8);}}
-  @media(max-width:700px){.ra-controls,.stats-grid,.benefits-grid,.sentiment-stats-row{grid-template-columns:1fr 1fr;}.settings-grid{grid-template-columns:1fr 1fr;}}
+  .export-bar{display:flex;gap:12px;padding-top:36px;border-top:1px solid var(--line);margin-top:48px;}
+  .btn-export{padding:13px 30px;background:var(--paper);border:1px solid var(--line);color:var(--ink);font-size:14px;border-radius:var(--radius);cursor:pointer;transition:all 0.15s;font-family:var(--sans);font-weight:500;}
+  .btn-export:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-faint);}
+
+  /* ───── RESPONSIVE ───── */
+  @media(max-width:900px){.choice-list,.curated-list,.reviews-list,.benefits-grid{grid-template-columns:1fr;}.with-wiki-source{grid-template-columns:1fr;}.wiki-source-col{border-left:none;border-top:1px solid var(--line);}.hero-title{font-size:42px;}.report-title{font-size:36px;}.section-heading{font-size:28px;}}
+  @media(max-width:700px){.stats-grid,.sentiment-stats-row{grid-template-columns:1fr 1fr;}.settings-grid{grid-template-columns:1fr 1fr;}.wrap{padding:40px 24px 80px;}}
 </style>
 
-<div class="review-analyzer-wrapper" style="max-width:1100px;margin:0 auto;padding:52px 32px;">
-  <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px;">Global Healing · PDP Intelligence</div>
-  <h1 style="font-family:'DM Serif Display',serif;font-size:52px;line-height:1.1;margin-bottom:12px;color:var(--ink);">Turn reviews into<br><em style="color:var(--accent);">conversion copy.</em></h1>
-  <p style="font-size:16px;color:#6b5e4a;margin-bottom:48px;max-width:560px;line-height:1.7;">Upload your Yotpo CSV. Paste the product wiki. Get PDP-ready copy for every section — grounded in real customer language.</p>
+<div class="wrap">
+  <div class="eyebrow">Global Healing · PDP Intelligence</div>
+  <h1 class="hero-title">Turn reviews into<br><em>conversion copy.</em></h1>
+  <p class="hero-sub">Upload your Yotpo CSV. Paste the product wiki. Get a PDP-ready research deliverable — grounded in real customer language.</p>
 
-  <div class="upload-zone" id="uploadZone">
-    <input type="file" id="csvFile" accept=".csv">
-    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12V4m0 0L8 8m4-4l4 4"/></svg>
-    <div class="upload-title">Drop your Yotpo CSV here</div>
-    <div class="upload-sub">or click to browse — .csv files only</div>
-  </div>
-
-  <div class="file-loaded" id="fileLoaded" style="display:none">
-    <div class="dot"></div>
-    <div><strong id="fileName">file.csv</strong> loaded — <span id="reviewCount">0</span> reviews across <span id="productCount">0</span> products</div>
-  </div>
-
-  <div class="ra-controls">
-    <div><span class="ra-label">Select Product</span><select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select></div>
-    <div style="display:flex;align-items:flex-end;"><button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button></div>
-  </div>
-
-  <div style="margin-bottom:16px;">
-    <span class="collapsible-toggle" onclick="togglePanel('wikiPanel','wikiArrow')">Product Wiki <span style="color:var(--rust);font-size:11px;font-family:'DM Mono',monospace;letter-spacing:0.06em;"> — REQUIRED</span> <span class="collapsible-arrow open" id="wikiArrow">▾</span></span>
-    <div class="collapsible-panel open" id="wikiPanel">
-      <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Drives Made With Purpose benefits and Ingredients section."></textarea>
-      <div class="panel-note">Plain text only. Wiki content drives Made With Purpose and Ingredients. The exact wiki sentences that informed each card will be shown beside it.</div>
+  <!-- STEP 1: Upload CSV -->
+  <div class="step-block">
+    <div class="step-num">Step 01</div>
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="csvFile" accept=".csv">
+      <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1M12 12V4m0 0L8 8m4-4l4 4"/></svg>
+      <div class="upload-title">Drop your Yotpo CSV here</div>
+      <div class="upload-sub">or click to browse — .csv files only</div>
+    </div>
+    <div class="file-loaded" id="fileLoaded" style="display:none;margin-top:16px;">
+      <div class="dot"></div>
+      <div><strong id="fileName">file.csv</strong> loaded — <span id="reviewCount">0</span> reviews across <span id="productCount">0</span> products</div>
     </div>
   </div>
 
-  <div style="margin-bottom:40px;">
+  <!-- STEP 2: Select Product -->
+  <div class="step-block">
+    <div class="step-num">Step 02</div>
+    <label class="step-label" for="productSelect">Select Product</label>
+    <select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select>
+  </div>
+
+  <!-- STEP 3: Wiki -->
+  <div class="step-block">
+    <div class="step-num">Step 03</div>
+    <label class="step-label" for="wikiText">Product Wiki <span class="required-tag">Required</span></label>
+    <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Drives Made With Purpose benefits and Ingredients section."></textarea>
+    <div class="field-help">Plain text only. Wiki content drives Made With Purpose and Ingredients. The exact wiki sentences that informed each card will be shown beside it.</div>
+  </div>
+
+  <!-- Output Settings (collapsed) -->
+  <div class="step-block">
     <span class="collapsible-toggle" onclick="togglePanel('settingsPanel','settingsArrow')">Output settings <span class="collapsible-arrow" id="settingsArrow">▾</span></span>
     <div class="collapsible-panel" id="settingsPanel">
       <div class="settings-panel-inner">
         <div class="settings-grid">
           <div class="settings-field"><label>About — max chars</label><input type="number" id="set_about_chars" value="205" min="100" max="300"></div>
-          <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="73" min="40" max="150"></div>
-          <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="200" min="80" max="400"></div>
+          <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="140" min="40" max="200"></div>
+          <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="250" min="80" max="400"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
+          <div class="settings-field"><label>Curated subhead — max chars</label><input type="number" id="set_curated_chars" value="80" min="40" max="200"></div>
+          <div class="settings-field"><label>FAQ answer — max chars</label><input type="number" id="set_faq_chars" value="150" min="80" max="400"></div>
           <div class="settings-field"><label>Stat label — max chars</label><input type="number" id="set_stat_chars" value="20" min="10" max="40"></div>
         </div>
-        <div class="panel-note" style="margin-top:16px;">Defaults are set. Change before running.</div>
       </div>
     </div>
+  </div>
+
+  <!-- STEP 4: Analyze button -->
+  <div class="step-block">
+    <div class="step-num">Step 04</div>
+    <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button>
   </div>
 
   <div class="error-box" id="errorBox"></div>
 
+  <!-- LOADING -->
   <div class="ra-loading" id="raLoading">
     <div class="loading-ring"></div>
-    <div class="loading-text">Analyzing <span id="loadingCount">0</span> reviews with Claude AI…</div>
-    <div style="margin-top:16px;margin-bottom:16px;">
-      <div style="background:var(--mist);border-radius:100px;height:4px;width:320px;margin:0 auto 10px;overflow:hidden;">
-        <div id="loadingBar" style="height:100%;width:0%;background:var(--accent);border-radius:100px;transition:width 0.8s ease;"></div>
-      </div>
-      <div style="font-family:'DM Mono',monospace;font-size:14px;color:var(--accent-mid);" id="loadingTimer">0s elapsed</div>
-    </div>
-    <div style="margin-top:4px">
-      <div class="loading-step" id="step1">↳ Sorting and parsing recent reviews</div>
-      <div class="loading-step" id="step2">↳ Mining pain points and customer language</div>
-      <div class="loading-step" id="step3">↳ Calculating outcome statistics</div>
-      <div class="loading-step" id="step4">↳ Writing PDP copy for all sections</div>
-    </div>
+    <div class="loading-text">Analyzing reviews</div>
+    <div class="loading-text-meta"><span id="loadingCount">0</span> of <span id="loadingTotal">0</span> most recent reviews</div>
+    <div class="loading-bar-track"><div id="loadingBar" class="loading-bar"></div></div>
+    <div class="loading-timer" id="loadingTimer">0s elapsed</div>
+    <div class="loading-step" id="step1">↳ Sorting and parsing recent reviews</div>
+    <div class="loading-step" id="step2">↳ Mining pain points and customer language</div>
+    <div class="loading-step" id="step3">↳ Writing PDP copy for all sections</div>
+    <div class="loading-step" id="step4">↳ Verifying limits and rewriting if needed</div>
   </div>
 
+  <!-- RESULTS -->
   <div class="ra-results" id="raResults">
-    <div class="results-header">
-      <div>
-        <div class="results-title" id="resultsTitle">Product</div>
-        <div class="date-range-badge" id="dateRangeBadge" style="display:none">📅 <span id="dateRangeText"></span></div>
+    <div class="report-masthead">
+      <div class="report-eyebrow">Review Analysis Report</div>
+      <h1 class="report-title" id="resultsTitle">Product</h1>
+      <div class="report-meta">
+        <div class="report-meta-item" id="dateRangeMetaItem" style="display:none">📅 <span id="dateRangeText"></span></div>
+        <div class="report-meta-item"><span id="resultsMetaText"></span></div>
       </div>
-      <div class="results-meta" id="resultsMeta"></div>
     </div>
 
+    <!-- ABOUT -->
     <div class="ra-section" id="sec-about">
-      <div class="section-label">About</div>
-      <div class="section-heading">About</div>
-      <div class="jane-note">5 options — each states the condition precisely, then names the ingredient mechanism. Max 205 characters. Pain point, benefit, and differentiator tagged on each card.</div>
+      <div class="section-eyebrow">Section 01</div>
+      <h2 class="section-heading">About</h2>
+      <p class="section-deck">Customer-facing copy options. Each leads with the condition as customers feel it, then names the strongest differentiator for the product.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howAbout')">How this section works <span class="how-arrow" id="howAboutArrow">▾</span></button>
+        <div class="how-content" id="howAbout">
+          <ul>
+            <li>5 About copy options, each tagged with pain point, benefit, and differentiator</li>
+            <li>Each option leads with the customer condition, then names the strongest differentiator (mechanism, form, sourcing, bioavailability, combination, or use case)</li>
+            <li>Differentiation framework picks the best angle per option using wiki + reviews — not forced to ingredient mechanism</li>
+            <li>"Why this differentiates" reasoning shown under each card</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Hard limit: 205 characters per option (auto-rewritten if over)</li>
+              <li>No question marks, casual openers, metaphors, or banned wellness terms</li>
+              <li>Zero health claims — no diagnose, treat, cure, prevent, reverse, or heal language</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="pain-ref-panel">
+        <div class="pain-ref-header" onclick="togglePainRef()">
+          <div class="pain-ref-label">Top pain points from reviews (reference)</div>
+          <span class="pain-ref-toggle" id="painRefToggle">▾</span>
+        </div>
+        <div class="pain-ref-body" id="painRefBody"></div>
+      </div>
       <div class="choice-list" id="aboutList"></div>
     </div>
 
+    <!-- MWP -->
     <div class="ra-section" id="sec-mwp">
-      <div class="section-label">Made With Purpose</div>
-      <div class="section-heading">Made With Purpose (Benefits)</div>
-      <div class="jane-note">5 benefit options structured as 3 conversion-angle versions of the existing v1 PDP benefits + 2 fresh angles drawn from the wiki. Same benefits Jane already wrote, viewed through a conversion lens. Title 2–3 words, description 73 chars max. Pick 3. Source shown beside each card.</div>
-      <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">⚠ No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki + reviews only. Verify alignment with brand voice.</div></div>
+      <div class="section-eyebrow">Section 02</div>
+      <h2 class="section-heading">Made With Purpose</h2>
+      <p class="section-deck">Benefit options structured as conversion-angle rewrites of the v1 PDP plus fresh angles from the wiki. Source attribution shown on every card.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howMwp')">How this section works <span class="how-arrow" id="howMwpArrow">▾</span></button>
+        <div class="how-content" id="howMwp">
+          <ul>
+            <li>5 benefit options — 3 conversion-angle rewrites of v1 PDP benefits + 2 fresh angles from wiki</li>
+            <li>Side-by-side wiki vs v1 PDP comparison shown above the cards (click to expand details)</li>
+            <li>Mismatch callout flags when wiki and v1 don't align — review wiki-sourced options carefully since wiki may include non-customer-facing content</li>
+            <li>Pick 3 to ship on the PDP</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Title: 2-4 words, prefer 3</li>
+              <li>Description: 140 characters max (auto-rewritten if over)</li>
+              <li>Source attribution shown on every card — v1 PDP quote (if applicable) + wiki quote</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="sourceCompareWrap" class="source-compare-wrap" style="display:none">
+        <div class="source-compare-header" onclick="toggleSourceCompare()">
+          <div class="source-compare-title">Source comparison — Wiki vs v1 PDP</div>
+          <span class="source-compare-toggle" id="sourceCompareToggle">▾</span>
+        </div>
+        <div class="source-compare-body" id="sourceCompareBody">
+          <table class="source-compare-table">
+            <thead><tr><th>Wiki Health Benefits</th><th>v1 PDP Benefits</th></tr></thead>
+            <tbody id="sourceCompareTable"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="mismatchCallout" style="display:none" class="mismatch-callout"></div>
+      <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki only — all labeled as wiki-sourced. v1_pdp_source will be empty on all cards.</div></div>
       <div id="mwpList"></div>
-      <div style="margin-top:56px;padding-top:36px;border-top:1px solid var(--mist);">
-        <div class="section-label" style="color:var(--sage);">Key Benefits</div>
-        <div class="section-heading" style="font-size:26px;margin-top:12px;margin-bottom:20px;">Key Benefits</div>
+      <div style="margin-top:64px;padding-top:48px;border-top:1px solid var(--line);">
+        <div class="section-eyebrow" style="color:var(--success);">Key Benefits</div>
+        <h3 class="section-heading" style="font-size:26px;">Key Benefits</h3>
+        <p class="section-deck">Benefits derived from review patterns — separate from MWP options above.</p>
         <div class="benefits-grid" id="reviewBenefitsGrid"></div>
         <hr class="fold-divider">
         <div class="benefits-grid" id="extraBenefitsGrid"></div>
       </div>
     </div>
 
+    <!-- STATS -->
     <div class="ra-section" id="sec-stats">
-      <div class="section-label">Real Customers</div>
-      <div class="section-heading">Real Customers. Real Results.</div>
-      <div class="section-sub">Outcome stats from review language. <strong>Stats Bar Option A (3-point percentages) is for products with a clinical study only.</strong> All other products use the transformation timeline below (Option B) — substantiation data shown beside each claim for the master sheet.</div>
-      <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">✕ Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
-      <div id="statsWarnYellow" style="display:none" class="warn-yellow"><div class="warn-yellow-title">⚠ Consider using transformation timeline instead</div><div class="warn-text" id="statsWarnYellowText"></div></div>
+      <div class="section-eyebrow">Section 03</div>
+      <h2 class="section-heading">Real Customers. Real Results.</h2>
+      <p class="section-deck">Outcome statistics mined from review language, with substantiation data shown beside every claim.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howStats')">How this section works <span class="how-arrow" id="howStatsArrow">▾</span></button>
+        <div class="how-content" id="howStats">
+          <ul>
+            <li>Outcome statistics mined from review language (not star ratings)</li>
+            <li>Substantiation data — mention count, keywords, sample quotes — shown beside every claim</li>
+            <li>Transformation timeline always included as alternative to the percentage grid</li>
+            <li>Alternative "X in Y" framing options also provided when supported by reviews</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Percentage grid (Option A) for products with clinical study only — all others use timeline (Option B)</li>
+              <li>Stat label: 20 characters max</li>
+              <li>Mention count = reviews containing BOTH a timeframe phrase AND an outcome phrase</li>
+              <li>No disease treatment claims</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
+      <div id="statsWarnYellow" style="display:none" class="warn-yellow"><div class="warn-yellow-title">Consider using transformation timeline instead</div><div class="warn-text" id="statsWarnYellowText"></div></div>
       <div class="stats-grid" id="statsGrid"></div>
       <div class="stats-footnote" id="statsFootnote"></div>
       <div id="altStatsWrap" style="display:none">
-        <div style="font-family:'DM Mono',monospace;font-size:12px;color:#8a7a68;text-transform:uppercase;letter-spacing:0.06em;margin:16px 0 12px;">Alternative "X in Y" Framing</div>
+        <div style="font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;margin:24px 0 14px;font-weight:600;">Alternative "X in Y" Framing</div>
         <div id="altStatsList"></div>
       </div>
       <div id="transformCard" style="display:none" class="transform-card">
@@ -310,48 +554,130 @@
       </div>
     </div>
 
+    <!-- REVIEWS -->
     <div class="ra-section" id="sec-reviews">
-      <div class="section-label">Reviews</div>
-      <div class="section-heading">Reviews</div>
-      <div class="jane-note">8 verbatim reviews from 4–5 star ratings with strong, articulate language. AI-generated title only — review text is unchanged from the customer. Named authors prioritized.</div>
+      <div class="section-eyebrow">Section 04</div>
+      <h2 class="section-heading">Reviews</h2>
+      <p class="section-deck">Verbatim reviews selected for articulate language and varied themes. Original text preserved exactly.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howReviews')">How this section works <span class="how-arrow" id="howReviewsArrow">▾</span></button>
+        <div class="how-content" id="howReviews">
+          <ul>
+            <li>8 verbatim reviews from 4-5 star ratings with strong, articulate language</li>
+            <li>Selected to cover varied benefits and themes — not 8 versions of the same story</li>
+            <li>AI-generated title only — review text is unchanged from the customer</li>
+            <li>Named authors prioritized over anonymous "Verified Buyer"</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Review text: 250 characters max</li>
+              <li>Layout: 2 columns × 4 rows</li>
+              <li>Original text preserved verbatim — no rephrasing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div class="reviews-list" id="reviewsList"></div>
     </div>
 
+    <!-- INGREDIENTS -->
     <div class="ra-section" id="sec-ingredients">
-      <div class="section-label">Ingredients</div>
-      <div class="section-heading">Ingredients</div>
-      <div class="jane-note">5 combined editorial headline options for the full ingredient story. Each option has a keyword in italics. The wiki sentence that informed it is shown beside each option. Pick one and edit for brand voice.</div>
+      <div class="section-eyebrow">Section 05</div>
+      <h2 class="section-heading">Ingredients</h2>
+      <p class="section-deck">Editorial headline options treating all ingredients as one combined story.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howIng')">How this section works <span class="how-arrow" id="howIngArrow">▾</span></button>
+        <div class="how-content" id="howIng">
+          <ul>
+            <li>5 editorial headline options treating all ingredients as one combined story</li>
+            <li>Each option has a single italicized keyword</li>
+            <li>Wiki source sentence shown beside each option</li>
+            <li>Pick one and edit for brand voice</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Subline: 120 characters max (auto-rewritten if over)</li>
+              <li>No asterisks in headline</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div id="ingredientsList"></div>
     </div>
 
-    <div class="curated-wrap ra-section" id="sec-curated">
-      <div class="section-label">Curate Your Collection</div>
-      <div class="section-heading">Curate Your Collection</div>
-      <div class="jane-note">3 heading + subhead options. Subhead max 190 characters. Language must be vague about specific products (we don't know which products will be paired) — focus on customer journey themes, not product names or formats.</div>
-      <div class="curated-list" id="curatedList"></div>
+    <!-- CURATED -->
+    <div class="ra-section" id="sec-curated">
+      <div class="section-eyebrow">Section 06</div>
+      <h2 class="section-heading">Curate Your Collection</h2>
+      <p class="section-deck">Heading and subhead options for the section that introduces companion products.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howCur')">How this section works <span class="how-arrow" id="howCurArrow">▾</span></button>
+        <div class="how-content" id="howCur">
+          <ul>
+            <li>3 heading + subhead options for the section that introduces ~3 recommended products</li>
+            <li>Pulls pairing logic from wiki's Recommended Pairings section when present</li>
+            <li>Inferred from review use cases when wiki has no pairings section (flagged)</li>
+            <li>Pick one and edit for brand voice</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Heading: 3-4 words</li>
+              <li>Subhead: 80 characters max (auto-rewritten if over)</li>
+              <li>Refers to companion products generically — doesn't name specific products</li>
+              <li>No disease claims</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="curated-wrap">
+        <div class="curated-list" id="curatedList"></div>
+      </div>
     </div>
 
+    <!-- FAQs -->
     <div class="ra-section" id="sec-faqs">
-      <div class="section-label">FAQs</div>
-      <div class="section-heading">FAQs</div>
-      <div class="jane-note">8 questions ranked by purchase-blocking impact. FAQ #1 is always a "What to Expect" question that proactively sets expectations — highlighted in purple. Answers for dosing/instructions are sourced from the wiki; if the wiki doesn't cover something, the FAQ is flagged as needing manual answer instead of fabricated.</div>
+      <div class="section-eyebrow">Section 07</div>
+      <h2 class="section-heading">FAQs</h2>
+      <p class="section-deck">Questions ranked by purchase-blocking impact, with a proactive "What to Expect" highlighted at the top.</p>
+      <div class="how-this-works">
+        <button class="how-toggle" onclick="toggleHow('howFaq')">How this section works <span class="how-arrow" id="howFaqArrow">▾</span></button>
+        <div class="how-content" id="howFaq">
+          <ul>
+            <li>8 questions ranked by purchase-blocking impact</li>
+            <li>FAQ #1 is always a "What to Expect" question (highlighted) with substantiation block — review quotes for onset timing and temporary effects</li>
+            <li>Dosing/instructions sourced from the wiki — never invented</li>
+            <li>FAQs flagged as "needs manual answer" when wiki doesn't cover the topic</li>
+          </ul>
+          <div class="how-constraints">
+            <div class="how-constraints-label">Constraints</div>
+            <ul>
+              <li>Answer: 150 characters max (auto-rewritten if over)</li>
+              <li>Wiki is source of truth for dosing — exact dose, timing, with/without food</li>
+              <li>No disease treatment claims</li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <div id="faqCards"></div>
     </div>
 
-    <hr class="ref-divider" id="sec-ref">
-    <div class="ref-label-txt">↓ Reference data — not mapped to PDP sections</div>
+    <hr class="ref-divider">
+    <div class="ref-label-txt">Reference data — not mapped to PDP sections</div>
 
     <div class="ra-section">
-      <div class="section-label">Reference — Pain Points</div>
-      <div class="section-heading">Pain Points</div>
-      <div class="section-sub">Top pain points from review language — used to inform the About copy options above.</div>
+      <div class="section-eyebrow">Reference</div>
+      <h2 class="section-heading">Pain Points</h2>
+      <p class="section-deck">Top pain points from review language — used to inform the About copy options above.</p>
       <div id="painCards"></div>
     </div>
 
     <div class="ra-section">
-      <div class="section-label">Reference — Sentiment</div>
-      <div class="section-heading">Sentiment</div>
-      <div class="section-sub">Tone-based analysis from review language — not star ratings.</div>
+      <div class="section-eyebrow">Reference</div>
+      <h2 class="section-heading">Sentiment</h2>
+      <p class="section-deck">Tone-based analysis from review language — not star ratings.</p>
       <div class="sentiment-wrap">
         <div class="sentiment-stats-row">
           <div class="sentiment-stat"><div class="sentiment-stat-pct" id="posNum">—</div><div class="sentiment-stat-label">Positive tone</div></div>
@@ -363,6 +689,7 @@
           <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
           <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
         </div>
+        <div class="sentiment-note">Based on tone analysis of review language, not star ratings. Percentages reflect how customers describe their experience.</div>
       </div>
     </div>
 
@@ -378,7 +705,8 @@
 var allReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
 var lastV1PdpBenefits=null;
-var DEFAULTS={about_chars:205,mwp_chars:73,review_chars:200,ing_chars:120,stat_chars:20,faq_count:8};
+var SAMPLE_SIZE=300;
+var DEFAULTS={about_chars:205,mwp_chars:140,review_chars:250,ing_chars:120,curated_chars:80,faq_chars:150,stat_chars:20,faq_count:8};
 
 function getSettings(){
   return {
@@ -386,12 +714,18 @@ function getSettings(){
     mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||DEFAULTS.mwp_chars,
     review_chars:parseInt(document.getElementById('set_review_chars').value)||DEFAULTS.review_chars,
     ing_chars:parseInt(document.getElementById('set_ing_chars').value)||DEFAULTS.ing_chars,
+    curated_chars:parseInt(document.getElementById('set_curated_chars').value)||DEFAULTS.curated_chars,
+    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||DEFAULTS.faq_chars,
     stat_chars:parseInt(document.getElementById('set_stat_chars').value)||DEFAULTS.stat_chars,
     faq_count:8
   };
 }
 
 function togglePanel(pId,aId){var p=document.getElementById(pId),a=document.getElementById(aId);p.classList.toggle('open');a.classList.toggle('open');}
+function toggleHow(id){var el=document.getElementById(id);el.classList.toggle('open');var arrowMap={howAbout:'howAboutArrow',howMwp:'howMwpArrow',howStats:'howStatsArrow',howReviews:'howReviewsArrow',howIng:'howIngArrow',howCur:'howCurArrow',howFaq:'howFaqArrow'};var arrowId=arrowMap[id];if(arrowId){var arrow=document.getElementById(arrowId);if(arrow)arrow.classList.toggle('open');}}
+function togglePainRef(){var b=document.getElementById('painRefBody'),t=document.getElementById('painRefToggle');b.classList.toggle('open');t.classList.toggle('open');}
+function toggleSourceCompare(){var b=document.getElementById('sourceCompareBody'),t=document.getElementById('sourceCompareToggle');b.style.display=b.style.display==='block'?'none':'block';t.classList.toggle('open');}
+function toggleSourceRow(rowId){var r=document.getElementById(rowId);if(r)r.classList.toggle('open');}
 
 document.getElementById('uploadZone').addEventListener('dragover',function(e){e.preventDefault();this.classList.add('drag-over');});
 document.getElementById('uploadZone').addEventListener('dragleave',function(){this.classList.remove('drag-over');});
@@ -426,7 +760,6 @@ function getReviewText(r){var keys=['review_content','Review Content','body','Bo
 
 var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives','inner leaf only','freeze-dried potency','freeze dried','purity-tested','purity tested','made in the usa','cgmp','third-party tested','sourced','source &','source and quality','backed by research'];
 
-// Product handle map for live PDP fetching
 var PRODUCT_HANDLES={
   'Acid Reflux Relief':'acid-reflux-relief-supplement','Aloe Vera':'aloe-vera-capsules','Ashwagandha':'organic-ashwagandha',
   'Berberine':'berberine','Bio-Active Copper':'bio-active-copper-supplement','Biophotonic Liquid Gold':'biophotonic-liquid-gold',
@@ -456,85 +789,135 @@ var PRODUCT_HANDLES={
 
 function findHandle(productName){
   if(PRODUCT_HANDLES[productName])return PRODUCT_HANDLES[productName];
-  // Fuzzy match - strip trademarks and try
   var clean=productName.replace(/[®™©]/g,'').trim();
-  for(var key in PRODUCT_HANDLES){
-    if(key.replace(/[®™©]/g,'').trim()===clean)return PRODUCT_HANDLES[key];
-  }
+  for(var key in PRODUCT_HANDLES){if(key.replace(/[®™©]/g,'').trim()===clean)return PRODUCT_HANDLES[key];}
   return null;
 }
 
 async function fetchV1PdpBenefits(productName){
   var handle=findHandle(productName);
   if(!handle)return null;
-  // Use Worker endpoint to bypass CORS
   var url='https://ecom-claude-proxy.globalhealing.workers.dev/fetch-pdp?handle='+encodeURIComponent(handle);
   try{
     var resp=await fetch(url);
     if(!resp.ok)return null;
     var data=await resp.json();
     if(data.benefits&&data.benefits.length)return data.benefits;
-    if(data.error){console.log('PDP fetch error:',data.error);return null;}
-    // Fallback: if Worker returned raw HTML, parse it
-    var html=data.html||'';
-    if(!html)return null;
-    // Find "The Benefits" section
-    var benefitsMatch=html.match(/The Benefits[\s\S]*?(?=Made With|Uniquely Made|Ingredients|The Impact|Curate|<\/section)/i);
-    if(!benefitsMatch)return null;
-    var sectionHtml=benefitsMatch[0];
-    // Extract accordion items - look for headings + paragraphs
-    var benefits=[];
-    var itemRegex=/<h[2-4][^>]*>([^<]+)<\/h[2-4]>\s*<p[^>]*>([^<]+)<\/p>/gi;
-    var match;
-    while((match=itemRegex.exec(sectionHtml))!==null&&benefits.length<5){
-      var title=match[1].trim().replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
-      var desc=match[2].trim().replace(/&amp;/g,'&').replace(/&#39;/g,"'").replace(/&quot;/g,'"');
-      if(title&&desc&&title.length<60&&desc.length>30)benefits.push({title:title,description:desc});
-    }
-    // Fallback: look for **### pattern from markdown-style scraping
-    if(benefits.length===0){
-      var mdRegex=/\*\*###\s*([^*]+?)\*\*\s*\n+([^*\n][^\n]*(?:\n(?!\*\*)[^\n]*)*)/g;
-      while((match=mdRegex.exec(sectionHtml))!==null&&benefits.length<5){
-        var t=match[1].trim();var d=match[2].trim();
-        if(t&&d)benefits.push({title:t,description:d});
-      }
-    }
-    return benefits.length?benefits:null;
-  }catch(e){
-    console.log('V1 PDP fetch failed (likely CORS):',e.message);
     return null;
-  }
+  }catch(e){return null;}
 }
 
 function buildPrompt(product,count,wikiSection,s,reviewTexts){
   var schema='{"sentiment":{"positive":0,"neutral":0,"negative":0},'
     +'"pain_points":[{"rank":1,"label":"","customer_language":"","copy_hook":"","main_benefit":""}],'
-    +'"about_options":[{"num":1,"text":"max 205 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label"}],'
-    +'"made_with_purpose":[{"num":1,"title":"2-3 words","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable","source_type":"v1_pdp or wiki"}],'
+    +'"about_options":[{"num":1,"text":"max 205 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label","differentiator_type":"Mechanism|Form|Sourcing|Bioavailability|Combination|Use Case","why_this_differentiates":"2-3 sentence explanation"}],'
+    +'"made_with_purpose":[{"num":1,"title":"2-4 words, prefer 3","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable","source_type":"v1_pdp or wiki"}],'
+    +'"wiki_v1_alignment":{"has_mismatch":false,"wiki_only_adds":["benefit titles in wiki but not v1"],"v1_only_adds":["benefit titles in v1 but not wiki"],"contradictions":["specific contradiction descriptions"]},'
     +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
     +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"timeframe_keywords":["first night","overnight","by morning"],"outcome_keywords":["relief","worked","felt better"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
     +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers","mention_count":0,"timeframe_keywords":["first night","overnight"],"outcome_keywords":["relief","worked"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]}],'
-    +'"reviews":[{"num":1,"title":"","rephrased_text":"","original_text":"","original_author":"","theme":""}],'
+    +'"reviews":[{"num":1,"title":"","original_text":"","original_author":"","theme":""}],'
     +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
-    +'"curated_collection":[{"num":1,"title":"","subhead":"","context":""}],'
-    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":"","is_what_to_expect":false}]}';
+    +'"curated_collection":[{"num":1,"title":"3-4 words","subhead":"max 80 chars","context":""}],'
+    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":"","is_what_to_expect":false,"expectation_substantiation":{"onset_quotes":["verbatim quote"],"effects_quotes":["verbatim quote"]}}]}';
 
   return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum — count every character including spaces and punctuation. If over 205 characters, remove the least essential clause entirely, do not compress. Each option contains exactly TWO elements only: (1) the customer CONDITION as the customer experiences it — what they FEEL, not what is happening clinically and not what competitor products do wrong. Use customer-felt language: constipation, bloating, sluggish digestion, pressure, heaviness. DO NOT open with clinical concepts (microbiome disruption, intestinal inflammation, gut dysbiosis) or competitor problems (stimulant laxatives force contractions, fiber adds bulk) — those belong in the differentiator if anywhere. Stated as a plain declarative fact from review language — NO question marks, NO casual openers; (2) the ingredient mechanism — name the specific ingredient and the chemical or physiological action it takes in the body. After the mechanism, you may add a crisp 2-3 item outcome rhythm (e.g. "loosen impacted waste, soften buildup, promote complete bowel movements") but NO clunky connectors like "that breaks down" or "that reduces that feeling of" — use declarative outcome phrases. Do NOT add product name, stats, or contrast as a third element. Tone: declarative, precise, reads like an expert. BANNED: question marks, casual openers, metaphors, clunky connectors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances, detox, cleanse, natural, powerful. ZERO health claims: no diagnose, treat, cure, prevent, reverses, heals, clinically proven. Add pain_point_tag (2-4 words — must be customer-felt, e.g. "Chronic constipation", "Bloating pressure"; NOT "Stimulant laxative harm" or "Microbiome disruption"), benefit_tag (2-4 words), differentiator_tag (2-4 words naming the mechanism e.g. oxygen-based, methylcobalamin form, ozonated magnesium) for each option.'
+    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Each contains TWO elements: (1) customer CONDITION as the customer experiences it (constipation, bloating, sluggish digestion, pressure, heaviness) — declarative, no question marks, no casual openers; (2) the strongest DIFFERENTIATOR for this product. Pick the differentiator type per option using this hierarchy: Mechanism (specific ingredient action) > Form/Delivery (liquid, liposomal, spore-forming, sublingual) > Sourcing (wildcrafted, single-origin, cold-pressed) > Bioavailability (methylated, chelated, standardized %) > Combination (synergistic stack with named purpose) > Use Case (specific timing/situation like post-antibiotic, daily reset). Each of the 5 options should test a DIFFERENT differentiator angle when the wiki supports it — do not use the same differentiator type for all 5. differentiator_type must be one of: Mechanism, Form, Sourcing, Bioavailability, Combination, Use Case. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. Skip generic terms (non-GMO, vegan, made in USA, gluten-free, no fillers). BANNED: question marks, casual openers, metaphors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims.'
     +'\n- pain_points: exactly 4, ranked by frequency'
-    +'\n- made_with_purpose: exactly 5 benefit options structured as 3 from V1 PDP + 2 from wiki. Options 1-3 (source_type="v1_pdp"): the foundation is the v1 PDP benefits provided below — rewrite each one as a conversion-angle version. The original v1 copy was written for brand description; the rewrite applies a conversion lens (lead with mechanism or customer outcome, tighter declarative phrasing, proof from wiki/reviews). Same benefit theme, different lens — not better than the original, just different intent. Stay close to the v1 angle. Options 4-5 (source_type="wiki"): NEW benefit angles drawn purely from the wiki Health Benefits & Function section — surface mechanisms or proof points the v1 PDP does NOT already cover. Do NOT duplicate benefit themes between v1 and wiki options. NOT from Source & Quality, certifications, or manufacturing. Title 2-3 words, desc under '+s.mwp_chars+' chars. wiki_source: exact wiki sentence that informed the card (required for all 5). v1_pdp_source: matching v1 PDP benefit text for options 1-3 only, empty for 4-5. If no v1 PDP benefits were provided, generate all 5 from wiki only and label all as source_type="wiki" with empty v1_pdp_source.'
-    +'\n- benefits: exactly 4 (rank 1-2 primary, 3-4 additional). No disease treatment claims.'
-    +'\n- outcome_stats: 4-6 items. detail field max 20 chars, distinct non-redundant outcomes. No disease claims.'
-    +'\n- transformation: fraction (e.g. "3 in 4") AND specific timeframe (e.g. "within 2 weeks"). Mine time-to-result language. CRITICAL substantiation rules: mention_count must be the count of reviews containing BOTH a timeframe phrase AND an outcome phrase in the SAME review — not the count of reviews matching either one. Do NOT count a review that only mentions timing without outcome, or only mentions outcome without timing. timeframe_keywords: 3-6 exact phrases that capture the timeframe (e.g. ["first night", "overnight", "by morning", "next morning", "within a day"]). outcome_keywords: 3-6 exact phrases that capture the outcome (e.g. ["relief", "worked", "went", "results", "felt better"]). sample_quotes: 3 verbatim quotes copied EXACTLY from reviews that contain BOTH a timeframe phrase AND an outcome phrase — do not paraphrase, do not select quotes that only show one element.'
-    +'\n- alt_stats: 2-3 items each with fraction AND timeframe. Same intersection counting rule as transformation: mention_count = count of reviews containing BOTH a timeframe phrase AND an outcome phrase. Provide separate timeframe_keywords (3-6 phrases) and outcome_keywords (3-6 phrases). sample_quotes: 3 verbatim quotes containing BOTH elements.'
-    +'\n- reviews: exactly 8. ONLY select 4-star or 5-star reviews with strong, articulate, specific language. original_text is the verbatim customer review copied EXACTLY as written. title is a short AI-generated headline (5-10 words) summarizing the review. Prioritize named authors over anonymous. Prefer reviews under 200 chars but quality over length. rephrased_text should be the SAME as original_text (verbatim only, no rephrasing).'
-    +'\n- ingredients: 5 combined editorial headlines treating ALL ingredients as one story. No asterisks in headline. keyword = single word to italicize. subline under '+s.ing_chars+' chars. wiki_source: exact quoted sentence from wiki.'
-    +'\n- curated_collection: exactly 3 options. Each subhead is HARD LIMITED to 190 characters. Language must be VAGUE about specific products — you do not know which products will be paired. DO NOT use specific format/protocol language: NO "take these capsules", NO "this cleanse", NO "these supplements", NO "this combination", NO "these three products". Instead use customer journey themes: "starts the work", "helps finish it", "continues the support", "rounds out the routine", "works alongside". Focus on outcomes/themes the customer cares about, not the products. No disease claims.'
-    +'\n- faqs: exactly 8 questions. FAQ #1 (rank 1) MUST ALWAYS be a "What to Expect" question framed proactively — set this as is_what_to_expect=true. The answer must cover: (1) typical onset timeframe based on review and wiki language, (2) any temporary effects customers commonly report explained by the mechanism (e.g. for Oxy-Powder: temporary gas, bloating, increased bowel movements, or loose stools as the oxygen-based cleanse begins working; for probiotics: digestive adjustment in first few days; for enzymes: variable response by diet), (3) individual variation note, (4) suggested use referenced from the wiki (exact dose, timing, with/without food) — copy these details directly from the wiki Suggested Use or FAQ section. CRITICAL: FAQ answers about dosing, instructions, ingredients, or product mechanics MUST be sourced from the wiki — never invent doses or contradict the wiki. If wiki says 4 capsules, the answer says 4 capsules. If the wiki does not cover a topic, set answer_note to "Needs manual answer — not in wiki" and leave suggested_answer empty rather than fabricating. FAQs 2-8: standard purchase-blocking hesitations ranked by frequency in reviews, with suggested answers also grounded in wiki where applicable. No disease treatment claims.'
+    +'\n- made_with_purpose: exactly 5 options. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits — same theme, tighter declarative phrasing, proof from wiki/reviews. Options 4-5 (source_type="wiki"): NEW benefit angles from wiki Health Benefits the v1 PDP does not cover. Title 2-4 words (prefer 3), desc under '+s.mwp_chars+' chars. wiki_source: exact wiki sentence (required all 5). v1_pdp_source: only for options 1-3, empty for 4-5. If no v1 PDP benefits provided, generate all 5 from wiki only and label all as source_type="wiki" with empty v1_pdp_source.'
+    +'\n- wiki_v1_alignment: compare wiki Health Benefits section against v1 PDP benefits. Set has_mismatch=true if any of: (a) wiki has a top-level benefit theme v1 doesn\'t cover, (b) v1 has a benefit not supported in current wiki, (c) v1 framing contradicts wiki (e.g. v1 markets daily-use but wiki specifies short-term only). List specifics in wiki_only_adds, v1_only_adds, contradictions arrays. If no v1 PDP provided, set has_mismatch=false and leave arrays empty.'
+    +'\n- benefits: exactly 4. No disease treatment claims.'
+    +'\n- outcome_stats: 4-6 items. detail max 20 chars, distinct non-redundant. No disease claims.'
+    +'\n- transformation: fraction AND timeframe. mention_count = reviews containing BOTH a timeframe phrase AND an outcome phrase. timeframe_keywords + outcome_keywords each 3-6 phrases. sample_quotes: 3 verbatim quotes containing BOTH elements.'
+    +'\n- alt_stats: 2-3 items. Same intersection counting rule.'
+    +'\n- reviews: exactly 8. ONLY 4-5 star with strong articulate language. original_text VERBATIM and UNDER 250 chars (skip longer ones, find shorter alternatives). Select for THEME VARIETY — 8 reviews should collectively cover different benefits, use cases, customer types. Don\'t pick 8 reviews about the same outcome. Named authors preferred. title is short AI-generated headline (5-10 words).'
+    +'\n- ingredients: 5 combined editorial headlines. No asterisks. keyword = single word to italicize. subline under '+s.ing_chars+' chars.'
+    +'\n- curated_collection: exactly 3 options. Each is 1 heading + 1 subhead introducing a collection of ~3 recommended companion products. Heading 3-4 words names the customer state/context (e.g. "Build Your Reset", "Round Out Your Routine", "Complete the Protocol"). Subhead max '+s.curated_chars+' chars introduces what the collection does. Pull pairing logic from wiki Recommended Pairings section when present. Refer to companion products GENERICALLY (e.g. "oxygen-based colon support") not by specific name. No disease claims.'
+    +'\n- faqs: exactly 8 questions. FAQ #1 (rank 1) MUST be "What to Expect" with is_what_to_expect=true. Cover (1) onset timeframe from review/wiki language, (2) temporary effects from review language explained by mechanism, (3) individual variation, (4) suggested use from wiki. expectation_substantiation: onset_quotes = 2-3 verbatim review quotes mentioning timing; effects_quotes = 2-3 verbatim review quotes mentioning temporary effects. CRITICAL: dosing/instruction details MUST come from wiki — never invent. If wiki doesn\'t cover, set answer_note="Needs manual answer — not in wiki" and leave suggested_answer empty. All FAQ answers under '+s.faq_chars+' chars. No disease claims.'
     +'\nReviews:\n'+reviewTexts;
+}
+
+function buildRewritePrompt(items){
+  return 'Rewrite each of the following copy fragments to fit within its character limit while preserving the original meaning, tone, and key information. Return ONLY valid JSON: {"rewrites":[{"id":"id1","new_text":"rewritten text"}, ...]}. Each new_text MUST be at or under its max_chars limit. Do not add disclaimers or commentary. Preserve banned-term restrictions (no health claims, no question marks in About options, no asterisks in ingredient headlines).\n\nFragments to rewrite:\n'+JSON.stringify(items,null,2);
+}
+
+async function doFetch(p,maxTok){
+  var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:maxTok||20000,messages:[{role:'user',content:p}]})
+  });
+  if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
+  return await response.text();
+}
+
+function parseEnvelope(rawText){
+  var envelope;try{envelope=JSON.parse(rawText);}catch(e){envelope=null;}
+  var inner=envelope&&envelope.content&&envelope.content[0]&&envelope.content[0].text||rawText;
+  var jm=inner.replace(/```json|```/g,'').trim().match(/\{[\s\S]*\}/);
+  if(!jm)return null;
+  try{return JSON.parse(jm[0]);}catch(e){return null;}
+}
+
+async function enforceCharLimits(analysis,settings){
+  var items=[];
+  (analysis.about_options||[]).forEach(function(o,i){
+    if((o.text||'').length>settings.about_chars){
+      items.push({id:'about_'+i,max_chars:settings.about_chars,current_text:o.text,note:'About option — declarative customer condition + differentiator, no question marks, no health claims'});
+    }
+  });
+  (analysis.made_with_purpose||[]).forEach(function(m,i){
+    if((m.description||'').length>settings.mwp_chars){
+      items.push({id:'mwp_'+i,max_chars:settings.mwp_chars,current_text:m.description,note:'MWP benefit description'});
+    }
+  });
+  (analysis.ingredients||[]).forEach(function(ing,i){
+    if((ing.subline||'').length>settings.ing_chars){
+      items.push({id:'ing_'+i,max_chars:settings.ing_chars,current_text:ing.subline,note:'Ingredient subline'});
+    }
+  });
+  (analysis.curated_collection||[]).forEach(function(c,i){
+    if((c.subhead||'').length>settings.curated_chars){
+      items.push({id:'curated_'+i,max_chars:settings.curated_chars,current_text:c.subhead,note:'Curated collection subhead'});
+    }
+  });
+  (analysis.faqs||[]).forEach(function(f,i){
+    if((f.suggested_answer||'').length>settings.faq_chars){
+      items.push({id:'faq_'+i,max_chars:settings.faq_chars,current_text:f.suggested_answer,note:'FAQ answer'});
+    }
+  });
+  (analysis.outcome_stats||[]).forEach(function(s,i){
+    if((s.detail||'').length>settings.stat_chars){
+      items.push({id:'stat_'+i,max_chars:settings.stat_chars,current_text:s.detail,note:'Stat label — punchy outcome'});
+    }
+  });
+
+  if(items.length===0)return analysis;
+
+  try{
+    var rewritePrompt=buildRewritePrompt(items);
+    var rawText=await doFetch(rewritePrompt,3000);
+    var parsed=parseEnvelope(rawText);
+    if(!parsed||!parsed.rewrites)return analysis;
+
+    parsed.rewrites.forEach(function(rw){
+      var parts=rw.id.split('_');
+      var kind=parts[0];
+      var idx=parseInt(parts[1]);
+      if(isNaN(idx))return;
+      if(kind==='about'&&analysis.about_options&&analysis.about_options[idx])analysis.about_options[idx].text=rw.new_text;
+      else if(kind==='mwp'&&analysis.made_with_purpose&&analysis.made_with_purpose[idx])analysis.made_with_purpose[idx].description=rw.new_text;
+      else if(kind==='ing'&&analysis.ingredients&&analysis.ingredients[idx])analysis.ingredients[idx].subline=rw.new_text;
+      else if(kind==='curated'&&analysis.curated_collection&&analysis.curated_collection[idx])analysis.curated_collection[idx].subhead=rw.new_text;
+      else if(kind==='faq'&&analysis.faqs&&analysis.faqs[idx])analysis.faqs[idx].suggested_answer=rw.new_text;
+      else if(kind==='stat'&&analysis.outcome_stats&&analysis.outcome_stats[idx])analysis.outcome_stats[idx].detail=rw.new_text;
+    });
+  }catch(e){
+    console.log('Rewrite pass failed:',e.message);
+  }
+  return analysis;
 }
 
 async function runAnalysis(){
@@ -545,14 +928,14 @@ async function runAnalysis(){
   var wiki=document.getElementById('wikiText').value.trim();
   if(!wiki){if(!confirm('Product wiki is empty. Made With Purpose and Ingredients will be less accurate. Continue anyway?')){return;}}
   var settings=getSettings();
-  hideError();showLoading(reviews.length);hideResults();
+  hideError();hideResults();
 
   var sorted=sortByDateDesc(reviews);
-  var sample=sorted.slice(0,300);
+  var sample=sorted.slice(0,SAMPLE_SIZE);
+  showLoading(sample.length,reviews.length);
   var dateRange=getDateRange(sample);
   var authorCol=getAuthorCol(sample[0]);
-  
-  // Fetch v1 PDP benefits (best effort, no blocking)
+
   lastV1PdpBenefits=null;
   try{lastV1PdpBenefits=await fetchV1PdpBenefits(product);}catch(e){lastV1PdpBenefits=null;}
 
@@ -568,39 +951,32 @@ async function runAnalysis(){
   if(lastV1PdpBenefits&&lastV1PdpBenefits.length){
     v1Section='\n\nV1 PDP BENEFITS (currently published, use as foundation for conversion-angle rewrites):\n';
     lastV1PdpBenefits.forEach(function(b,i){v1Section+=(i+1)+'. '+b.title+': '+b.description+'\n';});
+  } else {
+    v1Section='\n\nV1 PDP BENEFITS: none retrieved. Generate all 5 made_with_purpose options from wiki only. Leave v1_pdp_source empty on every card. Label every card source_type="wiki". Do NOT fabricate v1_pdp_source quotes.';
   }
   wikiSection+=v1Section;
   stepActive('step1');
   var prompt=buildPrompt(product,sample.length,wikiSection,settings,reviewTexts);
   stepDone('step1');stepActive('step2');
 
-  async function doFetch(p){
-    var response=await fetch('https://ecom-claude-proxy.globalhealing.workers.dev',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:8000,messages:[{role:'user',content:p}]})
-    });
-    if(!response.ok){var et=await response.text();throw new Error(et||'API error');}
-    return await response.text();
-  }
-
   try{
     var rawText;
-    try{rawText=await doFetch(prompt);}
+    try{rawText=await doFetch(prompt,20000);}
     catch(e1){
       if(e1.message.indexOf('524')!==-1||e1.message.indexOf('overloaded')!==-1||e1.message.indexOf('529')!==-1){
         document.getElementById('loadingTimer').textContent='Retrying\u2026';
         await new Promise(function(r){setTimeout(r,3000);});
-        rawText=await doFetch(prompt);
+        rawText=await doFetch(prompt,20000);
       } else {throw e1;}
     }
-    stepDone('step2');stepActive('step3');stepDone('step3');stepActive('step4');
-    var envelope;try{envelope=JSON.parse(rawText);}catch(e){envelope=null;}
-    var inner=envelope&&envelope.content&&envelope.content[0]&&envelope.content[0].text||rawText;
-    var jm=inner.replace(/```json|```/g,'').trim().match(/\{[\s\S]*\}/);
-    if(!jm){hideLoading();showError('Could not parse response. Try again.');return;}
-    var analysis;
-    try{analysis=JSON.parse(jm[0]);}catch(e){hideLoading();showError('Parse error. Try again.');return;}
-    lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length,dateRange:dateRange,settings:settings};
+    stepDone('step2');stepActive('step3');
+    var analysis=parseEnvelope(rawText);
+    if(!analysis){hideLoading();showError('Could not parse response. Try again.');return;}
+    stepDone('step3');stepActive('step4');
+
+    analysis=await enforceCharLimits(analysis,settings);
+
+    lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length,dateRange:dateRange,settings:settings,v1Benefits:lastV1PdpBenefits};
     stepDone('step4');
     setTimeout(function(){hideLoading();renderResults(product,reviews.length,sample.length,analysis,dateRange,settings);},400);
   }catch(err){hideLoading();showError('Analysis failed: '+err.message);}
@@ -610,60 +986,109 @@ function copyText(text){
   var clean=String(text).replace(/<[^>]+>/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'");
   navigator.clipboard.writeText(clean);
 }
-function makeCopyBtn(text,darkMode){
+function makeCopyBtn(text){
   var btn=document.createElement('button');
-  btn.className=darkMode?'btn-copy-dk':'btn-copy';btn.textContent='Copy';
-  btn.addEventListener('click',function(){copyText(text);btn.textContent='Copied!';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);});
+  btn.className='btn-copy';btn.textContent='Copy';
+  btn.addEventListener('click',function(){copyText(text);btn.textContent='Copied';btn.classList.add('copied');setTimeout(function(){btn.textContent='Copy';btn.classList.remove('copied');},2000);});
   return btn;
 }
 function isGeneric(text){var lower=(text||'').toLowerCase();return GENERIC_TERMS.some(function(t){return lower.indexOf(t)!==-1;});}
 function makeWikiSourceCol(wikiSource,v1Source){
   var col=document.createElement('div');col.className='wiki-source-col';
   if(v1Source){
-    var v1Lbl=document.createElement('div');v1Lbl.className='wiki-source-label';v1Lbl.textContent='From v1 PDP:';
-    v1Lbl.style.color='var(--accent)';
+    var v1Lbl=document.createElement('div');v1Lbl.className='wiki-source-label';v1Lbl.textContent='From v1 PDP';
     var v1Quote=document.createElement('div');v1Quote.className='wiki-source-quote';v1Quote.textContent=v1Source;
-    v1Quote.style.borderLeftColor='var(--accent)';
     col.appendChild(v1Lbl);col.appendChild(v1Quote);
-    var spacer=document.createElement('div');spacer.style.height='10px';col.appendChild(spacer);
+    var spacer=document.createElement('div');spacer.style.height='8px';col.appendChild(spacer);
   }
-  var lbl=document.createElement('div');lbl.className='wiki-source-label';lbl.textContent='From wiki:';
+  var lbl=document.createElement('div');lbl.className='wiki-source-label';lbl.textContent='From wiki';
   var quote=document.createElement('div');quote.className='wiki-source-quote';quote.textContent=wikiSource||'\u2014';
   col.appendChild(lbl);col.appendChild(quote);return col;
 }
 
 function renderResults(product,total,analyzed,a,dateRange,settings){
   document.getElementById('resultsTitle').textContent=product;
-  document.getElementById('resultsMeta').innerHTML=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed<br>(most recent first)';
-  if(dateRange){document.getElementById('dateRangeBadge').style.display='inline-flex';document.getElementById('dateRangeText').textContent='Reviews: '+dateRange;}
+  document.getElementById('resultsMetaText').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed';
+  if(dateRange){document.getElementById('dateRangeMetaItem').style.display='flex';document.getElementById('dateRangeText').textContent=dateRange;}
 
-  // S1 ABOUT
+  var painRef=document.getElementById('painRefBody');painRef.innerHTML='';
+  (a.pain_points||[]).forEach(function(p){
+    var item=document.createElement('div');item.className='pain-ref-item';
+    item.innerHTML='<strong>#'+p.rank+' '+(p.label||'')+'</strong> — <em>"'+(p.customer_language||'')+'"</em>';
+    painRef.appendChild(item);
+  });
+
+  // ABOUT
   var aboutList=document.getElementById('aboutList');aboutList.innerHTML='';
   (a.about_options||[]).forEach(function(o){
     var cc=(o.text||'').length,over=cc>settings.about_chars;
     var card=document.createElement('div');card.className='choice-card';
     var body=document.createElement('div');body.className='choice-body';
-    var num=document.createElement('div');num.className='choice-num';num.textContent='Option '+o.num;
+    var num=document.createElement('div');num.className='choice-num';num.innerHTML='<strong>Option '+o.num+'</strong>'+(o.differentiator_type?' · '+o.differentiator_type:'');
     var tags=document.createElement('div');tags.className='about-tags';
-    if(o.pain_point_tag){var pt=document.createElement('span');pt.className='about-tag about-tag-pain';pt.textContent='Pain: '+o.pain_point_tag;tags.appendChild(pt);}
-    if(o.benefit_tag){var bt=document.createElement('span');bt.className='about-tag about-tag-benefit';bt.textContent='Benefit: '+o.benefit_tag;tags.appendChild(bt);}
-    if(o.differentiator_tag){var dt=document.createElement('span');dt.className='about-tag about-tag-diff';dt.textContent='Differentiator: '+o.differentiator_tag;tags.appendChild(dt);}
+    if(o.pain_point_tag){var pt=document.createElement('span');pt.className='about-tag about-tag-pain';pt.textContent='Pain · '+o.pain_point_tag;tags.appendChild(pt);}
+    if(o.benefit_tag){var bt=document.createElement('span');bt.className='about-tag about-tag-benefit';bt.textContent='Benefit · '+o.benefit_tag;tags.appendChild(bt);}
+    if(o.differentiator_tag){var dt=document.createElement('span');dt.className='about-tag about-tag-diff';dt.textContent='Diff · '+o.differentiator_tag;tags.appendChild(dt);}
     var txt=document.createElement('div');txt.className='choice-text';txt.textContent=o.text||'';
-    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.about_chars+' chars'+(over?' \u2014 over limit':'');
+    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.about_chars+' chars'+(over?' — over limit':'');
     body.appendChild(num);if(tags.children.length)body.appendChild(tags);body.appendChild(txt);body.appendChild(meta);
+    if(o.why_this_differentiates){
+      var diffWrap=document.createElement('div');diffWrap.className='diff-explanation';
+      var diffLbl=document.createElement('div');diffLbl.className='diff-explanation-label';diffLbl.textContent='Why this differentiates';
+      var diffTxt=document.createElement('div');diffTxt.className='diff-explanation-text';diffTxt.textContent=o.why_this_differentiates;
+      diffWrap.appendChild(diffLbl);diffWrap.appendChild(diffTxt);
+      body.appendChild(diffWrap);
+    }
     card.appendChild(body);card.appendChild(makeCopyBtn(o.text||''));aboutList.appendChild(card);
   });
 
-  // S2 MWP
-  document.getElementById('v1WarnBanner').style.display = (lastV1PdpBenefits && lastV1PdpBenefits.length) ? 'none' : 'block';
+  // MWP
+  var hasV1=lastV1PdpBenefits&&lastV1PdpBenefits.length;
+  document.getElementById('v1WarnBanner').style.display=hasV1?'none':'block';
+  if(hasV1){
+    document.getElementById('sourceCompareWrap').style.display='block';
+    var tableBody=document.getElementById('sourceCompareTable');tableBody.innerHTML='';
+    var wikiTitles=(a.made_with_purpose||[]).filter(function(m){return m.source_type==='wiki';}).map(function(m){return {t:m.title,d:m.wiki_source};});
+    var v1Titles=lastV1PdpBenefits.map(function(b){return {t:b.title,d:b.description};});
+    var maxRows=Math.max(wikiTitles.length,v1Titles.length,3);
+    for(var i=0;i<maxRows;i++){
+      var rowId='src-row-'+i;
+      var wT=wikiTitles[i]?wikiTitles[i].t:'—';
+      var vT=v1Titles[i]?v1Titles[i].t:'—';
+      var wD=wikiTitles[i]?wikiTitles[i].d:'';
+      var vD=v1Titles[i]?v1Titles[i].d:'';
+      var tr=document.createElement('tr');tr.className='source-compare-row';tr.onclick=(function(rid){return function(){toggleSourceRow(rid);};})(rowId);
+      tr.innerHTML='<td>'+wT+'</td><td>'+vT+'</td>';
+      tableBody.appendChild(tr);
+      var detailTr=document.createElement('tr');detailTr.className='source-compare-detail';detailTr.id=rowId;
+      detailTr.innerHTML='<td>'+(wD||'—')+'</td><td>'+(vD||'—')+'</td>';
+      tableBody.appendChild(detailTr);
+    }
+    document.getElementById('sourceCompareBody').style.display='none';
+  } else {
+    document.getElementById('sourceCompareWrap').style.display='none';
+  }
+  var mc=document.getElementById('mismatchCallout');
+  var align=a.wiki_v1_alignment;
+  if(hasV1&&align&&align.has_mismatch){
+    var html='<div class="mismatch-title">Wiki–v1 PDP mismatch detected</div>';
+    html+='<div class="mismatch-text">The v1 PDP benefits don\'t fully align with the current wiki. v1 copy may have been written from an older wiki. Review wiki-sourced options below carefully — wiki content isn\'t always intended to be customer-facing.</div>';
+    html+='<ul class="mismatch-list">';
+    if(align.wiki_only_adds&&align.wiki_only_adds.length){html+='<li><strong>Wiki adds:</strong> '+align.wiki_only_adds.join(', ')+' <em>(not on v1)</em></li>';}
+    if(align.v1_only_adds&&align.v1_only_adds.length){html+='<li><strong>v1 adds:</strong> '+align.v1_only_adds.join(', ')+' <em>(not in current wiki — may be older copy)</em></li>';}
+    if(align.contradictions&&align.contradictions.length){html+='<li><strong>Possible contradiction:</strong> '+align.contradictions.join('; ')+'</li>';}
+    html+='</ul>';
+    mc.innerHTML=html;mc.style.display='block';
+  } else {mc.style.display='none';}
+
   var mwpList=document.getElementById('mwpList');mwpList.innerHTML='';
   (a.made_with_purpose||[]).filter(function(m){return !isGeneric(m.title)&&!isGeneric(m.description);}).forEach(function(m){
     var cc=(m.description||'').length,over=cc>settings.mwp_chars;
     var wrap=document.createElement('div');wrap.className='with-wiki-source';
-    var main=document.createElement('div');main.style.cssText='padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex:1;';
+    var main=document.createElement('div');main.style.cssText='padding:28px;display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex:1;';
     var body=document.createElement('div');body.className='choice-body';
-    var topRow=document.createElement('div');topRow.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;';
-    var num=document.createElement('div');num.className='choice-num';num.style.margin='0';num.textContent='Option '+m.num;
+    var topRow=document.createElement('div');topRow.style.cssText='display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap;';
+    var num=document.createElement('div');num.className='choice-num';num.style.margin='0';num.innerHTML='<strong>Option '+m.num+'</strong>';
     topRow.appendChild(num);
     if(m.source_type){
       var srcBadge=document.createElement('span');
@@ -673,10 +1098,11 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     }
     var title=document.createElement('div');title.className='choice-title';title.textContent=m.title||'';
     var desc=document.createElement('div');desc.className='choice-desc';desc.textContent=m.description||'';
-    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.mwp_chars+' chars'+(over?' \u2014 over limit':'');
+    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.mwp_chars+' chars'+(over?' — over limit':'');
     body.appendChild(topRow);body.appendChild(title);body.appendChild(desc);body.appendChild(meta);
     main.appendChild(body);main.appendChild(makeCopyBtn((m.title||'')+': '+(m.description||'')));
-    wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source,m.v1_pdp_source));mwpList.appendChild(wrap);
+    var v1Src=(hasV1&&m.source_type==='v1_pdp')?m.v1_pdp_source:null;
+    wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source,v1Src));mwpList.appendChild(wrap);
   });
 
   // KEY BENEFITS
@@ -699,9 +1125,8 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     card.appendChild(num);card.appendChild(title);card.appendChild(proof);card.appendChild(footer);eb.appendChild(card);
   });
 
-  // S3 STATS
+  // STATS
   var grid=document.getElementById('statsGrid');grid.innerHTML='';
-  var maxPct=0;(a.outcome_stats||[]).forEach(function(s){if(s.percentage>maxPct)maxPct=s.percentage;});
   var strongStats=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
   var numStrong=strongStats.length;
   if(numStrong===0){document.getElementById('statsWarnRed').style.display='block';document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Exclude the percentage grid from this PDP. Use the transformation timeline and "X in Y" framing below instead.';document.getElementById('statsWarnYellow').style.display='none';}
@@ -712,11 +1137,44 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var card=document.createElement('div');card.className='stat-card';
     var pct=document.createElement('div');pct.className='stat-pct';pct.textContent=s.percentage+'%';
     var lbl=document.createElement('div');lbl.className='stat-label';lbl.textContent=detail;
-    var det=document.createElement('div');det.className='stat-detail';det.textContent=s.count+' of '+analyzed.toLocaleString()+' reviewers';
+    var det=document.createElement('div');det.className='stat-detail';det.textContent=s.count+' of '+analyzed.toLocaleString()+' reviewers analyzed';
     var row=document.createElement('div');row.className='stat-copy-row';row.appendChild(makeCopyBtn(s.percentage+'% '+detail));
     card.appendChild(pct);card.appendChild(lbl);card.appendChild(det);card.appendChild(row);grid.appendChild(card);
   });
-  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes \u2014 individual experiences may vary.';
+  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
+
+  function appendVerificationBlock(parent,obj,total){
+    var vBlock=document.createElement('div');vBlock.className='verification-block';
+    var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Substantiation data';
+    vBlock.appendChild(vTitle);
+    if(obj.mention_count){
+      var vCount=document.createElement('div');vCount.className='verification-row';
+      vCount.innerHTML='<span class="v-label">Mentions:</span> '+obj.mention_count+' of '+total.toLocaleString()+' reviewers analyzed';
+      vBlock.appendChild(vCount);
+    }
+    if(obj.timeframe_keywords&&obj.timeframe_keywords.length){
+      var vTk=document.createElement('div');vTk.className='verification-row';
+      vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+obj.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+      vBlock.appendChild(vTk);
+    }
+    if(obj.outcome_keywords&&obj.outcome_keywords.length){
+      var vOk=document.createElement('div');vOk.className='verification-row';
+      vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+obj.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+      vBlock.appendChild(vOk);
+    }
+    var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
+    vMatchNote.textContent='Count = reviews containing BOTH a timeframe and outcome keyword';
+    vBlock.appendChild(vMatchNote);
+    if(obj.sample_quotes&&obj.sample_quotes.length){
+      var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
+      vBlock.appendChild(vqLbl);
+      obj.sample_quotes.forEach(function(q){
+        var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='\u201c'+q+'\u201d';
+        vBlock.appendChild(vq);
+      });
+    }
+    parent.appendChild(vBlock);
+  }
 
   if((a.alt_stats||[]).length){
     document.getElementById('altStatsWrap').style.display='block';
@@ -728,37 +1186,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       var txt=document.createElement('div');txt.className='alt-stat-text';txt.textContent=alt.text||'';
       var sub=document.createElement('div');sub.className='alt-stat-sub';sub.textContent=alt.sub||'';
       inner.appendChild(lbl);inner.appendChild(txt);inner.appendChild(sub);
-      // Add verification block
-      var vBlock=document.createElement('div');vBlock.className='verification-block';
-      var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='SUBSTANTIATION DATA';
-      vBlock.appendChild(vTitle);
-      if(alt.mention_count){
-        var vCount=document.createElement('div');vCount.className='verification-row';
-        vCount.innerHTML='<span class="v-label">Mentions:</span> '+alt.mention_count+' reviews';
-        vBlock.appendChild(vCount);
-      }
-      if(alt.timeframe_keywords&&alt.timeframe_keywords.length){
-        var vTk=document.createElement('div');vTk.className='verification-row';
-        vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+alt.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-        vBlock.appendChild(vTk);
-      }
-      if(alt.outcome_keywords&&alt.outcome_keywords.length){
-        var vOk=document.createElement('div');vOk.className='verification-row';
-        vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+alt.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-        vBlock.appendChild(vOk);
-      }
-      var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
-      vMatchNote.innerHTML='<em>Count = reviews containing BOTH a timeframe and outcome keyword</em>';
-      vBlock.appendChild(vMatchNote);
-      if(alt.sample_quotes&&alt.sample_quotes.length){
-        var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
-        vBlock.appendChild(vqLbl);
-        alt.sample_quotes.forEach(function(q){
-          var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='“'+q+'”';
-          vBlock.appendChild(vq);
-        });
-      }
-      inner.appendChild(vBlock);
+      appendVerificationBlock(inner,alt,analyzed);
       card.appendChild(inner);card.appendChild(makeCopyBtn(alt.text||''));altList.appendChild(card);
     });
   }
@@ -768,72 +1196,43 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     if(a.transformation.fraction&&a.transformation.timeframe&&tStat.indexOf(a.transformation.fraction)===-1)tStat=a.transformation.fraction+' customers noticed a difference '+a.transformation.timeframe;
     document.getElementById('transformStat').textContent=tStat;
     document.getElementById('transformSub').textContent=a.transformation.sub||'';
-    // Add verification block
     var transformInner=document.querySelector('#transformCard .transform-inner');
     var existingVerif=transformInner.querySelector('.verification-block');
     if(existingVerif)existingVerif.remove();
-    var vBlock=document.createElement('div');vBlock.className='verification-block';
-    var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='SUBSTANTIATION DATA';
-    vBlock.appendChild(vTitle);
-    if(a.transformation.mention_count){
-      var vCount=document.createElement('div');vCount.className='verification-row';
-      vCount.innerHTML='<span class="v-label">Mentions:</span> '+a.transformation.mention_count+' reviews';
-      vBlock.appendChild(vCount);
-    }
-    if(a.transformation.timeframe_keywords&&a.transformation.timeframe_keywords.length){
-      var vTk=document.createElement('div');vTk.className='verification-row';
-      vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+a.transformation.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-      vBlock.appendChild(vTk);
-    }
-    if(a.transformation.outcome_keywords&&a.transformation.outcome_keywords.length){
-      var vOk=document.createElement('div');vOk.className='verification-row';
-      vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+a.transformation.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-      vBlock.appendChild(vOk);
-    }
-    var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
-    vMatchNote.innerHTML='<em>Count = reviews containing BOTH a timeframe and outcome keyword</em>';
-    vBlock.appendChild(vMatchNote);
-    if(a.transformation.sample_quotes&&a.transformation.sample_quotes.length){
-      var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
-      vBlock.appendChild(vqLbl);
-      a.transformation.sample_quotes.forEach(function(q){
-        var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='“'+q+'”';
-        vBlock.appendChild(vq);
-      });
-    }
-    transformInner.appendChild(vBlock);
+    appendVerificationBlock(transformInner,a.transformation,analyzed);
     document.getElementById('transformCopyBtn').replaceWith(makeCopyBtn(tStat));
   }
 
-  // S4 REVIEWS — verbatim only, single block centered
+  // REVIEWS
   var revList=document.getElementById('reviewsList');revList.innerHTML='';
   (a.reviews||[]).forEach(function(v){
+    if((v.original_text||'').length>settings.review_chars)return;
     var card=document.createElement('div');card.className='review-card';
     var topRow=document.createElement('div');topRow.className='review-top-row';
-    var num=document.createElement('div');num.className='review-num';num.textContent='Option '+(v.num||'');
-    var origTag=document.createElement('div');origTag.className='review-orig-tag';origTag.textContent='Original copy';
-    topRow.appendChild(num);topRow.appendChild(origTag);
-    var title=document.createElement('div');title.className='review-title';title.textContent=v.title||'';
+    var num=document.createElement('div');num.className='review-num';num.textContent='Review '+(v.num||'');
     var stars=document.createElement('div');stars.className='review-stars';stars.textContent='\u2605\u2605\u2605\u2605\u2605';
+    topRow.appendChild(num);topRow.appendChild(stars);
+    var title=document.createElement('div');title.className='review-title';title.textContent=v.title||'';
     var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.original_text||'')+'\u201d';
     var authRow=document.createElement('div');authRow.className='review-author-row';
+    var authBlock=document.createElement('div');authBlock.className='review-author-block';
     var authName=document.createElement('div');authName.className='review-author-name';authName.textContent=v.original_author||'Verified Buyer';
+    authBlock.appendChild(authName);
+    if(v.original_author&&v.original_author!=='Verified Buyer'){var authLbl=document.createElement('div');authLbl.className='review-author-label';authLbl.textContent='Verified Buyer';authBlock.appendChild(authLbl);}
     var themeTag=document.createElement('span');themeTag.className='review-theme-tag';themeTag.textContent=v.theme||'';
-    authRow.appendChild(authName);
-    if(v.original_author&&v.original_author!=='Verified Buyer'){var authLbl=document.createElement('div');authLbl.className='review-author-label';authLbl.textContent='Verified Buyer';authRow.appendChild(authLbl);}
-    authRow.appendChild(themeTag);
+    authRow.appendChild(authBlock);authRow.appendChild(themeTag);
     var copyRow=document.createElement('div');copyRow.className='review-copy-row';
     copyRow.appendChild(makeCopyBtn((v.title?v.title+': ':'')+'\u201c'+(v.original_text||'')+'\u201d \u2014 '+(v.original_author||'Verified Buyer')));
-    card.appendChild(topRow);card.appendChild(title);card.appendChild(stars);card.appendChild(text);card.appendChild(authRow);card.appendChild(copyRow);
+    card.appendChild(topRow);card.appendChild(title);card.appendChild(text);card.appendChild(authRow);card.appendChild(copyRow);
     revList.appendChild(card);
   });
 
-  // S5 INGREDIENTS
+  // INGREDIENTS
   var ingList=document.getElementById('ingredientsList');ingList.innerHTML='';
   (a.ingredients||[]).forEach(function(ing){
     var sc=(ing.subline||'').length,over=sc>settings.ing_chars;
     var wrap=document.createElement('div');wrap.className='with-wiki-source';
-    var main=document.createElement('div');main.style.cssText='padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex:1;';
+    var main=document.createElement('div');main.style.cssText='padding:28px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex:1;';
     var body=document.createElement('div');body.className='ing-option-body';
     var num=document.createElement('div');num.className='ing-option-num';num.textContent='Option '+ing.num;
     var headlineRaw=(ing.headline||'').replace(/\*/g,'');
@@ -849,26 +1248,28 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       if(li<arr.length-1)headlineEl.appendChild(document.createElement('br'));
     });
     var sub=document.createElement('div');sub.className='ing-subline';sub.textContent=ing.subline||'';
-    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.style.marginTop='8px';meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' \u2014 over limit':'');
+    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.style.marginTop='10px';meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'');
     body.appendChild(num);body.appendChild(headlineEl);body.appendChild(sub);body.appendChild(meta);
     main.appendChild(body);main.appendChild(makeCopyBtn(headlineRaw+'\n'+(ing.subline||'')));
     wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(ing.wiki_source));ingList.appendChild(wrap);
   });
 
-  // S6 CURATED
+  // CURATED
   var curList=document.getElementById('curatedList');curList.innerHTML='';
   (a.curated_collection||[]).forEach(function(c){
+    var sc=(c.subhead||'').length,over=sc>settings.curated_chars;
     var card=document.createElement('div');card.className='curated-card';
     var body=document.createElement('div');body.className='curated-body';
     var num=document.createElement('div');num.className='curated-num';num.textContent='Option '+c.num;
     var title=document.createElement('div');title.className='curated-title';title.textContent=c.title||'';
     var sub=document.createElement('div');sub.className='curated-subhead';sub.textContent=c.subhead||'';
     var ctx=document.createElement('div');ctx.className='curated-context';ctx.textContent=c.context||'';
-    body.appendChild(num);body.appendChild(title);body.appendChild(sub);body.appendChild(ctx);
+    var meta=document.createElement('div');meta.className='curated-meta'+(over?' over':'');meta.textContent=sc+' / '+settings.curated_chars+' chars'+(over?' — over limit':'');
+    body.appendChild(num);body.appendChild(title);body.appendChild(sub);body.appendChild(ctx);body.appendChild(meta);
     card.appendChild(body);card.appendChild(makeCopyBtn((c.title||'')+' \u2014 '+(c.subhead||'')));curList.appendChild(card);
   });
 
-  // S7 FAQS
+  // FAQS
   var faqContainer=document.getElementById('faqCards');faqContainer.innerHTML='';
   (a.faqs||[]).forEach(function(o){
     var card=document.createElement('div');card.className='faq-card';
@@ -877,9 +1278,9 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var header=document.createElement('div');header.className='faq-header';
     header.addEventListener('click',function(){document.getElementById(bid).classList.toggle('open');document.getElementById(tid).classList.toggle('open');});
     var rank=document.createElement('span');rank.className='faq-rank';rank.textContent='#'+o.rank;
-    var qWrap=document.createElement('div');qWrap.style.cssText='flex:1;display:flex;flex-direction:column;gap:6px;';
+    var qWrap=document.createElement('div');qWrap.style.cssText='flex:1;display:flex;flex-direction:column;gap:4px;';
     if(o.is_what_to_expect){
-      var expectPill=document.createElement('span');expectPill.className='faq-expect-pill';expectPill.textContent='✨ What to Expect';
+      var expectPill=document.createElement('span');expectPill.className='faq-expect-pill';expectPill.textContent='What to Expect';
       qWrap.appendChild(expectPill);
     }
     var q=document.createElement('div');q.className='faq-question';q.textContent=o.question||'';
@@ -887,22 +1288,50 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var tog=document.createElement('span');tog.className='faq-toggle';tog.id=tid;tog.textContent='\u25be';
     header.appendChild(rank);header.appendChild(qWrap);header.appendChild(tog);
     var body=document.createElement('div');body.className='faq-body';body.id=bid;
-    var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='From review language:';
-    var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent='\u201c'+(o.source_language||'')+'\u201d';
+    if(o.source_language){
+      var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='From review language';
+      var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent='\u201c'+o.source_language+'\u201d';
+      body.appendChild(srcLbl);body.appendChild(srcQ);
+    }
     var ansWrap=document.createElement('div');ansWrap.className='faq-answer-wrap';
-    var ansLbl=document.createElement('div');ansLbl.className='faq-answer-label';ansLbl.textContent='Suggested answer \u2014 edit before publishing';
+    var ansLbl=document.createElement('div');ansLbl.className='faq-answer-label';ansLbl.textContent='Suggested answer — edit before publishing';
     var ansRow=document.createElement('div');ansRow.className='faq-answer-row';
     var ansTxt=document.createElement('div');ansTxt.className='faq-answer-text';ansTxt.textContent=o.suggested_answer||'';
     ansRow.appendChild(ansTxt);ansRow.appendChild(makeCopyBtn((o.question||'')+'\n\n'+(o.suggested_answer||'')));
     ansWrap.appendChild(ansLbl);ansWrap.appendChild(ansRow);
-    var note=document.createElement('div');note.className='faq-note';
-    var noteSpan=document.createElement('span');noteSpan.textContent=o.answer_note||'';
-    note.appendChild(document.createTextNode('Must address: '));note.appendChild(noteSpan);
-    body.appendChild(srcLbl);body.appendChild(srcQ);body.appendChild(ansWrap);body.appendChild(note);
+    var ansLen=(o.suggested_answer||'').length;
+    if(ansLen>0){
+      var ansMeta=document.createElement('div');ansMeta.className='faq-answer-meta'+(ansLen>settings.faq_chars?' over':'');ansMeta.textContent=ansLen+' / '+settings.faq_chars+' chars'+(ansLen>settings.faq_chars?' — over limit':'');
+      ansWrap.appendChild(ansMeta);
+    }
+    body.appendChild(ansWrap);
+    if(o.is_what_to_expect&&o.expectation_substantiation){
+      var sub=o.expectation_substantiation;
+      var vBlock=document.createElement('div');vBlock.className='verification-block';
+      var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Substantiation — from reviews';
+      vBlock.appendChild(vTitle);
+      if(sub.onset_quotes&&sub.onset_quotes.length){
+        var lbl1=document.createElement('div');lbl1.className='verification-row v-quotes-label';lbl1.innerHTML='<span class="v-label">Onset timing quotes:</span>';
+        vBlock.appendChild(lbl1);
+        sub.onset_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
+      }
+      if(sub.effects_quotes&&sub.effects_quotes.length){
+        var lbl2=document.createElement('div');lbl2.className='verification-row v-quotes-label';lbl2.innerHTML='<span class="v-label">Temporary effects quotes:</span>';
+        vBlock.appendChild(lbl2);
+        sub.effects_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
+      }
+      body.appendChild(vBlock);
+    }
+    if(o.answer_note){
+      var note=document.createElement('div');note.className='faq-note';note.style.marginTop='14px';
+      var noteSpan=document.createElement('span');noteSpan.textContent=o.answer_note;
+      note.appendChild(document.createTextNode('Must address: '));note.appendChild(noteSpan);
+      body.appendChild(note);
+    }
     card.appendChild(header);card.appendChild(body);faqContainer.appendChild(card);
   });
 
-  // REFERENCE — PAIN POINTS
+  // PAIN POINTS
   var painContainer=document.getElementById('painCards');painContainer.innerHTML='';
   (a.pain_points||[]).forEach(function(p){
     var card=document.createElement('div');card.className='pain-card';
@@ -914,7 +1343,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     card.appendChild(body);card.appendChild(makeCopyBtn(p.copy_hook||''));painContainer.appendChild(card);
   });
 
-  // REFERENCE — SENTIMENT
+  // SENTIMENT
   var s=a.sentiment||{positive:0,neutral:0,negative:0},sum=s.positive+s.neutral+s.negative||1;
   var pp=Math.round(s.positive/sum*100),np=Math.round(s.neutral/sum*100),ngp=Math.round(s.negative/sum*100);
   document.getElementById('posNum').textContent=pp+'%';
@@ -923,15 +1352,28 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   setTimeout(function(){document.getElementById('sentimentPos').style.width=pp+'%';document.getElementById('sentimentNeu').style.width=np+'%';document.getElementById('sentimentNeg').style.width=ngp+'%';},100);
 
   showResults();
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function exportTxt(){
   if(!lastAnalysis)return;
-  var a=lastAnalysis.analysis,out='PDP INTELLIGENCE REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' reviews\n';
+  var a=lastAnalysis.analysis,out='REVIEW ANALYSIS REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' reviews\n';
   if(lastAnalysis.dateRange)out+='Date range: '+lastAnalysis.dateRange+'\n';
-  out+='\n=== S1 \u2014 ABOUT ===\n';
-  (a.about_options||[]).forEach(function(o){out+='Option '+o.num+(o.pain_point_tag?' [Pain: '+o.pain_point_tag+']':'')+(o.benefit_tag?' [Benefit: '+o.benefit_tag+']':'')+(o.differentiator_tag?' [Diff: '+o.differentiator_tag+']':'')+'\n'+o.text+'\n\n';});
-  out+='\n=== S2 \u2014 MADE WITH PURPOSE (BENEFITS) ===\n';
+  out+='Generated: '+new Date().toISOString()+'\n';
+  out+='\n=== ABOUT ===\n';
+  (a.about_options||[]).forEach(function(o){
+    out+='Option '+o.num+(o.differentiator_type?' ['+o.differentiator_type+']':'')+(o.pain_point_tag?' [Pain: '+o.pain_point_tag+']':'')+(o.benefit_tag?' [Benefit: '+o.benefit_tag+']':'')+(o.differentiator_tag?' [Diff: '+o.differentiator_tag+']':'')+'\n'+o.text+'\n';
+    if(o.why_this_differentiates)out+='Why this differentiates: '+o.why_this_differentiates+'\n';
+    out+='\n';
+  });
+  out+='\n=== MADE WITH PURPOSE ===\n';
+  if(a.wiki_v1_alignment&&a.wiki_v1_alignment.has_mismatch){
+    out+='[MISMATCH FLAGGED]\n';
+    if(a.wiki_v1_alignment.wiki_only_adds&&a.wiki_v1_alignment.wiki_only_adds.length)out+='Wiki adds: '+a.wiki_v1_alignment.wiki_only_adds.join(', ')+'\n';
+    if(a.wiki_v1_alignment.v1_only_adds&&a.wiki_v1_alignment.v1_only_adds.length)out+='v1 adds: '+a.wiki_v1_alignment.v1_only_adds.join(', ')+'\n';
+    if(a.wiki_v1_alignment.contradictions&&a.wiki_v1_alignment.contradictions.length)out+='Contradictions: '+a.wiki_v1_alignment.contradictions.join('; ')+'\n';
+    out+='\n';
+  }
   (a.made_with_purpose||[]).forEach(function(m){
     out+='Option '+m.num+': '+m.title+'\n'+m.description+'\n';
     if(m.v1_pdp_source)out+='V1 PDP source: '+m.v1_pdp_source+'\n';
@@ -939,12 +1381,12 @@ function exportTxt(){
   });
   out+='\n=== KEY BENEFITS ===\n';
   (a.benefits||[]).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
-  out+='\n=== S3 \u2014 OUTCOME STATS ===\n';
-  (a.outcome_stats||[]).forEach(function(s){out+='\u2022 '+s.percentage+'% '+s.detail+'\n';});
+  out+='\n=== OUTCOME STATS ===\n';
+  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' of '+lastAnalysis.analyzed+' reviewers analyzed)\n';});
   if(a.transformation){
     out+='\nTRANSFORMATION TIMELINE:\n';
     out+='Claim: '+a.transformation.stat+'\n';
-    if(a.transformation.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+a.transformation.mention_count+' reviews\n';
+    if(a.transformation.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+a.transformation.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
     if(a.transformation.timeframe_keywords)out+='Timeframe keywords: '+a.transformation.timeframe_keywords.join(', ')+'\n';
     if(a.transformation.outcome_keywords)out+='Outcome keywords: '+a.transformation.outcome_keywords.join(', ')+'\n';
     if(a.transformation.sample_quotes)a.transformation.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
@@ -953,37 +1395,48 @@ function exportTxt(){
   (a.alt_stats||[]).forEach(function(s){
     out+='ALT FRAMING:\n';
     out+='Claim: '+s.text+'\n';
-    if(s.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+s.mention_count+' reviews\n';
+    if(s.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+s.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
     if(s.timeframe_keywords)out+='Timeframe keywords: '+s.timeframe_keywords.join(', ')+'\n';
     if(s.outcome_keywords)out+='Outcome keywords: '+s.outcome_keywords.join(', ')+'\n';
     if(s.sample_quotes)s.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   });
-  out+='\n=== S4 \u2014 REVIEWS (VERBATIM) ===\n';
-  (a.reviews||[]).forEach(function(v){out+='Option '+v.num+': '+v.title+'\n"'+(v.original_text||'')+'"\n\u2014 '+(v.original_author||'Verified Buyer')+'\n\n';});
-  out+='\n=== S5 \u2014 INGREDIENTS ===\n';
+  out+='\n=== REVIEWS (VERBATIM) ===\n';
+  (a.reviews||[]).forEach(function(v){out+='Review '+v.num+': '+v.title+'\n"'+(v.original_text||'')+'"\n— '+(v.original_author||'Verified Buyer')+' [Theme: '+(v.theme||'')+']\n\n';});
+  out+='\n=== INGREDIENTS ===\n';
   (a.ingredients||[]).forEach(function(ing){out+='Option '+ing.num+':\n'+ing.headline+'\n'+ing.subline+'\nWiki source: '+ing.wiki_source+'\n\n';});
-  out+='\n=== S6 \u2014 CURATE YOUR COLLECTION ===\n';
+  out+='\n=== CURATE YOUR COLLECTION ===\n';
   (a.curated_collection||[]).forEach(function(c){out+='Option '+c.num+': '+c.title+'\n'+c.subhead+'\n\n';});
-  out+='\n=== S7 \u2014 FAQS ===\n';
-  (a.faqs||[]).forEach(function(o){out+='#'+o.rank+' '+o.question+'\nAnswer: '+o.suggested_answer+'\n\n';});
+  out+='\n=== FAQS ===\n';
+  (a.faqs||[]).forEach(function(o){
+    out+='#'+o.rank+(o.is_what_to_expect?' [WHAT TO EXPECT]':'')+' '+o.question+'\nAnswer: '+o.suggested_answer+'\n';
+    if(o.is_what_to_expect&&o.expectation_substantiation){
+      var es=o.expectation_substantiation;
+      if(es.onset_quotes&&es.onset_quotes.length){out+='Onset timing quotes:\n';es.onset_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
+      if(es.effects_quotes&&es.effects_quotes.length){out+='Temporary effects quotes:\n';es.effects_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
+    }
+    out+='\n';
+  });
   out+='\n=== PAIN POINTS ===\n';
   (a.pain_points||[]).forEach(function(p){out+='#'+p.rank+' '+p.label+'\n"'+p.customer_language+'"\n\n';});
+  var date=new Date();
+  var dateStr=date.getFullYear()+'-'+String(date.getMonth()+1).padStart(2,'0')+'-'+String(date.getDate()).padStart(2,'0');
   var blob=new Blob([out],{type:'text/plain'}),url=URL.createObjectURL(blob),link=document.createElement('a');
-  link.href=url;link.download=lastAnalysis.product.replace(/\s+/g,'-')+'-pdp-intel.txt';link.click();
+  link.href=url;link.download=lastAnalysis.product.replace(/\s+/g,'-').replace(/[®™©]/g,'')+'-review-analysis-'+dateStr+'.txt';link.click();
 }
 
 var _loadTimer=null,_loadStart=0;
-function showLoading(c){
+function showLoading(sampleSize,totalCount){
   document.getElementById('raLoading').classList.add('active');
-  document.getElementById('loadingCount').textContent=c.toLocaleString();
+  document.getElementById('loadingCount').textContent=sampleSize.toLocaleString();
+  document.getElementById('loadingTotal').textContent=totalCount.toLocaleString();
   ['step1','step2','step3','step4'].forEach(function(s){document.getElementById(s).className='loading-step';});
   _loadStart=Date.now();document.getElementById('loadingBar').style.width='0%';document.getElementById('loadingTimer').textContent='0s elapsed';
   if(_loadTimer)clearInterval(_loadTimer);
   _loadTimer=setInterval(function(){
     var elapsed=Math.round((Date.now()-_loadStart)/1000);
     document.getElementById('loadingTimer').textContent=elapsed+'s elapsed';
-    document.getElementById('loadingBar').style.width=Math.min(90,elapsed*3)+'%';
+    document.getElementById('loadingBar').style.width=Math.min(90,elapsed*2)+'%';
   },1000);
 }
 function hideLoading(){document.getElementById('raLoading').classList.remove('active');if(_loadTimer){clearInterval(_loadTimer);_loadTimer=null;}document.getElementById('loadingBar').style.width='100%';}
