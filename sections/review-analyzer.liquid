@@ -2,24 +2,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:#1a1a1f;            /* primary text — warm near-black */
-    --ink-soft:#3a3a42;        /* secondary text */
-    --ink-muted:#6b6b75;       /* tertiary, captions */
-    --ink-faint:#9a9aa3;       /* metadata */
+    --ink:#1a1a1f;
+    --ink-soft:#3a3a42;
+    --ink-muted:#6b6b75;
+    --ink-faint:#9a9aa3;
     --paper:#ffffff;
-    --cream:#faf7f2;           /* warm cream background */
-    --cream-deep:#f3ede3;      /* card backgrounds, panels */
-    --line:#e8e2d6;            /* borders, dividers */
+    --cream:#faf7f2;
+    --cream-deep:#f3ede3;
+    --line:#e8e2d6;
     --line-soft:#f0ebe1;
-    --accent:#a8553a;          /* muted terracotta — primary accent */
-    --accent-deep:#8a4530;     /* hover / pressed */
-    --accent-soft:#f5e8e1;     /* tinted backgrounds */
+    --accent:#a8553a;
+    --accent-deep:#8a4530;
+    --accent-soft:#f5e8e1;
     --accent-faint:#fbf3ee;
-    --warn:#b8860b;            /* warm amber for warnings */
+    --warn:#b8860b;
     --warn-soft:#fdf6e3;
-    --danger:#a83a2a;          /* deeper rust for errors */
+    --danger:#a83a2a;
     --danger-soft:#fbeae5;
-    --success:#5a7a3e;         /* muted olive for OK states */
+    --success:#5a7a3e;
     --success-soft:#eef2e6;
     --radius:6px;
     --radius-lg:10px;
@@ -33,7 +33,6 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--cream);font-family:var(--sans);font-size:15px;color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;}
 
-  /* ───── HERO / INTAKE ───── */
   .wrap{max-width:1140px;margin:0 auto;padding:64px 40px 120px;}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:16px;}
   .hero-title{font-family:var(--serif);font-size:56px;line-height:1.05;letter-spacing:-0.02em;font-weight:400;color:var(--ink);margin-bottom:16px;}
@@ -82,7 +81,6 @@
   .settings-field input{width:100%;padding:10px 12px;border:1px solid var(--line);background:var(--cream);font-size:14px;color:var(--ink);border-radius:4px;outline:none;font-family:var(--mono);}
   .settings-field input:focus{border-color:var(--accent);}
 
-  /* ───── LOADING ───── */
   .ra-loading{display:none;text-align:center;padding:80px 0;}
   .ra-loading.active{display:block;}
   .loading-ring{width:42px;height:42px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:raspin 0.9s linear infinite;margin:0 auto 24px;}
@@ -96,7 +94,6 @@
   .loading-step.active{color:var(--accent);}
   .loading-step.done{color:var(--success);}
 
-  /* ───── REPORT HEADER ───── */
   .ra-results{display:none;}
   .ra-results.active{display:block;}
 
@@ -107,13 +104,11 @@
   .report-meta-item{display:flex;align-items:center;gap:8px;}
   .report-meta-item strong{color:var(--ink);font-weight:600;}
 
-  /* ───── SECTIONS ───── */
   .ra-section{margin-bottom:88px;scroll-margin-top:32px;}
   .section-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:10px;}
   .section-heading{font-family:var(--serif);font-size:36px;color:var(--ink);font-weight:400;letter-spacing:-0.015em;line-height:1.15;margin-bottom:12px;}
   .section-deck{font-size:16px;color:var(--ink-soft);max-width:680px;line-height:1.6;margin-bottom:32px;}
 
-  /* Collapsible "how this works" — restrained, sits beneath section header */
   .how-this-works{margin-bottom:32px;}
   .how-toggle{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;user-select:none;padding:6px 0;border:none;background:none;transition:color 0.15s;}
   .how-toggle:hover{color:var(--accent);}
@@ -128,12 +123,10 @@
   .how-constraints{margin-top:14px;padding-top:14px;border-top:1px dashed rgba(168,85,58,0.3);}
   .how-constraints-label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:8px;}
 
-  /* ───── COPY BUTTON ───── */
   .btn-copy{flex-shrink:0;padding:7px 14px;background:transparent;border:1px solid var(--line);color:var(--ink-muted);font-family:var(--mono);font-size:11px;border-radius:4px;cursor:pointer;transition:all 0.15s;letter-spacing:0.02em;}
   .btn-copy:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-faint);}
   .btn-copy.copied{border-color:var(--success);color:var(--success);background:var(--success-soft);}
 
-  /* ───── ABOUT CARDS ───── */
   .choice-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .choice-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:border-color 0.15s, box-shadow 0.15s;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
   .choice-card:hover{border-color:var(--ink-faint);box-shadow:var(--shadow);}
@@ -155,7 +148,6 @@
   .diff-explanation-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;font-weight:600;margin-bottom:8px;}
   .diff-explanation-text{font-size:13px;color:var(--ink-soft);line-height:1.6;}
 
-  /* ───── PAIN POINTS COLLAPSIBLE NEAR ABOUT ───── */
   .pain-ref-panel{margin-bottom:28px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow:hidden;}
   .pain-ref-header{padding:14px 20px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background 0.15s;}
   .pain-ref-header:hover{background:var(--cream);}
@@ -168,7 +160,6 @@
   .pain-ref-item:last-child{border-bottom:none;}
   .pain-ref-item strong{color:var(--ink);font-weight:600;}
 
-  /* ───── MWP — wiki/v1 comparison ───── */
   .with-wiki-source{display:grid;grid-template-columns:1fr 280px;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:14px;overflow:hidden;transition:border-color 0.15s;}
   .with-wiki-source:hover{border-color:var(--ink-faint);}
   .wiki-source-col{background:var(--cream);border-left:1px solid var(--line);padding:22px 20px;display:flex;flex-direction:column;gap:10px;}
@@ -177,7 +168,6 @@
 
   .choice-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;line-height:1.4;font-family:var(--sans);letter-spacing:-0.005em;}
 
-  /* Source comparison table */
   .source-compare-wrap{margin-bottom:24px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow:hidden;}
   .source-compare-header{padding:14px 20px;background:var(--cream);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background 0.15s;}
   .source-compare-header:hover{background:var(--cream-deep);}
@@ -200,7 +190,6 @@
   .mismatch-text{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-bottom:10px;}
   .mismatch-list{margin:8px 0 0 0;padding-left:18px;font-size:13px;color:var(--ink-soft);line-height:1.8;}
 
-  /* ───── STATS ───── */
   .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:14px;}
   .stat-card{padding:36px 28px;background:var(--paper);display:flex;flex-direction:column;gap:10px;}
   .stat-pct{font-family:var(--serif);font-size:64px;line-height:1;color:var(--ink);font-weight:400;letter-spacing:-0.03em;}
@@ -208,7 +197,17 @@
   .stat-detail{font-size:12px;color:var(--ink-muted);font-family:var(--mono);}
   .stat-copy-row{display:flex;justify-content:flex-end;margin-top:6px;}
 
-  .stats-footnote{font-family:var(--mono);font-size:11px;color:var(--ink-muted);font-style:italic;margin-bottom:18px;letter-spacing:0.02em;}
+  .outcome-stats-wrap{margin-top:32px;border:1px solid var(--line);border-radius:var(--radius);background:var(--paper);overflow:hidden;}
+  .outcome-stats-header{padding:18px 22px;background:var(--cream);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background 0.15s;}
+  .outcome-stats-header:hover{background:var(--cream-deep);}
+  .outcome-stats-title{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:500;}
+  .outcome-stats-meta{font-family:var(--mono);font-size:11px;color:var(--ink-faint);letter-spacing:0.02em;}
+  .outcome-stats-toggle{font-size:11px;color:var(--ink-faint);transition:transform 0.2s;margin-left:12px;}
+  .outcome-stats-toggle.open{transform:rotate(180deg);}
+  .outcome-stats-body{display:none;padding:24px;}
+  .outcome-stats-body.open{display:block;}
+
+  .stats-footnote{font-family:var(--mono);font-size:11px;color:var(--ink-muted);font-style:italic;margin-top:14px;letter-spacing:0.02em;}
 
   .warn-yellow{background:var(--warn-soft);border:1px solid #f0d785;border-radius:var(--radius);padding:16px 20px;margin-bottom:16px;border-left:3px solid var(--warn);}
   .warn-yellow-title{font-family:var(--mono);font-size:11px;color:#7a5b08;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;}
@@ -222,7 +221,6 @@
   .transform-stat{font-family:var(--serif);font-size:28px;color:var(--ink);font-weight:400;line-height:1.25;margin-bottom:6px;letter-spacing:-0.01em;}
   .transform-sub{font-size:13px;color:var(--ink-muted);font-family:var(--mono);}
 
-  /* Substantiation block — refined as editorial footnote */
   .verification-block{margin-top:20px;padding-top:18px;border-top:1px solid var(--line-soft);}
   .verification-title{font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:12px;}
   .verification-row{font-family:var(--mono);font-size:12px;color:var(--ink-soft);line-height:1.7;margin-bottom:6px;}
@@ -237,7 +235,6 @@
   .alt-stat-text{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:400;line-height:1.3;margin-bottom:6px;letter-spacing:-0.01em;}
   .alt-stat-sub{font-size:13px;color:var(--ink-muted);font-family:var(--mono);}
 
-  /* ───── BENEFITS ───── */
   .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px;}
   .benefit-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color 0.15s;}
   .benefit-card:hover{border-color:var(--ink-faint);}
@@ -245,15 +242,16 @@
   .benefit-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.35;letter-spacing:-0.005em;}
   .benefit-proof{font-size:13px;color:var(--ink-soft);line-height:1.6;flex:1;}
   .benefit-footer{display:flex;justify-content:flex-end;margin-top:8px;}
-  .fold-divider{border:none;border-top:1px solid var(--line-soft);margin:24px 0 18px;}
 
-  /* ───── REVIEWS (2x4 grid) ───── */
   .reviews-list{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .review-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:14px;transition:border-color 0.15s;}
   .review-card:hover{border-color:var(--ink-faint);}
-  .review-top-row{display:flex;justify-content:space-between;align-items:center;}
+  .review-card.unverified{border-color:var(--danger);background:var(--danger-soft);}
+  .review-top-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
   .review-num{font-family:var(--mono);font-size:10px;color:var(--ink-faint);letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
   .review-stars{color:var(--accent);font-size:13px;letter-spacing:3px;}
+  .review-verified-badge{font-family:var(--mono);font-size:9px;color:var(--success);background:var(--success-soft);padding:3px 8px;border-radius:3px;letter-spacing:0.04em;font-weight:600;}
+  .review-unverified-badge{font-family:var(--mono);font-size:9px;color:var(--danger);background:white;padding:3px 8px;border-radius:3px;letter-spacing:0.04em;font-weight:600;border:1px solid var(--danger);}
   .review-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.4;font-family:var(--sans);letter-spacing:-0.005em;}
   .review-text{font-size:14px;color:var(--ink);line-height:1.7;font-style:italic;font-family:var(--serif);}
   .review-author-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:14px;border-top:1px solid var(--line-soft);flex-wrap:wrap;}
@@ -263,14 +261,12 @@
   .review-theme-tag{display:inline-block;font-family:var(--mono);font-size:10px;background:var(--accent-soft);color:var(--accent-deep);padding:3px 9px;border-radius:3px;letter-spacing:0.03em;font-weight:500;}
   .review-copy-row{display:flex;justify-content:flex-end;}
 
-  /* ───── INGREDIENTS ───── */
   .ing-headline{font-family:var(--serif);font-size:28px;line-height:1.2;color:var(--ink);font-weight:400;letter-spacing:-0.015em;}
   .ing-headline em{font-style:italic;color:var(--accent);}
   .ing-subline{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-top:14px;max-width:520px;}
   .ing-option-num{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:16px;letter-spacing:0.08em;text-transform:uppercase;font-weight:500;}
   .ing-option-body{flex:1;}
 
-  /* ───── CURATED ───── */
   .curated-wrap{background:var(--cream-deep);border:1px solid var(--line);border-radius:var(--radius);padding:36px;}
   .curated-list{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
   .curated-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;transition:border-color 0.15s;}
@@ -283,11 +279,21 @@
   .curated-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:10px;letter-spacing:0.04em;}
   .curated-meta.over{color:var(--danger);}
 
-  /* ───── FAQs ───── */
+  .curated-refusal{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:32px;text-align:center;}
+  .curated-refusal-icon{font-size:32px;color:var(--ink-faint);margin-bottom:12px;}
+  .curated-refusal-title{font-family:var(--serif);font-size:22px;color:var(--ink);font-weight:500;margin-bottom:10px;}
+  .curated-refusal-text{font-size:14px;color:var(--ink-soft);line-height:1.6;max-width:520px;margin:0 auto;}
+
+  .faq-group-label{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin:24px 0 12px;padding-top:24px;border-top:1px dashed var(--line);}
+  .faq-group-label:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+  .faq-group-label.gap{color:var(--warn);}
+
   .faq-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);margin-bottom:8px;overflow:hidden;transition:border-color 0.15s;}
   .faq-card:hover{border-color:var(--ink-faint);}
   .faq-card-expect{border:1px solid var(--accent);background:var(--accent-faint);}
+  .faq-card-gap{border-color:#f0d785;background:var(--warn-soft);}
   .faq-expect-pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:white;background:var(--accent);padding:3px 10px;border-radius:3px;font-weight:600;width:fit-content;margin-bottom:6px;}
+  .faq-gap-pill{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:#7a5b08;background:white;border:1px solid var(--warn);padding:3px 10px;border-radius:3px;font-weight:600;width:fit-content;margin-bottom:6px;}
   .faq-header{padding:20px 24px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;user-select:none;transition:background 0.15s;}
   .faq-header:hover{background:var(--cream);}
   .faq-card-expect .faq-header:hover{background:var(--accent-soft);}
@@ -298,18 +304,18 @@
   .faq-toggle.open{transform:rotate(180deg);}
   .faq-body{padding:20px 24px 22px;border-top:1px solid var(--line-soft);display:none;background:var(--cream);}
   .faq-body.open{display:block;}
-  .faq-source-label{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-bottom:6px;letter-spacing:0.04em;}
+  .faq-source-label{font-family:var(--mono);font-size:11px;color:var(--ink-muted);margin-bottom:6px;letter-spacing:0.04em;font-weight:600;text-transform:uppercase;}
   .faq-source-quote{font-size:14px;color:var(--ink-soft);font-style:italic;line-height:1.6;margin-bottom:16px;font-family:var(--serif);}
   .faq-answer-wrap{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:12px;}
   .faq-answer-label{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;font-weight:600;}
   .faq-answer-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;}
   .faq-answer-text{font-size:14px;color:var(--ink);line-height:1.7;flex:1;}
+  .faq-answer-empty{font-size:14px;color:var(--ink-muted);font-style:italic;line-height:1.7;}
   .faq-answer-meta{font-family:var(--mono);font-size:10px;color:var(--ink-faint);margin-top:10px;letter-spacing:0.04em;}
   .faq-answer-meta.over{color:var(--danger);}
   .faq-note{font-family:var(--mono);font-size:11px;color:var(--ink-muted);letter-spacing:0.02em;}
   .faq-note span{color:var(--accent);}
 
-  /* ───── REFERENCE ───── */
   .ref-divider{border:none;border-top:1px solid var(--line);margin:80px 0 48px;}
   .ref-label-txt{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-bottom:40px;letter-spacing:0.1em;text-transform:uppercase;}
 
@@ -331,24 +337,21 @@
   .pain-label-txt{font-size:16px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-0.005em;}
   .pain-language{font-size:14px;color:var(--ink-soft);line-height:1.7;font-style:italic;font-family:var(--serif);}
 
-  /* ───── ERROR / EXPORT ───── */
   .error-box{display:none;background:var(--danger-soft);border:1px solid #e8b5a8;border-radius:var(--radius);padding:22px 26px;font-size:15px;color:var(--danger);margin-bottom:24px;}
   .error-box.active{display:block;}
   .export-bar{display:flex;gap:12px;padding-top:36px;border-top:1px solid var(--line);margin-top:48px;}
   .btn-export{padding:13px 30px;background:var(--paper);border:1px solid var(--line);color:var(--ink);font-size:14px;border-radius:var(--radius);cursor:pointer;transition:all 0.15s;font-family:var(--sans);font-weight:500;}
   .btn-export:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-faint);}
 
-  /* ───── RESPONSIVE ───── */
   @media(max-width:900px){.choice-list,.curated-list,.reviews-list,.benefits-grid{grid-template-columns:1fr;}.with-wiki-source{grid-template-columns:1fr;}.wiki-source-col{border-left:none;border-top:1px solid var(--line);}.hero-title{font-size:42px;}.report-title{font-size:36px;}.section-heading{font-size:28px;}}
   @media(max-width:700px){.stats-grid,.sentiment-stats-row{grid-template-columns:1fr 1fr;}.settings-grid{grid-template-columns:1fr 1fr;}.wrap{padding:40px 24px 80px;}}
 </style>
 
 <div class="wrap">
-  <div class="eyebrow">Global Healing · PDP Intelligence</div>
+  <div class="eyebrow">Global Healing · Review Intelligence</div>
   <h1 class="hero-title">Turn reviews into<br><em>conversion copy.</em></h1>
-  <p class="hero-sub">Upload your Yotpo CSV. Paste the product wiki. Get a PDP-ready research deliverable — grounded in real customer language.</p>
+  <p class="hero-sub">Upload your Yotpo CSV. Paste the product wiki. Get a PDP-ready research deliverable — grounded in real customer language and documented product facts.</p>
 
-  <!-- STEP 1: Upload CSV -->
   <div class="step-block">
     <div class="step-num">Step 01</div>
     <div class="upload-zone" id="uploadZone">
@@ -359,26 +362,23 @@
     </div>
     <div class="file-loaded" id="fileLoaded" style="display:none;margin-top:16px;">
       <div class="dot"></div>
-      <div><strong id="fileName">file.csv</strong> loaded — <span id="reviewCount">0</span> reviews across <span id="productCount">0</span> products</div>
+      <div><strong id="fileName">file.csv</strong> loaded — <span id="reviewCount">0</span> total reviews, <span id="publishedCount">0</span> published, across <span id="productCount">0</span> products</div>
     </div>
   </div>
 
-  <!-- STEP 2: Select Product -->
   <div class="step-block">
     <div class="step-num">Step 02</div>
     <label class="step-label" for="productSelect">Select Product</label>
     <select class="ra-select" id="productSelect" disabled><option value="">— upload a CSV first —</option></select>
   </div>
 
-  <!-- STEP 3: Wiki -->
   <div class="step-block">
     <div class="step-num">Step 03</div>
     <label class="step-label" for="wikiText">Product Wiki <span class="required-tag">Required</span></label>
-    <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Drives Made With Purpose benefits and Ingredients section."></textarea>
-    <div class="field-help">Plain text only. Wiki content drives Made With Purpose and Ingredients. The exact wiki sentences that informed each card will be shown beside it.</div>
+    <textarea class="ra-textarea" id="wikiText" placeholder="Paste product wiki text here — copy from Google Doc. Drives Made With Purpose, Ingredients, Curated Collection, and all FAQ answers."></textarea>
+    <div class="field-help">Plain text only. Wiki content is the source of truth for FAQ answers, ingredient claims, and pairing recommendations. Review language only informs questions and customer-felt pain points.</div>
   </div>
 
-  <!-- Output Settings (collapsed) -->
   <div class="step-block">
     <span class="collapsible-toggle" onclick="togglePanel('settingsPanel','settingsArrow')">Output settings <span class="collapsible-arrow" id="settingsArrow">▾</span></span>
     <div class="collapsible-panel" id="settingsPanel">
@@ -387,6 +387,7 @@
           <div class="settings-field"><label>About — max chars</label><input type="number" id="set_about_chars" value="205" min="100" max="300"></div>
           <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="140" min="40" max="200"></div>
           <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="250" min="80" max="400"></div>
+          <div class="settings-field"><label>Ingredient title — max chars</label><input type="number" id="set_ing_title_chars" value="40" min="20" max="80"></div>
           <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
           <div class="settings-field"><label>Curated subhead — max chars</label><input type="number" id="set_curated_chars" value="80" min="40" max="200"></div>
           <div class="settings-field"><label>FAQ answer — max chars</label><input type="number" id="set_faq_chars" value="150" min="80" max="400"></div>
@@ -396,7 +397,6 @@
     </div>
   </div>
 
-  <!-- STEP 4: Analyze button -->
   <div class="step-block">
     <div class="step-num">Step 04</div>
     <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button>
@@ -404,20 +404,18 @@
 
   <div class="error-box" id="errorBox"></div>
 
-  <!-- LOADING -->
   <div class="ra-loading" id="raLoading">
     <div class="loading-ring"></div>
     <div class="loading-text">Analyzing reviews</div>
-    <div class="loading-text-meta"><span id="loadingCount">0</span> of <span id="loadingTotal">0</span> most recent reviews</div>
+    <div class="loading-text-meta"><span id="loadingCount">0</span> of <span id="loadingTotal">0</span> most recent published reviews</div>
     <div class="loading-bar-track"><div id="loadingBar" class="loading-bar"></div></div>
     <div class="loading-timer" id="loadingTimer">0s elapsed</div>
-    <div class="loading-step" id="step1">↳ Sorting and parsing recent reviews</div>
-    <div class="loading-step" id="step2">↳ Mining pain points and customer language</div>
-    <div class="loading-step" id="step3">↳ Writing PDP copy for all sections</div>
+    <div class="loading-step" id="step1">↳ Filtering published reviews and parsing</div>
+    <div class="loading-step" id="step2">↳ Fetching v1 PDP benefits</div>
+    <div class="loading-step" id="step3">↳ Mining review patterns and writing copy</div>
     <div class="loading-step" id="step4">↳ Verifying limits and rewriting if needed</div>
   </div>
 
-  <!-- RESULTS -->
   <div class="ra-results" id="raResults">
     <div class="report-masthead">
       <div class="report-eyebrow">Review Analysis Report</div>
@@ -432,21 +430,23 @@
     <div class="ra-section" id="sec-about">
       <div class="section-eyebrow">Section 01</div>
       <h2 class="section-heading">About</h2>
-      <p class="section-deck">Customer-facing copy options. Each leads with the condition as customers feel it, then names the strongest differentiator for the product.</p>
+      <p class="section-deck">Customer-facing copy options structured benefit → pain → differentiator, with the product named in each option.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howAbout')">How this section works <span class="how-arrow" id="howAboutArrow">▾</span></button>
         <div class="how-content" id="howAbout">
           <ul>
             <li>5 About copy options, each tagged with pain point, benefit, and differentiator</li>
-            <li>Each option leads with the customer condition, then names the strongest differentiator (mechanism, form, sourcing, bioavailability, combination, or use case)</li>
-            <li>Differentiation framework picks the best angle per option using wiki + reviews — not forced to ingredient mechanism</li>
+            <li>Structure: lead with benefit → acknowledge pain → name differentiator</li>
+            <li>Product is named in every option (e.g. "Oxy-Powder…")</li>
+            <li>Differentiation framework picks the best angle per option (mechanism, form, sourcing, bioavailability, combination, use case)</li>
             <li>"Why this differentiates" reasoning shown under each card</li>
           </ul>
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
               <li>Hard limit: 205 characters per option (auto-rewritten if over)</li>
-              <li>No question marks, casual openers, metaphors, or banned wellness terms</li>
+              <li>No question marks, casual openers, metaphors</li>
+              <li>Banned words: program, protocol, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances</li>
               <li>Zero health claims — no diagnose, treat, cure, prevent, reverse, or heal language</li>
             </ul>
           </div>
@@ -473,7 +473,7 @@
           <ul>
             <li>5 benefit options — 3 conversion-angle rewrites of v1 PDP benefits + 2 fresh angles from wiki</li>
             <li>Side-by-side wiki vs v1 PDP comparison shown above the cards (click to expand details)</li>
-            <li>Mismatch callout flags when wiki and v1 don't align — review wiki-sourced options carefully since wiki may include non-customer-facing content</li>
+            <li>Mismatch callout flags when wiki and v1 don't align</li>
             <li>Pick 3 to ship on the PDP</li>
           </ul>
           <div class="how-constraints">
@@ -499,15 +499,13 @@
         </div>
       </div>
       <div id="mismatchCallout" style="display:none" class="mismatch-callout"></div>
-      <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki only — all labeled as wiki-sourced. v1_pdp_source will be empty on all cards.</div></div>
+      <div id="v1WarnBanner" style="display:none" class="warn-yellow"><div class="warn-yellow-title">No v1 PDP benefits found</div><div class="warn-text">Could not fetch existing benefits from the live PDP. Options below are generated from wiki only — all labeled as wiki-sourced.</div></div>
       <div id="mwpList"></div>
       <div style="margin-top:64px;padding-top:48px;border-top:1px solid var(--line);">
         <div class="section-eyebrow" style="color:var(--success);">Key Benefits</div>
         <h3 class="section-heading" style="font-size:26px;">Key Benefits</h3>
-        <p class="section-deck">Benefits derived from review patterns — separate from MWP options above.</p>
+        <p class="section-deck">Top benefits derived from review patterns. No percentages — qualitative observations only.</p>
         <div class="benefits-grid" id="reviewBenefitsGrid"></div>
-        <hr class="fold-divider">
-        <div class="benefits-grid" id="extraBenefitsGrid"></div>
       </div>
     </div>
 
@@ -515,42 +513,52 @@
     <div class="ra-section" id="sec-stats">
       <div class="section-eyebrow">Section 03</div>
       <h2 class="section-heading">Real Customers. Real Results.</h2>
-      <p class="section-deck">Outcome statistics mined from review language, with substantiation data shown beside every claim.</p>
+      <p class="section-deck">Transformation timeline mined from review language, with full substantiation data shown beside every claim.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howStats')">How this section works <span class="how-arrow" id="howStatsArrow">▾</span></button>
         <div class="how-content" id="howStats">
           <ul>
-            <li>Outcome statistics mined from review language (not star ratings)</li>
+            <li>Transformation Timeline is the primary stat shown — uses keyword intersection counting for substantiation</li>
+            <li>Alternative "X in Y" framing options provided when supported</li>
+            <li>Outcome percentage grid available but collapsed by default (use only for products with a clinical study)</li>
             <li>Substantiation data — mention count, keywords, sample quotes — shown beside every claim</li>
-            <li>Transformation timeline always included as alternative to the percentage grid</li>
-            <li>Alternative "X in Y" framing options also provided when supported by reviews</li>
           </ul>
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
-              <li>Percentage grid (Option A) for products with clinical study only — all others use timeline (Option B)</li>
-              <li>Stat label: 20 characters max</li>
               <li>Mention count = reviews containing BOTH a timeframe phrase AND an outcome phrase</li>
+              <li>Stat label: 20 characters max</li>
               <li>No disease treatment claims</li>
             </ul>
           </div>
         </div>
       </div>
-      <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
-      <div id="statsWarnYellow" style="display:none" class="warn-yellow"><div class="warn-yellow-title">Consider using transformation timeline instead</div><div class="warn-text" id="statsWarnYellowText"></div></div>
-      <div class="stats-grid" id="statsGrid"></div>
-      <div class="stats-footnote" id="statsFootnote"></div>
-      <div id="altStatsWrap" style="display:none">
-        <div style="font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;margin:24px 0 14px;font-weight:600;">Alternative "X in Y" Framing</div>
-        <div id="altStatsList"></div>
-      </div>
       <div id="transformCard" style="display:none" class="transform-card">
         <div class="transform-inner">
-          <div class="transform-label">Transformation Timeline — always include</div>
+          <div class="transform-label">Transformation Timeline</div>
           <div class="transform-stat" id="transformStat"></div>
           <div class="transform-sub" id="transformSub"></div>
         </div>
         <button class="btn-copy" id="transformCopyBtn">Copy</button>
+      </div>
+      <div id="altStatsWrap" style="display:none;margin-top:24px;">
+        <div style="font-family:var(--mono);font-size:11px;color:var(--ink-muted);text-transform:uppercase;letter-spacing:0.1em;margin:0 0 14px;font-weight:600;">Alternative "X in Y" Framing</div>
+        <div id="altStatsList"></div>
+      </div>
+      <div class="outcome-stats-wrap">
+        <div class="outcome-stats-header" onclick="toggleOutcomeStats()">
+          <div>
+            <div class="outcome-stats-title">Outcome percentage grid <span style="color:var(--ink-faint);text-transform:none;letter-spacing:0;margin-left:8px;">— clinical-study products only</span></div>
+            <div class="outcome-stats-meta" id="outcomeStatsStatus" style="margin-top:4px;"></div>
+          </div>
+          <span class="outcome-stats-toggle" id="outcomeStatsToggle">▾</span>
+        </div>
+        <div class="outcome-stats-body" id="outcomeStatsBody">
+          <div id="statsWarnRed" style="display:none" class="warn-red"><div class="warn-red-title">Exclude this section from the PDP</div><div class="warn-text" id="statsWarnRedText"></div></div>
+          <div id="statsWarnYellow" style="display:none" class="warn-yellow"><div class="warn-yellow-title">Consider using transformation timeline instead</div><div class="warn-text" id="statsWarnYellowText"></div></div>
+          <div class="stats-grid" id="statsGrid"></div>
+          <div class="stats-footnote" id="statsFootnote"></div>
+        </div>
       </div>
     </div>
 
@@ -558,15 +566,16 @@
     <div class="ra-section" id="sec-reviews">
       <div class="section-eyebrow">Section 04</div>
       <h2 class="section-heading">Reviews</h2>
-      <p class="section-deck">Verbatim reviews selected for articulate language and varied themes. Original text preserved exactly.</p>
+      <p class="section-deck">Verbatim published reviews selected for articulate language and varied themes. Every review verified against the source CSV.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howReviews')">How this section works <span class="how-arrow" id="howReviewsArrow">▾</span></button>
         <div class="how-content" id="howReviews">
           <ul>
-            <li>8 verbatim reviews from 4-5 star ratings with strong, articulate language</li>
-            <li>Selected to cover varied benefits and themes — not 8 versions of the same story</li>
+            <li>8 verbatim reviews from 4-5 star Published reviews only</li>
+            <li>Selected to cover varied benefits and themes</li>
             <li>AI-generated title only — review text is unchanged from the customer</li>
             <li>Named authors prioritized over anonymous "Verified Buyer"</li>
+            <li>Each review is checked against the source CSV — verified or flagged</li>
           </ul>
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
@@ -574,6 +583,7 @@
               <li>Review text: 250 characters max</li>
               <li>Layout: 2 columns × 4 rows</li>
               <li>Original text preserved verbatim — no rephrasing</li>
+              <li>Pending, hidden, or unpublished reviews excluded at the CSV upload step</li>
             </ul>
           </div>
         </div>
@@ -585,7 +595,7 @@
     <div class="ra-section" id="sec-ingredients">
       <div class="section-eyebrow">Section 05</div>
       <h2 class="section-heading">Ingredients</h2>
-      <p class="section-deck">Editorial headline options treating all ingredients as one combined story.</p>
+      <p class="section-deck">Editorial headline options treating all ingredients as one combined story. Every claim grounded in a directly supporting wiki sentence.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howIng')">How this section works <span class="how-arrow" id="howIngArrow">▾</span></button>
         <div class="how-content" id="howIng">
@@ -593,11 +603,12 @@
             <li>5 editorial headline options treating all ingredients as one combined story</li>
             <li>Each option has a single italicized keyword</li>
             <li>Wiki source sentence shown beside each option</li>
-            <li>Pick one and edit for brand voice</li>
+            <li>Headlines must be directly supported by the wiki — no source stretching</li>
           </ul>
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
+              <li>Headline: 40 characters max (auto-rewritten if over)</li>
               <li>Subline: 120 characters max (auto-rewritten if over)</li>
               <li>No asterisks in headline</li>
             </ul>
@@ -611,14 +622,14 @@
     <div class="ra-section" id="sec-curated">
       <div class="section-eyebrow">Section 06</div>
       <h2 class="section-heading">Curate Your Collection</h2>
-      <p class="section-deck">Heading and subhead options for the section that introduces companion products.</p>
+      <p class="section-deck">Heading and subhead options sourced from the wiki's Recommended Pairings section.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howCur')">How this section works <span class="how-arrow" id="howCurArrow">▾</span></button>
         <div class="how-content" id="howCur">
           <ul>
-            <li>3 heading + subhead options for the section that introduces ~3 recommended products</li>
-            <li>Pulls pairing logic from wiki's Recommended Pairings section when present</li>
-            <li>Inferred from review use cases when wiki has no pairings section (flagged)</li>
+            <li>3 heading + subhead options drawn from wiki's Recommended Pairings section</li>
+            <li>Names specific companion products from the wiki</li>
+            <li>Refuses to generate if the wiki has no Recommended Pairings section</li>
             <li>Pick one and edit for brand voice</li>
           </ul>
           <div class="how-constraints">
@@ -626,37 +637,39 @@
             <ul>
               <li>Heading: 3-4 words</li>
               <li>Subhead: 80 characters max (auto-rewritten if over)</li>
-              <li>Refers to companion products generically — doesn't name specific products</li>
+              <li>Names specific companion products from wiki</li>
+              <li>Banned words: program, protocol</li>
               <li>No disease claims</li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="curated-wrap">
-        <div class="curated-list" id="curatedList"></div>
-      </div>
+      <div id="curatedContainer"></div>
     </div>
 
     <!-- FAQs -->
     <div class="ra-section" id="sec-faqs">
       <div class="section-eyebrow">Section 07</div>
       <h2 class="section-heading">FAQs</h2>
-      <p class="section-deck">Questions ranked by purchase-blocking impact, with a proactive "What to Expect" highlighted at the top.</p>
+      <p class="section-deck">Questions surfaced by review patterns. Answers sourced from the wiki only — questions without wiki coverage are grouped below for manual answering.</p>
       <div class="how-this-works">
         <button class="how-toggle" onclick="toggleHow('howFaq')">How this section works <span class="how-arrow" id="howFaqArrow">▾</span></button>
         <div class="how-content" id="howFaq">
           <ul>
-            <li>8 questions ranked by purchase-blocking impact</li>
-            <li>FAQ #1 is always a "What to Expect" question (highlighted) with substantiation block — review quotes for onset timing and temporary effects</li>
-            <li>Dosing/instructions sourced from the wiki — never invented</li>
-            <li>FAQs flagged as "needs manual answer" when wiki doesn't cover the topic</li>
+            <li><strong>Questions</strong> come from review patterns — what customers actually ask, worry about, or hesitate on</li>
+            <li><strong>Answers</strong> come from the wiki only — never from review language</li>
+            <li>Product is named in every answer (e.g. "Oxy-Powder helps…")</li>
+            <li>FAQ #1 is always a "What to Expect" question (highlighted) with substantiation block</li>
+            <li>Questions without wiki coverage grouped below as "Needs manual answer"</li>
           </ul>
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
               <li>Answer: 150 characters max (auto-rewritten if over)</li>
-              <li>Wiki is source of truth for dosing — exact dose, timing, with/without food</li>
+              <li>Wiki is source of truth — exact dose, timing, with/without food</li>
+              <li>Banned words in answers: program, protocol</li>
               <li>No disease treatment claims</li>
+              <li>Review quotes shown as "Why we're asking" context, never as answer source</li>
             </ul>
           </div>
         </div>
@@ -689,7 +702,7 @@
           <div class="sentiment-fill s-neutral" id="sentimentNeu" style="width:0%"></div>
           <div class="sentiment-fill s-negative" id="sentimentNeg" style="width:0%"></div>
         </div>
-        <div class="sentiment-note">Based on tone analysis of review language, not star ratings. Percentages reflect how customers describe their experience.</div>
+        <div class="sentiment-note">Based on tone analysis of review language, not star ratings.</div>
       </div>
     </div>
 
@@ -702,21 +715,21 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 <script>
-var allReviews=[],lastAnalysis=null;
+var allReviews=[],publishedReviews=[],lastAnalysis=null;
 var THRESHOLD=72;
 var lastV1PdpBenefits=null;
 var SAMPLE_SIZE=300;
-var DEFAULTS={about_chars:205,mwp_chars:140,review_chars:250,ing_chars:120,curated_chars:80,faq_chars:150,stat_chars:20,faq_count:8};
 
 function getSettings(){
   return {
-    about_chars:parseInt(document.getElementById('set_about_chars').value)||DEFAULTS.about_chars,
-    mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||DEFAULTS.mwp_chars,
-    review_chars:parseInt(document.getElementById('set_review_chars').value)||DEFAULTS.review_chars,
-    ing_chars:parseInt(document.getElementById('set_ing_chars').value)||DEFAULTS.ing_chars,
-    curated_chars:parseInt(document.getElementById('set_curated_chars').value)||DEFAULTS.curated_chars,
-    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||DEFAULTS.faq_chars,
-    stat_chars:parseInt(document.getElementById('set_stat_chars').value)||DEFAULTS.stat_chars,
+    about_chars:parseInt(document.getElementById('set_about_chars').value)||205,
+    mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||140,
+    review_chars:parseInt(document.getElementById('set_review_chars').value)||250,
+    ing_title_chars:parseInt(document.getElementById('set_ing_title_chars').value)||40,
+    ing_chars:parseInt(document.getElementById('set_ing_chars').value)||120,
+    curated_chars:parseInt(document.getElementById('set_curated_chars').value)||80,
+    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||150,
+    stat_chars:parseInt(document.getElementById('set_stat_chars').value)||20,
     faq_count:8
   };
 }
@@ -726,24 +739,35 @@ function toggleHow(id){var el=document.getElementById(id);el.classList.toggle('o
 function togglePainRef(){var b=document.getElementById('painRefBody'),t=document.getElementById('painRefToggle');b.classList.toggle('open');t.classList.toggle('open');}
 function toggleSourceCompare(){var b=document.getElementById('sourceCompareBody'),t=document.getElementById('sourceCompareToggle');b.style.display=b.style.display==='block'?'none':'block';t.classList.toggle('open');}
 function toggleSourceRow(rowId){var r=document.getElementById(rowId);if(r)r.classList.toggle('open');}
+function toggleOutcomeStats(){var b=document.getElementById('outcomeStatsBody'),t=document.getElementById('outcomeStatsToggle');b.classList.toggle('open');t.classList.toggle('open');}
 
 document.getElementById('uploadZone').addEventListener('dragover',function(e){e.preventDefault();this.classList.add('drag-over');});
 document.getElementById('uploadZone').addEventListener('dragleave',function(){this.classList.remove('drag-over');});
 document.getElementById('uploadZone').addEventListener('drop',function(e){e.preventDefault();this.classList.remove('drag-over');if(e.dataTransfer.files[0])processFile(e.dataTransfer.files[0]);});
 document.getElementById('csvFile').addEventListener('change',function(e){if(e.target.files[0])processFile(e.target.files[0]);});
 
+function getStatusCol(reviews){var keys=['Review Status','review status','review_status','Status','status'];for(var i=0;i<keys.length;i++){if(reviews[0]&&reviews[0][keys[i]]!==undefined)return keys[i];}return null;}
+function isPublishedStatus(value){if(!value)return false;var v=String(value).toLowerCase().trim();return v==='published'||v==='true'||v==='1';}
+
 function processFile(file){
   Papa.parse(file,{header:true,skipEmptyLines:true,complete:function(r){
     allReviews=r.data;
-    var products=getProducts(allReviews),counts=getProductCounts(allReviews);
+    var statusCol=getStatusCol(allReviews);
+    if(statusCol){
+      publishedReviews=allReviews.filter(function(row){return isPublishedStatus(row[statusCol]);});
+    } else {
+      publishedReviews=allReviews;
+    }
+    var products=getProducts(publishedReviews),counts=getProductCounts(publishedReviews);
     var sel=document.getElementById('productSelect');
     sel.innerHTML='<option value="">— choose a product —</option>';
-    products.forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p+' ('+(counts[p]||0).toLocaleString()+' reviews)';sel.appendChild(o);});
+    products.forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p+' ('+(counts[p]||0).toLocaleString()+' published)';sel.appendChild(o);});
     sel.disabled=false;document.getElementById('analyzeBtn').disabled=false;
     document.getElementById('uploadZone').style.display='none';
     document.getElementById('fileLoaded').style.display='flex';
     document.getElementById('fileName').textContent=file.name;
     document.getElementById('reviewCount').textContent=allReviews.length.toLocaleString();
+    document.getElementById('publishedCount').textContent=publishedReviews.length.toLocaleString();
     document.getElementById('productCount').textContent=products.length.toLocaleString();
   },error:function(){showError("Couldn't parse CSV.");}});
 }
@@ -751,14 +775,15 @@ function processFile(file){
 function getProductCol(reviews){var keys=['product_title','Product Title','product_name','Product Name','title','name'];for(var i=0;i<keys.length;i++){if(reviews[0]&&reviews[0][keys[i]]!==undefined)return keys[i];}return null;}
 function getProducts(reviews){var col=getProductCol(reviews);if(!col)return['All Reviews'];var set=new Set(reviews.map(function(r){return r[col];}).filter(Boolean));return Array.from(set).sort();}
 function getProductCounts(reviews){var col=getProductCol(reviews);if(!col)return{};var c={};reviews.forEach(function(r){var p=r[col];if(p)c[p]=(c[p]||0)+1;});return c;}
-function getReviewsForProduct(p){if(p==='All Reviews')return allReviews;var col=getProductCol(allReviews);if(!col)return allReviews;return allReviews.filter(function(r){return r[col]===p;});}
-function getDateCol(r){var keys=['review creation date','Review Creation Date','created_at','Created At','date','Date','review_date'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
+function getReviewsForProduct(p){if(p==='All Reviews')return publishedReviews;var col=getProductCol(publishedReviews);if(!col)return publishedReviews;return publishedReviews.filter(function(r){return r[col]===p;});}
+function getDateCol(r){var keys=['Review Creation Date','review creation date','created_at','Created At','date','Date','review_date'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
 function sortByDateDesc(reviews){var dc=getDateCol(reviews[0]);if(!dc)return reviews;return reviews.slice().sort(function(a,b){return new Date(b[dc]||0)-new Date(a[dc]||0);});}
 function getDateRange(reviews){var dc=getDateCol(reviews[0]);if(!dc)return null;var dates=reviews.map(function(r){return new Date(r[dc]);}).filter(function(d){return !isNaN(d);});if(!dates.length)return null;dates.sort(function(a,b){return a-b;});var fmt=function(d){return d.toLocaleDateString('en-US',{month:'short',year:'numeric'});};return fmt(dates[0])+' \u2013 '+fmt(dates[dates.length-1]);}
 function getAuthorCol(r){var keys=['Reviewer Display Name','reviewer display name','display name','Display Name','reviewer_name','Reviewer Name','author','Author'];for(var i=0;i<keys.length;i++){if(r&&r[keys[i]]!==undefined)return keys[i];}return null;}
-function getReviewText(r){var keys=['review_content','Review Content','body','Body','content','Content','review','Review','comment','Comment'];for(var i=0;i<keys.length;i++){if(r[keys[i]]&&r[keys[i]].trim())return r[keys[i]].trim();}return Object.values(r).find(function(v){return v&&v.length>40;})||'';}
+function getReviewText(r){var keys=['Review Content','review_content','body','Body','content','Content','review','Review','comment','Comment'];for(var i=0;i<keys.length;i++){if(r[keys[i]]&&r[keys[i]].trim())return r[keys[i]].trim();}return Object.values(r).find(function(v){return v&&v.length>40;})||'';}
 
-var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives','inner leaf only','freeze-dried potency','freeze dried','purity-tested','purity tested','made in the usa','cgmp','third-party tested','sourced','source &','source and quality','backed by research'];
+var GENERIC_TERMS=['plant-based','plant based','made in usa','pharmaceutical free','pharmaceutical-free','non-gmo','gluten free','gluten-free','vegan','soy free','soy-free','dairy free','dairy-free','organic certified','certified organic','no fillers','no additives','inner leaf only','freeze-dried potency','freeze dried','purity-tested','purity tested','made in the usa','cgmp','third-party tested'];
+var BANNED_WORDS=['program','programs','protocol','protocols'];
 
 var PRODUCT_HANDLES={
   'Acid Reflux Relief':'acid-reflux-relief-supplement','Aloe Vera':'aloe-vera-capsules','Ashwagandha':'organic-ashwagandha',
@@ -813,35 +838,35 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'"about_options":[{"num":1,"text":"max 205 chars","pain_point_tag":"2-4 word label","benefit_tag":"2-4 word label","differentiator_tag":"2-4 word label","differentiator_type":"Mechanism|Form|Sourcing|Bioavailability|Combination|Use Case","why_this_differentiates":"2-3 sentence explanation"}],'
     +'"made_with_purpose":[{"num":1,"title":"2-4 words, prefer 3","description":"","wiki_source":"exact quoted sentence from wiki","v1_pdp_source":"matching v1 PDP benefit text if applicable","source_type":"v1_pdp or wiki"}],'
     +'"wiki_v1_alignment":{"has_mismatch":false,"wiki_only_adds":["benefit titles in wiki but not v1"],"v1_only_adds":["benefit titles in v1 but not wiki"],"contradictions":["specific contradiction descriptions"]},'
-    +'"benefits":[{"rank":1,"title":"","proof":"","pct":0}],'
+    +'"benefits":[{"rank":1,"title":"","proof":""}],'
     +'"outcome_stats":[{"percentage":0,"detail":"max 20 chars","count":0}],'
     +'"transformation":{"stat":"X in Y customers [result] within [timeframe]","timeframe":"within X weeks","fraction":"X in Y","percentage":0,"sub":"Based on [timeframe] language in reviews","mention_count":0,"timeframe_keywords":["first night","overnight","by morning"],"outcome_keywords":["relief","worked","felt better"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]},'
     +'"alt_stats":[{"text":"X in Y customers [outcome] within [timeframe]","sub":"[timeframe] · [count] reviewers","mention_count":0,"timeframe_keywords":["first night","overnight"],"outcome_keywords":["relief","worked"],"sample_quotes":["verbatim quote 1","verbatim quote 2","verbatim quote 3"]}],'
     +'"reviews":[{"num":1,"title":"","original_text":"","original_author":"","theme":""}],'
-    +'"ingredients":[{"num":1,"headline":"plain text headline","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki"}],'
-    +'"curated_collection":[{"num":1,"title":"3-4 words","subhead":"max 80 chars","context":""}],'
-    +'"faqs":[{"rank":1,"question":"","source_language":"","suggested_answer":"","answer_note":"","is_what_to_expect":false,"expectation_substantiation":{"onset_quotes":["verbatim quote"],"effects_quotes":["verbatim quote"]}}]}';
+    +'"ingredients":[{"num":1,"headline":"plain text headline max 40 chars","keyword":"word to italicize","subline":"","wiki_source":"exact quoted sentence from wiki that directly supports the headline claim"}],'
+    +'"curated_collection":{"has_pairings":false,"options":[{"num":1,"title":"3-4 words","subhead":"max 80 chars naming specific companion products from wiki","context":"","wiki_source":"exact quoted sentence from wiki Recommended Pairings"}]},'
+    +'"faqs":[{"rank":1,"question":"","review_context":"why this question came from reviews","suggested_answer":"","wiki_source":"exact quoted wiki sentence used to generate the answer","needs_manual_answer":false,"manual_answer_reason":"","is_what_to_expect":false,"expectation_substantiation":{"onset_quotes":["verbatim review quote"],"effects_quotes":["verbatim review quote"]}}]}';
 
-  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' reviews for "'+product+'".'+wikiSection
+  return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' published reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Each contains TWO elements: (1) customer CONDITION as the customer experiences it (constipation, bloating, sluggish digestion, pressure, heaviness) — declarative, no question marks, no casual openers; (2) the strongest DIFFERENTIATOR for this product. Pick the differentiator type per option using this hierarchy: Mechanism (specific ingredient action) > Form/Delivery (liquid, liposomal, spore-forming, sublingual) > Sourcing (wildcrafted, single-origin, cold-pressed) > Bioavailability (methylated, chelated, standardized %) > Combination (synergistic stack with named purpose) > Use Case (specific timing/situation like post-antibiotic, daily reset). Each of the 5 options should test a DIFFERENT differentiator angle when the wiki supports it — do not use the same differentiator type for all 5. differentiator_type must be one of: Mechanism, Form, Sourcing, Bioavailability, Combination, Use Case. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. Skip generic terms (non-GMO, vegan, made in USA, gluten-free, no fillers). BANNED: question marks, casual openers, metaphors, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims.'
+    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Structure: BENEFIT first (what the customer gets) → acknowledge PAIN (what it solves) → name DIFFERENTIATOR. Product name MUST appear in each option (e.g. "Oxy-Powder…", "Latero-Flora…"). Differentiator hierarchy: Mechanism > Form > Sourcing > Bioavailability > Combination > Use Case. Each of the 5 options should test a DIFFERENT differentiator angle when wiki supports it. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. BANNED WORDS in About text: program, programs, protocol, protocols, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims. No question marks or casual openers.'
     +'\n- pain_points: exactly 4, ranked by frequency'
-    +'\n- made_with_purpose: exactly 5 options. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits — same theme, tighter declarative phrasing, proof from wiki/reviews. Options 4-5 (source_type="wiki"): NEW benefit angles from wiki Health Benefits the v1 PDP does not cover. Title 2-4 words (prefer 3), desc under '+s.mwp_chars+' chars. wiki_source: exact wiki sentence (required all 5). v1_pdp_source: only for options 1-3, empty for 4-5. If no v1 PDP benefits provided, generate all 5 from wiki only and label all as source_type="wiki" with empty v1_pdp_source.'
-    +'\n- wiki_v1_alignment: compare wiki Health Benefits section against v1 PDP benefits. Set has_mismatch=true if any of: (a) wiki has a top-level benefit theme v1 doesn\'t cover, (b) v1 has a benefit not supported in current wiki, (c) v1 framing contradicts wiki (e.g. v1 markets daily-use but wiki specifies short-term only). List specifics in wiki_only_adds, v1_only_adds, contradictions arrays. If no v1 PDP provided, set has_mismatch=false and leave arrays empty.'
-    +'\n- benefits: exactly 4. No disease treatment claims.'
-    +'\n- outcome_stats: 4-6 items. detail max 20 chars, distinct non-redundant. No disease claims.'
+    +'\n- made_with_purpose: exactly 5. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits. Options 4-5 (source_type="wiki"): NEW benefit angles from wiki Health Benefits the v1 PDP does not cover. Title 2-4 words (prefer 3), desc under '+s.mwp_chars+' chars. wiki_source required all 5. v1_pdp_source only for options 1-3. If no v1 PDP provided, generate all 5 from wiki only and label source_type="wiki" with empty v1_pdp_source. Do NOT fabricate v1_pdp_source quotes.'
+    +'\n- wiki_v1_alignment: compare wiki Health Benefits against v1 PDP. Set has_mismatch=true if mismatches exist.'
+    +'\n- benefits: EXACTLY 3 review-derived qualitative benefits. NO percentage field. title + proof only.'
+    +'\n- outcome_stats: 4-6 items. detail max 20 chars. No disease claims.'
     +'\n- transformation: fraction AND timeframe. mention_count = reviews containing BOTH a timeframe phrase AND an outcome phrase. timeframe_keywords + outcome_keywords each 3-6 phrases. sample_quotes: 3 verbatim quotes containing BOTH elements.'
     +'\n- alt_stats: 2-3 items. Same intersection counting rule.'
-    +'\n- reviews: exactly 8. ONLY 4-5 star with strong articulate language. original_text VERBATIM and UNDER 250 chars (skip longer ones, find shorter alternatives). Select for THEME VARIETY — 8 reviews should collectively cover different benefits, use cases, customer types. Don\'t pick 8 reviews about the same outcome. Named authors preferred. title is short AI-generated headline (5-10 words).'
-    +'\n- ingredients: 5 combined editorial headlines. No asterisks. keyword = single word to italicize. subline under '+s.ing_chars+' chars.'
-    +'\n- curated_collection: exactly 3 options. Each is 1 heading + 1 subhead introducing a collection of ~3 recommended companion products. Heading 3-4 words names the customer state/context (e.g. "Build Your Reset", "Round Out Your Routine", "Complete the Protocol"). Subhead max '+s.curated_chars+' chars introduces what the collection does. Pull pairing logic from wiki Recommended Pairings section when present. Refer to companion products GENERICALLY (e.g. "oxygen-based colon support") not by specific name. No disease claims.'
-    +'\n- faqs: exactly 8 questions. FAQ #1 (rank 1) MUST be "What to Expect" with is_what_to_expect=true. Cover (1) onset timeframe from review/wiki language, (2) temporary effects from review language explained by mechanism, (3) individual variation, (4) suggested use from wiki. expectation_substantiation: onset_quotes = 2-3 verbatim review quotes mentioning timing; effects_quotes = 2-3 verbatim review quotes mentioning temporary effects. CRITICAL: dosing/instruction details MUST come from wiki — never invent. If wiki doesn\'t cover, set answer_note="Needs manual answer — not in wiki" and leave suggested_answer empty. All FAQ answers under '+s.faq_chars+' chars. No disease claims.'
+    +'\n- reviews: exactly 8. ONLY 4-5 star with strong articulate language. original_text VERBATIM and UNDER 250 chars. Select for THEME VARIETY. Named authors preferred. title is short AI-generated headline.'
+    +'\n- ingredients: 5 combined editorial headlines. headline MAX 40 chars (HARD LIMIT, no exceptions). headline must be DIRECTLY supported by wiki_source — wiki_source must be a sentence from the wiki that explicitly backs the headline claim. Do NOT use tangentially-related wiki sentences. If you cannot find a wiki sentence that directly supports a strong headline, write a softer headline the wiki actually supports. No asterisks. keyword = single word to italicize. subline under '+s.ing_chars+' chars.'
+    +'\n- curated_collection: Check the wiki for a "Recommended Pairings" section (table or list naming specific companion products). If present: set has_pairings=true and generate 3 options. Each option: heading 3-4 words naming the customer state, subhead max '+s.curated_chars+' chars naming the SPECIFIC companion products from the wiki (e.g. "Pair with Oxy-Powder and Aloe Vera to clear waste and soothe digestion"). wiki_source = exact quoted sentence from Recommended Pairings. If wiki has NO Recommended Pairings section: set has_pairings=false and leave options empty. BANNED WORDS: program, programs, protocol, protocols. No disease claims.'
+    +'\n- faqs: exactly 8 questions. CRITICAL FAQ RULES: (1) Questions come from review patterns — what customers ask, worry about, hesitate on. (2) Answers come from the WIKI ONLY — never from review language. (3) Product name MUST appear in every answer (e.g. "Oxy-Powder helps…"). (4) FAQ #1 is always a "What to Expect" question with is_what_to_expect=true covering onset timeframe + temporary effects + individual variation + suggested use — all sourced from wiki. expectation_substantiation onset_quotes/effects_quotes are review quotes used as CONTEXT for why we ask, not as answer source. (5) For each FAQ: review_context = brief note on why reviewers prompted this question (used as "Why we\'re asking" display, NOT as answer source). suggested_answer comes from wiki only. wiki_source = exact wiki sentence used. (6) If the wiki does NOT cover a topic, set needs_manual_answer=true, manual_answer_reason="Wiki does not cover [specific gap]", leave suggested_answer and wiki_source empty. Do NOT fabricate answers from review language to fill the gap. (7) Banned words in answers: program, programs, protocol, protocols. (8) All FAQ answers under '+s.faq_chars+' chars. No disease treatment claims.'
     +'\nReviews:\n'+reviewTexts;
 }
 
 function buildRewritePrompt(items){
-  return 'Rewrite each of the following copy fragments to fit within its character limit while preserving the original meaning, tone, and key information. Return ONLY valid JSON: {"rewrites":[{"id":"id1","new_text":"rewritten text"}, ...]}. Each new_text MUST be at or under its max_chars limit. Do not add disclaimers or commentary. Preserve banned-term restrictions (no health claims, no question marks in About options, no asterisks in ingredient headlines).\n\nFragments to rewrite:\n'+JSON.stringify(items,null,2);
+  return 'Rewrite each of the following copy fragments to fit within its character limit while preserving the original meaning, tone, and key information. Return ONLY valid JSON: {"rewrites":[{"id":"id1","new_text":"rewritten text"}, ...]}. Each new_text MUST be at or under its max_chars limit. Do not add disclaimers or commentary. Preserve banned-term restrictions (no health claims, no question marks in About options, no asterisks in ingredient headlines, no use of "program" or "protocol").\n\nFragments to rewrite:\n'+JSON.stringify(items,null,2);
 }
 
 async function doFetch(p,maxTok){
@@ -865,7 +890,7 @@ async function enforceCharLimits(analysis,settings){
   var items=[];
   (analysis.about_options||[]).forEach(function(o,i){
     if((o.text||'').length>settings.about_chars){
-      items.push({id:'about_'+i,max_chars:settings.about_chars,current_text:o.text,note:'About option — declarative customer condition + differentiator, no question marks, no health claims'});
+      items.push({id:'about_'+i,max_chars:settings.about_chars,current_text:o.text,note:'About option — benefit→pain→differentiator, names the product, no question marks, no health claims, no banned words'});
     }
   });
   (analysis.made_with_purpose||[]).forEach(function(m,i){
@@ -874,18 +899,22 @@ async function enforceCharLimits(analysis,settings){
     }
   });
   (analysis.ingredients||[]).forEach(function(ing,i){
+    if((ing.headline||'').length>settings.ing_title_chars){
+      items.push({id:'ingTitle_'+i,max_chars:settings.ing_title_chars,current_text:ing.headline,note:'Ingredient headline — must be wiki-grounded, no asterisks'});
+    }
     if((ing.subline||'').length>settings.ing_chars){
       items.push({id:'ing_'+i,max_chars:settings.ing_chars,current_text:ing.subline,note:'Ingredient subline'});
     }
   });
-  (analysis.curated_collection||[]).forEach(function(c,i){
+  var curOptions=(analysis.curated_collection&&analysis.curated_collection.options)||[];
+  curOptions.forEach(function(c,i){
     if((c.subhead||'').length>settings.curated_chars){
-      items.push({id:'curated_'+i,max_chars:settings.curated_chars,current_text:c.subhead,note:'Curated collection subhead'});
+      items.push({id:'curated_'+i,max_chars:settings.curated_chars,current_text:c.subhead,note:'Curated subhead — names specific companion products from wiki, no "program" or "protocol"'});
     }
   });
   (analysis.faqs||[]).forEach(function(f,i){
-    if((f.suggested_answer||'').length>settings.faq_chars){
-      items.push({id:'faq_'+i,max_chars:settings.faq_chars,current_text:f.suggested_answer,note:'FAQ answer'});
+    if(f.suggested_answer&&f.suggested_answer.length>settings.faq_chars){
+      items.push({id:'faq_'+i,max_chars:settings.faq_chars,current_text:f.suggested_answer,note:'FAQ answer — names the product, no "program" or "protocol"'});
     }
   });
   (analysis.outcome_stats||[]).forEach(function(s,i){
@@ -898,7 +927,7 @@ async function enforceCharLimits(analysis,settings){
 
   try{
     var rewritePrompt=buildRewritePrompt(items);
-    var rawText=await doFetch(rewritePrompt,3000);
+    var rawText=await doFetch(rewritePrompt,4000);
     var parsed=parseEnvelope(rawText);
     if(!parsed||!parsed.rewrites)return analysis;
 
@@ -909,8 +938,9 @@ async function enforceCharLimits(analysis,settings){
       if(isNaN(idx))return;
       if(kind==='about'&&analysis.about_options&&analysis.about_options[idx])analysis.about_options[idx].text=rw.new_text;
       else if(kind==='mwp'&&analysis.made_with_purpose&&analysis.made_with_purpose[idx])analysis.made_with_purpose[idx].description=rw.new_text;
+      else if(kind==='ingTitle'&&analysis.ingredients&&analysis.ingredients[idx])analysis.ingredients[idx].headline=rw.new_text;
       else if(kind==='ing'&&analysis.ingredients&&analysis.ingredients[idx])analysis.ingredients[idx].subline=rw.new_text;
-      else if(kind==='curated'&&analysis.curated_collection&&analysis.curated_collection[idx])analysis.curated_collection[idx].subhead=rw.new_text;
+      else if(kind==='curated'&&analysis.curated_collection&&analysis.curated_collection.options&&analysis.curated_collection.options[idx])analysis.curated_collection.options[idx].subhead=rw.new_text;
       else if(kind==='faq'&&analysis.faqs&&analysis.faqs[idx])analysis.faqs[idx].suggested_answer=rw.new_text;
       else if(kind==='stat'&&analysis.outcome_stats&&analysis.outcome_stats[idx])analysis.outcome_stats[idx].detail=rw.new_text;
     });
@@ -920,13 +950,25 @@ async function enforceCharLimits(analysis,settings){
   return analysis;
 }
 
+// CSV verification — for each generated review, check if original_text appears in the source CSV
+function verifyReviewsAgainstCsv(analysis,sampleReviews){
+  var csvTextBlob=sampleReviews.map(function(r){return getReviewText(r);}).join(' \n ').toLowerCase();
+  (analysis.reviews||[]).forEach(function(v){
+    if(!v.original_text){v._verified=false;return;}
+    // Check if a distinctive 30-char chunk from the review exists in the CSV
+    var text=v.original_text.toLowerCase().trim();
+    var chunk=text.length>30?text.substring(5,Math.min(50,text.length-5)):text;
+    v._verified=csvTextBlob.indexOf(chunk)!==-1;
+  });
+}
+
 async function runAnalysis(){
   var product=document.getElementById('productSelect').value;
   if(!product){showError('Please select a product.');return;}
   var reviews=getReviewsForProduct(product);
-  if(!reviews.length){showError('No reviews found.');return;}
+  if(!reviews.length){showError('No published reviews found for '+product+'. Check Yotpo review status.');return;}
   var wiki=document.getElementById('wikiText').value.trim();
-  if(!wiki){if(!confirm('Product wiki is empty. Made With Purpose and Ingredients will be less accurate. Continue anyway?')){return;}}
+  if(!wiki){if(!confirm('Product wiki is empty. Made With Purpose, Ingredients, Curated Collection, and FAQ answers will be unavailable or limited. Continue anyway?')){return;}}
   var settings=getSettings();
   hideError();hideResults();
 
@@ -936,8 +978,12 @@ async function runAnalysis(){
   var dateRange=getDateRange(sample);
   var authorCol=getAuthorCol(sample[0]);
 
+  stepActive('step1');stepDone('step1');stepActive('step2');
+
   lastV1PdpBenefits=null;
   try{lastV1PdpBenefits=await fetchV1PdpBenefits(product);}catch(e){lastV1PdpBenefits=null;}
+
+  stepDone('step2');stepActive('step3');
 
   var reviewTexts=sample.map(function(r){
     var text=getReviewText(r);
@@ -952,12 +998,10 @@ async function runAnalysis(){
     v1Section='\n\nV1 PDP BENEFITS (currently published, use as foundation for conversion-angle rewrites):\n';
     lastV1PdpBenefits.forEach(function(b,i){v1Section+=(i+1)+'. '+b.title+': '+b.description+'\n';});
   } else {
-    v1Section='\n\nV1 PDP BENEFITS: none retrieved. Generate all 5 made_with_purpose options from wiki only. Leave v1_pdp_source empty on every card. Label every card source_type="wiki". Do NOT fabricate v1_pdp_source quotes.';
+    v1Section='\n\nV1 PDP BENEFITS: none retrieved. Generate all 5 made_with_purpose options from wiki only. Leave v1_pdp_source empty on every card. Do NOT fabricate v1_pdp_source quotes.';
   }
   wikiSection+=v1Section;
-  stepActive('step1');
   var prompt=buildPrompt(product,sample.length,wikiSection,settings,reviewTexts);
-  stepDone('step1');stepActive('step2');
 
   try{
     var rawText;
@@ -969,12 +1013,12 @@ async function runAnalysis(){
         rawText=await doFetch(prompt,20000);
       } else {throw e1;}
     }
-    stepDone('step2');stepActive('step3');
     var analysis=parseEnvelope(rawText);
     if(!analysis){hideLoading();showError('Could not parse response. Try again.');return;}
     stepDone('step3');stepActive('step4');
 
     analysis=await enforceCharLimits(analysis,settings);
+    verifyReviewsAgainstCsv(analysis,sample);
 
     lastAnalysis={product:product,analysis:analysis,count:reviews.length,analyzed:sample.length,dateRange:dateRange,settings:settings,v1Benefits:lastV1PdpBenefits};
     stepDone('step4');
@@ -1006,9 +1050,42 @@ function makeWikiSourceCol(wikiSource,v1Source){
   col.appendChild(lbl);col.appendChild(quote);return col;
 }
 
+function appendVerificationBlock(parent,obj,total){
+  var vBlock=document.createElement('div');vBlock.className='verification-block';
+  var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Substantiation data';
+  vBlock.appendChild(vTitle);
+  if(obj.mention_count){
+    var vCount=document.createElement('div');vCount.className='verification-row';
+    vCount.innerHTML='<span class="v-label">Mentions:</span> '+obj.mention_count+' of '+total.toLocaleString()+' reviewers analyzed';
+    vBlock.appendChild(vCount);
+  }
+  if(obj.timeframe_keywords&&obj.timeframe_keywords.length){
+    var vTk=document.createElement('div');vTk.className='verification-row';
+    vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+obj.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+    vBlock.appendChild(vTk);
+  }
+  if(obj.outcome_keywords&&obj.outcome_keywords.length){
+    var vOk=document.createElement('div');vOk.className='verification-row';
+    vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+obj.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
+    vBlock.appendChild(vOk);
+  }
+  var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
+  vMatchNote.textContent='Count = reviews containing BOTH a timeframe and outcome keyword';
+  vBlock.appendChild(vMatchNote);
+  if(obj.sample_quotes&&obj.sample_quotes.length){
+    var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
+    vBlock.appendChild(vqLbl);
+    obj.sample_quotes.forEach(function(q){
+      var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='\u201c'+q+'\u201d';
+      vBlock.appendChild(vq);
+    });
+  }
+  parent.appendChild(vBlock);
+}
+
 function renderResults(product,total,analyzed,a,dateRange,settings){
   document.getElementById('resultsTitle').textContent=product;
-  document.getElementById('resultsMetaText').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' reviews analyzed';
+  document.getElementById('resultsMetaText').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' published reviews analyzed';
   if(dateRange){document.getElementById('dateRangeMetaItem').style.display='flex';document.getElementById('dateRangeText').textContent=dateRange;}
 
   var painRef=document.getElementById('painRefBody');painRef.innerHTML='';
@@ -1026,8 +1103,8 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var body=document.createElement('div');body.className='choice-body';
     var num=document.createElement('div');num.className='choice-num';num.innerHTML='<strong>Option '+o.num+'</strong>'+(o.differentiator_type?' · '+o.differentiator_type:'');
     var tags=document.createElement('div');tags.className='about-tags';
-    if(o.pain_point_tag){var pt=document.createElement('span');pt.className='about-tag about-tag-pain';pt.textContent='Pain · '+o.pain_point_tag;tags.appendChild(pt);}
     if(o.benefit_tag){var bt=document.createElement('span');bt.className='about-tag about-tag-benefit';bt.textContent='Benefit · '+o.benefit_tag;tags.appendChild(bt);}
+    if(o.pain_point_tag){var pt=document.createElement('span');pt.className='about-tag about-tag-pain';pt.textContent='Pain · '+o.pain_point_tag;tags.appendChild(pt);}
     if(o.differentiator_tag){var dt=document.createElement('span');dt.className='about-tag about-tag-diff';dt.textContent='Diff · '+o.differentiator_tag;tags.appendChild(dt);}
     var txt=document.createElement('div');txt.className='choice-text';txt.textContent=o.text||'';
     var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.textContent=cc+' / '+settings.about_chars+' chars'+(over?' — over limit':'');
@@ -1064,7 +1141,6 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       detailTr.innerHTML='<td>'+(wD||'—')+'</td><td>'+(vD||'—')+'</td>';
       tableBody.appendChild(detailTr);
     }
-    document.getElementById('sourceCompareBody').style.display='none';
   } else {
     document.getElementById('sourceCompareWrap').style.display='none';
   }
@@ -1072,7 +1148,7 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   var align=a.wiki_v1_alignment;
   if(hasV1&&align&&align.has_mismatch){
     var html='<div class="mismatch-title">Wiki–v1 PDP mismatch detected</div>';
-    html+='<div class="mismatch-text">The v1 PDP benefits don\'t fully align with the current wiki. v1 copy may have been written from an older wiki. Review wiki-sourced options below carefully — wiki content isn\'t always intended to be customer-facing.</div>';
+    html+='<div class="mismatch-text">The v1 PDP benefits don\'t fully align with the current wiki. v1 copy may have been written from an older wiki. Review wiki-sourced options below carefully.</div>';
     html+='<ul class="mismatch-list">';
     if(align.wiki_only_adds&&align.wiki_only_adds.length){html+='<li><strong>Wiki adds:</strong> '+align.wiki_only_adds.join(', ')+' <em>(not on v1)</em></li>';}
     if(align.v1_only_adds&&align.v1_only_adds.length){html+='<li><strong>v1 adds:</strong> '+align.v1_only_adds.join(', ')+' <em>(not in current wiki — may be older copy)</em></li>';}
@@ -1105,77 +1181,32 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(m.wiki_source,v1Src));mwpList.appendChild(wrap);
   });
 
-  // KEY BENEFITS
+  // KEY BENEFITS — 3 max, no pct
   var rb=document.getElementById('reviewBenefitsGrid');rb.innerHTML='';
-  (a.benefits||[]).slice(0,2).forEach(function(b){
+  (a.benefits||[]).slice(0,3).forEach(function(b){
     var card=document.createElement('div');card.className='benefit-card';
     var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+b.rank;
     var title=document.createElement('div');title.className='benefit-title';title.textContent=b.title||'';
-    var proof=document.createElement('div');proof.className='benefit-proof';proof.textContent=(b.proof||'')+(b.pct?' ('+b.pct+'% of reviewers)':'');
+    var proof=document.createElement('div');proof.className='benefit-proof';proof.textContent=b.proof||'';
     var footer=document.createElement('div');footer.className='benefit-footer';footer.appendChild(makeCopyBtn((b.title||'')+': '+(b.proof||'')));
     card.appendChild(num);card.appendChild(title);card.appendChild(proof);card.appendChild(footer);rb.appendChild(card);
   });
-  var eb=document.getElementById('extraBenefitsGrid');eb.innerHTML='';
-  (a.benefits||[]).slice(2,4).forEach(function(b,i){
-    var card=document.createElement('div');card.className='benefit-card';
-    var num=document.createElement('div');num.className='benefit-num';num.textContent='Benefit 0'+(i+3);
-    var title=document.createElement('div');title.className='benefit-title';title.textContent=b.title||'';
-    var proof=document.createElement('div');proof.className='benefit-proof';proof.textContent=(b.proof||'')+(b.pct?' ('+b.pct+'% of reviewers)':'');
-    var footer=document.createElement('div');footer.className='benefit-footer';footer.appendChild(makeCopyBtn((b.title||'')+': '+(b.proof||'')));
-    card.appendChild(num);card.appendChild(title);card.appendChild(proof);card.appendChild(footer);eb.appendChild(card);
-  });
 
-  // STATS
-  var grid=document.getElementById('statsGrid');grid.innerHTML='';
-  var strongStats=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
-  var numStrong=strongStats.length;
-  if(numStrong===0){document.getElementById('statsWarnRed').style.display='block';document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Exclude the percentage grid from this PDP. Use the transformation timeline and "X in Y" framing below instead.';document.getElementById('statsWarnYellow').style.display='none';}
-  else if(numStrong<3){document.getElementById('statsWarnYellow').style.display='block';document.getElementById('statsWarnYellowText').textContent='Only '+numStrong+' stat'+(numStrong===1?' clears':'s clear')+' 72%. Consider leading with the transformation timeline instead.';document.getElementById('statsWarnRed').style.display='none';}
-  else{document.getElementById('statsWarnYellow').style.display='none';document.getElementById('statsWarnRed').style.display='none';}
-  (a.outcome_stats||[]).forEach(function(s){
-    var detail=(s.detail||'');if(detail.length>20)detail=detail.substring(0,20).trim();
-    var card=document.createElement('div');card.className='stat-card';
-    var pct=document.createElement('div');pct.className='stat-pct';pct.textContent=s.percentage+'%';
-    var lbl=document.createElement('div');lbl.className='stat-label';lbl.textContent=detail;
-    var det=document.createElement('div');det.className='stat-detail';det.textContent=s.count+' of '+analyzed.toLocaleString()+' reviewers analyzed';
-    var row=document.createElement('div');row.className='stat-copy-row';row.appendChild(makeCopyBtn(s.percentage+'% '+detail));
-    card.appendChild(pct);card.appendChild(lbl);card.appendChild(det);card.appendChild(row);grid.appendChild(card);
-  });
-  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent). Results reflect customer-reported outcomes — individual experiences may vary.';
-
-  function appendVerificationBlock(parent,obj,total){
-    var vBlock=document.createElement('div');vBlock.className='verification-block';
-    var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Substantiation data';
-    vBlock.appendChild(vTitle);
-    if(obj.mention_count){
-      var vCount=document.createElement('div');vCount.className='verification-row';
-      vCount.innerHTML='<span class="v-label">Mentions:</span> '+obj.mention_count+' of '+total.toLocaleString()+' reviewers analyzed';
-      vBlock.appendChild(vCount);
-    }
-    if(obj.timeframe_keywords&&obj.timeframe_keywords.length){
-      var vTk=document.createElement('div');vTk.className='verification-row';
-      vTk.innerHTML='<span class="v-label">Timeframe keywords:</span> '+obj.timeframe_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-      vBlock.appendChild(vTk);
-    }
-    if(obj.outcome_keywords&&obj.outcome_keywords.length){
-      var vOk=document.createElement('div');vOk.className='verification-row';
-      vOk.innerHTML='<span class="v-label">Outcome keywords:</span> '+obj.outcome_keywords.map(function(k){return '"'+k+'"';}).join(', ');
-      vBlock.appendChild(vOk);
-    }
-    var vMatchNote=document.createElement('div');vMatchNote.className='verification-row v-note';
-    vMatchNote.textContent='Count = reviews containing BOTH a timeframe and outcome keyword';
-    vBlock.appendChild(vMatchNote);
-    if(obj.sample_quotes&&obj.sample_quotes.length){
-      var vqLbl=document.createElement('div');vqLbl.className='verification-row v-quotes-label';vqLbl.innerHTML='<span class="v-label">Sample quotes:</span>';
-      vBlock.appendChild(vqLbl);
-      obj.sample_quotes.forEach(function(q){
-        var vq=document.createElement('div');vq.className='verification-quote';vq.textContent='\u201c'+q+'\u201d';
-        vBlock.appendChild(vq);
-      });
-    }
-    parent.appendChild(vBlock);
+  // STATS — Transformation Timeline first
+  if(a.transformation){
+    document.getElementById('transformCard').style.display='flex';
+    var tStat=a.transformation.stat||'';
+    if(a.transformation.fraction&&a.transformation.timeframe&&tStat.indexOf(a.transformation.fraction)===-1)tStat=a.transformation.fraction+' customers noticed a difference '+a.transformation.timeframe;
+    document.getElementById('transformStat').textContent=tStat;
+    document.getElementById('transformSub').textContent=a.transformation.sub||'';
+    var transformInner=document.querySelector('#transformCard .transform-inner');
+    var existingVerif=transformInner.querySelector('.verification-block');
+    if(existingVerif)existingVerif.remove();
+    appendVerificationBlock(transformInner,a.transformation,analyzed);
+    document.getElementById('transformCopyBtn').replaceWith(makeCopyBtn(tStat));
   }
 
+  // ALT STATS
   if((a.alt_stats||[]).length){
     document.getElementById('altStatsWrap').style.display='block';
     var altList=document.getElementById('altStatsList');altList.innerHTML='';
@@ -1190,28 +1221,40 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
       card.appendChild(inner);card.appendChild(makeCopyBtn(alt.text||''));altList.appendChild(card);
     });
   }
-  if(a.transformation){
-    document.getElementById('transformCard').style.display='flex';
-    var tStat=a.transformation.stat||'';
-    if(a.transformation.fraction&&a.transformation.timeframe&&tStat.indexOf(a.transformation.fraction)===-1)tStat=a.transformation.fraction+' customers noticed a difference '+a.transformation.timeframe;
-    document.getElementById('transformStat').textContent=tStat;
-    document.getElementById('transformSub').textContent=a.transformation.sub||'';
-    var transformInner=document.querySelector('#transformCard .transform-inner');
-    var existingVerif=transformInner.querySelector('.verification-block');
-    if(existingVerif)existingVerif.remove();
-    appendVerificationBlock(transformInner,a.transformation,analyzed);
-    document.getElementById('transformCopyBtn').replaceWith(makeCopyBtn(tStat));
-  }
+
+  // OUTCOME STATS (collapsed)
+  var grid=document.getElementById('statsGrid');grid.innerHTML='';
+  var strongStats=(a.outcome_stats||[]).filter(function(s){return s.percentage>=THRESHOLD;});
+  var numStrong=strongStats.length;
+  var statsStatus='';
+  if(numStrong===0){document.getElementById('statsWarnRed').style.display='block';document.getElementById('statsWarnRedText').textContent='No outcome stats reach 72%. Exclude the percentage grid from this PDP.';document.getElementById('statsWarnYellow').style.display='none';statsStatus='No stats reach 72% — exclude from PDP';}
+  else if(numStrong<3){document.getElementById('statsWarnYellow').style.display='block';document.getElementById('statsWarnYellowText').textContent='Only '+numStrong+' stat'+(numStrong===1?' clears':'s clear')+' 72%. Consider leading with the transformation timeline instead.';document.getElementById('statsWarnRed').style.display='none';statsStatus=numStrong+' stat(s) clear 72%';}
+  else{document.getElementById('statsWarnYellow').style.display='none';document.getElementById('statsWarnRed').style.display='none';statsStatus=numStrong+' stats clear 72%';}
+  document.getElementById('outcomeStatsStatus').textContent=statsStatus;
+  (a.outcome_stats||[]).forEach(function(s){
+    var detail=(s.detail||'');if(detail.length>20)detail=detail.substring(0,20).trim();
+    var card=document.createElement('div');card.className='stat-card';
+    var pct=document.createElement('div');pct.className='stat-pct';pct.textContent=s.percentage+'%';
+    var lbl=document.createElement('div');lbl.className='stat-label';lbl.textContent=detail;
+    var det=document.createElement('div');det.className='stat-detail';det.textContent=s.count+' of '+analyzed.toLocaleString()+' reviewers analyzed';
+    var row=document.createElement('div');row.className='stat-copy-row';row.appendChild(makeCopyBtn(s.percentage+'% '+detail));
+    card.appendChild(pct);card.appendChild(lbl);card.appendChild(det);card.appendChild(row);grid.appendChild(card);
+  });
+  document.getElementById('statsFootnote').textContent='Based on '+analyzed.toLocaleString()+' Yotpo verified purchase reviews (most recent published). Results reflect customer-reported outcomes — individual experiences may vary.';
 
   // REVIEWS
   var revList=document.getElementById('reviewsList');revList.innerHTML='';
   (a.reviews||[]).forEach(function(v){
     if((v.original_text||'').length>settings.review_chars)return;
     var card=document.createElement('div');card.className='review-card';
+    if(v._verified===false)card.classList.add('unverified');
     var topRow=document.createElement('div');topRow.className='review-top-row';
     var num=document.createElement('div');num.className='review-num';num.textContent='Review '+(v.num||'');
     var stars=document.createElement('div');stars.className='review-stars';stars.textContent='\u2605\u2605\u2605\u2605\u2605';
-    topRow.appendChild(num);topRow.appendChild(stars);
+    var badge=document.createElement('span');
+    if(v._verified===false){badge.className='review-unverified-badge';badge.textContent='⚠ Not in CSV';}
+    else{badge.className='review-verified-badge';badge.textContent='✓ Verified';}
+    topRow.appendChild(num);topRow.appendChild(badge);topRow.appendChild(stars);
     var title=document.createElement('div');title.className='review-title';title.textContent=v.title||'';
     var text=document.createElement('div');text.className='review-text';text.textContent='\u201c'+(v.original_text||'')+'\u201d';
     var authRow=document.createElement('div');authRow.className='review-author-row';
@@ -1230,7 +1273,8 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   // INGREDIENTS
   var ingList=document.getElementById('ingredientsList');ingList.innerHTML='';
   (a.ingredients||[]).forEach(function(ing){
-    var sc=(ing.subline||'').length,over=sc>settings.ing_chars;
+    var hc=(ing.headline||'').length,hOver=hc>settings.ing_title_chars;
+    var sc=(ing.subline||'').length,sOver=sc>settings.ing_chars;
     var wrap=document.createElement('div');wrap.className='with-wiki-source';
     var main=document.createElement('div');main.style.cssText='padding:28px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex:1;';
     var body=document.createElement('div');body.className='ing-option-body';
@@ -1238,98 +1282,64 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
     var headlineRaw=(ing.headline||'').replace(/\*/g,'');
     var keyword=(ing.keyword||'').replace(/\*/g,'').trim();
     var headlineEl=document.createElement('div');headlineEl.className='ing-headline';
-    headlineRaw.split('\n').forEach(function(line,li,arr){
-      if(keyword&&line.toLowerCase().indexOf(keyword.toLowerCase())!==-1){
-        var idx=line.toLowerCase().indexOf(keyword.toLowerCase());
-        if(idx>0)headlineEl.appendChild(document.createTextNode(line.substring(0,idx)));
-        var em=document.createElement('em');em.textContent=line.substring(idx,idx+keyword.length);headlineEl.appendChild(em);
-        if(idx+keyword.length<line.length)headlineEl.appendChild(document.createTextNode(line.substring(idx+keyword.length)));
-      } else {headlineEl.appendChild(document.createTextNode(line));}
-      if(li<arr.length-1)headlineEl.appendChild(document.createElement('br'));
-    });
+    if(keyword&&headlineRaw.toLowerCase().indexOf(keyword.toLowerCase())!==-1){
+      var idx=headlineRaw.toLowerCase().indexOf(keyword.toLowerCase());
+      if(idx>0)headlineEl.appendChild(document.createTextNode(headlineRaw.substring(0,idx)));
+      var em=document.createElement('em');em.textContent=headlineRaw.substring(idx,idx+keyword.length);headlineEl.appendChild(em);
+      if(idx+keyword.length<headlineRaw.length)headlineEl.appendChild(document.createTextNode(headlineRaw.substring(idx+keyword.length)));
+    } else {headlineEl.appendChild(document.createTextNode(headlineRaw));}
+    var hMeta=document.createElement('div');hMeta.className='choice-meta'+(hOver?' over':'');hMeta.style.marginTop='6px';hMeta.textContent='Headline: '+hc+' / '+settings.ing_title_chars+' chars'+(hOver?' — over limit':'');
     var sub=document.createElement('div');sub.className='ing-subline';sub.textContent=ing.subline||'';
-    var meta=document.createElement('div');meta.className='choice-meta'+(over?' over':'');meta.style.marginTop='10px';meta.textContent=sc+' / '+settings.ing_chars+' chars'+(over?' — over limit':'');
-    body.appendChild(num);body.appendChild(headlineEl);body.appendChild(sub);body.appendChild(meta);
+    var sMeta=document.createElement('div');sMeta.className='choice-meta'+(sOver?' over':'');sMeta.style.marginTop='8px';sMeta.textContent='Subline: '+sc+' / '+settings.ing_chars+' chars'+(sOver?' — over limit':'');
+    body.appendChild(num);body.appendChild(headlineEl);body.appendChild(hMeta);body.appendChild(sub);body.appendChild(sMeta);
     main.appendChild(body);main.appendChild(makeCopyBtn(headlineRaw+'\n'+(ing.subline||'')));
     wrap.appendChild(main);wrap.appendChild(makeWikiSourceCol(ing.wiki_source));ingList.appendChild(wrap);
   });
 
-  // CURATED
-  var curList=document.getElementById('curatedList');curList.innerHTML='';
-  (a.curated_collection||[]).forEach(function(c){
-    var sc=(c.subhead||'').length,over=sc>settings.curated_chars;
-    var card=document.createElement('div');card.className='curated-card';
-    var body=document.createElement('div');body.className='curated-body';
-    var num=document.createElement('div');num.className='curated-num';num.textContent='Option '+c.num;
-    var title=document.createElement('div');title.className='curated-title';title.textContent=c.title||'';
-    var sub=document.createElement('div');sub.className='curated-subhead';sub.textContent=c.subhead||'';
-    var ctx=document.createElement('div');ctx.className='curated-context';ctx.textContent=c.context||'';
-    var meta=document.createElement('div');meta.className='curated-meta'+(over?' over':'');meta.textContent=sc+' / '+settings.curated_chars+' chars'+(over?' — over limit':'');
-    body.appendChild(num);body.appendChild(title);body.appendChild(sub);body.appendChild(ctx);body.appendChild(meta);
-    card.appendChild(body);card.appendChild(makeCopyBtn((c.title||'')+' \u2014 '+(c.subhead||'')));curList.appendChild(card);
-  });
+  // CURATED — refuse to generate when no wiki pairings
+  var curContainer=document.getElementById('curatedContainer');curContainer.innerHTML='';
+  var cur=a.curated_collection||{};
+  if(cur.has_pairings===false||!cur.options||cur.options.length===0){
+    var refusal=document.createElement('div');refusal.className='curated-refusal';
+    refusal.innerHTML='<div class="curated-refusal-icon">⊘</div><div class="curated-refusal-title">No content generated</div><div class="curated-refusal-text">The wiki for this product does not include a Recommended Pairings section. To populate this section, add a Recommended Pairings table to the wiki listing companion products, why they pair, and the customer state they\'re for. Then re-run the analysis.</div>';
+    curContainer.appendChild(refusal);
+  } else {
+    var wrap=document.createElement('div');wrap.className='curated-wrap';
+    var list=document.createElement('div');list.className='curated-list';
+    cur.options.forEach(function(c){
+      var sc=(c.subhead||'').length,over=sc>settings.curated_chars;
+      var card=document.createElement('div');card.className='curated-card';
+      var body=document.createElement('div');body.className='curated-body';
+      var num=document.createElement('div');num.className='curated-num';num.textContent='Option '+c.num;
+      var title=document.createElement('div');title.className='curated-title';title.textContent=c.title||'';
+      var sub=document.createElement('div');sub.className='curated-subhead';sub.textContent=c.subhead||'';
+      var meta=document.createElement('div');meta.className='curated-meta'+(over?' over':'');meta.textContent=sc+' / '+settings.curated_chars+' chars'+(over?' — over limit':'');
+      body.appendChild(num);body.appendChild(title);body.appendChild(sub);body.appendChild(meta);
+      if(c.wiki_source){
+        var srcDiv=document.createElement('div');srcDiv.className='curated-context';srcDiv.textContent='Wiki: "'+c.wiki_source+'"';
+        body.appendChild(srcDiv);
+      }
+      card.appendChild(body);card.appendChild(makeCopyBtn((c.title||'')+' — '+(c.subhead||'')));
+      list.appendChild(card);
+    });
+    wrap.appendChild(list);curContainer.appendChild(wrap);
+  }
 
-  // FAQS
+  // FAQs — answered first, manual-answer-needed grouped below
   var faqContainer=document.getElementById('faqCards');faqContainer.innerHTML='';
-  (a.faqs||[]).forEach(function(o){
-    var card=document.createElement('div');card.className='faq-card';
-    if(o.is_what_to_expect)card.classList.add('faq-card-expect');
-    var bid='faq-body-'+o.rank,tid='faq-tog-'+o.rank;
-    var header=document.createElement('div');header.className='faq-header';
-    header.addEventListener('click',function(){document.getElementById(bid).classList.toggle('open');document.getElementById(tid).classList.toggle('open');});
-    var rank=document.createElement('span');rank.className='faq-rank';rank.textContent='#'+o.rank;
-    var qWrap=document.createElement('div');qWrap.style.cssText='flex:1;display:flex;flex-direction:column;gap:4px;';
-    if(o.is_what_to_expect){
-      var expectPill=document.createElement('span');expectPill.className='faq-expect-pill';expectPill.textContent='What to Expect';
-      qWrap.appendChild(expectPill);
-    }
-    var q=document.createElement('div');q.className='faq-question';q.textContent=o.question||'';
-    qWrap.appendChild(q);
-    var tog=document.createElement('span');tog.className='faq-toggle';tog.id=tid;tog.textContent='\u25be';
-    header.appendChild(rank);header.appendChild(qWrap);header.appendChild(tog);
-    var body=document.createElement('div');body.className='faq-body';body.id=bid;
-    if(o.source_language){
-      var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='From review language';
-      var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent='\u201c'+o.source_language+'\u201d';
-      body.appendChild(srcLbl);body.appendChild(srcQ);
-    }
-    var ansWrap=document.createElement('div');ansWrap.className='faq-answer-wrap';
-    var ansLbl=document.createElement('div');ansLbl.className='faq-answer-label';ansLbl.textContent='Suggested answer — edit before publishing';
-    var ansRow=document.createElement('div');ansRow.className='faq-answer-row';
-    var ansTxt=document.createElement('div');ansTxt.className='faq-answer-text';ansTxt.textContent=o.suggested_answer||'';
-    ansRow.appendChild(ansTxt);ansRow.appendChild(makeCopyBtn((o.question||'')+'\n\n'+(o.suggested_answer||'')));
-    ansWrap.appendChild(ansLbl);ansWrap.appendChild(ansRow);
-    var ansLen=(o.suggested_answer||'').length;
-    if(ansLen>0){
-      var ansMeta=document.createElement('div');ansMeta.className='faq-answer-meta'+(ansLen>settings.faq_chars?' over':'');ansMeta.textContent=ansLen+' / '+settings.faq_chars+' chars'+(ansLen>settings.faq_chars?' — over limit':'');
-      ansWrap.appendChild(ansMeta);
-    }
-    body.appendChild(ansWrap);
-    if(o.is_what_to_expect&&o.expectation_substantiation){
-      var sub=o.expectation_substantiation;
-      var vBlock=document.createElement('div');vBlock.className='verification-block';
-      var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Substantiation — from reviews';
-      vBlock.appendChild(vTitle);
-      if(sub.onset_quotes&&sub.onset_quotes.length){
-        var lbl1=document.createElement('div');lbl1.className='verification-row v-quotes-label';lbl1.innerHTML='<span class="v-label">Onset timing quotes:</span>';
-        vBlock.appendChild(lbl1);
-        sub.onset_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
-      }
-      if(sub.effects_quotes&&sub.effects_quotes.length){
-        var lbl2=document.createElement('div');lbl2.className='verification-row v-quotes-label';lbl2.innerHTML='<span class="v-label">Temporary effects quotes:</span>';
-        vBlock.appendChild(lbl2);
-        sub.effects_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
-      }
-      body.appendChild(vBlock);
-    }
-    if(o.answer_note){
-      var note=document.createElement('div');note.className='faq-note';note.style.marginTop='14px';
-      var noteSpan=document.createElement('span');noteSpan.textContent=o.answer_note;
-      note.appendChild(document.createTextNode('Must address: '));note.appendChild(noteSpan);
-      body.appendChild(note);
-    }
-    card.appendChild(header);card.appendChild(body);faqContainer.appendChild(card);
-  });
+  var answered=(a.faqs||[]).filter(function(f){return !f.needs_manual_answer;});
+  var unanswered=(a.faqs||[]).filter(function(f){return f.needs_manual_answer;});
+
+  if(answered.length){
+    var aLbl=document.createElement('div');aLbl.className='faq-group-label';aLbl.textContent='Answered from wiki';
+    faqContainer.appendChild(aLbl);
+    answered.forEach(function(o){renderFaqCard(o,faqContainer,settings);});
+  }
+  if(unanswered.length){
+    var uLbl=document.createElement('div');uLbl.className='faq-group-label gap';uLbl.textContent='Needs manual answer — wiki gap';
+    faqContainer.appendChild(uLbl);
+    unanswered.forEach(function(o){renderFaqCard(o,faqContainer,settings);});
+  }
 
   // PAIN POINTS
   var painContainer=document.getElementById('painCards');painContainer.innerHTML='';
@@ -1355,14 +1365,85 @@ function renderResults(product,total,analyzed,a,dateRange,settings){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+function renderFaqCard(o,container,settings){
+  var card=document.createElement('div');card.className='faq-card';
+  if(o.is_what_to_expect)card.classList.add('faq-card-expect');
+  if(o.needs_manual_answer)card.classList.add('faq-card-gap');
+  var bid='faq-body-'+o.rank,tid='faq-tog-'+o.rank;
+  var header=document.createElement('div');header.className='faq-header';
+  header.addEventListener('click',function(){document.getElementById(bid).classList.toggle('open');document.getElementById(tid).classList.toggle('open');});
+  var rank=document.createElement('span');rank.className='faq-rank';rank.textContent='#'+o.rank;
+  var qWrap=document.createElement('div');qWrap.style.cssText='flex:1;display:flex;flex-direction:column;gap:4px;';
+  if(o.is_what_to_expect){
+    var expectPill=document.createElement('span');expectPill.className='faq-expect-pill';expectPill.textContent='What to Expect';
+    qWrap.appendChild(expectPill);
+  }
+  if(o.needs_manual_answer){
+    var gapPill=document.createElement('span');gapPill.className='faq-gap-pill';gapPill.textContent='Needs manual answer';
+    qWrap.appendChild(gapPill);
+  }
+  var q=document.createElement('div');q.className='faq-question';q.textContent=o.question||'';
+  qWrap.appendChild(q);
+  var tog=document.createElement('span');tog.className='faq-toggle';tog.id=tid;tog.textContent='\u25be';
+  header.appendChild(rank);header.appendChild(qWrap);header.appendChild(tog);
+  var body=document.createElement('div');body.className='faq-body';body.id=bid;
+  if(o.review_context){
+    var srcLbl=document.createElement('div');srcLbl.className='faq-source-label';srcLbl.textContent='Why we\'re asking';
+    var srcQ=document.createElement('div');srcQ.className='faq-source-quote';srcQ.textContent=o.review_context;
+    body.appendChild(srcLbl);body.appendChild(srcQ);
+  }
+  var ansWrap=document.createElement('div');ansWrap.className='faq-answer-wrap';
+  var ansLbl=document.createElement('div');ansLbl.className='faq-answer-label';
+  ansLbl.textContent=o.needs_manual_answer?'Needs manual answer — wiki does not cover this':'Answer from wiki — edit before publishing';
+  ansWrap.appendChild(ansLbl);
+  if(o.needs_manual_answer){
+    var reasonText=document.createElement('div');reasonText.className='faq-answer-empty';reasonText.textContent=o.manual_answer_reason||'Wiki does not cover this topic. Answer needs to be researched and written manually before publishing.';
+    ansWrap.appendChild(reasonText);
+  } else {
+    var ansRow=document.createElement('div');ansRow.className='faq-answer-row';
+    var ansTxt=document.createElement('div');ansTxt.className='faq-answer-text';ansTxt.textContent=o.suggested_answer||'';
+    ansRow.appendChild(ansTxt);ansRow.appendChild(makeCopyBtn((o.question||'')+'\n\n'+(o.suggested_answer||'')));
+    ansWrap.appendChild(ansRow);
+    var ansLen=(o.suggested_answer||'').length;
+    if(ansLen>0){
+      var ansMeta=document.createElement('div');ansMeta.className='faq-answer-meta'+(ansLen>settings.faq_chars?' over':'');ansMeta.textContent=ansLen+' / '+settings.faq_chars+' chars'+(ansLen>settings.faq_chars?' — over limit':'');
+      ansWrap.appendChild(ansMeta);
+    }
+  }
+  body.appendChild(ansWrap);
+  if(o.wiki_source&&!o.needs_manual_answer){
+    var wikiSrc=document.createElement('div');wikiSrc.className='faq-source-quote';wikiSrc.style.fontSize='12px';wikiSrc.style.marginTop='8px';
+    wikiSrc.innerHTML='<span style="font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Wiki source:</span> "'+o.wiki_source+'"';
+    body.appendChild(wikiSrc);
+  }
+  if(o.is_what_to_expect&&o.expectation_substantiation){
+    var sub=o.expectation_substantiation;
+    var vBlock=document.createElement('div');vBlock.className='verification-block';
+    var vTitle=document.createElement('div');vTitle.className='verification-title';vTitle.textContent='Why we\'re asking — review context';
+    vBlock.appendChild(vTitle);
+    if(sub.onset_quotes&&sub.onset_quotes.length){
+      var lbl1=document.createElement('div');lbl1.className='verification-row v-quotes-label';lbl1.innerHTML='<span class="v-label">Onset timing — what customers ask about:</span>';
+      vBlock.appendChild(lbl1);
+      sub.onset_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
+    }
+    if(sub.effects_quotes&&sub.effects_quotes.length){
+      var lbl2=document.createElement('div');lbl2.className='verification-row v-quotes-label';lbl2.innerHTML='<span class="v-label">Temporary effects — what customers ask about:</span>';
+      vBlock.appendChild(lbl2);
+      sub.effects_quotes.forEach(function(q){var el=document.createElement('div');el.className='verification-quote';el.textContent='\u201c'+q+'\u201d';vBlock.appendChild(el);});
+    }
+    body.appendChild(vBlock);
+  }
+  card.appendChild(header);card.appendChild(body);container.appendChild(card);
+}
+
 function exportTxt(){
   if(!lastAnalysis)return;
-  var a=lastAnalysis.analysis,out='REVIEW ANALYSIS REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' reviews\n';
+  var a=lastAnalysis.analysis,out='REVIEW ANALYSIS REPORT\n'+lastAnalysis.product+'\n'+lastAnalysis.analyzed.toLocaleString()+' of '+lastAnalysis.count.toLocaleString()+' published reviews\n';
   if(lastAnalysis.dateRange)out+='Date range: '+lastAnalysis.dateRange+'\n';
   out+='Generated: '+new Date().toISOString()+'\n';
   out+='\n=== ABOUT ===\n';
   (a.about_options||[]).forEach(function(o){
-    out+='Option '+o.num+(o.differentiator_type?' ['+o.differentiator_type+']':'')+(o.pain_point_tag?' [Pain: '+o.pain_point_tag+']':'')+(o.benefit_tag?' [Benefit: '+o.benefit_tag+']':'')+(o.differentiator_tag?' [Diff: '+o.differentiator_tag+']':'')+'\n'+o.text+'\n';
+    out+='Option '+o.num+(o.differentiator_type?' ['+o.differentiator_type+']':'')+'\n'+o.text+'\n';
     if(o.why_this_differentiates)out+='Why this differentiates: '+o.why_this_differentiates+'\n';
     out+='\n';
   });
@@ -1380,41 +1461,52 @@ function exportTxt(){
     out+='Wiki source: '+m.wiki_source+'\n\n';
   });
   out+='\n=== KEY BENEFITS ===\n';
-  (a.benefits||[]).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+(b.pct?' ('+b.pct+'%)':'')+'\n';});
-  out+='\n=== OUTCOME STATS ===\n';
-  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' of '+lastAnalysis.analyzed+' reviewers analyzed)\n';});
+  (a.benefits||[]).slice(0,3).forEach(function(b){out+='Benefit '+b.rank+': '+b.title+': '+b.proof+'\n';});
   if(a.transformation){
-    out+='\nTRANSFORMATION TIMELINE:\n';
+    out+='\n=== TRANSFORMATION TIMELINE ===\n';
     out+='Claim: '+a.transformation.stat+'\n';
-    if(a.transformation.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+a.transformation.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
+    if(a.transformation.mention_count)out+='Mentions: '+a.transformation.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
     if(a.transformation.timeframe_keywords)out+='Timeframe keywords: '+a.transformation.timeframe_keywords.join(', ')+'\n';
     if(a.transformation.outcome_keywords)out+='Outcome keywords: '+a.transformation.outcome_keywords.join(', ')+'\n';
     if(a.transformation.sample_quotes)a.transformation.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   }
   (a.alt_stats||[]).forEach(function(s){
-    out+='ALT FRAMING:\n';
-    out+='Claim: '+s.text+'\n';
-    if(s.mention_count)out+='Mentions (BOTH timeframe AND outcome): '+s.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
-    if(s.timeframe_keywords)out+='Timeframe keywords: '+s.timeframe_keywords.join(', ')+'\n';
-    if(s.outcome_keywords)out+='Outcome keywords: '+s.outcome_keywords.join(', ')+'\n';
+    out+='ALT FRAMING: '+s.text+'\n';
+    if(s.mention_count)out+='Mentions: '+s.mention_count+' of '+lastAnalysis.analyzed+' reviewers analyzed\n';
     if(s.sample_quotes)s.sample_quotes.forEach(function(q){out+='Quote: "'+q+'"\n';});
     out+='\n';
   });
+  out+='\n=== OUTCOME STATS (collapsed by default) ===\n';
+  (a.outcome_stats||[]).forEach(function(s){out+='• '+s.percentage+'% '+s.detail+' ('+s.count+' of '+lastAnalysis.analyzed+' reviewers)\n';});
   out+='\n=== REVIEWS (VERBATIM) ===\n';
-  (a.reviews||[]).forEach(function(v){out+='Review '+v.num+': '+v.title+'\n"'+(v.original_text||'')+'"\n— '+(v.original_author||'Verified Buyer')+' [Theme: '+(v.theme||'')+']\n\n';});
+  (a.reviews||[]).forEach(function(v){out+='Review '+v.num+': '+v.title+(v._verified===false?' [UNVERIFIED]':' [✓ verified]')+'\n"'+(v.original_text||'')+'"\n— '+(v.original_author||'Verified Buyer')+' [Theme: '+(v.theme||'')+']\n\n';});
   out+='\n=== INGREDIENTS ===\n';
   (a.ingredients||[]).forEach(function(ing){out+='Option '+ing.num+':\n'+ing.headline+'\n'+ing.subline+'\nWiki source: '+ing.wiki_source+'\n\n';});
   out+='\n=== CURATE YOUR COLLECTION ===\n';
-  (a.curated_collection||[]).forEach(function(c){out+='Option '+c.num+': '+c.title+'\n'+c.subhead+'\n\n';});
+  var cur=a.curated_collection||{};
+  if(cur.has_pairings&&cur.options){
+    cur.options.forEach(function(c){out+='Option '+c.num+': '+c.title+'\n'+c.subhead+'\nWiki source: '+(c.wiki_source||'')+'\n\n';});
+  } else {
+    out+='No content generated — wiki has no Recommended Pairings section.\n\n';
+  }
   out+='\n=== FAQS ===\n';
-  (a.faqs||[]).forEach(function(o){
+  out+='-- Answered from wiki --\n';
+  (a.faqs||[]).filter(function(f){return !f.needs_manual_answer;}).forEach(function(o){
     out+='#'+o.rank+(o.is_what_to_expect?' [WHAT TO EXPECT]':'')+' '+o.question+'\nAnswer: '+o.suggested_answer+'\n';
+    if(o.wiki_source)out+='Wiki source: '+o.wiki_source+'\n';
+    if(o.review_context)out+='Why we\'re asking: '+o.review_context+'\n';
     if(o.is_what_to_expect&&o.expectation_substantiation){
       var es=o.expectation_substantiation;
-      if(es.onset_quotes&&es.onset_quotes.length){out+='Onset timing quotes:\n';es.onset_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
-      if(es.effects_quotes&&es.effects_quotes.length){out+='Temporary effects quotes:\n';es.effects_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
+      if(es.onset_quotes&&es.onset_quotes.length){out+='Onset context quotes:\n';es.onset_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
+      if(es.effects_quotes&&es.effects_quotes.length){out+='Effects context quotes:\n';es.effects_quotes.forEach(function(q){out+='  "'+q+'"\n';});}
     }
+    out+='\n';
+  });
+  out+='\n-- Needs manual answer --\n';
+  (a.faqs||[]).filter(function(f){return f.needs_manual_answer;}).forEach(function(o){
+    out+='#'+o.rank+' '+o.question+'\nReason: '+(o.manual_answer_reason||'Wiki does not cover')+'\n';
+    if(o.review_context)out+='Why we\'re asking: '+o.review_context+'\n';
     out+='\n';
   });
   out+='\n=== PAIN POINTS ===\n';
