@@ -380,24 +380,6 @@
   </div>
 
   <div class="step-block">
-    <span class="collapsible-toggle" onclick="togglePanel('settingsPanel','settingsArrow')">Output settings <span class="collapsible-arrow" id="settingsArrow">▾</span></span>
-    <div class="collapsible-panel" id="settingsPanel">
-      <div class="settings-panel-inner">
-        <div class="settings-grid">
-          <div class="settings-field"><label>About — max chars</label><input type="number" id="set_about_chars" value="205" min="100" max="300"></div>
-          <div class="settings-field"><label>MWP desc — max chars</label><input type="number" id="set_mwp_chars" value="140" min="40" max="200"></div>
-          <div class="settings-field"><label>Review text — max chars</label><input type="number" id="set_review_chars" value="250" min="80" max="400"></div>
-          <div class="settings-field"><label>Ingredient title — max chars</label><input type="number" id="set_ing_title_chars" value="40" min="20" max="80"></div>
-          <div class="settings-field"><label>Ingredient desc — max chars</label><input type="number" id="set_ing_chars" value="120" min="60" max="200"></div>
-          <div class="settings-field"><label>Curated subhead — max chars</label><input type="number" id="set_curated_chars" value="80" min="40" max="200"></div>
-          <div class="settings-field"><label>FAQ answer — max chars</label><input type="number" id="set_faq_chars" value="250" min="80" max="400"></div>
-          <div class="settings-field"><label>Stat label — max chars</label><input type="number" id="set_stat_chars" value="20" min="10" max="40"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="step-block">
     <div class="step-num">Step 04</div>
     <button class="btn-analyze" id="analyzeBtn" disabled onclick="runAnalysis()">Analyze Reviews</button>
   </div>
@@ -437,7 +419,8 @@
             <li>5 About copy options, each tagged with pain point, benefit, and differentiator</li>
             <li>Structure: lead with benefit → acknowledge pain → name differentiator</li>
             <li>Product is named in every option (e.g. "Oxy-Powder…")</li>
-            <li>Differentiation framework picks the best angle per option (mechanism, form, sourcing, bioavailability, combination, use case)</li>
+            <li>Options 1-4 use Mechanism as the differentiator (different mechanism angle per option)</li>
+            <li>Option 5 uses Sourcing as the differentiator</li>
             <li>"Why this differentiates" reasoning shown under each card</li>
           </ul>
           <div class="how-constraints">
@@ -479,7 +462,7 @@
             <div class="how-constraints-label">Constraints</div>
             <ul>
               <li>Title: up to 5 words — written for the best angle, not constrained to a target length</li>
-              <li>Description: 140 characters max (auto-rewritten if over)</li>
+              <li>Description: 170 characters max (auto-rewritten if over)</li>
               <li>Source attribution shown on every card — v1 PDP quote (if applicable) + wiki quote</li>
             </ul>
           </div>
@@ -721,14 +704,14 @@ var SAMPLE_SIZE=300;
 
 function getSettings(){
   return {
-    about_chars:parseInt(document.getElementById('set_about_chars').value)||205,
-    mwp_chars:parseInt(document.getElementById('set_mwp_chars').value)||140,
-    review_chars:parseInt(document.getElementById('set_review_chars').value)||250,
-    ing_title_chars:parseInt(document.getElementById('set_ing_title_chars').value)||40,
-    ing_chars:parseInt(document.getElementById('set_ing_chars').value)||120,
-    curated_chars:parseInt(document.getElementById('set_curated_chars').value)||80,
-    faq_chars:parseInt(document.getElementById('set_faq_chars').value)||250,
-    stat_chars:parseInt(document.getElementById('set_stat_chars').value)||20,
+    about_chars:205,
+    mwp_chars:170,
+    review_chars:250,
+    ing_title_chars:40,
+    ing_chars:120,
+    curated_chars:80,
+    faq_chars:250,
+    stat_chars:20,
     faq_count:8
   };
 }
@@ -849,7 +832,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
   return 'Conversion copywriter for Global Healing supplements. Analyze '+count+' published reviews for "'+product+'".'+wikiSection
     +'\nReturn ONLY valid JSON matching this schema:\n'+schema
     +'\nCRITICAL RULES:'
-    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Structure: BENEFIT first (what the customer gets) → acknowledge PAIN (what it solves) → name DIFFERENTIATOR. Product name MUST appear in each option (e.g. "Oxy-Powder…", "Latero-Flora…"). Differentiator hierarchy: Mechanism > Form > Sourcing > Bioavailability > Combination > Use Case. Each of the 5 options should test a DIFFERENT differentiator angle when wiki supports it. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. BANNED WORDS in About text: program, programs, protocol, protocols, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims. No question marks or casual openers.'
+    +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Structure: BENEFIT first (what the customer gets) → acknowledge PAIN (what it solves) → name DIFFERENTIATOR. Product name MUST appear in each option (e.g. "Oxy-Powder…", "Latero-Flora…"). DIFFERENTIATOR ASSIGNMENT (strict): Options 1-4 use Mechanism as the differentiator (the specific chemical or physiological action the ingredient takes). Option 5 uses Sourcing as the differentiator (where ingredient comes from, how it\'s extracted, purity protocols). Each option should test a DIFFERENT mechanism angle (different ingredient, different physiological pathway, different proof point). Set differentiator_type accordingly: "Mechanism" for options 1-4, "Sourcing" for option 5. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. BANNED WORDS in About text: program, programs, protocol, protocols, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims. No question marks or casual openers.'
     +'\n- pain_points: exactly 4, ranked by frequency'
     +'\n- made_with_purpose: exactly 5. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits. Options 4-5 (source_type="wiki"): NEW benefit angles drawn from the wiki Health Benefits section that the v1 PDP does not already cover. Title: up to 5 words — prioritize specificity and distinctiveness over brevity, write what is best for the angle. desc under '+s.mwp_chars+' chars. wiki_source required all 5 — for wiki-sourced options, wiki_source MUST be the full Health Benefits block: the bold title, the italic descriptor sentence, and all bullet points underneath it, formatted as: "TITLE — DESCRIPTOR\\n• bullet 1\\n• bullet 2\\n• bullet 3". Use the bullets to inform punchier benefit angles. v1_pdp_source only for options 1-3. If no v1 PDP provided, generate all 5 from wiki only and label source_type="wiki" with empty v1_pdp_source. Do NOT fabricate v1_pdp_source quotes.'
     +'\n- wiki_v1_alignment: compare ONLY the wiki Health Benefits section against v1 PDP benefits. CRITICAL: wiki_only_adds must contain ONLY top-level entries from the wiki\'s Health Benefits section that do not appear in v1 PDP. DO NOT include content from: clinical study sections, "Backed by Research" subsections, mechanism explanations, formulation details, Source & Quality sections, certifications, manufacturing notes, or any section other than Health Benefits. v1_only_adds = v1 PDP benefits with no matching Health Benefits theme in the wiki. contradictions = direct conflicts in framing between wiki Health Benefits and v1 PDP. Set has_mismatch=true only if real mismatches exist within Health Benefits scope.'
