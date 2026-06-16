@@ -421,7 +421,6 @@
       <div class="report-eyebrow">Review Analysis Report</div>
       <h1 class="report-title" id="resultsTitle">Product</h1>
       <div class="report-meta">
-        <div class="report-meta-item" id="dateRangeMetaItem" style="display:none">📅 <span id="dateRangeText"></span></div>
         <div class="report-meta-item"><span id="resultsMetaText"></span></div>
       </div>
     </div>
@@ -479,7 +478,7 @@
           <div class="how-constraints">
             <div class="how-constraints-label">Constraints</div>
             <ul>
-              <li>Title: 2-4 words, prefer 3</li>
+              <li>Title: up to 5 words — written for the best angle, not constrained to a target length</li>
               <li>Description: 140 characters max (auto-rewritten if over)</li>
               <li>Source attribution shown on every card — v1 PDP quote (if applicable) + wiki quote</li>
             </ul>
@@ -852,7 +851,7 @@ function buildPrompt(product,count,wikiSection,s,reviewTexts){
     +'\nCRITICAL RULES:'
     +'\n- about_options: exactly 5. HARD LIMIT: 205 characters maximum per option. Structure: BENEFIT first (what the customer gets) → acknowledge PAIN (what it solves) → name DIFFERENTIATOR. Product name MUST appear in each option (e.g. "Oxy-Powder…", "Latero-Flora…"). Differentiator hierarchy: Mechanism > Form > Sourcing > Bioavailability > Combination > Use Case. Each of the 5 options should test a DIFFERENT differentiator angle when wiki supports it. why_this_differentiates: 2-3 sentences explaining why this angle is competitor-resistant and wiki-grounded. BANNED WORDS in About text: program, programs, protocol, protocols, reset, journey, lighter, balance, harmony, supports, promotes, boosts, enhances. ZERO health claims. No question marks or casual openers.'
     +'\n- pain_points: exactly 4, ranked by frequency'
-    +'\n- made_with_purpose: exactly 5. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits. Options 4-5 (source_type="wiki"): NEW benefit angles from wiki Health Benefits the v1 PDP does not cover. Title 2-4 words (prefer 3), desc under '+s.mwp_chars+' chars. wiki_source required all 5. v1_pdp_source only for options 1-3. If no v1 PDP provided, generate all 5 from wiki only and label source_type="wiki" with empty v1_pdp_source. Do NOT fabricate v1_pdp_source quotes.'
+    +'\n- made_with_purpose: exactly 5. Options 1-3 (source_type="v1_pdp"): conversion-angle rewrites of v1 PDP benefits. Options 4-5 (source_type="wiki"): NEW benefit angles drawn from the wiki Health Benefits section that the v1 PDP does not already cover. Title: up to 5 words — prioritize specificity and distinctiveness over brevity, write what is best for the angle. desc under '+s.mwp_chars+' chars. wiki_source required all 5 — for wiki-sourced options, wiki_source MUST be the full Health Benefits block: the bold title, the italic descriptor sentence, and all bullet points underneath it, formatted as: "TITLE — DESCRIPTOR\\n• bullet 1\\n• bullet 2\\n• bullet 3". Use the bullets to inform punchier benefit angles. v1_pdp_source only for options 1-3. If no v1 PDP provided, generate all 5 from wiki only and label source_type="wiki" with empty v1_pdp_source. Do NOT fabricate v1_pdp_source quotes.'
     +'\n- wiki_v1_alignment: compare ONLY the wiki Health Benefits section against v1 PDP benefits. CRITICAL: wiki_only_adds must contain ONLY top-level entries from the wiki\'s Health Benefits section that do not appear in v1 PDP. DO NOT include content from: clinical study sections, "Backed by Research" subsections, mechanism explanations, formulation details, Source & Quality sections, certifications, manufacturing notes, or any section other than Health Benefits. v1_only_adds = v1 PDP benefits with no matching Health Benefits theme in the wiki. contradictions = direct conflicts in framing between wiki Health Benefits and v1 PDP. Set has_mismatch=true only if real mismatches exist within Health Benefits scope.'
     +'\n- benefits: EXACTLY 3 review-derived qualitative benefits. NO percentage field. title + proof only.'
     +'\n- outcome_stats: 4-6 items. detail max 20 chars. No disease claims.'
@@ -1053,7 +1052,7 @@ async function runAnalysis(){
     return (isAnon?'[ANON]: ':'['+author+']: ')+text;
   }).filter(function(t){return t.length>20;}).join('\n---\n');
 
-  var wikiSection=wiki?'\n\nPRODUCT WIKI:\n'+wiki.substring(0,4000)+'\n':'';
+  var wikiSection=wiki?'\n\nPRODUCT WIKI:\n'+wiki.substring(0,12000)+'\n':'';
   var v1Section='';
   if(lastV1PdpBenefits&&lastV1PdpBenefits.length){
     v1Section='\n\nV1 PDP BENEFITS (currently published, use as foundation for conversion-angle rewrites):\n';
@@ -1108,7 +1107,7 @@ function makeWikiSourceCol(wikiSource,v1Source){
     var spacer=document.createElement('div');spacer.style.height='8px';col.appendChild(spacer);
   }
   var lbl=document.createElement('div');lbl.className='wiki-source-label';lbl.textContent='From wiki';
-  var quote=document.createElement('div');quote.className='wiki-source-quote';quote.textContent=wikiSource||'\u2014';
+  var quote=document.createElement('div');quote.className='wiki-source-quote';quote.style.whiteSpace='pre-line';quote.textContent=wikiSource||'\u2014';
   col.appendChild(lbl);col.appendChild(quote);return col;
 }
 
@@ -1148,7 +1147,6 @@ function appendVerificationBlock(parent,obj,total){
 function renderResults(product,total,analyzed,a,dateRange,settings){
   document.getElementById('resultsTitle').textContent=product;
   document.getElementById('resultsMetaText').textContent=analyzed.toLocaleString()+' of '+total.toLocaleString()+' published reviews analyzed';
-  if(dateRange){document.getElementById('dateRangeMetaItem').style.display='flex';document.getElementById('dateRangeText').textContent=dateRange;}
 
   var painRef=document.getElementById('painRefBody');painRef.innerHTML='';
   (a.pain_points||[]).forEach(function(p){
