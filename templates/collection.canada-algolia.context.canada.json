@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "parent": "collection.canada-algolia.json",
   "context": {
@@ -27,7 +36,7 @@
       },
       "blocks": {
         "algolia_search_and_discovery_instantsearch_9Tf9P": {
-          "type": "shopify:\/\/apps\/algolia-search-and-discovery\/blocks\/instantsearch\/57bb7f86-d5fe-4d43-96ca-3953324494cf",
+          "type": "shopify://apps/algolia-search-and-discovery/blocks/instantsearch/57bb7f86-d5fe-4d43-96ca-3953324494cf",
           "disabled": false,
           "settings": {
             "header-ef77e43bb80951ceba47a47549f8313b": null,
