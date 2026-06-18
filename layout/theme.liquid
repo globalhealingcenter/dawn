@@ -4,7 +4,7 @@
   <head>
     {% render 'elevateab' %}
     <!-- Google Consent Mode V2 (Consentmo) -->
-    {% render 'gcm-integration-script' %}
+    {% comment %} {% render 'gcm-integration-script' %} {% endcomment %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -109,7 +109,7 @@
     <!-- ============================================ -->
 
     {% comment %}
-        {% render 'speedshopify-head' %}
+      {% render 'speedshopify-head' %}
     {% endcomment %}
 
     {% comment %}
@@ -133,16 +133,18 @@
     </title>
 
     <!-- Google tag (gtag.js) -->
-    {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=AW-683425101"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+    {% comment %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-683425101"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
 
-      gtag('config', 'AW-683425101');
-    </script> {% endcomment %}
+        gtag('config', 'AW-683425101');
+      </script>
+    {% endcomment %}
 
     <script>
       (function (w, d, t, r, u) {
@@ -545,90 +547,94 @@
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
     <!-- Post Pilot -->
     <script type="text/javascript">
-        var script = document.createElement('script');
-        script.src = "https://xp2023-pix.s3.amazonaws.com/px_4W5x6.js";
-        document.getElementsByTagName('head')[0].appendChild(script);
-     </script>
+      var script = document.createElement('script');
+      script.src = 'https://xp2023-pix.s3.amazonaws.com/px_4W5x6.js';
+      document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
 
-  {% include 'huk-mega-menu-pro' %}
+    {% include 'huk-mega-menu-pro' %}
 
-  <!-- Tapcart/Ordergroove scroll fix -->
+    <!-- Tapcart/Ordergroove scroll fix -->
     <script>
-  (function () {
-    if (!window.location.pathname.includes('/apps/subscriptions')) return;
+      (function () {
+        if (!window.location.pathname.includes('/apps/subscriptions')) return;
 
-    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+        var css =
+          'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
 
-    function inject() {
-      if (document.getElementById('tapcart-og-scroll-fix')) return;
-      var s = document.createElement('style');
-      s.id = 'tapcart-og-scroll-fix';
-      s.textContent = css;
-      (document.head || document.documentElement).appendChild(s);
-    }
+        function inject() {
+          if (document.getElementById('tapcart-og-scroll-fix')) return;
+          var s = document.createElement('style');
+          s.id = 'tapcart-og-scroll-fix';
+          s.textContent = css;
+          (document.head || document.documentElement).appendChild(s);
+        }
 
-    // Apply immediately — beat Ordergroove's mount
-    inject();
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject, { once: true });
-    }
+        // Apply immediately — beat Ordergroove's mount
+        inject();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', inject, { once: true });
+        }
 
-    // MutationObserver: re-assert if Ordergroove resets inline styles after mount
-    var mo = new MutationObserver(inject);
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
-    if (document.body) {
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-      }, { once: true });
-    }
-  })();
-</script>
+        // MutationObserver: re-assert if Ordergroove resets inline styles after mount
+        var mo = new MutationObserver(inject);
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+        if (document.body) {
+          mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+        } else {
+          document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+              mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+            },
+            { once: true }
+          );
+        }
+      })();
+    </script>
 
-<!-- Tapcart/Article scroll fix -->
+    <!-- Tapcart/Article scroll fix -->
 
-<script>
-  (function () {
-    if (!window.location.pathname.includes('/blogs/')) return;
+    <script>
+      (function () {
+        if (!window.location.pathname.includes('/blogs/')) return;
 
-    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+        var css =
+          'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
 
-    function inject() {
-      if (document.getElementById('tapcart-article-scroll-fix')) return;
-      var s = document.createElement('style');
-      s.id = 'tapcart-article-scroll-fix';
-      s.textContent = css;
-      (document.head || document.documentElement).appendChild(s);
-    }
+        function inject() {
+          if (document.getElementById('tapcart-article-scroll-fix')) return;
+          var s = document.createElement('style');
+          s.id = 'tapcart-article-scroll-fix';
+          s.textContent = css;
+          (document.head || document.documentElement).appendChild(s);
+        }
 
-    inject();
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject, { once: true });
-    }
+        inject();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', inject, { once: true });
+        }
 
-    var mo = new MutationObserver(inject);
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
-    if (document.body) {
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-      }, { once: true });
-     }
-   })();
-</script>
-  
-  
-  {% include "huk-mega-menu-pro" %}
+        var mo = new MutationObserver(inject);
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+        if (document.body) {
+          mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+        } else {
+          document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+              mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+            },
+            { once: true }
+          );
+        }
+      })();
+    </script>
+
+    {% include 'huk-mega-menu-pro' %}
   </head>
-							
-
-
-
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -855,7 +861,7 @@
     {% render 'klaviyo-out-of-stock' %}
 
     {% comment %}
-        {% render 'speedshopify-body' %}
+      {% render 'speedshopify-body' %}
     {% endcomment %}
   </body>
 </html>
