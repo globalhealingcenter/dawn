@@ -30,13 +30,17 @@
   Resolve the "Continue shopping" URL based on the active storefront domain.
   URLs are managed in Theme Settings → Cart → Continue Shopping URLs.
 {%- endcomment -%}
-{%- if shop.domain contains 'globalhealing.co.uk' -%}
-  {%- assign continue_shopping_url = settings.continue_shopping_url_uk | default: 'https://globalhealing.co.uk/collections/products-for-uk' -%}
-{%- elsif shop.domain contains 'globalhealing.ca' -%}
-  {%- assign continue_shopping_url = settings.continue_shopping_url_ca | default: 'https://globalhealing.ca/collections/international' -%}
-{%- else -%}
-  {%- assign continue_shopping_url = settings.continue_shopping_url_us | default: 'https://globalhealing.com/collections/collections' -%}
-{%- endif -%}
+{%- liquid
+  assign current_host = request.host | downcase
+
+  if current_host contains 'globalhealing.co.uk'
+    assign continue_shopping_url = settings.continue_shopping_url_uk | default: '/collections/products-for-uk'
+  elsif current_host contains 'globalhealing.ca'
+    assign continue_shopping_url = settings.continue_shopping_url_ca | default: '/collections/international'
+  else
+    assign continue_shopping_url = settings.continue_shopping_url_us | default: '/collections/collections'
+  endif
+-%}
 
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
     <div class="title-wrapper-with-link">
