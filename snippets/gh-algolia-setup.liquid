@@ -36,19 +36,15 @@
       return options;
     });
 
-    {% if market_handle == 'uk' or market == 'United Kingdom' or localization.country.iso_code == 'GB' %}
+    {% if market_handle == 'uk' or market == 'United Kingdom' %}
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      // Filter by UK product variant objectIDs (always filterable in Algolia without facet config)
-      // Oxy-Powder UK: 44732533473480 (120 caps), 44732533506248 (60 caps)
-      // Vitamin B12 UK: 44732534390984 (60ml), 44732534423752 (30ml)
-      // Detoxadine UK: 44732534554824 (30ml)
-      let filter = 'objectID:44732533473480 OR objectID:44732533506248 OR objectID:44732534390984 OR objectID:44732534423752 OR objectID:44732534554824';
-      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND (' + filter + ')';
+      let filter = 'tags:available-for-uk';
+      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
       return filter;
     });
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'objectID:44732533473480 OR objectID:44732533506248 OR objectID:44732534390984 OR objectID:44732534423752 OR objectID:44732534554824';
-      if( defaultFilter ) filter = defaultFilter + ' AND (' + filter + ')';
+      let filter = 'tags:available-for-uk';
+      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
       return filter;
     });
     {% endif %}
