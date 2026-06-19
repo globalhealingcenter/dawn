@@ -1368,7 +1368,7 @@
         "id": "social_threads_link",
         "label": "t:settings_schema.social-media.settings.social_threads_link.label",
         "info": "t:settings_schema.social-media.settings.social_threads_link.info"
-      },
+      }
     ]
   },
   {
@@ -1463,6 +1463,24 @@
         "id": "cart_drawer_collection",
         "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
+      },
+      {
+        "type": "url",
+        "id": "continue_shopping_url_us",
+        "label": "Continue shopping URL - Global / US",
+        "default": "/collections/collections"
+      },
+      {
+        "type": "url",
+        "id": "continue_shopping_url_uk",
+        "label": "Continue shopping URL - UK",
+        "default": "/collections/products-for-uk"
+      },
+      {
+        "type": "url",
+        "id": "continue_shopping_url_ca",
+        "label": "Continue shopping URL - Canada",
+        "default": "/collections/international"
       }
     ]
   },
