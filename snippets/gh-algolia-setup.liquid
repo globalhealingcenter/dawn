@@ -36,15 +36,15 @@
       return options;
     });
 
-    {% if market_handle == 'uk' or market == 'United Kingdom' %}
+    {% if market_handle == 'uk' or market == 'United Kingdom' or localization.country.iso_code == 'GB' %}
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      let filter = 'tags:available-for-uk';
-      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
+      let filter = 'handle:oxy-powder-uk OR handle:detoxadine-uk OR handle:vitamin-b12-uk';
+      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND (' + filter + ')';
       return filter;
     });
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'tags:available-for-uk';
-      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
+      let filter = 'handle:oxy-powder-uk OR handle:detoxadine-uk OR handle:vitamin-b12-uk';
+      if( defaultFilter ) filter = defaultFilter + ' AND (' + filter + ')';
       return filter;
     });
     {% endif %}
