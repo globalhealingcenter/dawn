@@ -44,31 +44,17 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
-      let productHandle = item.handle;
-      let currentHost = window.location.hostname;
-
-      if (currentHost.includes('globalhealing.co.uk') && !productHandle.endsWith('-uk')) {
-        productHandle = `${productHandle}-uk`;
-      }
-
-      if (currentHost.includes('globalhealing.ca') && !productHandle.endsWith('-ca')) {
-        productHandle = `${productHandle}-ca`;
-      }
-
-      let productUrl = `${window.Shopify.routes.root}products/${productHandle}`;
-
       return html `<a
         class="aa-ItemLink aa-ProductItem"
         data-algolia-index="${item.index}"
         data-algolia-position="${item.productPosition}"
         data-algolia-queryid="${item.queryID}"
         data-algolia-objectid="${item.objectID}"
-        data-handle="${productHandle}"
-        data-gh-market-handle="${productHandle}"
+        data-handle="${item.handle}"
         data-variant-id="${item.objectID}"
         data-distinct="${item._distinct}"
         onclick="${defaultTemplate.props.onClick}"
-        href="${productUrl}"
+        href="${itemLink}"
       >
         <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
 
