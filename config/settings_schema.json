@@ -1463,31 +1463,6 @@
         "id": "cart_drawer_collection",
         "label": "t:settings_schema.cart.settings.cart_drawer.collection.label",
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
-      },
-      {
-        "type": "header",
-        "content": "Continue Shopping URLs"
-      },
-      {
-        "type": "url",
-        "id": "continue_shopping_url_us",
-        "label": "US (globalhealing.com)",
-        "default": "/collections/collections",
-        "info": "Shown on globalhealing.com"
-      },
-      {
-        "type": "url",
-        "id": "continue_shopping_url_uk",
-        "label": "UK (globalhealing.co.uk)",
-        "default": "/collections/products-for-uk",
-        "info": "Shown on globalhealing.co.uk"
-      },
-      {
-        "type": "url",
-        "id": "continue_shopping_url_ca",
-        "label": "CA (globalhealing.ca)",
-        "default": "/collections/international",
-        "info": "Shown on globalhealing.ca"
       }
     ]
   },
