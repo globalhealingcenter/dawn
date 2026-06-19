@@ -36,17 +36,30 @@
       return options;
     });
 
-    {% if market_handle == 'uk' or market == 'United Kingdom' %}
-    algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      let filter = 'tags:available-for-uk';
-      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
-      return filter;
-    });
-    algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'tags:available-for-uk';
-      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
-      return filter;
-    });
+    {% liquid
+      assign market_filter = ''
+
+      if market_handle == 'uk' or market == 'United Kingdom'
+        assign market_filter = 'tags:available-for-uk'
+      elsif market_handle == 'ca' or market == 'Canada'
+        assign market_filter = 'tags:available-for-canada'
+      elsif market_handle == 'international'
+        assign market_filter = 'tags:available-for-international'
+      endif
+    %}
+
+    {% if market_filter != blank %}
+      algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(defaultFilter) {
+        let filter = '{{ market_filter }}';
+        if (defaultFilter) filter = defaultFilter + ' AND ' + filter;
+        return filter;
+      });
+
+      algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
+        let filter = '{{ market_filter }}';
+        if (defaultFilter) filter = defaultFilter + ' AND ' + filter;
+        return filter;
+      });
     {% endif %}
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );

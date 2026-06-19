@@ -54,7 +54,11 @@
         data-variant-id="${item.objectID}"
         data-distinct="${item._distinct}"
         onclick="${defaultTemplate.props.onClick}"
-        href="${itemLink}"
+        let productUrl = `${window.Shopify.routes.root}products/${item.handle}`;
+        if (itemLink.includes('?')) {
+          productUrl += itemLink.substring(itemLink.indexOf('?'));
+        }
+        href="${productUrl}"
       >
         <span class="aa-ItemImage mb1"><img src="${algoliaShopify.helpers.compactImage(item)}" alt="${item.title}" /></span>
 
