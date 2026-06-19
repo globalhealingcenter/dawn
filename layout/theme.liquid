@@ -624,11 +624,10 @@
   
   
   {% include "huk-mega-menu-pro" %}
+
+
   </head>
 							
-
-
-
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) -->
@@ -857,5 +856,7 @@
     {% comment %}
         {% render 'speedshopify-body' %}
     {% endcomment %}
+
+    {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
   </body>
 </html>
