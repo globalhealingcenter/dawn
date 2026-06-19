@@ -54,6 +54,12 @@
             "picker_type": "button"
           }
         },
+        "custom_liquid_cFDQaa": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
+          }
+        },
         "ordergroove_offer": {
           "type": "shopify://apps/ordergroove-subscriptions/blocks/pdp-offer-block/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
           "settings": {
@@ -173,6 +179,7 @@
         "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "price",
         "variant_picker",
+        "custom_liquid_cFDQaa",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "custom_liquid_TxJtfK",
