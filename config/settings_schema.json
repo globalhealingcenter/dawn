@@ -1465,22 +1465,23 @@
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
       },
       {
+        "type": "header",
+        "content": "Continue shopping URLs"
+      },
+      {
         "type": "url",
         "id": "continue_shopping_url_us",
-        "label": "Continue shopping URL - Global / US",
-        "default": "/collections/collections"
+        "label": "Continue shopping URL - Global / US"
       },
       {
         "type": "url",
         "id": "continue_shopping_url_uk",
-        "label": "Continue shopping URL - UK",
-        "default": "/collections/products-for-uk"
+        "label": "Continue shopping URL - UK"
       },
       {
         "type": "url",
         "id": "continue_shopping_url_ca",
-        "label": "Continue shopping URL - Canada",
-        "default": "/collections/international"
+        "label": "Continue shopping URL - Canada"
       }
     ]
   },
