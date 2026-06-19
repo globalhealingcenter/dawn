@@ -44,11 +44,18 @@
         reviews_width = (100 / 5) * reviews.average
       }
 
-      let productUrl = `${window.Shopify.routes.root}products/${item.handle}`;
+      let productHandle = item.handle;
+      let currentHost = window.location.hostname;
 
-      if (itemLink && itemLink.includes('?')) {
-        productUrl += itemLink.substring(itemLink.indexOf('?'));
+      if (currentHost.includes('globalhealing.co.uk') && !productHandle.endsWith('-uk')) {
+        productHandle = `${productHandle}-uk`;
       }
+
+      if (currentHost.includes('globalhealing.ca') && !productHandle.endsWith('-ca')) {
+        productHandle = `${productHandle}-ca`;
+      }
+
+      let productUrl = `${window.Shopify.routes.root}products/${productHandle}`;
 
       return html `<a
         class="aa-ItemLink aa-ProductItem"
@@ -56,7 +63,8 @@
         data-algolia-position="${item.productPosition}"
         data-algolia-queryid="${item.queryID}"
         data-algolia-objectid="${item.objectID}"
-        data-handle="${item.handle}"
+        data-handle="${productHandle}"
+        data-gh-market-handle="${productHandle}"
         data-variant-id="${item.objectID}"
         data-distinct="${item._distinct}"
         onclick="${defaultTemplate.props.onClick}"
