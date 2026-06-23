@@ -628,6 +628,8 @@ This file can be re-written at any time.
   
   
   {% include "huk-mega-menu-pro" %}
+
+
   </head>
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     {% include 'shogun-content-handler' %}
@@ -635,7 +637,7 @@ This file can be re-written at any time.
     
     
     {{ content_for_layout }}
-    
+    {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
     <script>
       window.shopUrl = '{{ request.origin }}';
       window.routes = {
