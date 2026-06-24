@@ -35,18 +35,51 @@
       return options;
     });
 
-    {% if market == 'United Kingdom' %}
-    algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      console.log('default', _defaultFiltersString);
-      return 'tags:available-for-uk'
-    });
-    algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'tags:available-for-uk';
-      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
-      console.log('instant default filter', filter);
+    function ghAlgoliaCombineFilters(defaultFilter, extraFilters) {
+      const filters = extraFilters.filter(Boolean);
+      let filter = filters.join(' AND ');
+      if (defaultFilter) {
+        filter = filter ? defaultFilter + ' AND ' + filter : defaultFilter;
+      }
       return filter;
+    }
+
+    function ghAlgoliaHiddenProductFilters() {
+      return [
+        'NOT tags:algolia-ignore',
+        'NOT tags:draft'
+      ];
+    }
+
+    function ghAlgoliaIsHiddenProduct(hit) {
+      if (!hit) return true;
+      if (hit.title && hit.title.includes('[hidden]')) return true;
+      if (hit.variant_title && hit.variant_title.includes('[hidden]')) return true;
+      const tags = hit.tags || [];
+      return tags.includes('algolia-ignore') || tags.includes('draft');
+    }
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(defaultFilter) {
+      const extraFilters = ghAlgoliaHiddenProductFilters();
+      {% if market == 'United Kingdom' %}
+      extraFilters.push('tags:available-for-uk');
+      {% endif %}
+      return ghAlgoliaCombineFilters(defaultFilter, extraFilters);
     });
-    {% endif %}
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteProductTransformResponseHits', function(hits) {
+      return hits.filter(function(hit) {
+        return !ghAlgoliaIsHiddenProduct(hit);
+      });
+    });
+
+    algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
+      const extraFilters = ghAlgoliaHiddenProductFilters();
+      {% if market == 'United Kingdom' %}
+      extraFilters.push('tags:available-for-uk');
+      {% endif %}
+      return ghAlgoliaCombineFilters(defaultFilter, extraFilters);
+    });
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
