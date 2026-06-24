@@ -10,8 +10,15 @@
 <script>
   let gh_algolia = {
     autocomplete: {},
-    instant: {}
-  }
+    instant: {},
+    publishedHandles: new Set([
+      {% paginate collections.all.products by 1000 %}
+        {% for product in collections.all.products %}
+          {{ product.handle | json }},
+        {% endfor %}
+      {% endpaginate %}
+    ])
+  };
 </script>
 
 <style>{{ 'gh-algolia-autocomplete.css' | inline_asset_content }}</style>
@@ -25,80 +32,162 @@
 {% endif %}
 
 <script>
-
-  document.addEventListener('algolia.hooks.initialize', function() {
-
-    algoliaShopify.hooks.registerHook('beforeAutocompleteOptions', function(options) {
-      gh_algolia.autocomplete.plugins.getAll( algoliaShopify ).forEach( p => options.plugins.push(p) );
-      options.openOnFocus = true;
-      options.detachedMediaQuery = '';
-      return options;
-    });
-
-    function ghAlgoliaCombineFilters(defaultFilter, extraFilters) {
+  gh_algolia.helpers = {
+    combineFilters(defaultFilter, extraFilters) {
       const filters = extraFilters.filter(Boolean);
       let filter = filters.join(' AND ');
       if (defaultFilter) {
         filter = filter ? defaultFilter + ' AND ' + filter : defaultFilter;
       }
       return filter;
-    }
+    },
 
-    function ghAlgoliaHiddenProductFilters() {
+    hiddenProductFilters() {
       return [
         'NOT tags:algolia-ignore',
         'NOT tags:draft'
       ];
-    }
+    },
 
-    function ghAlgoliaIsHiddenProduct(hit) {
+    marketFilters() {
+      const filters = this.hiddenProductFilters();
+      {% if market == 'United Kingdom' %}
+      filters.push('tags:available-for-uk');
+      {% endif %}
+      return filters;
+    },
+
+    productTags(hit) {
+      if (!hit || !hit.tags) return [];
+      if (Array.isArray(hit.tags)) return hit.tags;
+      if (typeof hit.tags === 'string') {
+        return hit.tags.split(',').map(function(tag) { return tag.trim(); }).filter(Boolean);
+      }
+      return [];
+    },
+
+    isHiddenProduct(hit) {
       if (!hit) return true;
-      if (hit.title && hit.title.includes('[hidden]')) return true;
-      if (hit.variant_title && hit.variant_title.includes('[hidden]')) return true;
-      const tags = hit.tags || [];
-      return tags.includes('algolia-ignore') || tags.includes('draft');
+
+      if (hit.handle && gh_algolia.publishedHandles.size && !gh_algolia.publishedHandles.has(hit.handle)) {
+        return true;
+      }
+
+      if (hit.title && hit.title.indexOf('[hidden]') !== -1) return true;
+      if (hit.variant_title && hit.variant_title.indexOf('[hidden]') !== -1) return true;
+
+      const tags = this.productTags(hit);
+      return tags.indexOf('algolia-ignore') !== -1 || tags.indexOf('draft') !== -1;
+    },
+
+    applyProductFilters(existingFilters) {
+      return this.combineFilters(existingFilters, this.marketFilters());
+    },
+
+    filterProductHits(hits) {
+      return (hits || []).filter(function(hit) {
+        return !gh_algolia.helpers.isHiddenProduct(hit);
+      });
+    },
+
+    isProductsContext(context) {
+      return context && (context.pluginName === 'products' || context.sourceId === 'products');
     }
+  };
+
+  let ghAlgoliaHooksRegistered = false;
+
+  function ghAlgoliaRegisterHooks() {
+    if (ghAlgoliaHooksRegistered) return;
+    if (!window.algoliaShopify || !algoliaShopify.hooks || !algoliaShopify.hooks.registerHook) return;
+    ghAlgoliaHooksRegistered = true;
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteOptions', function(options) {
+      gh_algolia.autocomplete.plugins.getAll(algoliaShopify).forEach(function(plugin) {
+        options.plugins.push(plugin);
+      });
+      options.openOnFocus = true;
+      options.detachedMediaQuery = '';
+      return options;
+    });
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(defaultFilter) {
-      const extraFilters = ghAlgoliaHiddenProductFilters();
-      {% if market == 'United Kingdom' %}
-      extraFilters.push('tags:available-for-uk');
-      {% endif %}
-      return ghAlgoliaCombineFilters(defaultFilter, extraFilters);
+      return gh_algolia.helpers.applyProductFilters(defaultFilter);
+    });
+
+    algoliaShopify.hooks.registerHook('beforeAutocompletePluginOptions', function(options, context) {
+      if (!gh_algolia.helpers.isProductsContext(context)) return options;
+
+      options.searchParameters = options.searchParameters || {};
+      options.searchParameters.filters = gh_algolia.helpers.applyProductFilters(options.searchParameters.filters);
+
+      const existingTransformItems = options.transformItems;
+      options.transformItems = function(params) {
+        const items = existingTransformItems ? existingTransformItems(params) : params.items;
+        return gh_algolia.helpers.filterProductHits(items);
+      };
+
+      return options;
+    });
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteConfigurationOptions', function(config, context) {
+      if (!gh_algolia.helpers.isProductsContext(context) || !config.queries) return config;
+
+      config.queries = config.queries.map(function(query) {
+        return {
+          ...query,
+          params: {
+            ...query.params,
+            filters: gh_algolia.helpers.applyProductFilters(query.params && query.params.filters)
+          }
+        };
+      });
+
+      return config;
     });
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteProductTransformResponseHits', function(hits) {
-      return hits.filter(function(hit) {
-        return !ghAlgoliaIsHiddenProduct(hit);
-      });
+      return gh_algolia.helpers.filterProductHits(hits);
     });
 
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      const extraFilters = ghAlgoliaHiddenProductFilters();
-      {% if market == 'United Kingdom' %}
-      extraFilters.push('tags:available-for-uk');
-      {% endif %}
-      return ghAlgoliaCombineFilters(defaultFilter, extraFilters);
+      return gh_algolia.helpers.applyProductFilters(defaultFilter);
     });
 
-    algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
-    algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
-    algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate );
-    algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', gh_algolia.autocomplete.templates.productsTemplate );
-    algoliaShopify.hooks.registerHook('beforeAutocompleteArticlesTemplate', gh_algolia.autocomplete.templates.articlesTemplate );
+    algoliaShopify.hooks.registerHook('beforeInstantSearchTransformItems', function(transformedItems) {
+      return gh_algolia.helpers.filterProductHits(transformedItems);
+    });
+
+    algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate);
+    algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate);
+    algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate);
+    algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', function(defaultTemplate, templateOptions, distinct, itemLink) {
+      if (gh_algolia.helpers.isHiddenProduct(templateOptions.item)) {
+        const { html } = templateOptions;
+        return html``;
+      }
+      return gh_algolia.autocomplete.templates.productsTemplate(defaultTemplate, templateOptions, distinct, itemLink);
+    });
+    algoliaShopify.hooks.registerHook('beforeAutocompleteArticlesTemplate', gh_algolia.autocomplete.templates.articlesTemplate);
 
     {% if should_load_instant_search %}
     algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
       return gh_algolia.instant.init(options, algoliaShopify);
     });
-    algoliaShopify.hooks.registerHook('beforeInstantSearchNoResultTemplate', gh_algolia.instant.templates.noResult );
-    algoliaShopify.hooks.registerHook('beforeInstantSearchProductTemplate', gh_algolia.instant.templates.product );
-    algoliaShopify.hooks.registerHook('beforeInstantSearchMainTemplate', gh_algolia.instant.templates.main );
-    algoliaShopify.hooks.registerHook('afterInstantSearchHitClickAction', (_, hit) => {
-      console.log(_, hit)
+    algoliaShopify.hooks.registerHook('beforeInstantSearchNoResultTemplate', gh_algolia.instant.templates.noResult);
+    algoliaShopify.hooks.registerHook('beforeInstantSearchProductTemplate', function(defaultTemplate, hit, html, components) {
+      if (gh_algolia.helpers.isHiddenProduct(hit)) {
+        return html``;
+      }
+      return gh_algolia.instant.templates.product(defaultTemplate, hit, html, components);
+    });
+    algoliaShopify.hooks.registerHook('beforeInstantSearchMainTemplate', gh_algolia.instant.templates.main);
+    algoliaShopify.hooks.registerHook('afterInstantSearchHitClickAction', function(_, hit) {
+      console.log(_, hit);
     });
     {% endif %}
+  }
 
-  });
-
+  document.addEventListener('algolia.hooks.initialize', ghAlgoliaRegisterHooks);
+  ghAlgoliaRegisterHooks();
 </script>
