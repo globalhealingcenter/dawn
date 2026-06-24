@@ -28,24 +28,28 @@
 {% endif %}
 
 <script>
-  let ghAlgoliaReady = false;
+  let ghAlgoliaInitialized = false;
 
-  function initGhAlgoliaHooks() {
-    if (ghAlgoliaReady) return;
+  function initGhAlgolia() {
+    if (ghAlgoliaInitialized) return;
     if (!window.algoliaShopify || !algoliaShopify.hooks) return;
 
-    ghAlgoliaReady = true;
+    ghAlgoliaInitialized = true;
 
-    /* =========================================================
-      GLOBAL FILTER (THIS FIXES DRAFT + ACTIVE + MARKET)
-    ========================================================= */
+    /* =====================================================
+      🔥 FINAL FILTER (THIS IS THE ONLY SOURCE OF TRUTH)
+    ===================================================== */
     function buildFilters(defaultFilter) {
+
       let filters = [
-        'NOT tags:draft',
-        'NOT tags:algolia-ignore'
+        'NOT algolia_ignore:true'
       ];
 
-      /* MARKET FILTER */
+      /* 🚨 REAL SHOPIFY DRAFT CONTROL (IMPORTANT) */
+      filters.push('published:true');
+      filters.push('NOT status:draft');
+
+      /* 🌍 MARKET FILTER */
       {% if localization.country.name == 'United Kingdom' %}
       filters.push('tags:available-for-uk');
       {% endif %}
@@ -59,7 +63,9 @@
       return finalFilter;
     }
 
-    /* AUTOCOMPLETE FILTERS */
+    /* =====================================================
+      AUTOCOMPLETE FILTERS
+    ===================================================== */
     algoliaShopify.hooks.registerHook(
       'beforeAutocompleteFiltersString',
       function(defaultFilter) {
@@ -67,7 +73,9 @@
       }
     );
 
-    /* INSTANT SEARCH FILTERS */
+    /* =====================================================
+      INSTANT SEARCH FILTERS
+    ===================================================== */
     algoliaShopify.hooks.registerHook(
       'beforeInstantSearchFiltersString',
       function(defaultFilter) {
@@ -75,9 +83,9 @@
       }
     );
 
-    /* =========================================================
-      AUTOCOMPLETE INIT
-    ========================================================= */
+    /* =====================================================
+      AUTOCOMPLETE OPTIONS
+    ===================================================== */
     algoliaShopify.hooks.registerHook(
       'beforeAutocompleteOptions',
       function(options) {
@@ -92,9 +100,9 @@
       }
     );
 
-    /* =========================================================
-      PRODUCT TEMPLATE (NO FILTERING HERE → PREVENT EMPTY BOXES)
-    ========================================================= */
+    /* =====================================================
+      PRODUCT TEMPLATE (NO FILTERING HERE)
+    ===================================================== */
     algoliaShopify.hooks.registerHook(
       'beforeAutocompleteProductTemplate',
       function(defaultTemplate, templateOptions, distinct, itemLink) {
@@ -107,9 +115,9 @@
       }
     );
 
-    /* =========================================================
-      BASIC TEMPLATES
-    ========================================================= */
+    /* =====================================================
+      TEMPLATES
+    ===================================================== */
     algoliaShopify.hooks.registerHook(
       'beforeAutocompleteNoResultsTemplate',
       gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate
@@ -130,9 +138,9 @@
       gh_algolia.autocomplete.templates.articlesTemplate
     );
 
-    /* =========================================================
+    /* =====================================================
       INSTANT SEARCH INIT
-    ========================================================= */
+    ===================================================== */
     {% if should_load_instant_search %}
       algoliaShopify.hooks.registerHook(
         'beforeInstantSearchOptions',
@@ -158,6 +166,6 @@
     {% endif %}
   }
 
-  document.addEventListener('algolia.hooks.initialize', initGhAlgoliaHooks);
-  initGhAlgoliaHooks();
+  document.addEventListener('algolia.hooks.initialize', initGhAlgolia);
+  initGhAlgolia();
 </script>
