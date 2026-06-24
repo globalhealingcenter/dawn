@@ -127,8 +127,11 @@
     "cart_type": "notification",
     "show_vendor": false,
     "show_cart_note": false,
-    "cart_drawer_collection": "",
+    "continue_shopping_url_us": "https://globalhealing.com/collections/collections",
+    "continue_shopping_url_uk": "https://globalhealing.co.uk/collections/products-for-uk",
+    "continue_shopping_url_ca": "https://globalhealing.ca/collections/international",
     "ss_enable": false,
+    "cart_drawer_collection": "",
     "checkout_logo_image": "shopify://shop_images/Logo-Seal.svg",
     "checkout_logo_position": "center",
     "checkout_logo_size": "medium",
@@ -202,9 +205,19 @@
         "disabled": false,
         "settings": {}
       },
+      "11945366711752539959": {
+        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
+        "disabled": false,
+        "settings": {}
+      },
+      "2153490007123654574": {
+        "type": "shopify://apps/consentmo-gdpr/blocks/gdpr_cookie_consent/4fbe573f-a377-4fea-9801-3ee0858cae41",
+        "disabled": false,
+        "settings": {}
+      },
       "2296928500563504527": {
         "type": "shopify://apps/abra-promotions/blocks/abra/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "popup_preview": false,
           "popup_background_color": "#00260f",
@@ -232,16 +245,6 @@
           "announcement_bar_padding_x": 10,
           "sale_price_color": "#ff0000"
         }
-      },
-      "11945366711752539959": {
-        "type": "shopify://apps/zendesk/blocks/zendesk_web_widget/c0b417b1-b90b-4754-baaf-f55627e6acd4",
-        "disabled": false,
-        "settings": {}
-      },
-      "2153490007123654574": {
-        "type": "shopify://apps/consentmo-gdpr/blocks/gdpr_cookie_consent/4fbe573f-a377-4fea-9801-3ee0858cae41",
-        "disabled": false,
-        "settings": {}
       }
     },
     "color_schemes": {

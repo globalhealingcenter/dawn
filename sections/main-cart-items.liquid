@@ -26,15 +26,31 @@
 
 <script src="{{ 'quantity-popover.js' | asset_url }}" defer="defer"></script>
 
+{%- comment -%}
+  Resolve the "Continue shopping" URL based on the active storefront domain.
+  URLs are managed in Theme Settings → Cart → Continue Shopping URLs.
+{%- endcomment -%}
+{%- liquid
+  assign current_host = request.host | downcase
+
+  if current_host contains 'globalhealing.co.uk'
+    assign continue_shopping_url = settings.continue_shopping_url_uk | default: '/collections/products-for-uk'
+  elsif current_host contains 'globalhealing.ca'
+    assign continue_shopping_url = settings.continue_shopping_url_ca | default: '/collections/international'
+  else
+    assign continue_shopping_url = settings.continue_shopping_url_us | default: '/collections/collections'
+  endif
+-%}
+
 <cart-items class="page-width{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
     <div class="title-wrapper-with-link">
         <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
-        <a href="{{ routes.all_products_collection_url }}" class="underlined-link">{{ 'general.continue_shopping' | t }}</a>
+        <a href="{{ continue_shopping_url }}" class="underlined-link">{{ 'general.continue_shopping' | t }}</a>
     </div>
 
     <div class="cart__warnings">
         <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-        <a href="{{ routes.all_products_collection_url }}" class="button">
+        <a href="{{ continue_shopping_url }}" class="button">
             {{ 'general.continue_shopping' | t }}
         </a>
 

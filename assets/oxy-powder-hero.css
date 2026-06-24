@@ -74,6 +74,10 @@
   line-height: clamp(3.6rem, 79.012vw, 8.1rem);
 }
 
+.oph__oxy_logo a {
+  text-decoration: none;
+}
+
 .oph__oxy_logo .text-icons {
   font-weight: 400;
   font-size: 40px;
@@ -83,20 +87,24 @@
   right: 2px;
 }
 
+.oph__tagline a,
 .oph__tagline {
   font-size: clamp(18px, 1.575vw, 3rem);
   line-height: clamp(22px, 2.25vw, 3.6rem);
   color: #F9F2E8;
   margin: 0;
   font-weight: 400;
+  text-decoration: none;
 }
 
+.oph__social-proof a,
 .oph__social-proof {
   font-size: clamp(14px, 1.875vw, 3rem);
   line-height: clamp(19.2px, 2.25vw, 3.6rem);
   font-weight: bold;
   color: #F9F2E8;
   margin: 0;
+  text-decoration: none;
 }
 
 /* Middle row */
@@ -272,7 +280,8 @@
     margin: 0 auto; */
   }
 
-  .oph__tagline {
+  .oph__tagline,
+  .oph__tagline a {
     margin: 0px 0px 2px;
   }
 
