@@ -36,20 +36,6 @@
       return options;
     });
 
-    // Global filter: exclude draft/unpublished products from autocomplete
-    algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      let filter = 'published_status:published';
-      if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
-      return filter;
-    });
-
-    // Global filter: exclude draft/unpublished products from instant search
-    algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'published_status:published';
-      if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
-      return filter;
-    });
-
     {% if market_handle == 'uk' or market == 'United Kingdom' %}
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
       let filter = 'tags:available-for-uk';
@@ -64,8 +50,8 @@
     {% endif %}
 
     algoliaShopify.hooks.registerHook('beforeAutocompleteNoResultsTemplate', gh_algolia.autocomplete.templates.autocompleteNoResultsTemplate );
-    algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteSuggestionsTemplate', gh_algolia.autocomplete.templates.suggestionsTemplate );
+    algoliaShopify.hooks.registerHook('beforeAutocompleteMainTemplate', gh_algolia.autocomplete.templates.mainTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteProductTemplate', gh_algolia.autocomplete.templates.productsTemplate );
     algoliaShopify.hooks.registerHook('beforeAutocompleteArticlesTemplate', gh_algolia.autocomplete.templates.articlesTemplate );
 
