@@ -38,14 +38,14 @@
 
     // Global filter: exclude draft/unpublished products from autocomplete
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      let filter = 'status:active';
+      let filter = 'published_status:published';
       if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
       return filter;
     });
 
     // Global filter: exclude draft/unpublished products from instant search
     algoliaShopify.hooks.registerHook('beforeInstantSearchFiltersString', function(defaultFilter) {
-      let filter = 'status:active';
+      let filter = 'published_status:published';
       if( defaultFilter ) filter = defaultFilter + ' AND ' + filter;
       return filter;
     });
