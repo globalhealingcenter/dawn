@@ -38,7 +38,7 @@
 
     // Global filter: exclude draft/unpublished products from autocomplete
     algoliaShopify.hooks.registerHook('beforeAutocompleteFiltersString', function(_defaultFiltersString) {
-      let filter = 'published_status:published';
+      let filter = 'status:active';
       if( _defaultFiltersString ) filter = _defaultFiltersString + ' AND ' + filter;
       return filter;
     });
