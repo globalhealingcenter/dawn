@@ -24,20 +24,7 @@
   </style>
 {% endif %}
 
-<!-- Google Tag Manager -->
-<script>
-  (function (w, d, s, l, i) {
-    w[l] = w[l] || [];
-    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-    var f = d.getElementsByTagName(s)[0],
-      j = d.createElement(s),
-      dl = l != 'dataLayer' ? '&l=' + l : '';
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-    f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-N233MFC3');
-</script>
-<!-- End Google Tag Manager -->
+<!-- Google Tag Manager – loaded via consent-gated-tracking after marketing/analytics consent -->
 
 <!-- [ordergroove] -->
 <style>
@@ -818,33 +805,7 @@
   {{ 'vendor-glide-v3.6.0.theme.css' | inline_asset_content }}
 </style>
 
-<!-- impact radius setting cookie -->
-<script>
-  let cookieName = 'irclickid'; // Name of your affiliate cookie
-
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  const paramValue = urlParams.get(cookieName);
-
-  if (paramValue) {
-    let cookieValue = paramValue; // Sets your unique affiliate visit ID
-    let expirationTime = 2592000; // Expiration date - one month in seconds
-    expirationTime = expirationTime * 1000; // Converts expirationtime to milliseconds
-    let date = new Date();
-    let dateTimeNow = date.getTime();
-
-    date.setTime(dateTimeNow + expirationTime); // Sets expiration time (Time now + one month)
-    date = date.toUTCString(); // Converts milliseconds to UTC time string
-    document.cookie =
-      cookieName +
-      '=' +
-      cookieValue +
-      '; expires=' +
-      date +
-      '; path=/; domain=.' +
-      location.hostname.replace(/^www\./i, ''); // Sets cookie for all subdomains
-  }
-</script>
+<!-- Northbeam + Impact Radius affiliate cookies – loaded via consent-gated-tracking -->
 
 <!-- Tapcart Web Bridge SDK -->
 
