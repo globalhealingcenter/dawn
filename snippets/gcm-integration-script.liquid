@@ -8,16 +8,37 @@
   var __IN_TAPCART_EARLY__ = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
 
   const consentOutOfRegion = {
-    analytics: true,
-    marketing: true,
-    functionality: true,
-    adsDataRedaction: false,
+    analytics: false,
+    marketing: false,
+    functionality: false,
+    adsDataRedaction: true,
     urlPassthrough: false,
   };
 
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
+  }
+
+  function dispatchGhConsent(categories) {
+    window.__GH_CONSENT_STATE__ = categories;
+    if (categories.marketing) window.__GH_MARKETING_CONSENT__ = true;
+    document.dispatchEvent(new CustomEvent('gh:consentUpdate', { detail: categories }));
+  }
+
+  function parseConsentCategories(csmSignal) {
+    const gcm = csmSignal.integration?.gcm?.isEnabled ? csmSignal.integration.gcm.state : csmSignal.state;
+    const cats = csmSignal.categories || {};
+    return {
+      marketing: !!(cats.marketing || csmSignal.marketing || gcm?.ad_storage === 'granted'),
+      statistics: !!(cats.statistics || csmSignal.statistics || gcm?.analytics_storage === 'granted'),
+      functionality: !!(
+        cats.preferences ||
+        csmSignal.preferences ||
+        gcm?.functionality_storage === 'granted' ||
+        gcm?.personalization_storage === 'granted'
+      ),
+    };
   }
 
   if (__IN_TAPCART_EARLY__) {
@@ -34,6 +55,7 @@
     });
     // Prevent Consentmo from treating this session as a new visitor that needs consent.
     window.__consentmo_bypass__ = true;
+    dispatchGhConsent({ marketing: true, statistics: true, functionality: true });
     console.log('[Consentmo] Tapcart detected – consent widget suppressed.');
   } else {
     gtag('consent', 'default', {
@@ -61,7 +83,15 @@
         });
         gtag('set', 'ads_data_redaction', consentOutOfRegion.adsDataRedaction);
         gtag('set', 'url_passthrough', consentOutOfRegion.urlPassthrough);
+        dispatchGhConsent({
+          marketing: consentOutOfRegion.marketing,
+          statistics: consentOutOfRegion.analytics,
+          functionality: consentOutOfRegion.functionality,
+        });
       } else {
+        if (csmLoadSignal.hasConsent) {
+          dispatchGhConsent(parseConsentCategories(csmLoadSignal));
+        }
         document.addEventListener('consentmoSignal', function (event) {
           const csmSignal = event.detail;
           const consentState = csmSignal.integration?.gcm?.isEnabled
@@ -72,6 +102,7 @@
             gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
             gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
           }
+          dispatchGhConsent(parseConsentCategories(csmSignal));
         });
       }
     });

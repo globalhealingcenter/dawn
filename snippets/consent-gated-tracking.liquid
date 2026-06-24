@@ -1,0 +1,252 @@
+{%- comment -%}
+  Third-party marketing/analytics scripts gated behind Consentmo + Google Consent Mode v2.
+  Includes GTM (GTM-N233MFC3), Google Ads, Post Pilot, Snapchat – marketing tags load after consent.
+  Snapchat (Shopify channel) is auto-injected via content_for_header on window load – blocked here
+  until marketing consent, then loaded explicitly.
+  Loaded only after gh:consentUpdate (dispatched from gcm-integration-script.liquid).
+{%- endcomment -%}
+<script>
+  (function () {
+    var loaded = {
+      gtm: false,
+      googleAds: false,
+      postPilot: false,
+      klaviyo: false,
+      hotjar: false,
+      rebuy: false,
+      snapchat: false,
+    };
+
+    var GTM_CONTAINER_ID = 'GTM-N233MFC3';
+    var GOOGLE_ADS_ID = 'AW-683425101';
+    var SNAPCHAT_PIXEL_ID = '18cb733b-7c2e-4e14-92c5-2fc11903c39a';
+    var marketingConsentGranted = !!window.__GH_MARKETING_CONSENT__;
+
+    function isSnapchatScript(src) {
+      if (!src) return false;
+      return (
+        src.indexOf('intg.snapchat.com') !== -1 ||
+        src.indexOf('sc-static.net') !== -1 ||
+        src.indexOf('tr.snapchat.com') !== -1
+      );
+    }
+
+    function shouldBlockSnapchatScript(node) {
+      return (
+        node &&
+        node.tagName === 'SCRIPT' &&
+        !marketingConsentGranted &&
+        isSnapchatScript(node.src || node.getAttribute('src'))
+      );
+    }
+
+    var _insertBefore = Node.prototype.insertBefore;
+    Node.prototype.insertBefore = function (node, ref) {
+      if (shouldBlockSnapchatScript(node)) return node;
+      return _insertBefore.call(this, node, ref);
+    };
+
+    var _appendChild = Node.prototype.appendChild;
+    Node.prototype.appendChild = function (node) {
+      if (shouldBlockSnapchatScript(node)) return node;
+      return _appendChild.call(this, node);
+    };
+
+    function loadGoogleAds() {
+      if (loaded.googleAds || document.querySelector('script[src*="gtag/js?id=' + GOOGLE_ADS_ID + '"]')) return;
+      loaded.googleAds = true;
+      loadScript('https://www.googletagmanager.com/gtag/js?id=' + GOOGLE_ADS_ID, null);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag =
+        window.gtag ||
+        function () {
+          window.dataLayer.push(arguments);
+        };
+      window.gtag('js', new Date());
+      window.gtag('config', GOOGLE_ADS_ID);
+    }
+
+    function loadPostPilot() {
+      if (loaded.postPilot || document.querySelector('script[src*="xp2023-pix.s3.amazonaws.com"]')) return;
+      loaded.postPilot = true;
+      loadScript('https://xp2023-pix.s3.amazonaws.com/px_4W5x6.js', null);
+    }
+
+    function loadGTM() {
+      if (loaded.gtm || document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) return;
+      loaded.gtm = true;
+
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
+
+      function appendGtmNoscript() {
+        if (document.getElementById('gtm-noscript-iframe')) return;
+        var noscript = document.createElement('noscript');
+        noscript.id = 'gtm-noscript-iframe';
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.googletagmanager.com/ns.html?id=' + GTM_CONTAINER_ID;
+        iframe.height = 0;
+        iframe.width = 0;
+        iframe.style.display = 'none';
+        iframe.style.visibility = 'hidden';
+        noscript.appendChild(iframe);
+        if (document.body) {
+          document.body.insertBefore(noscript, document.body.firstChild);
+        } else {
+          document.addEventListener('DOMContentLoaded', function () {
+            document.body.insertBefore(noscript, document.body.firstChild);
+          });
+        }
+      }
+
+      appendGtmNoscript();
+    }
+
+    function loadScript(src, attrs) {
+      if (document.querySelector('script[src="' + src + '"]')) return;
+      var s = document.createElement('script');
+      s.src = src;
+      s.async = true;
+      if (attrs) {
+        Object.keys(attrs).forEach(function (key) {
+          s.setAttribute(key, attrs[key]);
+        });
+      }
+      document.head.appendChild(s);
+    }
+
+    function loadImpactRadiusCookie() {
+      var cookieName = 'irclickid';
+      var paramValue = new URLSearchParams(window.location.search).get(cookieName);
+      if (!paramValue) return;
+
+      var expirationTime = 2592000 * 1000;
+      var date = new Date();
+      date.setTime(date.getTime() + expirationTime);
+      document.cookie =
+        cookieName +
+        '=' +
+        paramValue +
+        '; expires=' +
+        date.toUTCString() +
+        '; path=/; domain=.' +
+        location.hostname.replace(/^www\./i, '');
+    }
+
+    function loadKlaviyo() {
+      if (loaded.klaviyo) return;
+      loaded.klaviyo = true;
+      loadScript('https://a.klaviyo.com/media/js/onsite/onsite.js', null);
+      var check = setInterval(function () {
+        if (!window.klaviyo) return;
+        clearInterval(check);
+        var klaviyo = window.klaviyo || [];
+        klaviyo.init({ account: 'YeibUN', platform: 'shopify' });
+        klaviyo.enable('backinstock', {
+          trigger: {
+            product_page_text: 'Notify Me When Available',
+            product_page_class: 'button',
+            product_page_text_align: 'center',
+            product_page_margin: '0px',
+            alternate_anchor: 'out-of-stock-form-signup',
+            replace_anchor: false,
+          },
+          modal: {
+            headline: '{product_name}',
+            body_content: 'Register to receive a notification when this item comes back in stock.',
+            email_field_label: 'Email',
+            button_label: 'Notify me when available',
+            subscription_success_label: "You're in! We'll let you know when it's back.",
+            footer_content: '',
+            drop_background_color: '#000',
+            background_color: '#fff',
+            text_color: '#222',
+            button_text_color: '#fff',
+            button_background_color: '#21472D',
+            close_button_color: '#ccc',
+            error_background_color: '#fcd6d7',
+            error_text_color: '#C72E2F',
+            success_background_color: '#d3efcd',
+            success_text_color: '#21472D',
+          },
+        });
+      }, 100);
+      setTimeout(function () {
+        clearInterval(check);
+      }, 10000);
+    }
+
+    function loadHotjar() {
+      if (loaded.hotjar || window.hj) return;
+      loaded.hotjar = true;
+      (function (h, o, t, j, a, r) {
+        h.hj =
+          h.hj ||
+          function () {
+            (h.hj.q = h.hj.q || []).push(arguments);
+          };
+        h._hjSettings = { hjid: 6443824, hjsv: 6 };
+        a = o.getElementsByTagName('head')[0];
+        r = o.createElement('script');
+        r.async = 1;
+        r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+        a.appendChild(r);
+      })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    }
+
+    function loadRebuy() {
+      if (loaded.rebuy || window.Rebuy || document.querySelector('script[src*="cdn.rebuyengine.com"]')) return;
+      loaded.rebuy = true;
+      loadScript('https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}', null);
+    }
+
+    function loadSnapchatPixel() {
+      if (loaded.snapchat || document.querySelector('script[src*="shopify-scevent-init"]')) return;
+      loaded.snapchat = true;
+      loadScript(
+        'https://intg.snapchat.com/shopify/shopify-scevent-init.js?id=' +
+          SNAPCHAT_PIXEL_ID +
+          '&shop={{ shop.permanent_domain }}',
+        null
+      );
+    }
+
+    function applyConsent(consent) {
+      if (!consent) return;
+
+      // Marketing: GTM (Trade Desk, Bing, Floodlight, Amazon, Pinterest, etc.), Google Ads, Post Pilot, Snapchat
+      if (consent.marketing) {
+        marketingConsentGranted = true;
+        loadGoogleAds();
+        loadGTM();
+        loadPostPilot();
+        loadImpactRadiusCookie();
+        loadKlaviyo();
+        loadSnapchatPixel();
+      }
+
+      if (consent.statistics) {
+        loadHotjar();
+      }
+      if (consent.marketing || consent.functionality) {
+        loadRebuy();
+      }
+    }
+
+    document.addEventListener('gh:consentUpdate', function (event) {
+      applyConsent(event.detail || {});
+    });
+
+    if (window.__GH_CONSENT_STATE__) {
+      applyConsent(window.__GH_CONSENT_STATE__);
+    }
+  })();
+</script>
