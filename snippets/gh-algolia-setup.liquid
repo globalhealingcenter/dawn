@@ -1,7 +1,7 @@
 {% liquid
   assign should_load_instant_search = false
   if template.name == 'search' or collection.template_suffix == 'canada-algolia' or collection.template_suffix == 'international'
-    assign should_load_instant_search = true
+    assign should_load_instant_search  = true
   endif
 
   assign market = localization.country.name
@@ -10,7 +10,7 @@
 <script>
   window.gh_algolia = {
     autocomplete: {},
-    instant: {},
+    instant: {}
   };
 </script>
 
@@ -28,92 +28,64 @@
 {% endif %}
 
 <script>
-  let ghAlgoliaInitialized = false;
-
-  function initGhAlgolia() {
-    if (ghAlgoliaInitialized) return;
-    if (!window.algoliaShopify || !algoliaShopify.hooks) return;
-
-    ghAlgoliaInitialized = true;
-
-    /* =====================================================
-      🔥 FINAL FILTER (THIS IS THE ONLY SOURCE OF TRUTH)
-    ===================================================== */
-    function buildFilters(defaultFilter) {
-
-      let filters = [
-        'NOT algolia_ignore:true'
-      ];
-
-      /* 🚨 REAL SHOPIFY DRAFT CONTROL (IMPORTANT) */
-      filters.push('published:true');
-      filters.push('NOT status:draft');
-
-      /* 🌍 MARKET FILTER */
-      {% if localization.country.name == 'United Kingdom' %}
-      filters.push('tags:available-for-uk');
-      {% endif %}
-
-      let finalFilter = filters.join(' AND ');
-
-      if (defaultFilter) {
-        finalFilter = defaultFilter + ' AND ' + finalFilter;
-      }
-
-      return finalFilter;
-    }
-
-    /* =====================================================
-      AUTOCOMPLETE FILTERS
-    ===================================================== */
-    algoliaShopify.hooks.registerHook(
-      'beforeAutocompleteFiltersString',
-      function(defaultFilter) {
-        return buildFilters(defaultFilter);
-      }
-    );
-
-    /* =====================================================
-      INSTANT SEARCH FILTERS
-    ===================================================== */
-    algoliaShopify.hooks.registerHook(
-      'beforeInstantSearchFiltersString',
-      function(defaultFilter) {
-        return buildFilters(defaultFilter);
-      }
-    );
+  document.addEventListener('algolia.hooks.initialize', function() {
 
     /* =====================================================
       AUTOCOMPLETE OPTIONS
     ===================================================== */
-    algoliaShopify.hooks.registerHook(
-      'beforeAutocompleteOptions',
-      function(options) {
-        gh_algolia.autocomplete.plugins
-          .getAll(algoliaShopify)
-          .forEach(p => options.plugins.push(p));
+    algoliaShopify.hooks.registerHook('beforeAutocompleteOptions', function(options) {
+      gh_algolia.autocomplete.plugins
+        .getAll(algoliaShopify)
+        .forEach(p => options.plugins.push(p));
 
-        options.openOnFocus = true;
-        options.detachedMediaQuery = '';
+      options.openOnFocus = true;
+      options.detachedMediaQuery = '';
 
-        return options;
-      }
-    );
+      return options;
+    });
 
     /* =====================================================
-      PRODUCT TEMPLATE (NO FILTERING HERE)
+      🔥 FINAL FILTER (ONLY SOURCE OF TRUTH)
+      - removes drafts
+      - removes hidden products
+      - applies market filter
     ===================================================== */
+
+    {% if market == 'United Kingdom' %}
+
     algoliaShopify.hooks.registerHook(
-      'beforeAutocompleteProductTemplate',
-      function(defaultTemplate, templateOptions, distinct, itemLink) {
-        return gh_algolia.autocomplete.templates.productsTemplate(
-          defaultTemplate,
-          templateOptions,
-          distinct,
-          itemLink
-        );
+      'beforeAutocompleteFiltersString',
+      function(defaultFilter) {
+
+        let filter = [
+          'tags:available-for-uk',
+          'NOT tags:algolia-ignore',
+          'NOT title:"[hidden]"'
+        ].join(' AND ');
+
+        return defaultFilter
+          ? defaultFilter + ' AND ' + filter
+          : filter;
       }
     );
+
+    algoliaShopify.hooks.registerHook(
+      'beforeInstantSearchFiltersString',
+      function(defaultFilter) {
+
+        let filter = [
+          'tags:available-for-uk',
+          'NOT tags:algolia-ignore',
+          'NOT title:"[hidden]"'
+        ].join(' AND ');
+
+        return defaultFilter
+          ? defaultFilter + ' AND ' + filter
+          : filter;
+      }
+    );
+
+    {% endif %}
 
     /* =====================================================
       TEMPLATES
@@ -134,38 +106,47 @@
     );
 
     algoliaShopify.hooks.registerHook(
+      'beforeAutocompleteProductTemplate',
+      gh_algolia.autocomplete.templates.productsTemplate
+    );
+
+    algoliaShopify.hooks.registerHook(
       'beforeAutocompleteArticlesTemplate',
       gh_algolia.autocomplete.templates.articlesTemplate
     );
 
     /* =====================================================
-      INSTANT SEARCH INIT
+      INSTANT SEARCH
     ===================================================== */
     {% if should_load_instant_search %}
-      algoliaShopify.hooks.registerHook(
-        'beforeInstantSearchOptions',
-        function(options) {
-          return gh_algolia.instant.init(options, algoliaShopify);
-        }
-      );
 
-      algoliaShopify.hooks.registerHook(
-        'beforeInstantSearchNoResultTemplate',
-        gh_algolia.instant.templates.noResult
-      );
+    algoliaShopify.hooks.registerHook('beforeInstantSearchOptions', function(options) {
+      return gh_algolia.instant.init(options, algoliaShopify);
+    });
 
-      algoliaShopify.hooks.registerHook(
-        'beforeInstantSearchProductTemplate',
-        gh_algolia.instant.templates.product
-      );
+    algoliaShopify.hooks.registerHook(
+      'beforeInstantSearchNoResultTemplate',
+      gh_algolia.instant.templates.noResult
+    );
 
-      algoliaShopify.hooks.registerHook(
-        'beforeInstantSearchMainTemplate',
-        gh_algolia.instant.templates.main
-      );
+    algoliaShopify.hooks.registerHook(
+      'beforeInstantSearchProductTemplate',
+      gh_algolia.instant.templates.product
+    );
+
+    algoliaShopify.hooks.registerHook(
+      'beforeInstantSearchMainTemplate',
+      gh_algolia.instant.templates.main
+    );
+
     {% endif %}
-  }
 
-  document.addEventListener('algolia.hooks.initialize', initGhAlgolia);
-  initGhAlgolia();
+    algoliaShopify.hooks.registerHook(
+      'afterInstantSearchHitClickAction',
+      (_, hit) => {
+        console.log(_, hit);
+      }
+    );
+
+  });
 </script>
