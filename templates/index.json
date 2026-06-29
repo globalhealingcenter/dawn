@@ -420,7 +420,7 @@
             "left_col_heading": "Start Your Journey",
             "left_col_text": "<p>Shop our collection and find the right product for you. </p>",
             "link_1_text": "Shop Our Collection",
-            "link_1": "shopify://collections/collections",
+            "link_1": "shopify://collections/products",
             "link_2_text": "",
             "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
