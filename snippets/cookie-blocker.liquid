@@ -1,0 +1,269 @@
+{%- comment -%}
+  ============================================================
+  CONSENT-FIRST COOKIE BLOCKER
+  Place this as the VERY FIRST script in <head> of theme.liquid
+  BEFORE content_for_header and before any other script tags.
+
+  Blocks:
+  - document.cookie writes (all tracking cookies)
+  - Attentive (_attn_)
+  - Meta/Facebook (_fbp)
+  - Google Analytics (_ga, _gcl_au)
+  - Northbeam (_nb_sp_id, _nb_sp_ses)
+  - Pinterest (_pin_unauth)
+  - Hotjar (_hjSession, _hjSessionUser)
+  - Any unknown third-party scripts injected via Customer Events
+
+  Works alongside your existing gh:consentUpdate script.
+  ============================================================
+{%- endcomment -%}
+
+<script>
+(function () {
+  'use strict';
+
+  // ─── 1. CONSENT STATE ────────────────────────────────────────────────────────
+  // Mirrors your existing __GH_CONSENT_STATE__ pattern
+  var consentState = {
+    analytics: false,
+    marketing: false,
+    functionality: false,
+  };
+
+  // If user already consented (returning visitor), unlock immediately
+  if (window.__GH_CONSENT_STATE__) {
+    var s = window.__GH_CONSENT_STATE__;
+    consentState.analytics    = !!s.statistics;
+    consentState.marketing    = !!s.marketing;
+    consentState.functionality = !!s.functionality;
+  }
+
+  // ─── 2. COOKIE BLOCKLIST ─────────────────────────────────────────────────────
+  // Cookies that must NEVER be set before consent is given.
+  // Key = cookie name prefix, Value = which consent category unlocks it.
+  var BLOCKED_COOKIES = {
+    // Analytics
+    '_ga':           'analytics',
+    '_gid':          'analytics',
+    '_gat':          'analytics',
+    '_gcl_au':       'analytics',  // Google Ads conversion linker
+    '_hjSession':    'analytics',  // Hotjar
+    '_hjSessionUser':'analytics',  // Hotjar
+
+    // Marketing
+    '_fbp':          'marketing',  // Meta/Facebook
+    '_fbc':          'marketing',  // Meta click ID
+    '_pin_unauth':   'marketing',  // Pinterest
+    '_pin_3p_session':'marketing', // Pinterest
+    '_attn_':        'marketing',  // Attentive
+    '_attn_bopd_':   'marketing',  // Attentive
+    '_nb_sp_id':     'marketing',  // Northbeam
+    '_nb_sp_ses':    'marketing',  // Northbeam
+    'ttclid':        'marketing',  // TikTok
+    '_ttp':          'marketing',  // TikTok
+    '_scid':         'marketing',  // Snapchat
+    '_sctr':         'marketing',  // Snapchat
+    'irclickid':     'marketing',  // Impact Radius — note: your script already gates this correctly
+  };
+
+  // ─── 3. COOKIE WRITE INTERCEPTOR ─────────────────────────────────────────────
+  // Intercepts ALL document.cookie = "..." writes and blocks disallowed ones.
+  var _originalCookieDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+
+  if (_originalCookieDescriptor && _originalCookieDescriptor.set) {
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+
+      get: function () {
+        return _originalCookieDescriptor.get.call(document);
+      },
+
+      set: function (cookieString) {
+        // Parse cookie name from "name=value; ..."
+        var cookieName = (cookieString || '').split('=')[0].trim();
+
+        // Check against each blocked prefix
+        var blocked = false;
+        var requiredConsent = null;
+
+        for (var prefix in BLOCKED_COOKIES) {
+          if (cookieName.indexOf(prefix) === 0) {
+            requiredConsent = BLOCKED_COOKIES[prefix];
+            if (!consentState[requiredConsent]) {
+              blocked = true;
+            }
+            break;
+          }
+        }
+
+        if (blocked) {
+          if (window.__GH_DEBUG_CONSENT__) {
+            console.warn(
+              '[ConsentBlocker] Blocked cookie: ' + cookieName +
+              ' (requires "' + requiredConsent + '" consent)'
+            );
+          }
+          return; // Drop the cookie silently
+        }
+
+        // Allow it through
+        _originalCookieDescriptor.set.call(document, cookieString);
+      }
+    });
+  }
+
+
+  // ─── 4. THIRD-PARTY SCRIPT DOMAIN BLOCKLIST ──────────────────────────────────
+  // Blocks script tags injected by Customer Events / App Embeds / theme code
+  // for these domains until the appropriate consent is granted.
+  var BLOCKED_SCRIPT_DOMAINS = {
+    // Analytics
+    'static.hotjar.com':          'analytics',
+    'script.hotjar.com':          'analytics',
+    'static.clarity.ms':          'analytics',
+
+    // Marketing
+    'connect.facebook.net':       'marketing',  // Meta Pixel
+    'fbcdn.net':                  'marketing',
+    'analytics.pinterest.com':    'marketing',
+    's.pinimg.com':               'marketing',
+    'static.klaviyo.com':         'marketing',  // backup — your script already gates
+    'a.klaviyo.com':              'marketing',  // backup
+    'cdn.attentivemobile.com':    'marketing',  // Attentive
+    'cdn2.attnl.com':             'marketing',  // Attentive alt CDN
+    'attn.tv':                    'marketing',
+    'static.northbeam.io':        'marketing',  // Northbeam
+    'd29wdpivwgcmqo.cloudfront.net': 'marketing', // Northbeam CDN
+    'intg.snapchat.com':          'marketing',  // Snapchat — already blocked in your script, extra safety
+    'sc-static.net':              'marketing',
+    'tr.snapchat.com':            'marketing',
+    'ads.tiktok.com':             'marketing',  // TikTok
+    'analytics.tiktok.com':       'marketing',
+  };
+
+  function isDomainBlocked(src) {
+    if (!src) return null;
+    for (var domain in BLOCKED_SCRIPT_DOMAINS) {
+      if (src.indexOf(domain) !== -1) {
+        var cat = BLOCKED_SCRIPT_DOMAINS[domain];
+        if (!consentState[cat]) return cat; // returns the category name if blocked
+      }
+    }
+    return null; // not blocked
+  }
+
+  function shouldBlockNode(node) {
+    if (!node || node.tagName !== 'SCRIPT') return false;
+    var src = node.src || node.getAttribute('src') || '';
+    return isDomainBlocked(src);
+  }
+
+  // Override DOM insertion methods so injected scripts are intercepted
+  var _insertBefore = Node.prototype.insertBefore;
+  Node.prototype.insertBefore = function (node, ref) {
+    var blockedBy = shouldBlockNode(node);
+    if (blockedBy) {
+      if (window.__GH_DEBUG_CONSENT__) {
+        console.warn('[ConsentBlocker] Blocked script: ' + (node.src || '?') + ' (requires "' + blockedBy + '" consent)');
+      }
+      return node; // Return node without inserting
+    }
+    return _insertBefore.call(this, node, ref);
+  };
+
+  var _appendChild = Node.prototype.appendChild;
+  Node.prototype.appendChild = function (node) {
+    var blockedBy = shouldBlockNode(node);
+    if (blockedBy) {
+      if (window.__GH_DEBUG_CONSENT__) {
+        console.warn('[ConsentBlocker] Blocked script: ' + (node.src || '?') + ' (requires "' + blockedBy + '" consent)');
+      }
+      return node;
+    }
+    return _appendChild.call(this, node);
+  };
+
+  // Also cover replaceChild and insertAdjacentElement
+  var _replaceChild = Node.prototype.replaceChild;
+  Node.prototype.replaceChild = function (newNode, oldNode) {
+    var blockedBy = shouldBlockNode(newNode);
+    if (blockedBy) {
+      if (window.__GH_DEBUG_CONSENT__) {
+        console.warn('[ConsentBlocker] Blocked replaceChild script: ' + (newNode.src || '?'));
+      }
+      return oldNode;
+    }
+    return _replaceChild.call(this, newNode, oldNode);
+  };
+
+
+  // ─── 5. LISTEN FOR YOUR EXISTING CONSENT EVENT ───────────────────────────────
+  // When gh:consentUpdate fires (from gcm-integration-script.liquid),
+  // unlock the appropriate cookie categories so future writes are allowed.
+  document.addEventListener('gh:consentUpdate', function (event) {
+    var detail = event.detail || {};
+
+    if (detail.statistics)   consentState.analytics    = true;
+    if (detail.marketing)    consentState.marketing    = true;
+    if (detail.functionality) consentState.functionality = true;
+
+    if (window.__GH_DEBUG_CONSENT__) {
+      console.log('[ConsentBlocker] Consent updated:', consentState);
+    }
+  });
+
+
+  // ─── 6. SHOPIFY CUSTOMER PRIVACY API BRIDGE ──────────────────────────────────
+  // Tells Shopify's native pixel system (Customer Events) to respect consent.
+  // This is what gates _fbp, _ga, _pin_unauth from the sandboxed pixels.
+  function applyShopifyConsentAPI() {
+    if (!window.Shopify || !window.Shopify.customerPrivacy) return;
+
+    var cp = window.Shopify.customerPrivacy;
+
+    // Set current consent state into Shopify's API
+    cp.setTrackingConsent(
+      {
+        analytics: consentState.analytics,
+        marketing: consentState.marketing,
+        preferences: consentState.functionality,
+        sale_of_data: consentState.marketing,
+      },
+      function () {
+        if (window.__GH_DEBUG_CONSENT__) {
+          console.log('[ConsentBlocker] Shopify Customer Privacy API updated');
+        }
+      }
+    );
+  }
+
+  // Run immediately if Shopify API already available, else wait for it
+  if (window.Shopify && window.Shopify.customerPrivacy) {
+    applyShopifyConsentAPI();
+  } else {
+    document.addEventListener('shopify:consent:loaded', applyShopifyConsentAPI);
+    // Fallback poll in case event doesn't fire
+    var shopifyAPICheck = setInterval(function () {
+      if (window.Shopify && window.Shopify.customerPrivacy) {
+        clearInterval(shopifyAPICheck);
+        applyShopifyConsentAPI();
+      }
+    }, 200);
+    setTimeout(function () { clearInterval(shopifyAPICheck); }, 5000);
+  }
+
+  // Re-apply when consent changes
+  document.addEventListener('gh:consentUpdate', function () {
+    applyShopifyConsentAPI();
+  });
+
+
+  // ─── 7. DEBUG MODE ───────────────────────────────────────────────────────────
+  // Add ?gh_consent_debug=1 to any URL to see what's being blocked in console.
+  if (window.location.search.indexOf('gh_consent_debug=1') !== -1) {
+    window.__GH_DEBUG_CONSENT__ = true;
+    console.log('[ConsentBlocker] Debug mode ON. Current consent state:', consentState);
+  }
+
+})();
+</script>
