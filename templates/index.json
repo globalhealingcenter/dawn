@@ -125,7 +125,7 @@
           "settings": {}
         },
         "tolstoy_shoppable_video_quiz_carousel_block_MdY3Ji": {
-          "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy-ads-image-video/blocks/carousel-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "settings": {
             "publishId": "dhknd9e74ir2m"
           }
@@ -146,7 +146,7 @@
             "left_col_heading": "Start Your Journey",
             "left_col_text": "<p>Shop our collection and find the right product for you. </p>",
             "link_1_text": "Shop Our Collection",
-            "link_1": "shopify://collections/collections",
+            "link_1": "shopify://collections/products",
             "link_2_text": "",
             "link_2": "/pages/getting-started-quiz",
             "link_list_heading": "SHOP BY HEALTH GOALS",
@@ -297,12 +297,6 @@
             "discount_background_color": "#e7f5ee",
             "discount_padding_y": 10,
             "discount_padding_x": 10,
-            "badge_background_color": "#119e52",
-            "badge_color": "#ffffff",
-            "badge_icon_color": "#ffffff",
-            "badge_border_radius": 48,
-            "badge_font_size": 12,
-            "badge_icon_size": 10,
             "discount_title_color": "#000000",
             "discount_price_color": "#404040",
             "discount_title_font_size": 14,
