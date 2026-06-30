@@ -2,7 +2,7 @@
   ============================================================
   CONSENT-GATED COOKIE BLOCKER + MARKETING TAG LOADER
   ============================================================
-  Blocks ALL non-essential cookies and scripts until the user
+  Blocks NAMED non-essential cookies/scripts until the user
   grants consent via Consentmo + Google Consent Mode v2.
 
   Consent categories:
@@ -12,6 +12,20 @@
                        PostPilot, Impact Radius, Attentive,
                        TikTok, Bing, Pinterest, Facebook
     • functionality  – Rebuy, Shogun
+
+  CHANGE LOG:
+    - Unknown/unlisted cookies are now ALLOWED by default
+      (fail-open), instead of being blocked as 'marketing'.
+      Only cookies explicitly listed in CATEGORIZED_COOKIES
+      are gated behind consent.
+    - Unknown cookies are still logged to console (always on,
+      not just in debug mode) so they stay visible. Check
+      console for [ConsentBlocker] Auto-allowed unknown cookie
+      entries periodically, especially after installing new
+      apps, and add anything tracking-related to
+      CATEGORIZED_COOKIES.
+    - Added 'og_auth' to ESSENTIAL_COOKIES (Ordergroove auth
+      cookie, required for subscription manager to load).
 
   Loaded only after gh:consentUpdate
   (dispatched from gcm-integration-script.liquid).
@@ -41,7 +55,7 @@
   // ═══════════════════════════════════════════════════════════
   // 2. ESSENTIAL COOKIE ALLOWLIST
   // ═══════════════════════════════════════════════════════════
-var ESSENTIAL_COOKIES = [
+  var ESSENTIAL_COOKIES = [
     'cart',
     'cart_sig',
     'cart_ts',
@@ -69,14 +83,16 @@ var ESSENTIAL_COOKIES = [
     'cookie_consent',
     'consentmo_consent',
     'consentmo_',
-    'og_auth',          
+    'og_auth',
     'og_session_id',
-    '_shg_session_id',
-    '_shg_user_id',
-    'rebuy-'
-];
+    'og_user_id',
+    'og_',
+  ];
 
-  // Known non-essential cookies → explicit category
+  // Known non-essential cookies → explicit category.
+  // Only cookies listed here (or in ESSENTIAL_COOKIES above)
+  // are gated behind consent. Anything else is auto-allowed
+  // (see getCookieCategory fallback below) but logged.
   var CATEGORIZED_COOKIES = {
     '_ga':              'analytics',
     '_gid':             'analytics',
@@ -115,9 +131,9 @@ var ESSENTIAL_COOKIES = [
     '_kla_id':          'marketing',
     '__kla_id':         'marketing',
 
-    {% comment %} '_shg_session_id':  'functionality',
+    '_shg_session_id':  'functionality',
     '_shg_user_id':     'functionality',
-    'rebuy-':           'functionality', {% endcomment %}
+    'rebuy-':           'functionality',
   };
 
   function isEssential(name) {
@@ -138,8 +154,14 @@ var ESSENTIAL_COOKIES = [
       }
     }
 
-    // Unknown cookie → block as marketing (strictest) until consent
-    return 'marketing';
+    // Unknown cookie → ALLOW by default (fail-open).
+    // Still logged below so unlisted cookies stay visible;
+    // review console output periodically and move anything
+    // tracking-related into CATEGORIZED_COOKIES above.
+    if (window.console && window.console.info) {
+      console.info('[ConsentBlocker] Auto-allowed unknown cookie:', name);
+    }
+    return 'essential';
   }
 
   // ═══════════════════════════════════════════════════════════
