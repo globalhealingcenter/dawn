@@ -41,7 +41,7 @@
   // ═══════════════════════════════════════════════════════════
   // 2. ESSENTIAL COOKIE ALLOWLIST
   // ═══════════════════════════════════════════════════════════
-  var ESSENTIAL_COOKIES = [
+var ESSENTIAL_COOKIES = [
     'cart',
     'cart_sig',
     'cart_ts',
@@ -69,7 +69,9 @@
     'cookie_consent',
     'consentmo_consent',
     'consentmo_',
-  ];
+    'og_auth',          
+    'og_session_id',
+];
 
   // Known non-essential cookies → explicit category
   var CATEGORIZED_COOKIES = {
@@ -112,7 +114,6 @@
 
     '_shg_session_id':  'functionality',
     '_shg_user_id':     'functionality',
-    'og_session_id':    'functionality',
     'rebuy-':           'functionality',
   };
 
