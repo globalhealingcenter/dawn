@@ -71,6 +71,9 @@ var ESSENTIAL_COOKIES = [
     'consentmo_',
     'og_auth',          
     'og_session_id',
+    '_shg_session_id',
+    '_shg_user_id',
+    'rebuy-'
 ];
 
   // Known non-essential cookies → explicit category
@@ -112,9 +115,9 @@ var ESSENTIAL_COOKIES = [
     '_kla_id':          'marketing',
     '__kla_id':         'marketing',
 
-    '_shg_session_id':  'functionality',
+    {% comment %} '_shg_session_id':  'functionality',
     '_shg_user_id':     'functionality',
-    'rebuy-':           'functionality',
+    'rebuy-':           'functionality', {% endcomment %}
   };
 
   function isEssential(name) {
