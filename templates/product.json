@@ -55,6 +55,10 @@
             "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
           }
         },
+        "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
+        },
         "ordergroove_offer": {
           "type": "shopify://apps/ordergroove-subscriptions/blocks/pdp-offer-block/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
           "settings": {
@@ -178,6 +182,7 @@
         "price",
         "variant_picker",
         "custom_liquid_cFDQaa",
+        "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "custom_liquid_TxJtfK",
@@ -210,10 +215,6 @@
     "169838059718b5ce0c": {
       "type": "apps",
       "blocks": {
-        "yotpo_loyalty_rewards_product_points_module_app_block_6D3jr9": {
-          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {}
-        },
         "3c43f1d2-5fe4-4b3b-8039-c945317de191": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -225,7 +226,6 @@
         }
       },
       "block_order": [
-        "yotpo_loyalty_rewards_product_points_module_app_block_6D3jr9",
         "3c43f1d2-5fe4-4b3b-8039-c945317de191"
       ],
       "custom_css": [],
