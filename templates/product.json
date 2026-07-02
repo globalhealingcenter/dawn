@@ -69,10 +69,6 @@
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
-          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "settings": {}
-        },
         "custom_liquid_TxJtfK": {
           "type": "custom_liquid",
           "settings": {
@@ -184,7 +180,6 @@
         "custom_liquid_cFDQaa",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "custom_liquid_TxJtfK",
         "buy_buttons",
         "gh_out_of_stock_form_dAeEPR",
@@ -215,6 +210,10 @@
     "169838059718b5ce0c": {
       "type": "apps",
       "blocks": {
+        "yotpo_loyalty_rewards_product_points_module_app_block_6D3jr9": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
+        },
         "3c43f1d2-5fe4-4b3b-8039-c945317de191": {
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
@@ -226,6 +225,7 @@
         }
       },
       "block_order": [
+        "yotpo_loyalty_rewards_product_points_module_app_block_6D3jr9",
         "3c43f1d2-5fe4-4b3b-8039-c945317de191"
       ],
       "custom_css": [],
