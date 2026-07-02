@@ -16,10 +16,6 @@
     "main": {
       "settings": {},
       "blocks": {
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
-          "disabled": true,
-          "settings": {}
-        },
         "price": {
           "disabled": false,
           "settings": {}
