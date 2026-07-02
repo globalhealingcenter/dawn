@@ -38,11 +38,6 @@
             "tab_3_title": "Suggested Use"
           }
         },
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
-          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
-          "disabled": true,
-          "settings": {}
-        },
         "price": {
           "type": "price",
           "disabled": true,
@@ -73,6 +68,10 @@
             "class": "bold p2 color-white bg-green center",
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
+        },
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
         },
         "custom_liquid_TxJtfK": {
           "type": "custom_liquid",
@@ -105,6 +104,7 @@
         },
         "abra_promotions_banner_gift_RQAc3p": {
           "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Gift",
             "color": "#21472d",
@@ -128,6 +128,7 @@
         },
         "abra_promotions_banner_f4iJ7z": {
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "banner_background_color": "#119d52",
@@ -144,6 +145,7 @@
         },
         "abra_promotions_banner_nUzYdW": {
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "banner_background_color": "#119d52",
@@ -160,6 +162,7 @@
         },
         "abra_promotions_dynamic_text_qHxcwi": {
           "type": "shopify://apps/abra-promotions/blocks/dynamic-text/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "dynamic_text_color": "#000000",
@@ -176,12 +179,12 @@
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
-        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "price",
         "variant_picker",
         "custom_liquid_cFDQaa",
         "ordergroove_offer",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "custom_liquid_TxJtfK",
         "buy_buttons",
         "gh_out_of_stock_form_dAeEPR",
