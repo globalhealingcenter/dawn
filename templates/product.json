@@ -104,6 +104,7 @@
         },
         "abra_promotions_banner_f4iJ7z": {
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "banner_background_color": "#119d52",
@@ -120,6 +121,7 @@
         },
         "abra_promotions_banner_nUzYdW": {
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "banner_background_color": "#119d52",
@@ -136,6 +138,7 @@
         },
         "abra_promotions_dynamic_text_qHxcwi": {
           "type": "shopify://apps/abra-promotions/blocks/dynamic-text/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
+          "disabled": true,
           "settings": {
             "name": "Default",
             "dynamic_text_color": "#000000",
