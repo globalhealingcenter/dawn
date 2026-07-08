@@ -160,6 +160,11 @@
                   </h2>
                 </a>
               </div>
+              {% if product.metafields.globalhealing.product_tagline != blank %}
+                <div class="product-tagline-v2">
+                  {{ product.metafields.globalhealing.product_tagline }}
+                </div>
+              {% endif %}
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price',
