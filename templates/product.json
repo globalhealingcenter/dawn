@@ -336,6 +336,26 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "17836967502868b2e7": {
+      "type": "apps",
+      "blocks": {
+        "rebuy_personalization_engine_rebuy_widget_EdtTj6": {
+          "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+          "settings": {
+            "enabled": true,
+            "id": "",
+            "product_id_enabled": true,
+            "collection_id_enabled": false
+          }
+        }
+      },
+      "block_order": [
+        "rebuy_personalization_engine_rebuy_widget_EdtTj6"
+      ],
+      "settings": {
+        "include_margins": true
+      }
     }
   },
   "order": [
@@ -352,6 +372,7 @@
     "custom_liquid_kweCXJ",
     "custom_liquid_8t6wPh",
     "gh_sticky_atc_gRBYqU",
-    "17836877139f4b9e0c"
+    "17836877139f4b9e0c",
+    "17836967502868b2e7"
   ]
 }
