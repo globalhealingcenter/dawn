@@ -13,7 +13,7 @@
   <!-- <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
 
 <!-- Add-on Widget -->
-  <div data-rebuy-id="300372" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+  <div data-rebuy-id="115516" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
 <script>
   document.querySelectorAll(".rebuy-product-actions .checkbox-label").forEach(label => {
@@ -95,6 +95,173 @@
     fill: #ffffff !important;
   }
 </style>
+
+{% raw %}
+<script id="rebuy-widget-300261" type="text/template">
+  <div class="rebuy-widget"
+		v-cloak
+		v-on:click="stopPropagation($event)"
+		v-bind:id="'rebuy-widget-' + id"
+		v-bind:class="['widget-type-' + config.type.replace('_','-'), products.length > 0 ? 'is-visible' : 'is-hidden']">
+		
+		<div
+			class="rebuy-widget-container"
+			v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]">
+			<div class="rebuy-widget-content">
+				<div class="rebuy-timer" v-if="hasTimer()">
+					<h5 class="rebuy-timer-title" v-if="config.language.timer_title">
+						<span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
+					</h5>
+				</div>
+				
+				<h4 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h4>
+
+				<h3 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h3>
+              
+				<div class="description" v-if="config.language.description != ''" v-html="config.language.description"></div>
+				
+				<div class="rebuy-bundle">
+				
+					<div class="rebuy-bundle__images">
+
+						<div class="rebuy-bundle__image" v-for="(product, index) in products" v-if="product.selected" v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product)]">
+							<a class="rebuy-bundle__image-item" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '' ]">
+								<img v-bind:src="itemImage(product, product.selected_variant, '400x400')" v-bind:alt="product.title">
+							</a>
+							<div class="rebuy-bundle__image-divider">
+								<i class="far fa-plus"></i>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="rebuy-bundle__items">
+						
+                    
+				    <div class="rebuy-product-block" v-for="(product, product_index) in products" v-bind:class="[product.handle, 'product-id-' + product.id, cartHasProduct(product) ? 'cart-has-item' : '', productTagClasses(product), isInputProduct(product) ? 'is-input-product' : '' ,product.selected ? 'is-selected': '']">
+							<div class="rebuy-bundle__image-divider-desktop">
+								<i class="far fa-plus"></i>
+							</div>
+							<div class="rebuy-product-info">
+                            	<a class="rebuy-bundle__image-item bundle-single-image" v-bind:href="learnMoreURL(product)" v-bind:style="imageStyles" v-on:click="learnMore(product);" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '' ]">
+									<img v-bind:src="itemImage(product, product.selected_variant)" v-bind:alt="product.title">
+								</a>
+                                <div v-if="!bundleRequiresAllItems()" class="rebuy-product-checkbox">
+                                    <label class="rebuy-checkbox-label">
+                                        <input
+                                            class="checkbox-input rebuy-checkbox"
+                                            v-model="product.selected"
+                                            type="checkbox" />
+                                    </label>                                  
+                                </div>
+                                <strong class="rebuy-product-label" v-if="isInputProduct(product)" v-html="'This item:'"></strong>
+								<a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '']"></a>
+                                <div class="rebuy-tagline" v-if="product.metafields.gh_product.data.tagline"v-html="product.metafields.gh_product.data.tagline"></div>
+								<div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+								<div class="rebuy-product-review" v-if="hasProductReviews(product)">
+									<span class="rebuy-star-rating">
+										<span class="rebuy-star-rating-background"></span>
+										<span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+									</span>
+									<span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+  
+								</div>
+
+								<div class="rebuy-product-price">
+  <div class="rebuy-product-options" v-if="showVariantSelect(product)">
+								<select
+									:id="id + '-' + 'select' + '-' + product_index"
+									:class="{ hide : settings.view_options.variant_selector == 'buttons' }"
+									class="rebuy-select"
+									v-model="product.selected_variant_id"
+									v-on:change="selectVariant(product)">
+									<option v-for="variant in product.variants" v-bind:value="variant.id">{{ variant.title }}</option>
+								</select>
+
+								<div v-if="option.name == 'Color' && displayColorSwatches()" v-for="(option, option_index) in product.options" class="rebuy-color-swatches">
+									<div v-for="(value, value_index) in option.values" class="rebuy-color-swatch">
+										<input
+											:name="id + '-color-' + product_index" 
+											:id="id + '-color-' + option_index + '-' + value + '-' + value_index"
+											:checked="value_index == 0" 
+											:value="value"
+											type="radio" 
+											class="rebuy-color-input hide"
+											v-on:change="selectVariantByColor(product, value, product_index)">
+										<label
+											:for="id + '-color-' + option_index + '-' + value + '-' + value_index"
+											:style="{ backgroundColor: value }"
+											:title="value"
+											class="rebuy-color-label"></label>
+									</div>
+								</div>
+
+								<div v-if="option.name == 'Size' && settings.view_options.variant_selector == 'buttons'" v-for="(option, option_index) in product.options" class="mt-10 rebuy-size-swatches">
+									<div v-for="(value, value_index) in option.values" class="rebuy-size-swatch">
+										<input
+											:name="id + '-size-' + product_index" 
+											:id="id + '-size-' + product_index + '-' + value"
+											:checked="value_index == 0" 
+											:value="value"
+											type="radio" 
+											class="rebuy-size-input hide"
+											v-on:change="selectVariantBySize(product, value, product_index)">
+										<label
+											:for="id + '-size-' + product_index + '-' + value"
+											class="rebuy-size-label">{{ value }}</label>
+									</div>
+								</div>
+							</div>
+									<div v-if="variantOnSale(product, product.selected_variant)">
+										<span class="rebuy-money " v-html="formatMoney(variantCompareAtPrice(product, product.selected_variant))"></span>
+									</div>
+									<div v-if="!(variantOnSale(product, product.selected_variant))">
+										<span class="rebuy-money" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
+									</div>
+								</div>
+								<div class="rebuy-product-description" v-if="showProductDescription(product)" v-html="text(product.body_html)"></div>
+							</div>
+							
+						</div>
+
+					</div>
+				</div>
+				
+			</div>
+		</div>
+							
+        <div class="rebuy-bundle__actions" v-if="subtotal() > 0">
+            
+            <div class="rebuy-bundle__actions-price">
+                <strong class="rebuy-bundle__actions-price-label">Total Price:</strong>
+                
+                <div class="rebuy-bundle__actions-price-value" v-if="bundleOnSale()">
+                    <span class="rebuy-money sale" v-html="formatMoney(subtotal())"></span>
+                    <span class="rebuy-money compare-at" v-html="formatMoney(compareAtSubtotal())"></span>
+                </div>
+                <div class="rebuy-bundle__actions-price-value" v-if="!(bundleOnSale())">
+                    <span class="rebuy-money" v-html="formatMoney(subtotal())"></span>
+                </div>
+            </div>
+            
+            <div class="rebuy-bundle__actions-buttons">
+                <button
+                    class="rebuy-button"
+                    v-on:click="addSelectedProductsToCart()"
+                    type="button">
+                        <span>Bundle & Save 15%</span>
+                </button>
+                <button class="rebuy-accordian-dropdown">
+
+                </button>
+              <p class="fbt_disc_msg" style="text-align: left; padding: 10px 8px;">Unlock 15% off when purchased together.</p>
+            </div>
+        </div>
+					
+	</div>
+  </div>
+</script>
+{% endraw %}
 
 <!-- Dynamic Bundle Widget BELOW -->
 {% raw %}
@@ -2975,7 +3142,7 @@
 
 <!-- Dynamic Bundle Widget A/B Testing BELOW -->
 {% raw %}
-<script id="rebuy-widget-300261" type="text/template">
+<script id="rebuy-widget-128942" type="text/template">
   <div class="rebuy-widget"
 		v-cloak
 		v-on:click="stopPropagation($event)"
@@ -3144,33 +3311,33 @@
 
 <style>
   @media(min-width: 800px){
-    #rebuy-widget-300261 .rebuy-bundle__actions {
+    #rebuy-widget-128942 .rebuy-bundle__actions {
       margin-bottom: 55px;
     }
-    #rebuy-widget-300261 .rebuy-accordian-dropdown {
-        display: none;
+    .rebuy-accordian-dropdown{
+      display: none;
     }
-     #rebuy-widget-300261 .rebuy-bundle__actions-buttons p{
+     #rebuy-widget-128942 .rebuy-bundle__actions-buttons p{
       text-align: center !important;
       line-height: normal;
       font-family: var(--gh-font-secondary);
       font-size: 15px;
     }
-    div#rebuy-widget-300261{
+    div#rebuy-widget-128942{
       display: grid;
       grid-template-columns: 1fr 30%;
       align-items: center;
       margin: auto;
     }
-    #rebuy-widget-300261 .rebuy-bundle__image-item{
+    #rebuy-widget-128942 .rebuy-bundle__image-item{
       height: 180px;
       width: 180px;
     }
-    #rebuy-widget-300261 .rebuy-bundle__items .rebuy-product-info {
+    #rebuy-widget-128942 .rebuy-bundle__items .rebuy-product-info {
       width: 180px;
       position:relative;
     }
-    #rebuy-widget-300261 .rebuy-product-checkbox {
+    #rebuy-widget-128942 .rebuy-product-checkbox {
       bottom: -30px;
       position: absolute;
       display: flex;
@@ -3179,36 +3346,36 @@
       width: 100%;
       margin-top: 0px !important;
     }
-     #rebuy-widget-300261 .rebuy-product-checkbox:after{
+     #rebuy-widget-128942 .rebuy-product-checkbox:after{
        content: 'Add to Cart';
        padding-top: 0px;
      }
-    #rebuy-widget-300261 .rebuy-tagline{
+    #rebuy-widget-128942 .rebuy-tagline{
     min-height: 31px;
   }
   }
-  #rebuy-widget-300261 .rebuy-review-count-parenthesis {
-    display: none;
-  }
-  #rebuy-widget-300261 .rebuy-product-review{
+  .rebuy-review-count-parenthesis{
+      display: none;
+    }
+  #rebuy-widget-128942 .rebuy-product-review{
     white-space: nowrap;
     margin: 0px;
   }
-  #rebuy-widget-300261 .rebuy-product-label{
+  #rebuy-widget-128942 .rebuy-product-label{
   display: none;
   }
-  /* #rebuy-widget-300261 .rebuy-product-block .rebuy-money.compare-at{
+  /* #rebuy-widget-128942 .rebuy-product-block .rebuy-money.compare-at{
   display: none;
   } */
-  #rebuy-widget-300261 .rebuy-bundle__actions-price-label{
+  #rebuy-widget-128942 .rebuy-bundle__actions-price-label{
     border-bottom: 1px solid #545454;
   }
-  #rebuy-widget-300261 .rebuy-button{
+  #rebuy-widget-128942 .rebuy-button{
     font-size: 14px !important;
     font-family: var(--gh-font-secondary) !important;
     font-weight: 400 !important;
   }
-  #rebuy-widget-300261 .rebuy-product-title{
+  #rebuy-widget-128942 .rebuy-product-title{
   text-decoration: none;
   font-family: var(--gh-font-secondary);
   font-size: 18px;
@@ -3220,17 +3387,17 @@
    margin-top: 10%;
    margin-left: 0px;
   }
-  #rebuy-widget-300261 .rebuy-money{
+  #rebuy-widget-128942 .rebuy-money{
   font-family: var(--gh-font-secondary);
   font-size: 14px;
   font-weight: 700;
   }
-  #rebuy-widget-300261 .rebuy-tagline {
-    font-family: var(--gh-font-secondary);
-    font-size: 13.7px;
-    font-weight: 400;
-    line-height: normal;
- }
+  .rebuy-tagline{
+  font-family: var(--gh-font-secondary);
+  font-size: 13.7px;
+  font-weight: 400;
+  line-height: normal;
+  }
 
   .rebuy-bundle__image-divider-desktop{
       position: relative;
@@ -3238,7 +3405,7 @@
       left: -30%;
       font-size: 20px;
   }
-  #rebuy-widget-300261 .primary-title{
+  #rebuy-widget-128942 .primary-title{
     margin-left: 30%;
     text-align: center;
     font-family: var(--gh-font-primary);
@@ -3248,56 +3415,56 @@
     margin-bottom: 0px;
   }
 
-  #rebuy-widget-300261 .rebuy-bundle__actions {
+  #rebuy-widget-128942 .rebuy-bundle__actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     order: 3;
   }
-  #rebuy-widget-300261 {
+  #rebuy-widget-128942 {
     max-width: 1140px;
     padding: 20px;
     margin:0px;
   }
-  #rebuy-widget-300261 .rebuy-bundle__actions-price {
+  #rebuy-widget-128942 .rebuy-bundle__actions-price {
     margin: 10px auto;
     display: flex;
     flex-direction: column;
   }
-  #rebuy-widget-300261 .rebuy-bundle__actions-buttons {
+  #rebuy-widget-128942 .rebuy-bundle__actions-buttons {
     margin: 0 auto;
   }
-  #rebuy-widget-300261 .rebuy-bundle__items .rebuy-product-info {
+  #rebuy-widget-128942 .rebuy-bundle__items .rebuy-product-info {
     display: flex;
     flex-direction: column;
     text-align: left;
 
   }
-  #rebuy-widget-300261 .rebuy-bundle__items {
+  #rebuy-widget-128942 .rebuy-bundle__items {
     display: flex;
     justify-content: center;
     gap: 5%;
   }
-  #rebuy-widget-300261 .rebuy-product-block {
+  #rebuy-widget-128942 .rebuy-product-block {
     max-width: 300px;
     padding: 10px 15px;
   }
-  #rebuy-widget-300261 .rebuy-bundle__image-item {
+  #rebuy-widget-128942 .rebuy-bundle__image-item {
     width: 100%;
   }
-  #rebuy-widget-300261 .rebuy-bundle .rebuy-product-block .rebuy-product-options {
+  #rebuy-widget-128942 .rebuy-bundle .rebuy-product-block .rebuy-product-options {
     margin: 0px;
   }
-  #rebuy-widget-300261 .rebuy-product-price {
+  #rebuy-widget-128942 .rebuy-product-price {
     padding: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  #rebuy-widget-300261 .rebuy-bundle__images {
+  #rebuy-widget-128942 .rebuy-bundle__images {
     display: none;
   }
-  #rebuy-widget-300261 .rebuy-select{
+  #rebuy-widget-128942 .rebuy-select{
       appearance: menulist;
       border: 1px solid #e6e6e6;
       border-radius: 2px;
@@ -3317,7 +3484,7 @@
       max-height: 2em;
       font-family: var(--gh-font-secondary);
   }
-  #rebuy-widget-300261 .primary-title {
+  #rebuy-widget-128942 .primary-title {
     text-align: center;
     font-size: 30px;
     font-family: var(--gh-font-primary);
@@ -3329,7 +3496,7 @@
     .rebuy-bundle__image-divider-desktop{
       display: none;
   }
-    #rebuy-widget-300261 .rebuy-product-review{
+    #rebuy-widget-128942 .rebuy-product-review{
       display: flex;
       grid-column: 2;
       grid-row: 3;
@@ -3341,7 +3508,7 @@
       font-size: 25px;
       color: #fff;
     }
-    #rebuy-widget-300261 .rebuy-accordian-dropdown{
+    #rebuy-widget-128942 .rebuy-accordian-dropdown{
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       background: #21472D;
@@ -3351,70 +3518,70 @@
       border-bottom-color: #21472D;
       width: 50px;
     }
-    #rebuy-widget-300261 .rebuy-bundle__actions-buttons{
+    #rebuy-widget-128942 .rebuy-bundle__actions-buttons{
       display: flex;
       flex-wrap: wrap;
     }
-    #rebuy-widget-300261 .rebuy-bundle__actions-buttons button:first-child{
+    #rebuy-widget-128942 .rebuy-bundle__actions-buttons button:first-child{
       flex: 1
     }
-    #rebuy-widget-300261 .rebuy-bundle__actions-buttons button:last-child{
+    #rebuy-widget-128942 .rebuy-bundle__actions-buttons button:last-child{
       flex: 0 0 50px;
     }
-    #rebuy-widget-300261 .rebuy-bundle__actions-buttons p{
+    #rebuy-widget-128942 .rebuy-bundle__actions-buttons p{
       flex-basis: 100%;
       text-align: center !important;
       line-height: normal;
       font-family: var(--gh-font-secondary);
       font-size: 15px;
     }
-    #rebuy-widget-300261 .rebuy-button{
+    #rebuy-widget-1128942 .rebuy-button{
       border-top-right-radius: 0px;
       border-bottom-right-radius: 0px;
     }
-    #rebuy-widget-300261 .primary-title{
+    #rebuy-widget-128942 .primary-title{
       font-size: 22px;
       margin: 0px 0px 3% 0px !important;
       font-family: var(--gh-font-primary);
     }
-    #rebuy-widget-300261 .rebuy-product-block{
+    #rebuy-widget-128942 .rebuy-product-block{
 
     }
-  	#rebuy-widget-300261 .rebuy-bundle__images {
+  	#rebuy-widget-128942 .rebuy-bundle__images {
   	  display: flex;
         flex-wrap: nowrap;
   	  gap: 20px;
       width: 100%;
   	}
-  	#rebuy-widget-300261 .rebuy-bundle__items {
+  	#rebuy-widget-128942 .rebuy-bundle__items {
   	  flex-direction: column;
   	  margin-top: 20px;
   	}
 
-  	#rebuy-widget-300261 .rebuy-bundle__items .rebuy-product-info {
+  	#rebuy-widget-128942 .rebuy-bundle__items .rebuy-product-info {
   	  display: grid;
         grid-template-columns: 30px 1fr;
         grid-template-rows: auto;
         padding-block: 10px;
   	}
 
-      #rebuy-widget-300261 .rebuy-tagline{
+      #rebuy-widget-128942 .rebuy-tagline{
         display: grid;
         grid-column: 2;
       }
-     #rebuy-widget-300261 .rebuy-product-checkbox {
+     #rebuy-widget-128942 .rebuy-product-checkbox {
         grid-row: 2;
         grid-column: 1;
       }
-    #rebuy-widget-300261 .rebuy-product-checkbox .rebuy-checkbox-label{
+    #rebuy-widget-128942 .rebuy-product-checkbox .rebuy-checkbox-label{
       margin-top: 0px !important;
     }
-    #rebuy-widget-300261 .rebuy-product-title{
+    #rebuy-widget-128942 .rebuy-product-title{
       grid-column: 2;
       grid-row: 1;
       margin-top: 0px;
     }
-    #rebuy-widget-300261 .rebuy-product-price{
+    #rebuy-widget-128942 .rebuy-product-price{
           grid-column: 2;
           margin: 0px;
           padding: 0px;
@@ -3422,72 +3589,72 @@
           align-items: baseline;
           flex-direction: column-reverse;
     }
-    #rebuy-widget-300261 .rebuy-select {
+    #rebuy-widget-128942 .rebuy-select {
       margin:0px;
     }
-  	#rebuy-widget-300261 .rebuy-bundle__items .rebuy-bundle__image-item.bundle-single-image,
-  	#rebuy-widget-300261 .rebuy-product-label {
+  	#rebuy-widget-128942 .rebuy-bundle__items .rebuy-bundle__image-item.bundle-single-image,
+  	#rebuy-widget-128942 .rebuy-product-label {
   	  display: none;
   	}
-  	#rebuy-widget-300261 .rebuy-bundle__actions {
+  	#rebuy-widget-128942 .rebuy-bundle__actions {
   	  margin-top: 0;
   	  padding-top: 10px;
   	}
-  	#rebuy-widget-300261 .rebuy-product-block {
+  	#rebuy-widget-128942 .rebuy-product-block {
   	  width: 100%;
   	  max-width: unset;
   	  padding: 0;
         display: none;
 
   	}
-    	#rebuy-widget-300261 .rebuy-product-block.show-product-block {
+    	#rebuy-widget-128942 .rebuy-product-block.show-product-block {
   	  width: 100%;
   	  max-width: unset;
   	  padding: 0;
         display: block;
 
   	}
-      /* #rebuy-widget-300261 .rebuy-bundle__items{
+      /* #rebuy-widget-128942 .rebuy-bundle__items{
         border-top: 1px solid #545454;
       } */
   }
 
     /* Tablet View */
     @media(min-width: 600px) and (max-width: 800px){
-      #rebuy-widget-300261 .rebuy-bundle__images{
+      #rebuy-widget-128942 .rebuy-bundle__images{
         justify-content: center;
       }
-      #rebuy-widget-300261 .rebuy-bundle__items .rebuy-product-info{
+      #rebuy-widget-128942 .rebuy-bundle__items .rebuy-product-info{
         width: 370px;
         margin: auto;
       }
-      /* #rebuy-widget-300261 .rebuy-product-review{
+      /* #rebuy-widget-128942 .rebuy-product-review{
         justify-content: center;
       }
-      #rebuy-widget-300261 .rebuy-product-price{
+      #rebuy-widget-128942 .rebuy-product-price{
         margin: auto !important;
       } */
     }
 
      @media(min-width: 801px) and (max-width: 975px){
 
-  #rebuy-widget-300261 .rebuy-bundle__actions{
+  #rebuy-widget-128942 .rebuy-bundle__actions{
     width: 70%;
   }
-  #rebuy-widget-300261 .rebuy-bundle__items{
+  #rebuy-widget-128942 .rebuy-bundle__items{
     width: 70%;
     margin: auto;
     gap: 0%;
   }
-  #rebuy-widget-300261 .rebuy-product-block img{
+  #rebuy-widget-128942 .rebuy-product-block img{
   width: 150px;
   height: 150px;
   margin: auto;
   }
-  #rebuy-widget-300261{
+  #rebuy-widget-128942{
     transform: scale(.8);
   }
-  #rebuy-widget-300261 .rebuy-bundle__image-divider-desktop {
+  #rebuy-widget-128942 .rebuy-bundle__image-divider-desktop {
       position: relative;
       top: 35%;
       left: -15%;
