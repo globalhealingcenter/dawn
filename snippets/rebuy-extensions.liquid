@@ -12,10 +12,10 @@
 {% if product %}
   <!-- <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
 
-div
+  <!--div
     data-rebuy-id="300261"
     data-rebuy-shopify-product-ids="{{ product.id }}"
-  ></div>
+  ></div>-->
 
 <!-- Add-on Widget -->
   <div data-rebuy-id="115516" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
@@ -267,26 +267,15 @@ div
 </script>
 {% endraw %}
 
-<!-- Dynamic Bundle Widget BELOW -->
-{% raw %}
-<script id="rebuy-widget-128942" type="text/template">
-  <div class="rebuy-widget"
-		v-cloak
-		v-on:click="stopPropagation($event)"
-		v-bind:id="'rebuy-widget-' + id"
-		v-bind:class="['widget-type-' + config.type.replace('_','-'), products.length > 0 ? 'is-visible' : 'is-hidden']">
-		
-		<div
-			class="rebuy-widget-container"
-			v-bind:class="['widget-display-' + config.display_type, visible ? 'is-visible' : 'is-hidden' ]">
-			<div class="rebuy-widget-content">
-				<div class="rebuy-timer" v-if="hasTimer()">
-					<h5 class="rebuy-timer-title" v-if="config.language.timer_title">
-						<span v-html="config.language.timer_title"></span> <span class="rebuy-timer-minutes" v-html="config.timer.duration_minutes"></span>:<span class="rebuy-timer-seconds" v-html="config.timer.duration_seconds"></span>
-					</h5>
-				</div>
-				
-				<h4 class="super-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h4>
+<style>
+  @media(min-width: 800px){
+    #rebuy-widget-300261 .rebuy-bundle__actions {
+      margin-bottom: 55px;
+    }
+    #rebuy-widget-300261 .rebuy-bundle__actions-buttons p{
+      text-align: center !important;
+      line-height: normal;
+      font-family: var(--ghuper-title" v-if="config.language.super_title != ''" v-html="config.language.super_title"></h4>
 
 				<h3 class="primary-title" v-if="config.language.title != ''" v-html="config.language.title"></h3>
               
