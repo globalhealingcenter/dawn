@@ -12,6 +12,11 @@
 {% if product %}
   <!-- <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
 
+div
+    data-rebuy-id="300261"
+    data-rebuy-shopify-product-ids="{{ product.id }}"
+  ></div>
+
 <!-- Add-on Widget -->
   <div data-rebuy-id="115516" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
@@ -20,6 +25,7 @@
     label.textContent = label.textContent.replace("Upgrade to Autoship &", "AutoShip &");
   })
 </script>
+
 
 <style>
   .rebuy-widget .flickity-button:focus{
@@ -257,8 +263,6 @@
               <p class="fbt_disc_msg" style="text-align: left; padding: 10px 8px;">Unlock 15% off when purchased together.</p>
             </div>
         </div>
-					
-	</div>
   </div>
 </script>
 {% endraw %}
