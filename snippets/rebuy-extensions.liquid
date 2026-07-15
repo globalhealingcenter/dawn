@@ -158,21 +158,39 @@
                                 <strong class="rebuy-product-label" v-if="isInputProduct(product)" v-html="'This item:'"></strong>
 								<a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '']"></a>
 
-                                <div
-                                  class="rebuy-product-review"
-                                  v-if="hasProductReviews(product)"
-                                  aria-label="Product rating">
-                                  <span class="rebuy-star-rating" aria-hidden="true">
-                                    <span class="rebuy-star-rating-background"></span>
-                                    <span
-                                      class="rebuy-star-rating-foreground"
-                                      v-bind:style="{ width: productReviewRatingPercentage(product) }">
-                                    </span>
-                                  </span>
-                                  <span
-                                    class="rebuy-review-count"
-                                    v-html="productReviewCount(product)">
-                                  </span>
+                                <!-- Reviews / zero-review empty state -->
+                                <div class="rebuy-product-review">
+                                  <template
+                                    v-if="product.reviews && product.reviews.star_rating && parseFloat(product.reviews.star_rating) > 0">
+                                    <a
+                                      class="rebuy-review-link"
+                                      v-bind:href="learnMoreURL(product) + '#reviews'"
+                                      v-on:click="learnMore(product);"
+                                      v-bind:aria-label="product.reviews.star_rating + ' out of 5 stars'">
+                                      <span class="rebuy-star-rating" aria-hidden="true">
+                                        <span class="rebuy-star-rating-background">★★★★★</span>
+                                        <span
+                                          class="rebuy-star-rating-foreground"
+                                          v-bind:style="{ width: ((parseFloat(product.reviews.star_rating) / 5) * 100) + '%' }">★★★★★</span>
+                                      </span>
+                                      <span class="rebuy-review-count">
+                                        ({{ product.reviews.review_count || 0 }})
+                                      </span>
+                                    </a>
+                                  </template>
+
+                                  <template v-else>
+                                    <a
+                                      class="rebuy-review-link rebuy-review-empty"
+                                      v-bind:href="learnMoreURL(product) + '#reviews'"
+                                      v-on:click="learnMore(product);"
+                                      aria-label="Write a review">
+                                      <span class="rebuy-star-rating" aria-hidden="true">
+                                        <span class="rebuy-star-rating-background">★★★★★</span>
+                                      </span>
+                                      <span class="rebuy-write-review">Write a review</span>
+                                    </a>
+                                  </template>
                                 </div>
 
                                 <div
@@ -331,10 +349,21 @@
   #rebuy-widget-300261 .rebuy-product-review {
     display: flex;
     align-items: center;
-    gap: 6px;
     margin: 6px 0;
-    min-height: 18px;
+    min-height: 20px;
     white-space: nowrap;
+  }
+
+  #rebuy-widget-300261 .rebuy-review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  #rebuy-widget-300261 .rebuy-review-link:hover {
+    text-decoration: none;
   }
 
   #rebuy-widget-300261 .rebuy-star-rating {
@@ -362,24 +391,24 @@
     width: 100%;
   }
 
-  #rebuy-widget-300261 .rebuy-star-rating-background::before,
-  #rebuy-widget-300261 .rebuy-star-rating-foreground::before {
-    content: "★★★★★";
-  }
-
-  #rebuy-widget-300261 .rebuy-star-rating-background::before {
+  #rebuy-widget-300261 .rebuy-star-rating-background {
     color: #d8d8d8;
   }
 
-  #rebuy-widget-300261 .rebuy-star-rating-foreground::before {
+  #rebuy-widget-300261 .rebuy-star-rating-foreground {
     color: #f5a623;
   }
 
-  #rebuy-widget-300261 .rebuy-review-count {
+  #rebuy-widget-300261 .rebuy-review-count,
+  #rebuy-widget-300261 .rebuy-write-review {
     display: inline-block;
     font-size: 13px;
     line-height: 18px;
     white-space: nowrap;
+  }
+
+  #rebuy-widget-300261 .rebuy-write-review {
+    text-decoration: underline;
   }
   #rebuy-widget-300261 .rebuy-product-label{
   display: none;
