@@ -13,7 +13,7 @@
   <!-- <div data-rebuy-id="108416" data-rebuy-shopify-product-ids="{{ product.id }}"></div> -->
 
 <!-- Add-on Widget -->
-  <div data-rebuy-id="300261" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+  <div data-rebuy-id="300372" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 {% endif %}
 <script>
   document.querySelectorAll(".rebuy-product-actions .checkbox-label").forEach(label => {
@@ -158,39 +158,67 @@
                                 <strong class="rebuy-product-label" v-if="isInputProduct(product)" v-html="'This item:'"></strong>
 								<a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() && !isInputProduct(product) ? 'clickable' : '']"></a>
 
-                                <!-- Reviews / zero-review empty state -->
+                                <!-- Reviews -->
                                 <div class="rebuy-product-review">
-                                  <template
-                                    v-if="product.reviews && product.reviews.star_rating && parseFloat(product.reviews.star_rating) > 0">
-                                    <a
-                                      class="rebuy-review-link"
-                                      v-bind:href="learnMoreURL(product) + '#reviews'"
-                                      v-on:click="learnMore(product);"
-                                      v-bind:aria-label="product.reviews.star_rating + ' out of 5 stars'">
-                                      <span class="rebuy-star-rating" aria-hidden="true">
-                                        <span class="rebuy-star-rating-background">★★★★★</span>
-                                        <span
-                                          class="rebuy-star-rating-foreground"
-                                          v-bind:style="{ width: ((parseFloat(product.reviews.star_rating) / 5) * 100) + '%' }">★★★★★</span>
-                                      </span>
-                                      <span class="rebuy-review-count">
-                                        ({{ product.reviews.review_count || 0 }})
-                                      </span>
-                                    </a>
-                                  </template>
 
-                                  <template v-else>
-                                    <a
-                                      class="rebuy-review-link rebuy-review-empty"
-                                      v-bind:href="learnMoreURL(product) + '#reviews'"
-                                      v-on:click="learnMore(product);"
-                                      aria-label="Write a review">
-                                      <span class="rebuy-star-rating" aria-hidden="true">
-                                        <span class="rebuy-star-rating-background">★★★★★</span>
-                                      </span>
-                                      <span class="rebuy-write-review">Write a review</span>
-                                    </a>
-                                  </template>
+                                    <!-- Product has reviews -->
+                                    <template v-if="hasProductReviews(product)">
+
+                                        <a
+                                            class="rebuy-review-link"
+                                            v-bind:href="learnMoreURL(product) + '#reviews'"
+                                            v-on:click="learnMore(product);">
+
+                                            <span class="rebuy-star-rating">
+
+                                                <span class="rebuy-star-rating-background">
+                                                    ★★★★★
+                                                </span>
+
+                                                <span
+                                                    class="rebuy-star-rating-foreground"
+                                                    v-bind:style="{
+                                                        width: productReviewRatingPercentage(product)
+                                                    }">
+                                                    ★★★★★
+                                                </span>
+
+                                            </span>
+
+                                            <span
+                                                class="rebuy-review-count"
+                                                v-html="productReviewCount(product)">
+                                            </span>
+
+                                        </a>
+
+                                    </template>
+
+
+                                    <!-- No reviews -->
+                                    <template v-else>
+
+                                        <a
+                                            class="rebuy-review-link rebuy-review-empty"
+                                            v-bind:href="learnMoreURL(product) + '#reviews'"
+                                            v-on:click="learnMore(product);">
+
+                                            <span class="rebuy-star-rating">
+
+                                                <span class="rebuy-star-rating-background">
+                                                    ★★★★★
+                                                </span>
+
+                                            </span>
+
+                                            <span class="rebuy-write-review">
+                                                Write a review
+                                            </span>
+
+                                        </a>
+
+                                    </template>
+
                                 </div>
 
                                 <div
@@ -379,12 +407,11 @@
 
   #rebuy-widget-300261 .rebuy-star-rating-background,
   #rebuy-widget-300261 .rebuy-star-rating-foreground {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 18px;
-    overflow: hidden;
-    white-space: nowrap;
+    position:absolute;
+    top:0;
+    left:0;
+    overflow:hidden;
+    white-space:nowrap;
   }
 
   #rebuy-widget-300261 .rebuy-star-rating-background {
