@@ -31,12 +31,6 @@
             "product": "{{ product }}"
           }
         },
-        "custom_liquid_JMVRGa": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<div class=\"yotpo-reviews-pdp\"><div class=\"yotpo-left-area\"><div class=\"yotpo bottomLine\"\n    data-appkey=\"ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk\"\n    data-domain=\"{{shop.permanent_domain | escape }}\"\n    data-product-id=\"{{ product.id }}\"\n    data-product-models=\"{{ product.id }}\"\n    data-name=\"{{ product.title | escape }}\"\n    data-url=\"{{ shop.url }}{{ product.url }}\"\n    data-image-url=\"{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}\"\n    data-description=\"{{ product.description | escape }}\"\n    data-bread-crumbs=\"{% for tag in product.tags %}{{ tag | escape }};{% endfor %}\">\n</div></div><div class=\"yotpo-right-text\">1M bottles sold</div></div>\n\n<script>\nfunction moveYotpoReviewCount() {\n  const bottomLines = document.querySelectorAll('.yotpo-bottomline');\n\n  bottomLines.forEach(container => {\n    const stars = container.querySelector('.yotpo-stars');\n    const reviewCount = container.querySelector('.text-m');\n\n    // Only run if both exist and haven't been moved yet\n    if (stars && reviewCount && reviewCount.nextSibling !== stars) {\n      // Move review count before stars\n      stars.parentNode.insertBefore(reviewCount, stars);\n    }\n  });\n}\n\n// Try every 300ms until the element exists\nconst yotpoInterval = setInterval(() => {\n  const bottomLines = document.querySelectorAll('.yotpo-bottomline');\n  if (bottomLines.length) {\n    moveYotpoReviewCount();\n    // Optional: stop interval after 5 seconds to prevent infinite loop\n    setTimeout(() => clearInterval(yotpoInterval), 5000);\n  }\n}, 300);\n</script>"
-          }
-        },
         "e142f8f9-de0e-4693-8e61-18c1d705b427": {
           "type": "info_tabs",
           "settings": {
@@ -161,7 +155,6 @@
       "block_order": [
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
-        "custom_liquid_JMVRGa",
         "e142f8f9-de0e-4693-8e61-18c1d705b427",
         "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "price",
