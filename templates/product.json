@@ -34,7 +34,7 @@
         "custom_liquid_JMVRGa": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div class=\"yotpo bottomLine\"\n    data-appkey=\"ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk\"\n    data-domain=\"{{shop.permanent_domain | escape }}\"\n    data-product-id=\"{{ product.id }}\"\n    data-product-models=\"{{ product.id }}\"\n    data-name=\"{{ product.title | escape }}\"\n    data-url=\"{{ shop.url }}{{ product.url }}\"\n    data-image-url=\"{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}\"\n    data-description=\"{{ product.description | escape }}\"\n    data-bread-crumbs=\"{% for tag in product.tags %}{{ tag | escape }};{% endfor %}\">\n</div>"
+            "custom_liquid": "<div class=\"yotpo-reviews-pdp\"><div class=\"yotpo-left-area\"><div class=\"yotpo bottomLine\"\n    data-appkey=\"ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk\"\n    data-domain=\"{{shop.permanent_domain | escape }}\"\n    data-product-id=\"{{ product.id }}\"\n    data-product-models=\"{{ product.id }}\"\n    data-name=\"{{ product.title | escape }}\"\n    data-url=\"{{ shop.url }}{{ product.url }}\"\n    data-image-url=\"{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}\"\n    data-description=\"{{ product.description | escape }}\"\n    data-bread-crumbs=\"{% for tag in product.tags %}{{ tag | escape }};{% endfor %}\">\n</div></div><div class=\"yotpo-right-text\">1M bottles sold</div></div>"
           }
         },
         "e142f8f9-de0e-4693-8e61-18c1d705b427": {
