@@ -51,6 +51,7 @@
         },
         "custom_liquid_cFDQaa": {
           "type": "custom_liquid",
+          "disabled": true,
           "settings": {
             "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
           }
