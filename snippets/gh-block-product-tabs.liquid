@@ -18,17 +18,11 @@
 
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
   <div class="info-tabs__links">
-    <a href="#" data-tab="1" class="active"><h3 class="h-inherit">{{ tab_one_title }}</h3></a>
-    {% if product.metafields.globalhealing.who_its_for %}
-    <a href="#" data-tab="2"><h3 class="h-inherit">{{ tab_two_title }}</h3></a>
-    {% endif %}
-    {% if product.metafields.globalhealing.suggested_use %}
-    <a href="#" data-tab="3"><h3 class="h-inherit">{{ tab_three_title }}</h3></a>
-    {% endif %}
+    <div class="about-tab-title active"><h3 class="h-inherit">{{ tab_one_title }}</h3></div>
   </div>
-  <div class="info-tabs__content">
-    <div data-tab="1" class="active">
-      <span>{{ product.metafields.globalhealing.product_tagline }}</span>
+  
+  <div class="info-tabs__content" style="margin-bottom: 2rem;">
+    <div data-tab="1" class="active" style="display: block;">
       {{ product.description }}
       {% if has_product_config %}
         {% if config.instructions contains 'https' %}
@@ -47,8 +41,36 @@
 
       {% endif %}
     </div>
-    <div data-tab="2">{{ product.metafields.globalhealing.who_its_for }}</div>
-    <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
+  </div>
+
+  <div class="info-accordions">
+    {% if product.metafields.globalhealing.who_its_for %}
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        <h3 class="h-inherit">{{ tab_two_title }}</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          {{ product.metafields.globalhealing.who_its_for }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if product.metafields.globalhealing.suggested_use %}
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        <h3 class="h-inherit">{{ tab_three_title }}</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          {{ product.metafields.globalhealing.suggested_use }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
   </div>
 
 {% comment %} FOR OXY-POWDER STUDY {% endcomment %}
@@ -89,19 +111,43 @@
 </div>
 {% unless manual_titles %}
 <script>
-  let all_tabs = document.querySelectorAll('.info-tabs__content > div');
-  let all_links = document.querySelectorAll('.info-tabs__links a');
-  
-  all_links.forEach( t => {
-    t.addEventListener('click', e => {
-      e.preventDefault();
-      all_links.forEach( c => c.classList.remove('active') );
-      all_tabs.forEach( c => c.classList.remove('active') );
-      let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
-      target.classList.add('active');
-      t.classList.add('active');
+  (function() {
+    let blockTabs = document.querySelector('.product__info-tabs[data-block-id="{{ block.id }}"]');
+    if (!blockTabs) return;
+    
+    let accordions = blockTabs.querySelectorAll('.accordion-header');
+    
+    accordions.forEach( acc => {
+      acc.addEventListener('click', e => {
+        e.preventDefault();
+        let content = acc.nextElementSibling;
+        let expanded = acc.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other accordions
+        accordions.forEach( otherAcc => {
+          if (otherAcc !== acc) {
+            otherAcc.setAttribute('aria-expanded', 'false');
+            otherAcc.nextElementSibling.style.display = 'none';
+            let icon = otherAcc.querySelector('.accordion-icon');
+            if(icon) icon.textContent = '+';
+          }
+        });
+        
+        // Toggle current accordion
+        if (expanded) {
+          acc.setAttribute('aria-expanded', 'false');
+          content.style.display = 'none';
+          let icon = acc.querySelector('.accordion-icon');
+          if(icon) icon.textContent = '+';
+        } else {
+          acc.setAttribute('aria-expanded', 'true');
+          content.style.display = 'block';
+          let icon = acc.querySelector('.accordion-icon');
+          if(icon) icon.textContent = '-';
+        }
+      })
     })
-  })
+  })();
 </script>
 {% endunless %}
 <style>
@@ -120,7 +166,7 @@
     font-weight: 700;
     text-transform: uppercase;
   }
-  .info-tabs__links a {
+  .about-tab-title {
     text-decoration: none;
     color: #00000095;
     flex: 1;
@@ -128,10 +174,7 @@
     padding-bottom: 3px;
     border-bottom: 4px solid transparent;
   }
-  .info-tabs__links a:not(:first-child) {
-    padding-left: 9px;
-  }
-  .info-tabs__links a.active {
+  .about-tab-title.active {
     color: var(--gh-color-green);
     border-bottom-color: var(--gh-color-green);
   }
@@ -142,31 +185,57 @@
   .info-tabs__content [data-tab="1"] p:nth-child(2){
     margin-top: 0;
   }
-  .info-tabs__content > div{
-    display: none;
-  }
-  .info-tabs__content > div.active{
-    display: block;
-  }
   .info-tabs__content p{
     margin-top: 0;
     margin-bottom: 1rem;
   }
-  @media (max-width: 749px){
-    .info-tabs__links a{
-      text-align: center;
-      white-space: nowrap;
-    }
-    .info-tabs__links a:nth-child(2){
-      flex-grow: 2;
-    }
+  
+  .info-accordions {
+    margin-top: 1rem;
   }
-  @media (min-width: 750px) and (max-width: 1000px){
-    .info-tabs__links{
-      justify-content: space-between;
-    }
-    .info-tabs__links a{
-      flex: inherit;
-    }
+  .accordion-item {
+    border-top: 1px solid #00000040;
+  }
+  .accordion-item:last-child {
+    border-bottom: 1px solid #00000040;
+  }
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    font-family: var(--gh-font-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00000095;
+    text-align: left;
+  }
+  .accordion-header[aria-expanded="true"] {
+    color: var(--gh-color-green);
+  }
+  .accordion-header h3 {
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .accordion-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: inherit;
+  }
+  .accordion-content {
+    display: none;
+  }
+  .accordion-content-inner {
+    padding-bottom: 1.5rem;
+  }
+  .accordion-content p{
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 </style>

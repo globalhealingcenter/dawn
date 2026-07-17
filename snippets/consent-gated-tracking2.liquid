@@ -473,7 +473,7 @@
 
   // ── Rebuy ─────────────────────────────────────────────────
   function loadRebuy() {
-    if (loaded.rebuy || window.Rebuy || document.querySelector('script[src*="cdn.rebuyengine.com"]')) return;
+    if (loaded.rebuy || document.querySelector('script[src*="cdn.rebuyengine.com/onsite/js/rebuy.js"]')) return;
     loaded.rebuy = true;
     loadScript('https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}', null);
   }

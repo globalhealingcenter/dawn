@@ -26,8 +26,9 @@
         },
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45": {
           "type": "shopify://apps/yotpo-product-reviews/blocks/star-rating/eb7dfd7d-db44-4334-bc49-c893b51b36cf",
+          "disabled": true,
           "settings": {
-            "product": "{{product}}"
+            "product": "{{ product }}"
           }
         },
         "e142f8f9-de0e-4693-8e61-18c1d705b427": {
@@ -37,6 +38,10 @@
             "tab_2_title": "Who It's For",
             "tab_3_title": "Suggested Use"
           }
+        },
+        "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP": {
+          "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
+          "settings": {}
         },
         "price": {
           "type": "price",
@@ -194,7 +199,7 @@
           "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-widget/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
           "settings": {
             "enabled": true,
-            "id": "128942",
+            "id": "300261",
             "product_id_enabled": true,
             "collection_id_enabled": false
           }
@@ -257,6 +262,7 @@
       "block_order": [
         "25085916-2810-44e8-9e6d-866a06af66f3"
       ],
+      "disabled": true,
       "settings": {
         "include_margins": true
       }
