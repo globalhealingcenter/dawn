@@ -165,6 +165,27 @@
                   {{ product.metafields.globalhealing.product_tagline }}
                 </div>
               {% endif %}
+              <div class="yotpo-reviews-pdp">
+                <div class="yotpo-left-area">
+                  <div class="yotpo bottomLine"
+                    data-appkey="ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk"
+                    data-domain="{{shop.permanent_domain | escape }}"
+                    data-product-id="{{ product.id }}"
+                    data-product-models="{{ product.id }}"
+                    data-name="{{ product.title | escape }}"
+                    data-url="{{ shop.url }}{{ product.url }}"
+                    data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                    data-description="{{ product.description | escape }}"
+                    data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                  </div>
+                </div>
+                <div class="yotpo-right-text">
+                  {% if product.metafields.globalhealing.bottles_sold != blank %}
+                    {{ product.metafields.globalhealing.bottles_sold }}
+                  {% endif %}
+                </div>
+              </div>
+
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                 {%- render 'price',
