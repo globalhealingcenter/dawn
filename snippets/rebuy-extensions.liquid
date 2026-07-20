@@ -1284,28 +1284,15 @@
                         </div>
                         <div class="rebuy-product-info">
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
-                            <!-- Shopify product tagline -->
-                            <div
-                                class="rebuy-tagline"
-                                v-if="product.metafields?.globalhealing?.product_tagline"
-                                v-html="product.metafields.globalhealing.product_tagline">
-                            </div>
-                            
-                            <!-- Yotpo star reviews -->
-                            <div class="yotpo bottomLine"
-                                data-appkey="ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk"
-                                data-domain="staging-global-healing.myshopify.com"
-                                data-product-id="{{ product.id }}"
-                                data-product-models="{{ product.id }}"
-                                data-name="{{ product.title | escape }}"
-                                data-url="{{ shop.url }}{{ product.url }}"
-                                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
-                                data-description="{{ product.description | escape }}"
-                                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
-                            </div>
-
-
+                            <div class="rebuy-tagline" v-if="product.metafields.gh_product?.data.tagline"v-html="product.metafields.gh_product?.data.tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
+                            <div class="rebuy-product-review" v-if="hasProductReviews(product)">
+                                <span class="rebuy-star-rating">
+                                    <span class="rebuy-star-rating-background"></span>
+                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+                                </span>
+                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+                            </div>
     
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
