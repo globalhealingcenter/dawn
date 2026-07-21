@@ -1368,6 +1368,12 @@
         "id": "social_threads_link",
         "label": "t:settings_schema.social-media.settings.social_threads_link.label",
         "info": "t:settings_schema.social-media.settings.social_threads_link.info"
+      },
+      {
+        "type": "url",
+        "id": "social_substack_link",
+        "label": "t:settings_schema.social-media.settings.social_substack_link.label",
+        "info": "t:settings_schema.social-media.settings.social_substack_link.info"
       }
     ]
   },

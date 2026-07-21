@@ -297,6 +297,10 @@
         "social_threads_link": {
           "label": "Threads",
           "info": "https://www.threads.com/@globalhealingofficial"
+        },
+        "social_substack_link": {
+          "label": "Substack",
+          "info": "https://globalhealing.substack.com"
         }
       }
     },
