@@ -20,18 +20,10 @@
             "text": "📱 App Exclusive! FREE SHIPPING On All Orders",
             "link": "https://0vf059r6.tapc.art"
           }
-        },
-        "announcement_6TpWEY": {
-          "type": "announcement",
-          "settings": {
-            "text": "Limited Time! Earn 2X Rewards on NAD+",
-            "link": "shopify://products/nad"
-          }
         }
       },
       "block_order": [
-        "announcement_GGCHez",
-        "announcement_6TpWEY"
+        "announcement_GGCHez"
       ],
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
