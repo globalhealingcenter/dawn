@@ -24,6 +24,15 @@
   font-size: 30px;
 }
 
+.yotpo-reviews-pdp .yotpo-bottomline.pull-left.star-clickable {
+  display: flex;
+  flex-flow: row-reverse;
+  gap: 10px;
+}
+
+.yotpo-reviews-pdp .yotpo-bottomline.pull-left.star-clickable .yotpo-clr {
+  display: none;
+}
 
 @media screen and (min-width: 750px) {
   .product__column-sticky {
