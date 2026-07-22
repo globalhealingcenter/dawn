@@ -1,0 +1,178 @@
+{% assign has_product_config = false %}
+{% if product and product.metafields.gh_product.data %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.gh_product.data.value %}
+{% endif %}
+
+{% assign tab_two_title = "Who It's For" %}
+{% if block.settings.tab_2_title != blank %}
+  {% assign tab_two_title = block.settings.tab_2_title %}
+{% endif %}
+{% if config.tab_2_title != blank %}
+  {% assign tab_two_title = config.tab_2_title %}
+{% endif %}
+
+{% assign tab_three_title = "Suggested Use" %}
+{% if block.settings.tab_3_title != blank %}
+  {% assign tab_three_title = block.settings.tab_3_title %}
+{% endif %}
+{% if config.tab_3_title != blank %}
+  {% assign tab_three_title = config.tab_3_title %}
+{% endif %}
+
+{% if manual_titles %}
+  {% assign tab_two_title = "Who It's For" %}
+  {% assign tab_three_title = 'Suggested Use' %}
+{% endif %}
+
+<div class="product__info-accordions" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="info-accordions">
+    {% if product.metafields.globalhealing.who_its_for %}
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        <h3 class="h-inherit">{{ tab_two_title }}</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          {{ product.metafields.globalhealing.who_its_for }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if product.metafields.globalhealing.suggested_use %}
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false">
+        <h3 class="h-inherit">{{ tab_three_title }}</h3>
+        <span class="accordion-icon">+</span>
+      </button>
+      <div class="accordion-content">
+        <div class="accordion-content-inner">
+          {{ product.metafields.globalhealing.suggested_use }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  {% comment %} FOR OXY-POWDER STUDY {% endcomment %}
+  {% assign has_study = false %}
+  {% if has_product_config %}
+      {% for block in config.blocks %} {% if block.type == 'study' %} {% assign has_study = true %} {% endif %} {% endfor %}
+  {% endif %}
+
+  {% if has_study  %}
+    <div class="citruslabs-study mt2">
+      <span class="bold block gh-font-secondary">Citruslabs Study: Real People, Real Results</span>
+      <div class="flex justify-between">
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">95%</div>
+          <div class="gh-font-secondary line-height-2">constipation<br> relief</div>
+        </div>
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">88%</div>
+          <div class="gh-font-secondary line-height-2">bloating<br> relief</div>
+        </div>
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">88%</div>
+          <div class="gh-font-secondary line-height-2">improved<br> digestion</div>
+        </div>
+      </div>
+      <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Download the Study</a>
+    </div>
+  {% endif %}
+</div>
+
+{% unless manual_titles %}
+<script>
+  (function() {
+    let blockContainer = document.querySelector('[data-block-id="{{ block.id }}"]') || document.querySelector('.info-accordions')?.closest('.product__info-tabs') || document;
+    if (!blockContainer) return;
+    
+    let accordions = blockContainer.querySelectorAll('.accordion-header');
+    
+    accordions.forEach( acc => {
+      acc.addEventListener('click', e => {
+        e.preventDefault();
+        let content = acc.nextElementSibling;
+        let expanded = acc.getAttribute('aria-expanded') === 'true';
+        
+        // Close all other accordions
+        accordions.forEach( otherAcc => {
+          if (otherAcc !== acc) {
+            otherAcc.setAttribute('aria-expanded', 'false');
+            otherAcc.nextElementSibling.style.display = 'none';
+            let icon = otherAcc.querySelector('.accordion-icon');
+            if(icon) icon.textContent = '+';
+          }
+        });
+        
+        // Toggle current accordion
+        if (expanded) {
+          acc.setAttribute('aria-expanded', 'false');
+          content.style.display = 'none';
+          let icon = acc.querySelector('.accordion-icon');
+          if(icon) icon.textContent = '+';
+        } else {
+          acc.setAttribute('aria-expanded', 'true');
+          content.style.display = 'block';
+          let icon = acc.querySelector('.accordion-icon');
+          if(icon) icon.textContent = '-';
+        }
+      })
+    })
+  })();
+</script>
+{% endunless %}
+
+<style>
+  .info-accordions {
+    margin-top: 1rem;
+  }
+  .accordion-item {
+    border-top: 1px solid #00000040;
+  }
+  .accordion-item:last-child {
+    border-bottom: 1px solid #00000040;
+  }
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 1.25rem 0;
+    cursor: pointer;
+    font-family: var(--gh-font-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00000095;
+    text-align: left;
+  }
+  .accordion-header[aria-expanded="true"] {
+    color: var(--gh-color-green);
+  }
+  .accordion-header h3 {
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+  .accordion-icon {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+    color: inherit;
+  }
+  .accordion-content {
+    display: none;
+  }
+  .accordion-content-inner {
+    padding-bottom: 1.5rem;
+  }
+  .accordion-content p{
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+</style>
