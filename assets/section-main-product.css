@@ -15,7 +15,9 @@
   padding-left: 0;
 }
 
-/* PDP V2 */
+/**
+**  PDP V2 
+**/
 .product__info-wrapper .product-tagline-v2 {
   margin: 0;
 }
@@ -40,6 +42,34 @@ span.variant-label-subtext {
   font-size: 12px;
   line-height: 21px;
   color: var(--gh-color-gray);
+}
+
+.product__info-wrapper.grid__item .product-form__submit {
+  font-size: 25px;
+}
+
+.accordion-header h3.accordion-titles {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gh-text-grey);
+  font-family: var(--gh-font-secondary);
+  padding: 0px 10px;
+}
+
+.citruslabs-study.mt2 .h3 {
+  font-size: 42px;
+}
+
+.citruslabs-study.mt2 span {
+  font-size: 20px;
+}
+
+.citruslabs-study.mt2 .line-height-2 {
+  font-size: 17px;
+}
+
+.citruslabs-study.mt2 a {
+  font-size: 20px;
 }
 
 @media screen and (min-width: 750px) {
@@ -152,12 +182,18 @@ span.variant-label-subtext {
 }
 
 .shopify-payment-button__more-options {
-  margin: 1.6rem 0 1rem;
-  font-size: 1.2rem;
-  line-height: calc(1 + 0.5 / var(--font-body-scale));
+  margin: 25px 0;
+  font-size: 15px;
+  line-height: 21px;
   letter-spacing: 0.05rem;
   text-decoration: underline;
   text-underline-offset: 0.3rem;
+}
+
+#shopify-buyer-consent {
+  margin: 0;
+  font-size: 15px;
+  line-height: 21px;
 }
 
 .shopify-payment-button__button+.shopify-payment-button__button--hidden {
