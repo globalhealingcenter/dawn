@@ -30,7 +30,7 @@
     {% if product.metafields.globalhealing.who_its_for %}
     <div class="accordion-item">
       <button class="accordion-header" aria-expanded="false">
-        <h3 class="h-inherit">{{ tab_two_title }}</h3>
+        <h3 class="accordion-titles">{{ tab_two_title }}</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-content">
@@ -44,7 +44,7 @@
     {% if product.metafields.globalhealing.suggested_use %}
     <div class="accordion-item">
       <button class="accordion-header" aria-expanded="false">
-        <h3 class="h-inherit">{{ tab_three_title }}</h3>
+        <h3 class="accordion-titles">{{ tab_three_title }}</h3>
         <span class="accordion-icon">+</span>
       </button>
       <div class="accordion-content">
@@ -64,7 +64,7 @@
 
   {% if has_study  %}
     <div class="citruslabs-study mt2">
-      <span class="bold block gh-font-secondary">Citruslabs Study: Real People, Real Results</span>
+      <span class="bold block gh-font-secondary">Real People, Real Results</span>
       <div class="flex justify-between">
         <div class="flex items-center gap-1 flex-wrap mb1">
           <div class="h3 color-gold">95%</div>
@@ -79,7 +79,7 @@
           <div class="gh-font-secondary line-height-2">improved<br> digestion</div>
         </div>
       </div>
-      <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Download the Study</a>
+      <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Read the Citrus Lab Study</a>
     </div>
   {% endif %}
 </div>
@@ -131,10 +131,10 @@
     margin-top: 1rem;
   }
   .accordion-item {
-    border-top: 1px solid #00000040;
+    border-top: 1px solid var(--gh-color-gray);
   }
   .accordion-item:last-child {
-    border-bottom: 1px solid #00000040;
+    border-bottom: 1px solid var(--gh-color-gray);
   }
   .accordion-header {
     width: 100%;
@@ -159,11 +159,11 @@
     font-size: inherit;
     color: inherit;
   }
-  .accordion-icon {
-    font-size: 1.5rem;
-    font-weight: 300;
-    line-height: 1;
+  .info-accordions .accordion-icon {
+    font-size: 40px;
+    font-weight: 100;
     color: inherit;
+    margin-right: 30px;
   }
   .accordion-content {
     display: none;
