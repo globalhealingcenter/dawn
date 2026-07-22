@@ -23,7 +23,7 @@
     <div class="about-tab-title active"><h3>{{ tab_one_title }}</h3> <span class="tab_one_subtitle">{{ product.metafields.globalhealing.bottles_sold }}</span></div>
   </div>
   
-  <div class="info-tabs__content" style="margin-bottom: 2rem;">
+  <div class="info-tabs__content">
     <div data-tab="1" class="active" style="display: block;">
       {{ product.description }}
       {% if has_product_config %}
@@ -31,15 +31,7 @@
           <p><a href='{{ config.instructions }}'>View Instructions</a></p>
         {% endif %}
 
-        {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
-        {% assign sf_content = sf_content | strip %}
-        {% assign button_text = 'Supplement Facts' %}
-        {% if product.type == 'Facial Cleansers' or product.type == 'Skin Care' %} {% assign button_text = 'View Label' %}{% endif %}
-        <!-- {{ product.type | json }} -->
-        {% unless sf_content == ''  %}
-          {% if config.supplement_facts_link_title != '' %} {% assign button_text = config.supplement_facts_link_title %} {% endif %}
-          {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: button_text, id: 'full-ingredients-header', content: sf_content %}
-        {% endunless %}
+        
 
       {% endif %}
     </div>
@@ -100,9 +92,10 @@
   }
   .info-tabs__content p{
     margin-top: 20px;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     font-size: 20px;
     line-height: 24px;
     color: var(--gh-color-gray);
+    font-family: var(--gh-font-secondary);
   }
 </style>

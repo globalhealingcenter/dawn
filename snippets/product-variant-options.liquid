@@ -55,29 +55,58 @@
           endif
       endcase
     endfor
+
+    assign variant_for_value = nil
+    for variant in product.variants
+      case option.position
+        when 1
+          if variant.option1 == value
+            assign variant_for_value = variant
+            break
+          endif
+        when 2
+          if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == value
+            assign variant_for_value = variant
+            break
+          endif
+        when 3
+          if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == product.selected_or_first_available_variant.option2 and variant.option3 == value
+            assign variant_for_value = variant
+            break
+          endif
+      endcase
+    endfor
+    assign variant_label = variant_for_value.metafields.globalhealing.label_for_variant.value | default: variant_for_value.metafields.globalhealing.label_for_variant
   -%}
   
   {%- if block.settings.picker_type == 'button' -%}
-    <input
-      type="radio"
-      id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
-      name="{{ option.name }}"
-      value="{{ value | escape }}"
-      form="{{ product_form_id }}"
-      {% if option.selected_value == value %}
-        checked
-      {% endif %}
-      {% if option_disabled or frontend_out_of_stock_products contains value %}
-        class="disabled"
-      {% endif %}
-      {% if frontend_out_of_stock_products contains value %}
-        disabled="disabled"
-      {% endif %}
-    >
-    <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}">
-      {{ value -}}
-      <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
-    </label>
+    <div class="product-form__option-item">
+      <input
+        type="radio"
+        id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
+        name="{{ option.name }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
+        {% if option_disabled or frontend_out_of_stock_products contains value %}
+          class="disabled"
+        {% endif %}
+        {% if frontend_out_of_stock_products contains value %}
+          disabled="disabled"
+        {% endif %}
+      >
+      <label for="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}" class="product-form__option-label">
+        <span class="variant-option-pill">
+          {{ value }}
+          <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+        </span>
+        {%- if variant_label != blank -%}
+          <span class="variant-label-subtext">{{ variant_label }}</span>
+        {%- endif -%}
+      </label>
+    </div>
   {%- elsif block.settings.picker_type == 'dropdown' -%}
     <option
       value="{{ value | escape }}"
@@ -90,6 +119,7 @@
       {%- else -%}
         {{- value -}}
       {%- endif %}
+      {%- if variant_label != blank %} - {{ variant_label }}{% endif -%}
     </option>
   {%- endif -%}
 {%- endfor -%}
