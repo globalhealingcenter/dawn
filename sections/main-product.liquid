@@ -263,6 +263,8 @@
               {%- endif -%}
             {%- when 'info_tabs' -%}
               {% render 'gh-block-product-tabs', block: block, product: product %}
+            {%- when 'info_accordions' -%}
+              {% render 'gh-block-product-accordions', block: block, product: product %}
             {%- when 'sku' -%}
               <p
                       class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -850,19 +852,26 @@
         {
           "type": "text",
           "id": "tab_1_title",
-          "default": "Tab 1",
+          "default": "About",
           "label": "Tab 1 Title"
-        },
+        }
+      ]
+    },
+    {
+      "type": "info_accordions",
+      "name": "Accordions",
+      "limit": 1,
+      "settings": [
         {
           "type": "text",
           "id": "tab_2_title",
-          "default": "Tab 2",
+          "default": "Who It's For",
           "label": "Tab 2 Title"
         },
         {
           "type": "text",
           "id": "tab_3_title",
-          "default": "Tab 3",
+          "default": "Suggested Use",
           "label": "Tab 3 Title"
         }
       ]
