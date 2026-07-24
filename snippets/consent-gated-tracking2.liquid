@@ -26,6 +26,8 @@
       CATEGORIZED_COOKIES.
     - Added 'og_auth' to ESSENTIAL_COOKIES (Ordergroove auth
       cookie, required for subscription manager to load).
+    - Klaviyo: load modern klaviyo.js (forms, Customer Hub, BIS)
+      after marketing consent; block static-tracking.klaviyo.com.
 
   Loaded only after gh:consentUpdate
   (dispatched from gcm-integration-script.liquid).
@@ -243,6 +245,7 @@
 
     // Marketing — Klaviyo
     'static.klaviyo.com':         'marketing',
+    'static-tracking.klaviyo.com': 'marketing',
     'a.klaviyo.com':              'marketing',
 
     // Marketing — Attentive
@@ -415,15 +418,25 @@
   }
 
   // ── Klaviyo ───────────────────────────────────────────────
-  function loadKlaviyo() {
-    if (loaded.klaviyo) return;
-    loaded.klaviyo = true;
-    loadScript('https://static.klaviyo.com/onsite/js/YeibUN/klaviyo.js', null);
+  var KLAVIYO_JS_SRC = 'https://static.klaviyo.com/onsite/js/YeibUN/klaviyo.js';
+
+  function configureKlaviyoBackInStock() {
+    var attempts = 0;
+    var maxAttempts = 300;
     var check = setInterval(function () {
-      if (!window.klaviyo) return;
+      attempts++;
+      var klaviyo = window.klaviyo;
+      if (!klaviyo || typeof klaviyo.enable !== 'function') {
+        if (attempts >= maxAttempts) {
+          clearInterval(check);
+          console.warn('[Klaviyo] Back in stock: klaviyo.enable not available after script load');
+        }
+        return;
+      }
       clearInterval(check);
-      var klaviyo = window.klaviyo || [];
-      klaviyo.init({ account: 'YeibUN', platform: 'shopify' });
+      if (typeof klaviyo.init === 'function') {
+        klaviyo.init({ account: 'YeibUN', platform: 'shopify' });
+      }
       klaviyo.enable('backinstock', {
         trigger: {
           product_page_text: 'Notify Me When Available',
@@ -453,7 +466,27 @@
         },
       });
     }, 100);
-    setTimeout(function () { clearInterval(check); }, 10000);
+  }
+
+  function loadKlaviyo() {
+    if (loaded.klaviyo) return;
+    if (document.querySelector('script[src*="static.klaviyo.com/onsite/js/YeibUN/klaviyo.js"]')) {
+      loaded.klaviyo = true;
+      configureKlaviyoBackInStock();
+      return;
+    }
+    loaded.klaviyo = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = KLAVIYO_JS_SRC;
+    s.onload = function () {
+      configureKlaviyoBackInStock();
+    };
+    s.onerror = function () {
+      console.error('[Klaviyo] Failed to load klaviyo.js');
+      loaded.klaviyo = false;
+    };
+    document.head.appendChild(s);
   }
 
   // ── Hotjar ────────────────────────────────────────────────
@@ -558,4 +591,3 @@
 
 })();
 </script>
-
