@@ -8,10 +8,10 @@
   var __IN_TAPCART_EARLY__ = !!window.Tapcart || /Tapcart/i.test(navigator.userAgent);
 
   const consentOutOfRegion = {
-    analytics: false,
-    marketing: false,
-    functionality: false,
-    adsDataRedaction: true,
+    analytics: true,
+    marketing: true,
+    functionality: true,
+    adsDataRedaction: false,
     urlPassthrough: false,
   };
 
@@ -20,132 +20,9 @@
     dataLayer.push(arguments);
   }
 
-  function dispatchGhConsent(categories) {
-    window.__GH_CONSENT_STATE__ = categories;
-    if (categories.marketing) window.__GH_MARKETING_CONSENT__ = true;
-    document.dispatchEvent(new CustomEvent('gh:consentUpdate', { detail: categories }));
-  }
-
-  function isConsentGranted(value) {
-    return value === 'granted' || value === true || value === 1 || value === '1';
-  }
-
-  function parseConsentCategories(csmSignal) {
-    const gcm = csmSignal.integration?.gcm?.isEnabled ? csmSignal.integration.gcm.state : csmSignal.state;
-    const cats = csmSignal.categories || {};
-    const prefs = csmSignal.preferences || {};
-
-    var marketing = !!(
-      cats.marketing ||
-      csmSignal.marketing ||
-      prefs.marketing ||
-      isConsentGranted(gcm?.ad_storage) ||
-      isConsentGranted(gcm?.ad_user_data) ||
-      isConsentGranted(gcm?.ad_personalization)
-    );
-
-    var statistics = !!(
-      cats.statistics ||
-      csmSignal.statistics ||
-      prefs.analytics ||
-      isConsentGranted(gcm?.analytics_storage)
-    );
-
-    var functionality = !!(
-      cats.preferences ||
-      cats.functionality ||
-      prefs.functionality ||
-      isConsentGranted(gcm?.functionality_storage) ||
-      isConsentGranted(gcm?.personalization_storage)
-    );
-
-    return { marketing: marketing, statistics: statistics, functionality: functionality };
-  }
-
-  function dispatchFromShopifyPrivacy(detail) {
-    if (!detail) return;
-    dispatchGhConsent({
-      marketing: !!detail.marketingAllowed,
-      statistics: !!(detail.analyticsAllowed || detail.analyticsProcessingAllowed),
-      functionality: !!(detail.preferencesAllowed || detail.preferencesProcessingAllowed),
-    });
-  }
-
-  function syncShopifyPrivacyFromApi() {
-    var cp = window.Shopify && window.Shopify.customerPrivacy;
-    if (!cp || typeof cp.marketingAllowed !== 'function') return;
-    dispatchGhConsent({
-      marketing: cp.marketingAllowed(),
-      statistics: cp.analyticsProcessingAllowed(),
-      functionality: cp.preferencesProcessingAllowed(),
-    });
-  }
-
-  function bindShopifyPrivacyConsentSync() {
-    document.addEventListener('visitorConsentCollected', function (event) {
-      dispatchFromShopifyPrivacy(event.detail);
-    });
-    document.addEventListener('trackingConsentAccepted', function () {
-      syncShopifyPrivacyFromApi();
-    });
-    syncShopifyPrivacyFromApi();
-  }
-
-  var GH_CONSENT_DENIED = { marketing: false, statistics: false, functionality: false };
-
-  function handleConsentmoSignal(event) {
-    const csmSignal = event.detail || {};
-    const consentState = csmSignal.integration?.gcm?.isEnabled
-      ? csmSignal.integration.gcm.state
-      : csmSignal.state;
-    if (consentState) {
-      gtag('consent', 'update', consentState);
-    }
-    if (csmSignal.integration?.gcm?.isEnabled) {
-      gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
-      gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
-    }
-    var parsed = parseConsentCategories(csmSignal);
-    if (window.__GH_DEBUG_CONSENT__) {
-      console.info('[GH Consent] consentmoSignal', csmSignal, parsed);
-    }
-    dispatchGhConsent(parsed);
-  }
-
-  function registerConsentmoListeners() {
-    document.addEventListener('consentmoSignal', handleConsentmoSignal);
-    window.addEventListener('consentmoSignal', handleConsentmoSignal);
-    document.addEventListener('consentmoSignal_onLoad', handleConsentmoOnLoad);
-    window.addEventListener('consentmoSignal_onLoad', handleConsentmoOnLoad);
-  }
-
-  function handleConsentmoOnLoad(eventData) {
-    const csmLoadSignal = eventData.detail || { isActive: false };
-    if (!csmLoadSignal.isActive) {
-      gtag('consent', 'update', {
-        ad_storage: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        ad_personalization: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        ad_user_data: consentOutOfRegion.marketing ? 'granted' : 'denied',
-        analytics_storage: consentOutOfRegion.analytics ? 'granted' : 'denied',
-        functionality_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
-        personalization_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
-        security_storage: 'granted',
-      });
-      gtag('set', 'ads_data_redaction', consentOutOfRegion.adsDataRedaction);
-      gtag('set', 'url_passthrough', consentOutOfRegion.urlPassthrough);
-      dispatchGhConsent({
-        marketing: consentOutOfRegion.marketing,
-        statistics: consentOutOfRegion.analytics,
-        functionality: consentOutOfRegion.functionality,
-      });
-    } else if (csmLoadSignal.hasConsent) {
-      handleConsentmoSignal({ detail: csmLoadSignal });
-    } else {
-      dispatchGhConsent(GH_CONSENT_DENIED);
-    }
-  }
-
   if (__IN_TAPCART_EARLY__) {
+    // Inside the Tapcart native app webview – cookie consent UI is not applicable.
+    // Grant all consent states immediately so Consentmo skips its banner entirely.
     gtag('consent', 'default', {
       ad_storage: 'granted',
       ad_personalization: 'granted',
@@ -155,8 +32,8 @@
       personalization_storage: 'granted',
       security_storage: 'granted',
     });
+    // Prevent Consentmo from treating this session as a new visitor that needs consent.
     window.__consentmo_bypass__ = true;
-    dispatchGhConsent({ marketing: true, statistics: true, functionality: true });
     console.log('[Consentmo] Tapcart detected – consent widget suppressed.');
   } else {
     gtag('consent', 'default', {
@@ -170,14 +47,34 @@
       wait_for_update: 1500,
     });
 
-    dispatchGhConsent(GH_CONSENT_DENIED);
-    registerConsentmoListeners();
-
-    if (window.Shopify && window.Shopify.customerPrivacy) {
-      bindShopifyPrivacyConsentSync();
-    } else {
-      document.addEventListener('shopify:consent:loaded', bindShopifyPrivacyConsentSync);
-    }
+    document.addEventListener('consentmoSignal_onLoad', function (eventData) {
+      const csmLoadSignal = eventData.detail || { isActive: false };
+      if (!csmLoadSignal.isActive) {
+        gtag('consent', 'update', {
+          ad_storage: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          ad_personalization: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          ad_user_data: consentOutOfRegion.marketing ? 'granted' : 'denied',
+          analytics_storage: consentOutOfRegion.analytics ? 'granted' : 'denied',
+          functionality_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
+          personalization_storage: consentOutOfRegion.functionality ? 'granted' : 'denied',
+          security_storage: 'granted',
+        });
+        gtag('set', 'ads_data_redaction', consentOutOfRegion.adsDataRedaction);
+        gtag('set', 'url_passthrough', consentOutOfRegion.urlPassthrough);
+      } else {
+        document.addEventListener('consentmoSignal', function (event) {
+          const csmSignal = event.detail;
+          const consentState = csmSignal.integration?.gcm?.isEnabled
+            ? csmSignal.integration.gcm.state
+            : csmSignal.state;
+          gtag('consent', 'update', consentState);
+          if (csmSignal.integration?.gcm?.isEnabled) {
+            gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
+            gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
+          }
+        });
+      }
+    });
   }
 </script>
 
