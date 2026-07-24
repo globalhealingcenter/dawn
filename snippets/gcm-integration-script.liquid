@@ -41,6 +41,23 @@
     };
   }
 
+  var GH_CONSENT_DENIED = { marketing: false, statistics: false, functionality: false };
+
+  function handleConsentmoSignal(event) {
+    const csmSignal = event.detail || {};
+    const consentState = csmSignal.integration?.gcm?.isEnabled
+      ? csmSignal.integration.gcm.state
+      : csmSignal.state;
+    if (consentState) {
+      gtag('consent', 'update', consentState);
+    }
+    if (csmSignal.integration?.gcm?.isEnabled) {
+      gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
+      gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
+    }
+    dispatchGhConsent(parseConsentCategories(csmSignal));
+  }
+
   if (__IN_TAPCART_EARLY__) {
     // Inside the Tapcart native app webview – cookie consent UI is not applicable.
     // Grant all consent states immediately so Consentmo skips its banner entirely.
@@ -69,6 +86,12 @@
       wait_for_update: 1500,
     });
 
+    // Default denied until Consentmo updates (never leave __GH_CONSENT_STATE__ undefined).
+    dispatchGhConsent(GH_CONSENT_DENIED);
+
+    // Register before Consentmo loads so accept/reject clicks are not missed.
+    document.addEventListener('consentmoSignal', handleConsentmoSignal);
+
     document.addEventListener('consentmoSignal_onLoad', function (eventData) {
       const csmLoadSignal = eventData.detail || { isActive: false };
       if (!csmLoadSignal.isActive) {
@@ -88,22 +111,10 @@
           statistics: consentOutOfRegion.analytics,
           functionality: consentOutOfRegion.functionality,
         });
+      } else if (csmLoadSignal.hasConsent) {
+        handleConsentmoSignal({ detail: csmLoadSignal });
       } else {
-        if (csmLoadSignal.hasConsent) {
-          dispatchGhConsent(parseConsentCategories(csmLoadSignal));
-        }
-        document.addEventListener('consentmoSignal', function (event) {
-          const csmSignal = event.detail;
-          const consentState = csmSignal.integration?.gcm?.isEnabled
-            ? csmSignal.integration.gcm.state
-            : csmSignal.state;
-          gtag('consent', 'update', consentState);
-          if (csmSignal.integration?.gcm?.isEnabled) {
-            gtag('set', 'ads_data_redaction', csmSignal.integration.gcm.adsDataRedaction);
-            gtag('set', 'url_passthrough', csmSignal.integration.gcm.urlPassthrough);
-          }
-          dispatchGhConsent(parseConsentCategories(csmSignal));
-        });
+        dispatchGhConsent(GH_CONSENT_DENIED);
       }
     });
   }
