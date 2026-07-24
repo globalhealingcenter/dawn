@@ -247,6 +247,11 @@
         "settings": {
           "defer_script": true
         }
+      },
+      "13070091535480640111": {
+        "type": "shopify://apps/attrac/blocks/app-embed/b783956d-47a9-4434-91ad-4ec960bd74b0",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
