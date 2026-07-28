@@ -1,149 +1,217 @@
 {% assign has_product_config = false %}
+
 {% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
   {% assign config = product.metafields.gh_product.data.value %}
 {% endif %}
 
-{% assign tab_two_title = "Who It's For" %}
-{% if block.settings.tab_2_title != blank %}
-  {% assign tab_two_title = block.settings.tab_2_title %}
-{% endif %}
-{% if config.tab_2_title != blank %}
-  {% assign tab_two_title = config.tab_2_title %}
-{% endif %}
-
-{% assign tab_three_title = "Suggested Use" %}
-{% if block.settings.tab_3_title != blank %}
-  {% assign tab_three_title = block.settings.tab_3_title %}
-{% endif %}
-{% if config.tab_3_title != blank %}
-  {% assign tab_three_title = config.tab_3_title %}
-{% endif %}
-
-{% if manual_titles %}
-  {% assign tab_two_title = "Who It's For" %}
-  {% assign tab_three_title = 'Suggested Use' %}
-{% endif %}
-
-<div class="product__info-accordions" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+<div
+  class="product__info-accordions"
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
   <div class="info-accordions">
-    {% if product.metafields.globalhealing.who_its_for %}
-    <div class="accordion-item">
-      <button class="accordion-header" aria-expanded="false">
-        <h3 class="accordion-titles">{{ tab_two_title }}</h3>
-        <span class="accordion-icon">+</span>
-      </button>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          {{ product.metafields.globalhealing.who_its_for }}
+
+    {% comment %}
+      Accordion 1: Made With Purpose
+      Replace the metafield below if required.
+    {% endcomment %}
+    {% assign made_with_purpose = product.metafields.globalhealing.made_with_purpose %}
+
+    {% if made_with_purpose != blank %}
+      <div class="accordion-item">
+        <button
+          type="button"
+          class="accordion-header"
+          aria-expanded="false"
+        >
+          <h3 class="accordion-titles">Made With Purpose</h3>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+
+        <div class="accordion-content">
+          <div class="accordion-content-inner">
+            {{ made_with_purpose | metafield_tag }}
+          </div>
         </div>
       </div>
-    </div>
     {% endif %}
 
-    {% if product.metafields.globalhealing.suggested_use %}
-    <div class="accordion-item">
-      <button class="accordion-header" aria-expanded="false">
-        <h3 class="accordion-titles">{{ tab_three_title }}</h3>
-        <span class="accordion-icon">+</span>
-      </button>
-      <div class="accordion-content">
-        <div class="accordion-content-inner">
-          {{ product.metafields.globalhealing.suggested_use }}
+
+    {% comment %}
+      Accordion 2: Supplement Facts
+      Replace the metafield below if required.
+    {% endcomment %}
+    {% assign supplement_facts = product.metafields.globalhealing.suggested_use %}
+
+    {% if supplement_facts != blank %}
+      <div class="accordion-item">
+        <button
+          type="button"
+          class="accordion-header"
+          aria-expanded="false"
+        >
+          <h3 class="accordion-titles">Supplement Facts</h3>
+          <span class="accordion-icon" aria-hidden="true">+</span>
+        </button>
+
+        <div class="accordion-content">
+          <div class="accordion-content-inner">
+            {{ supplement_facts | metafield_tag }}
+          </div>
         </div>
       </div>
-    </div>
     {% endif %}
+
   </div>
 
-  {% comment %} FOR OXY-POWDER STUDY {% endcomment %}
+
+  {% comment %} OXY-POWDER STUDY {% endcomment %}
   {% assign has_study = false %}
+
   {% if has_product_config %}
-      {% for block in config.blocks %} {% if block.type == 'study' %} {% assign has_study = true %} {% endif %} {% endfor %}
+    {% for config_block in config.blocks %}
+      {% if config_block.type == 'study' %}
+        {% assign has_study = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
   {% endif %}
 
-  {% if has_study  %}
+  {% if has_study %}
     <div class="citruslabs-study mt2">
-      <span class="bold block gh-font-secondary">Real People, Real Results</span>
+      <span class="bold block gh-font-secondary">
+        Real People, Real Results
+      </span>
+
       <div class="flex justify-between">
         <div class="flex items-center gap-1 flex-wrap mb1">
           <div class="h3 color-gold">95%</div>
-          <div class="gh-font-secondary line-height-2">constipation<br> relief</div>
+          <div class="gh-font-secondary line-height-2">
+            constipation<br>
+            relief
+          </div>
         </div>
+
         <div class="flex items-center gap-1 flex-wrap mb1">
           <div class="h3 color-gold">88%</div>
-          <div class="gh-font-secondary line-height-2">bloating<br> relief</div>
+          <div class="gh-font-secondary line-height-2">
+            bloating<br>
+            relief
+          </div>
         </div>
+
         <div class="flex items-center gap-1 flex-wrap mb1">
           <div class="h3 color-gold">88%</div>
-          <div class="gh-font-secondary line-height-2">improved<br> digestion</div>
+          <div class="gh-font-secondary line-height-2">
+            improved<br>
+            digestion
+          </div>
         </div>
       </div>
-      <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Read the Citrus Lab Study</a>
+
+      <a
+        class="bold gh-font-secondary color-green"
+        href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Read the Citrus Lab Study
+      </a>
     </div>
   {% endif %}
 </div>
 
-{% unless manual_titles %}
 <script>
-  (function() {
-    let blockContainer = document.querySelector('[data-block-id="{{ block.id }}"]') || document.querySelector('.info-accordions')?.closest('.product__info-tabs') || document;
+  (function () {
+    const currentScript = document.currentScript;
+
+    const blockContainer = currentScript
+      ? currentScript.previousElementSibling
+      : document.querySelector('[data-block-id="{{ block.id }}"]');
+
     if (!blockContainer) return;
-    
-    let accordions = blockContainer.querySelectorAll('.accordion-header');
-    
-    accordions.forEach( acc => {
-      acc.addEventListener('click', e => {
-        e.preventDefault();
-        let content = acc.nextElementSibling;
-        let expanded = acc.getAttribute('aria-expanded') === 'true';
-        
-        // Close all other accordions
-        accordions.forEach( otherAcc => {
-          if (otherAcc !== acc) {
-            otherAcc.setAttribute('aria-expanded', 'false');
-            otherAcc.nextElementSibling.style.display = 'none';
-            let icon = otherAcc.querySelector('.accordion-icon');
-            if(icon) icon.textContent = '+';
+
+    const accordionHeaders =
+      blockContainer.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(function (accordionHeader) {
+      accordionHeader.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const accordionContent = accordionHeader.nextElementSibling;
+        const accordionIcon =
+          accordionHeader.querySelector('.accordion-icon');
+
+        const isExpanded =
+          accordionHeader.getAttribute('aria-expanded') === 'true';
+
+        accordionHeaders.forEach(function (otherHeader) {
+          if (otherHeader === accordionHeader) return;
+
+          const otherContent = otherHeader.nextElementSibling;
+          const otherIcon =
+            otherHeader.querySelector('.accordion-icon');
+
+          otherHeader.setAttribute('aria-expanded', 'false');
+
+          if (otherContent) {
+            otherContent.style.display = 'none';
+          }
+
+          if (otherIcon) {
+            otherIcon.textContent = '+';
           }
         });
-        
-        // Toggle current accordion
-        if (expanded) {
-          acc.setAttribute('aria-expanded', 'false');
-          content.style.display = 'none';
-          let icon = acc.querySelector('.accordion-icon');
-          if(icon) icon.textContent = '+';
+
+        if (isExpanded) {
+          accordionHeader.setAttribute('aria-expanded', 'false');
+
+          if (accordionContent) {
+            accordionContent.style.display = 'none';
+          }
+
+          if (accordionIcon) {
+            accordionIcon.textContent = '+';
+          }
         } else {
-          acc.setAttribute('aria-expanded', 'true');
-          content.style.display = 'block';
-          let icon = acc.querySelector('.accordion-icon');
-          if(icon) icon.textContent = '-';
+          accordionHeader.setAttribute('aria-expanded', 'true');
+
+          if (accordionContent) {
+            accordionContent.style.display = 'block';
+          }
+
+          if (accordionIcon) {
+            accordionIcon.textContent = '−';
+          }
         }
-      })
-    })
+      });
+    });
   })();
 </script>
-{% endunless %}
 
 <style>
   .info-accordions {
     margin-top: 1rem;
   }
+
   .accordion-item {
     border-top: 1px solid var(--gh-color-gray);
   }
+
   .accordion-item:last-child {
     border-bottom: 1px solid var(--gh-color-gray);
   }
+
   .accordion-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
+    padding: 1.25rem 0;
     background: none;
     border: none;
-    padding: 1.25rem 0;
     cursor: pointer;
     font-family: var(--gh-font-secondary);
     font-weight: 700;
@@ -151,27 +219,35 @@
     color: #00000095;
     text-align: left;
   }
+
   .accordion-header[aria-expanded="true"] {
     color: var(--gh-color-green);
   }
+
   .accordion-header h3 {
     margin: 0;
     font-size: inherit;
     color: inherit;
   }
+
   .info-accordions .accordion-icon {
+    flex: 0 0 auto;
+    margin-right: 30px;
     font-size: 40px;
+    line-height: 1;
     font-weight: 100;
     color: inherit;
-    margin-right: 30px;
   }
+
   .accordion-content {
     display: none;
   }
+
   .accordion-content-inner {
     padding-bottom: 1.5rem;
   }
-  .accordion-content p{
+
+  .accordion-content p {
     margin-top: 0;
     margin-bottom: 1rem;
   }
