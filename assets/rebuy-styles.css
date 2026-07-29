@@ -207,7 +207,7 @@
 
 #rebuy-widget-300261 {
     max-width: 1140px;
-    padding: 20px;
+    padding: 20px 15px;
     margin: 0px;
 }
 
@@ -332,7 +332,32 @@
     font-weight: 700;
 }
 
-@media only screen and (max-width: 800px) {
+.evm-also-bought {
+    display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+    .rebuy-widget.widget-type-dynamic-bundle .rebuy-bundle__image {
+        width: 33.33%;
+    }
+
+    .rebuy-accordian-dropdown:after {
+        content: '\f0d7';
+        font-family: 'Font Awesome 5 Pro' !important;
+        font-size: 25px;
+        color: #fff;
+    }
+
+    #rebuy-widget-300261 .rebuy-bundle__actions-price-label,
+    #rebuy-widget-300261 .rebuy-bundle__actions-price-value .rebuy-money {
+        font-size: 16px;
+        line-height: 21px;
+    }
+
+    #rebuy-widget-300261 .rebuy-bundle__actions-price-value span.rebuy-money.compare-at {
+        margin-left: 10px;
+    }
+
     #rebuy-widget-300261 .rebuy-product-review {
         display: flex;
         grid-column: 2;
@@ -366,6 +391,7 @@
     #rebuy-widget-300261 .rebuy-bundle__actions-buttons {
         display: flex;
         flex-wrap: wrap;
+        width: 320px;
     }
 
     #rebuy-widget-300261 .rebuy-bundle__actions-buttons button:first-child {
@@ -406,13 +432,13 @@
     }
 
     #rebuy-widget-300261 .primary-title {
-        font-size: 22px;
-        margin: 0px 0px 12% 0px !important;
+        font-size: 16px;
+        margin: 0px 0px 6% 0px !important;
         font-family: var(--gh-font-primary);
     }
 
     #rebuy-widget-300261 .rebuy-bundle__actions-buttons span {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     #rebuy-widget-300261 .rebuy-product-block {}

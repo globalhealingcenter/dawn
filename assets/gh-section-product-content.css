@@ -559,13 +559,116 @@
 
 }
 
-@media (max-width: 749px) {
+@media (max-width: 767px) {
+    .evm-also-bought-products {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
     .ghd--hide-mobile {
         display: none;
     }
 
     .product__title h1 {
-        font-size: 3.5rem;
+        font-size: 30px;
+    }
+
+    .product-tagline-v2 {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .about-tab-title h3,
+    .tab_one_subtitle {
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .info-tabs__content p {
+        font-size: 16px;
+        line-height: 20px;
+        margin-top: 10px;
+    }
+
+    .product__info-tabs {
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    fieldset.product-form__input .form__label {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .product-form__input input[type=radio]+label .variant-option-pill {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    og-offer {
+        padding-top: 30px;
+    }
+
+    .product-form__buttons {
+        max-width: 100%;
+    }
+
+    .shopify-payment-button__more-options {
+        font-size: 14px;
+    }
+
+    #shopify-buyer-consent {
+        font-size: 10px;
+        line-height: 13px;
+    }
+
+    product-form.product-form {
+        margin-bottom: 0px !important;
+    }
+
+    .accordion-header h3.accordion-titles {
+        font-size: 16px;
+        line-height: 21px;
+    }
+
+    .info-accordions .accordion-icon {
+        font-size: 30px;
+    }
+
+    .citruslabs-study.mt2 span {
+        font-size: 16px;
+    }
+
+    .citruslabs-study.mt2 {
+        padding: 0px 10px;
+    }
+
+    .tab_one_content p {
+        margin-top: 10px;
+    }
+
+    .citruslabs-study.mt2 .h3 {
+        font-size: 30px;
+        line-height: 35px;
+        width: 100%;
+        display: block;
+    }
+
+    .citruslabs-study.mt2 .flex.items-center.gap-1.flex-wrap.mb1 {
+        gap: 5px;
+        margin: 10px 0px;
+    }
+
+    .citruslabs-study.mt2 .line-height-2 {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .citruslabs-study.mt2 a {
+        font-size: 16px;
+        line-height: 21px;
+        display: block;
+        margin-top: 10px;
     }
 
     h2.eyebrow,
