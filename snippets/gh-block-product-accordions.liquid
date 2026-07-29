@@ -163,6 +163,49 @@
                 </div>
               {% endif %}
 
+              {% if supplement_suggested_use.anchor.url != blank %}
+                <a
+                  href="{{ supplement_suggested_use.anchor.url }}"
+                  class="supplement-facts-anchor"
+                >
+                  {{ supplement_suggested_use.anchor.text }}
+                </a>
+              {% endif %}
+
+              {% assign included_program = supplement_accordion.included_in_program %}
+
+              {% if included_program.products != blank %}
+                <div class="supplement-facts-program">
+
+                  <h4 class="supplement-facts-heading">
+                    {{ included_program.title }}
+                  </h4>
+
+                  <div class="supplement-facts-program-products">
+
+                    {% for product in included_program.products %}
+                      <a
+                        href="{{ product.url }}"
+                        class="supplement-facts-program-product"
+                      >
+
+                        {% if product.image != blank %}
+                          <img
+                            src="{{ product.image }}"
+                            alt="{{ product.title }}"
+                            loading="lazy"
+                          >
+                        {% endif %}
+
+                        <span>{{ product.title }}</span>
+
+                      </a>
+                    {% endfor %}
+
+                  </div>
+
+                </div>
+              {% endif %}
 
               {% if certification_seals != blank %}
                 <div class="supplement-facts-certifications">
@@ -397,7 +440,6 @@
     font-size: 40px;
     line-height: 1;
     font-weight: 100;
-    color: inherit;
   }
 
   .accordion-content {
@@ -501,6 +543,36 @@
     margin-top: 22px;
   }
 
+  .supplement-facts-program {
+    margin-top: 25px;
+  }
+
+  .supplement-facts-program-products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      margin-top: 18px;
+  }
+
+  .supplement-facts-program-product {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: inherit;
+      text-decoration: none;
+  }
+
+  .supplement-facts-program-product img {
+      width: 34px;
+      height: 34px;
+      object-fit: contain;
+  }
+
+  .supplement-facts-program-product span {
+      font-size: 20px;
+      color: var(--gh-color-gray);
+  }
+
   .supplement-facts-certifications {
     display: flex;
     align-items: center;
@@ -531,7 +603,7 @@
   }
 
   .supplement-facts-clean-formulation .supplement-facts-copy {
-    line-height: 1.3;
+    line-height: 21px;
   }
 
   .supplement-facts-label {
@@ -551,9 +623,20 @@
     color: inherit;
   }
 
+  .supplement-facts-anchor {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--gh-color-green);
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
   @media screen and (max-width: 767px) {
-    .made-with-purpose-benefit-title {
-      font-size: 17px;
+    .made-with-purpose-benefit-title,
+    .supplement-facts-heading {
+      font-size: 16px;
     }
 
     .made-with-purpose-benefit p {
@@ -576,9 +659,15 @@
       font-size: 18px;
     }
 
-    .supplement-facts-copy {
-      font-size: 17px;
-      line-height: 1.3;
+    .supplement-facts-copy,
+    .supplement-facts-anchor,
+    .supplement-facts-program-product span {
+      font-size: 16px;
+      line-height: 21px;
+    }
+
+    .supplement-facts-program-products {
+      gap: 16px;
     }
 
     .supplement-facts-copy br + br {
@@ -602,7 +691,7 @@
 
     .supplement-facts-label {
       margin-top: 16px;
-      padding-top: 28px;
+      padding-top: 18px;
     }
   }
 </style>
