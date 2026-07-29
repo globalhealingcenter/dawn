@@ -16,51 +16,212 @@
       Accordion 1: Made With Purpose
       Replace the metafield below if required.
     {% endcomment %}
-    {% assign made_with_purpose = product.metafields.globalhealing.made_with_purpose %}
 
-    {% if made_with_purpose != blank %}
-      <div class="accordion-item">
-        <button
-          type="button"
-          class="accordion-header"
-          aria-expanded="false"
-        >
-          <h3 class="accordion-titles">Made With Purpose</h3>
-          <span class="accordion-icon" aria-hidden="true">+</span>
-        </button>
+    {% if has_product_config and config.made_with_purpose != blank %}
+      {% assign made_with_purpose = config.made_with_purpose %}
 
-        <div class="accordion-content">
-          <div class="accordion-content-inner">
-            {{ made_with_purpose | metafield_tag }}
+      {% if made_with_purpose.items != blank %}
+        <div class="accordion-item accordion-item--made-with-purpose">
+          <button
+            type="button"
+            class="accordion-header"
+            aria-expanded="false"
+            aria-controls="MadeWithPurpose-{{ block.id }}"
+          >
+            <h3 class="accordion-titles">Made With Purpose</h3>
+
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+
+          <div
+            id="MadeWithPurpose-{{ block.id }}"
+            class="accordion-content"
+          >
+            <div class="accordion-content-inner made-with-purpose-content">
+
+              <div class="made-with-purpose-benefits">
+                {% for item in made_with_purpose.items %}
+                  {% if item.title != blank or item.content != blank %}
+                    <div class="made-with-purpose-benefit">
+
+                      {% if item.title != blank %}
+                        <strong class="made-with-purpose-benefit-title">
+                          {{ item.title }}
+                        </strong>
+                      {% endif %}
+
+                      {% if item.content != blank %}
+                        <p>{{ item.content }}</p>
+                      {% endif %}
+
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              {% if made_with_purpose.manufacturing != blank %}
+                {% assign manufacturing = made_with_purpose.manufacturing %}
+
+                {% if manufacturing.image != blank or manufacturing.content != blank %}
+                  <div class="made-with-purpose-manufacturing">
+
+                    {% if manufacturing.image != blank %}
+                      <div class="made-with-purpose-manufacturing-image">
+                        <img
+                          src="{{ manufacturing.image }}"
+                          alt="{{ manufacturing.image_alt | default: 'Global Healing' | escape }}"
+                          width="130"
+                          height="130"
+                          loading="lazy"
+                        >
+                      </div>
+                    {% endif %}
+
+                    {% if manufacturing.content != blank %}
+                      <div class="made-with-purpose-manufacturing-content">
+                        <p>{{ manufacturing.content }}</p>
+                      </div>
+                    {% endif %}
+
+                  </div>
+                {% endif %}
+              {% endif %}
+
+            </div>
           </div>
         </div>
-      </div>
+      {% endif %}
     {% endif %}
 
 
     {% comment %}
-      Accordion 2: Supplement Facts
-      Replace the metafield below if required.
+      Supplement Facts Accordion
     {% endcomment %}
-    {% assign supplement_facts = product.metafields.globalhealing.suggested_use %}
 
-    {% if supplement_facts != blank %}
-      <div class="accordion-item">
-        <button
-          type="button"
-          class="accordion-header"
-          aria-expanded="false"
-        >
-          <h3 class="accordion-titles">Supplement Facts</h3>
-          <span class="accordion-icon" aria-hidden="true">+</span>
-        </button>
+    {% assign supplement_accordion = blank %}
 
-        <div class="accordion-content">
-          <div class="accordion-content-inner">
-            {{ supplement_facts | metafield_tag }}
+    {% if has_product_config and config.supplement_facts_accordion != blank %}
+      {% assign supplement_accordion = config.supplement_facts_accordion %}
+    {% endif %}
+
+    {% if supplement_accordion != blank %}
+      {% assign supplement_suggested_use = supplement_accordion.suggested_use %}
+      {% assign certification_seals = supplement_accordion.certification_seals %}
+      {% assign clean_formulation = supplement_accordion.clean_formulation %}
+      {% assign supplement_label = supplement_accordion.label %}
+
+      {% assign has_supplement_content = false %}
+
+      {% if supplement_suggested_use.content != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if certification_seals != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if clean_formulation.content != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if supplement_label.image != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if has_supplement_content %}
+        <div class="accordion-item accordion-item--supplement-facts">
+          <button
+            type="button"
+            class="accordion-header"
+            aria-expanded="false"
+            aria-controls="SupplementFacts-{{ block.id }}"
+          >
+            <h3 class="accordion-titles">Supplement Facts</h3>
+
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+
+          <div
+            id="SupplementFacts-{{ block.id }}"
+            class="accordion-content"
+          >
+            <div class="accordion-content-inner supplement-facts-content">
+
+              {% if supplement_suggested_use.content != blank %}
+                <div class="supplement-facts-section supplement-facts-suggested-use">
+
+                  <h4 class="supplement-facts-heading">
+                    {{ supplement_suggested_use.title | default: 'Suggested Use' }}
+                  </h4>
+
+                   <div class="supplement-facts-copy">
+                    {{ supplement_suggested_use.content
+                      | escape
+                      | newline_to_br
+                    }}
+                  </div>
+                </div>
+              {% endif %}
+
+
+              {% if certification_seals != blank %}
+                <div class="supplement-facts-certifications">
+                  {% for seal in certification_seals %}
+                    {% if seal.image != blank %}
+                      <div
+                        class="supplement-facts-certification"
+                        data-certification="{{ seal.type | handle }}"
+                      >
+                        <img
+                          src="{{ seal.image }}"
+                          alt="{{ seal.alt | default: seal.title | escape }}"
+                          loading="lazy"
+                          width="70"
+                          height="70"
+                        >
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+
+              {% if clean_formulation.content != blank %}
+                <div class="supplement-facts-section supplement-facts-clean-formulation">
+
+                  <h4 class="supplement-facts-heading">
+                    {{ clean_formulation.title | default: 'Clean Formulation' }}
+                  </h4>
+
+                  <div class="supplement-facts-copy supplement-facts-clean-copy">
+                    {% assign clean_content = clean_formulation.content | escape %}
+
+                    {{ clean_content
+                      | replace_first: 'Made without:', '<strong>Made without:</strong>'
+                      | newline_to_br
+                    }}
+                  </div>
+
+                </div>
+              {% endif %}
+
+
+              {% if supplement_label.image != blank %}
+                <div class="supplement-facts-label">
+                  <img
+                    src="{{ supplement_label.image }}"
+                    alt="{{ supplement_label.alt | default: 'Supplement Facts' | escape }}"
+                    loading="lazy"
+                    width="1200"
+                    height="1600"
+                  >
+                </div>
+              {% endif %}
+
+            </div>
           </div>
         </div>
-      </div>
+      {% endif %}
     {% endif %}
 
   </div>
@@ -250,5 +411,198 @@
   .accordion-content p {
     margin-top: 0;
     margin-bottom: 1rem;
+  }
+
+  /* Made With Purpose Accordion Content */
+  .made-with-purpose-content {
+    padding-bottom: 60px;
+  }
+
+  .made-with-purpose-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0px 10px;
+  }
+
+  .made-with-purpose-benefit {
+    margin: 0;
+  }
+
+  .made-with-purpose-benefit-title {
+    display: block;
+    margin: 0 0 2px;
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    color: var(--gh-color-green);
+  }
+
+  .made-with-purpose-benefit p {
+    margin: 0;
+    font-size: 20px;
+    line-height: 25px;
+    color: var(--gh-color-gray);
+  }
+
+  .made-with-purpose-manufacturing {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 26px;
+    padding: 20px 10px 0px;
+    border-top: 1px solid var(--gh-color-gray);
+  }
+
+  .made-with-purpose-manufacturing-image img {
+    display: block;
+    width: 110px;
+    min-width: 110px;
+    height: 110px;
+  }
+
+  .made-with-purpose-manufacturing-content p {
+    margin: 0;
+    font-family: var(--gh-font-primary);
+    font-size: 18px;
+    line-height: 25px;
+    font-style: italic;
+    color: var(--gh-color-gray);
+  }
+
+  /* Supplement Facts Content */
+  .supplement-facts-content {
+    padding: 0px 10px 0px;
+  }
+
+  .supplement-facts-section {
+    margin: 0;
+  }
+
+  .supplement-facts-heading {
+    margin: 0 0 2px;
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    line-height: 34px;
+    font-weight: 700;
+    color: var(--gh-color-green);
+  }
+
+  .supplement-facts-copy {
+    font-size: 20px;
+    line-height: 25px;
+    color: var(--gh-color-gray);
+  }
+
+  .supplement-facts-copy br + br {
+    display: block;
+    content: "";
+    margin-top: 22px;
+  }
+
+  .supplement-facts-certifications {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 34px;
+    padding-top: 30px;
+    border-top: 1px solid var(--gh-color-gray);
+  }
+
+  .supplement-facts-certification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .supplement-facts-certification img {
+    display: block;
+    width: auto;
+    max-width: 72px;
+    max-height: 60px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .supplement-facts-clean-formulation {
+    margin-top: 28px;
+  }
+
+  .supplement-facts-clean-formulation .supplement-facts-copy {
+    line-height: 1.3;
+  }
+
+  .supplement-facts-label {
+    margin: 18px 0px 40px;
+    padding-top: 32px;
+  }
+
+  .supplement-facts-label img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .supplement-facts-clean-copy strong {
+    font-weight: 700;
+    color: inherit;
+  }
+
+  @media screen and (max-width: 767px) {
+    .made-with-purpose-benefit-title {
+      font-size: 17px;
+    }
+
+    .made-with-purpose-benefit p {
+      font-size: 16px;
+    }
+
+    .made-with-purpose-manufacturing {
+      gap: 15px;
+    }
+
+    .made-with-purpose-manufacturing-image img {
+      max-width: 85px;
+    }
+
+    .made-with-purpose-manufacturing-content p {
+      font-size: 16px;
+    }
+
+    .supplement-facts-heading {
+      font-size: 18px;
+    }
+
+    .supplement-facts-copy {
+      font-size: 17px;
+      line-height: 1.3;
+    }
+
+    .supplement-facts-copy br + br {
+      margin-top: 18px;
+    }
+
+    .supplement-facts-certifications {
+      gap: 14px;
+      margin-top: 26px;
+      padding-top: 25px;
+    }
+
+    .supplement-facts-certification img {
+      max-width: 60px;
+      max-height: 52px;
+    }
+
+    .supplement-facts-clean-formulation {
+      margin-top: 25px;
+    }
+
+    .supplement-facts-label {
+      margin-top: 16px;
+      padding-top: 28px;
+    }
   }
 </style>
