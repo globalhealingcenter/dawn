@@ -1,0 +1,101 @@
+{% assign has_product_config = false %}
+{% if product and product.metafields.gh_product.data %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.gh_product.data.value %}
+{% endif %}
+
+
+{% assign tab_one_title = "About" %}
+{% if block.settings.tab_1_title != blank %}
+  {% assign tab_one_title = block.settings.tab_1_title %}
+{% endif %}
+{% if config.tab_1_title != blank %}
+  {% assign tab_one_title = config.tab_1_title %}
+{% endif %}
+
+<!-- manual title 1: {{ tab_title_1 }} -->
+{% if manual_titles %}
+  {% assign tab_one_title = 'About' %}
+{% endif %}
+
+<div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+  <div class="info-tabs__links">
+    <div class="about-tab-title active"><h3>{{ tab_one_title }}</h3> <span class="tab_one_subtitle">{{ product.metafields.globalhealing.bottles_sold }}</span></div>
+  </div>
+  
+  <div class="info-tabs__content">
+    <div data-tab="1" class="active" style="display: block;">
+      {{ product.description }}
+      {% if has_product_config %}
+        {% if config.instructions contains 'https' %}
+          <p><a href='{{ config.instructions }}'>View Instructions</a></p>
+        {% endif %}
+
+        
+
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .product__info-tabs {
+    padding-bottom: 1rem;
+  }
+  .product__info-tabs li p {
+    margin: 0;
+    display: inline;
+  }
+  .info-tabs__links{
+    display: flex;
+    margin-bottom: 1.5rem;
+    font-family: var(--gh-font-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 30px;
+  }
+  .about-tab-title {
+    text-decoration: none;
+    color: #00000095;
+    flex: 1;
+    margin-bottom: -3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid transparent;
+    display: flex;
+    gap: 20px;
+  }
+  .about-tab-title.active {
+    color: var(--gh-color-gray);
+    border-bottom-color: var(--gh-color-gray);
+  }
+  .tab_one_subtitle {
+    font-size: 20px;
+    line-height: 27px;
+    color: var(--gh-color-gold);
+    text-transform: none;
+    font-weight: 400;
+  }
+  .about-tab-title h3 {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 700;
+    color: var(--gh-color-green);
+    font-family: var(--gh-font-secondary);
+    margin: 0;
+  }
+  .info-tabs__content [data-tab="1"] > span:first-child{
+    color: var(--gh-color-green);
+    font-weight: bold;
+  }
+  .info-tabs__content [data-tab="1"] p:nth-child(2){
+    margin-top: 0;
+  }
+  .info-tabs__content p{
+    margin-top: 20px;
+    margin-bottom: 0;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--gh-color-gray);
+    font-family: var(--gh-font-secondary);
+  }
+</style>

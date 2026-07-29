@@ -263,6 +263,8 @@
               {%- endif -%}
             {%- when 'info_tabs' -%}
               {% render 'gh-block-product-tabs', block: block, product: product %}
+            {%- when 'info_tabs_v2' -%}
+              {% render 'gh-block-product-tabs-v2', block: block, product: product %}
             {%- when 'info_accordions' -%}
               {% render 'gh-block-product-accordions', block: block, product: product %}
             {%- when 'sku' -%}
@@ -843,6 +845,19 @@
   "blocks": [
     {
       "type": "@app"
+    },
+    {
+      "type": "info_tabs_v2",
+      "name": "Tabs - v2",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_1_title",
+          "default": "About",
+          "label": "Tab 1 Title"
+        }
+      ]
     },
     {
       "type": "info_tabs",

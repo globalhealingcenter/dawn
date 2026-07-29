@@ -5,39 +5,105 @@
 {% endif %}
 
 
-{% assign tab_one_title = "About" %}
-{% if block.settings.tab_1_title != blank %}
-  {% assign tab_one_title = block.settings.tab_1_title %}
-{% endif %}
-{% if config.tab_1_title != blank %}
-  {% assign tab_one_title = config.tab_1_title %}
-{% endif %}
+{% assign tab_one_title = config.tab_1_title | default: block.settings.tab_1_title %}
+{% assign tab_two_title = config.tab_2_title | default: block.settings.tab_2_title %}
+{% assign tab_three_title = config.tab_3_title | default: block.settings.tab_3_title %}
 
 <!-- manual title 1: {{ tab_title_1 }} -->
 {% if manual_titles %}
   {% assign tab_one_title = 'About' %}
+  {% assign tab_two_title = "Who It's For" %}
+  {% assign tab_three_title = 'Suggested Use' %}
 {% endif %}
 
 <div class="product__info-tabs" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
   <div class="info-tabs__links">
-    <div class="about-tab-title active"><h3>{{ tab_one_title }}</h3> <span class="tab_one_subtitle">{{ product.metafields.globalhealing.bottles_sold }}</span></div>
+    <a href="#" data-tab="1" class="active"><h3 class="h-inherit">{{ tab_one_title }}</h3></a>
+    {% if product.metafields.globalhealing.who_its_for %}
+    <a href="#" data-tab="2"><h3 class="h-inherit">{{ tab_two_title }}</h3></a>
+    {% endif %}
+    {% if product.metafields.globalhealing.suggested_use %}
+    <a href="#" data-tab="3"><h3 class="h-inherit">{{ tab_three_title }}</h3></a>
+    {% endif %}
   </div>
-  
   <div class="info-tabs__content">
-    <div data-tab="1" class="active" style="display: block;">
+    <div data-tab="1" class="active">
+      <span>{{ product.metafields.globalhealing.product_tagline }}</span>
       {{ product.description }}
       {% if has_product_config %}
         {% if config.instructions contains 'https' %}
           <p><a href='{{ config.instructions }}'>View Instructions</a></p>
         {% endif %}
 
-        
+        {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
+        {% assign sf_content = sf_content | strip %}
+        {% assign button_text = 'Supplement Facts' %}
+        {% if product.type == 'Facial Cleansers' or product.type == 'Skin Care' %} {% assign button_text = 'View Label' %}{% endif %}
+        <!-- {{ product.type | json }} -->
+        {% unless sf_content == ''  %}
+          {% if config.supplement_facts_link_title != '' %} {% assign button_text = config.supplement_facts_link_title %} {% endif %}
+          {% render 'gh-element-dialog', button_class: 'button--text-link text-bold', button_text: button_text, id: 'full-ingredients-header', content: sf_content %}
+        {% endunless %}
 
       {% endif %}
     </div>
+    <div data-tab="2">{{ product.metafields.globalhealing.who_its_for }}</div>
+    <div data-tab="3">{{ product.metafields.globalhealing.suggested_use }}</div>
   </div>
-</div>
 
+{% comment %} FOR OXY-POWDER STUDY {% endcomment %}
+{% assign has_product_config = false %}
+
+{% if product and product.metafields.gh_product.data %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.gh_product.data.value %}
+{% endif %}
+
+{% assign has_study = false %}
+{% if has_product_config %}
+    {% for block in config.blocks %} {% if block.type == 'study' %} {% assign has_study = true %} {% endif %} {% endfor %}
+{% endif %}
+
+{% if has_study  %}
+  <div class="citruslabs-study mt2">
+    <span class="bold block gh-font-secondary">Citruslabs Study: Real People, Real Results</span>
+    <div class="flex justify-between">
+      <div class="flex items-center gap-1 flex-wrap mb1">
+        <div class="h3 color-gold">95%</div>
+        <div class="gh-font-secondary line-height-2">constipation<br> relief</div>
+      </div>
+      <div class="flex items-center gap-1 flex-wrap mb1">
+        <div class="h3 color-gold">88%</div>
+        <div class="gh-font-secondary line-height-2">bloating<br> relief</div>
+      </div>
+      <div class="flex items-center gap-1 flex-wrap mb1">
+        <div class="h3 color-gold">88%</div>
+        <div class="gh-font-secondary line-height-2">improved<br> digestion</div>
+      </div>
+    </div>
+    <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Download the Study</a>
+  </div>
+{% endif %}
+
+
+</div>
+{% unless manual_titles %}
+<script>
+  let all_tabs = document.querySelectorAll('.info-tabs__content > div');
+  let all_links = document.querySelectorAll('.info-tabs__links a');
+  
+  all_links.forEach( t => {
+    t.addEventListener('click', e => {
+      e.preventDefault();
+      all_links.forEach( c => c.classList.remove('active') );
+      all_tabs.forEach( c => c.classList.remove('active') );
+      let target = document.querySelector(`.info-tabs__content [data-tab="${t.getAttribute('data-tab')}"]`);
+      target.classList.add('active');
+      t.classList.add('active');
+    })
+  })
+</script>
+{% endunless %}
 <style>
   .product__info-tabs {
     padding-bottom: 1rem;
@@ -47,41 +113,27 @@
     display: inline;
   }
   .info-tabs__links{
+    border-bottom: 2px solid #00000040;
     display: flex;
     margin-bottom: 1.5rem;
     font-family: var(--gh-font-secondary);
     font-weight: 700;
     text-transform: uppercase;
-    margin-top: 30px;
   }
-  .about-tab-title {
+  .info-tabs__links a {
     text-decoration: none;
     color: #00000095;
     flex: 1;
     margin-bottom: -3px;
     padding-bottom: 3px;
-    border-bottom: 1px solid transparent;
-    display: flex;
-    gap: 20px;
+    border-bottom: 4px solid transparent;
   }
-  .about-tab-title.active {
-    color: var(--gh-color-gray);
-    border-bottom-color: var(--gh-color-gray);
+  .info-tabs__links a:not(:first-child) {
+    padding-left: 9px;
   }
-  .tab_one_subtitle {
-    font-size: 20px;
-    line-height: 27px;
-    color: var(--gh-color-gold);
-    text-transform: none;
-    font-weight: 400;
-  }
-  .about-tab-title h3 {
-    font-size: 20px;
-    line-height: 27px;
-    font-weight: 700;
+  .info-tabs__links a.active {
     color: var(--gh-color-green);
-    font-family: var(--gh-font-secondary);
-    margin: 0;
+    border-bottom-color: var(--gh-color-green);
   }
   .info-tabs__content [data-tab="1"] > span:first-child{
     color: var(--gh-color-green);
@@ -90,12 +142,31 @@
   .info-tabs__content [data-tab="1"] p:nth-child(2){
     margin-top: 0;
   }
+  .info-tabs__content > div{
+    display: none;
+  }
+  .info-tabs__content > div.active{
+    display: block;
+  }
   .info-tabs__content p{
-    margin-top: 20px;
-    margin-bottom: 0;
-    font-size: 20px;
-    line-height: 24px;
-    color: var(--gh-color-gray);
-    font-family: var(--gh-font-secondary);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 749px){
+    .info-tabs__links a{
+      text-align: center;
+      white-space: nowrap;
+    }
+    .info-tabs__links a:nth-child(2){
+      flex-grow: 2;
+    }
+  }
+  @media (min-width: 750px) and (max-width: 1000px){
+    .info-tabs__links{
+      justify-content: space-between;
+    }
+    .info-tabs__links a{
+      flex: inherit;
+    }
   }
 </style>
