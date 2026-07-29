@@ -31,8 +31,8 @@
             "product": "{{ product }}"
           }
         },
-        "e142f8f9-de0e-4693-8e61-18c1d705b427": {
-          "type": "info_tabs",
+        "info_tabs_v2_THAfCd": {
+          "type": "info_tabs_v2",
           "settings": {
             "tab_1_title": "About"
           }
@@ -157,7 +157,7 @@
       "block_order": [
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
-        "e142f8f9-de0e-4693-8e61-18c1d705b427",
+        "info_tabs_v2_THAfCd",
         "variant_picker",
         "yotpo_loyalty_rewards_product_points_module_app_block_DwxWmP",
         "price",
