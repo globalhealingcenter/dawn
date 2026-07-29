@@ -34,9 +34,7 @@
         "e142f8f9-de0e-4693-8e61-18c1d705b427": {
           "type": "info_tabs",
           "settings": {
-            "tab_1_title": "About",
-            "tab_2_title": "Who It's For",
-            "tab_3_title": "Suggested Use"
+            "tab_1_title": "About"
           }
         },
         "variant_picker": {
@@ -86,6 +84,10 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "info_accordions_qW9dP4": {
+          "type": "info_accordions",
+          "settings": {}
         },
         "gh_out_of_stock_form_dAeEPR": {
           "type": "gh_out_of_stock_form",
@@ -164,6 +166,7 @@
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "custom_liquid_TxJtfK",
         "buy_buttons",
+        "info_accordions_qW9dP4",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
         "abra_promotions_banner_f4iJ7z",
