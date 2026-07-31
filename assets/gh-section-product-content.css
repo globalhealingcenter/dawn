@@ -24,6 +24,7 @@
 }
 
 .info-tabs__links {
+    border-bottom: 2px solid #00000040;
     display: flex;
     margin-bottom: 1.5rem;
     font-family: var(--gh-font-secondary);
@@ -64,6 +65,11 @@
 
 .info-tabs__content>div.active {
     display: block;
+}
+
+.info-tabs__content p {
+    margin-top: 0;
+    margin-bottom: 1rem;
 }
 
 @media (max-width: 749px) {
@@ -559,116 +565,13 @@
 
 }
 
-@media (max-width: 767px) {
-    .evm-also-bought-products {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-
+@media (max-width: 749px) {
     .ghd--hide-mobile {
         display: none;
     }
 
     .product__title h1 {
         font-size: 30px;
-    }
-
-    .product-tagline-v2 {
-        font-size: 16px;
-        line-height: 26px;
-    }
-
-    .about-tab-title h3,
-    .tab_one_subtitle {
-        font-size: 16px;
-        line-height: 26px;
-    }
-
-    .info-tabs__content p {
-        font-size: 16px;
-        line-height: 20px;
-        margin-top: 10px;
-    }
-
-    .product__info-tabs {
-        padding-bottom: 0;
-        margin-bottom: 0;
-    }
-
-    fieldset.product-form__input .form__label {
-        font-size: 12px;
-        line-height: 16px;
-    }
-
-    .product-form__input input[type=radio]+label .variant-option-pill {
-        font-size: 14px;
-        line-height: 16px;
-    }
-
-    og-offer {
-        padding-top: 30px;
-    }
-
-    .product-form__buttons {
-        max-width: 100%;
-    }
-
-    .shopify-payment-button__more-options {
-        font-size: 14px;
-    }
-
-    #shopify-buyer-consent {
-        font-size: 10px;
-        line-height: 13px;
-    }
-
-    product-form.product-form {
-        margin-bottom: 0px !important;
-    }
-
-    .accordion-header h3.accordion-titles {
-        font-size: 16px;
-        line-height: 21px;
-    }
-
-    .info-accordions .accordion-icon {
-        font-size: 30px;
-    }
-
-    .citruslabs-study.mt2 span {
-        font-size: 16px;
-    }
-
-    .citruslabs-study.mt2 {
-        padding: 0px;
-    }
-
-    .tab_one_content p {
-        margin-top: 10px;
-    }
-
-    .citruslabs-study.mt2 .h3 {
-        font-size: 30px;
-        line-height: 35px;
-        width: 100%;
-        display: block;
-    }
-
-    .citruslabs-study.mt2 .flex.items-center.gap-1.flex-wrap.mb1 {
-        gap: 5px;
-        margin: 10px 0px;
-    }
-
-    .citruslabs-study.mt2 .line-height-2 {
-        font-size: 14px;
-        line-height: 16px;
-    }
-
-    .citruslabs-study.mt2 a {
-        font-size: 16px;
-        line-height: 21px;
-        display: block;
-        margin-top: 10px;
     }
 
     h2.eyebrow,
@@ -868,19 +771,96 @@
 .ghd--block--study {
     padding-top: 7rem;
     padding-bottom: 7rem;
-    box-shadow: 0 -8px 8px #00000020;
+    position: relative;
+}
+
+.ghd--block--study-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ghd--block--study-content {
+    z-index: 1;
+    position: relative;
+    background-color: rgb(255 255 255 / 70%);
+    border-radius: 6px;
+    padding: 40px 90px;
+}
+
+.ghd--block--study-content h2.eyebrow {
+    font-size: 52px;
+}
+
+.ghd--block--study-content i {
+    font-weight: 400;
+}
+
+.ghd-study--results--stats img {
+    width: 120px;
+    height: 120px;
+}
+
+.gh--stats-content {
+    position: relative;
+    padding: 8px 0px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-top: 10px;
+}
+
+.gh--stats-content:before,
+.gh--stats-content:after {
+    content: '';
+    width: 80%;
+    height: 0.5px;
+    background-color: var(--gh-color-gray);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gh--stats-content:before {
+    top: 0
+}
+
+.gh--stats-content:after {
+    bottom: 0
 }
 
 .ghd-study--results {
-    --gap-padding: 65px;
+    --gap-padding: 25px;
+}
+
+.gh--study-content-right p {
+    font-size: 21px;
+    line-height: 31px;
+}
+
+.gh--study-content-right {
+    padding-left: 35px;
+}
+
+.download-the-study {
+    font-size: 21px;
+    background-color: #fff;
+    padding: 10px 25px;
+    border-radius: 6px;
+    line-height: 26px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .ghd-study--results>div:first-child {
     padding-right: var(--gap-padding);
-}
-
-.ghd-study--results>div:last-child {
-    padding-left: var(--gap-padding);
 }
 
 .ghd-study--results--stats .flex {
@@ -900,5 +880,82 @@
 
     .ghd-study--results--stats {
         padding-bottom: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .ghd--block--study-content h2.eyebrow br {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .ghd--block--study {
+        padding: 40px 30px;
+    }
+
+    .ghd--block--study .page-width {
+        padding: 0;
+    }
+
+    .ghd--block--study-content h2.eyebrow span {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .ghd--block--study-content h2.eyebrow {
+        font-size: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .ghd--block--study-content {
+        padding: 30px 20px;
+    }
+
+    .ghd-study--results--stats img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .gh--stats-content {
+        font-size: 11px;
+        line-height: 15px;
+        padding: 5px 0;
+    }
+
+    .gh--study-content-right {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .gh--study-content-right p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .gh--study-content-right img {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+
+    .download-the-study {
+        font-size: 15px;
+        gap: 10px;
+    }
+
+    .download-the-study img {
+        min-width: unset;
+        height: auto;
+        width: 18px !important;
+        min-width: unset;
+    }
+
+    .gh--study-content-right .flex.items-center.gap-2 {
+        gap: 10px;
+        justify-content: center;
+        padding-top: 10px;
     }
 }
