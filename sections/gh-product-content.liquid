@@ -63,7 +63,6 @@
               >
                 {% for review in block.items %}
                   {% assign review_product = review.product_name %}
-                  {% assign review_url = review.product_url %}
                   {% assign review_text = review.review_text %}
                   {% assign review_author = review.author %}
                   {% assign review_verified_text = review.verified_buyer_text | default: 'Verified Buyer' %}
@@ -102,13 +101,7 @@
 
                       {% if review_product != blank %}
                         <h3 class="ghr-reviews__product font-proxima">
-                          {% if review_url != blank %}
-                            <a href="{{ review_url }}">
-                              {{ review_product }}
-                            </a>
-                          {% else %}
                             {{ review_product }}
-                          {% endif %}
                         </h3>
                       {% endif %}
 
