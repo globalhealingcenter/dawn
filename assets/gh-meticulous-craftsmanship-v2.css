@@ -1,0 +1,316 @@
+/*
+ * Meticulous Craftsmanship V2 Carousel
+ * Uses isolated ghmc-* classes.
+ */
+
+.ghmc-craftsmanship {
+    padding: 8rem 0;
+    background: #fff;
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+.ghmc-craftsmanship__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6rem;
+}
+
+.ghmc-craftsmanship__header {
+    width: 100%;
+    text-align: center;
+}
+
+.ghmc-craftsmanship__label {
+    margin: 0 0 0.8rem;
+    color: var(--gh-color-gray);
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghmc-craftsmanship__heading {
+    margin: 0;
+    color: var(--gh-color-green);
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.ghmc-craftsmanship__heading strong {
+    font-weight: 700;
+    font-style: normal;
+}
+
+.ghmc-craftsmanship__carousel {
+    position: relative;
+    width: 100%;
+    padding-bottom: 8rem;
+    overflow: visible;
+}
+
+.ghmc-craftsmanship__track {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    width: max-content;
+    padding: 2.5rem 0;
+    cursor: grab;
+    touch-action: pan-y;
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.ghmc-craftsmanship__track.is-dragging {
+    cursor: grabbing;
+}
+
+.ghmc-craftsmanship__card {
+    display: flex;
+    flex: 0 0 calc((100vw - 3 * 3rem) / 3.25);
+    flex-direction: column;
+    min-width: calc((100vw - 3 * 3rem) / 3.25);
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid rgba(34, 71, 45, 0.08);
+    border-radius: 7px;
+    background: #f9f2e8;
+    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04); */
+    transform: scaleY(1);
+    transform-origin: center;
+    transition:
+        transform 0.35s ease
+}
+
+.ghmc-craftsmanship__card.ghmc-card-active {
+    z-index: 2;
+    /* box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12); */
+    transform: scaleY(1.14);
+}
+
+/*
+ * Disable card animation during invisible clone reset.
+ */
+.ghmc-craftsmanship.ghmc-craftsmanship--resetting .ghmc-craftsmanship__card {
+    transition: none !important;
+}
+
+.ghmc-craftsmanship__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.65 / 1;
+    overflow: hidden;
+    background: #173526;
+}
+
+.ghmc-craftsmanship__image,
+.ghmc-craftsmanship__image-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ghmc-craftsmanship__image {
+    object-fit: cover;
+}
+
+.ghmc-craftsmanship__image-placeholder {
+    background:
+        radial-gradient(circle at 25% 35%,
+            rgba(197, 119, 38, 0.85),
+            transparent 25%),
+        radial-gradient(circle at 67% 33%,
+            rgba(133, 208, 190, 0.75),
+            transparent 27%),
+        radial-gradient(circle at 55% 75%,
+            rgba(219, 143, 49, 0.7),
+            transparent 26%),
+        linear-gradient(135deg, #101d19, #284f40);
+}
+
+.ghmc-craftsmanship__content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 19rem;
+    padding: 2.3rem 3.5rem 2.8rem;
+}
+
+.ghmc-craftsmanship__eyebrow {
+    margin: 0;
+    color: var(--gh-color-green);
+    font-size: 13px;
+    line-height: 34px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghmc-craftsmanship__card-title {
+    margin: 0 0 15px;
+    color: var(--gh-color-green);
+    font-size: 21.87px;
+    line-height: 29.74px;
+    font-weight: 700;
+    display: block;
+}
+
+.ghmc-craftsmanship__description {
+    margin: 0;
+    color: var(--gh-color-gray);
+    font-size: 17.49px;
+    line-height: 27px;
+    font-weight: 400;
+}
+
+.ghmc-craftsmanship__progress {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 0 2rem;
+    box-sizing: border-box;
+    transform: translateX(-50%);
+}
+
+.ghmc-craftsmanship__progress-track {
+    width: 100%;
+    max-width: 550px;
+    height: 4px;
+    overflow: hidden;
+    border-radius: 2px;
+    background: rgba(34, 71, 45, 0.2);
+}
+
+.ghmc-craftsmanship__progress-fill {
+    display: block !important;
+    width: 0;
+    height: 100%;
+    border-radius: 2px;
+    background: var(--gh-color-green, #22472d);
+    transition: width 0.3s ease;
+}
+
+.ghmc-craftsmanship__learn-more {
+    font-size: 21px;
+    line-height: 26px;
+    color: var(--gh-color-green);
+}
+
+.ghmc-craftsmanship__learn-more:hover,
+.ghmc-craftsmanship__learn-more:focus-visible {
+    color: #10331d;
+}
+
+@media screen and (max-width: 767px) {
+    .ghmc-craftsmanship {
+        padding: 3rem 0 0;
+    }
+
+    .ghmc-craftsmanship__inner {
+        gap: 3rem;
+    }
+
+    .ghmc-craftsmanship__header {
+        padding: 0 30px;
+        box-sizing: border-box;
+    }
+
+    .ghmc-craftsmanship__label {
+        margin-bottom: 2px;
+        font-size: 16px;
+        line-height: 27px;
+    }
+
+    .ghmc-craftsmanship__heading {
+        font-size: 30px;
+        line-height: 40px;
+        display: inline;
+    }
+
+    .ghmc-craftsmanship__carousel {
+        padding-bottom: 4rem;
+    }
+
+    .ghmc-craftsmanship__track {
+        gap: 1.5rem;
+        padding: 0;
+        align-items: stretch;
+    }
+
+    .ghmc-craftsmanship__card {
+        flex: 0 0 calc((100vw - 1.5rem) / 1.35);
+        min-width: calc((100vw - 1.5rem) / 1.35);
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ghmc-craftsmanship__track {
+        align-items: stretch;
+    }
+
+    .ghmc-craftsmanship__card {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .ghmc-craftsmanship__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ghmc-craftsmanship__description {
+        flex: 1;
+    }
+
+    .ghmc-craftsmanship__card.ghmc-card-active {
+        transform: scaleY(1);
+    }
+
+    .ghmc-craftsmanship__content {
+        min-height: 165px;
+        padding: 18px 20px 22px;
+    }
+
+    .ghmc-craftsmanship__eyebrow {
+        margin-bottom: 2px;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .ghmc-craftsmanship__card-title {
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .ghmc-craftsmanship__description {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .ghmc-craftsmanship__progress {
+        padding: 0;
+        width: 90%;
+    }
+
+    .ghmc-craftsmanship__progress-track {
+        max-width: 70%;
+    }
+
+    .ghmc-craftsmanship__learn-more {
+        margin: -1rem 0 4rem;
+        font-size: 14px;
+    }
+}

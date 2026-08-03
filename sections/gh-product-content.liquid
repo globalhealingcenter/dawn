@@ -16,6 +16,10 @@
 {{ 'gh-product-reviews.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'gh-product-reviews.js' | asset_url }}" defer="defer"></script>
 
+{% comment %}Meticulous Craftsmanship Block{% endcomment %}
+{{ 'gh-meticulous-craftsmanship-v2.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gh-meticulous-craftsmanship-v2.js' | asset_url }}" defer="defer"></script>
+
 {% assign has_product_config = false %}
 
 {% if product and product.metafields.gh_product.data %}
@@ -226,6 +230,225 @@
         </div>
 
       </div>
+
+      {% when 'meticulous-craftsmanship-v2' %}
+
+        {% assign ghmc_product_card = block.product_specific_card %}
+        {% assign ghmc_selected_cards = block.selected_cards %}
+        {% assign ghmc_card_count = 0 %}
+
+        {% if ghmc_product_card.enabled == true %}
+          {% if ghmc_product_card.title != blank or ghmc_product_card.description != blank %}
+            {% assign ghmc_card_count = ghmc_card_count | plus: 1 %}
+          {% endif %}
+        {% endif %}
+
+        {% if ghmc_selected_cards %}
+          {% assign ghmc_card_count = ghmc_card_count | plus: ghmc_selected_cards.size %}
+        {% endif %}
+
+        {% if ghmc_card_count > 0 %}
+          <section
+            class="ghmc-craftsmanship"
+            data-ghmc-carousel
+          >
+            <div class="ghmc-craftsmanship__inner">
+
+              <div class="ghmc-craftsmanship__header">
+                <p class="ghmc-craftsmanship__label font-proxima">
+                  Meticulous Craftsmanship
+                </p>
+
+                <h2 class="ghmc-craftsmanship__heading font-miller">
+                  {{ block.headline | default: 'Unique <strong>Headline Here</strong>' }}
+                </h2>
+              </div>
+
+              <div class="ghmc-craftsmanship__carousel">
+
+                <div
+                  class="ghmc-craftsmanship__track"
+                  data-ghmc-track
+                  role="list"
+                  aria-label="Meticulous craftsmanship cards"
+                  tabindex="0"
+                >
+
+                  {% if ghmc_product_card.enabled == true %}
+                    {% if ghmc_product_card.title != blank or ghmc_product_card.description != blank %}
+                      <article
+                        class="ghmc-craftsmanship__card"
+                        data-ghmc-card
+                        role="listitem"
+                      >
+                        <div class="ghmc-craftsmanship__media">
+                          <img
+                            class="ghmc-craftsmanship__image"
+                            src="{% if ghmc_product_card.image != blank %}{{ ghmc_product_card.image }}{% else %}{{ 'placeholder.jpg' | asset_url }}{% endif %}"
+                            alt="{{ ghmc_product_card.title | default: 'Meticulous craftsmanship' | escape }}"
+                            width="700"
+                            height="430"
+                            loading="lazy"
+                          >
+                        </div>
+
+                        <div class="ghmc-craftsmanship__content">
+                          {% if ghmc_product_card.eyebrow != blank %}
+                            <p class="ghmc-craftsmanship__eyebrow font-proxima">
+                              {{ ghmc_product_card.eyebrow }}
+                            </p>
+                          {% endif %}
+
+                          {% if ghmc_product_card.title != blank %}
+                            <h3 class="ghmc-craftsmanship__card-title font-proxima">
+                              {{ ghmc_product_card.title | truncate: 35 }}
+                            </h3>
+                          {% endif %}
+
+                          {% if ghmc_product_card.description != blank %}
+                            <p class="ghmc-craftsmanship__description font-proxima">
+                              {{ ghmc_product_card.description | truncate: 160 }}
+                            </p>
+                          {% endif %}
+                        </div>
+                      </article>
+                    {% endif %}
+                  {% endif %}
+
+                  {% for ghmc_card_key in ghmc_selected_cards %}
+
+                    {% assign ghmc_eyebrow = blank %}
+                    {% assign ghmc_title = blank %}
+                    {% assign ghmc_description = blank %}
+                    {% assign ghmc_image = blank %}
+
+                    {% case ghmc_card_key %}
+
+                      {% when 'microsomal_liquids' %}
+                        {% assign ghmc_eyebrow = 'Innovation' %}
+                        {% assign ghmc_title = 'Revolutionary Absorption Technology' %}
+                        {% assign ghmc_description = 'Our proprietary MicroSomal® delivery system transforms nutrients into ultra-fine particles, supporting optimal bioavailability and absorption.' %}
+                        {% assign ghmc_image = 'MicroSomal.jpg' | asset_url %}
+
+                      {% when 'raw_herbal_liquids' %}
+                        {% assign ghmc_eyebrow = 'Innovation' %}
+                        {% assign ghmc_title = 'Full-Spectrum Preservation' %}
+                        {% assign ghmc_description = "Produced using our proprietary Raw Herbal Extract™ process, this formula helps preserve the herb's natural flavor, aroma, beneficial compounds, and life force." %}
+                        {% assign ghmc_image = 'RawHerbal.jpg' | asset_url %}
+
+                      {% when 'ormus' %}
+                        {% assign ghmc_eyebrow = 'Innovation' %}
+                        {% assign ghmc_title = 'Holistic Mineral Support' %}
+                        {% assign ghmc_description = 'This formula blends ORMUS Earth Minerals™, a proprietary trace mineral complex, to improve absorption while enhancing its nutritional and energetic profile.' %}
+                        {% assign ghmc_image = 'MineralSupport.jpg' | asset_url %}
+
+                      {% when 'verified_purity' %}
+                        {% assign ghmc_eyebrow = 'Trust' %}
+                        {% assign ghmc_title = 'Verified Purity' %}
+                        {% assign ghmc_description = "Supplier testing isn't enough. Every ingredient is verified through rigorous in-house and third-party testing for uncompromising purity." %}
+                        {% assign ghmc_image = 'VerifiedPurity.jpg' | asset_url %}
+
+                      {% when 'water_based_extraction' %}
+                        {% assign ghmc_eyebrow = 'Process' %}
+                        {% assign ghmc_title = 'Water-Based Extraction' %}
+                        {% assign ghmc_description = 'While many manufacturers rely on chemical solvents, we use triple-distilled, biophotonic structured water to help preserve purity and formula integrity.' %}
+                        {% assign ghmc_image = 'Water-BasedExtraction.jpg' | asset_url %}
+
+                      {% when 'no_shortcuts' %}
+                        {% assign ghmc_eyebrow = 'Process' %}
+                        {% assign ghmc_title = 'No Shortcuts, Ever' %}
+                        {% assign ghmc_description = 'Many manufacturers prioritize speed. We take a slower, methodical, low-heat approach to help preserve delicate compounds and ingredient quality.' %}
+                        {% assign ghmc_image = 'NoShortcuts.jpg' | asset_url %}
+
+                      {% when 'artisan_approach' %}
+                        {% assign ghmc_eyebrow = 'Process' %}
+                        {% assign ghmc_title = 'Artisan Approach' %}
+                        {% assign ghmc_description = 'Produced in small batches rather than through mass production to achieve a premium level of care, consistency, and attention to detail.' %}
+                        {% assign ghmc_image = 'ArtisanApproach.jpg' | asset_url %}
+
+                      {% when 'protected_from_interference' %}
+                        {% assign ghmc_eyebrow = 'Process' %}
+                        {% assign ghmc_title = 'Protected from Interference' %}
+                        {% assign ghmc_description = 'From glass vessels to platinum-cured silicone tubing, premium materials help minimize the potential for plastic leaching and metallic interference.' %}
+                        {% assign ghmc_image = 'ProtectedfromInterference.jpg' | asset_url %}
+
+                    {% endcase %}
+
+                    {% if ghmc_title != blank %}
+                      <article
+                        class="ghmc-craftsmanship__card"
+                        data-ghmc-card
+                        data-ghmc-card-key="{{ ghmc_card_key }}"
+                        role="listitem"
+                      >
+                        <div class="ghmc-craftsmanship__media">
+                          {% if ghmc_image != blank %}
+                            <img
+                              class="ghmc-craftsmanship__image"
+                              src="{{ ghmc_image }}"
+                              alt="{{ ghmc_title | escape }}"
+                              width="700"
+                              height="430"
+                              loading="lazy"
+                            >
+                          {% else %}
+                            <div
+                              class="ghmc-craftsmanship__image-placeholder"
+                              aria-hidden="true"
+                            ></div>
+                          {% endif %}
+                        </div>
+
+                        <div class="ghmc-craftsmanship__content">
+                          <p class="ghmc-craftsmanship__eyebrow font-proxima">
+                            {{ ghmc_eyebrow }}
+                          </p>
+
+                          <h3 class="ghmc-craftsmanship__card-title font-proxima">
+                            {{ ghmc_title }}
+                          </h3>
+
+                          <p class="ghmc-craftsmanship__description font-proxima">
+                            {{ ghmc_description }}
+                          </p>
+                        </div>
+                      </article>
+                    {% endif %}
+
+                  {% endfor %}
+                </div>
+
+                {% if ghmc_card_count > 1 %}
+                  <div
+                    class="ghmc-craftsmanship__progress"
+                    role="progressbar"
+                    aria-label="Craftsmanship carousel progress"
+                    aria-valuemin="1"
+                    aria-valuemax="{{ ghmc_card_count }}"
+                    aria-valuenow="1"
+                    data-ghmc-progress
+                  >
+                    <div class="ghmc-craftsmanship__progress-track">
+                      <div
+                        class="ghmc-craftsmanship__progress-fill"
+                        data-ghmc-progress-fill
+                      ></div>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+
+              <a
+                class="ghmc-craftsmanship__learn-more font-proxima"
+                href="https://globalhealing.com/pages/our-craftsmanship"
+              >
+                Learn More
+              </a>
+
+            </div>
+          </section>
+      {% endif %}
+
       {% when 'intro' %}
         {% if block.content %}
         <div class="ghd--block--intro ghd--block">
