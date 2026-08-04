@@ -10,8 +10,13 @@
     • analytics      – Hotjar, GA, Clarity
     • marketing      – GTM, Google Ads, Snapchat,
                        PostPilot, Impact Radius, Attentive,
-                       TikTok, Bing, Pinterest, Facebook
+                       TikTok, Bing, Facebook
     • functionality  – Rebuy, Shogun
+
+  NOTE: Pinterest cookies/scripts are intentionally NOT
+  gated here — they are excluded from CATEGORIZED_COOKIES
+  and BLOCKED_SCRIPT_DOMAINS and will fall through to the
+  auto-allow default.
 
   CHANGE LOG:
     - Unknown/unlisted cookies are now ALLOWED by default
@@ -26,6 +31,8 @@
       CATEGORIZED_COOKIES.
     - Added 'og_auth' to ESSENTIAL_COOKIES (Ordergroove auth
       cookie, required for subscription manager to load).
+    - Removed Pinterest cookies/scripts from gating (see NOTE
+      above).
 
   Loaded only after gh:consentUpdate
   (dispatched from gcm-integration-script.liquid).
@@ -93,6 +100,8 @@
   // Only cookies listed here (or in ESSENTIAL_COOKIES above)
   // are gated behind consent. Anything else is auto-allowed
   // (see getCookieCategory fallback below) but logged.
+  // NOTE: Pinterest cookies (_pin_unauth, _pin_3p_session,
+  // _derived_epik) are intentionally excluded — not gated.
   var CATEGORIZED_COOKIES = {
     '_ga':              'analytics',
     '_gid':             'analytics',
@@ -106,9 +115,6 @@
 
     '_fbp':             'marketing',
     '_fbc':             'marketing',
-    '_pin_unauth':      'marketing',
-    '_pin_3p_session':  'marketing',
-    '_derived_epik':    'marketing',
     '_attn_':           'marketing',
     '_attn_bopd_':      'marketing',
     '__attentive_':     'marketing',
@@ -221,6 +227,8 @@
   // ═══════════════════════════════════════════════════════════
   // 4. SCRIPT DOMAIN BLOCKLIST (single Node.prototype override)
   // ═══════════════════════════════════════════════════════════
+  // NOTE: Pinterest domains (analytics.pinterest.com, s.pinimg.com)
+  // are intentionally excluded — not gated.
   var BLOCKED_SCRIPT_DOMAINS = {
     // Analytics
     'static.hotjar.com':          'analytics',
@@ -234,10 +242,6 @@
     // Marketing — Facebook / Meta
     'connect.facebook.net':       'marketing',
     'fbcdn.net':                  'marketing',
-
-    // Marketing — Pinterest
-    'analytics.pinterest.com':    'marketing',
-    's.pinimg.com':               'marketing',
 
     // Marketing — Attentive
     'cdn.attentivemobile.com':    'marketing',
