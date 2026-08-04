@@ -32,14 +32,14 @@
 }
 
 .ghmc-craftsmanship__heading {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
     margin: 0;
     color: var(--gh-color-green);
     font-size: 50px;
     line-height: 60px;
     font-weight: 400;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
 }
 
 .ghmc-craftsmanship__heading strong {
@@ -74,24 +74,22 @@
 
 .ghmc-craftsmanship__card {
     display: flex;
-    flex: 0 0 calc((100vw - 3 * 3rem) / 3.25);
+    flex: 0 0 calc((100vw - 3 * 3rem) / 3.75);
     flex-direction: column;
-    min-width: calc((100vw - 3 * 3rem) / 3.25);
+    min-width: calc((100vw - 3 * 3rem) / 3.75);
+    height: 500px;
     overflow: hidden;
     box-sizing: border-box;
     border: 1px solid rgba(34, 71, 45, 0.08);
     border-radius: 7px;
     background: #f9f2e8;
-    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04); */
     transform: scaleY(1);
     transform-origin: center;
-    transition:
-        transform 0.35s ease
+    transition: transform 0.35s ease;
 }
 
 .ghmc-craftsmanship__card.ghmc-card-active {
     z-index: 2;
-    /* box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12); */
     transform: scaleY(1.14);
 }
 
@@ -104,6 +102,7 @@
 
 .ghmc-craftsmanship__media {
     position: relative;
+    flex: 0 0 auto;
     width: 100%;
     aspect-ratio: 1.65 / 1;
     overflow: hidden;
@@ -139,11 +138,13 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    min-height: 19rem;
+    min-height: 0;
     padding: 2.3rem 3.5rem 2.8rem;
+    box-sizing: border-box;
 }
 
 .ghmc-craftsmanship__eyebrow {
+    flex-shrink: 0;
     margin: 0;
     color: var(--gh-color-green);
     font-size: 13px;
@@ -153,20 +154,32 @@
 }
 
 .ghmc-craftsmanship__card-title {
+    display: block;
+    flex-shrink: 0;
     margin: 0 0 15px;
     color: var(--gh-color-green);
     font-size: 21.87px;
     line-height: 29.74px;
     font-weight: 700;
-    display: block;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .ghmc-craftsmanship__description {
+    flex: 1;
     margin: 0;
     color: var(--gh-color-gray);
     font-size: 17.49px;
     line-height: 27px;
     font-weight: 400;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .ghmc-craftsmanship__progress {
@@ -200,14 +213,30 @@
 }
 
 .ghmc-craftsmanship__learn-more {
+    color: var(--gh-color-green);
     font-size: 21px;
     line-height: 26px;
-    color: var(--gh-color-green);
 }
 
 .ghmc-craftsmanship__learn-more:hover,
 .ghmc-craftsmanship__learn-more:focus-visible {
     color: #10331d;
+}
+
+@media screen and (max-width: 1199px) and (min-width: 768px) {
+    .ghmc-craftsmanship__card {
+        height: 530px;
+    }
+
+    .ghmc-craftsmanship__content {
+        padding-right: 2.5rem;
+        padding-left: 2.5rem;
+    }
+
+    .ghmc-craftsmanship__description {
+        font-size: 15px;
+        line-height: 23px;
+    }
 }
 
 @media screen and (max-width: 767px) {
@@ -231,9 +260,9 @@
     }
 
     .ghmc-craftsmanship__heading {
+        display: inline;
         font-size: 30px;
         line-height: 40px;
-        display: inline;
     }
 
     .ghmc-craftsmanship__carousel {
@@ -241,45 +270,37 @@
     }
 
     .ghmc-craftsmanship__track {
+        align-items: stretch;
         gap: 1.5rem;
         padding: 0;
-        align-items: stretch;
     }
 
     .ghmc-craftsmanship__card {
         flex: 0 0 calc((100vw - 1.5rem) / 1.35);
         min-width: calc((100vw - 1.5rem) / 1.35);
+
+        /*
+         * Equal height for every mobile card.
+         */
+        height: 420px;
+
         border-radius: 4px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .ghmc-craftsmanship__track {
-        align-items: stretch;
-    }
-
-    .ghmc-craftsmanship__card {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-    }
-
-    .ghmc-craftsmanship__content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .ghmc-craftsmanship__description {
-        flex: 1;
     }
 
     .ghmc-craftsmanship__card.ghmc-card-active {
+        /*
+         * Mobile cards remain the same height.
+         */
         transform: scaleY(1);
     }
 
+    .ghmc-craftsmanship__media {
+        flex: 0 0 auto;
+    }
+
     .ghmc-craftsmanship__content {
-        min-height: 165px;
+        flex: 1;
+        min-height: 0;
         padding: 18px 20px 22px;
     }
 
@@ -296,13 +317,14 @@
     }
 
     .ghmc-craftsmanship__description {
+        flex: 1;
         font-size: 14px;
         line-height: 20px;
     }
 
     .ghmc-craftsmanship__progress {
-        padding: 0;
         width: 90%;
+        padding: 0;
     }
 
     .ghmc-craftsmanship__progress-track {

@@ -867,6 +867,120 @@
     height: 100%;
 }
 
+/*
+|--------------------------------------------------------------------------
+| Backstory V2
+|--------------------------------------------------------------------------
+*/
+
+.ghd--block--backstory-v2 {
+    background: #efe5d9;
+    overflow: hidden;
+}
+
+.ghd--block--backstory-v2__cols {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    align-items: stretch;
+    min-height: 720px;
+}
+
+.ghd--block--backstory-v2__content {
+    display: flex;
+    align-items: center;
+    padding: 10rem 7rem 10rem 16rem;
+}
+
+.ghd--block--backstory-v2__content-inner {
+    width: 100%;
+    max-width: 540px;
+}
+
+.ghd--block--backstory-v2__label {
+    margin: 0 0 5px;
+    color: var(--gh-color-gray);
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghd--block--backstory-v2__heading {
+    margin: 0 0 3rem;
+    color: var(--gh-color-green);
+    font-size: 50px;
+    line-height: 50px;
+    font-weight: 400;
+    font-style: italic;
+    width: 430px;
+}
+
+.ghd--block--backstory-v2__heading strong {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.ghd--block--backstory-v2__copy,
+.ghd--block--backstory-v2__copy p {
+    color: var(--gh-color-gray);
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.ghd--block--backstory-v2__copy p {
+    margin: 0 0 20px;
+}
+
+.ghd--block--backstory-v2__copy p:last-child {
+    margin-bottom: 0;
+}
+
+.ghd--block--backstory-v2__media {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.ghd--block--backstory-v2__media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ghd--block--backstory-v2__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ghd--block--backstory__image img {
+    height: 100%;
+    object-fit: cover;
+}
+
+/*--------------------------------------------------------------
+# Tablet
+--------------------------------------------------------------*/
+
+@media screen and (max-width: 1199px) {
+
+    .ghd--block--backstory-v2__cols {
+        grid-template-columns: 55% 45%;
+        min-height: 620px;
+    }
+
+    .ghd--block--backstory-v2__content {
+        padding: 6rem 5rem;
+    }
+
+    .ghd--block--backstory-v2__heading {
+        font-size: 5rem;
+    }
+
+}
+
 @media (min-width: 1024px) and (max-width: 1260px) {
     .ghd-study--results {
         --gap-padding: 25px;
@@ -890,6 +1004,52 @@
 }
 
 @media (max-width: 767px) {
+    .ghd--block--backstory-v2__cols {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: auto;
+    }
+
+    .ghd--block--backstory-v2__media {
+        aspect-ratio: 1 / 1;
+    }
+
+    .ghd--block--backstory-v2__image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .ghd--block--backstory-v2__content {
+        padding: 15px 30px 40px;
+    }
+
+    .ghd--block--backstory-v2__content-inner {
+        max-width: 100%;
+    }
+
+    .ghd--block--backstory-v2__label {
+        font-size: 16px;
+        letter-spacing: 1px;
+        line-height: 26px;
+        margin-bottom: 0;
+    }
+
+    .ghd--block--backstory-v2__heading {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 16px;
+        width: 280px;
+    }
+
+    .ghd--block--backstory-v2__copy {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .ghd--block--backstory__image img {
+        width: 100%;
+        height: auto;
+    }
+
     .ghd--block--study {
         padding: 40px 30px;
     }
