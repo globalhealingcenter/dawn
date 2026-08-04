@@ -45,10 +45,16 @@
 
     // Also propagate to Shopify's own consent layer, so any Klaviyo
     // Web Pixel / Customer Events tracking (which this script can't
-    // otherwise touch) respects the same decision.
+    // otherwise touch) respects the same decision — using the actual
+    // granted categories, not hardcoding everything to true.
     if (window.Shopify && window.Shopify.customerPrivacy) {
       window.Shopify.customerPrivacy.setTrackingConsent(
-        { marketing: true, analytics: true, preferences: true, sale_of_data: true },
+        {
+          marketing: !!consent.marketing,
+          analytics: !!consent.statistics,
+          preferences: !!consent.functionality,
+          sale_of_data: !!consent.marketing,
+        },
         function () {}
       );
     }
