@@ -449,6 +449,54 @@
           </section>
       {% endif %}
 
+      {% when 'backstory-v2' %}
+
+        {% if block.title.main != blank or block.content != blank %}
+          <div class="ghd--block--backstory-v2 ghd--block">
+            <div class="ghd--block--backstory-v2__cols">
+
+              <div class="ghd--block--backstory-v2__content">
+                <div class="ghd--block--backstory-v2__content-inner">
+
+                  <p class="ghd--block--backstory-v2__label font-proxima">
+                    BACKSTORY
+                  </p>
+
+                  {% if block.title.main != blank %}
+                    <h2 class="ghd--block--backstory-v2__heading font-proxima">
+                      {{ block.title.main }}
+                    </h2>
+                  {% endif %}
+
+                  {% if block.content != blank %}
+                    <div class="ghd--block--backstory-v2__copy font-proxima">
+                      {{ block.content }}
+                    </div>
+                  {% endif %}
+
+                </div>
+              </div>
+
+              <div class="ghd--block--backstory__image">
+                <picture>
+                  <source
+                    media="(min-width: 750px)"
+                    srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887">
+
+                  <source
+                    media="(max-width: 749px)"
+                    srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory-mobile.png?v=XXXXXXXX">
+
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887"
+                    alt="Backstory"
+                    loading="lazy">
+                </picture>
+              </div>
+            </div>
+          </div>
+      {% endif %}
+
       {% when 'intro' %}
         {% if block.content %}
         <div class="ghd--block--intro ghd--block">
