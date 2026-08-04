@@ -1,66 +1,185 @@
+{%- comment -%}
+  ============================================================
+  PINTEREST CONSENT-GATED COOKIE BLOCKER + TAG LOADER
+  ============================================================
+  Blocks Pinterest cookies/scripts until the user grants
+  Pinterest-specific consent via Consentmo + Google Consent
+  Mode v2.
+
+  This is intentionally separate from the general
+  marketing-tag-loader file, so Pinterest can be gated on its
+  own consent category (e.g. if you run a dedicated Pinterest
+  opt-in, or want to manage its rollout independently of
+  Meta/TikTok/Snapchat/etc).
+
+  Consent key used: consent.pinterest
+    - Wire this up wherever gh:consentUpdate is dispatched
+      (e.g. gcm-integration-script.liquid). If you don't have
+      a dedicated Pinterest toggle in your CMP yet, you can
+      default consent.pinterest to mirror consent.marketing
+      at the dispatch site until one exists.
+
+  Loaded only after gh:consentUpdate.
+  ============================================================
+{%- endcomment -%}
+
 <script>
 (function () {
   'use strict';
 
-  var marketingConsent = false;
-  var loaded = false;
-  var KLAVIYO_JS_SRC = 'https://static.klaviyo.com/onsite/js/YeibUN/klaviyo.js';
+  // ═══════════════════════════════════════════════════════════
+  // 1. CONSENT STATE
+  // ═══════════════════════════════════════════════════════════
+  var consentState = {
+    pinterest: false,
+  };
 
-  function loadKlaviyo() {
-    if (loaded) return;
-    loaded = true;
-
-    // Activate any inert placeholder tags rendered directly in theme HTML
-    var placeholders = document.querySelectorAll('script[data-consent-src="klaviyo"]');
-    var activated = false;
-    placeholders.forEach(function (el) {
-      var real = document.createElement('script');
-      for (var i = 0; i < el.attributes.length; i++) {
-        var attr = el.attributes[i];
-        if (attr.name === 'type' || attr.name === 'data-consent-src' || attr.name === 'data-src') continue;
-        real.setAttribute(attr.name, attr.value);
-      }
-      real.src = el.getAttribute('data-src') || KLAVIYO_JS_SRC;
-      el.parentNode.replaceChild(real, el);
-      activated = true;
-    });
-    if (activated) return;
-
-    // Fallback: nothing placeholder-ized on this page, load directly
-    if (document.querySelector('script[src*="static.klaviyo.com/onsite/js/YeibUN/klaviyo.js"]')) return;
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = KLAVIYO_JS_SRC;
-    s.onerror = function () {
-      console.error('[Klaviyo] Failed to load klaviyo.js');
-      loaded = false;
-    };
-    document.head.appendChild(s);
+  if (window.__GH_CONSENT_STATE__) {
+    var s = window.__GH_CONSENT_STATE__;
+    // Falls back to marketing consent if no dedicated
+    // pinterest key is present on the consent object.
+    consentState.pinterest = !!(s.pinterest !== undefined ? s.pinterest : s.marketing);
   }
 
-  function applyConsent(consent) {
-    if (!consent || !consent.marketing || marketingConsent) return;
-    marketingConsent = true;
-    loadKlaviyo();
+  // ═══════════════════════════════════════════════════════════
+  // 2. PINTEREST COOKIE PREFIXES (gated)
+  // ═══════════════════════════════════════════════════════════
+  var PINTEREST_COOKIES = [
+    '_pin_unauth',
+    '_pin_3p_session',
+    '_derived_epik',
+  ];
 
-    // Also propagate to Shopify's own consent layer, so any Klaviyo
-    // Web Pixel / Customer Events tracking (which this script can't
-    // otherwise touch) respects the same decision.
-    if (window.Shopify && window.Shopify.customerPrivacy) {
-      window.Shopify.customerPrivacy.setTrackingConsent(
-        { marketing: true, analytics: true, preferences: true, sale_of_data: true },
-        function () {}
-      );
+  function isPinterestCookie(name) {
+    for (var i = 0; i < PINTEREST_COOKIES.length; i++) {
+      if (name === PINTEREST_COOKIES[i] || name.indexOf(PINTEREST_COOKIES[i]) === 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 3. COOKIE INTERCEPTOR + PENDING QUEUE
+  //    NOTE: only intercepts Pinterest-named cookies; all
+  //    other cookies pass through untouched (this file does
+  //    not own general cookie gating).
+  // ═══════════════════════════════════════════════════════════
+  var pendingCookies = [];
+  var _cookieDesc = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
+
+  if (_cookieDesc && _cookieDesc.set) {
+    Object.defineProperty(document, 'cookie', {
+      configurable: true,
+
+      get: function () {
+        return _cookieDesc.get.call(document);
+      },
+
+      set: function (cookieString) {
+        var name = (cookieString || '').split('=')[0].trim();
+
+        if (!isPinterestCookie(name)) {
+          _cookieDesc.set.call(document, cookieString);
+          return;
+        }
+
+        if (!consentState.pinterest) {
+          pendingCookies.push(cookieString);
+          if (window.__GH_DEBUG_CONSENT__) {
+            console.warn('[PinterestConsentBlocker] Blocked cookie:', name);
+          }
+          return;
+        }
+
+        _cookieDesc.set.call(document, cookieString);
+      },
+    });
+  }
+
+  function replayPendingCookies() {
+    if (!_cookieDesc || !_cookieDesc.set) return;
+    if (!consentState.pinterest) return;
+    for (var i = 0; i < pendingCookies.length; i++) {
+      _cookieDesc.set.call(document, pendingCookies[i]);
+    }
+    pendingCookies = [];
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 4. PINTEREST SCRIPT DOMAIN BLOCKLIST
+  // ═══════════════════════════════════════════════════════════
+  var PINTEREST_SCRIPT_DOMAINS = [
+    'analytics.pinterest.com',
+    's.pinimg.com',
+  ];
+
+  function isPinterestScript(src) {
+    if (!src) return false;
+    for (var i = 0; i < PINTEREST_SCRIPT_DOMAINS.length; i++) {
+      if (src.indexOf(PINTEREST_SCRIPT_DOMAINS[i]) !== -1) return true;
+    }
+    return false;
+  }
+
+  function shouldBlockNode(node) {
+    if (!node || node.tagName !== 'SCRIPT') return false;
+    var src = node.src || node.getAttribute('src') || '';
+    return isPinterestScript(src) && !consentState.pinterest;
+  }
+
+  var _appendChild  = Node.prototype.appendChild;
+  var _insertBefore = Node.prototype.insertBefore;
+
+  Node.prototype.appendChild = function (node) {
+    if (shouldBlockNode(node)) {
+      if (window.__GH_DEBUG_CONSENT__) {
+        console.warn('[PinterestConsentBlocker] Blocked script:', node.src || node.getAttribute('src'));
+      }
+      return node;
+    }
+    return _appendChild.call(this, node);
+  };
+
+  Node.prototype.insertBefore = function (node, ref) {
+    if (shouldBlockNode(node)) {
+      if (window.__GH_DEBUG_CONSENT__) {
+        console.warn('[PinterestConsentBlocker] Blocked script:', node.src || node.getAttribute('src'));
+      }
+      return node;
+    }
+    return _insertBefore.call(this, node, ref);
+  };
+
+  // ═══════════════════════════════════════════════════════════
+  // 5. APPLY CONSENT
+  // ═══════════════════════════════════════════════════════════
+  function applyConsent(consent) {
+    if (!consent) return;
+
+    var pinterestGranted = consent.pinterest !== undefined
+      ? !!consent.pinterest
+      : !!consent.marketing;
+
+    if (pinterestGranted) {
+      consentState.pinterest = true;
+      replayPendingCookies();
     }
   }
 
-  // Attach listener FIRST so an early-fired event is never missed
+  // ═══════════════════════════════════════════════════════════
+  // 6. EVENT LISTENERS
+  // ═══════════════════════════════════════════════════════════
   document.addEventListener('gh:consentUpdate', function (event) {
     applyConsent(event.detail || {});
   });
 
+  // ═══════════════════════════════════════════════════════════
+  // 7. REHYDRATE RETURNING VISITOR CONSENT
+  // ═══════════════════════════════════════════════════════════
   if (window.__GH_CONSENT_STATE__) {
     applyConsent(window.__GH_CONSENT_STATE__);
   }
+
 })();
 </script>
