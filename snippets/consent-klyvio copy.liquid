@@ -1,0 +1,72 @@
+<script>
+(function () {
+  'use strict';
+
+  var marketingConsent = false;
+  var loaded = false;
+  var KLAVIYO_JS_SRC = 'https://static.klaviyo.com/onsite/js/YeibUN/klaviyo.js';
+
+  function loadKlaviyo() {
+    if (loaded) return;
+    loaded = true;
+
+    // Activate any inert placeholder tags rendered directly in theme HTML
+    var placeholders = document.querySelectorAll('script[data-consent-src="klaviyo"]');
+    var activated = false;
+    placeholders.forEach(function (el) {
+      var real = document.createElement('script');
+      for (var i = 0; i < el.attributes.length; i++) {
+        var attr = el.attributes[i];
+        if (attr.name === 'type' || attr.name === 'data-consent-src' || attr.name === 'data-src') continue;
+        real.setAttribute(attr.name, attr.value);
+      }
+      real.src = el.getAttribute('data-src') || KLAVIYO_JS_SRC;
+      el.parentNode.replaceChild(real, el);
+      activated = true;
+    });
+    if (activated) return;
+
+    // Fallback: nothing placeholder-ized on this page, load directly
+    if (document.querySelector('script[src*="static.klaviyo.com/onsite/js/YeibUN/klaviyo.js"]')) return;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = KLAVIYO_JS_SRC;
+    s.onerror = function () {
+      console.error('[Klaviyo] Failed to load klaviyo.js');
+      loaded = false;
+    };
+    document.head.appendChild(s);
+  }
+
+  function applyConsent(consent) {
+    if (!consent || !consent.marketing || marketingConsent) return;
+    marketingConsent = true;
+    loadKlaviyo();
+
+    // Also propagate to Shopify's own consent layer, so any Klaviyo
+    // Web Pixel / Customer Events tracking (which this script can't
+    // otherwise touch) respects the same decision — using the actual
+    // granted categories, not hardcoding everything to true.
+    if (window.Shopify && window.Shopify.customerPrivacy) {
+      window.Shopify.customerPrivacy.setTrackingConsent(
+        {
+          marketing: !!consent.marketing,
+          analytics: !!consent.statistics,
+          preferences: !!consent.functionality,
+          sale_of_data: !!consent.marketing,
+        },
+        function () {}
+      );
+    }
+  }
+
+  // Attach listener FIRST so an early-fired event is never missed
+  document.addEventListener('gh:consentUpdate', function (event) {
+    applyConsent(event.detail || {});
+  });
+
+  if (window.__GH_CONSENT_STATE__) {
+    applyConsent(window.__GH_CONSENT_STATE__);
+  }
+})();
+</script>
