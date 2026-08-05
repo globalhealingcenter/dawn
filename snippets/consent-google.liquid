@@ -1,0 +1,131 @@
+{%- comment -%}
+  ============================================================
+  GOOGLE TAGS — GTM, GOOGLE ADS (gtag), GA4
+  ============================================================
+  Loads Google Tag Manager and the Google Ads gtag.js config
+  once GOOGLE consent is granted, via gh:consentUpdate.
+
+  Consent key used: consent.google
+    - Falls back to consent.marketing if no dedicated Google
+      toggle exists yet in Consentmo. Once/if a distinct
+      Google consent option is added to the CMP, wire its
+      real value into the 'google' field on the
+      gh:consentUpdate detail object (see gcm-integration
+      bridge script) and this file will pick it up with no
+      further changes needed here.
+
+  Pinterest fires from inside the GTM container, so it is
+  gated here too (indirectly) — no separate Pinterest file
+  needed; see gh:consentUpdate → loadGTM().
+
+  IMPORTANT: this file does NOT own the document.cookie or
+  Node.prototype.appendChild/insertBefore overrides — those
+  live in the main consent-blocker file. Defining them twice
+  would silently break the first file's cookie interception.
+  This file only calls document.head.appendChild normally,
+  which passes through the main file's existing override
+  (safe, since this file already gates itself on consent
+  before ever calling loadGTM()/loadGoogleAds()).
+
+  Loaded only after gh:consentUpdate
+  (dispatched from gcm-integration-script.liquid).
+  ============================================================
+{%- endcomment -%}
+
+<script>
+(function () {
+  'use strict';
+
+  var googleGranted = false;
+
+  var loaded = {
+    gtm: false,
+    googleAds: false,
+  };
+
+  var GTM_CONTAINER_ID = 'GTM-N233MFC3';
+  var GOOGLE_ADS_ID     = 'AW-683425101';
+
+  function loadScript(src, attrs) {
+    if (document.querySelector('script[src="' + src + '"]')) return;
+    var s   = document.createElement('script');
+    s.src   = src;
+    s.async = true;
+    if (attrs) {
+      Object.keys(attrs).forEach(function (key) {
+        s.setAttribute(key, attrs[key]);
+      });
+    }
+    document.head.appendChild(s);
+  }
+
+  // ── Google Ads (gtag.js) ─────────────────────────────────
+  function loadGoogleAds() {
+    if (loaded.googleAds || document.querySelector('script[src*="gtag/js?id=' + GOOGLE_ADS_ID + '"]')) return;
+    loaded.googleAds = true;
+    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GOOGLE_ADS_ID, null);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ADS_ID);
+  }
+
+  // ── GTM (also carries the Pinterest tag internally) ──────
+  function loadGTM() {
+    if (loaded.gtm || document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) return;
+    loaded.gtm = true;
+
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f  = d.getElementsByTagName(s)[0],
+          j  = d.createElement(s),
+          dl = l !== 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src   = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
+
+    (function appendGtmNoscript() {
+      if (document.getElementById('gtm-noscript-iframe')) return;
+      var noscript = document.createElement('noscript');
+      noscript.id  = 'gtm-noscript-iframe';
+      var iframe   = document.createElement('iframe');
+      iframe.src   = 'https://www.googletagmanager.com/ns.html?id=' + GTM_CONTAINER_ID;
+      iframe.height = 0;
+      iframe.width  = 0;
+      iframe.style.display    = 'none';
+      iframe.style.visibility = 'hidden';
+      noscript.appendChild(iframe);
+      if (document.body) {
+        document.body.insertBefore(noscript, document.body.firstChild);
+      } else {
+        document.addEventListener('DOMContentLoaded', function () {
+          document.body.insertBefore(noscript, document.body.firstChild);
+        });
+      }
+    })();
+  }
+
+  function applyConsent(consent) {
+    if (!consent || googleGranted) return;
+    var googleAllowed = consent.google !== undefined
+      ? !!consent.google
+      : !!consent.marketing;
+    if (!googleAllowed) return;
+
+    googleGranted = true;
+    loadGoogleAds();
+    loadGTM();
+  }
+
+  // Attach listener FIRST so an early-fired event is never missed
+  document.addEventListener('gh:consentUpdate', function (event) {
+    applyConsent(event.detail || {});
+  });
+
+  if (window.__GH_CONSENT_STATE__) {
+    applyConsent(window.__GH_CONSENT_STATE__);
+  }
+})();
+</script>
