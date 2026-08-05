@@ -4,8 +4,13 @@
 
   ALSO responsible for bridging Consentmo's real consent state into the
   custom 'gh:consentUpdate' event + window.__GH_CONSENT_STATE__, which the
-  marketing-tag-loader and klaviyo-loader scripts depend on to unlock
-  GTM (Pinterest), Google Ads, Snapchat, PostPilot, Rebuy, and Klaviyo.
+  marketing-tag-loader, google-tags-loader, and klaviyo-loader scripts
+  depend on to unlock GTM (Pinterest), Google Ads, Snapchat, PostPilot,
+  Rebuy, and Klaviyo.
+
+  'google' consent key currently mirrors 'marketing' — no dedicated
+  Google toggle exists in Consentmo yet. If one is added later, update
+  the 'google' value below to read the real dedicated field instead.
 {%- endcomment -%}
 
 <!-- Google Consent Mode V2 Advanced Mode integration script for Consentmo GDPR Compliance App -->
@@ -29,6 +34,8 @@
   // Consentmo's currentVisitorConsent() shape is:
   //   { necessary: true, analytics: bool, marketing: bool, preferences: bool }
   // Note: the field is "preferences", not "functionality" — mapped below.
+  // 'google' is not a real Consentmo field — mirrors 'marketing' until
+  // a dedicated Google toggle exists in the CMP.
   function dispatchGhConsentUpdate() {
     if (!window.Consentmo) return;
     var consent = window.Consentmo.currentVisitorConsent();
@@ -37,6 +44,7 @@
       statistics: !!consent.analytics,
       marketing: !!consent.marketing,
       functionality: !!consent.preferences,
+      google: !!consent.marketing,
     };
     window.__GH_CONSENT_STATE__ = detail;
     document.dispatchEvent(new CustomEvent('gh:consentUpdate', { detail: detail }));
@@ -60,9 +68,9 @@
 
     // Tapcart visitors never fire Consentmo events, so unlock the
     // gh:consentUpdate-gated scripts directly with all-granted state.
-    window.__GH_CONSENT_STATE__ = { statistics: true, marketing: true, functionality: true };
+    window.__GH_CONSENT_STATE__ = { statistics: true, marketing: true, functionality: true, google: true };
     document.dispatchEvent(new CustomEvent('gh:consentUpdate', {
-      detail: { statistics: true, marketing: true, functionality: true },
+      detail: { statistics: true, marketing: true, functionality: true, google: true },
     }));
   } else {
     gtag('consent', 'default', {
@@ -96,6 +104,7 @@
           statistics: consentOutOfRegion.analytics,
           marketing: consentOutOfRegion.marketing,
           functionality: consentOutOfRegion.functionality,
+          google: consentOutOfRegion.marketing,
         };
         document.dispatchEvent(new CustomEvent('gh:consentUpdate', {
           detail: window.__GH_CONSENT_STATE__,
