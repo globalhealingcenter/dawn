@@ -8,15 +8,20 @@
   Consent categories:
     • essential      – always allowed (cart, checkout, session)
     • analytics      – Hotjar, GA, Clarity
-    • marketing      – GTM, Google Ads, Snapchat,
-                       PostPilot, Impact Radius, Attentive,
-                       TikTok, Bing, Facebook
+    • marketing      – Snapchat, PostPilot, Impact Radius,
+                       Attentive, TikTok, Bing, Facebook
     • functionality  – Rebuy, Shogun
+
+  NOTE: GTM, Google Ads (gtag), and GA4 loading logic has
+  moved to google-tags.liquid, gated on its own 'google'
+  consent key (currently mirrors marketing until a dedicated
+  Google toggle exists in Consentmo). See that file.
 
   NOTE: Pinterest cookies/scripts are intentionally NOT
   gated here — they are excluded from CATEGORIZED_COOKIES
   and BLOCKED_SCRIPT_DOMAINS and will fall through to the
-  auto-allow default.
+  auto-allow default. Pinterest fires from inside GTM, and is
+  therefore governed by google-tags.liquid's own consent gate.
 
   CHANGE LOG:
     - Unknown/unlisted cookies are now ALLOWED by default
@@ -33,6 +38,8 @@
       cookie, required for subscription manager to load).
     - Removed Pinterest cookies/scripts from gating (see NOTE
       above).
+    - Moved GTM/Google Ads loading to google-tags.liquid, on
+      its own 'google' consent category (see NOTE above).
 
   Loaded only after gh:consentUpdate
   (dispatched from gcm-integration-script.liquid).
@@ -102,6 +109,10 @@
   // (see getCookieCategory fallback below) but logged.
   // NOTE: Pinterest cookies (_pin_unauth, _pin_3p_session,
   // _derived_epik) are intentionally excluded — not gated.
+  // NOTE: Google cookies (_ga, _gid, _gat, _gcl_au) stay HERE
+  // because this file owns the single shared document.cookie
+  // interceptor — they're caught regardless of which file
+  // triggers the write (google-tags.liquid included).
   var CATEGORIZED_COOKIES = {
     '_ga':              'analytics',
     '_gid':             'analytics',
@@ -176,6 +187,7 @@
 
   // ═══════════════════════════════════════════════════════════
   // 3. COOKIE INTERCEPTOR + PENDING QUEUE
+  //    (SHARED — this is the only file that may own this)
   // ═══════════════════════════════════════════════════════════
   var pendingCookies = [];
   var _cookieDesc = Object.getOwnPropertyDescriptor(Document.prototype, 'cookie');
@@ -226,9 +238,15 @@
 
   // ═══════════════════════════════════════════════════════════
   // 4. SCRIPT DOMAIN BLOCKLIST (single Node.prototype override)
+  //    (SHARED — this is the only file that may own this)
   // ═══════════════════════════════════════════════════════════
   // NOTE: Pinterest domains (analytics.pinterest.com, s.pinimg.com)
   // are intentionally excluded — not gated.
+  // NOTE: googletagmanager.com stays listed here as a
+  // defense-in-depth safety net, even though this file no
+  // longer initiates GTM/Google Ads loading itself (see
+  // google-tags.liquid) — this catches any unexpected/early
+  // injection attempt from elsewhere before consent.
   var BLOCKED_SCRIPT_DOMAINS = {
     // Analytics
     'static.hotjar.com':          'analytics',
@@ -236,7 +254,7 @@
     'static.clarity.ms':          'analytics',
     'clarity.ms':                 'analytics',
 
-    // Marketing — Google
+    // Marketing — Google (safety net only, see NOTE above)
     'googletagmanager.com':       'marketing',
 
     // Marketing — Facebook / Meta
@@ -314,19 +332,15 @@
   };
 
   // ═══════════════════════════════════════════════════════════
-  // 5. TAG / SCRIPT LOADERS
+  // 5. TAG / SCRIPT LOADERS (non-Google)
   // ═══════════════════════════════════════════════════════════
   var loaded = {
-    gtm: false,
-    googleAds: false,
     postPilot: false,
     hotjar: false,
     rebuy: false,
     snapchat: false,
   };
 
-  var GTM_CONTAINER_ID  = 'GTM-N233MFC3';
-  var GOOGLE_ADS_ID     = 'AW-683425101';
   var SNAPCHAT_PIXEL_ID = '18cb733b-7c2e-4e14-92c5-2fc11903c39a';
 
   function loadScript(src, attrs) {
@@ -340,54 +354,6 @@
       });
     }
     document.head.appendChild(s);
-  }
-
-  // ── Google Ads ────────────────────────────────────────────
-  function loadGoogleAds() {
-    if (loaded.googleAds || document.querySelector('script[src*="gtag/js?id=' + GOOGLE_ADS_ID + '"]')) return;
-    loaded.googleAds = true;
-    loadScript('https://www.googletagmanager.com/gtag/js?id=' + GOOGLE_ADS_ID, null);
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-    window.gtag('js', new Date());
-    window.gtag('config', GOOGLE_ADS_ID);
-  }
-
-  // ── GTM ───────────────────────────────────────────────────
-  function loadGTM() {
-    if (loaded.gtm || document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) return;
-    loaded.gtm = true;
-
-    (function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-      var f  = d.getElementsByTagName(s)[0],
-          j  = d.createElement(s),
-          dl = l !== 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src   = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
-
-    (function appendGtmNoscript() {
-      if (document.getElementById('gtm-noscript-iframe')) return;
-      var noscript = document.createElement('noscript');
-      noscript.id  = 'gtm-noscript-iframe';
-      var iframe   = document.createElement('iframe');
-      iframe.src   = 'https://www.googletagmanager.com/ns.html?id=' + GTM_CONTAINER_ID;
-      iframe.height = 0;
-      iframe.width  = 0;
-      iframe.style.display    = 'none';
-      iframe.style.visibility = 'hidden';
-      noscript.appendChild(iframe);
-      if (document.body) {
-        document.body.insertBefore(noscript, document.body.firstChild);
-      } else {
-        document.addEventListener('DOMContentLoaded', function () {
-          document.body.insertBefore(noscript, document.body.firstChild);
-        });
-      }
-    })();
   }
 
   // ── PostPilot ─────────────────────────────────────────────
@@ -453,8 +419,6 @@
 
     if (consent.marketing) {
       consentState.marketing = true;
-      loadGoogleAds();
-      loadGTM();
       loadPostPilot();
       loadImpactRadiusCookie();
       loadSnapchatPixel();
