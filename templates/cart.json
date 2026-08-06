@@ -57,52 +57,6 @@
         "include_margins": true
       }
     },
-    "17647015295bf220e3": {
-      "type": "apps",
-      "blocks": {
-        "abra_promotions_banner_gift_xT6Gw4": {
-          "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-          "settings": {
-            "name": "Gift",
-            "color": "#43341f",
-            "icon_color": "#43341f",
-            "progress_bar_color": "#21472d",
-            "font_size": 14,
-            "icon_size": 14,
-            "text_align": "center",
-            "discount_background_color": "#f9f2e8",
-            "discount_padding_y": 10,
-            "discount_padding_x": 10,
-            "badge_background_color": "#21472d",
-            "badge_color": "#ffffff",
-            "badge_icon_color": "#ffffff",
-            "badge_border_radius": 48,
-            "badge_font_size": 12,
-            "badge_icon_size": 10,
-            "discount_title_color": "#43341f",
-            "discount_price_color": "#43341f",
-            "discount_title_font_size": 14,
-            "discount_price_font_size": 12,
-            "add_variant_color": "#000000",
-            "add_variant_text_color": "#ffffff",
-            "add_variant_disabled_color": "#000000",
-            "add_variant_disabled_text_color": "#ffffff"
-          }
-        }
-      },
-      "block_order": [
-        "abra_promotions_banner_gift_xT6Gw4"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "1764701879cdf4bcd3": {
-      "type": "apps",
-      "settings": {
-        "include_margins": true
-      }
-    },
     "177403560668280fef": {
       "type": "apps",
       "blocks": {
@@ -125,113 +79,6 @@
       },
       "block_order": [
         "abra_promotions_banner_JzHGDE"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "1774035634b9b1657c": {
-      "type": "apps",
-      "blocks": {
-        "abra_promotions_banner_AanDFd": {
-          "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-          "settings": {
-            "name": "Default",
-            "banner_background_color": "#119d52",
-            "banner_border_color": "#119d52",
-            "banner_color": "#ffffff",
-            "banner_icon_color": "#ffffff",
-            "banner_border_radius": 0,
-            "banner_font_size": 16,
-            "banner_icon_size": 16,
-            "banner_padding_y": 10,
-            "banner_padding_x": 10,
-            "text_align": "left"
-          }
-        }
-      },
-      "block_order": [
-        "abra_promotions_banner_AanDFd"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "17740389574e8136de": {
-      "type": "apps",
-      "blocks": {
-        "abra_promotions_tiered_banner_NHeYaw": {
-          "type": "shopify://apps/abra-promotions/blocks/tiered-banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-          "settings": {
-            "name": "Default",
-            "reward_tier_display": "next",
-            "enable_reward_hover_preview": true,
-            "enable_gift_title_click": true,
-            "banner_background_color": "#ffffff",
-            "progress_bar_text_and_icon_color": "#000000",
-            "progress_bar_color": "#119e52",
-            "reward_tier_color": "#cfecdc",
-            "active_reward_tier_color": "#119e52",
-            "reward_tier_icon_color": "#000000",
-            "active_reward_tier_icon_color": "#ffffff",
-            "progress_bar_text_size": 13,
-            "progress_bar_icon_size": 16,
-            "summary_background_color": "#cfecdc",
-            "summary_text_size": 13,
-            "gift_badge_background_color": "#119e52",
-            "gift_badge_text_and_icon_color": "#ffffff",
-            "gift_product_text_color": "#000000",
-            "gift_badge_border_radius": 48,
-            "gift_badge_text_size": 12,
-            "gift_badge_icon_size": 16,
-            "gift_product_name_text_size": 14,
-            "gift_padding_y": 10,
-            "gift_padding_x": 10
-          }
-        }
-      },
-      "block_order": [
-        "abra_promotions_tiered_banner_NHeYaw"
-      ],
-      "settings": {
-        "include_margins": true
-      }
-    },
-    "17740389631eab04d4": {
-      "type": "apps",
-      "blocks": {
-        "abra_promotions_tiered_banner_zRNdiE": {
-          "type": "shopify://apps/abra-promotions/blocks/tiered-banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-          "settings": {
-            "name": "Default",
-            "reward_tier_display": "next",
-            "enable_reward_hover_preview": true,
-            "enable_gift_title_click": true,
-            "banner_background_color": "#ffffff",
-            "progress_bar_text_and_icon_color": "#000000",
-            "progress_bar_color": "#119e52",
-            "reward_tier_color": "#cfecdc",
-            "active_reward_tier_color": "#119e52",
-            "reward_tier_icon_color": "#000000",
-            "active_reward_tier_icon_color": "#ffffff",
-            "progress_bar_text_size": 13,
-            "progress_bar_icon_size": 16,
-            "summary_background_color": "#cfecdc",
-            "summary_text_size": 13,
-            "gift_badge_background_color": "#119e52",
-            "gift_badge_text_and_icon_color": "#ffffff",
-            "gift_product_text_color": "#000000",
-            "gift_badge_border_radius": 48,
-            "gift_badge_text_size": 12,
-            "gift_badge_icon_size": 16,
-            "gift_product_name_text_size": 14,
-            "gift_padding_y": 10,
-            "gift_padding_x": 10
-          }
-        }
-      },
-      "block_order": [
-        "abra_promotions_tiered_banner_zRNdiE"
       ],
       "settings": {
         "include_margins": true
@@ -266,12 +113,7 @@
     "cart-items",
     "cart-footer",
     "1687779380613f616b",
-    "17647015295bf220e3",
-    "1764701879cdf4bcd3",
     "177403560668280fef",
-    "1774035634b9b1657c",
-    "17740389574e8136de",
-    "17740389631eab04d4",
     "1774039059af818a5e"
   ]
 }
