@@ -1,0 +1,218 @@
+<style>
+.gh-flavor-profile {
+  width: 100%;
+  padding: 0 0 3rem;
+  color: #244c35;
+}
+
+.gh-flavor-profile__header {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  margin-bottom: 4rem;
+}
+
+.gh-flavor-profile__heading {
+    text-align: left;
+    font-weight: 700 !important;
+    position: relative;
+    text-align: left;
+    font-family: var(--gh-font-secondary) !important;
+    position: relative;
+    margin: 0;
+    background: #F9F2E8;
+    padding-right: 10px;
+    font-size: 20px;
+    line-height: 27px;
+    text-transform: uppercase;
+    color: var(--gh-color-green);
+    min-width: max-content;
+}
+
+.gh-flavor-profile__header-line {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #77766f;
+}
+
+.gh-flavor-profile__scale {
+  width: 100%;
+  padding: 0;
+}
+
+.gh-flavor-profile__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: start;
+}
+
+/* Horizontal connecting line */
+.gh-flavor-profile__track::before {
+  content: "";
+  position: absolute;
+  top: 1.25rem;
+  left: 10%;
+  right: 10%;
+  height: 0.4rem;
+  background: var(--gh-color-green);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.gh-flavor-profile__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.gh-flavor-profile__point {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0.4rem solid var(--gh-color-green);
+  border-radius: 50%;
+  background: #f7f2e9;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.gh-flavor-profile__label {
+  display: block;
+  margin-top: 1.6rem;
+  color: var(--gh-color-green);
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+/* Selected metafield option */
+.gh-flavor-profile__item--active .gh-flavor-profile__point {
+  border-color: var(--gh-color-green);
+  background: var(--gh-color-green);
+}
+
+.gh-flavor-profile__item--active .gh-flavor-profile__label {
+  color: var(--gh-color-green);
+  font-weight: 700;
+}
+
+@media screen and (max-width: 749px) {
+  .gh-flavor-profile {
+    padding: 2.4rem 0;
+  }
+
+  .gh-flavor-profile__header {
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .gh-flavor-profile__heading {
+    font-size: 1.8rem;
+  }
+
+  .gh-flavor-profile__scale {
+    padding: 0;
+  }
+
+  .gh-flavor-profile__track::before {
+    top: 1.2rem;
+    left: 10%;
+    right: 10%;
+    height: 0.3rem;
+  }
+
+  .gh-flavor-profile__point {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-width: 0.4rem;
+  }
+
+  .gh-flavor-profile__label {
+    margin-top: 1.2rem;
+    font-size: 1.4rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .gh-flavor-profile__label {
+    font-size: 1.2rem;
+  }
+
+  .gh-flavor-profile__point {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.35rem;
+  }
+
+  .gh-flavor-profile__track::before {
+    top: 1rem;
+  }
+}
+</style>
+
+{% comment %}
+  Global Healing Flavor Profile
+
+  Product metafield:
+  Namespace: globalhealing
+  Key: flavor_profile
+
+  Supported values:
+  Sweet, Earthy, Bitter, Sour, Bold
+{% endcomment %}
+
+{% liquid
+  assign flavor_profile = product.metafields.globalhealing.flavor_profile.value
+  assign active_flavor = flavor_profile | strip | downcase
+
+  assign flavor_options = 'Sweet,Earthy,Bitter,Sour,Bold' | split: ','
+%}
+
+{% if flavor_profile != blank %}
+  <div class="gh-flavor-profile">
+    <div class="gh-flavor-profile__header">
+      <h3 class="gh-flavor-profile__heading">Flavor Profile</h3>
+      <span class="gh-flavor-profile__header-line"></span>
+    </div>
+
+    <div
+      class="gh-flavor-profile__scale"
+      role="group"
+      aria-label="Flavor profile: {{ flavor_profile | escape }}"
+    >
+      <div class="gh-flavor-profile__track">
+        {% for flavor in flavor_options %}
+          {% assign flavor_handle = flavor | downcase %}
+
+          <div
+            class="
+              gh-flavor-profile__item
+              {% if active_flavor == flavor_handle %}
+                gh-flavor-profile__item--active
+              {% endif %}
+            "
+          >
+            <span
+              class="gh-flavor-profile__point"
+              aria-hidden="true"
+            ></span>
+
+            <span class="gh-flavor-profile__label">
+              {{ flavor }}
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
