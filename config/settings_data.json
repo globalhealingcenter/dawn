@@ -210,9 +210,16 @@
         "disabled": false,
         "settings": {}
       },
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+        "disabled": true,
+        "settings": {
+          "defer_script": true
+        }
+      },
       "2296928500563504527": {
         "type": "shopify://apps/abra-promotions/blocks/abra/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "popup_preview": false,
           "popup_background_color": "#00260f",
@@ -240,18 +247,6 @@
           "announcement_bar_padding_x": 10,
           "sale_price_color": "#ff0000"
         }
-      },
-      "2809662434511621298": {
-        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-        "disabled": true,
-        "settings": {
-          "defer_script": true
-        }
-      },
-      "13070091535480640111": {
-        "type": "shopify://apps/attrac/blocks/app-embed/b783956d-47a9-4434-91ad-4ec960bd74b0",
-        "disabled": true,
-        "settings": {}
       }
     },
     "color_schemes": {
