@@ -302,6 +302,18 @@
           <div class="conditional-message" data-product-id="{{ product.id }}" data-country="{{ localization.country.iso_code }}"></div>
           <link rel="stylesheet" href="https://api-conditional-messaging.adoti.com/conditional-message.css">
           <script src="https://api-conditional-messaging.adoti.com/conditional-message.js" defer></script>
+          <style>
+            .conditional-message__popup-button{
+              padding: 10px 18px 10px 30px;
+              border: 0;
+              border-radius: 8px;
+              background: #fff;
+              font: inherit;
+              cursor: pointer;
+              color: #545454;
+              font-size: 15px;
+            }
+          </style>
         </div>
         {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract'  %}
           <div class="ghd--block--rb ghd--block">
