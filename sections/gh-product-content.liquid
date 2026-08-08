@@ -302,7 +302,7 @@
           </div>
           {% endif %}
 
-          {% endcomment %}
+          
           
           <div class="conditional-message" data-product-id="{{ product.id }}" data-country="{{ localization.country.iso_code }}"></div>
           <link rel="stylesheet" href="https://api-conditional-messaging.adoti.com/conditional-message.css">
@@ -325,6 +325,7 @@
               box-sizing: border-box;
             }
           </style>
+          {% endcomment %}
           
         </div>
         {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract'  %}
