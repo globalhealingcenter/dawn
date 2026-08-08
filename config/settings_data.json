@@ -246,6 +246,11 @@
         "type": "shopify://apps/klaviyo-email-marketing-sms/blocks/klaviyo-onsite-embed/2632fe16-c075-4321-a88b-50b567f42507",
         "disabled": false,
         "settings": {}
+      },
+      "17630777321892379452": {
+        "type": "shopify://apps/conditional-messaging-trial/blocks/conditional-message-embed/019fcda6-b1c2-7199-8a7e-c79cb824f6d9",
+        "disabled": false,
+        "settings": {}
       }
     },
     "color_schemes": {
