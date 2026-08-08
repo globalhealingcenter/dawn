@@ -277,6 +277,8 @@
               <img src="" srcset='' alt="" loading='lazy'>
             </div>
           </div>
+          {% comment %} // Has been replaced by the Conditional Messaging App
+
           {% if product.tags contains 'prop65' %}
           <div data-type="ghd--prop65-warning">
             {% assign prop65_id = 'prop65-product-content' %}
@@ -299,6 +301,8 @@
             </script>
           </div>
           {% endif %}
+
+          {% endcomment %}
           
           <div class="conditional-message" data-product-id="{{ product.id }}" data-country="{{ localization.country.iso_code }}"></div>
           <link rel="stylesheet" href="https://api-conditional-messaging.adoti.com/conditional-message.css">
