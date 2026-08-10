@@ -1,151 +1,1720 @@
 {% comment %}
-  Sticky Add-To-Cart Bar — Theme-agnostic version for Shopify
+  ============================================================
+  GH Sticky ATC — PDP v2
+  ============================================================
+
+  Features:
+  - Product title
+  - Rating / review count
+  - One-Time / Subscribe toggle
+  - SAVE X% badge
+  - Dynamic product/variant pricing
+  - Dynamic subscription pricing from PDP / OrderGroove
+  - Delivery frequency selector
+  - Subscription benefits bar
+  - Light / Dark design variants
+  - Main PDP Add to Cart proxy
+  - Scroll-to-top arrow
+
+  IMPORTANT:
+  Subscription pricing is NOT calculated in this section.
+  The actual subscription price/state should come from the
+  main PDP / OrderGroove implementation.
 {% endcomment %}
 
+
 {% assign selected_variant = product.selected_or_first_available_variant %}
-{% assign tagline_fallback = section.settings.tagline_text | default: 'Gentle, effective cleansing support' %}
-{% assign tagline_from_metafield = product.metafields.custom.tagline.value | default: product.metafields.custom.tagline %}
-{% assign tagline = tagline_from_metafield | default: tagline_fallback %}
+{% assign discount_pct = section.settings.subscribe_discount_pct | default: 15 %}
+{% assign color_variant = section.settings.color_variant | default: 'light' %}
 
-<div id="gh-sticky-atc"
-     class="gh-sticky-atc{% if section.settings.hide_on_desktop %} gh-sticky-atc--mobile-only{% endif %}{% if section.settings.hide_on_mobile %} gh-sticky-atc--desktop-only{% endif %}"
-     data-initial-variant="{{ selected_variant.id }}"
-     data-section-id="{{ section.id }}"
-     data-gh-sticky="true"
-     style="
-       --gh-sticky-bg: {{ section.settings.bg_color }};
-       --gh-sticky-border: {{ section.settings.border_color | color_mix: '#ffffff', 88 }};
-       --gh-sticky-shadow: 0 -6px 24px rgba(0,0,0,.06);
-       --gh-btn-bg: {{ section.settings.btn_bg }};
-       --gh-btn-color: {{ section.settings.btn_color }};
-       --gh-text: #21472d;
-     ">
 
-  <div class="gh-sticky-atc__content">
-    <div class="gh-sticky-atc__product">
-      <div class="gh-sticky-atc__img">
-        <img
-          src="{{ selected_variant.image | default: product.featured_image | img_url: '120x120' }}"
-          alt="{{ product.title | escape }}"
-          width="64" height="64" loading="lazy">
-      </div>
-      <div class="gh-sticky-atc__info">
-        <p class="gh-sticky-atc__name">{{ product.title }}</p>
-        {% if tagline != blank %}<p class="gh-sticky-atc__tagline">{{ tagline }}</p>{% endif %}
-      </div>
-    </div>
-    <div class="gh-sticky-atc__action">
-      <button id="StickyATCButton" type="button" class="product-form__submit button button--primary">
-        <span class="add-to-cart-default-text">Add to cart</span>
-        <span class="add-to-cart-subscribe-text" style="display:none;">Subscribe Now</span>
-        {% if section.settings.show_price %}<span class="gh-sticky-atc__price">| {{ selected_variant.price | money }}</span>{% endif %}
-        <div class="loading-overlay__spinner hidden" aria-hidden="true">
-          <svg class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
-            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-          </svg>
+{% comment %}
+  ------------------------------------------------------------
+  REVIEWS
+
+  Adjust these metafields if your PDP uses another review app.
+  Ideally use the same source that the main PDP review widget uses.
+  ------------------------------------------------------------
+{% endcomment %}
+
+{% assign review_count = product.metafields.custom.review_count.value %}
+{% assign review_average = product.metafields.custom.review_average.value %}
+
+{% if review_count == blank %}
+  {% assign review_count = product.metafields.spr.reviews_count %}
+{% endif %}
+
+{% if review_average == blank %}
+  {% assign review_average = product.metafields.spr.reviews_rating %}
+{% endif %}
+
+
+{% comment %}
+  ------------------------------------------------------------
+  BENEFITS
+  ------------------------------------------------------------
+{% endcomment %}
+
+{% assign benefit_1 = section.settings.benefit_1 | default: 'Free Shipping Always' %}
+{% assign benefit_2 = section.settings.benefit_2 | default: 'Cancel Anytime' %}
+{% assign benefit_3 = section.settings.benefit_3 | default: 'Skip or Pause Easily' %}
+
+
+<div
+  id="gh-sticky-atc-{{ section.id }}"
+  class="
+    gh-sticky-atc
+    gh-sticky-atc--hidden
+    {% if section.settings.hide_on_desktop %}
+      gh-sticky-atc--desktop-hidden
+    {% endif %}
+    {% if section.settings.hide_on_mobile %}
+      gh-sticky-atc--mobile-hidden
+    {% endif %}
+  "
+  data-gh-sticky="true"
+  data-gh-variant="{{ color_variant }}"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-initial-variant="{{ selected_variant.id }}"
+  data-discount-pct="{{ discount_pct }}"
+  data-show-after-px="{{ section.settings.show_after_px | default: 300 }}"
+>
+
+  {% comment %}
+    ==========================================================
+    MAIN BAR
+    ==========================================================
+  {% endcomment %}
+
+  <div class="gh-sticky-atc__bar">
+
+    <div class="gh-sticky-atc__inner">
+
+
+      {% comment %}
+        ------------------------------------------------------
+        PRODUCT TITLE + REVIEWS
+        ------------------------------------------------------
+      {% endcomment %}
+
+      <div class="gh-sticky-atc__product">
+
+        <div class="gh-sticky-atc__name">
+          {{ product.title }}
         </div>
+
+        {% if review_count != blank %}
+
+          <div
+            class="gh-sticky-atc__reviews"
+            {% if review_average != blank %}
+              aria-label="{{ review_average }} out of 5 stars, {{ review_count }} reviews"
+            {% endif %}
+          >
+
+            <span
+              class="gh-sticky-stars"
+              aria-hidden="true"
+            >
+
+              {% assign rating_val = review_average | default: 5 | times: 1.0 %}
+
+              {% for i in (1..5) %}
+
+                {% assign i_float = i | times: 1.0 %}
+
+                {% if i_float <= rating_val %}
+
+                  <svg
+                    class="gh-star gh-star--full"
+                    viewBox="0 0 20 19"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M10 0l2.39 7.36H20l-6.18 4.49 2.36 7.27L10 14.63l-6.18 4.49 2.36-7.27L0 7.36h7.61z"
+                    />
+                  </svg>
+
+                {% elsif rating_val >= i_float | minus: 0.5 %}
+
+                  <svg
+                    class="gh-star gh-star--half"
+                    viewBox="0 0 20 19"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="gh-half-star-{{ section.id }}-{{ i }}">
+                        <stop offset="50%" stop-color="currentColor"/>
+                        <stop offset="50%" stop-color="#d8d8d8"/>
+                      </linearGradient>
+                    </defs>
+
+                    <path
+                      fill="url(#gh-half-star-{{ section.id }}-{{ i }})"
+                      d="M10 0l2.39 7.36H20l-6.18 4.49 2.36 7.27L10 14.63l-6.18 4.49 2.36-7.27L0 7.36h7.61z"
+                    />
+                  </svg>
+
+                {% else %}
+
+                  <svg
+                    class="gh-star gh-star--empty"
+                    viewBox="0 0 20 19"
+                    width="18"
+                    height="18"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill="#d8d8d8"
+                      d="M10 0l2.39 7.36H20l-6.18 4.49 2.36 7.27L10 14.63l-6.18 4.49 2.36-7.27L0 7.36h7.61z"
+                    />
+                  </svg>
+
+                {% endif %}
+
+              {% endfor %}
+
+            </span>
+
+            <span class="gh-sticky-atc__review-count">
+              {{ review_count }}
+            </span>
+
+          </div>
+
+        {% endif %}
+
+      </div>
+
+
+      <div
+        class="gh-sticky-atc__divider gh-sticky-atc__divider--first"
+        aria-hidden="true"
+      ></div>
+
+
+      {% comment %}
+        ------------------------------------------------------
+        PURCHASE TYPE + DELIVERY
+        ------------------------------------------------------
+      {% endcomment %}
+
+      <div class="gh-sticky-atc__purchase">
+
+        <div
+          class="gh-sticky-toggle"
+          role="group"
+          aria-label="Purchase type"
+        >
+
+          <button
+            class="
+              gh-sticky-toggle__btn
+              gh-sticky-toggle__btn--onetime
+            "
+            type="button"
+            data-gh-toggle="onetime"
+            aria-pressed="true"
+          >
+            <span>One-Time</span>
+          </button>
+
+
+          <button
+            class="
+              gh-sticky-toggle__btn
+              gh-sticky-toggle__btn--subscribe
+            "
+            type="button"
+            data-gh-toggle="subscribe"
+            aria-pressed="false"
+          >
+
+            <span>Subscribe</span>
+
+            <span class="gh-sticky-toggle__badge">
+              SAVE {{ discount_pct }}%
+            </span>
+
+          </button>
+
+        </div>
+
+
+        {% comment %}
+          Delivery selector.
+          Hidden/disabled until subscription is active.
+        {% endcomment %}
+
+        <div
+          class="gh-sticky-delivery"
+          aria-hidden="true"
+        >
+
+          <label
+            class="gh-sticky-delivery__label"
+            for="gh-sticky-delivery-{{ section.id }}"
+          >
+            Delivery Type
+          </label>
+
+          <div class="gh-sticky-delivery__wrap">
+
+            <select
+              id="gh-sticky-delivery-{{ section.id }}"
+              class="gh-sticky-delivery__select"
+              data-gh-delivery
+              aria-label="Delivery frequency"
+              disabled
+            >
+
+              {% if product.selling_plan_groups.size > 0 %}
+
+                {% for group in product.selling_plan_groups %}
+
+                  {% for plan in group.selling_plans %}
+
+                    <option value="{{ plan.id }}">
+                      {{ plan.name }}
+                    </option>
+
+                  {% endfor %}
+
+                {% endfor %}
+
+              {% else %}
+
+                <option value="">
+                  1 month
+                </option>
+
+              {% endif %}
+
+            </select>
+
+
+            <span
+              class="gh-sticky-delivery__arrows"
+              aria-hidden="true"
+            >
+
+              <svg
+                viewBox="0 0 12 7"
+                width="10"
+                height="6"
+              >
+                <path
+                  d="M1 6L6 1L11 6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <svg
+                viewBox="0 0 12 7"
+                width="10"
+                height="6"
+              >
+                <path
+                  d="M1 1L6 6L11 1"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="gh-sticky-atc__divider gh-sticky-atc__divider--second"
+        aria-hidden="true"
+      ></div>
+
+
+      {% comment %}
+        ------------------------------------------------------
+        PRICE
+        ------------------------------------------------------
+      {% endcomment %}
+
+      <div class="gh-sticky-atc__price-block">
+
+        <span
+          class="gh-sticky-atc__compare-price"
+          data-gh-compare-price
+          style="display:none;"
+        ></span>
+
+        <span
+          class="gh-sticky-atc__price"
+          data-gh-price
+        >
+          {{ selected_variant.price | money }}
+        </span>
+
+      </div>
+
+
+      {% comment %}
+        ------------------------------------------------------
+        ADD TO CART
+        ------------------------------------------------------
+      {% endcomment %}
+
+      <button
+        class="gh-sticky-atc__btn"
+        type="button"
+        data-gh-sticky-atc-button
+        aria-label="Add {{ product.title | escape }} to cart"
+      >
+
+        <span class="gh-sticky-atc__btn-text">
+          Add to Cart
+        </span>
+
+        <span
+          class="gh-sticky-atc__spinner"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 50 50"
+            width="22"
+            height="22"
+          >
+            <circle
+              cx="25"
+              cy="25"
+              r="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="4"
+            />
+          </svg>
+        </span>
+
       </button>
+
+
+      {% comment %}
+        ------------------------------------------------------
+        SCROLL TO TOP
+        ------------------------------------------------------
+      {% endcomment %}
+
+      <button
+        class="gh-sticky-atc__scroll-btn"
+        type="button"
+        data-gh-scroll-top
+        aria-label="Back to top"
+      >
+
+        <svg
+          viewBox="0 0 32 20"
+          width="30"
+          height="20"
+          aria-hidden="true"
+        >
+          <path
+            d="M2 18L16 4L30 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+      </button>
+
     </div>
+
   </div>
+
+
+  {% comment %}
+    ==========================================================
+    SUBSCRIPTION BENEFITS
+    ==========================================================
+  {% endcomment %}
+
+  {% if section.settings.show_benefits_bar %}
+
+    <div
+      class="gh-sticky-atc__benefits"
+      aria-hidden="true"
+    >
+
+      <div class="gh-sticky-atc__benefits-inner">
+
+        <span class="gh-sticky-atc__benefit">
+
+          <span
+            class="gh-sticky-atc__benefit-star"
+            aria-hidden="true"
+          >
+            ✦
+          </span>
+
+          {{ benefit_1 }}
+
+        </span>
+
+
+        <span
+          class="gh-sticky-atc__benefits-separator"
+          aria-hidden="true"
+        >
+          |
+        </span>
+
+
+        <span class="gh-sticky-atc__benefit">
+
+          <span
+            class="gh-sticky-atc__benefit-star"
+            aria-hidden="true"
+          >
+            ✦
+          </span>
+
+          {{ benefit_2 }}
+
+        </span>
+
+
+        <span
+          class="gh-sticky-atc__benefits-separator"
+          aria-hidden="true"
+        >
+          |
+        </span>
+
+
+        <span class="gh-sticky-atc__benefit">
+
+          <span
+            class="gh-sticky-atc__benefit-star"
+            aria-hidden="true"
+          >
+            ✦
+          </span>
+
+          {{ benefit_3 }}
+
+        </span>
+
+      </div>
+
+    </div>
+
+  {% endif %}
+
 </div>
 
-<script id="gh-sticky-variants-{{ section.id }}" type="application/json">
+
+{% comment %}
+  ============================================================
+  VARIANT DATA
+
+  Used as a reliable fallback when theme/OrderGroove price
+  elements cannot immediately be read.
+  ============================================================
+{% endcomment %}
+
+<script
+  id="gh-sticky-variants-{{ section.id }}"
+  type="application/json"
+>
 [
-{% for v in product.variants %}
-  {"id":{{ v.id }},"price":{{ v.price }},"compare_at_price":{{ v.compare_at_price | default: 0 }},"available":{{ v.available | json }} }{% unless forloop.last %},{% endunless %}
-{% endfor %}
+  {% for variant in product.variants %}
+    {
+      "id": {{ variant.id | json }},
+      "available": {{ variant.available | json }},
+      "price": {{ variant.price | json }},
+      "compare_at_price": {{ variant.compare_at_price | default: 0 | json }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
 ]
 </script>
 
+
+{% comment %}
+  ============================================================
+  SELLING PLAN DATA
+  ============================================================
+{% endcomment %}
+
+<script
+  id="gh-sticky-plans-{{ section.id }}"
+  type="application/json"
+>
+[
+  {% assign plan_counter = 0 %}
+
+  {% for group in product.selling_plan_groups %}
+
+    {% for plan in group.selling_plans %}
+
+      {% if plan_counter > 0 %},{% endif %}
+
+      {
+        "id": {{ plan.id | json }},
+        "name": {{ plan.name | json }},
+        "group_name": {{ group.name | json }}
+      }
+
+      {% assign plan_counter = plan_counter | plus: 1 %}
+
+    {% endfor %}
+
+  {% endfor %}
+]
+</script>
+
+
 <style>
-.gh-sticky-atc {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  background: var(--gh-sticky-bg, #fff);
-  border-top: 1px solid var(--gh-sticky-border, #eaeaea);
-  box-shadow: var(--gh-sticky-shadow);
-  padding: 10px 14px;
-  z-index: 50;
-}
-.gh-sticky-atc--mobile-only { display: none; }
-.gh-sticky-atc--desktop-only { display: block; }
-@media (max-width: 640px){
-  .gh-sticky-atc--mobile-only { display: block; }
-  .gh-sticky-atc--desktop-only { display: none; }
-}
-.gh-sticky-atc__content {
-  max-width: var(--page-width, 1200px);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 16px;
-}
-.gh-sticky-atc__product {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 12px;
-  align-items: center;
-}
-.gh-sticky-atc__img {
-  position: relative;
-  width: 64px; height: 64px;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #f5f3ef;
-}
-.gh-sticky-atc__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.gh-sticky-atc__name {
-  margin: 0;
-  font-weight: 700;
-  color: var(--gh-text);
-  font-family: var(--gh-font-primary, inherit);
-  line-height: 1.15;
-}
-.gh-sticky-atc__tagline {
-  margin: 0;
-  font-size: 14px;
-  color: #4a6657;
-  line-height: 1.25;
-}
-.gh-sticky-atc__action .button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background-color: var(--gh-btn-bg, #21472d) !important;
-  color: var(--gh-btn-color, #fff) !important;
-  padding: 12px 18px;
-  border-radius: 6px;
-  min-width: 240px;
-}
-.gh-sticky-atc__price { margin-left: 4px; opacity: .95; }
-@media (max-width: 640px){
-  .gh-sticky-atc__content { grid-template-columns: 1fr; gap: 12px; }
-  .gh-sticky-atc__action .button { width: 100%; }
-}
+
+  /* ========================================================
+     BASE TOKENS
+     ======================================================== */
+
+  .gh-sticky-atc {
+    --gh-green: #0b4527;
+    --gh-green-medium: #294b32;
+    --gh-gold: #d9ad24;
+    --gh-cream: #f8f4ee;
+    --gh-white: #ffffff;
+
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    z-index: 999;
+
+    font-family: var(
+      --font-body-family,
+      Arial,
+      sans-serif
+    );
+
+    box-shadow: 0 -2px 18px rgba(0, 0, 0, 0.08);
+
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+
+  .gh-sticky-atc--hidden {
+    transform: translateY(110%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  /* ========================================================
+     LIGHT VARIANT
+     ======================================================== */
+
+  .gh-sticky-atc[data-gh-variant="light"] {
+
+    --gh-bar-bg: #ffffff;
+    --gh-product-text: #11462a;
+
+    --gh-divider: #d7af29;
+
+    --gh-toggle-bg: #154a2b;
+    --gh-toggle-border: #d7af29;
+
+    --gh-toggle-text: #ffffff;
+    --gh-subscribe-active-bg: #ddb528;
+    --gh-subscribe-active-text: #16482b;
+
+    --gh-badge-bg: #f6edbd;
+    --gh-badge-text: #18492c;
+
+    --gh-delivery-label: #c4c4c4;
+    --gh-delivery-bg: #154a2b;
+    --gh-delivery-text: #ffffff;
+
+    --gh-price-text: #0c4527;
+    --gh-compare-text: #8b9890;
+
+    --gh-button-bg: #294c32;
+    --gh-button-text: #ffffff;
+
+    --gh-arrow-bg: #17492c;
+    --gh-arrow-text: #ffffff;
+
+    --gh-benefit-bg: #063d20;
+    --gh-benefit-text: #c9b86f;
+
+    --gh-star-color: #d7aa24;
+  }
+
+
+  /* ========================================================
+     DARK VARIANT
+     ======================================================== */
+
+  .gh-sticky-atc[data-gh-variant="dark"] {
+
+    --gh-bar-bg: #294b32;
+    --gh-product-text: #ffffff;
+
+    --gh-divider: #d7af29;
+
+    --gh-toggle-bg: #154a2b;
+    --gh-toggle-border: #d7af29;
+
+    --gh-toggle-text: #ffffff;
+    --gh-subscribe-active-bg: #ddb528;
+    --gh-subscribe-active-text: #16482b;
+
+    --gh-badge-bg: #f6edbd;
+    --gh-badge-text: #18492c;
+
+    --gh-delivery-label: #c8c4b5;
+    --gh-delivery-bg: #0c4728;
+    --gh-delivery-text: #ffffff;
+
+    --gh-price-text: #ffffff;
+    --gh-compare-text: rgba(255,255,255,.55);
+
+    --gh-button-bg: #ffffff;
+    --gh-button-text: #25482f;
+
+    --gh-arrow-bg: #ddb528;
+    --gh-arrow-text: #17492c;
+
+    --gh-benefit-bg: #063d20;
+    --gh-benefit-text: #c9b86f;
+
+    --gh-star-color: #d7aa24;
+  }
+
+
+  /* ========================================================
+     MAIN BAR
+     ======================================================== */
+
+  .gh-sticky-atc__bar {
+    width: 100%;
+    background: var(--gh-bar-bg);
+  }
+
+
+  .gh-sticky-atc__inner {
+    width: 100%;
+    min-height: 142px;
+
+    padding: 26px 56px;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(220px, 280px)
+      1px
+      minmax(390px, 1fr)
+      1px
+      minmax(110px, 130px)
+      minmax(280px, 340px)
+      70px;
+
+    align-items: center;
+
+    column-gap: 54px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* ========================================================
+     PRODUCT
+     ======================================================== */
+
+  .gh-sticky-atc__product {
+    min-width: 0;
+  }
+
+
+  .gh-sticky-atc__name {
+    margin: 0 0 8px;
+
+    color: var(--gh-product-text);
+
+    font-family:
+      var(--font-heading-family),
+      Georgia,
+      serif;
+
+    font-size: clamp(24px, 1.8vw, 36px);
+
+    font-weight: 600;
+
+    line-height: 1.1;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .gh-sticky-atc__reviews {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: var(--gh-star-color);
+  }
+
+
+  .gh-sticky-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+
+  .gh-sticky-atc__review-count {
+    color: #929792;
+
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+
+  /* ========================================================
+     DIVIDERS
+     ======================================================== */
+
+  .gh-sticky-atc__divider {
+    width: 1px;
+    height: 76px;
+
+    background: var(--gh-divider);
+  }
+
+
+  /* ========================================================
+     PURCHASE AREA
+     ======================================================== */
+
+  .gh-sticky-atc__purchase {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 48px;
+
+    min-width: 0;
+  }
+
+
+  /* ========================================================
+     PURCHASE TOGGLE
+     ======================================================== */
+
+  .gh-sticky-toggle {
+    display: inline-flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    min-width: 400px;
+
+    padding: 4px;
+
+    background: var(--gh-toggle-bg);
+
+    border: 2px solid var(--gh-toggle-border);
+
+    border-radius: 999px;
+  }
+
+
+  .gh-sticky-toggle__btn {
+    min-height: 42px;
+
+    border: 0;
+    outline: 0;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 8px 24px;
+
+    border-radius: 999px;
+
+    background: transparent;
+
+    color: var(--gh-toggle-text);
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+      background 0.2s ease,
+      color 0.2s ease;
+
+    white-space: nowrap;
+  }
+
+
+  .gh-sticky-toggle__btn--onetime {
+    flex: 1;
+  }
+
+
+  .gh-sticky-toggle__btn--subscribe {
+    flex: 1.35;
+  }
+
+
+  /*
+   * One-Time selected:
+   * Keep it dark as shown in supplied design.
+   */
+
+  .gh-sticky-toggle__btn--onetime[aria-pressed="true"] {
+    background: transparent;
+    color: #ffffff;
+  }
+
+
+  /*
+   * Subscribe selected:
+   * Gold active pill.
+   */
+
+  .gh-sticky-toggle__btn--subscribe[aria-pressed="true"] {
+    background: var(--gh-subscribe-active-bg);
+    color: var(--gh-subscribe-active-text);
+  }
+
+
+  .gh-sticky-toggle__badge {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 12px;
+
+    background: var(--gh-badge-bg);
+
+    color: var(--gh-badge-text);
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    white-space: nowrap;
+  }
+
+
+  /*
+   * Hide save badge when One-Time is selected if desired.
+   * Requirement/design shows badge as part of Subscribe pill,
+   * so we leave it visible.
+   */
+
+
+  /* ========================================================
+     DELIVERY
+     ======================================================== */
+
+  .gh-sticky-delivery {
+    min-width: 140px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+
+  .gh-sticky-atc--subscribed .gh-sticky-delivery {
+    visibility: visible;
+
+    opacity: 1;
+
+    pointer-events: auto;
+  }
+
+
+  .gh-sticky-delivery__label {
+    padding-left: 12px;
+
+    color: var(--gh-delivery-label);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+  }
+
+
+  .gh-sticky-delivery__wrap {
+    position: relative;
+  }
+
+
+  .gh-sticky-delivery__select {
+    width: 100%;
+    height: 50px;
+
+    margin: 0;
+
+    padding: 0 45px 0 16px;
+
+    border: 0;
+    outline: 0;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    background: var(--gh-delivery-bg);
+
+    color: var(--gh-delivery-text);
+
+    border-radius: 999px;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+
+  .gh-sticky-delivery__arrows {
+    position: absolute;
+
+    top: 50%;
+    right: 16px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    color: rgba(255,255,255,.7);
+
+    pointer-events: none;
+  }
+
+
+  /* ========================================================
+     PRICE
+     ======================================================== */
+
+  .gh-sticky-atc__price-block {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 3px;
+
+    white-space: nowrap;
+  }
+
+
+  .gh-sticky-atc__compare-price {
+    color: var(--gh-compare-text);
+
+    font-size: 14px;
+
+    line-height: 1;
+
+    text-decoration: line-through;
+  }
+
+
+  .gh-sticky-atc__price {
+    color: var(--gh-price-text);
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    line-height: 1;
+  }
+
+
+  /* ========================================================
+     ADD TO CART
+     ======================================================== */
+
+  .gh-sticky-atc__btn {
+    width: 100%;
+
+    min-height: 76px;
+
+    padding: 16px 30px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    background: var(--gh-button-bg);
+
+    color: var(--gh-button-text);
+
+    font-family:
+      var(--font-heading-family),
+      Georgia,
+      serif;
+
+    font-size: clamp(24px, 1.7vw, 33px);
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+      opacity 0.2s ease,
+      transform 0.1s ease;
+  }
+
+
+  .gh-sticky-atc__btn:hover {
+    opacity: 0.92;
+  }
+
+
+  .gh-sticky-atc__btn:active {
+    transform: scale(0.99);
+  }
+
+
+  .gh-sticky-atc__btn[disabled] {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+  }
+
+
+  .gh-sticky-atc__spinner {
+    display: none;
+  }
+
+
+  .gh-sticky-atc__btn.is-loading .gh-sticky-atc__spinner {
+    display: inline-flex;
+  }
+
+
+  .gh-sticky-atc__btn.is-loading .gh-sticky-atc__btn-text {
+    opacity: 0.6;
+  }
+
+
+  .gh-sticky-atc__spinner svg {
+    animation: ghStickySpin 0.8s linear infinite;
+  }
+
+
+  @keyframes ghStickySpin {
+
+    to {
+      transform: rotate(360deg);
+    }
+
+  }
+
+
+  /* ========================================================
+     SCROLL TO TOP
+     ======================================================== */
+
+  .gh-sticky-atc__scroll-btn {
+    width: 70px;
+    height: 70px;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--gh-arrow-bg);
+
+    color: var(--gh-arrow-text);
+
+    cursor: pointer;
+
+    transition:
+      opacity 0.2s ease,
+      transform 0.15s ease;
+  }
+
+
+  .gh-sticky-atc__scroll-btn:hover {
+    opacity: 0.9;
+  }
+
+
+  .gh-sticky-atc__scroll-btn:active {
+    transform: scale(0.95);
+  }
+
+
+  /* ========================================================
+     BENEFITS
+     ======================================================== */
+
+  .gh-sticky-atc__benefits {
+    display: none;
+
+    min-height: 58px;
+
+    padding: 15px 20px;
+
+    box-sizing: border-box;
+
+    background: var(--gh-benefit-bg);
+
+    color: var(--gh-benefit-text);
+  }
+
+
+  .gh-sticky-atc--subscribed .gh-sticky-atc__benefits {
+    display: flex;
+  }
+
+
+  .gh-sticky-atc__benefits-inner {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+  }
+
+
+  .gh-sticky-atc__benefit {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: var(--gh-benefit-text);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+  }
+
+
+  .gh-sticky-atc__benefit-star {
+    color: var(--gh-gold);
+
+    font-size: 15px;
+  }
+
+
+  .gh-sticky-atc__benefits-separator {
+    opacity: 0.65;
+  }
+
+
+  /* ========================================================
+     DESKTOP RESPONSIVE
+     ======================================================== */
+
+  @media screen and (max-width: 1500px) {
+
+    .gh-sticky-atc__inner {
+
+      grid-template-columns:
+        minmax(180px, 230px)
+        1px
+        minmax(360px, 1fr)
+        1px
+        minmax(100px, 120px)
+        minmax(230px, 280px)
+        60px;
+
+      column-gap: 30px;
+
+      padding-left: 36px;
+      padding-right: 36px;
+    }
+
+
+    .gh-sticky-toggle {
+      min-width: 350px;
+    }
+
+
+    .gh-sticky-atc__purchase {
+      gap: 25px;
+    }
+
+
+    .gh-sticky-atc__scroll-btn {
+      width: 60px;
+      height: 60px;
+    }
+
+  }
+
+
+  @media screen and (max-width: 1200px) {
+
+    .gh-sticky-atc__inner {
+
+      grid-template-columns:
+        minmax(150px, 190px)
+        1px
+        minmax(320px, 1fr)
+        1px
+        100px
+        minmax(180px, 230px)
+        54px;
+
+      column-gap: 18px;
+
+      padding: 22px 22px;
+    }
+
+
+    .gh-sticky-toggle {
+      min-width: 310px;
+    }
+
+
+    .gh-sticky-toggle__btn {
+      padding: 7px 15px;
+
+      font-size: 14px;
+    }
+
+
+    .gh-sticky-toggle__badge {
+      padding: 4px 8px;
+
+      font-size: 10px;
+    }
+
+
+    .gh-sticky-atc__purchase {
+      gap: 16px;
+    }
+
+
+    .gh-sticky-atc__name {
+      font-size: 24px;
+    }
+
+
+    .gh-sticky-atc__btn {
+      min-height: 64px;
+
+      font-size: 23px;
+    }
+
+
+    .gh-sticky-atc__scroll-btn {
+      width: 54px;
+      height: 54px;
+    }
+
+  }
+
+
+  /* ========================================================
+     MOBILE
+     ======================================================== */
+
+  @media screen and (max-width: 767px) {
+
+    .gh-sticky-atc__bar {
+      padding: 0;
+    }
+
+
+    .gh-sticky-atc__inner {
+      min-height: auto;
+
+      padding: 12px 14px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+    }
+
+
+    .gh-sticky-atc__product,
+    .gh-sticky-atc__divider {
+      display: none;
+    }
+
+
+    .gh-sticky-atc__purchase {
+      width: 100%;
+
+      order: 1;
+
+      display: flex;
+
+      gap: 8px;
+    }
+
+
+    .gh-sticky-toggle {
+      flex: 1;
+
+      min-width: 0;
+    }
+
+
+    .gh-sticky-toggle__btn {
+      min-height: 36px;
+
+      padding: 6px 10px;
+
+      gap: 5px;
+
+      font-size: 12px;
+    }
+
+
+    .gh-sticky-toggle__badge {
+      padding: 3px 6px;
+
+      font-size: 8px;
+    }
+
+
+    .gh-sticky-delivery {
+      min-width: 105px;
+    }
+
+
+    .gh-sticky-delivery__label {
+      font-size: 8px;
+    }
+
+
+    .gh-sticky-delivery__select {
+      height: 40px;
+
+      padding-left: 12px;
+      padding-right: 32px;
+
+      font-size: 11px;
+    }
+
+
+    .gh-sticky-delivery__arrows {
+      right: 10px;
+    }
+
+
+    .gh-sticky-atc__price-block {
+      order: 2;
+
+      flex: 0 0 auto;
+
+      align-items: flex-start;
+    }
+
+
+    .gh-sticky-atc__compare-price {
+      font-size: 10px;
+    }
+
+
+    .gh-sticky-atc__price {
+      font-size: 18px;
+    }
+
+
+    .gh-sticky-atc__btn {
+      order: 3;
+
+      flex: 1;
+
+      width: auto;
+
+      min-height: 48px;
+
+      padding: 10px 16px;
+
+      font-size: 18px;
+    }
+
+
+    .gh-sticky-atc__scroll-btn {
+      order: 4;
+
+      width: 48px;
+      height: 48px;
+    }
+
+
+    .gh-sticky-atc__scroll-btn svg {
+      width: 22px;
+    }
+
+
+    .gh-sticky-atc__benefits {
+      min-height: auto;
+
+      padding: 9px 12px;
+    }
+
+
+    .gh-sticky-atc__benefits-inner {
+      gap: 7px;
+
+      flex-wrap: wrap;
+    }
+
+
+    .gh-sticky-atc__benefit {
+      font-size: 8px;
+    }
+
+
+    .gh-sticky-atc__benefits-separator {
+      font-size: 8px;
+    }
+
+  }
+
+
+  @media screen and (max-width: 420px) {
+
+    .gh-sticky-toggle__btn {
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+
+
+    .gh-sticky-toggle__badge {
+      display: none;
+    }
+
+
+    .gh-sticky-delivery {
+      min-width: 95px;
+    }
+
+  }
+
+
+  /* ========================================================
+     SECTION VISIBILITY SETTINGS
+     ======================================================== */
+
+  @media screen and (min-width: 768px) {
+
+    .gh-sticky-atc--desktop-hidden {
+      display: none !important;
+    }
+
+  }
+
+
+  @media screen and (max-width: 767px) {
+
+    .gh-sticky-atc--mobile-hidden {
+      display: none !important;
+    }
+
+  }
+
 </style>
 
+
 {{ 'gh-sticky-atc.js' | asset_url | script_tag }}
+
 
 {% schema %}
 {
   "name": "Sticky Add To Cart Bar",
-  "templates": ["product"],
+  "templates": [
+    "product"
+  ],
   "presets": [
-    { "name": "Sticky Add To Cart Bar" }
+    {
+      "name": "Sticky Add To Cart Bar"
+    }
   ],
   "settings": [
-    { "type": "checkbox", "id": "show_price", "label": "Show price in button", "default": true },
-    { "type": "text", "id": "tagline_text", "label": "Fallback tagline", "default": "Gentle, effective cleansing support" },
-    { "type": "header", "content": "Visibility" },
-    { "type": "checkbox", "id": "hide_on_mobile", "label": "Hide on mobile", "default": false },
-    { "type": "checkbox", "id": "hide_on_desktop", "label": "Hide on desktop", "default": false },
-    { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Bar background", "default": "#ffffff" },
-    { "type": "color", "id": "border_color", "label": "Top border (base color)", "default": "#21472d" },
-    { "type": "color", "id": "btn_bg", "label": "Button background", "default": "#21472d" },
-    { "type": "color", "id": "btn_color", "label": "Button text color", "default": "#ffffff" }
+    {
+      "type": "header",
+      "content": "Design Variant"
+    },
+    {
+      "type": "select",
+      "id": "color_variant",
+      "label": "Colour Theme",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light / Cream"
+        },
+        {
+          "value": "dark",
+          "label": "Dark / Forest Green"
+        }
+      ],
+      "default": "light"
+    },
+    {
+      "type": "header",
+      "content": "Subscription"
+    },
+    {
+      "type": "number",
+      "id": "subscribe_discount_pct",
+      "label": "Subscribe saving badge %",
+      "default": 15,
+      "info": "Badge text only. The actual subscription price must come from OrderGroove / the main PDP purchase options."
+    },
+    {
+      "type": "header",
+      "content": "Subscription Benefits"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_benefits_bar",
+      "label": "Show subscription benefits bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "benefit_1",
+      "label": "Benefit 1",
+      "default": "Free Shipping Always"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2",
+      "label": "Benefit 2",
+      "default": "Cancel Anytime"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3",
+      "label": "Benefit 3",
+      "default": "Skip or Pause Easily"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Hide on desktop",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Sticky Trigger"
+    },
+    {
+      "type": "range",
+      "id": "show_after_px",
+      "label": "Show after scrolling",
+      "min": 0,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 300,
+      "info": "Use 0 if the bar should always be visible."
+    }
   ]
 }
 {% endschema %}
