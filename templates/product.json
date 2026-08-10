@@ -103,30 +103,6 @@
             "publishId": "zgl654227kz70"
           }
         },
-        "abra_promotions_banner_gift_RQAc3p": {
-          "type": "shopify://apps/abra-promotions/blocks/banner-gift/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
-          "disabled": true,
-          "settings": {
-            "name": "Gift",
-            "color": "#21472d",
-            "icon_color": "#00260f",
-            "progress_bar_color": "#00260f",
-            "font_size": 14,
-            "icon_size": 14,
-            "text_align": "center",
-            "discount_background_color": "#f9f2e8",
-            "discount_padding_y": 10,
-            "discount_padding_x": 10,
-            "discount_title_color": "#000000",
-            "discount_price_color": "#404040",
-            "discount_title_font_size": 14,
-            "discount_price_font_size": 12,
-            "add_variant_color": "#000000",
-            "add_variant_text_color": "#ffffff",
-            "add_variant_disabled_color": "#000000",
-            "add_variant_disabled_text_color": "#ffffff"
-          }
-        },
         "abra_promotions_banner_f4iJ7z": {
           "type": "shopify://apps/abra-promotions/blocks/banner/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
           "disabled": true,
@@ -190,7 +166,6 @@
         "buy_buttons",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
-        "abra_promotions_banner_gift_RQAc3p",
         "abra_promotions_banner_f4iJ7z",
         "abra_promotions_banner_nUzYdW",
         "abra_promotions_dynamic_text_qHxcwi"
@@ -330,7 +305,6 @@
     },
     "gh_sticky_atc_gRBYqU": {
       "type": "gh-sticky-atc",
-      "disabled": true,
       "name": "Sticky Add To Cart Bar",
       "settings": {
         "show_price": true,
