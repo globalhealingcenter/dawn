@@ -620,6 +620,154 @@
           </div>
         </div>
       {% endif %}
+      {% when 'ingredients-v2' %}
+
+      {% assign ingredient_count = block.items.size %}
+
+      {% if ingredient_count > 4 %}
+        {% assign ingredient_count = 4 %}
+      {% endif %}
+
+      <div
+        class="ghiv2 ghiv2--count-{{ ingredient_count }}"
+        data-ingredient-count="{{ ingredient_count }}"
+      >
+
+        <div class="ghiv2__inner">
+
+          <div class="ghiv2__intro">
+
+            <div class="ghiv2__label">
+              INGREDIENTS
+            </div>
+
+            {% unless block.title.main == blank %}
+              <h2 class="ghiv2__heading">
+                {{ block.title.main }}
+              </h2>
+            {% endunless %}
+
+          </div>
+
+          {% unless block.subhead == blank %}
+            <div class="ghiv2__subhead">
+              {{ block.subhead }}
+            </div>
+          {% endunless %}
+
+
+          {% if block.items != blank %}
+
+            <div class="ghiv2__ingredients">
+
+              {% for detail in block.items limit: 4 %}
+
+                <div class="ghiv2__ingredient">
+
+                  {% unless detail.image == blank %}
+                    <div class="ghiv2__ingredient-image">
+                      <img
+                        src="{{ detail.image }}"
+                        alt="{{ detail.title | escape }}"
+                        loading="lazy"
+                        width="600"
+                        height="400"
+                      >
+                    </div>
+                  {% endunless %}
+
+                  <div class="ghiv2__ingredient-content">
+
+                    {% unless detail.title == blank %}
+                      <h3 class="ghiv2__ingredient-title">
+                        {{ detail.title }}
+                      </h3>
+                    {% endunless %}
+
+                    {% unless detail.content == blank %}
+                      <div class="ghiv2__ingredient-description">
+                        {{ detail.content }}
+                      </div>
+                    {% endunless %}
+
+                  </div>
+
+                </div>
+
+              {% endfor %}
+
+            </div>
+
+          {% endif %}
+
+
+          {% unless block.full_ingredient_list.text == blank %}
+            <div class="ghiv2__full-list">
+
+              {% if block.full_ingredient_list.url != blank %}
+                <a
+                  href="{{ block.full_ingredient_list.url }}"
+                  class="ghiv2__full-list-link"
+                >
+                  {{ block.full_ingredient_list.text }}
+                </a>
+              {% else %}
+                <span class="ghiv2__full-list-link">
+                  {{ block.full_ingredient_list.text }}
+                </span>
+              {% endif %}
+
+            </div>
+          {% endunless %}
+
+
+          {% if product.tags contains 'prop65' %}
+
+            <div class="ghiv2__prop65">
+
+              {% assign prop65_v2_id = 'prop65-product-content-v2' %}
+
+              {% render
+                'gh-element-dialog',
+                button_text: "<b>WARNING</b> - California's Proposition 65",
+                id: prop65_v2_id,
+                content: ''
+              %}
+
+              <script>
+                (function () {
+                  var productSkus = [];
+
+                  {% for variant in product.variants %}
+                    productSkus.push({{ variant.sku | json }});
+                  {% endfor %}
+
+                  if (
+                    window.gh &&
+                    gh.shopify &&
+                    gh.shopify.checkout &&
+                    typeof gh.shopify.checkout.prop65Message === 'function'
+                  ) {
+                    gh.shopify.checkout.prop65Message(productSkus, function(html) {
+                      var dialogContent = document.querySelector(
+                        '#dialog-{{ prop65_v2_id }} .ghd--dialog-content'
+                      );
+
+                      if (dialogContent) {
+                        dialogContent.innerHTML = html;
+                      }
+                    });
+                  }
+                })();
+              </script>
+
+            </div>
+
+          {% endif %}
+
+        </div>
+
+      </div>
       {% when 'ingredients' %}
         <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
           <div data-type="header">

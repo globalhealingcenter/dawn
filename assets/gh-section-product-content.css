@@ -458,6 +458,428 @@
     }
 }
 
+/* 
+** Ingredients - v2
+*/
+/* ==========================================================
+   Ingredients V2
+   ========================================================== */
+
+.ghiv2 {
+    width: 100%;
+    background: #fff;
+    padding: 7rem 0;
+    color: var(--gh-color-green, #003c2f);
+}
+
+.ghiv2__inner {
+    width: 100%;
+    margin-inline: auto;
+    padding: 0px 16rem;
+}
+
+
+/* ----------------------------------------------------------
+   Intro
+   ---------------------------------------------------------- */
+
+.ghiv2__intro {
+    min-width: 0;
+}
+
+.ghiv2__label {
+    margin: 0 0 1rem;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.ghiv2__heading {
+    max-width: 570px;
+    margin: 0;
+    color: var(--gh-color-green, #003c2f);
+    font-family: var(--font-heading-family, inherit);
+    font-size: clamp(3.2rem, 3vw, 5rem);
+    line-height: 1.02;
+    font-weight: 400;
+}
+
+.ghiv2__subhead {
+    max-width: 430px;
+    color: #222;
+    font-size: 1.6rem;
+    line-height: 1.4;
+}
+
+
+/* ----------------------------------------------------------
+   Ingredient cards
+   ---------------------------------------------------------- */
+
+.ghiv2__ingredients {
+    min-width: 0;
+}
+
+.ghiv2__ingredient {
+    min-width: 0;
+}
+
+.ghiv2__ingredient-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.ghiv2__ingredient-image img {
+    display: block;
+    width: 100%;
+    max-width: 230px;
+    height: 150px;
+    object-fit: contain;
+}
+
+.ghiv2__ingredient-content {
+    width: 100%;
+}
+
+.ghiv2__ingredient-title {
+    margin: 0;
+    padding: 0 0 0.8rem;
+    border-bottom: 1px solid currentColor;
+
+    color: var(--gh-color-green, #003c2f);
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.ghiv2__ingredient-description {
+    margin-top: 1rem;
+    color: #222;
+    font-size: 1.5rem;
+    line-height: 1.35;
+}
+
+.ghiv2__ingredient-description>*:first-child {
+    margin-top: 0;
+}
+
+.ghiv2__ingredient-description>*:last-child {
+    margin-bottom: 0;
+}
+
+
+/* ----------------------------------------------------------
+   Full ingredient list
+   ---------------------------------------------------------- */
+
+.ghiv2__full-list {
+    margin-top: 4.5rem;
+}
+
+.ghiv2__full-list-link {
+    color: var(--gh-color-green, #003c2f);
+    font-size: 1.5rem;
+    line-height: 1.3;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+
+/* ==========================================================
+   FOUR INGREDIENTS
+   Design:
+   heading + subhead on top
+   four ingredients underneath
+   ========================================================== */
+
+.ghiv2--count-4 .ghiv2__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+    column-gap: 8rem;
+}
+
+.ghiv2--count-4 .ghiv2__intro {
+    grid-column: 1;
+}
+
+.ghiv2--count-4 .ghiv2__subhead {
+    grid-column: 2;
+    align-self: end;
+}
+
+.ghiv2--count-4 .ghiv2__ingredients {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4.5rem;
+
+    margin-top: 6rem;
+}
+
+.ghiv2--count-4 .ghiv2__full-list {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   THREE INGREDIENTS
+   Same general structure as 4-up, but 3 columns
+   ========================================================== */
+
+.ghiv2--count-3 .ghiv2__inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+    column-gap: 8rem;
+}
+
+.ghiv2--count-3 .ghiv2__intro {
+    grid-column: 1;
+}
+
+.ghiv2--count-3 .ghiv2__subhead {
+    grid-column: 2;
+    align-self: end;
+}
+
+.ghiv2--count-3 .ghiv2__ingredients {
+    grid-column: 1 / -1;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6rem;
+
+    margin-top: 6rem;
+    padding-inline: 9%;
+}
+
+.ghiv2--count-3 .ghiv2__full-list {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+
+/* ==========================================================
+   TWO INGREDIENTS
+   Design:
+   story on left
+   ingredient 1 + ingredient 2 on right
+   ========================================================== */
+
+.ghiv2--count-2 .ghiv2__inner {
+    display: grid;
+    grid-template-columns:
+        minmax(300px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-areas:
+        "intro ingredients"
+        "subhead ingredients"
+        "link ingredients";
+    column-gap: clamp(5rem, 8vw, 12rem);
+    align-items: start;
+}
+
+.ghiv2--count-2 .ghiv2__intro {
+    grid-area: intro;
+}
+
+.ghiv2--count-2 .ghiv2__subhead {
+    grid-area: subhead;
+    margin-top: 3rem;
+}
+
+.ghiv2--count-2 .ghiv2__ingredients {
+    grid-area: ingredients;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3rem, 5vw, 7rem);
+}
+
+.ghiv2--count-2 .ghiv2__full-list {
+    grid-area: link;
+    margin-top: 2rem;
+}
+
+
+/* ==========================================================
+   SINGLE INGREDIENT
+   Design:
+   story on left
+   large ingredient image on right
+   ========================================================== */
+
+.ghiv2--count-1 .ghiv2__inner {
+    display: grid;
+    grid-template-columns:
+        minmax(300px, 0.9fr) minmax(0, 1.1fr);
+    grid-template-areas:
+        "intro ingredients"
+        "subhead ingredients"
+        "link ingredients";
+    column-gap: clamp(5rem, 9vw, 14rem);
+    align-items: center;
+}
+
+.ghiv2--count-1 .ghiv2__intro {
+    grid-area: intro;
+}
+
+.ghiv2--count-1 .ghiv2__subhead {
+    grid-area: subhead;
+    margin-top: 2.5rem;
+}
+
+.ghiv2--count-1 .ghiv2__ingredients {
+    grid-area: ingredients;
+}
+
+.ghiv2--count-1 .ghiv2__ingredient-image {
+    margin: 0;
+}
+
+.ghiv2--count-1 .ghiv2__ingredient-image img {
+    max-width: 560px;
+    height: 320px;
+}
+
+.ghiv2--count-1 .ghiv2__ingredient-content {
+    margin-top: 2rem;
+}
+
+.ghiv2--count-1 .ghiv2__full-list {
+    grid-area: link;
+    margin-top: 2rem;
+}
+
+
+/* ----------------------------------------------------------
+   Prop 65
+   ---------------------------------------------------------- */
+
+.ghiv2__prop65 {
+    margin-top: 5rem;
+    padding-top: 2rem;
+    border-bottom: 1px solid var(--gh-color-green, #003c2f);
+    padding-bottom: 2rem;
+}
+
+
+/* ==========================================================
+   Tablet
+   ========================================================== */
+
+@media screen and (max-width: 989px) {
+
+    .ghiv2 {
+        padding: 5rem 0;
+    }
+
+    .ghiv2__inner {
+        width: min(100% - 3rem, 900px);
+    }
+
+    .ghiv2--count-4 .ghiv2__inner,
+    .ghiv2--count-3 .ghiv2__inner {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4rem;
+    }
+
+    .ghiv2--count-4 .ghiv2__ingredients {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 4rem;
+    }
+
+    .ghiv2--count-3 .ghiv2__ingredients {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding-inline: 0;
+        gap: 3rem;
+    }
+
+}
+
+
+/* ==========================================================
+   Mobile
+   ========================================================== */
+
+@media screen and (max-width: 749px) {
+
+    .ghiv2 {
+        padding: 4rem 0;
+    }
+
+    .ghiv2__inner {
+        width: calc(100% - 3rem);
+    }
+
+    .ghiv2__label {
+        margin-bottom: 0.8rem;
+    }
+
+    .ghiv2__heading {
+        font-size: 3.2rem;
+        line-height: 1.05;
+    }
+
+    .ghiv2__subhead {
+        margin-top: 2rem !important;
+        font-size: 1.5rem;
+    }
+
+
+    /* Reset all desktop layouts */
+
+    .ghiv2--count-1 .ghiv2__inner,
+    .ghiv2--count-2 .ghiv2__inner,
+    .ghiv2--count-3 .ghiv2__inner,
+    .ghiv2--count-4 .ghiv2__inner {
+        display: block;
+    }
+
+    .ghiv2--count-1 .ghiv2__ingredients,
+    .ghiv2--count-2 .ghiv2__ingredients,
+    .ghiv2--count-3 .ghiv2__ingredients,
+    .ghiv2--count-4 .ghiv2__ingredients {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 4rem;
+
+        margin-top: 4rem;
+        padding-inline: 0;
+    }
+
+    .ghiv2__ingredient-image img {
+        max-width: 260px;
+        height: 170px;
+    }
+
+    .ghiv2--count-1 .ghiv2__ingredient-image img {
+        max-width: 100%;
+        height: 250px;
+    }
+
+    .ghiv2__full-list,
+    .ghiv2--count-1 .ghiv2__full-list,
+    .ghiv2--count-2 .ghiv2__full-list,
+    .ghiv2--count-3 .ghiv2__full-list,
+    .ghiv2--count-4 .ghiv2__full-list {
+        margin-top: 3.5rem;
+        text-align: left;
+    }
+
+    .ghiv2__prop65 {
+        margin-top: 4rem;
+    }
+
+}
+
 
 /*
     Miron Glass
