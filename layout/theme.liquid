@@ -14,6 +14,10 @@
     <meta name="theme-color" content="">
     <meta name="google-site-verification" content="GAl8RHdIopPIKMZdcGYud7wvTvmKLZW32YTWQwdObFI">
 
+    {% if request.path == '/collections/all' %}
+      <meta http-equiv="refresh" content="0;url=/collections/products">
+    {% endif %}
+
     <!--
       ============================================
       FIX C + D: Tapcart Safe Shim for Yotpo Rewards & Reviews
