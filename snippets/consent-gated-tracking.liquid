@@ -4,7 +4,7 @@
   Snapchat (Shopify channel) is auto-injected via content_for_header on window load – blocked here
   until marketing consent, then loaded explicitly.
   Loaded only after gh:consentUpdate (dispatched from gcm-integration-script.liquid).
-{%- endcomment -%}
+
 <script>
   (function () {
     var loaded = {
@@ -250,3 +250,5 @@
     }
   })();
 </script>
+
+{%- endcomment -%}
