@@ -1,0 +1,2017 @@
+{% comment %}
+  Global Healing - Sticky Purchase Bar V2
+
+  Features:
+  - Hidden by default
+  - Shows after configurable scroll distance
+  - Dynamic Ordergroove subscription widget
+  - Shopify selling-plan pricing
+  - Product rating via Yotpo
+  - Light / dark variants
+  - Scroll to top button
+  - Variant sync with main PDP
+
+  Ordergroove Widget:
+  - Location / Widget ID: 7b1327d3
+{% endcomment %}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<section
+  id="GHStickyPurchase-{{ section.id }}"
+  class="
+    gh-spb
+    gh-spb--{{ section.settings.theme_variant }}
+    {% if section.settings.hide_mobile %}gh-spb--hide-mobile{% endif %}
+    {% if section.settings.hide_desktop %}gh-spb--hide-desktop{% endif %}
+  "
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-current-variant="{{ current_variant.id }}"
+
+  style="
+    --gh-spb-light-bg: {{ section.settings.light_background }};
+    --gh-spb-light-text: {{ section.settings.light_text }};
+    --gh-spb-light-accent: {{ section.settings.light_accent }};
+
+    --gh-spb-dark-bg: {{ section.settings.dark_background }};
+    --gh-spb-dark-text: {{ section.settings.dark_text }};
+    --gh-spb-dark-accent: {{ section.settings.dark_accent }};
+
+    --gh-spb-benefits-bg: {{ section.settings.benefits_background }};
+    --gh-spb-button-radius: {{ section.settings.button_radius }}px;
+    --gh-spb-max-width: {{ section.settings.max_width }}px;
+  "
+>
+
+  <div class="gh-spb__main">
+
+    <div class="gh-spb__inner">
+
+      <!-- ================================
+           PRODUCT / REVIEWS
+      ================================= -->
+
+      <div class="gh-spb__product">
+
+        <div class="gh-spb__product-name">
+          {{ product.title }}
+        </div>
+
+        {% if section.settings.show_reviews %}
+          <div class="gh-spb__reviews">
+            <div
+              class="yotpo bottomLine"
+              data-product-id="{{ product.id }}"
+            ></div>
+
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      <!-- ================================
+           STICKY PRODUCT FORM
+
+           display: contents is used below
+           so this FORM does not affect
+           your existing flex UI.
+      ================================= -->
+
+      <form
+        action="{{ routes.cart_add_url }}"
+        method="post"
+        enctype="multipart/form-data"
+        class="gh-spb__order-form"
+        data-gh-sticky-form
+      >
+
+        <input
+          type="hidden"
+          name="id"
+          value="{{ current_variant.id }}"
+          data-gh-variant-input
+        >
+
+        <input
+          type="hidden"
+          name="quantity"
+          value="1"
+        >
+
+
+        <!-- ================================
+             ORDERGROOVE
+        ================================= -->
+
+        <div class="gh-spb-left">
+
+          <div class="gh-spb__ordergroove">
+
+            <og-offer
+              product="{{ current_variant.id }}"
+              location="stickybar"
+              data-gh-ordergroove
+            ></og-offer>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================
+             RIGHT SIDE
+        ================================= -->
+
+        <div class="gh-spb-right">
+
+
+          <!-- PRICE -->
+
+          <div class="gh-spb__price">
+
+            <span
+              class="gh-spb__compare-price"
+              data-gh-compare-price
+              hidden
+            ></span>
+
+            <strong
+              class="gh-spb__current-price"
+              data-gh-price
+            >
+              {{ current_variant.price | money }}
+            </strong>
+
+          </div>
+
+
+          <!-- ADD TO CART -->
+
+          <div class="gh-spb__cart">
+
+            <button
+              type="submit"
+              name="add"
+              class="gh-spb__atc"
+              data-gh-add
+              {% unless current_variant.available %}
+                disabled
+              {% endunless %}
+            >
+
+              {% if current_variant.available %}
+
+                {{ section.settings.button_text }}
+
+              {% else %}
+
+                Sold Out
+
+              {% endif %}
+
+            </button>
+
+          </div>
+
+
+          <!-- TOP BUTTON -->
+
+          {% if section.settings.show_top_button %}
+
+            <button
+              type="button"
+              class="gh-spb__top"
+              data-gh-scroll-top
+              aria-label="Back to top"
+            >
+
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+
+                <path
+                  d="M5 15l7-7 7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+              </svg>
+
+            </button>
+
+          {% endif %}
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================
+     VARIANT + SELLING PLAN DATA
+
+     Only used for:
+     - variant sync
+     - sticky price sync
+     - subscription price sync
+
+     Ordergroove itself controls the
+     subscription selection.
+====================================== -->
+
+<script
+  type="application/json"
+  id="GHStickyVariants-{{ section.id }}"
+>
+{
+  "moneyFormat": {{ shop.money_format | json }},
+
+  "variants": {
+
+    {% for variant in product.variants %}
+
+      "{{ variant.id }}": {
+
+        "id": {{ variant.id }},
+
+        "available": {{ variant.available | json }},
+
+        "price": {{ variant.price }},
+
+        "sellingPlans": [
+
+          {% for allocation in variant.selling_plan_allocations %}
+
+            {
+              "id": {{ allocation.selling_plan.id }},
+              "name": {{ allocation.selling_plan.name | json }},
+              "price": {{ allocation.price }},
+              "compareAtPrice": {{ allocation.compare_at_price | default: variant.price }}
+            }
+
+            {% unless forloop.last %},{% endunless %}
+
+          {% endfor %}
+
+        ]
+
+      }
+
+      {% unless forloop.last %},{% endunless %}
+
+    {% endfor %}
+
+  }
+}
+</script>
+
+
+<style>
+
+/* =====================================
+   STICKY CONTAINER
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} {
+
+  position: fixed;
+
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+
+  z-index: 999;
+
+  font-family: inherit;
+
+  box-shadow:
+    0 -5px 22px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: translateY(100%);
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease,
+    visibility .3s ease;
+
+}
+
+.gh-spb:has(og-offer[subscribed]) {
+  bottom: 46px !important;
+}
+
+/* SHOW AFTER SCROLL */
+
+#GHStickyPurchase-{{ section.id }}.gh-spb--visible {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: translateY(0);
+
+}
+
+
+/* =====================================
+   LIGHT THEME
+===================================== */
+
+#GHStickyPurchase-{{ section.id }}.gh-spb--light {
+
+  --gh-bg: var(--gh-spb-light-bg);
+
+  --gh-text: var(--gh-spb-light-text);
+
+  --gh-accent: var(--gh-spb-light-accent);
+
+  --gh-button-bg: var(--gh-spb-light-text);
+
+  --gh-button-text: var(--gh-spb-light-bg);
+
+  --gh-top-bg: var(--gh-spb-light-text);
+
+  --gh-top-text: var(--gh-spb-light-bg);
+
+  --gh-select-bg: #ffffff;
+
+}
+
+
+/* =====================================
+   DARK THEME
+===================================== */
+
+#GHStickyPurchase-{{ section.id }}.gh-spb--dark {
+
+  --gh-bg: var(--gh-spb-dark-bg);
+
+  --gh-text: var(--gh-spb-dark-text);
+
+  --gh-accent: var(--gh-spb-dark-accent);
+
+  --gh-button-bg: #ffffff;
+
+  --gh-button-text: var(--gh-spb-dark-bg);
+
+  --gh-top-bg: var(--gh-spb-dark-accent);
+
+  --gh-top-text: var(--gh-spb-dark-bg);
+
+  --gh-select-bg: #ffffff;
+
+}
+
+#GHStickyPurchase-{{ section.id }}.gh-spb--dark .gh-og-frequency-label{
+    color: #ffffff;
+}
+
+.gh-spb .yotpo-display-wrapper .yotpo-bottomline a{
+    color: #ffffff !important;
+}
+
+/* =====================================
+   MAIN
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__main {
+
+  background: var(--gh-bg);
+
+  color: var(--gh-text);
+
+  padding:
+    {{ section.settings.padding_vertical }}px
+    {{ section.settings.padding_horizontal }}px;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__inner {
+
+  width: 100%;
+
+  max-width: var(--gh-spb-max-width);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  gap: 20px;
+
+  align-items: center;
+
+}
+
+
+/*
+  IMPORTANT
+
+  We need the Ordergroove widget inside a real
+  Shopify product form.
+
+  display: contents prevents this form from
+  becoming another flex wrapper, therefore
+  your existing UI/layout stays unchanged.
+*/
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__order-form {
+
+  display: contents;
+
+}
+
+
+/* =====================================
+   PRODUCT
+===================================== */
+
+.gh-spb__product {
+
+  width: 12%;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__product-name {
+
+  font-size: {{ section.settings.product_font_size }}px;
+
+  font-weight: 700;
+
+  line-height: 1.1;
+
+  font-family: var(--gh-font-primary);
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__reviews {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 6px;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__stars {
+
+  color: var(--gh-accent);
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  letter-spacing: 1px;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__review-count {
+
+  font-size: 14px;
+
+  opacity: .72;
+
+}
+
+
+/* =====================================
+   LEFT / RIGHT LAYOUT
+
+   UNCHANGED FROM YOUR CURRENT UI
+===================================== */
+
+.gh-spb-right,
+.gh-spb-left {
+  min-height: 60px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  border-left: 1px solid var(--gh-accent);
+
+  padding-left: 40px;
+
+  margin-left: 40px;
+
+  width: 44%;
+
+}
+
+
+.gh-spb-right {
+
+  justify-content: center;
+
+}
+
+
+/* =====================================
+   ORDERGROOVE
+
+   Only basic container sizing is added.
+   Ordergroove widget design remains
+   controlled by your OG widget.
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__ordergroove {
+
+  width: 100%;
+
+  min-width: 0;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__ordergroove og-offer {
+
+  display: block;
+  padding: 0;
+  width: 100%;
+
+}
+
+
+/* =====================================
+   DIVIDER
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__divider {
+
+  height: 58px;
+
+  width: 1px;
+
+  background: var(--gh-accent);
+
+  opacity: .7;
+
+}
+
+
+/* =====================================
+   PRICE
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__price {
+
+  text-align: center;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__compare-price {
+
+  font-size: 12px;
+  text-align: right;
+  text-decoration: line-through;
+
+  opacity: .55;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__current-price {
+
+  font-size: {{ section.settings.price_font_size }}px;
+
+  line-height: 1.1;
+  font-family: var(--gh-font-secondary);
+  color: var(--gh-text);
+
+}
+
+
+/* =====================================
+   ADD TO CART
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__atc {
+
+  width: 100%;
+
+  min-height: 54px;
+
+  border: 0;
+
+  border-radius: var(--gh-spb-button-radius);
+
+  background: var(--gh-button-bg);
+
+  color: var(--gh-button-text);
+
+  font-family: var(--gh-font-secondary);
+
+  font-size: {{ section.settings.button_font_size }}px;
+
+  font-weight: 700;
+
+  padding: 11px 80px;
+
+  cursor: pointer;
+
+  transition:
+    opacity .2s ease,
+    transform .2s ease;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__atc:hover {
+
+  opacity: .9;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__atc:active {
+
+  transform: scale(.99);
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__atc:disabled {
+
+  opacity: .45;
+
+  cursor: not-allowed;
+
+}
+
+
+/* =====================================
+   TOP BUTTON
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__top {
+
+  width: 50px;
+
+  height: 50px;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: var(--gh-top-bg);
+
+  color: var(--gh-top-text);
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+
+}
+
+
+.gh-spb--light .gh-spb__top:hover {
+
+  background-color:
+    var(--gh-spb-light-accent) !important;
+
+}
+
+
+.gh-spb--light .gh-spb__top:hover svg {
+
+  color:
+    var(--gh-spb-light-text);
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__top svg {
+
+  width: 27px;
+
+  height: 27px;
+
+}
+
+
+/* =====================================
+   BENEFITS
+
+   Kept because these styles existed
+   in your UI.
+
+   They no longer render static HTML.
+===================================== */
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__benefits {
+
+  background:
+    var(--gh-spb-benefits-bg);
+
+  padding:
+    11px 20px;
+
+  color:
+    {{ section.settings.benefits_text_color }};
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__benefits-inner {
+
+  max-width:
+    var(--gh-spb-max-width);
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: .02em;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__benefits-inner span {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  color: #F9F2E8;
+
+  font-size: 10px;
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__benefits-inner strong {
+
+  color:
+    var(--gh-spb-light-accent);
+
+}
+
+
+#GHStickyPurchase-{{ section.id }} .gh-spb__benefits-inner i {
+
+  width: 1px;
+
+  height: 13px;
+
+  background: currentColor;
+
+  opacity: .4;
+
+}
+
+
+/* =====================================
+   VISIBILITY
+===================================== */
+
+@media(max-width: 1500px){
+    #GHStickyPurchase-{{ section.id }} .gh-spb__atc {
+        padding: 4px 30px;
+    }
+    .gh-spb__product {
+        width: 20%;
+    }
+    .gh-spb-right, .gh-spb-left{
+        padding-left: 20px;
+        margin-left: 20px;
+    }
+}
+
+@media()
+
+@media screen and (min-width: 769px) {
+
+  #GHStickyPurchase-{{ section.id }}.gh-spb--hide-desktop {
+
+    display: none;
+
+  }
+
+}
+
+
+@media screen and (max-width: 1024px) {
+
+  #GHStickyPurchase-{{ section.id }}.gh-spb--hide-mobile,
+  .gh-spb-left {
+    display: none;
+  }
+
+  .gh-spb__price,
+  button.gh-spb__top {
+    display: none !important;
+  }
+
+  .gh-spb__inner {
+    justify-content: center;
+  }
+
+  .gh-spb-right,
+  .gh-spb__product {
+    width: auto;
+  }
+
+  .gh-spb-right {
+    padding-left: 40px;
+    margin-left: 20px;
+  }
+
+  .gh-spb__atc{
+    padding: 4px 70px !important;
+  }
+
+  .gh-spb:has(og-offer[subscribed]),
+  .gh-spb {
+    bottom: 0px !important;
+  }
+}
+
+@media (max-width: 550px){
+    .gh-spb__atc{
+        padding: 4px 30px !important;
+    }
+    .gh-spb__main {
+        padding: 10px 20px !important;
+    }
+    .gh-spb-right {
+        padding-left: 20px;
+        margin-left: 10px;
+    }
+}
+</style>
+
+
+<script>
+
+(function() {
+
+  const section =
+    document.getElementById(
+      'GHStickyPurchase-{{ section.id }}'
+    );
+
+  if (!section)
+    return;
+
+
+  /* ========================================
+     SHOW / HIDE AFTER SCROLL
+  ======================================== */
+
+  const SHOW_AFTER_SCROLL =
+    {{ section.settings.show_after_scroll | default: 500 }};
+
+
+  function handleStickyVisibility() {
+
+    if (
+      window.scrollY >=
+      SHOW_AFTER_SCROLL
+    ) {
+
+      section.classList.add(
+        'gh-spb--visible'
+      );
+
+    } else {
+
+      section.classList.remove(
+        'gh-spb--visible'
+      );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    'scroll',
+    handleStickyVisibility,
+    {
+      passive: true
+    }
+  );
+
+
+  handleStickyVisibility();
+
+
+  /* ========================================
+     PRODUCT DATA
+  ======================================== */
+
+  const jsonElement =
+    document.getElementById(
+      'GHStickyVariants-{{ section.id }}'
+    );
+
+
+  if (!jsonElement)
+    return;
+
+
+  const productData =
+    JSON.parse(
+      jsonElement.textContent
+    );
+
+
+  let currentVariantId =
+    String(
+      section.dataset.currentVariant
+    );
+
+
+  /* ========================================
+     ELEMENTS
+  ======================================== */
+
+  const stickyForm =
+    section.querySelector(
+      '[data-gh-sticky-form]'
+    );
+
+
+  const variantInput =
+    section.querySelector(
+      '[data-gh-variant-input]'
+    );
+
+
+  const ordergrooveOffer =
+    section.querySelector(
+      '[data-gh-ordergroove]'
+    );
+
+
+  const priceElement =
+    section.querySelector(
+      '[data-gh-price]'
+    );
+
+
+  const comparePriceElement =
+    section.querySelector(
+      '[data-gh-compare-price]'
+    );
+
+
+  const addButton =
+    section.querySelector(
+      '[data-gh-add]'
+    );
+
+
+  /* ========================================
+     MONEY
+  ======================================== */
+
+  function formatMoney(cents) {
+
+    const amount =
+      (
+        Number(cents || 0) / 100
+      ).toFixed(2);
+
+
+    const format =
+      productData.moneyFormat ||
+      '${{amount}}';
+
+
+    return format
+
+      .replace(
+        /\{\{\s*amount\s*\}\}/g,
+        amount
+      )
+
+      .replace(
+        /\{\{\s*amount_no_decimals\s*\}\}/g,
+        Math.round(
+          Number(amount)
+        )
+      )
+
+      .replace(
+        /\{\{\s*amount_with_comma_separator\s*\}\}/g,
+        amount.replace(
+          '.',
+          ','
+        )
+      )
+
+      .replace(
+        /\{\{\s*amount_no_decimals_with_comma_separator\s*\}\}/g,
+        Math.round(
+          Number(amount)
+        )
+      );
+
+  }
+
+
+  /* ========================================
+     GET CURRENT VARIANT
+  ======================================== */
+
+  function getCurrentVariant() {
+
+    return (
+      productData
+        .variants[currentVariantId] ||
+      null
+    );
+
+  }
+
+
+  /* ========================================
+     GET SELECTED ORDERGROOVE SELLING PLAN
+  ======================================== */
+
+  function getSelectedSellingPlanId() {
+
+    if (!stickyForm)
+      return null;
+
+
+    /*
+     * Ordergroove normally adds a
+     * selling_plan field to the form.
+     */
+
+    const sellingPlanField =
+      stickyForm.querySelector(
+        '[name="selling_plan"]'
+      );
+
+
+    if (
+      sellingPlanField &&
+      sellingPlanField.value
+    ) {
+
+      return String(
+        sellingPlanField.value
+      );
+
+    }
+
+
+    /*
+     * Fallback in case OG renders
+     * selected radio/options carrying
+     * selling-plan values.
+     */
+
+    const checkedField =
+      stickyForm.querySelector(
+        '[data-selling-plan-id]:checked'
+      );
+
+
+    if (
+      checkedField &&
+      checkedField.dataset
+        .sellingPlanId
+    ) {
+
+      return String(
+        checkedField.dataset
+          .sellingPlanId
+      );
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* ========================================
+     UPDATE PRICE
+  ======================================== */
+
+  function updatePrice() {
+
+    const variant =
+      getCurrentVariant();
+
+
+    if (!variant)
+      return;
+
+
+    const selectedPlanId =
+      getSelectedSellingPlanId();
+
+
+    let selectedPlan =
+      null;
+
+
+    if (
+      selectedPlanId &&
+      variant.sellingPlans
+    ) {
+
+      selectedPlan =
+        variant.sellingPlans.find(
+          function(plan) {
+
+            return (
+              String(plan.id) ===
+              String(selectedPlanId)
+            );
+
+          }
+        );
+
+    }
+
+
+    /*
+     * SUBSCRIPTION PRICE
+     */
+
+    if (selectedPlan) {
+
+      if (priceElement) {
+
+        priceElement.textContent =
+          formatMoney(
+            selectedPlan.price
+          );
+
+      }
+
+
+      const originalPrice =
+        Number(
+          selectedPlan.compareAtPrice ||
+          variant.price
+        );
+
+
+      if (
+        comparePriceElement &&
+        originalPrice >
+          Number(selectedPlan.price)
+      ) {
+
+        comparePriceElement.hidden =
+          false;
+
+
+        comparePriceElement.textContent =
+          formatMoney(
+            originalPrice
+          );
+
+      } else if (
+        comparePriceElement
+      ) {
+
+        comparePriceElement.hidden =
+          true;
+
+      }
+
+
+      return;
+
+    }
+
+
+    /*
+     * ONE-TIME PRICE
+     */
+
+    if (priceElement) {
+
+      priceElement.textContent =
+        formatMoney(
+          variant.price
+        );
+
+    }
+
+
+    if (comparePriceElement) {
+
+      comparePriceElement.hidden =
+        true;
+
+    }
+
+  }
+
+
+  /* ========================================
+     AVAILABILITY
+  ======================================== */
+
+  function updateAvailability() {
+
+    const variant =
+      getCurrentVariant();
+
+
+    if (
+      !variant ||
+      !addButton
+    ) {
+
+      return;
+
+    }
+
+
+    if (variant.available) {
+
+      addButton.disabled =
+        false;
+
+
+      addButton.textContent =
+        {{ section.settings.button_text | json }};
+
+    } else {
+
+      addButton.disabled =
+        true;
+
+
+      addButton.textContent =
+        'Sold Out';
+
+    }
+
+  }
+
+
+  /* ========================================
+     GET MAIN PDP FORM
+  ======================================== */
+
+  function getMainForm() {
+
+    const forms =
+      Array.from(
+        document.querySelectorAll(
+          'form[action*="/cart/add"]'
+        )
+      );
+
+
+    return (
+      forms.find(
+        function(form) {
+
+          return !section.contains(
+            form
+          );
+
+        }
+      ) ||
+      null
+    );
+
+  }
+
+
+  /* ========================================
+     REFRESH ORDERGROOVE VARIANT
+  ======================================== */
+
+  function updateOrdergrooveVariant(
+    variantId
+  ) {
+
+    if (!ordergrooveOffer)
+      return;
+
+
+    /*
+     * Ordergroove uses the Shopify
+     * variant ID in the product
+     * attribute.
+     */
+
+    ordergrooveOffer.setAttribute(
+      'product',
+      String(variantId)
+    );
+
+  }
+
+
+  /* ========================================
+     UPDATE STICKY VARIANT
+  ======================================== */
+
+  function updateStickyVariant(
+    variantId
+  ) {
+
+    variantId =
+      String(
+        variantId || ''
+      );
+
+
+    if (
+      !variantId ||
+      !productData
+        .variants[variantId]
+    ) {
+
+      return;
+
+    }
+
+
+    currentVariantId =
+      variantId;
+
+
+    section.dataset.currentVariant =
+      variantId;
+
+
+    /*
+     * Shopify form
+     */
+
+    if (variantInput) {
+
+      variantInput.value =
+        variantId;
+
+    }
+
+
+    /*
+     * Ordergroove
+     */
+
+    updateOrdergrooveVariant(
+      variantId
+    );
+
+
+    /*
+     * Price / availability
+     */
+
+    updatePrice();
+
+    updateAvailability();
+
+  }
+
+
+  /* ========================================
+     READ MAIN PDP VARIANT
+  ======================================== */
+
+  function readCurrentVariantFromPDP() {
+
+    const mainForm =
+      getMainForm();
+
+
+    if (!mainForm)
+      return;
+
+
+    const mainVariantInput =
+      mainForm.querySelector(
+        '[name="id"]'
+      );
+
+
+    if (!mainVariantInput)
+      return;
+
+
+    const newVariantId =
+      String(
+        mainVariantInput.value || ''
+      );
+
+
+    if (
+      !newVariantId ||
+      !productData
+        .variants[newVariantId] ||
+      newVariantId ===
+        currentVariantId
+    ) {
+
+      return;
+
+    }
+
+
+    updateStickyVariant(
+      newVariantId
+    );
+
+  }
+
+
+  /* ========================================
+     WATCH MAIN PDP CHANGES
+  ======================================== */
+
+  document.addEventListener(
+    'change',
+    function(event) {
+
+      /*
+       * Changes inside the sticky
+       * Ordergroove widget should
+       * update subscription price.
+       */
+
+      if (
+        section.contains(
+          event.target
+        )
+      ) {
+
+        window.setTimeout(
+          updatePrice,
+          30
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * Variant change on main PDP.
+       */
+
+      window.setTimeout(
+        readCurrentVariantFromPDP,
+        30
+      );
+
+    }
+  );
+
+
+  /* ========================================
+     COMMON SHOPIFY VARIANT EVENT
+  ======================================== */
+
+  document.addEventListener(
+    'variant:change',
+    function(event) {
+
+      const variant =
+        event.detail &&
+        event.detail.variant;
+
+
+      if (
+        variant &&
+        productData.variants[
+          String(variant.id)
+        ]
+      ) {
+
+        updateStickyVariant(
+          variant.id
+        );
+
+      }
+
+    }
+  );
+
+
+  /* ========================================
+     WATCH ORDERGROOVE DOM
+
+     Ordergroove can dynamically create
+     selling_plan fields after loading,
+     therefore observe the form and update
+     the sticky price when this happens.
+  ======================================== */
+
+  if (
+    stickyForm &&
+    typeof MutationObserver !==
+      'undefined'
+  ) {
+
+    let mutationTimer =
+      null;
+
+
+    const observer =
+      new MutationObserver(
+        function() {
+
+          clearTimeout(
+            mutationTimer
+          );
+
+
+          mutationTimer =
+            setTimeout(
+              function() {
+
+                updatePrice();
+
+              },
+              20
+            );
+
+        }
+      );
+
+
+    observer.observe(
+      stickyForm,
+      {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: [
+          'value',
+          'checked'
+        ]
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     ADD TO CART
+  ======================================== */
+
+  if (
+    stickyForm &&
+    addButton
+  ) {
+
+    stickyForm.addEventListener(
+      'submit',
+      function() {
+
+        const variant =
+          getCurrentVariant();
+
+
+        if (
+          !variant ||
+          !variant.available
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+         * Don't manually create or change
+         * selling_plan here.
+
+         * Ordergroove owns that field now.
+         */
+
+        addButton.disabled =
+          true;
+
+
+        addButton.textContent =
+          'Adding...';
+
+
+        /*
+         * This intentionally allows the
+         * normal Shopify / Ordergroove
+         * form submission to continue.
+         */
+
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     SCROLL TO TOP
+  ======================================== */
+
+  const scrollButton =
+    section.querySelector(
+      '[data-gh-scroll-top]'
+    );
+
+
+  if (scrollButton) {
+
+    scrollButton.addEventListener(
+      'click',
+      function() {
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     INITIALIZE
+  ======================================== */
+
+  updateStickyVariant(
+    currentVariantId
+  );
+
+
+  window.setTimeout(
+    function() {
+
+      readCurrentVariantFromPDP();
+
+      updatePrice();
+
+    },
+    100
+  );
+
+
+  /*
+   * Additional delayed check because
+   * Ordergroove can initialize after
+   * the section JavaScript.
+   */
+
+  window.setTimeout(
+    function() {
+
+      updatePrice();
+
+    },
+    750
+  );
+
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Sticky Purchase Bar V2",
+
+  "templates": [
+    "product"
+  ],
+
+  "settings": [
+
+    {
+      "type": "header",
+      "content": "Scroll behavior"
+    },
+
+    {
+      "type": "range",
+      "id": "show_after_scroll",
+      "label": "Show after scrolling",
+      "min": 100,
+      "max": 1500,
+      "step": 50,
+      "default": 500,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Design"
+    },
+
+    {
+      "type": "select",
+      "id": "theme_variant",
+      "label": "Design variant",
+      "default": "light",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light / Cream"
+        },
+        {
+          "value": "dark",
+          "label": "Dark / Forest Green"
+        }
+      ]
+    },
+
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "default": 1500,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "label": "Vertical padding",
+      "min": 5,
+      "max": 30,
+      "step": 1,
+      "default": 16,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "label": "Horizontal padding",
+      "min": 10,
+      "max": 60,
+      "step": 2,
+      "default": 30,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Light Design"
+    },
+
+    {
+      "type": "color",
+      "id": "light_background",
+      "label": "Background",
+      "default": "#f9f2e8"
+    },
+
+    {
+      "type": "color",
+      "id": "light_text",
+      "label": "Text / button",
+      "default": "#21472d"
+    },
+
+    {
+      "type": "color",
+      "id": "light_accent",
+      "label": "Accent",
+      "default": "#c8a735"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Dark Design"
+    },
+
+    {
+      "type": "color",
+      "id": "dark_background",
+      "label": "Background",
+      "default": "#21472d"
+    },
+
+    {
+      "type": "color",
+      "id": "dark_text",
+      "label": "Text",
+      "default": "#f9f2e8"
+    },
+
+    {
+      "type": "color",
+      "id": "dark_accent",
+      "label": "Accent",
+      "default": "#c8a735"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Product & Reviews"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_reviews",
+      "label": "Show reviews",
+      "default": true
+    },
+
+    {
+      "type": "range",
+      "id": "product_font_size",
+      "label": "Product name size",
+      "min": 14,
+      "max": 30,
+      "step": 1,
+      "default": 22,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Price"
+    },
+
+    {
+      "type": "range",
+      "id": "price_font_size",
+      "label": "Price size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "default": 20,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Add To Cart"
+    },
+
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    },
+
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "default": 18,
+      "unit": "px"
+    },
+
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "default": 5,
+      "unit": "px"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Ordergroove"
+    },
+
+    {
+      "type": "paragraph",
+      "content": "This sticky bar uses the Ordergroove widget/location ID: 7b1327d3"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Subscription Benefits"
+    },
+
+    {
+      "type": "color",
+      "id": "benefits_background",
+      "label": "Benefits background",
+      "default": "#21472d"
+    },
+
+    {
+      "type": "color",
+      "id": "benefits_text_color",
+      "label": "Benefits text",
+      "default": "#c8a735"
+    },
+
+
+    {
+      "type": "header",
+      "content": "Top Button"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_top_button",
+      "label": "Show top arrow",
+      "default": true
+    },
+
+
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "hide_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    },
+
+    {
+      "type": "checkbox",
+      "id": "hide_desktop",
+      "label": "Hide on desktop",
+      "default": false
+    }
+
+  ],
+
+  "presets": [
+    {
+      "name": "Sticky Purchase Bar V2"
+    }
+  ]
+}
+{% endschema %}
