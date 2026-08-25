@@ -897,7 +897,6 @@
 
 
 <script>
-
 (function() {
 
   const section =
@@ -905,8 +904,7 @@
       'GHStickyPurchase-{{ section.id }}'
     );
 
-  if (!section)
-    return;
+  if (!section) return;
 
 
   /* ========================================
@@ -919,10 +917,7 @@
 
   function handleStickyVisibility() {
 
-    if (
-      window.scrollY >=
-      SHOW_AFTER_SCROLL
-    ) {
+    if (window.scrollY >= SHOW_AFTER_SCROLL) {
 
       section.classList.add(
         'gh-spb--visible'
@@ -965,10 +960,26 @@
     return;
 
 
-  const productData =
-    JSON.parse(
-      jsonElement.textContent
+  let productData;
+
+
+  try {
+
+    productData =
+      JSON.parse(
+        jsonElement.textContent
+      );
+
+  } catch(error) {
+
+    console.error(
+      'GH Sticky: Product data error',
+      error
     );
+
+    return;
+
+  }
 
 
   let currentVariantId =
@@ -1018,14 +1029,15 @@
 
 
   /* ========================================
-     MONEY
+     MONEY FORMAT
   ======================================== */
 
   function formatMoney(cents) {
 
     const amount =
       (
-        Number(cents || 0) / 100
+        Number(cents || 0) /
+        100
       ).toFixed(2);
 
 
@@ -1067,14 +1079,15 @@
 
 
   /* ========================================
-     GET CURRENT VARIANT
+     CURRENT VARIANT
   ======================================== */
 
   function getCurrentVariant() {
 
     return (
-      productData
-        .variants[currentVariantId] ||
+      productData.variants[
+        currentVariantId
+      ] ||
       null
     );
 
@@ -1082,65 +1095,300 @@
 
 
   /* ========================================
-     GET SELECTED ORDERGROOVE SELLING PLAN
+     ORDERGROOVE SUBSCRIPTION STATE
+  ======================================== */
+
+  function isSubscribed() {
+
+    return !!(
+      ordergrooveOffer &&
+      ordergrooveOffer.hasAttribute(
+        'subscribed'
+      )
+    );
+
+  }
+
+
+  /* ========================================
+     SELECTED SELLING PLAN ID
+
+     In your DOM:
+       frequency="5601788078"
+
+     This matches Shopify selling-plan ID:
+       5601788078
   ======================================== */
 
   function getSelectedSellingPlanId() {
 
-    if (!stickyForm)
+    if (
+      !ordergrooveOffer ||
+      !isSubscribed()
+    ) {
+
+      return null;
+
+    }
+
+
+    const frequency =
+      ordergrooveOffer.getAttribute(
+        'frequency'
+      );
+
+
+    if (!frequency)
       return null;
 
 
-    /*
-     * Ordergroove normally adds a
-     * selling_plan field to the form.
-     */
+    return String(
+      frequency
+    );
 
-    const sellingPlanField =
-      stickyForm.querySelector(
-        '[name="selling_plan"]'
-      );
+  }
+
+
+  /* ========================================
+     FIND SHOPIFY SELLING PLAN
+  ======================================== */
+
+  function getSelectedSellingPlan() {
+
+    const variant =
+      getCurrentVariant();
 
 
     if (
-      sellingPlanField &&
-      sellingPlanField.value
+      !variant ||
+      !variant.sellingPlans ||
+      !variant.sellingPlans.length
     ) {
 
-      return String(
-        sellingPlanField.value
+      return null;
+
+    }
+
+
+    const sellingPlanId =
+      getSelectedSellingPlanId();
+
+
+    if (!sellingPlanId)
+      return null;
+
+
+    return (
+      variant.sellingPlans.find(
+        function(plan) {
+
+          return (
+            String(plan.id) ===
+            String(sellingPlanId)
+          );
+
+        }
+      ) ||
+      null
+    );
+
+  }
+
+
+  /* ========================================
+     READ DYNAMIC ORDERGROOVE DISCOUNT
+
+     Example:
+       <og-incentive-text
+         from="DiscountPercent">
+         15%
+       </og-incentive-text>
+
+     Nothing is hardcoded.
+  ======================================== */
+
+  function getOrdergrooveDiscountPercent() {
+
+    if (!ordergrooveOffer)
+      return 0;
+
+
+    const incentiveElements =
+      ordergrooveOffer.querySelectorAll(
+        'og-incentive-text[from="DiscountPercent"]'
       );
+
+
+    for (
+      let i = 0;
+      i < incentiveElements.length;
+      i++
+    ) {
+
+      const text =
+        (
+          incentiveElements[i]
+            .textContent || ''
+        )
+        .trim();
+
+
+      const match =
+        text.match(
+          /(\d+(?:\.\d+)?)\s*%/
+        );
+
+
+      if (match) {
+
+        const percentage =
+          Number(
+            match[1]
+          );
+
+
+        if (
+          !isNaN(percentage) &&
+          percentage > 0
+        ) {
+
+          return percentage;
+
+        }
+
+      }
 
     }
 
 
     /*
-     * Fallback in case OG renders
-     * selected radio/options carrying
-     * selling-plan values.
+     * Fallback:
+     *
+     * Search entire Ordergroove offer text
+     * for "Save 15%" / "Save 10%" etc.
      */
 
-    const checkedField =
-      stickyForm.querySelector(
-        '[data-selling-plan-id]:checked'
+    const fullText =
+      (
+        ordergrooveOffer.textContent ||
+        ''
       );
 
 
-    if (
-      checkedField &&
-      checkedField.dataset
-        .sellingPlanId
-    ) {
-
-      return String(
-        checkedField.dataset
-          .sellingPlanId
+    const saveMatch =
+      fullText.match(
+        /save\s+(\d+(?:\.\d+)?)\s*%/i
       );
+
+
+    if (saveMatch) {
+
+      const percentage =
+        Number(
+          saveMatch[1]
+        );
+
+
+      if (
+        !isNaN(percentage) &&
+        percentage > 0
+      ) {
+
+        return percentage;
+
+      }
 
     }
 
 
-    return null;
+    return 0;
+
+  }
+
+
+  /* ========================================
+     CALCULATE SUBSCRIPTION PRICE
+
+     Dynamic:
+       Original Price × (1 - discount%)
+  ======================================== */
+
+  function getSubscriptionPrice() {
+
+    const variant =
+      getCurrentVariant();
+
+
+    if (!variant)
+      return null;
+
+
+    const discountPercent =
+      getOrdergrooveDiscountPercent();
+
+
+    if (
+      !discountPercent ||
+      discountPercent <= 0
+    ) {
+
+      /*
+       * Fall back to Shopify allocation price
+       * only if OG discount isn't available.
+       */
+
+      const plan =
+        getSelectedSellingPlan();
+
+
+      if (
+        plan &&
+        Number(plan.price) <
+        Number(variant.price)
+      ) {
+
+        return Number(
+          plan.price
+        );
+
+      }
+
+
+      return null;
+
+    }
+
+
+    const originalPrice =
+      Number(
+        variant.price
+      );
+
+
+    /*
+     * Shopify price calculations use cents.
+     *
+     * Example:
+     * 4995 × 85% = 4245.75
+     *
+     * Shopify storefront result expected:
+     * $42.46
+     */
+
+    const discountedPrice =
+      Math.round(
+        originalPrice *
+        (
+          1 -
+          (
+            discountPercent /
+            100
+          )
+        )
+      );
+
+
+    return discountedPrice;
 
   }
 
@@ -1159,89 +1407,89 @@
       return;
 
 
-    const selectedPlanId =
-      getSelectedSellingPlanId();
-
-
-    let selectedPlan =
-      null;
-
-
-    if (
-      selectedPlanId &&
-      variant.sellingPlans
-    ) {
-
-      selectedPlan =
-        variant.sellingPlans.find(
-          function(plan) {
-
-            return (
-              String(plan.id) ===
-              String(selectedPlanId)
-            );
-
-          }
-        );
-
-    }
-
-
     /*
-     * SUBSCRIPTION PRICE
+     * =====================================
+     * SUBSCRIBE
+     * =====================================
      */
 
-    if (selectedPlan) {
+    if (isSubscribed()) {
 
-      if (priceElement) {
-
-        priceElement.textContent =
-          formatMoney(
-            selectedPlan.price
-          );
-
-      }
+      const discountPercent =
+        getOrdergrooveDiscountPercent();
 
 
-      const originalPrice =
-        Number(
-          selectedPlan.compareAtPrice ||
-          variant.price
-        );
+      const subscriptionPrice =
+        getSubscriptionPrice();
+
+
+      console.log(
+        'GH Sticky Subscription Price:',
+        {
+          variantPrice:
+            variant.price,
+
+          discount:
+            discountPercent,
+
+          sellingPlan:
+            getSelectedSellingPlanId(),
+
+          calculatedPrice:
+            subscriptionPrice
+        }
+      );
 
 
       if (
-        comparePriceElement &&
-        originalPrice >
-          Number(selectedPlan.price)
+        subscriptionPrice !== null &&
+        subscriptionPrice <
+        Number(variant.price)
       ) {
 
-        comparePriceElement.hidden =
-          false;
+        /*
+         * Discounted price
+         */
+
+        if (priceElement) {
+
+          priceElement.textContent =
+            formatMoney(
+              subscriptionPrice
+            );
+
+        }
 
 
-        comparePriceElement.textContent =
-          formatMoney(
-            originalPrice
-          );
+        /*
+         * Original crossed price
+         */
 
-      } else if (
-        comparePriceElement
-      ) {
+        if (comparePriceElement) {
 
-        comparePriceElement.hidden =
-          true;
+          comparePriceElement.hidden =
+            false;
+
+
+          comparePriceElement.textContent =
+            formatMoney(
+              variant.price
+            );
+
+        }
+
+
+        return;
 
       }
-
-
-      return;
 
     }
 
 
     /*
-     * ONE-TIME PRICE
+     * =====================================
+     * ONE-TIME
+     * =====================================
      */
 
     if (priceElement) {
@@ -1260,6 +1508,81 @@
         true;
 
     }
+
+  }
+
+
+  /* ========================================
+     SYNC SELLING PLAN INPUT
+  ======================================== */
+
+  function syncSellingPlanInput() {
+
+    if (!stickyForm)
+      return;
+
+
+    let input =
+      stickyForm.querySelector(
+        'input[name="selling_plan"]'
+      );
+
+
+    /*
+     * ONE TIME
+     */
+
+    if (!isSubscribed()) {
+
+      if (input) {
+
+        input.value =
+          '';
+
+      }
+
+      return;
+
+    }
+
+
+    /*
+     * SUBSCRIBE
+     */
+
+    const sellingPlanId =
+      getSelectedSellingPlanId();
+
+
+    if (!sellingPlanId)
+      return;
+
+
+    if (!input) {
+
+      input =
+        document.createElement(
+          'input'
+        );
+
+
+      input.type =
+        'hidden';
+
+
+      input.name =
+        'selling_plan';
+
+
+      stickyForm.appendChild(
+        input
+      );
+
+    }
+
+
+    input.value =
+      sellingPlanId;
 
   }
 
@@ -1338,7 +1661,7 @@
 
 
   /* ========================================
-     REFRESH ORDERGROOVE VARIANT
+     UPDATE ORDERGROOVE VARIANT
   ======================================== */
 
   function updateOrdergrooveVariant(
@@ -1348,12 +1671,6 @@
     if (!ordergrooveOffer)
       return;
 
-
-    /*
-     * Ordergroove uses the Shopify
-     * variant ID in the product
-     * attribute.
-     */
 
     ordergrooveOffer.setAttribute(
       'product',
@@ -1396,10 +1713,6 @@
       variantId;
 
 
-    /*
-     * Shopify form
-     */
-
     if (variantInput) {
 
       variantInput.value =
@@ -1408,22 +1721,23 @@
     }
 
 
-    /*
-     * Ordergroove
-     */
-
     updateOrdergrooveVariant(
       variantId
     );
 
 
-    /*
-     * Price / availability
-     */
+    window.setTimeout(
+      function() {
 
-    updatePrice();
+        syncSellingPlanInput();
 
-    updateAvailability();
+        updatePrice();
+
+        updateAvailability();
+
+      },
+      100
+    );
 
   }
 
@@ -1442,28 +1756,29 @@
       return;
 
 
-    const mainVariantInput =
+    const input =
       mainForm.querySelector(
         '[name="id"]'
       );
 
 
-    if (!mainVariantInput)
+    if (!input)
       return;
 
 
     const newVariantId =
       String(
-        mainVariantInput.value || ''
+        input.value ||
+        ''
       );
 
 
     if (
       !newVariantId ||
-      !productData
-        .variants[newVariantId] ||
       newVariantId ===
-        currentVariantId
+        currentVariantId ||
+      !productData
+        .variants[newVariantId]
     ) {
 
       return;
@@ -1479,18 +1794,190 @@
 
 
   /* ========================================
-     WATCH MAIN PDP CHANGES
+     ORDERGROOVE STATE CHANGE
+  ======================================== */
+
+  function handleOrdergrooveChange() {
+
+    /*
+     * Ordergroove updates several DOM values
+     * asynchronously.
+     */
+
+    window.setTimeout(
+      function() {
+
+        syncSellingPlanInput();
+
+        updatePrice();
+
+      },
+      20
+    );
+
+
+    window.setTimeout(
+      function() {
+
+        syncSellingPlanInput();
+
+        updatePrice();
+
+      },
+      100
+    );
+
+
+    window.setTimeout(
+      function() {
+
+        syncSellingPlanInput();
+
+        updatePrice();
+
+      },
+      300
+    );
+
+  }
+
+
+  /* ========================================
+     OBSERVE ORDERGROOVE HOST
+
+     subscribed=""
+     frequency="5601788078"
+  ======================================== */
+
+  if (
+    ordergrooveOffer &&
+    typeof MutationObserver !==
+      'undefined'
+  ) {
+
+    const offerObserver =
+      new MutationObserver(
+        function(mutations) {
+
+          let relevant =
+            false;
+
+
+          mutations.forEach(
+            function(mutation) {
+
+              if (
+                mutation.type ===
+                'attributes' &&
+                (
+                  mutation.attributeName ===
+                    'subscribed' ||
+
+                  mutation.attributeName ===
+                    'frequency'
+                )
+              ) {
+
+                relevant =
+                  true;
+
+              }
+
+            }
+          );
+
+
+          if (relevant) {
+
+            handleOrdergrooveChange();
+
+          }
+
+        }
+      );
+
+
+    offerObserver.observe(
+      ordergrooveOffer,
+      {
+        attributes:
+          true,
+
+        attributeFilter: [
+          'subscribed',
+          'frequency'
+        ]
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     OBSERVE ORDERGROOVE CONTENT
+
+     Important because incentive text such as
+     "15%" can populate after the subscribed
+     attribute has already changed.
+  ======================================== */
+
+  if (
+    ordergrooveOffer &&
+    typeof MutationObserver !==
+      'undefined'
+  ) {
+
+    let contentTimer =
+      null;
+
+
+    const contentObserver =
+      new MutationObserver(
+        function() {
+
+          clearTimeout(
+            contentTimer
+          );
+
+
+          contentTimer =
+            window.setTimeout(
+              function() {
+
+                updatePrice();
+
+              },
+              50
+            );
+
+        }
+      );
+
+
+    contentObserver.observe(
+      ordergrooveOffer,
+      {
+        childList:
+          true,
+
+        subtree:
+          true,
+
+        characterData:
+          true
+      }
+    );
+
+  }
+
+
+  /* ========================================
+     CHANGE EVENTS
   ======================================== */
 
   document.addEventListener(
     'change',
     function(event) {
-
-      /*
-       * Changes inside the sticky
-       * Ordergroove widget should
-       * update subscription price.
-       */
 
       if (
         section.contains(
@@ -1498,19 +1985,12 @@
         )
       ) {
 
-        window.setTimeout(
-          updatePrice,
-          30
-        );
+        handleOrdergrooveChange();
 
         return;
 
       }
 
-
-      /*
-       * Variant change on main PDP.
-       */
 
       window.setTimeout(
         readCurrentVariantFromPDP,
@@ -1522,7 +2002,7 @@
 
 
   /* ========================================
-     COMMON SHOPIFY VARIANT EVENT
+     SHOPIFY VARIANT EVENT
   ======================================== */
 
   document.addEventListener(
@@ -1552,64 +2032,6 @@
 
 
   /* ========================================
-     WATCH ORDERGROOVE DOM
-
-     Ordergroove can dynamically create
-     selling_plan fields after loading,
-     therefore observe the form and update
-     the sticky price when this happens.
-  ======================================== */
-
-  if (
-    stickyForm &&
-    typeof MutationObserver !==
-      'undefined'
-  ) {
-
-    let mutationTimer =
-      null;
-
-
-    const observer =
-      new MutationObserver(
-        function() {
-
-          clearTimeout(
-            mutationTimer
-          );
-
-
-          mutationTimer =
-            setTimeout(
-              function() {
-
-                updatePrice();
-
-              },
-              20
-            );
-
-        }
-      );
-
-
-    observer.observe(
-      stickyForm,
-      {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: [
-          'value',
-          'checked'
-        ]
-      }
-    );
-
-  }
-
-
-  /* ========================================
      ADD TO CART
   ======================================== */
 
@@ -1636,12 +2058,8 @@
         }
 
 
-        /*
-         * Don't manually create or change
-         * selling_plan here.
+        syncSellingPlanInput();
 
-         * Ordergroove owns that field now.
-         */
 
         addButton.disabled =
           true;
@@ -1649,13 +2067,6 @@
 
         addButton.textContent =
           'Adding...';
-
-
-        /*
-         * This intentionally allows the
-         * normal Shopify / Ordergroove
-         * form submission to continue.
-         */
 
       }
     );
@@ -1691,18 +2102,18 @@
 
 
   /* ========================================
-     INITIALIZE
+     INITIALIZATION
   ======================================== */
 
-  updateStickyVariant(
-    currentVariantId
-  );
+  updateAvailability();
 
 
   window.setTimeout(
     function() {
 
       readCurrentVariantFromPDP();
+
+      syncSellingPlanInput();
 
       updatePrice();
 
@@ -1711,19 +2122,39 @@
   );
 
 
-  /*
-   * Additional delayed check because
-   * Ordergroove can initialize after
-   * the section JavaScript.
-   */
-
   window.setTimeout(
     function() {
+
+      syncSellingPlanInput();
 
       updatePrice();
 
     },
-    750
+    500
+  );
+
+
+  window.setTimeout(
+    function() {
+
+      syncSellingPlanInput();
+
+      updatePrice();
+
+    },
+    1000
+  );
+
+
+  window.setTimeout(
+    function() {
+
+      syncSellingPlanInput();
+
+      updatePrice();
+
+    },
+    2000
   );
 
 })();
