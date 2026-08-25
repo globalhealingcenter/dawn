@@ -327,7 +327,7 @@
       "name": "Sticky Purchase Bar V2",
       "settings": {
         "show_after_scroll": 500,
-        "theme_variant": "light",
+        "theme_variant": "dark",
         "max_width": 1500,
         "padding_vertical": 16,
         "padding_horizontal": 30,
