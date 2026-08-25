@@ -321,6 +321,34 @@
         "btn_bg": "#21472d",
         "btn_color": "#ffffff"
       }
+    },
+    "sticky_purchase_bar_v2_kyedcV": {
+      "type": "sticky-purchase-bar-v2",
+      "name": "Sticky Purchase Bar V2",
+      "settings": {
+        "show_after_scroll": 500,
+        "theme_variant": "dark",
+        "max_width": 1500,
+        "padding_vertical": 16,
+        "padding_horizontal": 30,
+        "light_background": "#f9f2e8",
+        "light_text": "#21472d",
+        "light_accent": "#c8a735",
+        "dark_background": "#21472d",
+        "dark_text": "#f9f2e8",
+        "dark_accent": "#c8a735",
+        "show_reviews": true,
+        "product_font_size": 25,
+        "price_font_size": 20,
+        "button_text": "Add to Cart",
+        "button_font_size": 18,
+        "button_radius": 5,
+        "benefits_background": "#21472d",
+        "benefits_text_color": "#c8a735",
+        "show_top_button": true,
+        "hide_mobile": false,
+        "hide_desktop": true
+      }
     }
   },
   "order": [
@@ -336,6 +364,7 @@
     "1758490710fe464197",
     "custom_liquid_kweCXJ",
     "custom_liquid_8t6wPh",
-    "gh_sticky_atc_gRBYqU"
+    "gh_sticky_atc_gRBYqU",
+    "sticky_purchase_bar_v2_kyedcV"
   ]
 }
