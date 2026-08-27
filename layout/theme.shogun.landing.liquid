@@ -8,6 +8,8 @@ This file can be re-written at any time.
   <head>
     <!-- Google Consent Mode V2 (Consentmo) – must load before any tracking tags -->
     {% render 'consent-gated-tracking2' %}
+    {% render 'consent-google' %}
+    {% render 'consent-pinterest' %}
     {% render 'gcm-integration-script' %}
     {% render 'elevateab' %}
     <meta charset="utf-8">
@@ -15,6 +17,10 @@ This file can be re-written at any time.
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
     <meta name="google-site-verification" content="GAl8RHdIopPIKMZdcGYud7wvTvmKLZW32YTWQwdObFI">
+
+    {% if request.path == '/collections/all' %}
+      <script>window.location.replace('/collections/products');</script>
+    {% endif %}
 
     <!--
       ============================================
