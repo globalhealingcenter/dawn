@@ -64,28 +64,6 @@
     {% for block in config.blocks %} {% if block.type == 'study' %} {% assign has_study = true %} {% endif %} {% endfor %}
 {% endif %}
 
-{% if has_study  %}
-  <div class="citruslabs-study mt2">
-    <span class="bold block gh-font-secondary">Citruslabs Study: Real People, Real Results</span>
-    <div class="flex justify-between">
-      <div class="flex items-center gap-1 flex-wrap mb1">
-        <div class="h3 color-gold">95%</div>
-        <div class="gh-font-secondary line-height-2">constipation<br> relief</div>
-      </div>
-      <div class="flex items-center gap-1 flex-wrap mb1">
-        <div class="h3 color-gold">88%</div>
-        <div class="gh-font-secondary line-height-2">bloating<br> relief</div>
-      </div>
-      <div class="flex items-center gap-1 flex-wrap mb1">
-        <div class="h3 color-gold">88%</div>
-        <div class="gh-font-secondary line-height-2">improved<br> digestion</div>
-      </div>
-    </div>
-    <a class="bold gh-font-secondary color-green" href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf" target="_blank">Download the Study</a>
-  </div>
-{% endif %}
-
-
 </div>
 {% unless manual_titles %}
 <script>
