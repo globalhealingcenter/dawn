@@ -241,6 +241,11 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         margin: auto;
         font-size: 10px;
         line-height: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .ghr-reviews__meta {
