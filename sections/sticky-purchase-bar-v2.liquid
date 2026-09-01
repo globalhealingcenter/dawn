@@ -834,7 +834,17 @@
     }
 }
 
-@media()
+@media screen and (max-width: 768px){
+  #GHStickyPurchase-{{ section.id }} .gh-spb__product-name {
+    font-size: 20px;
+  }
+  #GHStickyPurchase-{{ section.id }} .gh-spb__atc {
+    min-height: 40px;
+  }
+  .gh-spb__main {
+      padding: 14px 20px !important;
+  }
+}
 
 @media screen and (min-width: 769px) {
 
@@ -886,9 +896,6 @@
 @media (max-width: 550px){
     .gh-spb__atc{
         padding: 4px 30px !important;
-    }
-    .gh-spb__main {
-        padding: 10px 20px !important;
     }
     .gh-spb-right {
         padding-left: 20px;
