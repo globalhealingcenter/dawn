@@ -124,7 +124,9 @@
     text-decoration: underline;
 }
 
-.ghr-reviews__text {
+.ghr-reviews__text,
+.ghr-reviews__text p,
+.ghr-reviews__card p {
     flex: 1;
     margin: 0;
     text-align: center;
@@ -236,7 +238,9 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         gap: 2px;
     }
 
-    .ghr-reviews__text {
+    .ghr-reviews__text,
+    .ghr-reviews__text p,
+    .ghr-reviews__card p {
         width: 90%;
         margin: auto;
         font-size: 10px;
