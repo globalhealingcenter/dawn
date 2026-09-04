@@ -137,11 +137,7 @@
 }
 
 .ghr-reviews__meta {
-    margin: 20px 0 0;
-    text-align: center;
-    font-size: clamp(1rem, 1.175vw, 2rem);
-    line-height: clamp(1.1rem, 1.85vw, 2.2rem);
-    color: #f9f2e8;
+    margin: 20px 0 0 !important;
 }
 
 .ghr-reviews__verified {
