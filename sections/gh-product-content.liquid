@@ -20,6 +20,9 @@
 {{ 'gh-meticulous-craftsmanship-v2.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'gh-meticulous-craftsmanship-v2.js' | asset_url }}" defer="defer"></script>
 
+{% comment %}Ingredients V2 Block{% endcomment %}
+{{ 'gh-ingredients-v2.css' | asset_url | stylesheet_tag }}
+
 {% assign has_product_config = false %}
 
 {% if product and product.metafields.gh_product.data %}
@@ -28,6 +31,7 @@
 {% endif %}
 
 {{ 'gh-section-product-content.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gh-product-content.js' | asset_url }}" defer="defer"></script>
 
 {% if has_product_config %}
 
@@ -622,152 +626,285 @@
       {% endif %}
       {% when 'ingredients-v2' %}
 
-      {% assign ingredient_count = block.items.size %}
+      {% assign ghiv2_ingredient_count = block.items.size %}
 
-      {% if ingredient_count > 4 %}
-        {% assign ingredient_count = 4 %}
+      {% if ghiv2_ingredient_count > 4 %}
+        {% assign ghiv2_ingredient_count = 4 %}
       {% endif %}
 
-      <div
-        class="ghiv2 ghiv2--count-{{ ingredient_count }}"
-        data-ingredient-count="{{ ingredient_count }}"
-      >
+      {% if ghiv2_ingredient_count > 0 %}
 
-        <div class="ghiv2__inner">
+        <section
+          class="
+            ghiv2
+            ghiv2--count-{{ ghiv2_ingredient_count }}
+            {% if ghiv2_ingredient_count >= 3 %}ghiv2--standard{% endif %}
+            {% if ghiv2_ingredient_count == 2 %}ghiv2--two-up{% endif %}
+            {% if ghiv2_ingredient_count == 1 %}ghiv2--single{% endif %}
+          "
+          data-ingredients-v2
+          data-ghiv2-carousel
+          data-ingredient-count="{{ ghiv2_ingredient_count }}"
+        >
 
-          <div class="ghiv2__intro">
+          <div class="ghiv2__inner">
 
-            <div class="ghiv2__label">
-              INGREDIENTS
-            </div>
+            {%- comment -%}
+              ============================================================
+              HEADER
+              ============================================================
+            {%- endcomment -%}
 
-            {% unless block.title.main == blank %}
-              <h2 class="ghiv2__heading">
-                {{ block.title.main }}
-              </h2>
-            {% endunless %}
+            <div class="ghiv2__header">
 
-          </div>
+              <div class="ghiv2__header-main">
 
-          {% unless block.subhead == blank %}
-            <div class="ghiv2__subhead">
-              {{ block.subhead }}
-            </div>
-          {% endunless %}
-
-
-          {% if block.items != blank %}
-
-            <div class="ghiv2__ingredients">
-
-              {% for detail in block.items limit: 4 %}
-
-                <div class="ghiv2__ingredient">
-
-                  {% unless detail.image == blank %}
-                    <div class="ghiv2__ingredient-image">
-                      <img
-                        src="{{ detail.image }}"
-                        alt="{{ detail.title | escape }}"
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                      >
-                    </div>
-                  {% endunless %}
-
-                  <div class="ghiv2__ingredient-content">
-
-                    {% unless detail.title == blank %}
-                      <h3 class="ghiv2__ingredient-title">
-                        {{ detail.title }}
-                      </h3>
-                    {% endunless %}
-
-                    {% unless detail.content == blank %}
-                      <div class="ghiv2__ingredient-description">
-                        {{ detail.content }}
-                      </div>
-                    {% endunless %}
-
-                  </div>
-
+                <div class="ghiv2__label font-proxima">
+                  INGREDIENTS
                 </div>
 
-              {% endfor %}
+                {% if block.title.main != blank %}
+                  <h2 class="ghiv2__heading font-miller">
+                    {{ block.title.main }}
+                  </h2>
+                {% endif %}
 
-            </div>
+              </div>
 
-          {% endif %}
-
-
-          {% unless block.full_ingredient_list.text == blank %}
-            <div class="ghiv2__full-list">
-
-              {% if block.full_ingredient_list.url != blank %}
-                <a
-                  href="{{ block.full_ingredient_list.url }}"
-                  class="ghiv2__full-list-link"
-                >
-                  {{ block.full_ingredient_list.text }}
-                </a>
-              {% else %}
-                <span class="ghiv2__full-list-link">
-                  {{ block.full_ingredient_list.text }}
-                </span>
+              {% if block.subhead != blank %}
+                <div class="ghiv2__subhead font-proxima">
+                  {{ block.subhead }}
+                </div>
               {% endif %}
 
             </div>
-          {% endunless %}
 
 
-          {% if product.tags contains 'prop65' %}
+            {%- comment -%}
+              ============================================================
+              INGREDIENT CARDS
+              ============================================================
+            {%- endcomment -%}
 
-            <div class="ghiv2__prop65">
+            <div
+              class="ghiv2__carousel-viewport"
+              data-ghiv2-viewport
+            >
 
-              {% assign prop65_v2_id = 'prop65-product-content-v2' %}
+              <div
+                class="ghiv2__ingredients"
+                data-ghiv2-track
+                role="list"
+                aria-label="Product ingredients"
+                tabindex="0"
+              >
 
-              {% render
-                'gh-element-dialog',
-                button_text: "<b>WARNING</b> - California's Proposition 65",
-                id: prop65_v2_id,
-                content: ''
-              %}
+                {% for ingredient in block.items limit: 4 %}
 
-              <script>
-                (function () {
-                  var productSkus = [];
+                  <article
+                    class="ghiv2__ingredient"
+                    data-ghiv2-card
+                    data-ingredient-index="{{ forloop.index }}"
+                    role="listitem"
+                  >
 
-                  {% for variant in product.variants %}
-                    productSkus.push({{ variant.sku | json }});
-                  {% endfor %}
+                    {% if ingredient.image != blank %}
 
-                  if (
-                    window.gh &&
-                    gh.shopify &&
-                    gh.shopify.checkout &&
-                    typeof gh.shopify.checkout.prop65Message === 'function'
-                  ) {
-                    gh.shopify.checkout.prop65Message(productSkus, function(html) {
-                      var dialogContent = document.querySelector(
-                        '#dialog-{{ prop65_v2_id }} .ghd--dialog-content'
-                      );
+                      <div class="ghiv2__ingredient-media">
 
-                      if (dialogContent) {
-                        dialogContent.innerHTML = html;
-                      }
-                    });
-                  }
-                })();
-              </script>
+                        <img
+                          class="ghiv2__ingredient-image"
+                          src="{{ ingredient.image }}"
+                          alt="{{ ingredient.image_alt | default: ingredient.title | escape }}"
+                          width="800"
+                          height="600"
+                          loading="lazy"
+                          draggable="false"
+                        >
+
+                      </div>
+
+                    {% endif %}
+
+                    {% if ingredient.title != blank or ingredient.content != blank %}
+
+                      <div class="ghiv2__ingredient-content">
+
+                        {% if ingredient.title != blank %}
+
+                          <h3 class="ghiv2__ingredient-title font-proxima">
+                            {{ ingredient.title }}
+                          </h3>
+
+                        {% endif %}
+
+                        {% if ingredient.content != blank %}
+
+                          <div class="ghiv2__ingredient-description font-proxima">
+                            {{ ingredient.content }}
+                          </div>
+
+                        {% endif %}
+
+                      </div>
+
+                    {% endif %}
+
+                  </article>
+
+                {% endfor %}
+
+              </div>
 
             </div>
 
-          {% endif %}
+            {%- comment -%}
+              ============================================================
+              FULL INGREDIENT LIST
 
-        </div>
+              Priority:
+              1. Use GH Tools URL if supplied.
+              2. Otherwise fall back to the existing Supplement Facts
+                dialog functionality.
+              ============================================================
+            {%- endcomment -%}
 
-      </div>
+            {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
+
+            {% if block.full_ingredient_list.url != blank %}
+
+              <div class="ghiv2__full-list">
+
+                <a
+                  href="{{ block.full_ingredient_list.url }}"
+                  class="ghiv2__full-list-link font-proxima"
+                  {% if block.full_ingredient_list.new_tab == true %}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  {% endif %}
+                >
+                  {{ ghiv2_link_text }}
+                </a>
+
+              </div>
+
+            {% elsif config.supplement_facts != blank %}
+
+              <div class="ghiv2__full-list">
+
+                {% capture ghiv2_supplement_facts_content %}
+                  {% render 'gh-product-supplement-facts', config: config %}
+                {% endcapture %}
+
+                {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
+
+                {% render
+                  'gh-element-dialog',
+                  button_text: ghiv2_link_text,
+                  button_class: 'ghiv2__full-list-link font-proxima',
+                  id: ghiv2_supplement_dialog_id,
+                  content: ghiv2_supplement_facts_content
+                %}
+
+              </div>
+
+            {% endif %}
+
+
+            {%- comment -%}
+              ============================================================
+              PROP 65
+
+              Reuses the same product tag + GH checkout Prop65 service
+              as the existing Ingredients block.
+              ============================================================
+            {%- endcomment -%}
+
+            {% if product.tags contains 'prop65' %}
+
+              <div class="ghiv2__prop65">
+
+                {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
+
+                {% render
+                  'gh-element-dialog',
+                  button_text: "<b>WARNING</b> - California's Proposition 65",
+                  button_class: 'ghiv2__prop65-link font-proxima',
+                  id: ghiv2_prop65_id,
+                  content: ''
+                %}
+
+                <script>
+                  (function () {
+
+                    var productSkus = [];
+
+                    {% for variant in product.variants %}
+                      productSkus.push({{ variant.sku | json }});
+                    {% endfor %}
+
+
+                    function loadIngredientsV2Prop65() {
+
+                      if (
+                        !window.gh ||
+                        !window.gh.shopify ||
+                        !window.gh.shopify.checkout ||
+                        typeof window.gh.shopify.checkout.prop65Message !== 'function'
+                      ) {
+                        return;
+                      }
+
+                      window.gh.shopify.checkout.prop65Message(
+                        productSkus,
+                        function (html) {
+
+                          var dialogContent = document.querySelector(
+                            '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
+                          );
+
+                          if (dialogContent) {
+                            dialogContent.innerHTML = html;
+                          }
+
+                        }
+                      );
+
+                    }
+
+
+                    if (document.readyState === 'loading') {
+
+                      document.addEventListener(
+                        'DOMContentLoaded',
+                        loadIngredientsV2Prop65
+                      );
+
+                    } else {
+
+                      loadIngredientsV2Prop65();
+
+                    }
+
+                    window.addEventListener(
+                      'load',
+                      loadIngredientsV2Prop65,
+                      { once: true }
+                    );
+
+                  })();
+                </script>
+
+              </div>
+
+            {% endif %}
+
+          </div>
+
+        </section>
+
+      {% endif %}
+  
       {% when 'ingredients' %}
         <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
           <div data-type="header">
@@ -999,57 +1136,6 @@
   {% endfor %}
   </div>
 </section>
-
-<script>
-  {
-    let ingredients = document.querySelector('.ghd--block--ingredients');
-    let ingredients_img = ingredients.querySelector('[data-type="image"] img');
-    let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
-
-    function setActiveImage(){
-      ingredients_inputs.forEach( i => {
-        if(!i.checked) return;
-        ingredients_img.classList.add('loading');
-
-        ingredients_img.src = i.getAttribute('data-ingredient-image') + '?width=600'
-        ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?width=1200 2x' );
-
-        if(ingredients_img.complete){
-          ingredients_img.classList.remove('loading');
-        }
-
-        ingredients_img.addEventListener('load', () => {
-          ingredients_img.classList.remove('loading');
-        })
-
-      })
-    }
-
-    ingredients_inputs.forEach( i => {
-      i.addEventListener('change', e => {
-        if( !i.checked ) return;
-        setActiveImage()
-      })
-    })
-
-    setActiveImage();
-
-    /*
-    ingredients_details.forEach( d => {
-      d.addEventListener('toggle', () => {
-        if( d.open === true ){
-          if( current_open ) current_open.open = false;
-          setCurrentOpen();
-          setActiveImage();
-        }
-      })
-    })
-
-    setCurrentOpen();
-    setActiveImage();
-    */
-  }
-</script>
 
 {% endif %}
 
