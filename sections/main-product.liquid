@@ -149,27 +149,20 @@
               </script>
             {%- when 'title' -%}
               {% assign title = product.title | escape %}
-              {% assign product_line = product.metafields.globalhealing.product_line.value %}
-              {% if product_line_link == blank %}
-                {% assign product_line_link = product.metafields.globalhealing.product_line_link.value %}
-              {% endif %}
-              {% assign product_line_url = product_line_link.url | default: product_line_link %}
 
               {% if product.metafields.globalhealing.custom_h1 and product.metafields.globalhealing.custom_h1 != '' %}
                 {% assign title = product.metafields.globalhealing.custom_h1 | escape %}
               {% endif %}
 
-              <div class="product__title" {{ block.shopify_attributes }}>
-                {% if product_line != blank %}
-                  <div class="product__eyebrow">
-                    {% if product_line_url != blank %}
-                      <a href="{{ product_line_url }}">{{ product_line }}</a>
-                    {% else %}
-                      {{ product_line }}
-                    {% endif %}
-                  </div>
-                {% endif %}
+              {% assign product_line = product.metafields.globalhealing.product_line.value %}
 
+              {% if product_line != blank %}
+                <div class="product-line-eyebrow">
+                  {{ product_line }}
+                </div>
+              {% endif %}
+
+              <div class="product__title" {{ block.shopify_attributes }}>
                 <h1>
                   {% if product.vendor != 'Global Healing' %}
                     <span
@@ -189,6 +182,7 @@
                   </h2>
                 </a>
               </div>
+
               {% if product.metafields.globalhealing.product_tagline != blank %}
                 <div class="product-tagline-v2">
                   {{ product.metafields.globalhealing.product_tagline }}
