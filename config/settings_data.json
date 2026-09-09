@@ -210,13 +210,6 @@
         "disabled": false,
         "settings": {}
       },
-      "2809662434511621298": {
-        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
-        "disabled": true,
-        "settings": {
-          "defer_script": true
-        }
-      },
       "2296928500563504527": {
         "type": "shopify://apps/abra-promotions/blocks/abra/daa1493a-23b5-48bb-8cb5-7ab1267b4642",
         "disabled": true,
@@ -246,6 +239,13 @@
           "announcement_bar_padding_y": 10,
           "announcement_bar_padding_x": 10,
           "sale_price_color": "#ff0000"
+        }
+      },
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+        "disabled": false,
+        "settings": {
+          "defer_script": true
         }
       }
     },
