@@ -918,7 +918,41 @@
                             <div class="rebuy-tagline" v-if="product.metafields.globalhealing.product_tagline"v-html="product.metafields.globalhealing.product_tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
                             
-                            <div class="yotpo-widget-instance" data-yotpo-instance-id="1373153" data-yotpo-product-id="{{product.id}}" data-yotpo-cart-product-id="{{item.product.id}}" data-yotpo-section-id="{{template.name}}"></div>
+                            <div class="yotpo-reviews-pdp">
+                                <div class="yotpo bottomLine"
+                                data-appkey="ptFM3MbTnBNv63bJ3sAo7NHL6ZTQkXeQhZWwUGZk"
+                                data-domain="{{shop.permanent_domain | escape }}"
+                                data-product-id="{{ product.id }}"
+                                data-product-models="{{ product.id }}"
+                                data-name="{{ product.title | escape }}"
+                                data-url="{{ shop.url }}{{ product.url }}"
+                                data-image-url="{{ product.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&','%26'}}"
+                                data-description="{{ product.description | escape }}"
+                                data-bread-crumbs="{% for tag in product.tags %}{{ tag | escape }};{% endfor %}">
+                                </div>
+                            </div>
+
+                            {% assign reviews_count = product.metafields.globalhealing.reviews_count %}
+                            {% if reviews_count > 999 %}
+                            {% assign money_count = reviews_count | times: 100 | money | replace: "$", "" | replace: ".00", "" |  replace: "£", "" %}
+                            <style>
+                                .span.yotpo-sr-bottom-line-right-panel:after{
+                                content: "{{ money_count }} Reviews";
+                                display: block;
+                                white-space: nowrap;
+                                font-size: 16px;
+                                text-align: start;
+                                font-family: "Proxima Nova";
+                                font-style: normal;
+                                color: rgb(44, 44, 44);
+                                padding-top: 2px;
+                                line-height: 28px;
+                                cursor: pointer;
+                            }
+                            .span.yotpo-sr-bottom-line-text.yotpo-sr-bottom-line-text--right-panel{
+                                display: none
+                            }
+                            </style>
 
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
