@@ -426,7 +426,7 @@
   }
   .rebuy-tagline{
   font-family: var(--gh-font-secondary);
-  font-size: 13.7px;
+  font-size: 15px;
   font-weight: 400;
   line-height: normal;
   }
@@ -917,12 +917,34 @@
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
                             <div class="rebuy-tagline" v-if="product.metafields.globalhealing.product_tagline"v-html="product.metafields.globalhealing.product_tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
-                            <div class="rebuy-product-review" v-if="hasProductReviews(product)">
+                            <div
+                                class="rebuy-product-review"
+                                v-if="hasProductReviews(product)"
+                                aria-label="product star rating"
+                            >
                                 <span class="rebuy-star-rating">
+
+                                    <span
+                                        v-if="product.reviews && product.reviews.star_rating"
+                                        class="rebuy-star-rating-value sr-only"
+                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
+                                    ></span>
+
                                     <span class="rebuy-star-rating-background"></span>
-                                    <span class="rebuy-star-rating-foreground" v-bind:style="{ width: productReviewRatingPercentage(product) }"></span>
+
+                                    <span
+                                        class="rebuy-star-rating-foreground"
+                                        v-bind:style="{
+                                            width: productReviewRatingPercentage(product)
+                                        }"
+                                    ></span>
+
                                 </span>
-                                <span class="rebuy-review-count" v-html="productReviewCount(product)"></span>
+
+                                <span
+                                    class="rebuy-review-count"
+                                    v-html="productReviewCount(product)"
+                                ></span>
                             </div>
     
                             <div class="rebuy-product-price">
