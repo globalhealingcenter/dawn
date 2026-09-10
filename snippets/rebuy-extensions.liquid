@@ -906,47 +906,39 @@
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
                             <div class="rebuy-tagline" v-if="product.metafields.globalhealing.product_tagline"v-html="product.metafields.globalhealing.product_tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
-                            
-                           <div class="rebuy-product-review" v-if="hasProductReviews(product)">
-                            <span class="rebuy-star-rating">
-                                <span class="rebuy-star-rating-background"></span>
-
-                                <span
-                                    class="rebuy-star-rating-foreground"
-                                    v-bind:style="{
-                                        width: productReviewRatingPercentage(product)
-                                    }"
-                                ></span>
-                            </span>
-
-                            <span
-                                class="rebuy-review-count"
-                                v-if="product.metafields.globalhealing.reviews_count"
+                            <div
+                                class="gh-custom-reviews"
+                                v-if="product.metafields && product.metafields.globalhealing"
                             >
-                                (<span v-html="product.metafields.globalhealing.reviews_count"></span>)
-                            </span>
-                        </div>
+                                <span class="gh-custom-stars">
+
+                                    <span class="gh-custom-stars-empty">
+                                        ★★★★★
+                                    </span>
 
                                     <span
-                                        v-if="product.reviews && product.reviews.star_rating"
-                                        class="rebuy-star-rating-value sr-only"
-                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
-                                    ></span>
-
-                                    <span class="rebuy-star-rating-background"></span>
-
-                                    <span
-                                        class="rebuy-star-rating-foreground"
+                                        class="gh-custom-stars-filled"
                                         v-bind:style="{
-                                            width: productReviewRatingPercentage(product)
+                                            width: (
+                                                parseFloat(
+                                                    product.metafields.globalhealing.reviews_average.value ||
+                                                    product.metafields.globalhealing.reviews_average ||
+                                                    0
+                                                ) / 5 * 100
+                                            ) + '%'
                                         }"
-                                    ></span>
+                                    >
+                                        ★★★★★
+                                    </span>
 
                                 </span>
 
                                 <span
-                                    class="rebuy-review-count"
-                                    v-html="productReviewCount(product)"
+                                    class="gh-custom-review-count"
+                                    v-html="
+                                        product.metafields.globalhealing.reviews_count.value ||
+                                        product.metafields.globalhealing.reviews_count
+                                    "
                                 ></span>
                             </div>
     
