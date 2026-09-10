@@ -624,286 +624,321 @@
           </div>
         </div>
       {% endif %}
+      
       {% when 'ingredients-v2' %}
 
-      {% assign ghiv2_ingredient_count = block.items.size %}
+        {% assign ghiv2_ingredient_count = block.items.size %}
 
-      {% if ghiv2_ingredient_count > 4 %}
-        {% assign ghiv2_ingredient_count = 4 %}
-      {% endif %}
+        {% if ghiv2_ingredient_count > 4 %}
+          {% assign ghiv2_ingredient_count = 4 %}
+        {% endif %}
 
-      {% if ghiv2_ingredient_count > 0 %}
+        {% if ghiv2_ingredient_count > 0 %}
 
-        <section
-          class="
-            ghiv2
-            ghiv2--count-{{ ghiv2_ingredient_count }}
-            {% if ghiv2_ingredient_count >= 3 %}ghiv2--standard{% endif %}
-            {% if ghiv2_ingredient_count == 2 %}ghiv2--two-up{% endif %}
-            {% if ghiv2_ingredient_count == 1 %}ghiv2--single{% endif %}
-          "
-          data-ingredients-v2
-          data-ghiv2-carousel
-          data-ingredient-count="{{ ghiv2_ingredient_count }}"
-        >
+          <section
+            class="
+              ghiv2
+              ghiv2--count-{{ ghiv2_ingredient_count }}
+              {% if ghiv2_ingredient_count >= 3 %}ghiv2--standard{% endif %}
+              {% if ghiv2_ingredient_count == 2 %}ghiv2--two-up{% endif %}
+              {% if ghiv2_ingredient_count == 1 %}ghiv2--single{% endif %}
+            "
+            data-ingredients-v2
+            data-ghiv2-carousel
+            data-ingredient-count="{{ ghiv2_ingredient_count }}"
+          >
 
-          <div class="ghiv2__inner page-width">
+            <div class="ghiv2__inner page-width">
 
-            {%- comment -%}
-              ============================================================
-              HEADER
-              ============================================================
-            {%- endcomment -%}
+              {%- comment -%}
+                ============================================================
+                HEADER
+                ============================================================
+              {%- endcomment -%}
 
-            <div class="ghiv2__header">
+              <div class="ghiv2__header">
 
-              <div class="ghiv2__header-main">
+                <div class="ghiv2__header-main">
 
-                <div class="ghiv2__label font-proxima">
-                  INGREDIENTS
+                  <div class="ghiv2__label font-proxima">
+                    INGREDIENTS
+                  </div>
+
+                  {% if block.title.main != blank %}
+                    <h2 class="ghiv2__heading font-miller">
+                      {{ block.title.main }}
+                    </h2>
+                  {% endif %}
+
                 </div>
 
-                {% if block.title.main != blank %}
-                  <h2 class="ghiv2__heading font-miller">
-                    {{ block.title.main }}
-                  </h2>
+
+                {%- comment -%}
+                  ============================================================
+                  DESCRIPTION / SUBHEAD
+
+                  2, 3, 4 ingredients:
+                  - Use section subhead from block.subhead
+
+                  1 ingredient:
+                  - There is NO section subhead
+                  - Use the ingredient description (item.content)
+                    in the subhead position instead
+                  ============================================================
+                {%- endcomment -%}
+
+                {% if ghiv2_ingredient_count == 1 %}
+
+                  {% assign ghiv2_single_ingredient = block.items.first %}
+
+                  {% if ghiv2_single_ingredient.content != blank %}
+                    <div class="ghiv2__subhead font-proxima">
+                      {{ ghiv2_single_ingredient.content }}
+                    </div>
+                  {% endif %}
+
+                {% elsif block.subhead != blank %}
+
+                  <div class="ghiv2__subhead font-proxima">
+                    {{ block.subhead }}
+                  </div>
+
                 {% endif %}
 
               </div>
 
-              {% if block.subhead != blank %}
-                <div class="ghiv2__subhead font-proxima">
-                  {{ block.subhead }}
+
+              {%- comment -%}
+                ============================================================
+                INGREDIENT CARDS
+                ============================================================
+              {%- endcomment -%}
+
+              <div
+                class="ghiv2__carousel-viewport"
+                data-ghiv2-viewport
+              >
+
+                <div
+                  class="ghiv2__ingredients"
+                  data-ghiv2-track
+                  role="list"
+                  aria-label="Product ingredients"
+                  tabindex="0"
+                >
+
+                  {% for ingredient in block.items limit: 4 %}
+
+                    <article
+                      class="ghiv2__ingredient"
+                      data-ghiv2-card
+                      data-ingredient-index="{{ forloop.index }}"
+                      role="listitem"
+                    >
+
+                      {% if ingredient.image != blank %}
+
+                        <div class="ghiv2__ingredient-media">
+
+                          <img
+                            class="ghiv2__ingredient-image"
+                            src="{{ ingredient.image }}"
+                            alt="{{ ingredient.image_alt | default: ingredient.title | escape }}"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                            draggable="false"
+                          >
+
+                        </div>
+
+                      {% endif %}
+
+
+                      {% if ingredient.title != blank or ingredient.content != blank %}
+
+                        <div class="ghiv2__ingredient-content">
+
+                          {% if ingredient.title != blank %}
+
+                            <h3 class="ghiv2__ingredient-title font-proxima">
+                              {{ ingredient.title }}
+                            </h3>
+
+                          {% endif %}
+
+
+                          {% if ingredient.content != blank %}
+
+                            <div class="ghiv2__ingredient-description font-proxima">
+                              {{ ingredient.content }}
+                            </div>
+
+                          {% endif %}
+
+                        </div>
+
+                      {% endif %}
+
+                    </article>
+
+                  {% endfor %}
+
                 </div>
+
+              </div>
+
+
+              {%- comment -%}
+                ============================================================
+                FULL INGREDIENT LIST
+
+                Priority:
+                1. Use GH Tools URL if supplied.
+                2. Otherwise fall back to existing Supplement Facts dialog.
+                ============================================================
+              {%- endcomment -%}
+
+              {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
+
+              {% if block.full_ingredient_list.url != blank %}
+
+                <div class="ghiv2__full-list">
+
+                  <a
+                    href="{{ block.full_ingredient_list.url }}"
+                    class="ghiv2__full-list-link font-proxima"
+                    {% if block.full_ingredient_list.new_tab == true %}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    {% endif %}
+                  >
+                    {{ ghiv2_link_text }}
+                  </a>
+
+                </div>
+
+
+              {% elsif config.supplement_facts != blank %}
+
+                <div class="ghiv2__full-list">
+
+                  {% capture ghiv2_supplement_facts_content %}
+                    {% render 'gh-product-supplement-facts', config: config %}
+                  {% endcapture %}
+
+                  {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
+
+                  {% render
+                    'gh-element-dialog',
+                    button_text: ghiv2_link_text,
+                    button_class: 'ghiv2__full-list-link font-proxima',
+                    id: ghiv2_supplement_dialog_id,
+                    content: ghiv2_supplement_facts_content
+                  %}
+
+                </div>
+
+              {% endif %}
+
+
+              {%- comment -%}
+                ============================================================
+                PROP 65
+
+                Uses the same existing product tag +
+                GH checkout Prop 65 service.
+                ============================================================
+              {%- endcomment -%}
+
+              {% if product.tags contains 'prop65' %}
+
+                <div class="ghiv2__prop65">
+
+                  {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
+
+                  {% render
+                    'gh-element-dialog',
+                    button_text: "<b>WARNING</b> - California's Proposition 65",
+                    button_class: 'ghiv2__prop65-link font-proxima',
+                    id: ghiv2_prop65_id,
+                    content: ''
+                  %}
+
+
+                  <script>
+                    (function () {
+
+                      var productSkus = [];
+
+                      {% for variant in product.variants %}
+                        productSkus.push({{ variant.sku | json }});
+                      {% endfor %}
+
+
+                      function loadIngredientsV2Prop65() {
+
+                        if (
+                          !window.gh ||
+                          !window.gh.shopify ||
+                          !window.gh.shopify.checkout ||
+                          typeof window.gh.shopify.checkout.prop65Message !== 'function'
+                        ) {
+                          return;
+                        }
+
+
+                        window.gh.shopify.checkout.prop65Message(
+                          productSkus,
+                          function (html) {
+
+                            var dialogContent = document.querySelector(
+                              '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
+                            );
+
+
+                            if (dialogContent) {
+                              dialogContent.innerHTML = html;
+                            }
+
+                          }
+                        );
+
+                      }
+
+
+                      if (document.readyState === 'loading') {
+
+                        document.addEventListener(
+                          'DOMContentLoaded',
+                          loadIngredientsV2Prop65
+                        );
+
+                      } else {
+
+                        loadIngredientsV2Prop65();
+
+                      }
+
+
+                      window.addEventListener(
+                        'load',
+                        loadIngredientsV2Prop65,
+                        { once: true }
+                      );
+
+                    })();
+                  </script>
+
+                </div>
+
               {% endif %}
 
             </div>
 
+          </section>
 
-            {%- comment -%}
-              ============================================================
-              INGREDIENT CARDS
-              ============================================================
-            {%- endcomment -%}
-
-            <div
-              class="ghiv2__carousel-viewport"
-              data-ghiv2-viewport
-            >
-
-              <div
-                class="ghiv2__ingredients"
-                data-ghiv2-track
-                role="list"
-                aria-label="Product ingredients"
-                tabindex="0"
-              >
-
-                {% for ingredient in block.items limit: 4 %}
-
-                  <article
-                    class="ghiv2__ingredient"
-                    data-ghiv2-card
-                    data-ingredient-index="{{ forloop.index }}"
-                    role="listitem"
-                  >
-
-                    {% if ingredient.image != blank %}
-
-                      <div class="ghiv2__ingredient-media">
-
-                        <img
-                          class="ghiv2__ingredient-image"
-                          src="{{ ingredient.image }}"
-                          alt="{{ ingredient.image_alt | default: ingredient.title | escape }}"
-                          width="800"
-                          height="600"
-                          loading="lazy"
-                          draggable="false"
-                        >
-
-                      </div>
-
-                    {% endif %}
-
-                    {% if ingredient.title != blank or ingredient.content != blank %}
-
-                      <div class="ghiv2__ingredient-content">
-
-                        {% if ingredient.title != blank %}
-
-                          <h3 class="ghiv2__ingredient-title font-proxima">
-                            {{ ingredient.title }}
-                          </h3>
-
-                        {% endif %}
-
-                        {% if ingredient.content != blank %}
-
-                          <div class="ghiv2__ingredient-description font-proxima">
-                            {{ ingredient.content }}
-                          </div>
-
-                        {% endif %}
-
-                      </div>
-
-                    {% endif %}
-
-                  </article>
-
-                {% endfor %}
-
-              </div>
-
-            </div>
-
-            {%- comment -%}
-              ============================================================
-              FULL INGREDIENT LIST
-
-              Priority:
-              1. Use GH Tools URL if supplied.
-              2. Otherwise fall back to the existing Supplement Facts
-                dialog functionality.
-              ============================================================
-            {%- endcomment -%}
-
-            {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
-
-            {% if block.full_ingredient_list.url != blank %}
-
-              <div class="ghiv2__full-list">
-
-                <a
-                  href="{{ block.full_ingredient_list.url }}"
-                  class="ghiv2__full-list-link font-proxima"
-                  {% if block.full_ingredient_list.new_tab == true %}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  {% endif %}
-                >
-                  {{ ghiv2_link_text }}
-                </a>
-
-              </div>
-
-            {% elsif config.supplement_facts != blank %}
-
-              <div class="ghiv2__full-list">
-
-                {% capture ghiv2_supplement_facts_content %}
-                  {% render 'gh-product-supplement-facts', config: config %}
-                {% endcapture %}
-
-                {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
-
-                {% render
-                  'gh-element-dialog',
-                  button_text: ghiv2_link_text,
-                  button_class: 'ghiv2__full-list-link font-proxima',
-                  id: ghiv2_supplement_dialog_id,
-                  content: ghiv2_supplement_facts_content
-                %}
-
-              </div>
-
-            {% endif %}
-
-
-            {%- comment -%}
-              ============================================================
-              PROP 65
-
-              Reuses the same product tag + GH checkout Prop65 service
-              as the existing Ingredients block.
-              ============================================================
-            {%- endcomment -%}
-
-            {% if product.tags contains 'prop65' %}
-
-              <div class="ghiv2__prop65">
-
-                {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
-
-                {% render
-                  'gh-element-dialog',
-                  button_text: "<b>WARNING</b> - California's Proposition 65",
-                  button_class: 'ghiv2__prop65-link font-proxima',
-                  id: ghiv2_prop65_id,
-                  content: ''
-                %}
-
-                <script>
-                  (function () {
-
-                    var productSkus = [];
-
-                    {% for variant in product.variants %}
-                      productSkus.push({{ variant.sku | json }});
-                    {% endfor %}
-
-
-                    function loadIngredientsV2Prop65() {
-
-                      if (
-                        !window.gh ||
-                        !window.gh.shopify ||
-                        !window.gh.shopify.checkout ||
-                        typeof window.gh.shopify.checkout.prop65Message !== 'function'
-                      ) {
-                        return;
-                      }
-
-                      window.gh.shopify.checkout.prop65Message(
-                        productSkus,
-                        function (html) {
-
-                          var dialogContent = document.querySelector(
-                            '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
-                          );
-
-                          if (dialogContent) {
-                            dialogContent.innerHTML = html;
-                          }
-
-                        }
-                      );
-
-                    }
-
-
-                    if (document.readyState === 'loading') {
-
-                      document.addEventListener(
-                        'DOMContentLoaded',
-                        loadIngredientsV2Prop65
-                      );
-
-                    } else {
-
-                      loadIngredientsV2Prop65();
-
-                    }
-
-                    window.addEventListener(
-                      'load',
-                      loadIngredientsV2Prop65,
-                      { once: true }
-                    );
-
-                  })();
-                </script>
-
-              </div>
-
-            {% endif %}
-
-          </div>
-
-        </section>
-
-      {% endif %}
+        {% endif %}
   
       {% when 'ingredients' %}
         <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
