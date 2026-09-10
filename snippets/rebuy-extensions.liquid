@@ -917,36 +917,9 @@
                             <a class="rebuy-product-title" v-bind:href="learnMoreURL(product)" v-on:click="learnMore(product);" v-html="product.title" v-bind:class="[hasLearnMore() ? 'clickable' : '']" v-bind:alt="'View ' + product.title"></a>
                             <div class="rebuy-tagline" v-if="product.metafields.globalhealing.product_tagline"v-html="product.metafields.globalhealing.product_tagline"></div>
                             <div class="rebuy-variant-title" v-if="showVariantTitle(product)" v-html="product.selected_variant.title"></div>
-                            <div
-                                class="rebuy-product-review"
-                                v-if="hasProductReviews(product)"
-                                aria-label="product star rating"
-                            >
-                                <span class="rebuy-star-rating">
-
-                                    <span
-                                        v-if="product.reviews && product.reviews.star_rating"
-                                        class="rebuy-star-rating-value sr-only"
-                                        v-html="product.reviews.star_rating + ' stars out of 5 stars'"
-                                    ></span>
-
-                                    <span class="rebuy-star-rating-background"></span>
-
-                                    <span
-                                        class="rebuy-star-rating-foreground"
-                                        v-bind:style="{
-                                            width: productReviewRatingPercentage(product)
-                                        }"
-                                    ></span>
-
-                                </span>
-
-                                <span
-                                    class="rebuy-review-count"
-                                    v-html="productReviewCount(product)"
-                                ></span>
-                            </div>
+                            
                             <div class="yotpo-widget-instance" data-yotpo-instance-id="465432" data-yotpo-product-id="{{product.id}}" data-yotpo-cart-product-id="{{item.product.id}}" data-yotpo-section-id="{{template.name}}"></div>
+                            
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
                                     <span class="rebuy-money sale" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
