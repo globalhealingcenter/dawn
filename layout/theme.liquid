@@ -502,6 +502,81 @@
       })();
     </script>
 
+
+<script>
+(function () {
+  console.log('[OG Card Click] Script loaded');
+
+  document.addEventListener(
+    'click',
+    function (event) {
+      // Shadow DOM elements are available through composedPath()
+      var path = event.composedPath ? event.composedPath() : [];
+
+      if (!path.length) return;
+
+      // Find the Ordergroove card anywhere in the Shadow DOM
+      var card = path.find(function (element) {
+        return (
+          element &&
+          element.nodeType === 1 &&
+          element.classList &&
+          element.classList.contains('gh-og-card')
+        );
+      });
+
+      if (!card) return;
+
+      console.log('[OG Card Click] Card clicked:', card);
+
+      // Don't interfere with the frequency dropdown
+      var clickedFrequency = path.some(function (element) {
+        return (
+          element &&
+          element.nodeType === 1 &&
+          (
+            element.matches?.('select') ||
+            element.matches?.('option') ||
+            element.matches?.('og-select-frequency')
+          )
+        );
+      });
+
+      if (clickedFrequency) return;
+
+      // Don't interfere with the actual Ordergroove controls
+      var clickedControl = path.some(function (element) {
+        return (
+          element &&
+          element.nodeType === 1 &&
+          (
+            element.matches?.('og-optin-button') ||
+            element.matches?.('og-optout-button') ||
+            element.matches?.('input') ||
+            element.matches?.('button')
+          )
+        );
+      });
+
+      if (clickedControl) return;
+
+      // Find the correct Ordergroove control inside the card
+      var optin = card.querySelector('og-optin-button');
+      var optout = card.querySelector('og-optout-button');
+
+      if (optin) {
+        console.log('[OG Card Click] Selecting Subscribe & Save');
+        optin.click();
+      } else if (optout) {
+        console.log('[OG Card Click] Selecting One-Time Purchase');
+        optout.click();
+      }
+    },
+    true
+  );
+})();
+</script>
+
     <!-- Start of LittledataLayer -->
     {% include 'LittledataLayer' %}
     <!-- End of LittledataLayer -->
