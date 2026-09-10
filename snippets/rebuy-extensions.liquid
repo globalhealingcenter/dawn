@@ -946,7 +946,7 @@
                                     v-html="productReviewCount(product)"
                                 ></span>
                             </div>
-    
+                            <div class="yotpo-widget-instance" data-yotpo-instance-id="465432" data-yotpo-product-id="{{product.id}}" data-yotpo-cart-product-id="{{item.product.id}}" data-yotpo-section-id="{{template.name}}"></div>
                             <div class="rebuy-product-price">
                                 <div v-if="variantOnSale(product, product.selected_variant)">
                                     <span class="rebuy-money sale" v-html="formatMoney(variantPrice(product, product.selected_variant))"></span>
