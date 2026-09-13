@@ -48,7 +48,7 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
 {%- endif -%}
 
 {%- comment -%} Count the entries that actually carry rows, so one usable panel among several does not become an accordion of one. {%- endcomment -%}
-{%- assign sf_count = 1 -%}
+{%- assign sf_count = 0 -%}
 {%- for item in sf_items -%}
     {%- if sf_many -%}
         {%- if item.panel -%}{%- assign p = item.panel -%}{%- else -%}{%- assign p = item -%}{%- endif -%}
