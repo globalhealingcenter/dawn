@@ -1,0 +1,366 @@
+{% comment %}
+
+Renders one or more Supplement Facts panels from the structured data produced by
+the tools-v2 parser (ProductVariant data -> supplement_facts_parsed.panel).
+
+Follows the same shape as gh-product-supplement-facts.liquid: more than one
+entry renders as a ghd--details accordion, a single entry renders bare.
+
+Attributes:
+
+{array} panels: required. Entries of {title, panel}, mirroring the {title, image}
+    entries the v2 image snippet takes. A bare panel object as the entry also
+    works, in which case the title falls back to panel_title.
+{object} panel: optional alternative for a single panel, so a variant level
+    render does not have to build a one item array in Liquid.
+{boolean} styles: optional, default true. Emitted once per render of this
+    snippet, no matter how many panels. Set false on the second and later
+    renders on a page ({% render %} is an isolated scope, so the snippet cannot
+    know it has already emitted its CSS).
+{string} fallback_image: optional. Rendered instead when nothing has been
+    parsed yet, so v3 can go live before every product has data.
+
+Panels must already be Liquid objects — a JSON metafield's `.value`, for
+example. Liquid cannot parse a JSON string, so a string here renders nothing.
+
+Usage:
+
+    {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}
+    {% render 'gh-product-supplement-facts-v3', panel: variant.metafields.globalhealing.supplement_facts.value.panel %}
+
+Row shape: name, level (0 top / 1 sub blend / 2 deeper), amount, amount_value,
+amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}].
+
+{% endcomment %}
+
+{%- comment -%}
+    One loop has to serve both inputs, and Liquid cannot build an array of
+    objects. `'x' | split: ','` gives a one element array to iterate when a
+    single `panel` was passed instead of `panels`.
+{%- endcomment -%}
+{%- assign sf_many = false -%}
+{%- if panels and panels.size > 0 -%}
+    {%- assign sf_many = true -%}
+    {%- assign sf_items = panels -%}
+{%- else -%}
+    {%- assign sf_items = "x" | split: "," -%}
+{%- endif -%}
+
+{%- comment -%} Count the entries that actually carry rows, so one usable panel among several does not become an accordion of one. {%- endcomment -%}
+{%- assign sf_count = 0 -%}
+{%- for item in sf_items -%}
+    {%- if sf_many -%}
+        {%- if item.panel -%}{%- assign p = item.panel -%}{%- else -%}{%- assign p = item -%}{%- endif -%}
+    {%- else -%}
+        {%- assign p = panel -%}
+    {%- endif -%}
+    {%- if p.rows and p.rows.size > 0 -%}
+        {%- assign sf_count = sf_count | plus: 1 -%}
+    {%- endif -%}
+{%- endfor -%}
+
+{%- assign use_details = false -%}
+{%- if sf_count > 1 -%}
+    {%- assign use_details = true -%}
+{%- endif -%}
+
+{%- if sf_count > 0 -%}
+
+{%- if use_details -%}<div class="ghd--details" style="width: 800px; max-width: 100%;">{%- endif -%}
+
+{%- for item in sf_items -%}
+
+    {%- if sf_many -%}
+        {%- if item.panel -%}{%- assign p = item.panel -%}{%- else -%}{%- assign p = item -%}{%- endif -%}
+        {%- assign item_title = item.title | default: p.panel_title | default: "Supplement Facts" -%}
+    {%- else -%}
+        {%- assign p = panel -%}
+        {%- assign item_title = p.panel_title | default: "Supplement Facts" -%}
+    {%- endif -%}
+
+    {%- unless p.rows and p.rows.size > 0 -%}{%- continue -%}{%- endunless -%}
+
+    {%- if use_details -%}
+        <details>
+            <summary>{{ item_title | escape }}</summary>
+    {%- endif -%}
+
+
+    {%- comment -%} Only show the % Daily Value column when something actually has one. {%- endcomment -%}
+    {%- assign has_dv = false -%}
+    {%- for row in p.rows -%}
+        {%- if row.daily_value and row.daily_value != blank -%}
+            {%- assign has_dv = true -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+    {%- assign amount_heading = "Amount Per Serving" -%}
+    {%- for col in p.value_columns -%}
+        {%- assign col_test = col | downcase -%}
+        {%- if col_test contains "amount" -%}
+            {%- assign amount_heading = col -%}
+        {%- endif -%}
+    {%- endfor -%}
+
+
+    <div class="gh-sfp">
+
+        {%- assign sf_heading = p.panel_title | default: "Supplement Facts" -%}
+        <div class="gh-sfp__title">{{ sf_heading | escape }}</div>
+
+        {%- if p.serving_size and p.serving_size != blank -%}
+            <div class="gh-sfp__serving">Serving Size: {{ p.serving_size | escape }}</div>
+        {%- endif -%}
+
+        {%- if p.servings_per_container and p.servings_per_container != blank -%}
+            <div class="gh-sfp__serving">Servings Per Container: {{ p.servings_per_container | escape }}</div>
+        {%- endif -%}
+
+        <div class="gh-sfp__rule"></div>
+
+        <table class="gh-sfp__table">
+            <thead>
+                <tr>
+                    <th scope="col"><span class="gh-sfp__sr">Nutrient</span></th>
+                    <th scope="col" class="gh-sfp__num">{{ amount_heading | escape }}</th>
+                    {%- if has_dv -%}
+                        <th scope="col" class="gh-sfp__num">% Daily Value</th>
+                    {%- endif -%}
+                </tr>
+            </thead>
+            <tbody>
+                {%- for row in p.rows -%}
+
+                    {%- comment -%}
+                        "800 mg*" already carries its marker. Append only the symbols
+                        the printed amount does not already show.
+                    {%- endcomment -%}
+                    {%- assign amount = row.amount | default: "" -%}
+                    {%- for symbol in row.symbols -%}
+                        {%- unless amount contains symbol -%}
+                            {%- assign amount = amount | append: symbol -%}
+                        {%- endunless -%}
+                    {%- endfor -%}
+
+                    <tr class="gh-sfp__row gh-sfp__row--l{{ row.level | default: 0 }}">
+                        <td>
+                            <span class="gh-sfp__name">{{ row.name | escape }}</span>
+
+                            {%- if row.source and row.source != blank -%}
+                                {%- comment -%} Stored bare; the panel prints it in parentheses. Strip any the parser left on. {%- endcomment -%}
+                                {%- assign src = row.source | strip -%}
+                                {%- assign src_first = src | slice: 0 -%}
+                                {%- if src_first == "(" -%}
+                                    {%- assign src = src | remove_first: "(" -%}
+                                {%- endif -%}
+                                {%- assign src_last = src | slice: -1 -%}
+                                {%- if src_last == ")" -%}
+                                    {%- assign src_end = src.size | minus: 1 -%}
+                                    {%- assign src = src | slice: 0, src_end -%}
+                                {%- endif -%}
+                                <div class="gh-sfp__source">({{ src | escape }})</div>
+                            {%- endif -%}
+
+                            {%- if row.ingredients and row.ingredients.size > 0 -%}
+                                <div class="gh-sfp__ingredients">
+                                    ({%- for ingredient in row.ingredients -%}
+                                        {{- ingredient.name | escape -}}
+                                        {%- if ingredient.qualifier and ingredient.qualifier != blank %} ({{ ingredient.qualifier | escape }}){% endif -%}
+                                        {%- unless forloop.last %}, {% endunless -%}
+                                    {%- endfor -%})
+                                </div>
+                            {%- endif -%}
+
+                            {%- if row.note and row.note != blank -%}
+                                <div class="gh-sfp__note">{{ row.note | escape }}</div>
+                            {%- endif -%}
+                        </td>
+                        <td class="gh-sfp__num">{{ amount | escape }}</td>
+                        {%- if has_dv -%}
+                            <td class="gh-sfp__num">{{ row.daily_value | escape }}</td>
+                        {%- endif -%}
+                    </tr>
+                {%- endfor -%}
+            </tbody>
+        </table>
+
+        <div class="gh-sfp__rule"></div>
+
+        {%- for footnote in p.footnotes -%}
+            <div class="gh-sfp__footnote">{{ footnote | escape }}</div>
+        {%- endfor -%}
+
+        {%- if p.other_ingredients and p.other_ingredients.size > 0 -%}
+            <div class="gh-sfp__other">
+                <b>Other Ingredients:</b> {{ p.other_ingredients | join: ", " | escape }}
+            </div>
+        {%- endif -%}
+
+        {%- for allergen in p.allergens -%}
+            <div class="gh-sfp__other">{{ allergen | escape }}</div>
+        {%- endfor -%}
+
+        {%- if p.directions and p.directions != blank -%}
+            <div class="gh-sfp__other"><b>Directions:</b> {{ p.directions | escape }}</div>
+        {%- endif -%}
+
+        {%- for warning in p.warnings -%}
+            <div class="gh-sfp__other gh-sfp__warning">{{ warning | escape }}</div>
+        {%- endfor -%}
+
+    </div>
+
+
+    {%- if use_details -%}
+        </details>
+    {%- endif -%}
+
+{%- endfor -%}
+
+{%- if use_details -%}</div>{%- endif -%}
+
+{%- elsif fallback_image and fallback_image contains "https" -%}
+
+    <img src="{{ fallback_image }}?w=800"
+         srcset="{{ fallback_image }}?w=1600 2x"
+         alt="Supplement facts"
+         loading="lazy">
+
+
+{%- endif -%}
+
+{%- if sf_count > 0 and styles != false -%}
+<style>
+    .gh-sfp {
+        width: 340px;
+        max-width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #000;
+        padding: 8px 10px;
+        background: #fff;
+        color: #000;
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .gh-sfp * {
+        box-sizing: border-box;
+    }
+
+    .gh-sfp__title {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        line-height: 1.05;
+        margin: 0 0 2px;
+    }
+
+    .gh-sfp__serving {
+        font-size: 12px;
+    }
+
+    .gh-sfp__rule {
+        border-top: 8px solid #000;
+        margin: 3px 0;
+    }
+
+    .gh-sfp__table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 12px;
+    }
+
+    .gh-sfp__table th {
+        font-size: 11px;
+        font-weight: 700;
+        text-align: right;
+        border-bottom: 1px solid #000;
+        padding: 1px 0;
+    }
+
+    .gh-sfp__table td {
+        vertical-align: top;
+        border-bottom: 1px solid #000;
+        padding: 2px 0;
+    }
+
+    .gh-sfp__table tbody tr:last-child td {
+        border-bottom: 0;
+    }
+
+    .gh-sfp__num {
+        text-align: right;
+        white-space: nowrap;
+        padding-left: 8px;
+        font-weight: 700;
+    }
+
+    .gh-sfp__name {
+        font-weight: 700;
+    }
+
+    /* mirrors the indentation printed on the label */
+    .gh-sfp__row--l1 .gh-sfp__name,
+    .gh-sfp__row--l2 .gh-sfp__name {
+        font-weight: 400;
+        font-style: italic;
+    }
+
+    .gh-sfp__row--l1 .gh-sfp__name,
+    .gh-sfp__row--l1 .gh-sfp__source,
+    .gh-sfp__row--l1 .gh-sfp__ingredients {
+        padding-left: 10px;
+    }
+
+    .gh-sfp__row--l2 .gh-sfp__name,
+    .gh-sfp__row--l2 .gh-sfp__source,
+    .gh-sfp__row--l2 .gh-sfp__ingredients {
+        padding-left: 20px;
+    }
+
+    .gh-sfp__source {
+        font-size: 12px;
+        line-height: 1.25;
+    }
+
+    .gh-sfp__ingredients {
+        font-size: 11px;
+        font-style: italic;
+        line-height: 1.3;
+    }
+
+    .gh-sfp__note {
+        font-size: 11px;
+    }
+
+    .gh-sfp__footnote,
+    .gh-sfp__other {
+        font-size: 11px;
+        margin-top: 3px;
+    }
+
+    .gh-sfp__warning {
+        font-weight: 700;
+    }
+
+    .gh-sfp__sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    @media print {
+        .gh-sfp {
+            break-inside: avoid;
+        }
+    }
+</style>
+{%- endif -%}
