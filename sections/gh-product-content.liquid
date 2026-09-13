@@ -267,8 +267,15 @@
 
                 {% unless config.supplement_facts == blank  %}
                 <div>
+                  {% comment %}
                   {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
                   {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content %}
+                  {% endcomment %}
+
+                  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+                    {%- capture sf_content_v3 -%}{% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}{% endcapture %}
+                    {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content_v3 %}
+                  {% endif %}
                 </div>
                 {% endunless %}
               </div>
