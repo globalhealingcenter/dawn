@@ -5,6 +5,9 @@ This file can be re-written at any time.
 
 {% assign template_suffix = template.suffix %}
 
+{% assign template_prefix = template | slice: 0, 37 %}
+
+
 {% if article %}
   {% assign content = article %}
 {% elsif page %}
@@ -14,7 +17,7 @@ This file can be re-written at any time.
 {% elsif collection %}
   {% assign content = collection %}
 
-{% elsif template == 'index' or template | starts_with: 'index.shogun-670d5d3e39026dab5374cd12' %}
+{% elsif template == 'index' or template_prefix == 'index.shogun-670d5d3e39026dab5374cd12' %}
   {% assign content = pages['shogun-imported-homepage'] %}
 
   {% if template == 'index' %}
