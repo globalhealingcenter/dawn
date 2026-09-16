@@ -384,10 +384,6 @@
         flex-wrap: wrap;
     }
 
-    #rebuy-widget-300261 .rebuy-money {
-        font-size: 16px;
-    }
-
     #rebuy-widget-300261 .rebuy-bundle__actions-buttons button:first-child {
         flex: 1
     }
