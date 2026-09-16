@@ -360,13 +360,12 @@
     #rebuy-widget-300261 .rebuy-accordian-dropdown {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+        border: none;
         background: #21472D;
         border-left: none;
-        border-top-color: #21472D;
-        border-right-color: #21472D;
-        border-bottom-color: #21472D;
         width: 50px;
         position: relative;
+        box-shadow: none;
     }
 
     #rebuy-widget-300261 .rebuy-accordian-dropdown:before {
@@ -386,7 +385,7 @@
     }
 
     #rebuy-widget-300261 .rebuy-money {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     #rebuy-widget-300261 .rebuy-bundle__actions-buttons button:first-child {
@@ -503,8 +502,13 @@
         margin-top: 0px;
     }
 
+    #rebuy-widget-300261 .rebuy-bundle__actions-price-value span.rebuy-money.compare-at {
+        margin-left: 5px;
+        font-size: 14px;
+    }
+
     #rebuy-widget-300261 {
-        padding: 20px 30px;
+        padding: 20px 0px;
     }
 
     #rebuy-widget-300261 .rebuy-product-price {
@@ -549,6 +553,7 @@
         display: flex;
         flex-direction: column;
         margin-top: 20px;
+        padding: 0px 30px;
     }
 
     #rebuy-widget-300261 .rebuy-product-block {
