@@ -416,6 +416,7 @@
         font-weight: 300;
         transition: transform 0.3s ease;
         display: inline-block;
+        font-family: 'Font Awesome 5 Pro';
     }
 
     .rebuy-accordian-dropdown.is-open:after,
