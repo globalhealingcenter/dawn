@@ -842,7 +842,6 @@
     font-weight: 500;
     font-size: 16px;
     line-height: 19px;
-    margin-top: 10px;
 }
 
 .gh--stats-content:before,
@@ -1098,18 +1097,15 @@
 
     .ghd--block--study-content h2.eyebrow {
         font-size: 30px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
     }
 
     .ghd--block--study-content {
-        padding: 30px 20px;
+        padding: 30px 8px;
     }
 
     .ghd-study--results--stats img {
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
     }
 
     .gh--stats-content {
