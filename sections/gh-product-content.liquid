@@ -57,10 +57,10 @@
           data-gh-reviews
         >
           <div class="ghr-reviews__inner">
-            <h2 class="ghr-reviews__heading font-proxima">
+            {% comment %}<h2 class="ghr-reviews__heading font-proxima">
               Healing That Speaks
               <span class="font-miller">for Itself.</span>
-            </h2>
+            </h2>{% endcomment %}
 
             <div class="ghr-reviews__carousel">
               <div
@@ -126,7 +126,7 @@
                           {% if review_verified_text != blank %}
                             <span class="ghr-reviews__separator" aria-hidden="true"> | </span>
                             <span class="ghr-reviews__verified">
-                              {{ review_verified_text }}
+                              Verified Buyer
                             </span>
                           {% endif %}
                         </p>

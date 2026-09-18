@@ -169,7 +169,7 @@
     display: block;
     width: 0;
     height: 100%;
-    background: var(--gh-color-green, #22472d);
+    background: var(--gh-color-gray, #545454);
     border-radius: 2px;
     transition: width 0.3s ease;
 }
@@ -211,8 +211,14 @@ section.ghr-reviews .ghr-reviews__progress-fill {
     }
 
     .ghr-reviews__card {
-        flex: 0 0 calc((100% - 1.5rem) / 1.35);
-        min-width: calc((100% - 1.5rem) / 1.35);
+        flex: 0 0 min(300px,
+                calc((100% - 1.5rem) / 1.35));
+
+        min-width: min(300px,
+                calc((100% - 1.5rem) / 1.35));
+
+        max-width: 300px;
+
         padding: 20px 10px;
         border-radius: 4px;
     }
