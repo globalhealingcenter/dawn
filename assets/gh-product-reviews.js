@@ -107,10 +107,14 @@
 
             var containerWidth = carousel.getBoundingClientRect().width;
 
-            fullyVisibleCards = Math.max(
-                1,
-                Math.floor(containerWidth / step)
-            );
+            if (window.innerWidth <= 767) {
+                fullyVisibleCards = 1;
+            } else {
+                fullyVisibleCards = Math.max(
+                    1,
+                    Math.floor(containerWidth / step)
+                );
+            }
 
             peekOffset =
                 (containerWidth - fullyVisibleCards * step + gap) / 2;
