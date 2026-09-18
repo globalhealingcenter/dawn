@@ -77,7 +77,7 @@
     flex: 0 0 calc((100vw - 3 * 3rem) / 3.75);
     flex-direction: column;
     min-width: calc((100vw - 3 * 3rem) / 3.75);
-    height: 500px;
+    height: auto;
     overflow: hidden;
     box-sizing: border-box;
     border: 1px solid rgba(34, 71, 45, 0.08);
@@ -91,6 +91,11 @@
 .ghmc-craftsmanship__card.ghmc-card-active {
     z-index: 2;
     transform: scaleY(1.14);
+}
+
+.ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content p,
+.ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content h3 {
+    transform: scale(0.96);
 }
 
 /*
@@ -169,11 +174,10 @@
 }
 
 .ghmc-craftsmanship__description {
-    flex: 1;
     margin: 0;
     color: var(--gh-color-gray);
     font-size: 17.49px;
-    line-height: 27px;
+    line-height: 25px;
     font-weight: 400;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -224,10 +228,6 @@
 }
 
 @media screen and (max-width: 1199px) and (min-width: 768px) {
-    .ghmc-craftsmanship__card {
-        height: 530px;
-    }
-
     .ghmc-craftsmanship__content {
         padding-right: 2.5rem;
         padding-left: 2.5rem;
@@ -244,6 +244,11 @@
         padding: 3rem 0 0;
     }
 
+    .ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content p,
+    .ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content h3 {
+        transform: scale(1);
+    }
+
     .ghmc-craftsmanship__inner {
         gap: 3rem;
     }
@@ -251,18 +256,21 @@
     .ghmc-craftsmanship__header {
         padding: 0 30px;
         box-sizing: border-box;
+        text-align: left;
     }
 
     .ghmc-craftsmanship__label {
         margin-bottom: 2px;
         font-size: 16px;
         line-height: 27px;
+        text-align: left;
     }
 
     .ghmc-craftsmanship__heading {
         display: inline;
         font-size: 30px;
         line-height: 40px;
+        text-align: left;
     }
 
     .ghmc-craftsmanship__carousel {
@@ -278,13 +286,6 @@
     .ghmc-craftsmanship__card {
         flex: 0 0 calc((100vw - 1.5rem) / 1.35);
         min-width: calc((100vw - 1.5rem) / 1.35);
-
-        /*
-         * Equal height for every mobile card.
-         */
-        height: 420px;
-
-        border-radius: 4px;
     }
 
     .ghmc-craftsmanship__card.ghmc-card-active {
@@ -317,7 +318,6 @@
     }
 
     .ghmc-craftsmanship__description {
-        flex: 1;
         font-size: 14px;
         line-height: 20px;
     }
