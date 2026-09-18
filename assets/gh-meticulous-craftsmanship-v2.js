@@ -169,7 +169,34 @@
             });
         }
 
+        syncCardHeights() {
+            if (!this.cards || !this.cards.length) {
+                return;
+            }
+
+            // Reset heights to allow measuring natural content size
+            this.cards.forEach((card) => {
+                card.style.height = 'auto';
+            });
+
+            let maxHeight = 0;
+            this.cards.forEach((card) => {
+                const height = card.offsetHeight;
+                if (height > maxHeight) {
+                    maxHeight = height;
+                }
+            });
+
+            if (maxHeight > 0) {
+                this.cards.forEach((card) => {
+                    card.style.height = `${maxHeight}px`;
+                });
+            }
+        }
+
         updateMeasurements() {
+            this.syncCardHeights();
+
             const firstCard = this.cards[0];
 
             if (!firstCard) {

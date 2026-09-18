@@ -298,7 +298,7 @@
 }
 
 .ghd--block--curated .eyebrow.h2 {
-    font-family: var(--gh-font-secondary);
+    font-family: var(--gh-font-primary);
     font-style: italic;
     font-weight: 400;
     font-size: 50px;
@@ -330,6 +330,7 @@
 
 .ghd--block--curated .subtle {
     font-family: var(--gh-font-secondary);
+    color: var(--gh-color-green);
 }
 
 .ghd--block--curated [data-type="items"]>div {
@@ -599,6 +600,23 @@
 @media (max-width: 749px) {
     .ghd--hide-mobile {
         display: none;
+    }
+
+    .ghd--block--curated .eyebrow.h2 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .eyebrow-curated {
+        margin-bottom: 2px;
+        font-size: 16px;
+        line-height: 27px;
+    }
+
+    .ghd--block--curated .h4.mb3 {
+        margin: 10px auto 30px;
+        font-size: 16px;
+        line-height: 26px;
     }
 
     .product__title h1 {
