@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_zDr4xD": {
+          "type": "announcement",
+          "settings": {
+            "text": "Just launched! Forever Active Creatine",
+            "link": "shopify://products/creatine"
+          }
+        },
         "announcement_GGCHez": {
           "type": "announcement",
           "settings": {
@@ -23,6 +30,7 @@
         }
       },
       "block_order": [
+        "announcement_zDr4xD",
         "announcement_GGCHez"
       ],
       "custom_css": [
