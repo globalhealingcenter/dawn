@@ -339,7 +339,8 @@
                     class="rebuy-button"
                     v-on:click="addSelectedProductsToCart()"
                     type="button">
-                        <span>Add to Cart</span>
+                        <span v-if="products.length > 0 && products.every(function(product){ return product.selected; })">Bundle &amp; Save 15%</span>
+                        <span v-else>Add to Cart</span>
                 </button>
                 <button class="rebuy-accordian-dropdown">
 
