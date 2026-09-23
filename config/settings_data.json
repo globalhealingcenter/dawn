@@ -190,11 +190,6 @@
         "disabled": false,
         "settings": {}
       },
-      "10641372206048101839": {
-        "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-global-embed/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
-        "disabled": false,
-        "settings": {}
-      },
       "4705145147225299685": {
         "type": "shopify://apps/tolstoy-shoppable-video-quiz/blocks/widget-block/06fa8282-42ff-403e-b67c-1936776aed11",
         "disabled": false,
@@ -254,6 +249,11 @@
         "settings": {
           "product": ""
         }
+      },
+      "10641372206048101839": {
+        "type": "shopify://apps/rebuy-personalization-engine/blocks/rebuy-global-embed/a26ae9b9-933b-40bf-bbc6-bf1220bbc4dc",
+        "disabled": true,
+        "settings": {}
       }
     },
     "color_schemes": {
