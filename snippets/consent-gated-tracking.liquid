@@ -202,11 +202,11 @@
       })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
     }
 
-    function loadRebuy() {
+    {% comment %} function loadRebuy() {
       if (loaded.rebuy || document.querySelector('script[src*="cdn.rebuyengine.com/onsite/js/rebuy.js"]')) return;
       loaded.rebuy = true;
       loadScript('https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}', null);
-    }
+    } {% endcomment %}
 
     function loadSnapchatPixel() {
       if (loaded.snapchat || document.querySelector('script[src*="shopify-scevent-init"]')) return;
@@ -236,9 +236,9 @@
       if (consent.statistics) {
         loadHotjar();
       }
-      if (consent.marketing || consent.functionality) {
+      {% comment %} if (consent.marketing || consent.functionality) {
         loadRebuy();
-      }
+      } {% endcomment %}
     }
 
     document.addEventListener('gh:consentUpdate', function (event) {
