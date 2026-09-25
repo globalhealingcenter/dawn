@@ -57,13 +57,21 @@
 .ghmc-craftsmanship__track {
     display: flex;
     align-items: center;
+    height: 100%;
+
+    /*
+     * BASE GAP:
+     * Every slide always has the same 3rem layout gap.
+     */
     gap: 3rem;
+
     width: max-content;
-    padding: 2.5rem 0;
+    padding: 4rem 0;
     cursor: grab;
     touch-action: pan-y;
     will-change: transform;
     transform: translate3d(0, 0, 0);
+
     -webkit-user-select: none;
     user-select: none;
 }
@@ -74,36 +82,62 @@
 
 .ghmc-craftsmanship__card {
     display: flex;
+
+    /*
+     * Base width remains identical for ALL slides.
+     */
     flex: 0 0 calc((100vw - 3 * 3rem) / 3.75);
-    flex-direction: column;
     min-width: calc((100vw - 3 * 3rem) / 3.75);
-    height: auto;
+
+    flex-direction: column;
+    height: 100%;
+
     overflow: hidden;
     box-sizing: border-box;
+
     border: 1px solid rgba(34, 71, 45, 0.08);
     border-radius: 7px;
+
     background: #f9f2e8;
-    transform: scaleY(1);
-    transform-origin: center;
-    transition: transform 0.35s ease;
-}
 
-.ghmc-craftsmanship__card.ghmc-card-active {
-    z-index: 2;
-    transform: scaleY(1.14);
-}
+    /*
+     * JS controls these values.
+     */
+    --ghmc-scale: 1;
+    --ghmc-offset-x: 0px;
 
-.ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content p,
-.ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content h3 {
-    transform: scale(0.96);
+    transform:
+        translate3d(var(--ghmc-offset-x), 0, 0) scale(var(--ghmc-scale));
+
+    transform-origin: center center;
+
+    will-change: transform;
+
+    transition:
+        transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 /*
- * Disable card animation during invisible clone reset.
+ * IMPORTANT:
+ * Active card sizing is controlled by JS.
+ * Don't add margin / width / transform here.
+ */
+.ghmc-craftsmanship__card.ghmc-card-active {
+    z-index: 2;
+}
+
+/*
+ * Disable animations while the infinite carousel
+ * silently resets from a clone to the original card.
  */
 .ghmc-craftsmanship.ghmc-craftsmanship--resetting .ghmc-craftsmanship__card {
     transition: none !important;
 }
+
+
+/* ========================================
+   MEDIA
+   ======================================== */
 
 .ghmc-craftsmanship__media {
     position: relative;
@@ -136,8 +170,15 @@
         radial-gradient(circle at 55% 75%,
             rgba(219, 143, 49, 0.7),
             transparent 26%),
-        linear-gradient(135deg, #101d19, #284f40);
+        linear-gradient(135deg,
+            #101d19,
+            #284f40);
 }
+
+
+/* ========================================
+   CONTENT
+   ======================================== */
 
 .ghmc-craftsmanship__content {
     display: flex;
@@ -159,7 +200,7 @@
 }
 
 .ghmc-craftsmanship__card-title {
-    display: block;
+    display: -webkit-box;
     flex-shrink: 0;
     margin: 0 0 15px;
     color: var(--gh-color-green);
@@ -167,7 +208,6 @@
     line-height: 29.74px;
     font-weight: 700;
     text-overflow: ellipsis;
-    display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
@@ -185,6 +225,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
+
+
+/* ========================================
+   PROGRESS
+   ======================================== */
 
 .ghmc-craftsmanship__progress {
     position: absolute;
@@ -216,6 +261,11 @@
     transition: width 0.3s ease;
 }
 
+
+/* ========================================
+   LEARN MORE
+   ======================================== */
+
 .ghmc-craftsmanship__learn-more {
     color: var(--gh-color-green);
     font-size: 21px;
@@ -227,7 +277,13 @@
     color: #10331d;
 }
 
+
+/* ========================================
+   TABLET
+   ======================================== */
+
 @media screen and (max-width: 1199px) and (min-width: 768px) {
+
     .ghmc-craftsmanship__content {
         padding-right: 2.5rem;
         padding-left: 2.5rem;
@@ -239,14 +295,21 @@
     }
 }
 
+@media (min-width: 768px) {
+    .ghmc-craftsmanship__carousel {
+        height: 655px;
+    }
+}
+
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
 @media screen and (max-width: 767px) {
+
     .ghmc-craftsmanship {
         padding: 3rem 0 0;
-    }
-
-    .ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content p,
-    .ghmc-craftsmanship__card.ghmc-card-active .ghmc-craftsmanship__content h3 {
-        transform: scale(1);
     }
 
     .ghmc-craftsmanship__inner {
@@ -285,14 +348,13 @@
 
     .ghmc-craftsmanship__card {
         flex: 0 0 calc((100vw - 1.5rem) / 1.35);
-        min-width: calc((100vw - 1.5rem) / 1.35);
-    }
+        max-width: 300px;
 
-    .ghmc-craftsmanship__card.ghmc-card-active {
         /*
-         * Mobile cards remain the same height.
+         * No focus scaling/pushing on mobile.
          */
-        transform: scaleY(1);
+        --ghmc-scale: 1 !important;
+        --ghmc-offset-x: 0px !important;
     }
 
     .ghmc-craftsmanship__media {
