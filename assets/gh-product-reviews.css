@@ -1,4 +1,4 @@
-/*
+/**
  * GH Product Reviews Carousel
  * JSON-controlled reviews block
  */
@@ -31,6 +31,10 @@
     display: inline;
 }
 
+/* =========================================================
+   CAROUSEL
+   ========================================================= */
+
 .ghr-reviews__carousel {
     width: 100%;
     position: relative;
@@ -55,41 +59,66 @@
     cursor: grabbing;
 }
 
+/* =========================================================
+   REVIEW CARD
+   ========================================================= */
+
 .ghr-reviews__card {
-    flex: 0 0 calc((100% - 3 * 1.5rem) / 3.25);
-    min-width: calc((100% - 3 * 1.5rem) / 3.25);
+    --ghr-card-width: calc((100% - 3 * 1.5rem) / 3.25);
+
+    flex: 0 0 var(--ghr-card-width);
+    min-width: var(--ghr-card-width);
+
     box-sizing: border-box;
     background: #10331d;
     border-radius: 7px;
     padding: 4.6rem 2.5rem;
+
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+
     transform: scaleY(1);
-    transform-origin: center;
+    transform-origin: center center;
+
+    /*
+     * DO NOT animate flex-basis or min-width.
+     */
     transition:
-        transform 0.1s ease,
+        transform 0.45s cubic-bezier(0.25, 0.1, 0.25, 1),
         box-shadow 0.35s ease;
 }
 
-.ghr-reviews__card {
-    transition:
-        transform 0.35s ease,
-        box-shadow 0.35s ease;
+
+/* =========================================================
+   ACTIVE / FOCUS CARD - DESKTOP
+   ========================================================= */
+
+@media screen and (min-width: 768px) {
+
+    .ghr-reviews__card.ghr-review-active {
+        flex-basis: calc(var(--ghr-card-width) * 1.14);
+        min-width: calc(var(--ghr-card-width) * 1.14);
+
+        transform: scaleY(1.14);
+
+        z-index: 2;
+    }
 }
 
-.ghr-reviews__card.ghr-review-active {
-    transform: scaleY(1.14);
-    z-index: 2;
-}
 
-/*
- * Disable card animation while the carousel silently moves
- * from a cloned slide back to the matching original slide.
+/**
+ * Disable card animation while carousel silently moves
+ * from cloned slide back to matching original slide.
  */
 .ghr-reviews.ghr-reviews--resetting .ghr-reviews__card {
     transition: none !important;
 }
+
+
+/* =========================================================
+   STARS
+   ========================================================= */
 
 .ghr-reviews__stars {
     display: flex;
@@ -104,6 +133,11 @@
     height: 25px;
     flex-shrink: 0;
 }
+
+
+/* =========================================================
+   PRODUCT TITLE
+   ========================================================= */
 
 .ghr-reviews__product {
     margin: 0;
@@ -124,6 +158,11 @@
     text-decoration: underline;
 }
 
+
+/* =========================================================
+   REVIEW TEXT
+   ========================================================= */
+
 .ghr-reviews__text,
 .ghr-reviews__text p,
 .ghr-reviews__card p {
@@ -136,6 +175,11 @@
     color: #f9f2e8;
 }
 
+
+/* =========================================================
+   AUTHOR / VERIFIED BUYER
+   ========================================================= */
+
 .ghr-reviews__meta {
     margin: 20px 0 0 !important;
 }
@@ -144,15 +188,25 @@
     white-space: nowrap;
 }
 
+
+/* =========================================================
+   PROGRESS
+   ========================================================= */
+
 .ghr-reviews__progress {
     display: flex;
     justify-content: center;
+
     width: 100%;
+
     padding: 0 2rem;
+
     position: absolute;
     left: 50%;
     bottom: 0;
+
     box-sizing: border-box;
+
     transform: translateX(-50%);
 }
 
@@ -160,17 +214,23 @@
     width: 100%;
     max-width: 550px;
     height: 4px;
+
     background: rgba(34, 71, 45, 0.2);
+
     border-radius: 2px;
     overflow: hidden;
 }
 
 .ghr-reviews__progress-fill {
     display: block;
+
     width: 0;
     height: 100%;
+
     background: var(--gh-color-gray, #545454);
+
     border-radius: 2px;
+
     transition: width 0.3s ease;
 }
 
@@ -178,7 +238,13 @@ section.ghr-reviews .ghr-reviews__progress-fill {
     display: block;
 }
 
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media screen and (max-width: 767px) {
+
     .ghr-reviews {
         padding: 3rem 0;
     }
@@ -187,11 +253,19 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         gap: 3.5rem;
     }
 
+
+    /* -------------------------
+       Heading
+       ------------------------- */
+
     .ghr-reviews__heading {
         max-width: none;
+
         margin: 0;
         padding: 0 30px;
+
         box-sizing: border-box;
+
         font-size: 36px;
         line-height: 1.05;
     }
@@ -200,6 +274,11 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         display: block;
         margin-top: 10px;
     }
+
+
+    /* -------------------------
+       Carousel
+       ------------------------- */
 
     .ghr-reviews__carousel {
         padding-bottom: 3rem;
@@ -210,26 +289,65 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         padding: 1.5rem 0;
     }
 
+
+    /* -------------------------
+       Card
+       ------------------------- */
+
     .ghr-reviews__card {
-        flex: 0 0 min(300px,
+        /*
+         * Keep existing responsive mobile width.
+         *
+         * Card will never exceed 300px.
+         */
+        --ghr-mobile-card-width:
+            min(300px,
                 calc((100% - 1.5rem) / 1.35));
 
-        min-width: min(300px,
-                calc((100% - 1.5rem) / 1.35));
-
+        flex: 0 0 var(--ghr-mobile-card-width);
+        min-width: var(--ghr-mobile-card-width);
         max-width: 300px;
 
         padding: 20px 10px;
+
         border-radius: 4px;
+
+        /*
+         * No active scaling on mobile.
+         */
+        transform: none;
+
+        transition:
+            transform 0.35s ease,
+            box-shadow 0.35s ease;
     }
 
+    /*
+     * Active mobile card remains the same size.
+     */
     .ghr-reviews__card.ghr-review-active {
-        transform: scaleY(1);
+        flex-basis: var(--ghr-mobile-card-width);
+        min-width: var(--ghr-mobile-card-width);
+        max-width: 300px;
+
+        transform: none;
+
+        z-index: 2;
     }
+
+
+    /* -------------------------
+       Product title
+       ------------------------- */
 
     .ghr-reviews__product a {
         font-size: 14px;
     }
+
+
+    /* -------------------------
+       Stars
+       ------------------------- */
 
     .ghr-reviews__star {
         width: 15px;
@@ -240,29 +358,54 @@ section.ghr-reviews .ghr-reviews__progress-fill {
         gap: 2px;
     }
 
+
+    /* -------------------------
+       Review text
+       ------------------------- */
+
     .ghr-reviews__text,
     .ghr-reviews__text p,
     .ghr-reviews__card p {
         width: 90%;
+
         margin: auto;
+
         font-size: 10px;
         line-height: 15px;
+
         display: -webkit-box;
+
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
+
         overflow: hidden;
+
         text-overflow: ellipsis;
     }
 
+
+    /* -------------------------
+       Author
+       ------------------------- */
+
     .ghr-reviews__meta {
         display: flex;
+
         text-align: center;
+
         font-size: 10px;
         line-height: 15px;
+
         gap: 5px;
+
         justify-content: center;
         align-items: center;
     }
+
+
+    /* -------------------------
+       Progress
+       ------------------------- */
 
     .ghr-reviews__progress {
         padding: 0;
