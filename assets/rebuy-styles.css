@@ -487,6 +487,11 @@
         margin: 4px 0 8px;
     }
 
+    #rebuy-widget-128942 .rebuy-money,
+    #rebuy-widget-128942 .rebuy-money.sale {
+        font-size: 16px !important;
+    }
+
     #rebuy-widget-128942 .rebuy-accordian-dropdown {
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
