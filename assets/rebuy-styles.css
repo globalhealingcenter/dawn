@@ -703,6 +703,7 @@
         right: 0;
         bottom: 50px;
         transform: none;
+        height: max-content;
     }
 
     #rebuy-widget-115516 .rebuy-product-media {
