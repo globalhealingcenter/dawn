@@ -24,7 +24,20 @@
   </style>
 {% endif %}
 
-<!-- Google Tag Manager – loaded via consent-gated-tracking after marketing/analytics consent -->
+<!-- Google Tag Manager -->
+{% comment %} <script>
+  (function (w, d, s, l, i) {
+    w[l] = w[l] || [];
+    w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s),
+      dl = l != 'dataLayer' ? '&l=' + l : '';
+    j.async = true;
+    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+    f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-N233MFC3');
+</script> {% endcomment %}
+<!-- End Google Tag Manager -->
 
 <!-- [ordergroove] -->
 <style>
@@ -91,8 +104,6 @@
   {{ 'vendor-glide-v3.6.0.core.css' | inline_asset_content }}
   {{ 'vendor-glide-v3.6.0.theme.css' | inline_asset_content }}
 </style>
-
-<!-- Northbeam + Impact Radius affiliate cookies – loaded via consent-gated-tracking -->
 
 <!-- Tapcart Web Bridge SDK -->
 
