@@ -1,6 +1,8 @@
 {% include 'shogun-content-handler' %}
 <html>
 <head>
+  {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
+  <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
 	{{content_for_header}}
 
   {% render 'shogun-head' %}
