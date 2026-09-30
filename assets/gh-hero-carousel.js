@@ -15,6 +15,12 @@
     var count = originalSlides.length;
     if (count <= 1) return;
 
+    // Load every real slide's assets up front. Relying on "current +/- 1"
+    // preloading left any slide beyond the immediate neighbors of the
+    // initial position (e.g. the 3rd+ slide) permanently stuck on
+    // data-src, since most visitors never click through the whole carousel.
+    originalSlides.forEach(loadSlideAssets);
+
     // 1. Create Clones
     var firstClone = originalSlides[0].cloneNode(true);
     var lastClone = originalSlides[count - 1].cloneNode(true);
