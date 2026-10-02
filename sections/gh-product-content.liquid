@@ -237,18 +237,11 @@
 
       {% when 'meticulous-craftsmanship-v2' %}
 
-        {% assign ghmc_product_card = block.product_specific_card %}
         {% assign ghmc_selected_cards = block.selected_cards %}
         {% assign ghmc_card_count = 0 %}
 
-        {% if ghmc_product_card.enabled == true %}
-          {% if ghmc_product_card.title != blank or ghmc_product_card.description != blank %}
-            {% assign ghmc_card_count = ghmc_card_count | plus: 1 %}
-          {% endif %}
-        {% endif %}
-
         {% if ghmc_selected_cards %}
-          {% assign ghmc_card_count = ghmc_card_count | plus: ghmc_selected_cards.size %}
+          {% assign ghmc_card_count = ghmc_selected_cards.size %}
         {% endif %}
 
         {% if ghmc_card_count > 0 %}
@@ -277,47 +270,6 @@
                   aria-label="Meticulous craftsmanship cards"
                   tabindex="0"
                 >
-
-                  {% if ghmc_product_card.enabled == true %}
-                    {% if ghmc_product_card.title != blank or ghmc_product_card.description != blank %}
-                      <article
-                        class="ghmc-craftsmanship__card"
-                        data-ghmc-card
-                        role="listitem"
-                      >
-                        <div class="ghmc-craftsmanship__media">
-                          <img
-                            class="ghmc-craftsmanship__image"
-                            src="{% if ghmc_product_card.image != blank %}{{ ghmc_product_card.image }}{% else %}{{ 'placeholder.jpg' | asset_url }}{% endif %}"
-                            alt="{{ ghmc_product_card.title | default: 'Meticulous craftsmanship' | escape }}"
-                            width="700"
-                            height="430"
-                            loading="lazy"
-                          >
-                        </div>
-
-                        <div class="ghmc-craftsmanship__content">
-                          {% if ghmc_product_card.eyebrow != blank %}
-                            <p class="ghmc-craftsmanship__eyebrow font-proxima">
-                              {{ ghmc_product_card.eyebrow }}
-                            </p>
-                          {% endif %}
-
-                          {% if ghmc_product_card.title != blank %}
-                            <h3 class="ghmc-craftsmanship__card-title font-proxima">
-                              {{ ghmc_product_card.title | truncate: 35 }}
-                            </h3>
-                          {% endif %}
-
-                          {% if ghmc_product_card.description != blank %}
-                            <p class="ghmc-craftsmanship__description font-proxima">
-                              {{ ghmc_product_card.description | truncate: 160 }}
-                            </p>
-                          {% endif %}
-                        </div>
-                      </article>
-                    {% endif %}
-                  {% endif %}
 
                   {% for ghmc_card_key in ghmc_selected_cards %}
 
