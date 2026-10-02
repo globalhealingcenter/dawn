@@ -148,6 +148,7 @@
               {% if product_line_link == blank %}
                 {% assign product_line_link = product.metafields.globalhealing.product_line_link.value %}
               {% endif %}
+              {% assign product_line_url = product_line_link.url | default: product_line_link %}
 
               {% if product.metafields.globalhealing.custom_h1 and product.metafields.globalhealing.custom_h1 != '' %}
                 {% assign title = product.metafields.globalhealing.custom_h1 | escape %}
@@ -157,8 +158,8 @@
 
                 {% if product_line != blank %}
                   <div class="product__eyebrow">
-                    {% if product_line_link != blank %}
-                      <a href="{{ product_line_link }}">{{ product_line }}</a>
+                    {% if product_line_url != blank %}
+                      <a href="{{ product_line_url }}">{{ product_line }}</a>
                     {% else %}
                       {{ product_line }}
                     {% endif %}
