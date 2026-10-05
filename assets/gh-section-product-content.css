@@ -23,6 +23,15 @@
     margin: 10px 0 2px;
 }
 
+.product__eyebrow a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.product__eyebrow a:hover {
+    text-decoration: underline;
+}
+
 
 /* product tabs */
 .product__info-tabs {
