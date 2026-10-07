@@ -1162,8 +1162,41 @@
 
     {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
 
-    
+    <script>
+  function formatYotpoReviewCount() {
+    document
+      .querySelectorAll('.yotpo-sr-bottom-line-text--right-panel')
+      .forEach(function (element) {
+        const text = element.textContent.trim();
+
+        const match = text.match(/^([\d,]+)(.*)$/);
+
+        if (!match) return;
+
+        const count = parseInt(match[1].replace(/,/g, ''), 10);
+
+        if (isNaN(count)) return;
+
+        element.textContent =
+          count.toLocaleString('en-US') + match[2];
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    formatYotpoReviewCount();
+
+    const observer = new MutationObserver(function () {
+      formatYotpoReviewCount();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+</script>
   </body>
+
 
 
 
