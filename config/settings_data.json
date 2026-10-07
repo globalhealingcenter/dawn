@@ -251,6 +251,13 @@
         "type": "shopify://apps/conditional-messaging-trial/blocks/conditional-message-embed/019fcda6-b1c2-7199-8a7e-c79cb824f6d9",
         "disabled": false,
         "settings": {}
+      },
+      "2809662434511621298": {
+        "type": "shopify://apps/ordergroove-subscriptions/blocks/main-app-embed/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
+        "disabled": false,
+        "settings": {
+          "defer_script": true
+        }
       }
     },
     "color_schemes": {
