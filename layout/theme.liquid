@@ -2,8 +2,8 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
-  {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
-  <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
+    {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
+    <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
     <!-- Google Consent Mode V2 (Consentmo) – must load before any tracking tags -->
     {% render 'consent-gated-tracking2' %}
     {% render 'consent-google' %}
@@ -17,7 +17,9 @@
     <meta name="google-site-verification" content="GAl8RHdIopPIKMZdcGYud7wvTvmKLZW32YTWQwdObFI">
 
     {% if request.path == '/collections/all' %}
-      <script>window.location.replace('/collections/products');</script>
+      <script>
+        window.location.replace('/collections/products');
+      </script>
     {% endif %}
 
     <!--
@@ -118,7 +120,7 @@
     <!-- ============================================ -->
 
     {% comment %}
-        {% render 'speedshopify-head' %}
+      {% render 'speedshopify-head' %}
     {% endcomment %}
 
     {% comment %}
@@ -523,84 +525,89 @@
     <!-- alpine.js (for tabs) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-
     <!-- Post Pilot – loaded via consent-gated-tracking after marketing consent -->
 
-  {% include 'huk-mega-menu-pro' %}
+    {% include 'huk-mega-menu-pro' %}
 
-  <!-- Tapcart/Ordergroove scroll fix -->
+    <!-- Tapcart/Ordergroove scroll fix -->
     <script>
-  (function () {
-    if (!window.location.pathname.includes('/apps/subscriptions')) return;
+      (function () {
+        if (!window.location.pathname.includes('/apps/subscriptions')) return;
 
-    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+        var css =
+          'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
 
-    function inject() {
-      if (document.getElementById('tapcart-og-scroll-fix')) return;
-      var s = document.createElement('style');
-      s.id = 'tapcart-og-scroll-fix';
-      s.textContent = css;
-      (document.head || document.documentElement).appendChild(s);
-    }
+        function inject() {
+          if (document.getElementById('tapcart-og-scroll-fix')) return;
+          var s = document.createElement('style');
+          s.id = 'tapcart-og-scroll-fix';
+          s.textContent = css;
+          (document.head || document.documentElement).appendChild(s);
+        }
 
-    // Apply immediately — beat Ordergroove's mount
-    inject();
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject, { once: true });
-    }
+        // Apply immediately — beat Ordergroove's mount
+        inject();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', inject, { once: true });
+        }
 
-    // MutationObserver: re-assert if Ordergroove resets inline styles after mount
-    var mo = new MutationObserver(inject);
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
-    if (document.body) {
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-      }, { once: true });
-    }
-  })();
-</script>
+        // MutationObserver: re-assert if Ordergroove resets inline styles after mount
+        var mo = new MutationObserver(inject);
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+        if (document.body) {
+          mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+        } else {
+          document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+              mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+            },
+            { once: true }
+          );
+        }
+      })();
+    </script>
 
-<!-- Tapcart/Article scroll fix -->
+    <!-- Tapcart/Article scroll fix -->
 
-<script>
-  (function () {
-    if (!window.location.pathname.includes('/blogs/')) return;
+    <script>
+      (function () {
+        if (!window.location.pathname.includes('/blogs/')) return;
 
-    var css = 'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
+        var css =
+          'html, body { position: static !important; inset: auto !important; height: auto !important; overflow: visible !important; -webkit-overflow-scrolling: touch !important; }';
 
-    function inject() {
-      if (document.getElementById('tapcart-article-scroll-fix')) return;
-      var s = document.createElement('style');
-      s.id = 'tapcart-article-scroll-fix';
-      s.textContent = css;
-      (document.head || document.documentElement).appendChild(s);
-    }
+        function inject() {
+          if (document.getElementById('tapcart-article-scroll-fix')) return;
+          var s = document.createElement('style');
+          s.id = 'tapcart-article-scroll-fix';
+          s.textContent = css;
+          (document.head || document.documentElement).appendChild(s);
+        }
 
-    inject();
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inject, { once: true });
-    }
+        inject();
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', inject, { once: true });
+        }
 
-    var mo = new MutationObserver(inject);
-    mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
-    if (document.body) {
-      mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-    } else {
-      document.addEventListener('DOMContentLoaded', function () {
-        mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
-      }, { once: true });
-     }
-   })();
-</script>
-  
-  
-  {% include "huk-mega-menu-pro" %}
+        var mo = new MutationObserver(inject);
+        mo.observe(document.documentElement, { attributes: true, attributeFilter: ['style', 'class'] });
+        if (document.body) {
+          mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+        } else {
+          document.addEventListener(
+            'DOMContentLoaded',
+            function () {
+              mo.observe(document.body, { attributes: true, attributeFilter: ['style', 'class'] });
+            },
+            { once: true }
+          );
+        }
+      })();
+    </script>
 
-
+    {% include 'huk-mega-menu-pro' %}
   </head>
-							
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
     <!-- Google Tag Manager (noscript) – loaded via consent-gated-tracking after consent -->
@@ -718,59 +725,445 @@
     {% endif %}
 
     <script>
-      (function () {
-        var THUMB_WIDTH = '500';
-        var tolstoyScopeSelector =
-          'div[id^="shopify-block-"][id*="tolstoy"], tolstoy-carousel, .tolstoy-carousel-container';
+            (function () {
+              var THUMB_WIDTH = '500';
+              var tolstoyScopeSelector =
+                'div[id^="shopify-block-"][id*="tolstoy"], tolstoy-carousel, .tolstoy-carousel-container';
 
-        function updateWidthParam(url) {
-          if (!url || url.indexOf('cdn.shopify.com') === -1) return url;
-          if (url.indexOf('width=') === -1) return url;
-          return url.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
-        }
+              function updateWidthParam(url) {
+                if (!url || url.indexOf('cdn.shopify.com') === -1) return url;
+                if (url.indexOf('width=') === -1) return url;
+                return url.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
+              }
 
-        function updateImageAttributes(el) {
-          ['src', 'data-src', 'href'].forEach(function (attr) {
-            var val = el.getAttribute(attr);
-            if (!val) return;
-            var updated = updateWidthParam(val);
-            if (updated !== val) el.setAttribute(attr, updated);
-          });
+              function updateImageAttributes(el) {
+                ['src', 'data-src', 'href'].forEach(function (attr) {
+                  var val = el.getAttribute(attr);
+                  if (!val) return;
+                  var updated = updateWidthParam(val);
+                  if (updated !== val) el.setAttribute(attr, updated);
+                });
 
-          var srcset = el.getAttribute('srcset');
-          if (srcset && srcset.indexOf('width=') !== -1) {
-            var updatedSrcset = srcset.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
-            if (updatedSrcset !== srcset) el.setAttribute('srcset', updatedSrcset);
-          }
-        }
+                var srcset = el.getAttribute('srcset');
+                if (srcset && srcset.indexOf('width=') !== -1) {
+                  var updatedSrcset = srcset.replace(/([?&]width=)\d+/g, '$1' + THUMB_WIDTH);
+                  if (updatedSrcset !== srcset) el.setAttribute('srcset', updatedSrcset);
+                }
+              }
 
-        function updateTolstoyMedia(root) {
-          var scope = root || document;
-          scope.querySelectorAll('img, source, a').forEach(function (el) {
-            var className = typeof el.className === 'string' ? el.className : '';
-            if (!el.closest(tolstoyScopeSelector) && className.indexOf('tolstoy') === -1) return;
-            updateImageAttributes(el);
-          });
-        }
+              function updateTolstoyMedia(root) {
+                var scope = root || document;
+                scope.querySelectorAll('img, source, a').forEach(function (el) {
+                  var className = typeof el.className === 'string' ? el.className : '';
+                  if (!el.closest(tolstoyScopeSelector) && className.indexOf('tolstoy') === -1) return;
+                  updateImageAttributes(el);
+                });
+              }
 
-        var observer = new MutationObserver(function (mutations) {
-          mutations.forEach(function (mutation) {
-            mutation.addedNodes.forEach(function (node) {
-              if (node.nodeType !== 1) return;
-              updateTolstoyMedia(node);
-            });
-          });
-        });
+              var observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                  mutation.addedNodes.forEach(function (node) {
+                    if (node.nodeType !== 1) return;
+                    updateTolstoyMedia(node);
+                  });
+                });
+              });
 
-        updateTolstoyMedia(document);
-        observer.observe(document.body, { childList: true, subtree: true });
+              updateTolstoyMedia(document);
+              observer.observe(document.body, { childList: true, subtree: true });
+
+              {% comment %} Ordergroove Click Complete Block {% endcomment %}
+              (function () {
+
+                /* =========================================================
+                  CARD CLICK FUNCTIONALITY
+                ========================================================= */
+
+                if (!window.__ghOgCardClickInstalled) {
+
+                    window.__ghOgCardClickInstalled = true;
+
+                    document.addEventListener('click', function (event) {
+
+                        const card = event.target.closest('.gh-og-card');
+
+                        if (!card) return;
+
+                        /*
+                        * Do not trigger the card click when the user
+                        * interacts with an actual form control.
+                        */
+                        if (
+                            event.target.closest(
+                                'select, option, button, input, textarea, a, og-select-frequency'
+                            )
+                        ) {
+                            return;
+                        }
+
+                        const optionButton = card.querySelector(
+                            'og-optin-button, og-optout-button'
+                        );
+
+                        if (optionButton) {
+                            optionButton.click();
+                        }
+
+                    });
+
+                }
+
+
+                /* =========================================================
+                  ORDERGROOVE DISCOUNT GLITCH GUARD
+
+                  IMPORTANT:
+                  No percentage is hardcoded here.
+
+                  The value ALWAYS originates from:
+
+                  <og-incentive-text from="DiscountPercent">
+
+                  Example:
+
+                  Ordergroove:
+                  15%
+                      ↓
+                  variant changes
+                      ↓
+                  undefined%
+                      ↓
+                  15% / 20% / whatever OG setting returns
+
+                  This code prevents the temporary "undefined%" value
+                  from becoming the displayed value.
+                ========================================================= */
+
+                if (window.__ghOgDiscountGuardInstalled) {
+                    return;
+                }
+
+                window.__ghOgDiscountGuardInstalled = true;
+
+
+                /*
+                * Stores ONLY the last valid value received from
+                * Ordergroove.
+                *
+                * Nothing is manually assigned here.
+                */
+                let lastValidDiscount = null;
+
+
+                const discountSelector =
+                    'og-offer[location="pdp"] ' +
+                    'og-incentive-text[from="DiscountPercent"]';
+
+
+                /* ---------------------------------------------------------
+                  NORMALIZE VALUE
+                --------------------------------------------------------- */
+
+                function normalizeDiscount(value) {
+
+                    return (value || '')
+                        .replace(/\s+/g, '')
+                        .trim();
+
+                }
+
+
+                /* ---------------------------------------------------------
+                  VALIDATE ORDERGROOVE VALUE
+
+                  Valid examples:
+
+                  15%
+                  20%
+                  10%
+                  12.5%
+                  0%
+
+                  Invalid examples:
+
+                  undefined%
+                  undefined
+                  null%
+                  NaN%
+                  empty
+                --------------------------------------------------------- */
+
+                function isValidDiscount(value) {
+
+                    return /^\d+(?:\.\d+)?%$/.test(value);
+
+                }
+
+
+                /* ---------------------------------------------------------
+                  GET ORDERGROOVE TEXT NODE
+
+                  Ordergroove actually renders something similar to:
+
+                  <og-incentive-text>
+                      <!---->
+                      15%
+                      <!---->
+                  </og-incentive-text>
+
+                  We only modify the text node.
+
+                  We DO NOT remove Ordergroove's comment markers because
+                  those markers may be used internally when OG updates.
+                --------------------------------------------------------- */
+
+                function getDiscountTextNode(element) {
+
+                    for (
+                        let i = 0;
+                        i < element.childNodes.length;
+                        i++
+                    ) {
+
+                        const node = element.childNodes[i];
+
+                        if (node.nodeType === Node.TEXT_NODE) {
+
+                            return node;
+
+                        }
+
+                    }
+
+                    return null;
+
+                }
+
+
+                /* ---------------------------------------------------------
+                  RESTORE LAST VALID DYNAMIC VALUE
+                --------------------------------------------------------- */
+
+                function restoreDiscount(element, value) {
+
+                    if (!value) return;
+
+
+                    let textNode = getDiscountTextNode(element);
+
+
+                    /*
+                    * Normally Ordergroove already has its text node.
+                    */
+                    if (textNode) {
+
+                        const currentValue =
+                            normalizeDiscount(textNode.nodeValue);
+
+
+                        if (currentValue !== value) {
+
+                            textNode.nodeValue =
+                                '\n       ' + value + '\n    ';
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    /*
+                    * Extra fallback:
+                    *
+                    * If OG temporarily removed the text node but retained
+                    * its Lit comment markers, insert the value between
+                    * those markers.
+                    */
+                    const childNodes =
+                        Array.from(element.childNodes);
+
+
+                    const comments = childNodes.filter(function (node) {
+
+                        return node.nodeType === Node.COMMENT_NODE;
+
+                    });
+
+
+                    if (comments.length >= 2) {
+
+                        element.insertBefore(
+                            document.createTextNode(
+                                '\n       ' + value + '\n    '
+                            ),
+                            comments[comments.length - 1]
+                        );
+
+                    }
+
+                }
+
+
+                /* ---------------------------------------------------------
+                  PROCESS ALL PDP DISCOUNT ELEMENTS
+                --------------------------------------------------------- */
+
+                function protectDiscountValues() {
+
+                    const elements =
+                        document.querySelectorAll(discountSelector);
+
+
+                    if (!elements.length) {
+                        return;
+                    }
+
+
+                    /*
+                    * FIRST PASS
+                    *
+                    * Look for any current VALID value supplied by
+                    * Ordergroove.
+                    *
+                    * Doing this first is important because one OG element
+                    * may already have the new value while the second is
+                    * temporarily undefined.
+                    */
+                    elements.forEach(function (element) {
+
+                        const value =
+                            normalizeDiscount(element.textContent);
+
+
+                        if (isValidDiscount(value)) {
+
+                            lastValidDiscount = value;
+
+                        }
+
+                    });
+
+
+                    /*
+                    * SECOND PASS
+                    *
+                    * Fix any temporary invalid value.
+                    */
+                    elements.forEach(function (element) {
+
+                        const value =
+                            normalizeDiscount(element.textContent);
+
+
+                        /*
+                        * Ordergroove supplied a proper value.
+                        *
+                        * Keep it exactly as provided.
+                        */
+                        if (isValidDiscount(value)) {
+
+                            lastValidDiscount = value;
+
+                            element.style.visibility = '';
+
+                            return;
+
+                        }
+
+
+                        /*
+                        * Ordergroove temporarily supplied something like:
+                        *
+                        * undefined%
+                        * null%
+                        * NaN%
+                        * blank
+                        *
+                        * If we already have a valid dynamic value from OG,
+                        * restore that value immediately.
+                        */
+                        if (lastValidDiscount) {
+
+                            restoreDiscount(
+                                element,
+                                lastValidDiscount
+                            );
+
+                            element.style.visibility = '';
+
+                            return;
+
+                        }
+
+
+                        /*
+                        * This case can only happen during initial page
+                        * initialization BEFORE Ordergroove has ever
+                        * provided its first valid percentage.
+                        *
+                        * Better to momentarily show nothing than
+                        * "undefined%".
+                        *
+                        * As soon as OG supplies its real percentage,
+                        * visibility is restored automatically.
+                        */
+                        element.style.visibility = 'hidden';
+
+                    });
+
+                }
+
+
+                /* =========================================================
+                  INITIAL VALUE
+                ========================================================= */
+
+                protectDiscountValues();
+
+
+                /* =========================================================
+                  OBSERVE ORDERGROOVE
+
+                  MutationObserver callbacks are processed before the
+                  browser's next normal rendering opportunity.
+
+                  So if OG internally changes:
+
+                  15%
+                  →
+                  undefined%
+                  →
+                  20%
+
+                  the invalid intermediate value is immediately replaced
+                  with the last valid Ordergroove value.
+                ========================================================= */
+
+                const discountObserver =
+                    new MutationObserver(function () {
+
+                        protectDiscountValues();
+
+                    });
+
+
+                discountObserver.observe(
+                    document.documentElement,
+                    {
+                        subtree: true,
+                        childList: true,
+                        characterData: true
+                    }
+                );
+            })();
       })();
     </script>
 
     {% render 'klaviyo-out-of-stock' %}
 
     {% comment %}
-        {% render 'speedshopify-body' %}
+      {% render 'speedshopify-body' %}
     {% endcomment %}
 
     {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
