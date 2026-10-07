@@ -719,47 +719,6 @@
 
     
     <script>
-      {% comment %} Yotpo Reviews Count Formating {% endcomment %}
-      function formatYotpoReviewCount() {
-        const widget = document.querySelector(
-          '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
-        );
-
-        if (!widget) return;
-
-        const element = widget.querySelector(
-          '.yotpo-sr-bottom-line-text--right-panel'
-        );
-
-        if (!element) return;
-
-        const text = element.textContent.trim();
-        const match = text.match(/^([\d,]+)(.*)$/);
-
-        if (!match) return;
-
-        const count = parseInt(match[1].replace(/,/g, ''), 10);
-
-        if (isNaN(count)) return;
-
-        element.textContent =
-          count.toLocaleString('en-US') + match[2];
-      }
-
-      document.addEventListener('DOMContentLoaded', function () {
-        formatYotpoReviewCount();
-
-        const observer = new MutationObserver(function () {
-          formatYotpoReviewCount();
-        });
-
-        observer.observe(document.body, {
-          childList: true,
-          subtree: true
-        });
-      });
-      {% comment %} End Yotpo Review {% endcomment %}
-      
       (function () {
         var THUMB_WIDTH = '500';
         var tolstoyScopeSelector =
@@ -1202,6 +1161,49 @@
     {% endcomment %}
 
     {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
+
+    <script>
+       {% comment %} Yotpo Reviews Count Formating {% endcomment %}
+      function formatYotpoReviewCount() {
+        const widget = document.querySelector(
+          '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
+        );
+
+        if (!widget) return;
+
+        const element = widget.querySelector(
+          '.yotpo-sr-bottom-line-text--right-panel'
+        );
+
+        if (!element) return;
+
+        const text = element.textContent.trim();
+        const match = text.match(/^([\d,]+)(.*)$/);
+
+        if (!match) return;
+
+        const count = parseInt(match[1].replace(/,/g, ''), 10);
+
+        if (isNaN(count)) return;
+
+        element.textContent =
+          count.toLocaleString('en-US') + match[2];
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        formatYotpoReviewCount();
+
+        const observer = new MutationObserver(function () {
+          formatYotpoReviewCount();
+        });
+
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
+      {% comment %} End Yotpo Review {% endcomment %}
+    </script>
   </body>
 
 
