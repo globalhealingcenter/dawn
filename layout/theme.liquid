@@ -1163,43 +1163,47 @@
     {{ 'rebuy-empty-cart-url.js' | asset_url | script_tag }}
 
     <script>
-  function formatYotpoReviewCount() {
-    document
-      .querySelectorAll('.yotpo-sr-bottom-line-text--right-panel')
-      .forEach(function (element) {
-        const text = element.textContent.trim();
+      (function () {
+        var attempts = 0;
+        var maxAttempts = 30;
 
-        const match = text.match(/^([\d,]+)(.*)$/);
+        function formatYotpoReviews() {
+          attempts++;
 
-        if (!match) return;
+          var el = document.querySelector(
+            '.yotpo-widget-instance[data-yotpo-instance-id="465432"] .yotpo-sr-bottom-line-text--right-panel'
+          );
 
-        const count = parseInt(match[1].replace(/,/g, ''), 10);
+          if (el) {
+            var text = el.textContent.trim();
 
-        if (isNaN(count)) return;
+            var match = text.match(/^(\d+)\s*(.*)$/);
 
-        element.textContent =
-          count.toLocaleString('en-US') + match[2];
-      });
-  }
+            if (match) {
+              var count = parseInt(match[1], 10);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    formatYotpoReviewCount();
+              if (!isNaN(count)) {
+                el.textContent =
+                  count.toLocaleString('en-US') +
+                  (match[2] ? ' ' + match[2].trim() : '');
+              }
+            }
 
-    const observer = new MutationObserver(function () {
-      formatYotpoReviewCount();
-    });
+            return;
+          }
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-  });
-</script>
+          if (attempts < maxAttempts) {
+            setTimeout(formatYotpoReviews, 500);
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', formatYotpoReviews);
+        } else {
+          formatYotpoReviews();
+        }
+      })();
+      </script>
   </body>
-
-
-
-
-
 
 </html>
