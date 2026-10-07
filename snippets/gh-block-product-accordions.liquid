@@ -157,7 +157,7 @@
                   </h4>
 
                   <div class="supplement-facts-copy">
-                    {{ supplement_suggested_use.content | escape | newline_to_br }}
+                    {{ supplement_suggested_use.content }}
                   </div>
                 </div>
               {% endif %}
@@ -203,20 +203,49 @@
               {% if certification_seals != blank %}
                 <div class="supplement-facts-certifications">
                   {% for seal in certification_seals %}
-                    {% if seal.image != blank %}
-                      <div
-                        class="supplement-facts-certification"
-                        data-certification="{{ seal.type | handle }}"
-                      >
-                        <img
-                          src="{{ seal.image }}"
-                          alt="{{ seal.alt | default: seal.title | escape }}"
-                          loading="lazy"
-                          width="70"
-                          height="70"
+                    {% case seal %}
+                      {% when 'kosher' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="kosher"
                         >
-                      </div>
-                    {% endif %}
+                          <img
+                            src="{{ 'kosher.png' | asset_url }}"
+                            alt="Kosher Certified"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+
+                      {% when 'non_gmo' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="non-gmo"
+                        >
+                          <img
+                            src="{{ 'non-gmo.png' | asset_url }}"
+                            alt="Non-GMO Project Verified"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+
+                      {% when 'usda_organic' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="organic"
+                        >
+                          <img
+                            src="{{ 'organic.png' | asset_url }}"
+                            alt="USDA Organic"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+                    {% endcase %}
                   {% endfor %}
                 </div>
               {% endif %}
@@ -228,19 +257,19 @@
                   </h4>
 
                   <div class="supplement-facts-copy supplement-facts-clean-copy">
-                    {% assign clean_content = clean_formulation.content | escape %}
+                    {% if clean_formulation.content != blank %}
+                      {{ clean_formulation.content | replace_first: 'Made without:', '<strong>Made without:</strong>' }}
 
-                    {{
-                      clean_content
-                      | replace_first: 'Made without:', '<strong>Made without:</strong>'
-                      | newline_to_br
-                    }}
+                    {% else %}
+                      <strong>Made without:</strong> harsh chemicals, alcohol, gluten, soy, dairy, animal products,
+                      binders, fillers, artificial dyes, flavors, or additives.
+                    {% endif %}
                   </div>
                 </div>
               {% endif %}
 
-              {% if supplement_label.image != blank %}
-                <div class="supplement-facts-label">
+              <div class="supplement-facts-label">
+                {% if supplement_label.image != blank %}
                   <img
                     src="{{ supplement_label.image }}"
                     alt="{{ supplement_label.alt | default: 'Supplement Facts' | escape }}"
@@ -248,8 +277,17 @@
                     width="1200"
                     height="1600"
                   >
-                </div>
-              {% endif %}
+
+                {% else %}
+                  <img
+                    src="{{ 'oxy-powder-supplement-facts.png' | asset_url }}"
+                    alt="Oxy-Powder Supplement Facts"
+                    loading="lazy"
+                    width="1200"
+                    height="1600"
+                  >
+                {% endif %}
+              </div>
             </div>
           </div>
         </div>
