@@ -36,27 +36,26 @@
             "tab_1_title": "About"
           }
         },
-        "price": {
-          "type": "price",
-          "disabled": true,
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
           }
         },
-        "custom_liquid_cFDQaa": {
-          "type": "custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
-          }
-        },
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK": {
           "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "custom_liquid_cFDQaa": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
+          }
         },
         "ordergroove_subscriptions_pdp_offer_block_wtWwxz": {
           "type": "shopify://apps/ordergroove-subscriptions/blocks/pdp-offer-block/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
@@ -84,6 +83,10 @@
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
           }
+        },
+        "info_accordions_phd4hW": {
+          "type": "info_accordions",
+          "settings": {}
         },
         "gh_out_of_stock_form_dAeEPR": {
           "type": "gh_out_of_stock_form",
@@ -178,14 +181,15 @@
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "info_tabs_v2_NFgqDz",
-        "price",
         "variant_picker",
-        "custom_liquid_cFDQaa",
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
+        "price",
+        "custom_liquid_cFDQaa",
         "ordergroove_subscriptions_pdp_offer_block_wtWwxz",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "custom_liquid_TxJtfK",
         "buy_buttons",
+        "info_accordions_phd4hW",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
         "abra_promotions_banner_gift_RQAc3p",
