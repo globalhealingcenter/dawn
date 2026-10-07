@@ -11,7 +11,6 @@
   {{ block.shopify_attributes }}
 >
   <div class="info-accordions">
-
     {% comment %}
       Accordion 1: Made With Purpose
       Replace the metafield below if required.
@@ -38,12 +37,10 @@
             class="accordion-content"
           >
             <div class="accordion-content-inner made-with-purpose-content">
-
               <div class="made-with-purpose-benefits">
                 {% for item in made_with_purpose.items %}
                   {% if item.title != blank or item.content != blank %}
                     <div class="made-with-purpose-benefit">
-
                       {% if item.title != blank %}
                         <strong class="made-with-purpose-benefit-title">
                           {{ item.title }}
@@ -53,46 +50,53 @@
                       {% if item.content != blank %}
                         <p>{{ item.content }}</p>
                       {% endif %}
-
                     </div>
                   {% endif %}
                 {% endfor %}
               </div>
 
-              {% if made_with_purpose.manufacturing != blank %}
-                {% assign manufacturing = made_with_purpose.manufacturing %}
+              {% assign manufacturing = made_with_purpose.manufacturing %}
 
-                {% if manufacturing.image != blank or manufacturing.content != blank %}
-                  <div class="made-with-purpose-manufacturing">
+              <div class="made-with-purpose-manufacturing">
+                <div class="made-with-purpose-manufacturing-image">
+                  {% if manufacturing.image != blank %}
+                    <img
+                      src="{{ manufacturing.image }}"
+                      alt="{{ manufacturing.image_alt | default: 'Global Healing' | escape }}"
+                      width="130"
+                      height="130"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    {%- comment -%}
+                      Replace with the actual Global Healing manufacturing seal asset.
+                    {%- endcomment -%}
+                    <img
+                      src="{{ 'made-with-purpose.png' | asset_url }}"
+                      alt="Global Healing"
+                      width="130"
+                      height="130"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
 
-                    {% if manufacturing.image != blank %}
-                      <div class="made-with-purpose-manufacturing-image">
-                        <img
-                          src="{{ manufacturing.image }}"
-                          alt="{{ manufacturing.image_alt | default: 'Global Healing' | escape }}"
-                          width="130"
-                          height="130"
-                          loading="lazy"
-                        >
-                      </div>
-                    {% endif %}
-
-                    {% if manufacturing.content != blank %}
-                      <div class="made-with-purpose-manufacturing-content">
-                        <p>{{ manufacturing.content }}</p>
-                      </div>
-                    {% endif %}
-
-                  </div>
-                {% endif %}
-              {% endif %}
-
+                <div class="made-with-purpose-manufacturing-content">
+                  {% if manufacturing.content != blank %}
+                    <p>{{ manufacturing.content }}</p>
+                  {% else %}
+                    <p>
+                      Crafted to exceed every standard. Made in-house in small batches through precision processes that
+                      preserve purity, potency, and promote better absorption.
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       {% endif %}
     {% endif %}
-
 
     {% comment %}
       Supplement Facts Accordion
@@ -146,19 +150,14 @@
             class="accordion-content"
           >
             <div class="accordion-content-inner supplement-facts-content">
-
               {% if supplement_suggested_use.content != blank %}
                 <div class="supplement-facts-section supplement-facts-suggested-use">
-
                   <h4 class="supplement-facts-heading">
                     {{ supplement_suggested_use.title | default: 'Suggested Use' }}
                   </h4>
 
-                   <div class="supplement-facts-copy">
-                    {{ supplement_suggested_use.content
-                      | escape
-                      | newline_to_br
-                    }}
+                  <div class="supplement-facts-copy">
+                    {{ supplement_suggested_use.content | escape | newline_to_br }}
                   </div>
                 </div>
               {% endif %}
@@ -176,19 +175,16 @@
 
               {% if included_program.products != blank %}
                 <div class="supplement-facts-program">
-
                   <h4 class="supplement-facts-heading">
                     {{ included_program.title }}
                   </h4>
 
                   <div class="supplement-facts-program-products">
-
                     {% for product in included_program.products %}
                       <a
                         href="{{ product.url }}"
                         class="supplement-facts-program-product"
                       >
-
                         {% if product.image != blank %}
                           <img
                             src="{{ product.image }}"
@@ -198,12 +194,9 @@
                         {% endif %}
 
                         <span>{{ product.title }}</span>
-
                       </a>
                     {% endfor %}
-
                   </div>
-
                 </div>
               {% endif %}
 
@@ -228,10 +221,8 @@
                 </div>
               {% endif %}
 
-
               {% if clean_formulation.content != blank %}
                 <div class="supplement-facts-section supplement-facts-clean-formulation">
-
                   <h4 class="supplement-facts-heading">
                     {{ clean_formulation.title | default: 'Clean Formulation' }}
                   </h4>
@@ -239,15 +230,14 @@
                   <div class="supplement-facts-copy supplement-facts-clean-copy">
                     {% assign clean_content = clean_formulation.content | escape %}
 
-                    {{ clean_content
+                    {{
+                      clean_content
                       | replace_first: 'Made without:', '<strong>Made without:</strong>'
                       | newline_to_br
                     }}
                   </div>
-
                 </div>
               {% endif %}
-
 
               {% if supplement_label.image != blank %}
                 <div class="supplement-facts-label">
@@ -260,15 +250,12 @@
                   >
                 </div>
               {% endif %}
-
             </div>
           </div>
         </div>
       {% endif %}
     {% endif %}
-
   </div>
-
 
   {% comment %} OXY-POWDER STUDY {% endcomment %}
   {% assign has_study = false %}
@@ -284,9 +271,7 @@
 
   {% if has_study %}
     <div class="citruslabs-study mt2">
-      <span class="bold block gh-font-secondary">
-        Real People, Real Results
-      </span>
+      <span class="bold block gh-font-secondary"> Real People, Real Results </span>
 
       <div class="flex justify-between">
         <div class="flex items-center gap-1 flex-wrap mb1">
@@ -336,26 +321,22 @@
 
     if (!blockContainer) return;
 
-    const accordionHeaders =
-      blockContainer.querySelectorAll('.accordion-header');
+    const accordionHeaders = blockContainer.querySelectorAll('.accordion-header');
 
     accordionHeaders.forEach(function (accordionHeader) {
       accordionHeader.addEventListener('click', function (event) {
         event.preventDefault();
 
         const accordionContent = accordionHeader.nextElementSibling;
-        const accordionIcon =
-          accordionHeader.querySelector('.accordion-icon');
+        const accordionIcon = accordionHeader.querySelector('.accordion-icon');
 
-        const isExpanded =
-          accordionHeader.getAttribute('aria-expanded') === 'true';
+        const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
 
         accordionHeaders.forEach(function (otherHeader) {
           if (otherHeader === accordionHeader) return;
 
           const otherContent = otherHeader.nextElementSibling;
-          const otherIcon =
-            otherHeader.querySelector('.accordion-icon');
+          const otherIcon = otherHeader.querySelector('.accordion-icon');
 
           otherHeader.setAttribute('aria-expanded', 'false');
 
@@ -424,7 +405,7 @@
     text-align: left;
   }
 
-  .accordion-header[aria-expanded="true"] {
+  .accordion-header[aria-expanded='true'] {
     color: var(--gh-color-green);
   }
 
@@ -537,7 +518,7 @@
 
   .supplement-facts-copy br + br {
     display: block;
-    content: "";
+    content: '';
     margin-top: 22px;
   }
 
@@ -546,29 +527,29 @@
   }
 
   .supplement-facts-program-products {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 28px;
-      margin-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 18px;
   }
 
   .supplement-facts-program-product {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      color: inherit;
-      text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
   }
 
   .supplement-facts-program-product img {
-      width: 34px;
-      height: 34px;
-      object-fit: contain;
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
   }
 
   .supplement-facts-program-product span {
-      font-size: 20px;
-      color: var(--gh-color-gray);
+    font-size: 20px;
+    color: var(--gh-color-gray);
   }
 
   .supplement-facts-certifications {
