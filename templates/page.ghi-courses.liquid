@@ -8,7 +8,7 @@
     {% assign course_skus = 'GHI-RCD GHI-SOH GHI-VH GHI-POF GHI-UT GHI-PC GHI-INTRO GHI-GUT GHI-INTRO-F GHI-JOYF GHI-NUTR' | split: ' ' %}
 
     {% paginate customer.orders by 250 %}
-        {% for order in customer.orders by 250 %}
+        {% for order in customer.orders %}
 
             {% if order.financial_status != 'refunded' and order.cancelled != true %}
                 {% unless order.tags contains "chargeback-accepted" %}
@@ -32,7 +32,7 @@
 
     {% comment %} add the Q&A video for everyone with a purchased course {% endcomment %}
     {% if purchased_skus != empty %}
-        {% assign purchased_skus = purchased_skus | append: 'GHI-QA' |  %}
+        {% assign purchased_skus = purchased_skus | append: 'GHI-QA' %}
     {% endif %}
 
     {% assign purchased_skus = purchased_skus | split: ' ' %}
@@ -61,4 +61,16 @@
         {% endif %}
 
     </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% for order in customer.orders by 250 %}"
+  to: "{% for order in customer.orders %}"
+  position: 469..503
+- from: "{% assign purchased_skus = purchased_skus | append: 'GHI-QA' |  %}"
+  to: "{% assign purchased_skus = purchased_skus | append: 'GHI-QA' %}"
+  position: 1619..1682
+{%- endcomment -%}
