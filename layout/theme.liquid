@@ -1164,46 +1164,101 @@
 
     <script>
       (function () {
-        var attempts = 0;
-        var maxAttempts = 30;
 
-        function formatYotpoReviews() {
-          attempts++;
-
-          var el = document.querySelector(
-            '.yotpo-widget-instance[data-yotpo-instance-id="465432"] .yotpo-sr-bottom-line-text--right-panel'
+        function formatReviewCount(widget) {
+          var el = widget.querySelector(
+            '.yotpo-sr-bottom-line-text--right-panel'
           );
 
-          if (el) {
-            var text = el.textContent.trim();
+          if (!el) return;
 
-            var match = text.match(/^(\d+)\s*(.*)$/);
+          var text = el.textContent.trim();
 
-            if (match) {
-              var count = parseInt(match[1], 10);
+          var match = text.match(/^([\d,]+)(.*)$/);
 
-              if (!isNaN(count)) {
-                el.textContent =
-                  count.toLocaleString('en-US') +
-                  (match[2] ? ' ' + match[2].trim() : '');
-              }
-            }
+          if (!match) return;
 
+          var number = parseInt(
+            match[1].replace(/,/g, ''),
+            10
+          );
+
+          if (isNaN(number)) return;
+
+          var formattedNumber = number.toLocaleString('en-US');
+
+          var newText =
+            formattedNumber +
+            (match[2] ? match[2] : '');
+
+          /*
+          * Only update if text actually needs changing.
+          * This prevents MutationObserver loops.
+          */
+          if (text !== newText) {
+            el.textContent = newText;
+          }
+        }
+
+
+        function initYotpoReviewFormatter() {
+
+          var widget = document.querySelector(
+            '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
+          );
+
+          /*
+          * Yotpo has not loaded yet.
+          * Try again shortly.
+          */
+          if (!widget) {
+            setTimeout(initYotpoReviewFormatter, 300);
             return;
           }
 
-          if (attempts < maxAttempts) {
-            setTimeout(formatYotpoReviews, 500);
-          }
+
+          /*
+          * Format current value.
+          */
+          formatReviewCount(widget);
+
+
+          /*
+          * Watch ONLY this Yotpo widget.
+          *
+          * When Yotpo re-renders 12178 Reviews,
+          * we'll change it back to 12,178 Reviews.
+          */
+          var observer = new MutationObserver(function () {
+            formatReviewCount(widget);
+          });
+
+          observer.observe(widget, {
+            childList: true,
+            subtree: true,
+            characterData: true
+          });
+
         }
 
+
         if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', formatYotpoReviews);
+
+          document.addEventListener(
+            'DOMContentLoaded',
+            initYotpoReviewFormatter
+          );
+
         } else {
-          formatYotpoReviews();
+
+          initYotpoReviewFormatter();
+
         }
+
       })();
-      </script>
+    </script>
   </body>
+
+
 
 </html>
