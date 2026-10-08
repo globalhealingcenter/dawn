@@ -4405,4 +4405,13 @@
 </script>
 {% endraw %}
 
-{% render ‘rebuy-extensions-two’ %}
+{% render rebuy-extensions-two %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render ‘rebuy-extensions-two’ %}"
+  to: "{% render rebuy-extensions-two %}"
+  position: 249987..250020
+{%- endcomment -%}
