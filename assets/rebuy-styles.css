@@ -329,11 +329,15 @@
     position: relative !important;
 }
 
+#rebuy-widget-128942 .rebuy-widget.widget-type-dynamic-bundle .rebuy-bundle .rebuy-product-block .rebuy-product-info .rebuy-product-checkbox .rebuy-checkbox-label {
+    width: 22px;
+}
+
 #rebuy-widget-128942 .rebuy-checkbox:checked:before {
     content: "";
     background-color: #000;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     border-radius: 100%;
     position: absolute;
     top: 50%;
