@@ -1191,53 +1191,125 @@
             formattedNumber +
             (match[2] ? match[2] : '');
 
-          /*
-          * Only update if text actually needs changing.
-          * This prevents MutationObserver loops.
-          */
           if (text !== newText) {
             el.textContent = newText;
+          }
+
+
+          /* Also format accessibility aria-label */
+          var button = widget.querySelector(
+            '.yotpo-sr-bottom-line-summary'
+          );
+
+          if (button) {
+            var aria = button.getAttribute('aria-label');
+
+            if (aria) {
+              var newAria = aria.replace(
+                /\b(\d{4,})\b/g,
+                function (number) {
+                  return Number(number).toLocaleString('en-US');
+                }
+              );
+
+              if (aria !== newAria) {
+                button.setAttribute('aria-label', newAria);
+              }
+            }
           }
         }
 
 
         function initYotpoReviewFormatter() {
 
-          var widget = document.querySelector(
+          var widgets = document.querySelectorAll(
             '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
           );
 
           /*
-          * Yotpo has not loaded yet.
-          * Try again shortly.
+          * Yotpo has not loaded yet
           */
-          if (!widget) {
+          if (!widgets.length) {
             setTimeout(initYotpoReviewFormatter, 300);
             return;
           }
 
 
-          /*
-          * Format current value.
-          */
-          formatReviewCount(widget);
+          widgets.forEach(function (widget) {
 
-
-          /*
-          * Watch ONLY this Yotpo widget.
-          *
-          * When Yotpo re-renders 12178 Reviews,
-          * we'll change it back to 12,178 Reviews.
-          */
-          var observer = new MutationObserver(function () {
+            /*
+            * Format immediately
+            */
             formatReviewCount(widget);
+
+
+            /*
+            * Don't attach observer twice
+            */
+            if (widget.dataset.reviewCommaObserver === 'true') {
+              return;
+            }
+
+            widget.dataset.reviewCommaObserver = 'true';
+
+
+            /*
+            * Watch this specific Yotpo widget
+            */
+            var observer = new MutationObserver(function () {
+              formatReviewCount(widget);
+            });
+
+            observer.observe(widget, {
+              childList: true,
+              subtree: true,
+              characterData: true
+            });
+
           });
 
-          observer.observe(widget, {
-            childList: true,
-            subtree: true,
-            characterData: true
-          });
+
+          /*
+          * Run a few more times because another Yotpo
+          * instance (e.g. sticky bar) may load slightly later.
+          */
+          var attempts = 0;
+
+          var timer = setInterval(function () {
+
+            var allWidgets = document.querySelectorAll(
+              '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
+            );
+
+            allWidgets.forEach(function (widget) {
+
+              formatReviewCount(widget);
+
+              if (widget.dataset.reviewCommaObserver === 'true') {
+                return;
+              }
+
+              widget.dataset.reviewCommaObserver = 'true';
+
+              var observer = new MutationObserver(function () {
+                formatReviewCount(widget);
+              });
+
+              observer.observe(widget, {
+                childList: true,
+                subtree: true,
+                characterData: true
+              });
+
+            });
+
+            attempts++;
+
+            if (attempts >= 20) {
+              clearInterval(timer);
+            }
+
+          }, 500);
 
         }
 
@@ -1258,6 +1330,7 @@
       })();
     </script>
   </body>
+
 
 
 
