@@ -27,11 +27,19 @@
             "text": "📱 App Exclusive! FREE SHIPPING On All Orders",
             "link": "https://0vf059r6.tapc.art"
           }
+        },
+        "announcement_azd9FX": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Oxy-Powder Sample on Orders $75+",
+            "link": ""
+          }
         }
       },
       "block_order": [
         "announcement_zDr4xD",
-        "announcement_GGCHez"
+        "announcement_GGCHez",
+        "announcement_azd9FX"
       ],
       "custom_css": [
         ".announcement-bar__message {font-size: 13px; font-weight: 700;}"
