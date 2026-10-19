@@ -1,0 +1,28 @@
+{% comment %}
+  Renders the "NEW" badge for a product.
+
+  The badge is driven by the Shopify `new` product tag, which is the single source of truth shared with the
+  Tapcart app. A Shopify Flow workflow adds the tag on publish and removes it after 45 days.
+
+  Accepts:
+  - product: {Object} Product Liquid object
+  - class: {String} Additional CSS classes (optional)
+
+  Usage:
+  {% render 'gh-new-badge', product: card_product %}
+{% endcomment %}
+
+{%- liquid
+  assign gh_is_new = false
+  for gh_tag in product.tags
+    assign gh_tag_normalized = gh_tag | strip | downcase
+    if gh_tag_normalized == 'new'
+      assign gh_is_new = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if gh_is_new -%}
+  <span class="gh-new-badge{% if class != blank %} {{ class }}{% endif %}">New</span>
+{%- endif -%}

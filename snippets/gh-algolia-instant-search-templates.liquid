@@ -18,6 +18,10 @@ window['gh_html'] = html
       }
       reviews.count_formatted = parseInt(reviews.count).toLocaleString();
 
+      // `new` tag is managed by Shopify Flow (45-day window); same source as the Tapcart app
+      const tags = Array.isArray(hit.tags) ? hit.tags : String(hit.tags || '').split(',');
+      const isNew = tags.some(tag => String(tag).trim().toLowerCase() === 'new');
+
       let reviews_width = 0;
       if( reviews.average > 1 ){
         reviews_width = (100 / 5) * reviews.average
@@ -36,7 +40,10 @@ window['gh_html'] = html
         href="${algolia.helpers.instantsearchLink(hit)}"
       >
         <div class="ais-hit-gh--picture">
-          <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
+          <span class="gh-new-badge-anchor">
+            <img src="${algolia.helpers.mediumImage(hit)}" alt="" loading="lazy" />
+            ${isNew && html`<span class="gh-new-badge">New</span>`}
+          </span>
         </div>
 
         <div class="ais-hit-gh--details">
