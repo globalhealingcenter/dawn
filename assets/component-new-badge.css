@@ -14,6 +14,13 @@
   border-radius: 100px;
 }
 
+.ais-page .ais-Hits-item .ais-hit-gh--picture span.gh-new-badge {
+  left: -35%;
+  top: -7%;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
 /* Algolia search / collection hits: anchor the badge to the product image */
 .gh-new-badge-anchor {
   position: relative;
@@ -22,6 +29,18 @@
 
 .gh-new-badge-anchor img {
   display: block;
+}
+
+@media screen and (max-width: 1250px) and (min-width: 1200px) {
+  .ais-page .ais-Hits-item .ais-hit-gh--picture span.gh-new-badge {
+    left: -3.5vw;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 769px) {
+  .ais-page .ais-Hits-item .ais-hit-gh--picture span.gh-new-badge {
+    left: -53%;
+  }
 }
 
 @media screen and (min-width: 750px) {
