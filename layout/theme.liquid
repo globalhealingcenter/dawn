@@ -4,12 +4,10 @@
   <head>
   {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
   <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
-    <!-- Google Consent Mode V2 (Consentmo) – must load before any tracking tags -->
-    {% render 'consent-gated-tracking2' %}
-    {% comment %} {% render 'consent-google' %} {% endcomment %}
-    {% render 'consent-pinterest' %}
+
     {% render 'gcm-integration-script' %}
     {% render 'elevateab' %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -141,7 +139,38 @@
       {%- unless page_title contains shop.name %} | {{ shop.name }}{% endunless -%}
     </title>
 
-    <!-- Google Ads gtag – loaded via consent-gated-tracking after marketing consent -->
+        <!-- Google tag (gtag.js) -->
+    {% comment %} <script async src="https://www.googletagmanager.com/gtag/js?id=AW-683425101"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'AW-683425101');
+    </script> {% endcomment %}
+
+    <script>
+      (function (w, d, t, r, u) {
+        var f, n, i;
+        (w[u] = w[u] || []),
+          (f = function () {
+            var o = { ti: '4024044', enableAutoSpaTracking: true };
+            (o.q = w[u]), (w[u] = new UET(o)), w[u].push('pageLoad');
+          }),
+          (n = d.createElement(t)),
+          (n.src = r),
+          (n.async = 1),
+          (n.onload = n.onreadystatechange =
+            function () {
+              var s = this.readyState;
+              (s && s !== 'loaded' && s !== 'complete') || (f(), (n.onload = n.onreadystatechange = null));
+            }),
+          (i = d.getElementsByTagName(t)[0]),
+          i.parentNode.insertBefore(n, i);
+      })(window, document, 'script', '//bat.bing.com/bat.js', 'uetq');
+    </script>
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
@@ -524,7 +553,12 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
-    <!-- Post Pilot – loaded via consent-gated-tracking after marketing consent -->
+        <!-- Post Pilot -->
+    <script type="text/javascript">
+        var script = document.createElement('script');
+        script.src = "https://xp2023-pix.s3.amazonaws.com/px_4W5x6.js";
+        document.getElementsByTagName('head')[0].appendChild(script);
+     </script>
 
   {% include 'huk-mega-menu-pro' %}
 
@@ -603,7 +637,17 @@
 							
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %} {{ template | replace: '.', '-' | replace: '/', '-' }} {% if settings.ss_enable and collection.handle and collection.handle == settings.ss_collection_handle %} ss-shop{% endif %}">
-    <!-- Google Tag Manager (noscript) – loaded via consent-gated-tracking after consent -->
+        <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-N233MFC3"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      >
+      </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
