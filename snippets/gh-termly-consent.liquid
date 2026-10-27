@@ -65,13 +65,36 @@
     }
   }
 
-  // Has the visitor already made a choice in Termly? (stored choice)
+  // Our own record that the visitor made a choice in the banner.
+  // Termly's storage and 'consent' event can exist before any click,
+  // so neither is a reliable signal on its own.
+  var CHOICE_KEY = 'gh_termly_choice_made';
+  var INTERACTION_WINDOW_MS = 5000;
+  var lastInteraction = 0;
+
+  function markInteraction(event) {
+    if (event.isTrusted) lastInteraction = Date.now();
+  }
+
+  document.addEventListener('click', markInteraction, true);
+  document.addEventListener('keydown', markInteraction, true);
+
+  function isUserAction() {
+    return Date.now() - lastInteraction < INTERACTION_WINDOW_MS;
+  }
+
   function hasStoredChoice() {
     try {
-      return !!window.localStorage.getItem('TERMLY_COOKIE_CONSENT');
+      return window.localStorage.getItem(CHOICE_KEY) === '1';
     } catch (error) {
       return false;
     }
+  }
+
+  function rememberChoice() {
+    try {
+      window.localStorage.setItem(CHOICE_KEY, '1');
+    } catch (error) {}
   }
 
   // Push the Termly choice into Shopify's Customer Privacy API so
@@ -174,7 +197,13 @@
     // Called when visitor changes consent.
     window.Termly.on('consent', function () {
       syncConsent();
-      syncShopify(true);
+
+      if (isUserAction()) {
+        rememberChoice();
+        syncShopify(true);
+      } else {
+        syncShopify(false);
+      }
     });
 
     // Also support previously saved consent.
