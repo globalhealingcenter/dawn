@@ -65,6 +65,81 @@
     }
   }
 
+  // Has the visitor already made a choice in Termly? (stored choice)
+  function hasStoredChoice() {
+    try {
+      return !!window.localStorage.getItem('TERMLY_COOKIE_CONSENT');
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // Push the Termly choice into Shopify's Customer Privacy API so
+  // Shopify pixels (Meta, Klaviyo, etc.) follow the visitor's choice.
+  // Only records consent after the visitor has used the banner.
+  var lastShopifySignature = null;
+
+  function syncShopify(fromUserAction) {
+    if (
+      !window.Termly ||
+      typeof window.Termly.getConsentState !== 'function'
+    ) {
+      return;
+    }
+
+    if (!fromUserAction && !hasStoredChoice()) return;
+
+    var state;
+    try {
+      state = window.Termly.getConsentState() || {};
+    } catch (error) {
+      console.warn('[GH Termly] Consent read failed:', error);
+      return;
+    }
+
+    var consent = {
+      analytics: state.analytics === true,
+      marketing: state.advertising === true,
+      preferences: state.performance === true
+    };
+
+    // Sale of data opt-out only comes from the visitor's own action
+    if (fromUserAction) {
+      consent.sale_of_data = state.do_not_sell !== true;
+    }
+
+    var signature = JSON.stringify(consent);
+    if (signature === lastShopifySignature) return;
+
+    function apply() {
+      lastShopifySignature = signature;
+      window.Shopify.customerPrivacy.setTrackingConsent(consent, function (result) {
+        if (result && result.error) {
+          console.warn('[GH Termly] Shopify consent failed:', result.error);
+        }
+      });
+    }
+
+    if (
+      window.Shopify &&
+      window.Shopify.customerPrivacy &&
+      typeof window.Shopify.customerPrivacy.setTrackingConsent === 'function'
+    ) {
+      apply();
+    } else if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+      window.Shopify.loadFeatures(
+        [{ name: 'consent-tracking-api', version: '0.1' }],
+        function (error) {
+          if (error) {
+            console.warn('[GH Termly] Shopify consent API failed to load:', error);
+            return;
+          }
+          apply();
+        }
+      );
+    }
+  }
+
   window.GHConsent = {
     getState: function () {
       return Object.assign(
@@ -93,15 +168,18 @@
     // Called when Termly finishes initialization.
     window.Termly.on('initialized', function () {
       syncConsent();
+      syncShopify(false);
     });
 
     // Called when visitor changes consent.
     window.Termly.on('consent', function () {
       syncConsent();
+      syncShopify(true);
     });
 
     // Also support previously saved consent.
     syncConsent();
+    syncShopify(false);
 
     return true;
   }
