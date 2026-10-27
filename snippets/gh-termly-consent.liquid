@@ -228,5 +228,80 @@
   window.onGHTermlyLoaded = attachTermly;
 
   retryAttach();
+
+  // Klaviyo Customer Hub gating.
+  // Account links carry data-k-hub-ignore so Klaviyo doesn't take them
+  // over. The Hub opens only when Shopify reports marketing consent;
+  // otherwise the link goes to the normal Shopify account page.
+  function isAccountLink(link) {
+    if (!link || !link.getAttribute) return false;
+
+    var href = link.getAttribute('href') || '';
+    var path;
+    try {
+      path = new URL(href, window.location.href).pathname;
+    } catch (error) {
+      return false;
+    }
+
+    return /^\/account(\/|$)/.test(path) && !/^\/account\/logout/.test(path);
+  }
+
+  function markAccountLinks(root) {
+    var links = (root || document).querySelectorAll('a[href*="/account"]');
+    for (var i = 0; i < links.length; i++) {
+      if (isAccountLink(links[i])) links[i].setAttribute('data-k-hub-ignore', '');
+    }
+  }
+
+  function marketingAllowed() {
+    try {
+      return !!(
+        window.Shopify &&
+        window.Shopify.customerPrivacy &&
+        typeof window.Shopify.customerPrivacy.marketingAllowed === 'function' &&
+        window.Shopify.customerPrivacy.marketingAllowed()
+      );
+    } catch (error) {
+      return false;
+    }
+  }
+
+  // Covers menu links set in Shopify admin and links rendered later.
+  document.addEventListener('DOMContentLoaded', function () {
+    markAccountLinks(document);
+
+    if (typeof MutationObserver === 'function') {
+      var pending = false;
+      new MutationObserver(function () {
+        if (pending) return;
+        pending = true;
+        setTimeout(function () {
+          pending = false;
+          markAccountLinks(document);
+        }, 500);
+      }).observe(document.body, { childList: true, subtree: true });
+    }
+  });
+
+  document.addEventListener('click', function (event) {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    var link = event.target.closest && event.target.closest('a[href]');
+    if (!isAccountLink(link)) return;
+
+    link.setAttribute('data-k-hub-ignore', '');
+
+    if (
+      marketingAllowed() &&
+      window.customerHubApi &&
+      typeof window.customerHubApi.open === 'function'
+    ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      window.customerHubApi.open();
+    }
+  }, true);
 })();
 </script>
