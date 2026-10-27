@@ -1,0 +1,125 @@
+
+{% comment %}
+  Global Healing — Termly Consent Bridge
+
+  - No Consentmo dependency
+  - Termly controls consent categories
+  - BIS remains available independently
+  - Customer Hub should require marketing consent
+  - Google Consent Mode V2 is handled by Termly
+{% endcomment %}
+
+<script id="gh-termly-consent-bridge">
+(function () {
+  'use strict';
+
+  if (window.__GH_TERMLY_BRIDGE_INSTALLED__) return;
+  window.__GH_TERMLY_BRIDGE_INSTALLED__ = true;
+
+  var attached = false;
+  var lastSignature = null;
+  var retryCount = 0;
+  var maxRetries = 80;
+
+  function normalize(consent) {
+    var state = consent || {};
+
+    return {
+      statistics: state.analytics === true,
+      marketing: state.advertising === true,
+      functionality: state.performance === true,
+      google: state.advertising === true
+    };
+  }
+
+  function publish(consent) {
+    var state = normalize(consent);
+    var signature = JSON.stringify(state);
+
+    window.__GH_CONSENT_STATE__ = state;
+
+    if (signature === lastSignature) return;
+    lastSignature = signature;
+
+    document.dispatchEvent(
+      new CustomEvent('gh:consentUpdate', {
+        detail: Object.assign({}, state)
+      })
+    );
+  }
+
+  function syncConsent() {
+    if (
+      !window.Termly ||
+      typeof window.Termly.getConsentState !== 'function'
+    ) {
+      publish(null);
+      return;
+    }
+
+    try {
+      publish(window.Termly.getConsentState());
+    } catch (error) {
+      console.warn('[GH Termly] Consent read failed:', error);
+      publish(null);
+    }
+  }
+
+  window.GHConsent = {
+    getState: function () {
+      return Object.assign(
+        {},
+        window.__GH_CONSENT_STATE__
+      );
+    },
+    refresh: syncConsent
+  };
+
+  // Default: no optional consent
+  publish(null);
+
+  function attachTermly() {
+    if (attached) return true;
+
+    if (
+      !window.Termly ||
+      typeof window.Termly.on !== 'function'
+    ) {
+      return false;
+    }
+
+    attached = true;
+
+    // Called when Termly finishes initialization.
+    window.Termly.on('initialized', function () {
+      syncConsent();
+    });
+
+    // Called when visitor changes consent.
+    window.Termly.on('consent', function () {
+      syncConsent();
+    });
+
+    // Also support previously saved consent.
+    syncConsent();
+
+    return true;
+  }
+
+  function retryAttach() {
+    if (attachTermly()) return;
+
+    if (++retryCount <= maxRetries) {
+      setTimeout(retryAttach, 250);
+    } else {
+      console.warn(
+        '[GH Termly] Termly not detected.'
+      );
+    }
+  }
+
+  window.onGHTermlyLoaded = attachTermly;
+
+  retryAttach();
+})();
+</script>
