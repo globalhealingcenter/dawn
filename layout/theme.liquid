@@ -6,24 +6,39 @@
   <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
 
 
-  <script src="https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on"></script>
 
+      {% comment %}
+        Termly Consent Management
+        Replaces the previous Consentmo integration.
+      {% endcomment %}
 
-  <script data-termly-config>
-    window.TERMLY_CUSTOM_BLOCKING_MAP = {
-      "bat.bing.com": "advertising",
-      "rebuyengine.com": "advertising"
-    }
-  </script>
+      <!-- Termly blocking configuration -->
+      <script data-termly-config>
+        window.TERMLY_CUSTOM_BLOCKING_MAP = {
+          "bat.bing.com": "advertising",
+          "rebuyengine.com": "advertising"
+        };
+      </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll('a[href*="app.termly.io"]').forEach(function (link) {
-          link.setAttribute("target", "_blank");
-          link.setAttribute("rel", "noopener");
+      <!-- Termly CMP + Auto Blocker -->
+      <script
+        type="text/javascript"
+        src="https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on">
+      </script>
+
+      <!-- Global Healing Termly consent bridge -->
+      {% render 'gh-termly-consent' %}
+
+      <!-- Open Termly policy links in new tabs -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          document.querySelectorAll('a[href*="app.termly.io"]').forEach(function (link) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener");
+          });
         });
-      });
-    </script>
+      </script>
+
 
     {% render 'elevateab' %}
 
