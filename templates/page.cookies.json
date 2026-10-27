@@ -11,13 +11,46 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "rich_text_eJ7JRw": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_pk44K8": {
+          "type": "heading",
+          "settings": {
+            "heading": "{{ page.title }}",
+            "heading_size": "h1"
+          }
+        },
+        "text_Xy3bMx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:</p><p>Consentmo cookie preferences</p><p><a href=\"#\">Consent Preferences</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_pk44K8",
+        "text_Xy3bMx"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "left",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "rich_text_eJ7JRw"
   ]
 }
