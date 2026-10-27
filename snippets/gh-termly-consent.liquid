@@ -244,11 +244,16 @@
       return false;
     }
 
-    return /^\/account(\/|$)/.test(path) && !/^\/account\/logout/.test(path);
+    return (
+      /^\/(account|customer_authentication)(\/|$)/.test(path) &&
+      !/\/logout(\/|$)/.test(path)
+    );
   }
 
   function markAccountLinks(root) {
-    var links = (root || document).querySelectorAll('a[href*="/account"]');
+    var links = (root || document).querySelectorAll(
+      'a[href*="/account"], a[href*="/customer_authentication"]'
+    );
     for (var i = 0; i < links.length; i++) {
       if (isAccountLink(links[i])) links[i].setAttribute('data-k-hub-ignore', '');
     }
@@ -293,15 +298,46 @@
 
     link.setAttribute('data-k-hub-ignore', '');
 
-    if (
-      marketingAllowed() &&
+    if (!marketingAllowed()) return;
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    openHubOrNavigate(link.href);
+  }, true);
+
+  // Klaviyo's Hub API can take several seconds to load. Wait for it,
+  // then fall back to the normal account page if it never appears.
+  var HUB_WAIT_MS = 4000;
+  var hubWaiting = false;
+
+  function hubReady() {
+    return !!(
       window.customerHubApi &&
       typeof window.customerHubApi.open === 'function'
-    ) {
-      event.preventDefault();
-      event.stopImmediatePropagation();
+    );
+  }
+
+  function openHubOrNavigate(href) {
+    if (hubReady()) {
       window.customerHubApi.open();
+      return;
     }
-  }, true);
+
+    if (hubWaiting) return;
+    hubWaiting = true;
+
+    var started = Date.now();
+    (function poll() {
+      if (hubReady()) {
+        hubWaiting = false;
+        window.customerHubApi.open();
+      } else if (Date.now() - started >= HUB_WAIT_MS) {
+        hubWaiting = false;
+        window.location.href = href;
+      } else {
+        setTimeout(poll, 200);
+      }
+    })();
+  }
 })();
 </script>
