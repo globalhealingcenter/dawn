@@ -30,25 +30,6 @@
     dataLayer.push(arguments);
   }
 
-  // ── Bridge: Consentmo's real consent state → gh:consentUpdate ──────
-  // Consentmo's currentVisitorConsent() shape is:
-  //   { necessary: true, analytics: bool, marketing: bool, preferences: bool }
-  // Note: the field is "preferences", not "functionality" — mapped below.
-  // 'google' is not a real Consentmo field — mirrors 'marketing' until
-  // a dedicated Google toggle exists in the CMP.
-  function dispatchGhConsentUpdate() {
-    if (!window.Consentmo) return;
-    var consent = window.Consentmo.currentVisitorConsent();
-    if (!consent) return;
-    var detail = {
-      statistics: !!consent.analytics,
-      marketing: !!consent.marketing,
-      functionality: !!consent.preferences,
-      google: !!consent.marketing,
-    };
-    window.__GH_CONSENT_STATE__ = detail;
-    document.dispatchEvent(new CustomEvent('gh:consentUpdate', { detail: detail }));
-  }
 
   if (__IN_TAPCART_EARLY__) {
     // Inside the Tapcart native app webview – cookie consent UI is not applicable.
