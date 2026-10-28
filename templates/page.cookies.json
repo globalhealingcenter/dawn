@@ -30,7 +30,7 @@
         "text_Xy3bMx": {
           "type": "text",
           "settings": {
-            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:</p><p>Consentmo cookie preferences</p><p><a href=\"#\">Consent Preferences</a></p>"
+            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:</p><p>Consentmo cookie preferences</p><p><a>Change cookie preferences</a></p>"
           }
         }
       },
