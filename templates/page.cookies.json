@@ -17,33 +17,36 @@
         "padding_bottom": 28
       }
     },
-    "rich_text_eJ7JRw": {
+    "rich_text_qnjhNb": {
       "type": "rich-text",
       "blocks": {
-        "heading_pk44K8": {
+        "heading_nKWrGG": {
           "type": "heading",
           "settings": {
             "heading": "{{ page.title }}",
             "heading_size": "h1"
           }
-        },
-        "text_Xy3bMx": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:</p><p>Consentmo cookie preferences</p><p><a href=\"#\">Consent Preferences</a></p>"
-          }
         }
       },
       "block_order": [
-        "heading_pk44K8",
-        "text_Xy3bMx"
+        "heading_nKWrGG"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
-        "content_alignment": "left",
+        "content_alignment": "center",
         "color_scheme": "",
         "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_a6paqY": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:\n\nTermly cookie preferences\n<a href=\"#\" class=\"termly-display-preferences\">Consent Preferences</a>",
+        "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
       }
@@ -51,6 +54,7 @@
   },
   "order": [
     "main",
-    "rich_text_eJ7JRw"
+    "rich_text_qnjhNb",
+    "custom_liquid_a6paqY"
   ]
 }
