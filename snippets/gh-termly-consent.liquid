@@ -9,6 +9,13 @@
   - Google Consent Mode V2 is handled by Termly
 {% endcomment %}
 
+<style>
+  html:not(.gh-consent-marketing) .evm-drawer-recently-viewed,
+  html:not(.gh-consent-marketing) .evm-drawer-related-viewed-browsing {
+    display: none !important;
+  }
+</style>
+
 <script id="gh-termly-consent-bridge">
 (function () {
   'use strict';
@@ -37,6 +44,9 @@
     var signature = JSON.stringify(state);
 
     window.__GH_CONSENT_STATE__ = state;
+
+    // Browsing-based widgets (recently viewed) only show with marketing consent
+    document.documentElement.classList.toggle('gh-consent-marketing', state.marketing);
 
     if (signature === lastSignature) return;
     lastSignature = signature;
@@ -97,6 +107,22 @@
     } catch (error) {}
   }
 
+  // After a decline, unlink this browser from any Klaviyo profile it was
+  // tied to before, so earlier browsing can't be associated with it.
+  function clearKlaviyoIdentity() {
+    var host = window.location.hostname.replace(/^www\./i, '');
+    var domains = ['', '; domain=' + host, '; domain=.' + host];
+    var names = ['__kla_id'];
+
+    for (var i = 0; i < names.length; i++) {
+      if (document.cookie.indexOf(names[i] + '=') === -1) continue;
+      for (var j = 0; j < domains.length; j++) {
+        document.cookie =
+          names[i] + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + domains[j];
+      }
+    }
+  }
+
   // Push the Termly choice into Shopify's Customer Privacy API so
   // Shopify pixels (Meta, Klaviyo, etc.) follow the visitor's choice.
   // Only records consent after the visitor has used the banner.
@@ -130,6 +156,8 @@
     if (fromUserAction) {
       consent.sale_of_data = state.do_not_sell !== true;
     }
+
+    if (!consent.marketing) clearKlaviyoIdentity();
 
     var signature = JSON.stringify(consent);
     if (signature === lastShopifySignature) return;
