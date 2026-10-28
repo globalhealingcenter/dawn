@@ -26,27 +26,31 @@
             "heading": "{{ page.title }}",
             "heading_size": "h1"
           }
+        },
+        "text_BEc8ke": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:<br/><br/>Termly cookie preferences</p>"
+          }
+        },
+        "custom_liquid_NFzANj": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<a href=\"#\" class=\"termly-display-preferences\">Consent Preferences</a>"
+          }
         }
       },
       "block_order": [
-        "heading_nKWrGG"
+        "heading_nKWrGG",
+        "text_BEc8ke",
+        "custom_liquid_NFzANj"
       ],
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
-        "content_alignment": "center",
+        "content_alignment": "left",
         "color_scheme": "",
         "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 52
-      }
-    },
-    "custom_liquid_a6paqY": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "custom_liquid": "We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:\n\nTermly cookie preferences\n<a href=\"#\" class=\"termly-display-preferences\">Consent Preferences</a>",
-        "color_scheme": "",
         "padding_top": 40,
         "padding_bottom": 52
       }
@@ -54,7 +58,6 @@
   },
   "order": [
     "main",
-    "rich_text_qnjhNb",
-    "custom_liquid_a6paqY"
+    "rich_text_qnjhNb"
   ]
 }
