@@ -749,26 +749,7 @@
 
               {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
 
-              
-              {% if block.full_ingredient_list.url != blank %}
-
-                <div class="ghiv2__full-list">
-
-                  <a
-                    href="{{ block.full_ingredient_list.url }}"
-                    class="ghiv2__full-list-link font-proxima"
-                    {% if block.full_ingredient_list.new_tab == true %}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    {% endif %}
-                  >
-                    {{ ghiv2_link_text }}
-                  </a>
-
-                </div>
-
-
-              {% elsif config.supplement_facts != blank %}
+              {% if config.supplement_facts != blank %}
 
                 <div class="ghiv2__full-list">
 
