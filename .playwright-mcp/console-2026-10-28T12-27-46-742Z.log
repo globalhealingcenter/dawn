@@ -1,0 +1,220 @@
+[    1902ms] [WARNING] [Termly] Termly ResourceBlocker is not the first script on the page. You might not be blocking unapproved content. @ https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on:177
+[    1903ms] [LOG] [Tapcart Shim] Safe Yotpo initialization applied: {IN_TAPCART: false, IS_PDP: false} @ https://globalhealing.com/:516
+[    2738ms] [INFO] [HotReload] CLI hot reload disabled - No hot reload port specified. @ https://globalhealing.com/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js:316
+[    3276ms] [LOG] GTM loaded through shopify pixel @ https://globalhealing.com/web-pixels@78841ebdw6fd1eda2peb7ac126m6aaa99ab/custom/web-pixel-127238344@1/sandbox/modern/:90
+[    3943ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s78841ebdw6fd1eda2peb7ac126m6aaa99abm.js:0
+[    4049ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s78841ebdw6fd1eda2peb7ac126m6aaa99abm.js:0
+[    5081ms] [LOG] [stoq-pixel] initialized, shop: globalhealing.myshopify.com @ https://globalhealing.com/web-pixels/strict/app/web-pixel-1091338440@336a2b48e62bacb928a9b72d0a7271cd.js:1
+[    5083ms] [INFO] k-web-pixel-version 4 @ https://globalhealing.com/web-pixels/strict/app/web-pixel-938344648@3fe25e975c30cd2a9af38a04798704c0.js:0
+[    5126ms] [LOG] [stoq-pixel] sessionId set (rank 3): b29d1f63... @ https://globalhealing.com/web-pixels/strict/app/web-pixel-1091338440@336a2b48e62bacb928a9b72d0a7271cd.js:1
+[    5202ms] [ERROR] Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed. @ https://globalhealing.com/:0
+[    5202ms] [ERROR] Attestation check for Attribution Reporting on https://ara.paa-reporting-advertising.amazon failed. @ https://globalhealing.com/:0
+[    5205ms] [LOG] %c
+
+📈 Increased conversion rates
+📈 Increased average order value
+📈 Increased customer lifetime value
+
+
+Learn more at: https://developers.rebuyengine.com/
+
+ font-size: 14px; @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[    5209ms] [LOG]  @ :0
+[    5226ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5259ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5259ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5260ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5260ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5261ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5262ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5336ms] [LOG] {args: Array(1)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5399ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://id5-sync.com/k/2007.gif?puid=HiNbcPXTTUOgXtjVkLkN9Q&gdpr=0:0
+[    5475ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5486ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5608ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5638ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5767ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5925ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    5931ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    6107ms] [LOG] ok >> @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    6146ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    6147ms] [LOG] pointer events back @ https://globalhealing.com/:22297
+[    6337ms] Uncaught (in promise) SecurityError: Failed to read a named property 'document' from 'Window': Sandbox access violation: Blocked a frame at "https://globalhealing.com" from accessing a frame at "https://globalhealing.com".  The frame requesting access is sandboxed and lacks the "allow-same-origin" flag.
+    at Oi (https://cdn.attn.tv/tag/2026-latest/unified-tag.js?v=2026-latest_2c3f0c09004:1:73383)
+    at u (https://cdn.attn.tv/tag/2026-latest/unified-tag.js?v=2026-latest_2c3f0c09004:1:74806)
+    at d (https://cdn.attn.tv/tag/2026-latest/unified-tag.js?v=2026-latest_2c3f0c09004:1:75577)
+[    6918ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://target.digitalaudience.io/bakery/bake?rvid=793&partner=AmazonDSP&car=0:0
+[    7116ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    7245ms] [ERROR] SyntaxError: Failed to execute 'querySelector' on 'Document': The provided selector is empty.
+    at Object.select (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:309032)
+    at Module.beforeUnique (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:546109)
+    at Widget.repositionTemplate (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:214783)
+    at Vue.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:137750)
+    at Array.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:635610)
+    at flushCallbacks (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:634935) nextTick @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[    7902ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    8464ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    8609ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    9980ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    9980ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[   39777ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[   69993ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  124726ms] [ERROR] Failed to load resource: net::ERR_NETWORK_CHANGED @ https://use.typekit.net/ypc5rha.css:0
+[  126652ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  126822ms] ReferenceError: yotpoWidgetsContainer is not defined
+    at https://globalhealing.com/:1793:7
+[  127034ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  245337ms] Uncaught (in promise) ChunkLoadError: Loading chunk 8920 failed.
+(timeout: )
+    at __webpack_require__.f.j (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:844911)
+    at <anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:837246)
+    at __webpack_require__.e (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:837206)
+    at <anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:32534)
+[  245768ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  250922ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/mega-menu-styles.css?v=49158758067816157371778163522 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  250922ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/gh.css?v=104695685425037884081753981550 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  250922ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/component-localization-form.css?v=143319823105703127341691529946 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  250922ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/base.css?v=106193397230042298241777304288 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  742212ms] [WARNING] [Termly] Termly ResourceBlocker is not the first script on the page. You might not be blocking unapproved content. @ https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on:177
+[  742226ms] [LOG] [Tapcart Shim] Safe Yotpo initialization applied: {IN_TAPCART: false, IS_PDP: false} @ https://globalhealing.com/:516
+[  743076ms] [LOG]  @ :0
+[  743223ms] [INFO] [HotReload] CLI hot reload disabled - No hot reload port specified. @ https://globalhealing.com/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js:316
+[  743539ms] [LOG] GTM loaded through shopify pixel @ https://globalhealing.com/web-pixels@78841ebdw6fd1eda2peb7ac126m6aaa99ab/custom/web-pixel-127238344@1/sandbox/modern/:90
+[  743589ms] [LOG] ok >> @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  744970ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745295ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s78841ebdw6fd1eda2peb7ac126m6aaa99abm.js:0
+[  745501ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745603ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745608ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745663ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745670ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  745680ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  746601ms] [LOG] pointer events back @ https://globalhealing.com/:22297
+[  748108ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  750688ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  750829ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  751848ms] [LOG] {args: Array(1)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752006ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752009ms] [LOG] %c
+
+📈 Increased conversion rates
+📈 Increased average order value
+📈 Increased customer lifetime value
+
+
+Learn more at: https://developers.rebuyengine.com/
+
+ font-size: 14px; @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[  752012ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752012ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752013ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752013ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752034ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752187ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752316ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752431ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752471ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752788ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752866ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  752933ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  753343ms] [ERROR] SyntaxError: Failed to execute 'querySelector' on 'Document': The provided selector is empty.
+    at Object.select (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:309032)
+    at Module.beforeUnique (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:546109)
+    at Widget.repositionTemplate (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:214783)
+    at Vue.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:137750)
+    at Array.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:635610)
+    at flushCallbacks (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:634935) nextTick @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[  754951ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  755631ms] ReferenceError: yotpoWidgetsContainer is not defined
+    at https://globalhealing.com/:1793:7
+[  758301ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/mega-menu-styles.css?v=49158758067816157371778163522 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  758301ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/gh.css?v=104695685425037884081753981550 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  758301ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/component-localization-form.css?v=143319823105703127341691529946 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  758301ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/base.css?v=106193397230042298241777304288 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  773200ms] [INFO] Clear-Site-Data header on 'https://globalhealing.com/cart/update.js': Cleared data types: "prefetchCache", "prerenderCache". @ https://globalhealing.com/:0
+[  773221ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  778813ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  778815ms] [INFO] Clear-Site-Data header on 'https://globalhealing.com/cart/update.js': Cleared data types: "prefetchCache", "prerenderCache". @ https://globalhealing.com/:0
+[  778869ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  780463ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  780569ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  780701ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  781505ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  799390ms] Uncaught SyntaxError: Failed to execute 'querySelector' on 'Document': The provided selector is empty.
+    at select (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:309031)
+    at beforeUnique (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:546108)
+    at repositionTemplate (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:214782)
+    at <anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:172027)
+    at invokeFunc (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:828102)
+    at trailingEdge (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:828417)
+    at timerExpired (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0:828260)
+[  802147ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  809385ms] [WARNING] [Termly] Termly ResourceBlocker is not the first script on the page. You might not be blocking unapproved content. @ https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on:177
+[  809387ms] [LOG] [Tapcart Shim] Safe Yotpo initialization applied: {IN_TAPCART: false, IS_PDP: false} @ https://globalhealing.com/:516
+[  810468ms] [INFO] [HotReload] CLI hot reload disabled - No hot reload port specified. @ https://globalhealing.com/cdn/shopifycloud/theme-hot-reload/theme-hot-reload.js:316
+[  811003ms] [LOG] ok >> @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  811078ms] [LOG]  @ :0
+[  811616ms] [LOG] GTM loaded through shopify pixel @ https://globalhealing.com/web-pixels@78841ebdw6fd1eda2peb7ac126m6aaa99ab/custom/web-pixel-127238344@1/sandbox/modern/:90
+[  812664ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  812753ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  812754ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  813094ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  813170ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s78841ebdw6fd1eda2peb7ac126m6aaa99abm.js:0
+[  813186ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  813219ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  813470ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  813825ms] [LOG] pointer events back @ https://globalhealing.com/:22297
+[  814674ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816173ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816175ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816327ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816328ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816330ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816345ms] [LOG] %c
+
+📈 Increased conversion rates
+📈 Increased average order value
+📈 Increased customer lifetime value
+
+
+Learn more at: https://developers.rebuyengine.com/
+
+ font-size: 14px; @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[  816348ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816348ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816349ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816466ms] [WARNING] [Termly] %o is not a known event. Known events are: %s preferenceChange consent,initialized @ https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on:7
+[  816466ms] [WARNING] [Termly] %o is not a known event. Known events are: %s consentChange consent,initialized @ https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on:7
+[  816954ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816959ms] [LOG] {args: Array(1)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816963ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  816964ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  817055ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  817247ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  817540ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  818375ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  818963ms] ReferenceError: yotpoWidgetsContainer is not defined
+    at https://globalhealing.com/:1793:7
+[  819491ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  819534ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  821145ms] [ERROR] SyntaxError: Failed to execute 'querySelector' on 'Document': The provided selector is empty.
+    at Object.select (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:309032)
+    at Module.beforeUnique (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:546109)
+    at Widget.repositionTemplate (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:214783)
+    at Vue.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:137750)
+    at Array.<anonymous> (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:635610)
+    at flushCallbacks (https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:1:634935) nextTick @ https://cdn.rebuyengine.com/onsite/js/global-0b84673f8a9ffab51281.js:0
+[  826486ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  826536ms] [INFO] Clear-Site-Data header on 'https://globalhealing.com/cart/update.js': Cleared data types: "prefetchCache", "prerenderCache". @ https://globalhealing.com/:0
+[  826548ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  827331ms] [INFO] Clear-Site-Data header on 'https://globalhealing.com/cart/update.js': Cleared data types: "prefetchCache", "prerenderCache". @ https://globalhealing.com/:0
+[  827332ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  827333ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  828089ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  828597ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  828834ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  829358ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[  833093ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/mega-menu-styles.css?v=49158758067816157371778163522 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  833093ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/gh.css?v=104695685425037884081753981550 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  833093ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/component-localization-form.css?v=143319823105703127341691529946 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0
+[  833093ms] [WARNING] The resource https://globalhealing.com/cdn/shop/t/43/assets/base.css?v=106193397230042298241777304288 (as=style) was preloaded using link preload in Early Hints but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value, a correct `crossorigin` value and it is preloaded intentionally. @ https://globalhealing.com/:0

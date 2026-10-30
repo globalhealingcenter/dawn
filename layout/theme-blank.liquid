@@ -1,6 +1,21 @@
 {% include 'shogun-content-handler' %}
 <html>
 <head>
+  {% render 'gh-termly-consent' %}
+
+  <script data-termly-config>
+    window.TERMLY_CUSTOM_BLOCKING_MAP = {
+      "bat.bing.com": "advertising",
+      "rebuyengine.com": "advertising",
+      "shgcdn3.com": "analytics"
+    };
+  </script>
+
+  <script
+    src="https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on"
+    onload="onGHTermlyLoaded()">
+  </script>
+
   {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
   <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
 	{{content_for_header}}

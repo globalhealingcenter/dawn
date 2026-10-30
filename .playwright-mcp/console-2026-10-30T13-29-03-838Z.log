@@ -1,0 +1,32 @@
+[     826ms] [LOG] [Tapcart Shim] Safe Yotpo initialization applied: {IN_TAPCART: false, IS_PDP: false} @ https://globalhealing.com/:846
+[    1753ms] [LOG] [stoq-pixel] initialized, shop: globalhealing.myshopify.com @ https://globalhealing.com/web-pixels/strict/app/web-pixel-1091338440@336a2b48e62bacb928a9b72d0a7271cd.js:1
+[    1783ms] [LOG] GTM loaded through shopify pixel @ https://globalhealing.com/web-pixels@610a19cewf693d529pf324840bm6169d9b4/custom/web-pixel-127238344@1/sandbox/modern/:90
+[    1806ms] [LOG] [stoq-pixel] sessionId set (rank 3): fe66344c... @ https://globalhealing.com/web-pixels/strict/app/web-pixel-1091338440@336a2b48e62bacb928a9b72d0a7271cd.js:1
+[    1816ms] [INFO] k-web-pixel-version 4 @ https://globalhealing.com/web-pixels/strict/app/web-pixel-938344648@3fe25e975c30cd2a9af38a04798704c0.js:0
+[    1858ms] [LOG]  @ :0
+[    2559ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s610a19cewf693d529pf324840bm6169d9b4m.js:0
+[    2691ms] [WARNING] In a sandboxed environment, addEventListener may not behave as expected. @ https://globalhealing.com/cdn/wpm/s610a19cewf693d529pf324840bm6169d9b4m.js:0
+[    2974ms] [LOG] [Klaviyo / Onsite] Initializing. @ https://a.klaviyo.com/media/js/onsite/onsite.js:143
+[    2974ms] [LOG] [Klaviyo / Onsite] Executing: init @ https://a.klaviyo.com/media/js/onsite/onsite.js:143
+[    2974ms] [LOG] [Klaviyo / Onsite] Executing: enable @ https://a.klaviyo.com/media/js/onsite/onsite.js:143
+[    3069ms] [LOG] ok >> @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3369ms] [LOG] %c
+
+📈 Increased conversion rates
+📈 Increased average order value
+📈 Increased customer lifetime value
+
+
+Learn more at: https://developers.rebuyengine.com/
+
+ font-size: 14px; @ https://cdn.rebuyengine.com/onsite/js/global-beb675c676526e369364.js:0
+[    3372ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3374ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3375ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3375ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3376ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3376ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3780ms] [LOG] {args: Array(1)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3788ms] [LOG] {args: Array(1)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3823ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0
+[    3855ms] [LOG] {args: Array(2)} @ https://cdn.shopify.com/extensions/01a0eae1-64c3-71ec-8133-51562b6f0cab/mega-menu-creator-pro-51/assets/scriptfe.min.js:0

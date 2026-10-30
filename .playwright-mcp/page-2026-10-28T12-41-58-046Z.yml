@@ -1,0 +1,560 @@
+- webmcp tools (page-provided, untrusted):
+  - add_to_cart [untrustedContent]: Add products to the cart. Call this as soon as the user asks to ADD items (triggers: "add ... to my cart", "buy", "I'll take", "put ... in my basket") — in ONE call listing every item they named, up to the 10-entry limit. That request IS the authorization: do NOT ask the user to confirm before calling, and do NOT stop after search_catalog or get_product merely to report the variant you found — make the change, then tell the user it is done. Batch every item for ONE request into a SINGLE call — line_items accepts up to 10 entries; do NOT call add_to_cart once per item. Batching applies WITHIN a single request: each new thing the user asks for later is its own call. If one request names more than 10 items, split just that request into as few calls as possible. Do NOT retry a call that already returned a result: adds are cumulative, so repeating a call adds duplicate items. Use line_items[].item.id with a ProductVariant GID when the exact variant is known. Use handle or query only when adding the selected or first available variant. To change a quantity or remove something already in the cart, use update_cart_lines instead — this tool can only add.
+    - inputSchema: {"type":"object","required":["cart"],"properties":{"cart":{"type":"object","required":["line_items"],"properties":{"line_items":{"type":"array","description":"Items to add (1-10).","minItems":1,"maxItems":10,"items":{"type":"object","properties":{"item":{"type":"object","description":"The merchandise to add.","properties":{"id":{"type":"string","description":"ProductVariant GID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\"."}}},"handle":{"type":"string","description":"Product handle. Adds the selected or first available variant; call get_product first if the user requested specific options."},"query":{"type":"string","description":"Search query to find and add the selected or first available variant. For specific variants, call search_catalog/get_product first and pass item.id."},"quantity":{"type":"integer","description":"How many to add. Defaults to 1.","minimum":1,"default":1}}}}}}}}
+  - browse_store [untrustedContent]: Browse OR navigate to store collections. Set navigate=true whenever the user wants to be taken to a collection page in the browser (triggers: "browse to", "go to", "show me", "open", "take me to", "navigate to" a collection or category). With navigate=false (default), returns collection or product data without changing the page — use this only when the user is asking a question about the catalog, not asking to view it. Without a collection handle, lists all collections. With a handle, returns products from that collection; use "all" to browse everything. Does NOT add anything to the cart; use add_to_cart for cart changes. Prefer this over search_catalog when the user names a category, collection, or wants to explore. With navigate=true this MOVES the browser to the collection page; the tool result confirms the destination, and no further navigation is needed to show it.
+    - inputSchema: {"type":"object","properties":{"collection":{"type":"string","description":"Collection handle to browse (e.g. \"best-sellers\", \"new-arrivals\"). Omit to list all collections. Use \"all\" to browse every product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the collection page after loading data. Set true for user intents like \"browse to\", \"go to\", \"show me\", \"open\", \"take me to\" a collection. Requires a collection handle. Defaults to false."},"sort_by":{"type":"string","description":"Sort order. Options: best-selling (default), price-ascending, price-descending, title-ascending, title-descending, created-descending, created-ascending."},"page":{"type":"number","description":"Page number for pagination (starts at 1). Each page returns up to 30 products."}}}
+  - cancel_cart: Remove all items from the cart in one step. Use when the user wants to empty their cart or start over.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_cart [readOnly, untrustedContent]: Get the current shopping cart contents — line items with product titles, variant titles, handles, URLs, images, unit prices, quantities, and totals. Everything needed to describe the cart to the user in natural language, without a follow-up get_product call per line. Works from any page.
+    - inputSchema: {"type":"object","properties":{}}
+  - get_product [untrustedContent]: Get product details, OR navigate the browser to the product page. Set catalog.navigate=true whenever the user wants to see/view the product in the browser (triggers: "show me", "open", "view", "go to", "take me to", "navigate to" a product). Set catalog.navigate=false (default) only when you need data (description, options, variants, prices, availability) to answer a question or to prepare an add_to_cart call — the browser stays on the current page. Defaults to the current page's product if no catalog.id is provided. Does NOT add anything to the cart; use add_to_cart for that. To view a specific variant (color/size/etc.) in the browser, use show_variant instead — it accepts partial option selections like "purple" without needing every option. To add a specific variant to the cart, call get_product with catalog.selected_options to get its variant id. With catalog.navigate=true this MOVES the browser to the product page; the tool result confirms the destination, and no further navigation is needed to show it.
+    - inputSchema: {"type":"object","properties":{"catalog":{"type":"object","description":"Product detail parameters.","properties":{"id":{"type":"string","description":"Storefront API Product GID, product handle, or product URL path. Custom app product paths and Shopify standard /products/<handle> paths are supported. The id field from search_catalog or browse_store can be passed directly. If omitted, uses the current page's product."},"navigate":{"type":"boolean","description":"When true, navigate the browser to the product page after fetching details. Set true for user intents like \"show me\", \"open\", \"view\", \"go to\", \"take me to\" a product. Defaults to false. If the user specified partial options (e.g. only a color), prefer show_variant with selected_options instead."},"selected_options":{"type":"array","description":"Known product option selections to filter available_options. Use exact option names and values from search_catalog options or a prior get_product available_options entry.","items":{"type":"object","properties":{"name":{"type":"string","description":"Option name, e.g. \"Size\" or \"Color\"."},"value":{"type":"string","description":"Option value, e.g. \"160cm\" or \"Fiberglass\"."}},"required":["name","value"]}}}}}}
+  - get_ucp_profile [readOnly, untrustedContent]: Get this store's Universal Commerce Protocol (UCP) profile, as served at /.well-known/ucp: the UCP version, the services the store offers with their endpoints (e.g. the store's UCP MCP server), its capabilities, and its payment handlers. Use it to discover how to continue a purchase with this store over UCP, or to check which platform operates the store. Read-only; works from any page.
+    - inputSchema: {"type":"object","properties":{}}
+  - manage_orders: Navigate to the customer's order history page. Use when the user asks about past orders, order status, tracking, or returns. The user will be prompted to log in if not already authenticated. This MOVES the browser to the order history page; the tool result confirms the destination, and no further navigation is needed to show it.
+    - inputSchema: {"type":"object","properties":{}}
+  - proceed_to_checkout: Proceed to checkout. Verifies the cart is not empty, then MOVES the browser to the checkout page. The tool result confirms the destination, and no further navigation is needed to show it.
+    - inputSchema: {"type":"object","properties":{}}
+  - search_catalog [readOnly, untrustedContent]: Search the store catalog for products, collections, articles, and pages. Does NOT add anything to the cart; use add_to_cart for cart changes. If the user asks for a specific product variant, call get_product after search_catalog to get its variant ID for add_to_cart, or use show_variant to display it.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","required":["query"],"properties":{"query":{"type":"string","description":"Search query string."},"pagination":{"type":"object","properties":{"limit":{"type":"integer","description":"Max results per type (1-10). Defaults to 5.","default":5,"minimum":1,"maximum":10}}}}}}}
+  - search_shop_policies_and_faqs [readOnly, untrustedContent]: Used to get facts about the store's policies, FAQ, or contact details.
+When the question is about specific policy kinds, set policy_types to those kinds; leave it unset for general FAQ questions.
+Some examples of questions you can ask are:
+  - What is your return policy? (policy_types: ["refund"])
+  - What is your shipping policy? (policy_types: ["shipping"])
+  - What is your phone number? (policy_types: ["contact"])
+  - What are your hours of operation? (policy_types: ["contact"])
+  - Do you offer gift wrapping? (general FAQ, no specific policy kind — leave policy_types unset)
+
+    - inputSchema: {"type":"object","properties":{"query":{"type":"string","description":"A natural language query. Searches FAQ pages and articles, and routes policies by keyword when policy_types is omitted."},"policy_types":{"type":"array","description":"Policy kinds to fetch, chosen from the user's question — e.g. [\"refund\"] for returns/exchanges, [\"contact\"] for phone/hours/address. Include every kind the question touches. Omit when no specific policy is relevant (e.g. a general FAQ question).","items":{"type":"string","enum":["refund","shipping","privacy","terms_of_service","terms_of_sale","subscription","legal_notice","contact"]}}},"required":["query"]}
+  - show_variant [untrustedContent]: Navigate the browser to a product page, with a specific variant OR a partial option filter selected. Use for view intents: "show me", "open", "view", "go to", "take me to" a specific product configuration. Accepts EITHER variant_id (fully specified variant) OR selected_options (partial, e.g. only Color=Purple) — with partial options the first matching available variant is picked automatically, so DO NOT ask the user for missing options when their intent is to view. Does NOT add anything to the cart; use add_to_cart for cart changes. For cart operations you still need a full variant_id — call get_product with the full option combination first. This MOVES the browser to the exact variant page with the variant pre-selected; the tool result confirms the destination, and no further navigation is needed to show it.
+    - inputSchema: {"type":"object","required":["catalog"],"properties":{"catalog":{"type":"object","description":"Provide EITHER variant_id OR selected_options. Handle is required unless the user is already on the product page.","properties":{"handle":{"type":"string","description":"Product handle. If omitted, uses the current product page's handle."},"variant_id":{"type":["string","number"],"description":"ProductVariant ID from get_product variants[].id, e.g. \"gid://shopify/ProductVariant/123\", or the numeric variant ID. Use when the user picked a specific fully-specified variant. Omit when using selected_options."},"selected_options":{"type":"array","description":"Partial (or full) option selections, e.g. [{\"name\":\"Color\",\"value\":\"Purple\"}]. Use when the user names some options but not all (e.g. \"show me the purple shoe\" — pass only Color). The first matching available variant will be selected automatically. Use exact option names and values from get_product available_options or search_catalog options.","items":{"type":"object","properties":{"name":{"type":"string"},"value":{"type":"string"}}}}}}}}
+  - update_cart_lines [untrustedContent]: Change the quantity of items already in the cart, or remove them. Every change here addresses an existing cart line by its id, so call get_cart first unless you already have line_items[].id from an earlier get_cart in this conversation. Pass the ABSOLUTE target quantity, not a delta — quantity 2 means the line ends up at 2 regardless of what it was. Use quantity 0 to remove the line entirely. Batch every change for ONE request into a SINGLE call — line_items accepts up to 10 entries; do NOT call update_cart_lines once per line. Batching applies WITHIN a single request: each new thing the user asks for later is its own call. This tool cannot add new merchandise. To add something not already in the cart, use add_to_cart. To empty the whole cart at once, use cancel_cart.
+    - inputSchema: {"type":"object","required":["cart"],"properties":{"cart":{"type":"object","required":["line_items"],"properties":{"line_items":{"type":"array","description":"Existing cart lines to update or remove (1-10).","minItems":1,"maxItems":10,"items":{"type":"object","required":["id","quantity"],"properties":{"id":{"type":"string","description":"Existing cart line id from get_cart line_items[].id. Required — this tool cannot resolve products by name."},"quantity":{"type":"integer","description":"Absolute target quantity for this line (not a delta). 0 removes the line.","minimum":0}}}}}}}}
+
+- generic [active] [ref=f20e1]:
+  - link "Skip to content" [ref=f20e2] [cursor=pointer]:
+    - /url: "#MainContent"
+  - region "Announcement bar" [ref=f20e6]:
+    - generic [ref=f20e7]:
+      - button "Previous announcement" [ref=f20e8] [cursor=pointer]
+      - group "1 of 3" [ref=f20e11]:
+        - region "Announcement" [ref=f20e12]:
+          - paragraph [ref=f20e13]: Free Oxy-Powder Sample on Orders $75+
+      - button "Next announcement" [ref=f20e14] [cursor=pointer]
+  - banner [ref=f20e18]:
+    - heading [level=1] [ref=f20e19]:
+      - link [ref=f20e20] [cursor=pointer]:
+        - /url: /
+        - img "Global Healing" [ref=f20e22]
+    - navigation [ref=f20e23]:
+      - list [ref=f20e24]:
+        - listitem [ref=f20e25]:
+          - link "Shop" [ref=f20e26] [cursor=pointer]:
+            - /url: ""
+        - listitem [ref=f20e32]:
+          - link "Learn" [ref=f20e33] [cursor=pointer]:
+            - /url: ""
+        - listitem [ref=f20e39]:
+          - link "Our Story" [ref=f20e40] [cursor=pointer]:
+            - /url: ""
+        - listitem [ref=f20e46]:
+          - link "The Institute" [ref=f20e47] [cursor=pointer]:
+            - /url: https://globalhealing.com/pages/courses
+        - listitem [ref=f20e49]:
+          - link "Rewards" [ref=f20e50] [cursor=pointer]:
+            - /url: https://globalhealing.com/pages/live-healthy-rewards-program
+    - generic [ref=f20e52]:
+      - link "Search" [ref=f20e53] [cursor=pointer]:
+        - /url: "#"
+      - link "Log in" [ref=f20e56] [cursor=pointer]:
+        - /url: https://globalhealing.com/customer_authentication/redirect?locale=en&region_country=US
+      - link "Cart" [ref=f20e59] [cursor=pointer]:
+        - /url: /cart
+  - main [ref=f20e68]:
+    - generic [ref=f20e70]:
+      - generic [ref=f20e71]:
+        - generic [ref=f20e72]:
+          - generic [ref=f20e73]:
+            - generic [ref=f20e74]: HEALING IS THE
+            - generic [ref=f20e75]: New Wellness
+          - generic [ref=f20e76]: Over 50,000 5-Star Reviews
+        - generic [ref=f20e90]:
+          - list "Hero banners" [ref=f20e91]:
+            - link [ref=f20e93] [cursor=pointer]:
+              - /url: /products/glutathione
+            - link [ref=f20e96] [cursor=pointer]:
+              - /url: /collections/unsung-hero
+            - link [ref=f20e99] [cursor=pointer]:
+              - /url: /products/creatine
+            - link [ref=f20e102] [cursor=pointer]:
+              - /url: /products/glutathione
+            - link [ref=f20e105] [cursor=pointer]:
+              - /url: /collections/unsung-hero
+          - button "Previous slide" [ref=f20e107] [cursor=pointer]
+          - button "Next slide" [ref=f20e110] [cursor=pointer]
+      - generic [ref=f20e148]:
+        - generic [ref=f20e149]:
+          - heading "The New Standard" [level=2] [ref=f20e150]
+          - paragraph [ref=f20e151]: in Supplements
+          - paragraph [ref=f20e152]: Because industry norms aren't enough.
+          - link "See the Full Process" [ref=f20e153] [cursor=pointer]:
+            - /url: /pages/quality-purity
+        - generic [ref=f20e155]:
+          - generic [ref=f20e156]:
+            - button "Our Way, In Our Hands Arrow Up" [expanded] [ref=f20e157] [cursor=pointer]:
+              - generic [ref=f20e158]: Our Way, In Our Hands
+              - img "Arrow Up" [ref=f20e160]
+            - generic [ref=f20e183]:
+              - strong [ref=f20e184]: INDEPENDENT
+              - paragraph [ref=f20e186]: We’re family-owned and operated with no outside investors. We won’t compromise our standards—or your trust—in exchange for profits.
+              - strong [ref=f20e187]: In-House from Start to Finish
+              - paragraph [ref=f20e189]: Quality should never be outsourced. Our team guides every step of manufacturing, from sourcing to bottling, to ensure precision and integrity.
+              - strong [ref=f20e190]: Manufactured in the USA
+              - paragraph [ref=f20e192]: Our supplements are made in Phoenix and Houston, not on the other side of the world. We stand behind our communities, our people, and our products.
+          - button "Clean Without Compromise Arrow Up" [ref=f20e194] [cursor=pointer]:
+            - generic [ref=f20e195]: Clean Without Compromise
+            - img "Arrow Up" [ref=f20e197]
+          - button "Crafted for Superior Performance Arrow Up" [ref=f20e199] [cursor=pointer]:
+            - generic [ref=f20e200]: Crafted for Superior Performance
+            - img "Arrow Up" [ref=f20e202]
+      - generic [ref=f20e203]:
+        - img "Section Background"
+        - generic [ref=f20e204]:
+          - heading [level=2] [ref=f20e205]:
+            - text: Shop by
+            - emphasis [ref=f20e206]: Health Goals
+          - generic [ref=f20e207]:
+            - generic [ref=f20e208]:
+              - link "Gut & Digestion" [ref=f20e209] [cursor=pointer]:
+                - /url: /collections/gut-digestion
+              - link "Longevity & Cellular Health" [ref=f20e210] [cursor=pointer]:
+                - /url: /collections/longevity-cellular-health
+              - link "Detox & Cleansing" [ref=f20e211] [cursor=pointer]:
+                - /url: /collections/cleanse-detox-supplements
+              - link "Immune Support" [ref=f20e212] [cursor=pointer]:
+                - /url: /collections/immune-support
+            - generic [ref=f20e213]:
+              - link "Brain & Cognitive Health" [ref=f20e214] [cursor=pointer]:
+                - /url: /collections/brain-cognitive-health
+              - link "Hormones & Thyroid" [ref=f20e215] [cursor=pointer]:
+                - /url: /collections/hormones-thyroid
+              - link "Stress, Sleep & Mood" [ref=f20e216] [cursor=pointer]:
+                - /url: /collections/sleep-stress-mood
+              - link "Energy & Performance" [ref=f20e217] [cursor=pointer]:
+                - /url: /collections/energy-performance
+          - link "Shop More Health Goals" [ref=f20e219] [cursor=pointer]:
+            - /url: https://globalhealing.com/pages/shop-by-health-benefit
+      - generic [ref=f20e222]:
+        - generic [ref=f20e223]:
+          - generic [ref=f20e224]:
+            - img "Oxy-Powder®" [ref=f20e225]
+            - link "Oxy-Powder®" [ref=f20e226] [cursor=pointer]:
+              - /url: /products/oxy-powder
+          - paragraph [ref=f20e227]:
+            - link "Support for Your Foundation of Healing" [ref=f20e228] [cursor=pointer]:
+              - /url: /products/oxy-powder
+          - paragraph [ref=f20e229]:
+            - link "1M+ Bottles Sold | 10,000+ 5-Star Reviews" [ref=f20e230] [cursor=pointer]:
+              - /url: /products/oxy-powder
+        - generic [ref=f20e231]:
+          - link [ref=f20e233] [cursor=pointer]:
+            - /url: /products/oxy-powder
+            - img "Oxy-Powder®" [ref=f20e234]
+          - generic [ref=f20e235]:
+            - paragraph [ref=f20e237]:
+              - text: Health begins in the gut.
+              - strong [ref=f20e238]: Oxy-Powder®
+              - text: uses gentle, non-habit-forming ingredients to support elimination and refresh the starting point of your overall health.
+            - generic [ref=f20e239]:
+              - link "Add to Cart" [ref=f20e240] [cursor=pointer]:
+                - /url: https://globalhealing.com/cart/39862723117256:1
+              - link "Read the Study" [ref=f20e241] [cursor=pointer]:
+                - /url: https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf
+        - generic [ref=f20e244]:
+          - generic [ref=f20e245]:
+            - generic [ref=f20e246]: 92.5% Overall Satisfaction
+            - link "Backed by independent clinical research." [ref=f20e248] [cursor=pointer]:
+              - /url: https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf
+          - img "CITRUSLABS TESTED" [ref=f20e250]
+      - generic [ref=f20e252]:
+        - generic [ref=f20e253]: Your browser does not support the video tag.
+        - generic [ref=f20e256]:
+          - generic [ref=f20e257]:
+            - heading "Consistency Made Easier" [level=2] [ref=f20e258]
+            - paragraph [ref=f20e259]: Turn Wellness into an Automatic Habit
+          - region "Wellness feature cards" [ref=f20e261]:
+            - generic [ref=f20e262]:
+              - heading "Subscribe & Save" [level=3] [ref=f20e278]
+              - paragraph [ref=f20e280]: Enjoy 15% off every order—automatically delivered for uninterrupted wellness.
+              - link "Learn More" [ref=f20e281] [cursor=pointer]:
+                - /url: /pages/autoship
+            - generic [ref=f20e282]:
+              - heading "Live Healthy Rewards" [level=3] [ref=f20e306]
+              - paragraph [ref=f20e308]: Earn points with every purchase. Redeem for exclusive discounts and free products.
+              - link "Learn More" [ref=f20e309] [cursor=pointer]:
+                - /url: /pages/live-healthy-rewards-program
+            - generic [ref=f20e310]:
+              - heading "Free U.S. Shipping" [level=3] [ref=f20e331]
+              - paragraph [ref=f20e333]: Enjoy complimentary U.S. shipping on every order over $100.
+              - link "Learn More" [ref=f20e334] [cursor=pointer]:
+                - /url: /pages/shipping
+            - generic [ref=f20e335]:
+              - heading "Satisfaction Guarantee" [level=3] [ref=f20e368]
+              - paragraph [ref=f20e370]: Take a year to try any product. If it's not a good fit, we'll offer a full refund.
+              - link "Learn More" [ref=f20e371] [cursor=pointer]:
+                - /url: /pages/guarantee
+      - generic [ref=f20e373]:
+        - heading "Healing That Speaks for Itself." [level=2] [ref=f20e374]
+        - generic [ref=f20e375]:
+          - region "Customer reviews" [ref=f20e376]:
+            - listitem [aria-hidden] [ref=f20e377]:
+              - heading [level=3] [ref=f20e389]:
+                - link [ref=f20e390] [cursor=pointer]:
+                  - /url: /products/probiotic
+                  - text: Ultimate Probiotic
+              - paragraph [ref=f20e391]: "\"I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on track. I'm truly grateful.\""
+              - paragraph [ref=f20e392]: Léonor N. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e393]:
+              - heading [level=3] [ref=f20e405]:
+                - link [ref=f20e406] [cursor=pointer]:
+                  - /url: /products/organic-black-seed-oil
+                  - text: Black Seed Oil
+              - paragraph [ref=f20e407]: "\"I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint stiffness in my knees. Since taking it daily, it has drastically reduced.\""
+              - paragraph [ref=f20e408]: Starr R. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e409]:
+              - heading [level=3] [ref=f20e421]:
+                - link [ref=f20e422] [cursor=pointer]:
+                  - /url: /products/calcium-disodium-edta
+                  - text: Calcium Disodium EDTA
+              - paragraph [ref=f20e423]: "\"This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep better and feel like I'm 25 again. You have a loyal customer now! Donna W.\""
+              - paragraph [ref=f20e424]: Donna W. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e425]:
+              - heading [level=3] [ref=f20e437]:
+                - link [ref=f20e438] [cursor=pointer]:
+                  - /url: /products/latero-flora
+                  - text: Latero-Flora®
+              - paragraph [ref=f20e439]: "\"I've tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and with celiac my gut was always off. After four months, my issues have been neutralized. This has been a dramatic change.\""
+              - paragraph [ref=f20e440]: Nicole P. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e441]:
+              - heading [level=3] [ref=f20e453]:
+                - link [ref=f20e454] [cursor=pointer]:
+                  - /url: /products/organic-multivitamin-with-minerals
+                  - text: Multivitamin with Minerals
+              - paragraph [ref=f20e455]: "\"I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost. I'll continue ordering it along with several other Global Healing supplements. They've earned my trust.\""
+              - paragraph [ref=f20e456]: Caren R. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e457]:
+              - heading [level=3] [ref=f20e469]:
+                - link [ref=f20e470] [cursor=pointer]:
+                  - /url: /products/oxy-powder
+                  - text: Oxy-Powder®
+              - paragraph [ref=f20e471]: "\"I used to get sick after eating greasy foods. Now I take Oxy-Powder and don't suffer. When I feel bloated, it feels like I've done a cleanse. I can't stand to be without it.\""
+              - paragraph [ref=f20e472]: Nilsa G. | Verified Buyer
+            - listitem [ref=f20e473]:
+              - heading [level=3] [ref=f20e485]:
+                - link "Ultimate Probiotic" [ref=f20e486] [cursor=pointer]:
+                  - /url: /products/probiotic
+              - paragraph [ref=f20e487]: "\"I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on track. I'm truly grateful.\""
+              - paragraph [ref=f20e488]: Léonor N. | Verified Buyer
+            - listitem [ref=f20e489]:
+              - heading [level=3] [ref=f20e501]:
+                - link "Black Seed Oil" [ref=f20e502] [cursor=pointer]:
+                  - /url: /products/organic-black-seed-oil
+              - paragraph [ref=f20e503]: "\"I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint stiffness in my knees. Since taking it daily, it has drastically reduced.\""
+              - paragraph [ref=f20e504]: Starr R. | Verified Buyer
+            - listitem [ref=f20e505]:
+              - heading [level=3] [ref=f20e517]:
+                - link "Calcium Disodium EDTA" [ref=f20e518] [cursor=pointer]:
+                  - /url: /products/calcium-disodium-edta
+              - paragraph [ref=f20e519]: "\"This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep better and feel like I'm 25 again. You have a loyal customer now! Donna W.\""
+              - paragraph [ref=f20e520]: Donna W. | Verified Buyer
+            - listitem [ref=f20e521]:
+              - heading [level=3] [ref=f20e533]:
+                - link "Latero-Flora®" [ref=f20e534] [cursor=pointer]:
+                  - /url: /products/latero-flora
+              - paragraph [ref=f20e535]: "\"I've tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and with celiac my gut was always off. After four months, my issues have been neutralized. This has been a dramatic change.\""
+              - paragraph [ref=f20e536]: Nicole P. | Verified Buyer
+            - listitem [ref=f20e537]:
+              - heading [level=3] [ref=f20e549]:
+                - link "Multivitamin with Minerals" [ref=f20e550] [cursor=pointer]:
+                  - /url: /products/organic-multivitamin-with-minerals
+              - paragraph [ref=f20e551]: "\"I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost. I'll continue ordering it along with several other Global Healing supplements. They've earned my trust.\""
+              - paragraph [ref=f20e552]: Caren R. | Verified Buyer
+            - listitem [ref=f20e553]:
+              - heading [level=3] [ref=f20e565]:
+                - link "Oxy-Powder®" [ref=f20e566] [cursor=pointer]:
+                  - /url: /products/oxy-powder
+              - paragraph [ref=f20e567]: "\"I used to get sick after eating greasy foods. Now I take Oxy-Powder and don't suffer. When I feel bloated, it feels like I've done a cleanse. I can't stand to be without it.\""
+              - paragraph [ref=f20e568]: Nilsa G. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e569]:
+              - heading [level=3] [ref=f20e581]:
+                - link [ref=f20e582] [cursor=pointer]:
+                  - /url: /products/probiotic
+                  - text: Ultimate Probiotic
+              - paragraph [ref=f20e583]: "\"I struggled for years with gut issues. Ultimate Probiotic combined with aloe vera, Ultimate Enzymes, and Oxy-Powder changed my life. My gut has never felt better, and I finally feel like my health is back on track. I'm truly grateful.\""
+              - paragraph [ref=f20e584]: Léonor N. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e585]:
+              - heading [level=3] [ref=f20e597]:
+                - link [ref=f20e598] [cursor=pointer]:
+                  - /url: /products/organic-black-seed-oil
+                  - text: Black Seed Oil
+              - paragraph [ref=f20e599]: "\"I noticed a positive difference very soon after starting Black Seed Oil. I had been suffering from joint stiffness in my knees. Since taking it daily, it has drastically reduced.\""
+              - paragraph [ref=f20e600]: Starr R. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e601]:
+              - heading [level=3] [ref=f20e613]:
+                - link [ref=f20e614] [cursor=pointer]:
+                  - /url: /products/calcium-disodium-edta
+                  - text: Calcium Disodium EDTA
+              - paragraph [ref=f20e615]: "\"This product has completely changed my life. I feel clear-headed, energized, and overall well. I sleep better and feel like I'm 25 again. You have a loyal customer now! Donna W.\""
+              - paragraph [ref=f20e616]: Donna W. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e617]:
+              - heading [level=3] [ref=f20e629]:
+                - link [ref=f20e630] [cursor=pointer]:
+                  - /url: /products/latero-flora
+                  - text: Latero-Flora®
+              - paragraph [ref=f20e631]: "\"I've tried many probiotics, but none compare. I used to get chronic yeast and bacterial infections, and with celiac my gut was always off. After four months, my issues have been neutralized. This has been a dramatic change.\""
+              - paragraph [ref=f20e632]: Nicole P. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e633]:
+              - heading [level=3] [ref=f20e645]:
+                - link [ref=f20e646] [cursor=pointer]:
+                  - /url: /products/organic-multivitamin-with-minerals
+                  - text: Multivitamin with Minerals
+              - paragraph [ref=f20e647]: "\"I was having trouble with low energy. Taking Multivitamin with Minerals has given me a noticeable boost. I'll continue ordering it along with several other Global Healing supplements. They've earned my trust.\""
+              - paragraph [ref=f20e648]: Caren R. | Verified Buyer
+            - listitem [aria-hidden] [ref=f20e649]:
+              - heading [level=3] [ref=f20e661]:
+                - link [ref=f20e662] [cursor=pointer]:
+                  - /url: /products/oxy-powder
+                  - text: Oxy-Powder®
+              - paragraph [ref=f20e663]: "\"I used to get sick after eating greasy foods. Now I take Oxy-Powder and don't suffer. When I feel bloated, it feels like I've done a cleanse. I can't stand to be without it.\""
+              - paragraph [ref=f20e664]: Nilsa G. | Verified Buyer
+          - progressbar [aria-hidden] [ref=f20e665]
+    - generic [ref=f20e672]:
+      - generic [ref=f20e673]:
+        - heading "Join the Healing" [level=2] [ref=f20e674]
+        - paragraph [ref=f20e675]: Thoughtful guidance, educational articles, and updates to support your journey.
+      - generic [ref=f20e676]:
+        - generic [ref=f20e678]:
+          - generic [ref=f20e679]:
+            - textbox "Enter Your Email" [ref=f20e680]
+            - button "Sign Up" [ref=f20e681] [cursor=pointer]
+          - generic [ref=f20e682]:
+            - checkbox "I agree to receive marketing emails. View Privacy Policy." [ref=f20e683] [cursor=pointer]
+            - text: I agree to receive marketing emails.
+            - link "View Privacy Policy." [ref=f20e684] [cursor=pointer]:
+              - /url: /pages/privacy-policy
+        - generic [ref=f20e685]:
+          - generic [ref=f20e686]: Stay Connected
+          - list [ref=f20e687]:
+            - listitem [ref=f20e688]:
+              - link "Facebook" [ref=f20e689] [cursor=pointer]:
+                - /url: https://www.facebook.com/globalhealingofficial
+            - listitem [ref=f20e693]:
+              - link "Instagram" [ref=f20e694] [cursor=pointer]:
+                - /url: https://www.instagram.com/globalhealingofficial/
+            - listitem [ref=f20e698]:
+              - link "Threads" [ref=f20e699] [cursor=pointer]:
+                - /url: https://www.threads.com/@globalhealingofficial
+            - listitem [ref=f20e703]:
+              - link "YouTube" [ref=f20e704] [cursor=pointer]:
+                - /url: https://www.youtube.com/@GlobalHealing98
+            - listitem [ref=f20e708]:
+              - link "TikTok" [ref=f20e709] [cursor=pointer]:
+                - /url: https://www.tiktok.com/@globalhealing?
+            - listitem [ref=f20e713]:
+              - link "Pinterest" [ref=f20e714] [cursor=pointer]:
+                - /url: https://www.pinterest.com/ghchealth/
+    - link [ref=f20e721] [cursor=pointer]:
+      - /url: /pages/social-shop-instagram
+      - heading "Explore our Instagram" [level=2] [ref=f20e722]
+  - contentinfo [ref=f20e724]:
+    - generic [ref=f20e725]:
+      - generic [ref=f20e726]:
+        - generic [ref=f20e727]:
+          - generic [ref=f20e728]: My Account
+          - list [ref=f20e729]:
+            - listitem [ref=f20e730]:
+              - link "My Account" [ref=f20e731] [cursor=pointer]:
+                - /url: /account
+            - listitem [ref=f20e732]:
+              - link "Subscribe & Save" [ref=f20e733] [cursor=pointer]:
+                - /url: /pages/autoship
+            - listitem [ref=f20e734]:
+              - link "Live Healthy Rewards" [ref=f20e735] [cursor=pointer]:
+                - /url: /pages/live-healthy-rewards-program
+            - listitem [ref=f20e736]:
+              - link "My Membership" [ref=f20e737] [cursor=pointer]:
+                - /url: /pages/my-courses
+            - listitem [ref=f20e738]:
+              - link "Refer a Friend, Get $10" [ref=f20e739] [cursor=pointer]:
+                - /url: https://globalhealing.com/pages/refer-a-friend
+            - listitem [ref=f20e740]:
+              - link "Terms of Service" [ref=f20e741] [cursor=pointer]:
+                - /url: /policies/terms-of-service
+        - generic [ref=f20e742]:
+          - generic [ref=f20e743]: Customer Care
+          - list [ref=f20e744]:
+            - listitem [ref=f20e745]:
+              - link "FAQ" [ref=f20e746] [cursor=pointer]:
+                - /url: /a/help
+            - listitem [ref=f20e747]:
+              - link "Shipping Policy" [ref=f20e748] [cursor=pointer]:
+                - /url: /pages/shipping
+            - listitem [ref=f20e749]:
+              - link "Returns" [ref=f20e750] [cursor=pointer]:
+                - /url: /pages/returns
+            - listitem [ref=f20e751]:
+              - link "Shop Pay" [ref=f20e752] [cursor=pointer]:
+                - /url: /pages/shop-pay
+            - listitem [ref=f20e753]:
+              - link "Coupons & Promotions" [ref=f20e754] [cursor=pointer]:
+                - /url: /pages/coupons
+            - listitem [ref=f20e755]:
+              - link "Find a Coach" [ref=f20e756] [cursor=pointer]:
+                - /url: https://globalhealinginstitute.org/alumni-directory-homepage/
+            - listitem [ref=f20e757]:
+              - link "Cookie Preferences" [ref=f20e758] [cursor=pointer]:
+                - /url: /pages/cookie-preferences
+        - generic [ref=f20e759]:
+          - generic [ref=f20e760]: Our Story
+          - list [ref=f20e761]:
+            - listitem [ref=f20e762]:
+              - link "Meet Dr. Group, DC" [ref=f20e763] [cursor=pointer]:
+                - /url: /pages/dr-group
+            - listitem [ref=f20e764]:
+              - link "Our Healing Mission" [ref=f20e765] [cursor=pointer]:
+                - /url: /pages/our-story
+            - listitem [ref=f20e766]:
+              - link "Courses" [ref=f20e767] [cursor=pointer]:
+                - /url: /pages/courses
+            - listitem [ref=f20e768]:
+              - link "Quality & Purity" [ref=f20e769] [cursor=pointer]:
+                - /url: /pages/quality-purity
+            - listitem [ref=f20e770]:
+              - link "Our Proprietary Technologies" [ref=f20e771] [cursor=pointer]:
+                - /url: /pages/our-proprietary-technologies
+        - generic [ref=f20e772]:
+          - generic [ref=f20e773]: Our Company
+          - list [ref=f20e774]:
+            - listitem [ref=f20e775]:
+              - link "Careers" [ref=f20e776] [cursor=pointer]:
+                - /url: /pages/careers
+            - listitem [ref=f20e777]:
+              - link "Affiliate Program" [ref=f20e778] [cursor=pointer]:
+                - /url: /pages/affiliates
+            - listitem [ref=f20e779]:
+              - link "Wholesale" [ref=f20e780] [cursor=pointer]:
+                - /url: /pages/wholesale
+            - listitem [ref=f20e781]:
+              - link "Press Room" [ref=f20e782] [cursor=pointer]:
+                - /url: /pages/press
+            - listitem [ref=f20e783]:
+              - link "Satisfaction Guarantee" [ref=f20e784] [cursor=pointer]:
+                - /url: /pages/guarantee
+            - listitem [ref=f20e785]:
+              - link "HSA/FSA" [ref=f20e786] [cursor=pointer]:
+                - /url: /pages/hsa-fsa
+      - list [ref=f20e788]:
+        - listitem [ref=f20e789]:
+          - link "Facebook" [ref=f20e790] [cursor=pointer]:
+            - /url: https://www.facebook.com/globalhealingofficial
+        - listitem [ref=f20e794]:
+          - link "Instagram" [ref=f20e795] [cursor=pointer]:
+            - /url: https://www.instagram.com/globalhealingofficial/
+        - listitem [ref=f20e799]:
+          - link "Threads" [ref=f20e800] [cursor=pointer]:
+            - /url: https://www.threads.com/@globalhealingofficial
+        - listitem [ref=f20e804]:
+          - link "Substack" [ref=f20e805] [cursor=pointer]:
+            - /url: https://globalhealing.substack.com
+        - listitem [ref=f20e809]:
+          - link "YouTube" [ref=f20e810] [cursor=pointer]:
+            - /url: https://www.youtube.com/@GlobalHealing98
+        - listitem [ref=f20e814]:
+          - link "TikTok" [ref=f20e815] [cursor=pointer]:
+            - /url: https://www.tiktok.com/@globalhealing?
+        - listitem [ref=f20e819]:
+          - link "Pinterest" [ref=f20e820] [cursor=pointer]:
+            - /url: https://www.pinterest.com/ghchealth/
+    - generic [ref=f20e829]:
+      - heading "Country/region" [level=2] [ref=f20e830]
+      - button "USD $ | United States" [ref=f20e832] [cursor=pointer]
+  - generic [ref=f20e838]:
+    - text: Have a question? We'd love to help!
+    - link "1-800-476-0016" [ref=f20e839] [cursor=pointer]:
+      - /url: tel:18004760016
+    - link "1242 N Post Oak Rd Suite 100, Houston, TX 77055" [ref=f20e840] [cursor=pointer]:
+      - /url: https://g.page/global-healing-houston
+    - link "Contact Us" [ref=f20e841] [cursor=pointer]:
+      - /url: /pages/contact
+  - generic [ref=f20e845]:
+    - link "Download on the App Store":
+      - /url: https://apps.apple.com/us/app/global-healing/id6751608078
+      - img "Download on the App Store"
+    - link "Get it on Google Play":
+      - /url: https://play.google.com/store/apps/details?id=co.app.id_LwjtV2j20b
+      - img "Get it on Google Play"
+  - generic [ref=f20e846]:
+    - generic [ref=f20e847]:
+      - generic [ref=f20e848]:
+        - generic [ref=f20e849]:
+          - link "Terms of Use" [ref=f20e850] [cursor=pointer]:
+            - /url: /pages/terms-of-use
+          - text: "|"
+          - link "Disclaimer" [ref=f20e851] [cursor=pointer]:
+            - /url: /pages/disclaimer
+          - text: "|"
+          - link "Privacy Policy" [ref=f20e852] [cursor=pointer]:
+            - /url: /pages/privacy-policy
+          - text: "|"
+          - link "Sitemap" [ref=f20e853] [cursor=pointer]:
+            - /url: /pages/product-sitemap
+          - text: All testimonials and product reviews are authentic from actual customers. Documentation is available for legal inspection. Product reviews are within range of typicality.Information and statements made are for education purposes and are not intended to replace the advice of your treating doctor. Global Healing does not dispense medical advice, prescribe, or diagnose illness. The views and nutritional advice expressed by Global Healing are not intended to be a substitute for conventional medical service. If you have a severe medical condition or health concern, see your physician. This Web site contains links to Web sites operated by other parties. Such links are provided for your convenience and reference only. We are not responsible for the content or products of any linked site or any link contained in a linked site. Global Healing does not adopt any medical claims which may have been made in 3rd party references. Where Global Healing has control over the posting or other communications of such claims to the public, Global Healing will make its best effort to remove such claims.
+        - generic [ref=f20e854]: These statements have not been evaluated by the Food and Drug Administration. These products are not intended to diagnose, treat, cure, or prevent any disease.
+        - generic [ref=f20e856]:
+          - text: © 2026,
+          - link "Global Healing" [ref=f20e857] [cursor=pointer]:
+            - /url: /
+        - link:
+          - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+      - link:
+        - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+    - link:
+      - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+  - link:
+    - /url: https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore
+    - alert [ref=f20e858] [cursor=pointer]:
+      - button "Close notification" [ref=f20e859]
+  - iframe [ref=f20e863]:
+    - generic [ref=f21e4]:
+      - button [ref=f21e7] [cursor=pointer]
+      - generic [ref=f21e15]:
+        - generic [ref=f21e18]:
+          - link [ref=f21e19] [cursor=pointer]:
+            - /url: https://admin.shopify.com/store/globalhealing
+            - img "Logo" [ref=f21e20]
+          - generic [ref=f21e22]:
+            - generic [ref=f21e23]: dawn/gh/termly
+            - generic [ref=f21e24]: Draft
+        - generic [ref=f21e26]:
+          - button "Hide bar" [ref=f21e28] [cursor=pointer]
+          - button "Exit preview" [ref=f21e31] [cursor=pointer]
+          - button "Copy link" [ref=f21e35] [cursor=pointer]
+  - generic [ref=f20e864]:
+    - generic [ref=f20e865]:
+      - heading [level=2] [ref=f20e867]: Your Cart ( )
+      - button [ref=f20e868] [cursor=pointer]:
+        - generic [ref=f20e869]: 
+        - generic [ref=f20e870]: Close Cart
+    - generic [ref=f20e871]:
+      - generic [ref=f20e872]: FREE U.S. SHIPPING ON AUTOSHIP
+      - generic [ref=f20e877]:
+        - progressbar [ref=f20e879]
+        - generic [ref=f20e880]: You are $100.00 away from free U.S. shipping
+      - generic [ref=f20e882]:
+        - heading [level=4] [ref=f20e883]: Your cart is empty!
+        - paragraph [ref=f20e884]: Add your favorite items to your cart.
+        - paragraph [ref=f20e885]:
+          - link [ref=f20e886] [cursor=pointer]:
+            - /url: /collections/collections
+            - text: Shop Now
