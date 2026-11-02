@@ -34,1104 +34,1168 @@
 <script src="{{ 'gh-product-content.js' | asset_url }}" defer="defer"></script>
 
 {% if has_product_config %}
-
-<section class="gh--product-content section-{{ section.id }}-padding">
-
-  <div class="ghd--product-container">
-
-  {% for block in config.blocks %}
-    {%- case block.type -%}
-      {%- when 'blank' -%}
-       {% if block.content %}
-        <div class="ghd--block--blank ghd--block">
-          <div class="page-width">
-            {{ block.content }}
-          </div>
-        </div>
-       {% endif %}
-      {% when 'reviews-v2' %}
-      {% if block.items and block.items.size > 0 %}
-
-        <section
-          class="ghr-reviews"
-          data-gh-reviews
-        >
-          <div class="ghr-reviews__inner">
-            {% comment %}<h2 class="ghr-reviews__heading font-proxima">
-              Healing That Speaks
-              <span class="font-miller">for Itself.</span>
-            </h2>{% endcomment %}
-
-            <div class="ghr-reviews__carousel">
-              <div
-                class="ghr-reviews__track"
-                role="list"
-                aria-label="Customer reviews"
-                tabindex="0"
+  <section class="gh--product-content section-{{ section.id }}-padding">
+    <div class="ghd--product-container">
+      {% for block in config.blocks %}
+        {%- case block.type -%}
+          {%- when 'blank' -%}
+            {% if block.content %}
+              <div class="ghd--block--blank ghd--block">
+                <div class="page-width">
+                  {{ block.content }}
+                </div>
+              </div>
+            {% endif %}
+          {% when 'reviews-v2' %}
+            {% if block.items and block.items.size > 0 %}
+              <section
+                class="ghr-reviews"
+                data-gh-reviews
               >
-                {% for review in block.items %}
-                  {% assign review_product = review.product_name %}
-                  {% assign review_text = review.review_text %}
-                  {% assign review_author = review.author %}
-                  {% assign review_verified_text = review.verified_buyer_text | default: 'Verified Buyer' %}
+                <div class="ghr-reviews__inner">
+                  {% comment %}
+                    <h2 class="ghr-reviews__heading font-proxima">
+                      Healing That Speaks
+                      <span class="font-miller">for Itself.</span>
+                    </h2>
+                  {% endcomment %}
 
-                  {% assign review_star_rating = review.star_rating | default: 5 | plus: 0 %}
-                  {% assign review_star_rating = review_star_rating | at_least: 1 | at_most: 5 %}
-
-                  {% if review_product != blank or review_text != blank %}
-                    <article
-                      class="ghr-reviews__card"
-                      role="listitem"
-                      aria-label="Review {{ forloop.index }} of {{ block.items.size }}"
+                  <div class="ghr-reviews__carousel">
+                    <div
+                      class="ghr-reviews__track"
+                      role="list"
+                      aria-label="Customer reviews"
+                      tabindex="0"
                     >
-                      <div
-                        class="ghr-reviews__stars"
-                        aria-label="{{ review_star_rating }} out of 5 stars"
-                      >
-                        {% for star in (1..5) %}
-                          <svg
-                            class="ghr-reviews__star"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 105 99"
-                            width="105"
-                            height="99"
-                            focusable="false"
-                            aria-hidden="true"
+                      {% for review in block.items %}
+                        {% assign review_product = review.product_name %}
+                        {% assign review_text = review.review_text %}
+                        {% assign review_author = review.author %}
+                        {% assign review_verified_text = review.verified_buyer_text | default: 'Verified Buyer' %}
+
+                        {% assign review_star_rating = review.star_rating | default: 5 | plus: 0 %}
+                        {% assign review_star_rating = review_star_rating | at_least: 1 | at_most: 5 %}
+
+                        {% if review_product != blank or review_text != blank %}
+                          <article
+                            class="ghr-reviews__card"
+                            role="listitem"
+                            aria-label="Review {{ forloop.index }} of {{ block.items.size }}"
                           >
-                            <path
-                              fill="{% if star <= review_star_rating %}#cca72c{% else %}#d8d8d8{% endif %}"
-                              fill-rule="evenodd"
-                              d="m52.75-0.3 12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81L52.75-.3z"
-                            />
-                          </svg>
-                        {% endfor %}
-                      </div>
-
-                      {% if review_product != blank %}
-                        <h3 class="ghr-reviews__product font-proxima">
-                            {{ review_product }}
-                        </h3>
-                      {% endif %}
-
-                      {% if review_text != blank %}
-                        <p class="ghr-reviews__text font-proxima">
-                          {{ review_text }}
-                        </p>
-                      {% endif %}
-
-                      {% if review_author != blank %}
-                        <p class="ghr-reviews__meta font-proxima">
-                          {{ review_author }}
-
-                          {% if review_verified_text != blank %}
-                            <span class="ghr-reviews__separator" aria-hidden="true"> | </span>
-                            <span class="ghr-reviews__verified">
-                              Verified Buyer
-                            </span>
-                          {% endif %}
-                        </p>
-                      {% endif %}
-                    </article>
-                  {% endif %}
-                {% endfor %}
-              </div>
-
-              {% if block.items.size > 1 %}
-                <div
-                  class="ghr-reviews__progress"
-                  role="progressbar"
-                  aria-label="Review carousel progress"
-                  aria-valuenow="1"
-                  aria-valuemin="1"
-                  aria-valuemax="{{ block.items.size }}"
-                >
-                  <div class="ghr-reviews__progress-track">
-                    <div class="ghr-reviews__progress-fill"></div>
-                  </div>
-                </div>
-              {% endif %}
-            </div>
-
-          </div>
-        </section>
-
-      {% endif %}
-
-      {% when 'study' %}
-      <style>
-        .ghd--block--intro{
-          z-index: -1;
-          position: relative;
-        }
-      </style>
-      <div class="ghd--block--study ghd--block bg-white">
-
-        <div class="page-width">
-          <img class="ghd--block--study-bg" src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/proven-results-bg.png?v=1785523159" width="3000" height="1500" alt="proven-results" />
-          <div class="ghd--block--study-content">
-              <h2 class="eyebrow center">
-                <span>Proven Results</span>
-                Effective, <br><i>Measurable</i> Relief
-              </h2>
-
-              <div class="ghd-study--results flex flex-wrap items-center">
-                <div class="col-12 md-col-6 gh--study-content-left">
-                  <div class="ghd-study--results--stats flex flex-wrap center">
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Constipation Relief</div>
-                      </div>
-                    </div>
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Bloating Relief</div>
-                      </div>
-                    </div>
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-85-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-85-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Cramp Relief</div>
-                      </div>
-                    </div>
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Improved Gut Health</div>
-                      </div>
-                    </div>
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Would Use Again</div>
-                      </div>
-                    </div>
-                    <div class="col-4 lg-col-4 pt2">
-                      <div class="flex flex-column justify-between">
-                        <div>{% render 'gh-element-image', image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-92.5-agreed.png?width=130', image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-92.5-agreed.png?width=260' %}</div>
-                        <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">Overall Satisfied</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 md-col-6 gh--study-content-right">
-                  <p class="px2">In a Citruslabs study, adults with digestive issues used Oxy-Powder and reported rapid, noticeable improvement, some as early as day one. These benefits were sustained throughout the week, demonstrating Oxy-Powder’s effectiveness in relieving common digestive discomfort and supporting overall gut health.</p>
-
-                  <div class="flex items-center gap-2">
-                    <div>
-                      <img class="block" src="https://cdn.shopify.com/s/files/1/0539/5621/4984/files/citrus-labs-logo.png" alt="" width="85" height="85">
-                    </div>
-                    <div>
-                      <a target="_blank" class="download-the-study" href="https://cdn.shopify.com/s/files/1/0539/5621/4984/files/product-document-oxy-powder-global-healing-study-report-20435.pdf?v=1752598938">
-                        <img src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/download-icon.png?v=1785530490" alt="Download the study" width="20" height="19" /> Download the Study</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
-          
-        </div>
-
-      </div>
-
-      {% when 'meticulous-craftsmanship-v2' %}
-
-        {% assign ghmc_selected_cards = block.selected_cards %}
-        {% assign ghmc_card_count = 0 %}
-
-        {% if ghmc_selected_cards %}
-          {% assign ghmc_card_count = ghmc_selected_cards.size %}
-        {% endif %}
-
-        {% if ghmc_card_count > 0 %}
-          <section
-            class="ghmc-craftsmanship"
-            data-ghmc-carousel
-          >
-            <div class="ghmc-craftsmanship__inner">
-
-              <div class="ghmc-craftsmanship__header">
-                <p class="ghmc-craftsmanship__label font-proxima">
-                  Meticulous Craftsmanship
-                </p>
-
-                <h2 class="ghmc-craftsmanship__heading font-miller">
-                  {{ block.headline | default: 'Unique <strong>Headline Here</strong>' }}
-                </h2>
-              </div>
-
-              <div class="ghmc-craftsmanship__carousel">
-
-                <div
-                  class="ghmc-craftsmanship__track"
-                  data-ghmc-track
-                  role="list"
-                  aria-label="Meticulous craftsmanship cards"
-                  tabindex="0"
-                >
-
-                  {% for ghmc_card_key in ghmc_selected_cards %}
-
-                    {% assign ghmc_eyebrow = blank %}
-                    {% assign ghmc_title = blank %}
-                    {% assign ghmc_description = blank %}
-                    {% assign ghmc_image = blank %}
-
-                    {% case ghmc_card_key %}
-
-                      {% when 'microsomal_liquids' %}
-                        {% assign ghmc_eyebrow = 'Innovation' %}
-                        {% assign ghmc_title = 'Revolutionary Absorption Technology' %}
-                        {% assign ghmc_description = 'Our proprietary MicroSomal® delivery system transforms nutrients into ultra-fine particles, supporting optimal bioavailability and absorption.' %}
-                        {% assign ghmc_image = 'MicroSomal.jpg' | asset_url %}
-
-                      {% when 'raw_herbal_liquids' %}
-                        {% assign ghmc_eyebrow = 'Innovation' %}
-                        {% assign ghmc_title = 'Full-Spectrum Preservation' %}
-                        {% assign ghmc_description = "Produced using our proprietary Raw Herbal Extract™ process, this formula helps preserve the herb's natural flavor, aroma, beneficial compounds, and life force." %}
-                        {% assign ghmc_image = 'RawHerbal.jpg' | asset_url %}
-
-                      {% when 'ormus' %}
-                        {% assign ghmc_eyebrow = 'Innovation' %}
-                        {% assign ghmc_title = 'Holistic Mineral Support' %}
-                        {% assign ghmc_description = 'This formula blends ORMUS Earth Minerals™, a proprietary trace mineral complex, to improve absorption while enhancing its nutritional and energetic profile.' %}
-                        {% assign ghmc_image = 'MineralSupport.jpg' | asset_url %}
-
-                      {% when 'verified_purity' %}
-                        {% assign ghmc_eyebrow = 'Trust' %}
-                        {% assign ghmc_title = 'Verified Purity' %}
-                        {% assign ghmc_description = "Supplier testing isn't enough. Every ingredient is verified through rigorous in-house and third-party testing for uncompromising purity." %}
-                        {% assign ghmc_image = 'VerifiedPurity.jpg' | asset_url %}
-
-                      {% when 'water_based_extraction' %}
-                        {% assign ghmc_eyebrow = 'Process' %}
-                        {% assign ghmc_title = 'Water-Based Extraction' %}
-                        {% assign ghmc_description = 'While many manufacturers rely on chemical solvents, we use triple-distilled, biophotonic structured water to help preserve purity and formula integrity.' %}
-                        {% assign ghmc_image = 'Water-BasedExtraction.jpg' | asset_url %}
-
-                      {% when 'no_shortcuts' %}
-                        {% assign ghmc_eyebrow = 'Process' %}
-                        {% assign ghmc_title = 'No Shortcuts, Ever' %}
-                        {% assign ghmc_description = 'Many manufacturers prioritize speed. We take a slower, methodical, low-heat approach to help preserve delicate compounds and ingredient quality.' %}
-                        {% assign ghmc_image = 'NoShortcuts.jpg' | asset_url %}
-
-                      {% when 'artisan_approach' %}
-                        {% assign ghmc_eyebrow = 'Process' %}
-                        {% assign ghmc_title = 'Artisan Approach' %}
-                        {% assign ghmc_description = 'Produced in small batches rather than through mass production to achieve a premium level of care, consistency, and attention to detail.' %}
-                        {% assign ghmc_image = 'ArtisanApproach.jpg' | asset_url %}
-
-                      {% when 'protected_from_interference' %}
-                        {% assign ghmc_eyebrow = 'Process' %}
-                        {% assign ghmc_title = 'Protected from Interference' %}
-                        {% assign ghmc_description = 'From glass vessels to platinum-cured silicone tubing, premium materials help minimize the potential for plastic leaching and metallic interference.' %}
-                        {% assign ghmc_image = 'ProtectedfromInterference.jpg' | asset_url %}
-
-                    {% endcase %}
-
-                    {% if ghmc_title != blank %}
-                      <article
-                        class="ghmc-craftsmanship__card"
-                        data-ghmc-card
-                        data-ghmc-card-key="{{ ghmc_card_key }}"
-                        role="listitem"
-                      >
-                        <div class="ghmc-craftsmanship__media">
-                          {% if ghmc_image != blank %}
-                            <img
-                              class="ghmc-craftsmanship__image"
-                              src="{{ ghmc_image }}"
-                              alt="{{ ghmc_title | escape }}"
-                              width="700"
-                              height="430"
-                              loading="lazy"
-                            >
-                          {% else %}
                             <div
-                              class="ghmc-craftsmanship__image-placeholder"
-                              aria-hidden="true"
-                            ></div>
-                          {% endif %}
-                        </div>
-
-                        <div class="ghmc-craftsmanship__content">
-                          <p class="ghmc-craftsmanship__eyebrow font-proxima">
-                            {{ ghmc_eyebrow }}
-                          </p>
-
-                          <h3 class="ghmc-craftsmanship__card-title font-proxima">
-                            {{ ghmc_title }}
-                          </h3>
-
-                          <p class="ghmc-craftsmanship__description font-proxima">
-                            {{ ghmc_description }}
-                          </p>
-                        </div>
-                      </article>
-                    {% endif %}
-
-                  {% endfor %}
-                </div>
-
-                {% if ghmc_card_count > 1 %}
-                  <div
-                    class="ghmc-craftsmanship__progress"
-                    role="progressbar"
-                    aria-label="Craftsmanship carousel progress"
-                    aria-valuemin="1"
-                    aria-valuemax="{{ ghmc_card_count }}"
-                    aria-valuenow="1"
-                    data-ghmc-progress
-                  >
-                    <div class="ghmc-craftsmanship__progress-track">
-                      <div
-                        class="ghmc-craftsmanship__progress-fill"
-                        data-ghmc-progress-fill
-                      ></div>
-                    </div>
-                  </div>
-                {% endif %}
-              </div>
-
-              <a
-                class="ghmc-craftsmanship__learn-more font-proxima"
-                href="https://globalhealing.com/pages/our-craftsmanship"
-              >
-                Learn More
-              </a>
-
-            </div>
-          </section>
-      {% endif %}
-
-      {% when 'backstory-v2' %}
-
-        {% if block.title.main != blank or block.content != blank %}
-          <div class="ghd--block--backstory-v2 ghd--block">
-            <div class="ghd--block--backstory-v2__cols">
-
-              <div class="ghd--block--backstory-v2__content">
-                <div class="ghd--block--backstory-v2__content-inner">
-
-                  <p class="ghd--block--backstory-v2__label font-proxima">
-                    BACKSTORY
-                  </p>
-
-                  {% if block.title.main != blank %}
-                    <h2 class="ghd--block--backstory-v2__heading font-miller">
-                      {{ block.title.main }}
-                    </h2>
-                  {% endif %}
-
-                  {% if block.content != blank %}
-                    <div class="ghd--block--backstory-v2__copy font-proxima">
-                      {{ block.content }}
-                    </div>
-                  {% endif %}
-
-                </div>
-              </div>
-
-              <div class="ghd--block--backstory__image">
-                <picture>
-                  <source
-                    media="(min-width: 750px)"
-                    srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887">
-
-                  <source
-                    media="(max-width: 749px)"
-                    srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory-mobiles.png?v=1789053331">
-
-                  <img
-                    src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887"
-                    alt="Backstory"
-                    loading="lazy">
-                </picture>
-              </div>
-            </div>
-          </div>
-      {% endif %}
-
-      {% when 'intro' %}
-        {% if block.content %}
-        <div class="ghd--block--intro ghd--block">
-          <div data-type="cols">
-            <div data-type="text">
-              <div class="mw">
-                <h2 class="eyebrow">
-                  <span>{{ block.title.before | default: 'Uniquely Made' }}</span>
-                  {{ block.title.main }}
-                </h2>
-                {{ block.content }}
-              </div>
-            </div>
-            <div data-type="image">
-              <picture>
-                <source media="(min-width: 750px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?width=1000">
-                <source media="(max-width: 749px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?width=800">
-                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png?width=1000' }}" alt="" loading="lazy">
-              </picture>
-            </div>
-          </div>
-        </div>
-        {% endif %}
-      {% when 'story' %}
-        {% if block.content %}
-          <div class="ghd--block--story ghd--block bg-cream-dark">
-            <div data-type="cols">
-              <div data-type="text">
-                <h2 class="eyebrow pb1">
-                  <span>{{ block.title.before | default: 'BEHIND THE ALCHEMY' }}</span>
-                  {{ block.title.main }}
-                </h2>
-                {{ block.content }}
-              </div>
-              <div data-type="image">
-                {% if block.image.desktop %}
-                <picture>
-                  <source media="(min-width: 900px)" srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?width=400">
-                  <source media="(max-width: 899px)" srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?width=400">
-                  <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}" alt="" loading="lazy">
-                </picture>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      {% when 'benefits' %}
-        <div class="ghd--block--benefits ghd--block">
-          <div data-type="cols">
-            <div data-type="image">
-              <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?width=500" alt="" loading="lazy">
-            </div>
-            <div data-type="text">
-              <div class="mw">
-                <h2 class="eyebrow pb1">
-                  <span>{{ block.title.before | default: 'The Benefits' }}</span>
-                  {{ block.title.main }}
-                </h2>
-                <div class="ghd--details">
-                  {% for detail in block.items %}
-                    {% if detail.content != '' %}
-                    <details {% if forloop.first %}open{% endif %}>
-                      <summary><h3>{{ detail.title }}</h3></summary>
-                      {{ detail.content }}
-                    </details>
-                    {% else %}
-                    <span>{{ detail.title }}</span>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-       {%- when 'references' -%}
-        {% if block.items.size > 0 %}
-        <div class="ghd--block--references ghd--block">
-          <div class="page-width">
-            <details id="references">
-              <summary class='h5 color-green'>References</summary>
-              <div>
-                <ol>
-                {% for item in block.items %}
-                  <li id='references-{{ forloop.index }}'>{{ item.reference }}</li>
-                {% endfor %}
-                </ol>
-              </div>
-            </details>
-          </div>
-        </div>
-        {% endif %}
-      {% when 'how_it_works' %}
-      {% if block.items.size > 0 %}
-        <div class="ghd--block--benefits ghd--block--how-it-works ghd--block" data-video>
-          <div data-type="cols">
-            <div data-type="text">
-              <div class="mw">
-                <h2 class="eyebrow pb1">
-                  <span>{{ block.title.before | default: product.title }}</span>
-                  {{ block.title.main |  default: 'How It Works' }}
-                </h2>
-                <div class="ghd--details">
-                  {% for detail in block.items %}
-                    <details {% if forloop.first %}open{% endif %}>
-                      <summary>{{ detail.title }}</summary>
-                      {{ detail.content }}
-                    </details>
-                  {% endfor %}
-                </div>
-              </div>
-            </div>
-            <div data-type="image">
-              {% if block.image.desktop contains "mp4" %}
-                <video id="bgVideo" preload="true" autoplay loop muted>
-                  <source src="{{ block.image.desktop }}" type="video/mp4" />
-                </video>
-              {% else %}
-                <img src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?width=500" alt="" loading='lazy'>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      {% endif %}
-      
-      {% when 'ingredients-v2' %}
-
-        {% assign ghiv2_ingredient_count = block.items.size %}
-
-        {% if ghiv2_ingredient_count > 4 %}
-          {% assign ghiv2_ingredient_count = 4 %}
-        {% endif %}
-
-        {% if ghiv2_ingredient_count > 0 %}
-
-          <section
-            class="
-              ghiv2
-              ghiv2--count-{{ ghiv2_ingredient_count }}
-              {% if ghiv2_ingredient_count >= 3 %}ghiv2--standard{% endif %}
-              {% if ghiv2_ingredient_count == 2 %}ghiv2--two-up{% endif %}
-              {% if ghiv2_ingredient_count == 1 %}ghiv2--single{% endif %}
-            "
-            data-ingredients-v2
-            data-ghiv2-carousel
-            data-ingredient-count="{{ ghiv2_ingredient_count }}"
-          >
-
-            <div class="ghiv2__inner page-width">
-
-              {%- comment -%}
-                ============================================================
-                HEADER
-                ============================================================
-              {%- endcomment -%}
-
-              <div class="ghiv2__header">
-
-                <div class="ghiv2__header-main">
-
-                  {% if block.title.main != blank %}
-                    <h2 class="ghiv2__heading font-miller">
-                      {{ block.title.main }}
-                    </h2>
-                  {% endif %}
-
-                </div>
-
-
-                {%- comment -%}
-                  ============================================================
-                  DESCRIPTION / SUBHEAD
-
-                  2, 3, 4 ingredients:
-                  - Use section subhead from block.subhead
-
-                  1 ingredient:
-                  - There is NO section subhead
-                  - Use the ingredient description (item.content)
-                    in the subhead position instead
-                  ============================================================
-                {%- endcomment -%}
-
-                {% if ghiv2_ingredient_count == 1 %}
-
-                  {% assign ghiv2_single_ingredient = block.items.first %}
-
-                  {% if ghiv2_single_ingredient.content != blank %}
-                    <div class="ghiv2__subhead font-proxima">
-                      {{ ghiv2_single_ingredient.content }}
-                    </div>
-                  {% endif %}
-
-                {% elsif block.subhead != blank %}
-
-                  <div class="ghiv2__subhead font-proxima">
-                    {{ block.subhead }}
-                  </div>
-
-                {% endif %}
-
-              </div>
-
-
-              {%- comment -%}
-                ============================================================
-                INGREDIENT CARDS
-                ============================================================
-              {%- endcomment -%}
-
-              <div
-                class="ghiv2__carousel-viewport"
-                data-ghiv2-viewport
-              >
-
-                <div
-                  class="ghiv2__ingredients"
-                  data-ghiv2-track
-                  role="list"
-                  aria-label="Product ingredients"
-                  tabindex="0"
-                >
-
-                  {% for ingredient in block.items limit: 4 %}
-
-                    <article
-                      class="ghiv2__ingredient"
-                      data-ghiv2-card
-                      data-ingredient-index="{{ forloop.index }}"
-                      role="listitem"
-                    >
-
-                      {% if ingredient.image != blank %}
-
-                        <div class="ghiv2__ingredient-media">
-
-                          <img
-                            class="ghiv2__ingredient-image"
-                            src="{{ ingredient.image }}"
-                            alt="{{ ingredient.image_alt | default: ingredient.title | escape }}"
-                            width="800"
-                            height="600"
-                            loading="lazy"
-                            draggable="false"
-                          >
-
-                        </div>
-
-                      {% endif %}
-
-
-                      {% if ingredient.title != blank or ingredient.content != blank %}
-
-                        <div class="ghiv2__ingredient-content">
-
-                          {% if ingredient.title != blank %}
-
-                            <h3 class="ghiv2__ingredient-title font-proxima">
-                              {{ ingredient.title }}
-                            </h3>
-
-                          {% endif %}
-
-
-                          {% if ingredient.content != blank %}
-
-                            <div class="ghiv2__ingredient-description font-proxima">
-                              {{ ingredient.content }}
+                              class="ghr-reviews__stars"
+                              aria-label="{{ review_star_rating }} out of 5 stars"
+                            >
+                              {% for star in (1..5) %}
+                                <svg
+                                  class="ghr-reviews__star"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 105 99"
+                                  width="105"
+                                  height="99"
+                                  focusable="false"
+                                  aria-hidden="true"
+                                >
+                                  <path
+                                    fill="{% if star <= review_star_rating %}#cca72c{% else %}#d8d8d8{% endif %}"
+                                    fill-rule="evenodd"
+                                    d="m52.75-0.3 12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81L52.75-.3z"
+                                  />
+                                </svg>
+                              {% endfor %}
                             </div>
 
-                          {% endif %}
+                            {% if review_product != blank %}
+                              <h3 class="ghr-reviews__product font-proxima">
+                                {{ review_product }}
+                              </h3>
+                            {% endif %}
 
+                            {% if review_text != blank %}
+                              <p class="ghr-reviews__text font-proxima">
+                                {{ review_text }}
+                              </p>
+                            {% endif %}
+
+                            {% if review_author != blank %}
+                              <p class="ghr-reviews__meta font-proxima">
+                                {{ review_author }}
+
+                                {% if review_verified_text != blank %}
+                                  <span class="ghr-reviews__separator" aria-hidden="true"> | </span>
+                                  <span class="ghr-reviews__verified"> Verified Buyer </span>
+                                {% endif %}
+                              </p>
+                            {% endif %}
+                          </article>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    {% if block.items.size > 1 %}
+                      <div
+                        class="ghr-reviews__progress"
+                        role="progressbar"
+                        aria-label="Review carousel progress"
+                        aria-valuenow="1"
+                        aria-valuemin="1"
+                        aria-valuemax="{{ block.items.size }}"
+                      >
+                        <div class="ghr-reviews__progress-track">
+                          <div class="ghr-reviews__progress-fill"></div>
                         </div>
-
-                      {% endif %}
-
-                    </article>
-
-                  {% endfor %}
-
+                      </div>
+                    {% endif %}
+                  </div>
                 </div>
+              </section>
+            {% endif %}
 
+          {% when 'study' %}
+            <style>
+              .ghd--block--intro {
+                z-index: -1;
+                position: relative;
+              }
+            </style>
+            <div class="ghd--block--study ghd--block bg-white">
+              <div class="page-width">
+                <img
+                  class="ghd--block--study-bg"
+                  src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/proven-results-bg.png?v=1785523159"
+                  width="3000"
+                  height="1500"
+                  alt="proven-results"
+                />
+                <div class="ghd--block--study-content">
+                  <h2 class="eyebrow center">
+                    <span>Proven Results</span>
+                    Effective, <br>
+                    <i>Measurable</i> Relief
+                  </h2>
+
+                  <div class="ghd-study--results flex flex-wrap items-center">
+                    <div class="col-12 md-col-6 gh--study-content-left">
+                      <div class="ghd-study--results--stats flex flex-wrap center">
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Constipation Relief
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Bloating Relief
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-85-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-85-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Cramp Relief
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-87.5-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Improved Gut Health
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-95-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Would Use Again
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-4 lg-col-4 pt2">
+                          <div class="flex flex-column justify-between">
+                            <div>
+                              {% render 'gh-element-image',
+                                image: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-92.5-agreed.png?width=130',
+                                image_2x: 'https://cdn.shopify.com/s/files/1/0539/5621/4984/files/study-92.5-agreed.png?width=260'
+                              %}
+                            </div>
+                            <div class="gh--stats-content flex flex-auto items-center justify-center pb1 block color-green gh-font-secondary">
+                              Overall Satisfied
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 md-col-6 gh--study-content-right">
+                      <p class="px2">
+                        In a Citruslabs study, adults with digestive issues used Oxy-Powder and reported rapid,
+                        noticeable improvement, some as early as day one. These benefits were sustained throughout the
+                        week, demonstrating Oxy-Powder’s effectiveness in relieving common digestive discomfort and
+                        supporting overall gut health.
+                      </p>
+
+                      <div class="flex items-center gap-2">
+                        <div>
+                          <img
+                            class="block"
+                            src="https://cdn.shopify.com/s/files/1/0539/5621/4984/files/citrus-labs-logo.png"
+                            alt=""
+                            width="85"
+                            height="85"
+                          >
+                        </div>
+                        <div>
+                          <a
+                            target="_blank"
+                            class="download-the-study"
+                            href="https://cdn.shopify.com/s/files/1/0539/5621/4984/files/product-document-oxy-powder-global-healing-study-report-20435.pdf?v=1752598938"
+                          >
+                            <img
+                              src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/download-icon.png?v=1785530490"
+                              alt="Download the study"
+                              width="20"
+                              height="19"
+                            />
+                            Download the Study</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
 
+          {% when 'meticulous-craftsmanship-v2' %}
+            {% assign ghmc_selected_cards = block.selected_cards %}
+            {% assign ghmc_card_count = 0 %}
 
-              {%- comment -%}
-                ============================================================
-                FULL INGREDIENT LIST
+            {% if ghmc_selected_cards %}
+              {% assign ghmc_card_count = ghmc_selected_cards.size %}
+            {% endif %}
 
-                Priority:
-                1. Use GH Tools URL if supplied.
-                2. Otherwise fall back to existing Supplement Facts dialog.
-                ============================================================
-              {%- endcomment -%}
+            {% if ghmc_card_count > 0 %}
+              <section
+                class="ghmc-craftsmanship"
+                data-ghmc-carousel
+              >
+                <div class="ghmc-craftsmanship__inner">
+                  <div class="ghmc-craftsmanship__header">
+                    <p class="ghmc-craftsmanship__label font-proxima">Meticulous Craftsmanship</p>
 
-              {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
+                    <h2 class="ghmc-craftsmanship__heading font-miller">
+                      {{ block.headline | default: 'Unique <strong>Headline Here</strong>' }}
+                    </h2>
+                  </div>
 
-              {% if block.full_ingredient_list.url != blank %}
+                  <div class="ghmc-craftsmanship__carousel">
+                    <div
+                      class="ghmc-craftsmanship__track"
+                      data-ghmc-track
+                      role="list"
+                      aria-label="Meticulous craftsmanship cards"
+                      tabindex="0"
+                    >
+                      {% for ghmc_card_key in ghmc_selected_cards %}
+                        {% assign ghmc_eyebrow = blank %}
+                        {% assign ghmc_title = blank %}
+                        {% assign ghmc_description = blank %}
+                        {% assign ghmc_image = blank %}
 
-                <div class="ghiv2__full-list">
+                        {% case ghmc_card_key %}
+                          {% when 'microsomal_liquids' %}
+                            {% assign ghmc_eyebrow = 'Innovation' %}
+                            {% assign ghmc_title = 'Revolutionary Absorption Technology' %}
+                            {% assign ghmc_description = 'Our proprietary MicroSomal® delivery system transforms nutrients into ultra-fine particles, supporting optimal bioavailability and absorption.' %}
+                            {% assign ghmc_image = 'MicroSomal.jpg' | asset_url %}
+
+                          {% when 'raw_herbal_liquids' %}
+                            {% assign ghmc_eyebrow = 'Innovation' %}
+                            {% assign ghmc_title = 'Full-Spectrum Preservation' %}
+                            {% assign ghmc_description = "Produced using our proprietary Raw Herbal Extract™ process, this formula helps preserve the herb's natural flavor, aroma, beneficial compounds, and life force." %}
+                            {% assign ghmc_image = 'RawHerbal.jpg' | asset_url %}
+
+                          {% when 'ormus' %}
+                            {% assign ghmc_eyebrow = 'Innovation' %}
+                            {% assign ghmc_title = 'Holistic Mineral Support' %}
+                            {% assign ghmc_description = 'This formula blends ORMUS Earth Minerals™, a proprietary trace mineral complex, to improve absorption while enhancing its nutritional and energetic profile.' %}
+                            {% assign ghmc_image = 'MineralSupport.jpg' | asset_url %}
+
+                          {% when 'verified_purity' %}
+                            {% assign ghmc_eyebrow = 'Trust' %}
+                            {% assign ghmc_title = 'Verified Purity' %}
+                            {% assign ghmc_description = "Supplier testing isn't enough. Every ingredient is verified through rigorous in-house and third-party testing for uncompromising purity." %}
+                            {% assign ghmc_image = 'VerifiedPurity.jpg' | asset_url %}
+
+                          {% when 'water_based_extraction' %}
+                            {% assign ghmc_eyebrow = 'Process' %}
+                            {% assign ghmc_title = 'Water-Based Extraction' %}
+                            {% assign ghmc_description = 'While many manufacturers rely on chemical solvents, we use triple-distilled, biophotonic structured water to help preserve purity and formula integrity.' %}
+                            {% assign ghmc_image = 'Water-BasedExtraction.jpg' | asset_url %}
+
+                          {% when 'no_shortcuts' %}
+                            {% assign ghmc_eyebrow = 'Process' %}
+                            {% assign ghmc_title = 'No Shortcuts, Ever' %}
+                            {% assign ghmc_description = 'Many manufacturers prioritize speed. We take a slower, methodical, low-heat approach to help preserve delicate compounds and ingredient quality.' %}
+                            {% assign ghmc_image = 'NoShortcuts.jpg' | asset_url %}
+
+                          {% when 'artisan_approach' %}
+                            {% assign ghmc_eyebrow = 'Process' %}
+                            {% assign ghmc_title = 'Artisan Approach' %}
+                            {% assign ghmc_description = 'Produced in small batches rather than through mass production to achieve a premium level of care, consistency, and attention to detail.' %}
+                            {% assign ghmc_image = 'ArtisanApproach.jpg' | asset_url %}
+
+                          {% when 'protected_from_interference' %}
+                            {% assign ghmc_eyebrow = 'Process' %}
+                            {% assign ghmc_title = 'Protected from Interference' %}
+                            {% assign ghmc_description = 'From glass vessels to platinum-cured silicone tubing, premium materials help minimize the potential for plastic leaching and metallic interference.' %}
+                            {% assign ghmc_image = 'ProtectedfromInterference.jpg' | asset_url %}
+                        {% endcase %}
+
+                        {% if ghmc_title != blank %}
+                          <article
+                            class="ghmc-craftsmanship__card"
+                            data-ghmc-card
+                            data-ghmc-card-key="{{ ghmc_card_key }}"
+                            role="listitem"
+                          >
+                            <div class="ghmc-craftsmanship__media">
+                              {% if ghmc_image != blank %}
+                                <img
+                                  class="ghmc-craftsmanship__image"
+                                  src="{{ ghmc_image }}"
+                                  alt="{{ ghmc_title | escape }}"
+                                  width="700"
+                                  height="430"
+                                  loading="lazy"
+                                >
+                              {% else %}
+                                <div
+                                  class="ghmc-craftsmanship__image-placeholder"
+                                  aria-hidden="true"
+                                ></div>
+                              {% endif %}
+                            </div>
+
+                            <div class="ghmc-craftsmanship__content">
+                              <p class="ghmc-craftsmanship__eyebrow font-proxima">
+                                {{ ghmc_eyebrow }}
+                              </p>
+
+                              <h3 class="ghmc-craftsmanship__card-title font-proxima">
+                                {{ ghmc_title }}
+                              </h3>
+
+                              <p class="ghmc-craftsmanship__description font-proxima">
+                                {{ ghmc_description }}
+                              </p>
+                            </div>
+                          </article>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    {% if ghmc_card_count > 1 %}
+                      <div
+                        class="ghmc-craftsmanship__progress"
+                        role="progressbar"
+                        aria-label="Craftsmanship carousel progress"
+                        aria-valuemin="1"
+                        aria-valuemax="{{ ghmc_card_count }}"
+                        aria-valuenow="1"
+                        data-ghmc-progress
+                      >
+                        <div class="ghmc-craftsmanship__progress-track">
+                          <div
+                            class="ghmc-craftsmanship__progress-fill"
+                            data-ghmc-progress-fill
+                          ></div>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
 
                   <a
-                    href="{{ block.full_ingredient_list.url }}"
-                    class="ghiv2__full-list-link font-proxima"
-                    {% if block.full_ingredient_list.new_tab == true %}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    {% endif %}
+                    class="ghmc-craftsmanship__learn-more font-proxima"
+                    href="https://globalhealing.com/pages/our-craftsmanship"
                   >
-                    {{ ghiv2_link_text }}
+                    Learn More
                   </a>
-
                 </div>
+              </section>
+            {% endif %}
 
+          {% when 'backstory-v2' %}
+            {% if block.title.main != blank or block.content != blank %}
+              <div class="ghd--block--backstory-v2 ghd--block">
+                <div class="ghd--block--backstory-v2__cols">
+                  <div class="ghd--block--backstory-v2__content">
+                    <div class="ghd--block--backstory-v2__content-inner">
+                      <p class="ghd--block--backstory-v2__label font-proxima">BACKSTORY</p>
 
-              {% elsif config.supplement_facts != blank %}
+                      {% if block.title.main != blank %}
+                        <h2 class="ghd--block--backstory-v2__heading font-miller">
+                          {{ block.title.main }}
+                        </h2>
+                      {% endif %}
 
-                <div class="ghiv2__full-list">
+                      {% if block.content != blank %}
+                        <div class="ghd--block--backstory-v2__copy font-proxima">
+                          {{ block.content }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
 
-                  {% capture ghiv2_supplement_facts_content %}
-                    {% render 'gh-product-supplement-facts', config: config %}
-                  {% endcapture %}
+                  <div class="ghd--block--backstory__image">
+                    <picture>
+                      <source
+                        media="(min-width: 750px)"
+                        srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887"
+                      >
 
-                  {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
+                      <source
+                        media="(max-width: 749px)"
+                        srcset="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory-mobiles.png?v=1789053331"
+                      >
 
-                  {% render
-                    'gh-element-dialog',
-                    button_text: ghiv2_link_text,
-                    button_class: 'ghiv2__full-list-link font-proxima',
-                    id: ghiv2_supplement_dialog_id,
-                    content: ghiv2_supplement_facts_content
-                  %}
-
+                      <img
+                        src="https://cdn.shopify.com/s/files/1/0555/3474/7822/files/backstory.png?v=1785864887"
+                        alt="Backstory"
+                        loading="lazy"
+                      >
+                    </picture>
+                  </div>
                 </div>
+              </div>
+            {% endif %}
 
-              {% endif %}
+          {% when 'intro' %}
+            {% if block.content %}
+              <div class="ghd--block--intro ghd--block">
+                <div data-type="cols">
+                  <div data-type="text">
+                    <div class="mw">
+                      <h2 class="eyebrow">
+                        <span>{{ block.title.before | default: 'Uniquely Made' }}</span>
+                        {{ block.title.main }}
+                      </h2>
+                      {{ block.content }}
+                    </div>
+                  </div>
+                  <div data-type="image">
+                    <picture>
+                      <source
+                        media="(min-width: 750px)"
+                        srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?width=1000"
+                      >
+                      <source
+                        media="(max-width: 749px)"
+                        srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?width=800"
+                      >
+                      <img
+                        src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png?width=1000' }}"
+                        alt=""
+                        loading="lazy"
+                      >
+                    </picture>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% when 'story' %}
+            {% if block.content %}
+              <div class="ghd--block--story ghd--block bg-cream-dark">
+                <div data-type="cols">
+                  <div data-type="text">
+                    <h2 class="eyebrow pb1">
+                      <span>{{ block.title.before | default: 'BEHIND THE ALCHEMY' }}</span>
+                      {{ block.title.main }}
+                    </h2>
+                    {{ block.content }}
+                  </div>
+                  <div data-type="image">
+                    {% if block.image.desktop %}
+                      <picture>
+                        <source
+                          media="(min-width: 900px)"
+                          srcset="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}?width=400"
+                        >
+                        <source
+                          media="(max-width: 899px)"
+                          srcset="{{ block.image.mobile | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro-mobile.png' }}?width=400"
+                        >
+                        <img
+                          src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/all/v2/intro.png' }}"
+                          alt=""
+                          loading="lazy"
+                        >
+                      </picture>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% when 'benefits' %}
+            <div class="ghd--block--benefits ghd--block">
+              <div data-type="cols">
+                <div data-type="image">
+                  <img
+                    src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?width=500"
+                    alt=""
+                    loading="lazy"
+                  >
+                </div>
+                <div data-type="text">
+                  <div class="mw">
+                    <h2 class="eyebrow pb1">
+                      <span>{{ block.title.before | default: 'The Benefits' }}</span>
+                      {{ block.title.main }}
+                    </h2>
+                    <div class="ghd--details">
+                      {% for detail in block.items %}
+                        {% if detail.content != '' %}
+                          <details
+                            {% if forloop.first %}
+                              open
+                            {% endif %}
+                          >
+                            <summary>
+                              <h3>{{ detail.title }}</h3>
+                            </summary>
+                            {{ detail.content }}
+                          </details>
+                        {% else %}
+                          <span>{{ detail.title }}</span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {%- when 'references' -%}
+            {% if block.items.size > 0 %}
+              <div class="ghd--block--references ghd--block">
+                <div class="page-width">
+                  <details id="references">
+                    <summary class="h5 color-green">References</summary>
+                    <div>
+                      <ol>
+                        {% for item in block.items %}
+                          <li id="references-{{ forloop.index }}">{{ item.reference }}</li>
+                        {% endfor %}
+                      </ol>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            {% endif %}
+          {% when 'how_it_works' %}
+            {% if block.items.size > 0 %}
+              <div class="ghd--block--benefits ghd--block--how-it-works ghd--block" data-video>
+                <div data-type="cols">
+                  <div data-type="text">
+                    <div class="mw">
+                      <h2 class="eyebrow pb1">
+                        <span>{{ block.title.before | default: product.title }}</span>
+                        {{ block.title.main | default: 'How It Works' }}
+                      </h2>
+                      <div class="ghd--details">
+                        {% for detail in block.items %}
+                          <details
+                            {% if forloop.first %}
+                              open
+                            {% endif %}
+                          >
+                            <summary>{{ detail.title }}</summary>
+                            {{ detail.content }}
+                          </details>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  <div data-type="image">
+                    {% if block.image.desktop contains 'mp4' %}
+                      <video id="bgVideo" preload="true" autoplay loop muted>
+                        <source src="{{ block.image.desktop }}" type="video/mp4" />
+                      </video>
+                    {% else %}
+                      <img
+                        src="{{ block.image.desktop | default: 'https://cdn.globalhealing.com/products/pages/ultimate-probiotic/v2/benefits.jpg' }}?width=500"
+                        alt=""
+                        loading="lazy"
+                      >
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+          {% when 'ingredients-v2' %}
+            {% assign ghiv2_ingredient_count = block.items.size %}
+
+            {% if ghiv2_ingredient_count > 4 %}
+              {% assign ghiv2_ingredient_count = 4 %}
+            {% endif %}
+
+            {% if ghiv2_ingredient_count > 0 %}
+              <section
+                class="
+                  ghiv2
+                  ghiv2--count-{{ ghiv2_ingredient_count }}
+                  {% if ghiv2_ingredient_count >= 3 %}ghiv2--standard{% endif %}
+                  {% if ghiv2_ingredient_count == 2 %}ghiv2--two-up{% endif %}
+                  {% if ghiv2_ingredient_count == 1 %}ghiv2--single{% endif %}
+                "
+                data-ingredients-v2
+                data-ghiv2-carousel
+                data-ingredient-count="{{ ghiv2_ingredient_count }}"
+              >
+                <div class="ghiv2__inner page-width">
+                  {%- comment -%}
+                    ============================================================
+                    HEADER
+                    ============================================================
+                  {%- endcomment -%}
+
+                  <div class="ghiv2__header">
+                    <div class="ghiv2__header-main">
+                      {% if block.title.main != blank %}
+                        <h2 class="ghiv2__heading font-miller">
+                          {{ block.title.main }}
+                        </h2>
+                      {% endif %}
+                    </div>
+
+                    {%- comment -%}
+                      ============================================================
+                      DESCRIPTION / SUBHEAD
+
+                      2, 3, 4 ingredients:
+                      - Use section subhead from block.subhead
+
+                      1 ingredient:
+                      - There is NO section subhead
+                      - Use the ingredient description (item.content)
+                        in the subhead position instead
+                      ============================================================
+                    {%- endcomment -%}
+
+                    {% if ghiv2_ingredient_count == 1 %}
+                      {% assign ghiv2_single_ingredient = block.items.first %}
+
+                      {% if ghiv2_single_ingredient.content != blank %}
+                        <div class="ghiv2__subhead font-proxima">
+                          {{ ghiv2_single_ingredient.content }}
+                        </div>
+                      {% endif %}
+
+                    {% elsif block.subhead != blank %}
+                      <div class="ghiv2__subhead font-proxima">
+                        {{ block.subhead }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  {%- comment -%}
+                    ============================================================
+                    INGREDIENT CARDS
+                    ============================================================
+                  {%- endcomment -%}
+
+                  <div
+                    class="ghiv2__carousel-viewport"
+                    data-ghiv2-viewport
+                  >
+                    <div
+                      class="ghiv2__ingredients"
+                      data-ghiv2-track
+                      role="list"
+                      aria-label="Product ingredients"
+                      tabindex="0"
+                    >
+                      {% for ingredient in block.items limit: 4 %}
+                        <article
+                          class="ghiv2__ingredient"
+                          data-ghiv2-card
+                          data-ingredient-index="{{ forloop.index }}"
+                          role="listitem"
+                        >
+                          {% if ingredient.image != blank %}
+                            <div class="ghiv2__ingredient-media">
+                              <img
+                                class="ghiv2__ingredient-image"
+                                src="{{ ingredient.image }}"
+                                alt="{{ ingredient.image_alt | default: ingredient.title | escape }}"
+                                width="800"
+                                height="600"
+                                loading="lazy"
+                                draggable="false"
+                              >
+                            </div>
+                          {% endif %}
+
+                          {% if ingredient.title != blank or ingredient.content != blank %}
+                            <div class="ghiv2__ingredient-content">
+                              {% if ingredient.title != blank %}
+                                <h3 class="ghiv2__ingredient-title font-proxima">
+                                  {{ ingredient.title }}
+                                </h3>
+                              {% endif %}
+
+                              {% if ingredient.content != blank %}
+                                <div class="ghiv2__ingredient-description font-proxima">
+                                  {{ ingredient.content }}
+                                </div>
+                              {% endif %}
+                            </div>
+                          {% endif %}
+                        </article>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  {%- comment -%}
+                    ============================================================
+                    FULL INGREDIENT LIST
+
+                    Priority:
+                    1. Use the existing live Supplement Facts dialog when available.
+                    2. Use the GH Tools URL only as a fallback.
+
+                    Update Oct 29 (Heraldo):
+                    The simple GH Tools link is the least-preferred option and
+                    should only be used when Supplement Facts are unavailable.
+                    ============================================================
+                  {%- endcomment -%}
+
+                  {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
+
+                  {% if config.supplement_facts != blank %}
+                    <div class="ghiv2__full-list">
+                      {% capture ghiv2_supplement_facts_content %}
+                        {% render 'gh-product-supplement-facts', config: config %}
+                      {% endcapture %}
+
+                      {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
+
+                      {% render 'gh-element-dialog',
+                        button_text: ghiv2_link_text,
+                        button_class: 'ghiv2__full-list-link font-proxima',
+                        id: ghiv2_supplement_dialog_id,
+                        content: ghiv2_supplement_facts_content
+                      %}
+                    </div>
+
+                  {% elsif block.full_ingredient_list.url != blank %}
+                    <div class="ghiv2__full-list">
+                      <a
+                        href="{{ block.full_ingredient_list.url }}"
+                        class="ghiv2__full-list-link font-proxima"
+                        {% if block.full_ingredient_list.new_tab == true %}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        {% endif %}
+                      >
+                        {{ ghiv2_link_text }}
+                      </a>
+                    </div>
+                  {% endif %}
+
+                  {%- comment -%}
+                    ============================================================
+                    PROP 65
+
+                    Uses the same existing product tag +
+                    GH checkout Prop 65 service.
+                    ============================================================
+                  {%- endcomment -%}
+
+                  {% if product.tags contains 'prop65' %}
+                    <div class="ghiv2__prop65">
+                      {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
+
+                      {% render 'gh-element-dialog',
+                        button_text: "<b>WARNING</b> - California's Proposition 65",
+                        button_class: 'ghiv2__prop65-link font-proxima',
+                        id: ghiv2_prop65_id,
+                        content: ''
+                      %}
+
+                      <script>
+                        (function () {
+
+                          var productSkus = [];
+
+                          {% for variant in product.variants %}
+                            productSkus.push({{ variant.sku | json }});
+                          {% endfor %}
 
 
-              {%- comment -%}
-                ============================================================
-                PROP 65
+                          function loadIngredientsV2Prop65() {
 
-                Uses the same existing product tag +
-                GH checkout Prop 65 service.
-                ============================================================
-              {%- endcomment -%}
+                            if (
+                              !window.gh ||
+                              !window.gh.shopify ||
+                              !window.gh.shopify.checkout ||
+                              typeof window.gh.shopify.checkout.prop65Message !== 'function'
+                            ) {
+                              return;
+                            }
 
-              {% if product.tags contains 'prop65' %}
 
-                <div class="ghiv2__prop65">
+                            window.gh.shopify.checkout.prop65Message(
+                              productSkus,
+                              function (html) {
 
-                  {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
+                                var dialogContent = document.querySelector(
+                                  '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
+                                );
 
+
+                                if (dialogContent) {
+                                  dialogContent.innerHTML = html;
+                                }
+
+                              }
+                            );
+
+                          }
+
+
+                          if (document.readyState === 'loading') {
+
+                            document.addEventListener(
+                              'DOMContentLoaded',
+                              loadIngredientsV2Prop65
+                            );
+
+                          } else {
+
+                            loadIngredientsV2Prop65();
+
+                          }
+
+
+                          window.addEventListener(
+                            'load',
+                            loadIngredientsV2Prop65,
+                            { once: true }
+                          );
+
+                        })();
+                      </script>
+                    </div>
+                  {% endif %}
+                </div>
+              </section>
+            {% endif %}
+
+          {% when 'ingredients' %}
+            <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
+              <div data-type="header">
+                <h2 class="eyebrow">
+                  <span>{{ block.title.before | default: 'Made With' }}</span>
+                  {{ block.title.main | default: 'Clean, Pure, Premium Ingredients' }}
+                </h2>
+                <h3 class="h4">
+                  {{
+                    block.title.after
+                    | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES'
+                  }}
+                </h3>
+              </div>
+              <div data-type="cols">
+                <div data-type="text">
+                  <div class="ghd--accordion">
+                    {% for detail in block.items %}
+                      <div>
+                        <input
+                          type="radio"
+                          data-ingredient-image="{{ detail.image }}"
+                          name="product-ingredients"
+                          id="product-ingredients-{{ forloop.index }}"
+                          {% if forloop.first %}
+                            checked
+                          {% endif %}
+                          hidden
+                        />
+                        <label for="product-ingredients-{{ forloop.index }}">
+                          <h3 class="h-inherit">{{ detail.title }}</h3>
+                        </label>
+                        <div>
+                          <img
+                            class="ghd--hide-desktop"
+                            src="{{ detail.image }}?width=600"
+                            srcset="{{ detail.image }}?width=1200 2x"
+                            alt=""
+                            loading="lazy"
+                          >
+                          {{ detail.content }}
+                        </div>
+                      </div>
+                    {% endfor %}
+
+                    {% unless config.supplement_facts == blank %}
+                      <div>
+                        {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
+                        {% render 'gh-element-dialog',
+                          button_text: 'See Full Ingredient List',
+                          id: 'product-supplement-facts-body',
+                          content: sf_content
+                        %}
+
+                        {% comment %}
+                          {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+                            {%- capture sf_content_v3 -%}{% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}{% endcapture %}
+                            {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content_v3 %}
+                          {% endif %}
+                        {% endcomment %}
+                      </div>
+                    {% endunless %}
+                  </div>
+                </div>
+                <div data-type="image" class="ghd--hide-mobile">
+                  <img src="" srcset="" alt="" loading="lazy">
+                </div>
+              </div>
+              {% comment %}
+                // Has been replaced by the Conditional Messaging App
+
+                {% if product.tags contains 'prop65' %}
+                <div data-type="ghd--prop65-warning">
+                  {% assign prop65_id = 'prop65-product-content' %}
                   {% render
                     'gh-element-dialog',
                     button_text: "<b>WARNING</b> - California's Proposition 65",
-                    button_class: 'ghiv2__prop65-link font-proxima',
-                    id: ghiv2_prop65_id,
+                    id: prop65_id,
                     content: ''
                   %}
-
-
                   <script>
-                    (function () {
+                    let product_skus = [];
 
-                      var productSkus = [];
+                    {% for variant in product.variants %}
+                    product_skus.push('{{ variant.sku }}')
+                    {% endfor %}
 
-                      {% for variant in product.variants %}
-                        productSkus.push({{ variant.sku | json }});
-                      {% endfor %}
-
-
-                      function loadIngredientsV2Prop65() {
-
-                        if (
-                          !window.gh ||
-                          !window.gh.shopify ||
-                          !window.gh.shopify.checkout ||
-                          typeof window.gh.shopify.checkout.prop65Message !== 'function'
-                        ) {
-                          return;
-                        }
-
-
-                        window.gh.shopify.checkout.prop65Message(
-                          productSkus,
-                          function (html) {
-
-                            var dialogContent = document.querySelector(
-                              '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
-                            );
-
-
-                            if (dialogContent) {
-                              dialogContent.innerHTML = html;
-                            }
-
-                          }
-                        );
-
-                      }
-
-
-                      if (document.readyState === 'loading') {
-
-                        document.addEventListener(
-                          'DOMContentLoaded',
-                          loadIngredientsV2Prop65
-                        );
-
-                      } else {
-
-                        loadIngredientsV2Prop65();
-
-                      }
-
-
-                      window.addEventListener(
-                        'load',
-                        loadIngredientsV2Prop65,
-                        { once: true }
-                      );
-
-                    })();
+                    gh.shopify.checkout.prop65Message( product_skus, (html) => {
+                      document.querySelector('#dialog-{{ prop65_id }} .ghd--dialog-content').innerHTML = html;
+                    })
                   </script>
-
                 </div>
+                {% endif %}
 
+
+
+                <div class="conditional-message" data-product-id="{{ product.id }}" data-country="{{ localization.country.iso_code }}"></div>
+                <link rel="stylesheet" href="https://api-conditional-messaging.adoti.com/conditional-message.css">
+                <script src="https://api-conditional-messaging.adoti.com/conditional-message.js" defer></script>
+                <style>
+                  .conditional-message__popup-button{
+                    padding: 10px 18px 10px 30px;
+                    border: 0;
+                    border-radius: 8px;
+                    background: #fff;
+                    font: inherit;
+                    cursor: pointer;
+                    color: #545454;
+                    font-size: 15px;
+                  }
+                  .conditional-message,
+                  .conditional-message *,
+                  .conditional-message *::before,
+                  .conditional-message *::after {
+                    box-sizing: border-box;
+                  }
+                </style>
+              {% endcomment %}
+            </div>
+            {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract' %}
+              <div class="ghd--block--rb ghd--block">
+                <div data-type="cols">
+                  <div data-type="image">&nbsp;</div>
+
+                  <div data-type="text">
+                    <div class="mw">
+                      <h2 class="eyebrow">Raw Brilliance</h2>
+                      <p class="mb3">
+                        Through our Raw Herbal Extract® technology, we preserve the full-spectrum benefits of natural
+                        botanicals. This meticulous process maximizes potency while delivering bold herbal flavors and
+                        unique variations in aroma, color, and texture—all hallmarks of authenticity.
+                      </p>
+
+                      <div class="ghd--details">
+                        <details open="">
+                          <summary class="h3">Flavor</summary>
+                          <p class="mb0">Bold, natural tastes reflect seasonality and harvest conditions.</p>
+                        </details>
+                        <details>
+                          <summary class="h3">Color</summary>
+                          <p class="mb0">Color variations reflect ingredients' natural hues and unique qualities.</p>
+                        </details>
+                        <details>
+                          <summary class="h3">Texture</summary>
+                          <p class="mb0">Texture differences arise due to the absence of synthetic stabilizers.</p>
+                        </details>
+                        <details>
+                          <summary class="h3">Smell</summary>
+                          <p class="mb0">Slight scent shifts reflect our ingredients’ natural aromatic profiles.</p>
+                        </details>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% when 'impact' %}
+            {% if block.title %}
+              <div class="ghd--block--impact ghd--block">
+                <div data-type="cols">
+                  <div data-type="text">
+                    <div class="mw">
+                      <h2 class="eyebrow">
+                        <span>{{ block.title.before | default: 'The Impact' }}</span>
+                        {{ block.title.main }}
+                      </h2>
+                      <div class="h4 mb3">{{ block.title.after }}</div>
+                      <div>{{ block.content }}</div>
+                    </div>
+                  </div>
+                  <div data-type="image">
+                    <picture>
+                      <source media="(min-width: 750px)" srcset="{{ block.image.desktop }}?width=1000">
+                      <source media="(max-width: 749px)" srcset="{{ block.image.mobile }}?width=800">
+                      <img src="{{ block.image.desktop }}?width=1000" alt="" loading="lazy">
+                    </picture>
+                  </div>
+                </div>
+              </div>
+
+              {% if product.metafields.globalhealing.impact_bg %}
+                <style>
+                  .ghd--block--impact{background: {{ product.metafields.globalhealing.impact_bg }}}
+                </style>
               {% endif %}
+            {% endif %}
 
-            </div>
-
-          </section>
-
-        {% endif %}
-  
-      {% when 'ingredients' %}
-        <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
-          <div data-type="header">
-            <h2 class="eyebrow">
-              <span>{{ block.title.before | default: 'Made With' }}</span>
-              {{ block.title.main | default: 'Clean, Pure, Premium Ingredients' }}
-            </h2>
-            <h3 class="h4">{{ block.title.after | default: '100% VEGAN | GLUTEN-FREE | NO ADDITIVES, FILLERS, OR PRESERVATIVES' }}</h3>
-          </div>
-          <div data-type="cols">
-            <div data-type="text">
-
-              <div class="ghd--accordion">
-                {% for detail in block.items %}
-                <div>
-                  <input type="radio"
-                         data-ingredient-image='{{ detail.image }}'
-                         name="product-ingredients"
-                         id="product-ingredients-{{ forloop.index }}"
-                         {% if forloop.first %}checked{% endif %}
-                  hidden />
-                  <label for="product-ingredients-{{ forloop.index }}"><h3 class="h-inherit">{{ detail.title }}</h3></label>
-                  <div>
-                    <img class='ghd--hide-desktop' src="{{ detail.image }}?width=600" srcset='{{ detail.image }}?width=1200 2x' alt="" loading='lazy'>
-                    {{ detail.content }}
-                  </div>
-                </div>
-                {% endfor %}
-
-                {% unless config.supplement_facts == blank  %}
-                <div>
-                  {%- capture sf_content -%}{% render 'gh-product-supplement-facts', config: config %}{% endcapture %}
-                  {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content %}
-                  
-                  {% comment %}
-                  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
-                    {%- capture sf_content_v3 -%}{% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}{% endcapture %}
-                    {% render 'gh-element-dialog', button_text: 'See Full Ingredient List', id: 'product-supplement-facts-body', content: sf_content_v3 %}
-                  {% endif %}
-                  {% endcomment %}
-                </div>
-                {% endunless %}
-              </div>
-            </div>
-            <div data-type="image" class='ghd--hide-mobile'>
-              <img src="" srcset='' alt="" loading='lazy'>
-            </div>
-          </div>
-          {% comment %} // Has been replaced by the Conditional Messaging App
-
-          {% if product.tags contains 'prop65' %}
-          <div data-type="ghd--prop65-warning">
-            {% assign prop65_id = 'prop65-product-content' %}
-            {% render
-              'gh-element-dialog',
-              button_text: "<b>WARNING</b> - California's Proposition 65",
-              id: prop65_id,
-              content: ''
-            %}
-            <script>
-              let product_skus = [];
-
-              {% for variant in product.variants %}
-              product_skus.push('{{ variant.sku }}')
-              {% endfor %}
-
-              gh.shopify.checkout.prop65Message( product_skus, (html) => {
-                document.querySelector('#dialog-{{ prop65_id }} .ghd--dialog-content').innerHTML = html;
-              })
-            </script>
-          </div>
-          {% endif %}
-
-          
-          
-          <div class="conditional-message" data-product-id="{{ product.id }}" data-country="{{ localization.country.iso_code }}"></div>
-          <link rel="stylesheet" href="https://api-conditional-messaging.adoti.com/conditional-message.css">
-          <script src="https://api-conditional-messaging.adoti.com/conditional-message.js" defer></script>
-          <style>
-            .conditional-message__popup-button{
-              padding: 10px 18px 10px 30px;
-              border: 0;
-              border-radius: 8px;
-              background: #fff;
-              font: inherit;
-              cursor: pointer;
-              color: #545454;
-              font-size: 15px;
-            }
-            .conditional-message,
-            .conditional-message *,
-            .conditional-message *::before,
-            .conditional-message *::after {
-              box-sizing: border-box;
-            }
-          </style>
-          {% endcomment %}
-          
-        </div>
-        {% if product.metafields.globalhealing.technology.value contains 'Raw Herbal Extract'  %}
-          <div class="ghd--block--rb ghd--block">
-            <div data-type="cols">
-  
-              <div data-type="image">
-                &nbsp;
-              </div>
-  
-              <div data-type="text">
-  
-                <div class="mw">
-  
-                  <h2 class="eyebrow">
-                    Raw Brilliance
-                  </h2>
-                  <p class="mb3">Through our Raw Herbal Extract® technology, we preserve the full-spectrum benefits of natural botanicals. This meticulous process maximizes potency while delivering bold herbal flavors and unique variations in aroma, color, and texture—all hallmarks of authenticity.</p>
-  
-                  <div class="ghd--details">
-                    <details open="">
-                      <summary class="h3">Flavor</summary>
-                      <p class="mb0">Bold, natural tastes reflect seasonality and harvest conditions.</p>
-                    </details>
-                    <details>
-                      <summary class="h3">Color</summary>
-                      <p class="mb0">Color variations reflect ingredients' natural hues and unique qualities.</p>
-                    </details>
-                    <details>
-                      <summary class="h3">Texture</summary>
-                      <p class="mb0">Texture differences arise due to the absence of synthetic stabilizers.</p>
-                    </details>
-                    <details>
-                      <summary class="h3">Smell</summary>
-                      <p class="mb0">Slight scent shifts reflect our ingredients’ natural aromatic profiles.</p>
-                    </details>
-                  </div>
-  
-                </div>
-  
-              </div>
-            </div>
-          </div>
-        {% endif %}
-      {% when 'impact' %}
-      {% if block.title %}
-      <div class="ghd--block--impact ghd--block">
-        <div data-type="cols">
-          <div data-type="text">
-            <div class="mw">
-              <h2 class="eyebrow">
-                <span>{{ block.title.before | default: 'The Impact' }}</span>
-                {{ block.title.main }}
-              </h2>
-              <div class="h4 mb3">{{ block.title.after }}</div>
-              <div>{{ block.content }}</div>
-            </div>
-          </div>
-          <div data-type="image">
-            <picture>
-              <source media="(min-width: 750px)" srcset="{{ block.image.desktop }}?width=1000">
-              <source media="(max-width: 749px)" srcset="{{ block.image.mobile }}?width=800">
-              <img src="{{ block.image.desktop }}?width=1000" alt=""  loading="lazy">
-            </picture>
-          </div>
-        </div>
-      </div>
-
-      {% if product.metafields.globalhealing.impact_bg %}
-        <style>.ghd--block--impact{background: {{ product.metafields.globalhealing.impact_bg }}}</style>
-      {% endif %}
-
-      {% endif %}
-
-      {% when 'miron' %}
-
-      {% capture miron_default %}
+          {% when 'miron' %}
+            {% capture miron_default %}
         <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
       {% endcapture %}
 
-      {% capture video_link %}
+            {% capture video_link %}
         <iframe src="{{ block.video_link | default: 'https://player.vimeo.com/video/405459325' }}?h=3aa1cbbf06&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
       {% endcapture %}
 
-      {% capture video_button %}{{ block.video_button | default: 'Watch the Video' }}{% endcapture %}
+            {% capture video_button %}{{ block.video_button | default: 'Watch the Video' }}{% endcapture %}
 
-      <div class="ghd--block--miron ghd--block">
-        <div data-type="cols">
-          <div data-type="text">
-            <div class="mw">
-              <h2>{{ block.title.main | default: 'Preserving the Essence of Natural Ingredients' }}</h2>
-              {{ block.content | default: miron_default }}
-              {% render 'gh-element-dialog', button_text: video_button, button_class: 'button mt3', id: 'miron-view-video', content: video_link %}
+            <div class="ghd--block--miron ghd--block">
+              <div data-type="cols">
+                <div data-type="text">
+                  <div class="mw">
+                    <h2>{{ block.title.main | default: 'Preserving the Essence of Natural Ingredients' }}</h2>
+                    {{ block.content | default: miron_default }}
+                    {% render 'gh-element-dialog',
+                      button_text: video_button,
+                      button_class: 'button mt3',
+                      id: 'miron-view-video',
+                      content: video_link
+                    %}
+                  </div>
+                </div>
+                <div data-type="image">
+                  <img
+                    src="{{ block.image | default: 'https://cdn.globalhealing.com/products/pages/all/v2/miron-bottle.png' }}"
+                    alt=""
+                    loading="lazy"
+                  >
+                </div>
+              </div>
             </div>
-          </div>
-          <div data-type="image">
-            <img src='{{ block.image | default: 'https://cdn.globalhealing.com/products/pages/all/v2/miron-bottle.png' }}' alt='' loading='lazy'>
-          </div>
-        </div>
-      </div>
-      {% when 'faqs' %}
-      <div class="ghd--block--faq ghd--block">
-        <h2 class="eyebrow">{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
-        <input type='radio' name='view-more' id='product-faq-view-more' hidden>
-        <div class="ghd--details mw">
-          {% for detail in block.items %}
-            <details>
-              <summary><h3>{{ detail.title }}</h3></summary>
-              {{ detail.content }}
-            </details>
-          {% endfor %}
-          {% if block.items.size > 5 %}
-            <label for='product-faq-view-more'>View More</label>
-          {% endif %}
-        </div>
-      </div>
-      {% when 'curated_collection' %}
-      {% if product.metafields.globalhealing.curated_collection.value and block.items.size > 0 %}
-        
-      {% assign has_curated = false %}
-      {% for p in product.metafields.globalhealing.curated_collection.value %}{% assign has_curated = true %}{% endfor %}
-      {% if has_curated %}
+          {% when 'faqs' %}
+            <div class="ghd--block--faq ghd--block">
+              <h2 class="eyebrow">{{ block.title.main | default: 'Frequently Asked Questions' }}</h2>
+              <input type="radio" name="view-more" id="product-faq-view-more" hidden>
+              <div class="ghd--details mw">
+                {% for detail in block.items %}
+                  <details>
+                    <summary>
+                      <h3>{{ detail.title }}</h3>
+                    </summary>
+                    {{ detail.content }}
+                  </details>
+                {% endfor %}
+                {% if block.items.size > 5 %}
+                  <label for="product-faq-view-more">View More</label>
+                {% endif %}
+              </div>
+            </div>
+          {% when 'curated_collection' %}
+            {% if product.metafields.globalhealing.curated_collection.value and block.items.size > 0 %}
+              {% assign has_curated = false %}
+              {% for p in product.metafields.globalhealing.curated_collection.value -%}
+                {%- assign has_curated = true -%}
+              {%- endfor %}
+              {% if has_curated %}
+                <div class="ghd--block--curated ghd--block">
+                  <div data-type="header">
+                    <div class="eyebrow-curated font-proxima">INSIDE THE FORMULA</div>
+                    <div class="eyebrow h2">
+                      {{ block.title.main | default: 'Curate <strong>Your Collection</strong>' }}
+                    </div>
+                    <div class="h4 mb3">{{ block.title.after }}</div>
+                  </div>
+                  <div class="items-container page-width">
+                    <div data-type="items" data-item-count="{{ block.items | size }}">
+                      {% for p in product.metafields.globalhealing.curated_collection.value %}
+                        {% assign curated = block.items[forloop.index0] %}
+                        {% assign v = p.selected_or_first_available_variant %}
+                        {% assign image = v.featured_image | default: p.featured_image %}
+                        <div>
+                          <span class="image">
+                            <a href="{{ p.url }}">{{ image | image_url: width: 225 | image_tag }}</a></span
+                          >
+                          <div class="title h5">
+                            <a class="subtle" href="{{ p.url }}">{{ p.title }}</a>
+                          </div>
+                          <p class="tagline bold pb1">{{ p.metafields.globalhealing.product_tagline }}</p>
+                          <div class="description">{{ p.description | truncatewords: 46 }}</div>
+                          <p class="price">{{ v.price | money }}</p>
 
-      <div class="ghd--block--curated ghd--block">
-        <div data-type="header">
-          <div class="eyebrow-curated font-proxima">INSIDE THE FORMULA</div>
-          <div class="eyebrow h2">
-            {{ block.title.main | default: 'Curate <strong>Your Collection</strong>' }}
-          </div>
-          <div class="h4 mb3">{{ block.title.after }}</div>
-        </div>
-        <div class='items-container page-width'>
-          <div data-type="items" data-item-count='{{ block.items | size }}'>
-            {% for p in product.metafields.globalhealing.curated_collection.value %}
-              {% assign curated = block.items[forloop.index0] %}
-              {% assign v = p.selected_or_first_available_variant %}
-              {% assign image = v.featured_image | default: p.featured_image %}
-            <div>
-              <span class="image">
-              <a href="{{ p.url }}">{{ image | image_url: width: 225 | image_tag }}</a></span>
-              <div class="title h5"><a class="subtle" href="{{ p.url }}">{{ p.title }}</a></div>
-              <p class="tagline bold pb1">{{ p.metafields.globalhealing.product_tagline }}</p>
-              <div class="description">{{ p.description | truncatewords: 46 }}</div>
-              <p class="price">{{ v.price | money }}</p>
-
-              {%- assign product_form_id = 'product-form-' | append: v.id  -%}
-              {% capture buy_buttons %}
+                          {%- assign product_form_id = 'product-form-' | append: v.id -%}
+                          {% capture buy_buttons %}
               {%- render 'buy-buttons',
                   block: block,
                   product: p,
@@ -1139,22 +1203,18 @@
                   section_id: section.id
                 -%}
                 {% endcapture %}
-                {{ buy_buttons | replace: "/cart/add", "/cart/add/" }}
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </div>
-
-      {% endif %}
-      {% endif %}
-    {% endcase %}
-
-
-  {% endfor %}
-  </div>
-</section>
-
+                          {{ buy_buttons | replace: '/cart/add', '/cart/add/' }}
+                        </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </section>
 {% endif %}
 
 {% schema %}
