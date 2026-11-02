@@ -163,6 +163,18 @@
               {% endif %}
 
               <div class="product__title" {{ block.shopify_attributes }}>
+                <<<<<<< HEAD =======
+                {% if product_line != blank %}
+                  <div class="product__eyebrow">
+                    {% if product_line_url != blank %}
+                      <a href="{{ product_line_url }}">{{ product_line }}</a>
+                    {% else %}
+                      {{ product_line }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                >>>>>>> c4f0b726 (Add custom snippets, rendering, clinical choice)
                 <h1>
                   {% if product.vendor != 'Global Healing' %}
                     <span
@@ -279,6 +291,12 @@
                   {{ product.description }}
                 </div>
               {%- endif -%}
+
+            {%- when 'clinical_choice' -%}
+              <div class="product__clinical-choice" {{ block.shopify_attributes }}>
+                {% render 'clinical-choice' %}
+              </div>
+
             {%- when 'info_tabs' -%}
               {% render 'gh-block-product-tabs', block: block, product: product %}
             {%- when 'info_tabs_v2' -%}
@@ -958,18 +976,11 @@
       "type": "@app"
     },
     {
-      "type": "info_tabs_v2",
-      "name": "Tabs - v2",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "tab_1_title",
-          "default": "About",
-          "label": "Tab 1 Title"
-        }
-      ]
+      "type": "clinical_choice",
+      "name": "Clinical Choice Badge",
+      "limit": 1
     },
+
     {
       "type": "info_tabs",
       "name": "Tabs",
