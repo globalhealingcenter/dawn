@@ -6,6 +6,8 @@ This file can be re-written at any time.
 {% include 'shogun-content-handler' %}
 <html class="no-js" lang="{{ request.locale.iso_code }}">
   <head>
+  {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
+  <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
     {% render 'gh-termly-consent' %}
 
     <script data-termly-config>
@@ -21,8 +23,6 @@ This file can be re-written at any time.
       onload="onGHTermlyLoaded()">
     </script>
 
-    {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
-    <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
 
     {% render 'elevateab' %}
     <meta charset="utf-8">
