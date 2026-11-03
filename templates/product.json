@@ -34,8 +34,8 @@
           "type": "clinical_choice",
           "settings": {}
         },
-        "info_tabs_RaGaiQ": {
-          "type": "info_tabs",
+        "info_tabs_v2_i7fnbq": {
+          "type": "info_tabs_v2",
           "settings": {
             "tab_1_title": "About"
           }
@@ -185,7 +185,7 @@
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
         "clinical_choice_nzbtiK",
-        "info_tabs_RaGaiQ",
+        "info_tabs_v2_i7fnbq",
         "variant_picker",
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
         "price",
