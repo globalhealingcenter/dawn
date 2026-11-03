@@ -11,40 +11,33 @@
   "sections": {
     "main": {
       "type": "main-page",
-      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
     },
-    "rich_text_qnjhNb": {
+    "rich_text_eJ7JRw": {
       "type": "rich-text",
       "blocks": {
-        "heading_nKWrGG": {
+        "heading_pk44K8": {
           "type": "heading",
           "settings": {
             "heading": "{{ page.title }}",
             "heading_size": "h1"
           }
         },
-        "text_BEc8ke": {
+        "text_Xy3bMx": {
           "type": "text",
           "settings": {
-            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:<br/><br/>Termly cookie preferences</p>"
-          }
-        },
-        "custom_liquid_NFzANj": {
-          "type": "custom_liquid",
-          "settings": {
-            "custom_liquid": "<a href=\"#\" class=\"termly-display-preferences\">Consent Preferences</a>"
+            "text": "<p>We use cookies to enhance your experience, analyze traffic, and personalize content. Some cookies are essential, while others help us understand how you interact with our site. You can manage your preferences at any time from here:</p><p>Consentmo cookie preferences</p><p><a>Change cookie preferences</a></p>"
           }
         }
       },
       "block_order": [
-        "heading_nKWrGG",
-        "text_BEc8ke",
-        "custom_liquid_NFzANj"
+        "heading_pk44K8",
+        "text_Xy3bMx"
       ],
+      "disabled": true,
       "name": "t:sections.rich-text.presets.name",
       "settings": {
         "desktop_content_position": "center",
@@ -58,6 +51,6 @@
   },
   "order": [
     "main",
-    "rich_text_qnjhNb"
+    "rich_text_eJ7JRw"
   ]
 }
