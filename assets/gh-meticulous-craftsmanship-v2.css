@@ -221,7 +221,7 @@
     font-weight: 400;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -292,6 +292,12 @@
     .ghmc-craftsmanship__description {
         font-size: 15px;
         line-height: 23px;
+    }
+}
+
+@media (max-width: 800px) and (min-width: 767px) {
+    .ghmc-craftsmanship__heading {
+        flex-wrap: wrap;
     }
 }
 
