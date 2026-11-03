@@ -412,6 +412,9 @@ This file can be re-written at any time.
             font-weight: var(--font-body-weight);
             }
 
+            div#satcb_bar {
+                display: none !important;
+            }
 
             /* Global Fonts */
       /* @font-face {
@@ -769,6 +772,557 @@ This file can be re-written at any time.
 
         updateTolstoyMedia(document);
         observer.observe(document.body, { childList: true, subtree: true });
+
+        {% comment %} OrderGroove Scripts {% endcomment %}
+        /* =========================================================
+          CARD CLICK FUNCTIONALITY
+        ========================================================= */
+
+        if (!window.__ghOgCardClickInstalled) {
+
+            window.__ghOgCardClickInstalled = true;
+
+            document.addEventListener('click', function (event) {
+
+                const card = event.target.closest('.gh-og-card');
+
+                if (!card) return;
+
+                /*
+                * Do not trigger the card click when the user
+                * interacts with an actual form control.
+                */
+                if (
+                    event.target.closest(
+                        'select, option, button, input, textarea, a, og-select-frequency'
+                    )
+                ) {
+                    return;
+                }
+
+                const optionButton = card.querySelector(
+                    'og-optin-button, og-optout-button'
+                );
+
+                if (optionButton) {
+                    optionButton.click();
+                }
+
+            });
+
+        }
+
+
+        /* =========================================================
+          ORDERGROOVE DISCOUNT GLITCH GUARD
+
+          IMPORTANT:
+          No percentage is hardcoded here.
+
+          The value ALWAYS originates from:
+
+          <og-incentive-text from="DiscountPercent">
+
+          Example:
+
+          Ordergroove:
+          15%
+              ↓
+          variant changes
+              ↓
+          undefined%
+              ↓
+          15% / 20% / whatever OG setting returns
+
+          This code prevents the temporary "undefined%" value
+          from becoming the displayed value.
+        ========================================================= */
+
+        if (window.__ghOgDiscountGuardInstalled) {
+            return;
+        }
+
+        window.__ghOgDiscountGuardInstalled = true;
+
+
+        /*
+        * Stores ONLY the last valid value received from
+        * Ordergroove.
+        *
+        * Nothing is manually assigned here.
+        */
+        let lastValidDiscount = null;
+
+
+        const discountSelector =
+            'og-offer[location="pdp"] ' +
+            'og-incentive-text[from="DiscountPercent"]';
+
+
+        /* ---------------------------------------------------------
+          NORMALIZE VALUE
+        --------------------------------------------------------- */
+
+        function normalizeDiscount(value) {
+
+            return (value || '')
+                .replace(/\s+/g, '')
+                .trim();
+
+        }
+
+
+        /* ---------------------------------------------------------
+          VALIDATE ORDERGROOVE VALUE
+
+          Valid examples:
+
+          15%
+          20%
+          10%
+          12.5%
+          0%
+
+          Invalid examples:
+
+          undefined%
+          undefined
+          null%
+          NaN%
+          empty
+        --------------------------------------------------------- */
+
+        function isValidDiscount(value) {
+
+            return /^\d+(?:\.\d+)?%$/.test(value);
+
+        }
+
+
+        /* ---------------------------------------------------------
+          GET ORDERGROOVE TEXT NODE
+
+          Ordergroove actually renders something similar to:
+
+          <og-incentive-text>
+              <!---->
+              15%
+              <!---->
+          </og-incentive-text>
+
+          We only modify the text node.
+
+          We DO NOT remove Ordergroove's comment markers because
+          those markers may be used internally when OG updates.
+        --------------------------------------------------------- */
+
+        function getDiscountTextNode(element) {
+
+            for (
+                let i = 0;
+                i < element.childNodes.length;
+                i++
+            ) {
+
+                const node = element.childNodes[i];
+
+                if (node.nodeType === Node.TEXT_NODE) {
+
+                    return node;
+
+                }
+
+            }
+
+            return null;
+
+        }
+
+
+        /* ---------------------------------------------------------
+          RESTORE LAST VALID DYNAMIC VALUE
+        --------------------------------------------------------- */
+
+        function restoreDiscount(element, value) {
+
+            if (!value) return;
+
+
+            let textNode = getDiscountTextNode(element);
+
+
+            /*
+            * Normally Ordergroove already has its text node.
+            */
+            if (textNode) {
+
+                const currentValue =
+                    normalizeDiscount(textNode.nodeValue);
+
+
+                if (currentValue !== value) {
+
+                    textNode.nodeValue =
+                        '\n       ' + value + '\n    ';
+
+                }
+
+                return;
+
+            }
+
+
+            /*
+            * Extra fallback:
+            *
+            * If OG temporarily removed the text node but retained
+            * its Lit comment markers, insert the value between
+            * those markers.
+            */
+            const childNodes =
+                Array.from(element.childNodes);
+
+
+            const comments = childNodes.filter(function (node) {
+
+                return node.nodeType === Node.COMMENT_NODE;
+
+            });
+
+
+            if (comments.length >= 2) {
+
+                element.insertBefore(
+                    document.createTextNode(
+                        '\n       ' + value + '\n    '
+                    ),
+                    comments[comments.length - 1]
+                );
+
+            }
+
+        }
+
+
+        /* ---------------------------------------------------------
+          PROCESS ALL PDP DISCOUNT ELEMENTS
+        --------------------------------------------------------- */
+
+        function protectDiscountValues() {
+
+            const elements =
+                document.querySelectorAll(discountSelector);
+
+
+            if (!elements.length) {
+                return;
+            }
+
+
+            /*
+            * FIRST PASS
+            *
+            * Look for any current VALID value supplied by
+            * Ordergroove.
+            *
+            * Doing this first is important because one OG element
+            * may already have the new value while the second is
+            * temporarily undefined.
+            */
+            elements.forEach(function (element) {
+
+                const value =
+                    normalizeDiscount(element.textContent);
+
+
+                if (isValidDiscount(value)) {
+
+                    lastValidDiscount = value;
+
+                }
+
+            });
+
+
+            /*
+            * SECOND PASS
+            *
+            * Fix any temporary invalid value.
+            */
+            elements.forEach(function (element) {
+
+                const value =
+                    normalizeDiscount(element.textContent);
+
+
+                /*
+                * Ordergroove supplied a proper value.
+                *
+                * Keep it exactly as provided.
+                */
+                if (isValidDiscount(value)) {
+
+                    lastValidDiscount = value;
+
+                    element.style.visibility = '';
+
+                    return;
+
+                }
+
+
+                /*
+                * Ordergroove temporarily supplied something like:
+                *
+                * undefined%
+                * null%
+                * NaN%
+                * blank
+                *
+                * If we already have a valid dynamic value from OG,
+                * restore that value immediately.
+                */
+                if (lastValidDiscount) {
+
+                    restoreDiscount(
+                        element,
+                        lastValidDiscount
+                    );
+
+                    element.style.visibility = '';
+
+                    return;
+
+                }
+
+
+                /*
+                * This case can only happen during initial page
+                * initialization BEFORE Ordergroove has ever
+                * provided its first valid percentage.
+                *
+                * Better to momentarily show nothing than
+                * "undefined%".
+                *
+                * As soon as OG supplies its real percentage,
+                * visibility is restored automatically.
+                */
+                element.style.visibility = 'hidden';
+
+            });
+
+        }
+
+
+        /* =========================================================
+          INITIAL VALUE
+        ========================================================= */
+
+        protectDiscountValues();
+
+
+        /* =========================================================
+          OBSERVE ORDERGROOVE
+
+          MutationObserver callbacks are processed before the
+          browser's next normal rendering opportunity.
+
+          So if OG internally changes:
+
+          15%
+          →
+          undefined%
+          →
+          20%
+
+          the invalid intermediate value is immediately replaced
+          with the last valid Ordergroove value.
+        ========================================================= */
+
+        const discountObserver =
+            new MutationObserver(function () {
+
+                protectDiscountValues();
+
+            });
+
+
+        discountObserver.observe(
+            document.documentElement,
+            {
+                subtree: true,
+                childList: true,
+                characterData: true
+            }
+        );
+
+})();
+</script>
+<script>
+      (function () {
+
+        function formatReviewCount(widget) {
+          var el = widget.querySelector(
+            '.yotpo-sr-bottom-line-text--right-panel'
+          );
+
+          if (!el) return;
+
+          var text = el.textContent.trim();
+
+          var match = text.match(/^([\d,]+)(.*)$/);
+
+          if (!match) return;
+
+          var number = parseInt(
+            match[1].replace(/,/g, ''),
+            10
+          );
+
+          if (isNaN(number)) return;
+
+          var formattedNumber = number.toLocaleString('en-US');
+
+          var newText =
+            formattedNumber +
+            (match[2] ? match[2] : '');
+
+          if (text !== newText) {
+            el.textContent = newText;
+          }
+
+
+          /* Also format accessibility aria-label */
+          var button = widget.querySelector(
+            '.yotpo-sr-bottom-line-summary'
+          );
+
+          if (button) {
+            var aria = button.getAttribute('aria-label');
+
+            if (aria) {
+              var newAria = aria.replace(
+                /\b(\d{4,})\b/g,
+                function (number) {
+                  return Number(number).toLocaleString('en-US');
+                }
+              );
+
+              if (aria !== newAria) {
+                button.setAttribute('aria-label', newAria);
+              }
+            }
+          }
+        }
+
+
+        function initYotpoReviewFormatter() {
+
+          var widgets = document.querySelectorAll(
+            '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
+          );
+
+          /*
+          * Yotpo has not loaded yet
+          */
+          if (!widgets.length) {
+            setTimeout(initYotpoReviewFormatter, 300);
+            return;
+          }
+
+
+          widgets.forEach(function (widget) {
+
+            /*
+            * Format immediately
+            */
+            formatReviewCount(widget);
+
+
+            /*
+            * Don't attach observer twice
+            */
+            if (widget.dataset.reviewCommaObserver === 'true') {
+              return;
+            }
+
+            widget.dataset.reviewCommaObserver = 'true';
+
+
+            /*
+            * Watch this specific Yotpo widget
+            */
+            var observer = new MutationObserver(function () {
+              formatReviewCount(widget);
+            });
+
+            observer.observe(widget, {
+              childList: true,
+              subtree: true,
+              characterData: true
+            });
+
+          });
+
+
+          /*
+          * Run a few more times because another Yotpo
+          * instance (e.g. sticky bar) may load slightly later.
+          */
+          var attempts = 0;
+
+          var timer = setInterval(function () {
+
+            var allWidgets = document.querySelectorAll(
+              '.yotpo-widget-instance[data-yotpo-instance-id="465432"]'
+            );
+
+            allWidgets.forEach(function (widget) {
+
+              formatReviewCount(widget);
+
+              if (widget.dataset.reviewCommaObserver === 'true') {
+                return;
+              }
+
+              widget.dataset.reviewCommaObserver = 'true';
+
+              var observer = new MutationObserver(function () {
+                formatReviewCount(widget);
+              });
+
+              observer.observe(widget, {
+                childList: true,
+                subtree: true,
+                characterData: true
+              });
+
+            });
+
+            attempts++;
+
+            if (attempts >= 20) {
+              clearInterval(timer);
+            }
+
+          }, 500);
+
+        }
+
+
+        if (document.readyState === 'loading') {
+
+          document.addEventListener(
+            'DOMContentLoaded',
+            initYotpoReviewFormatter
+          );
+
+        } else {
+
+          initYotpoReviewFormatter();
+
+        }
+
       })();
     </script>
     <style type="text/css">
