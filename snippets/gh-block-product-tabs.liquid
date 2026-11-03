@@ -20,10 +20,10 @@
   <div class="info-tabs__links gh-product-tabs-o">
     <a href="#" data-tab="1" class="active"><h3 class="h-inherit">{{ tab_one_title }}</h3></a>
     {% if product.metafields.globalhealing.who_its_for %}
-    <a href="#" data-tab="2"><h3 class="h-inherit">{{ tab_two_title }}</h3></a>
+    <a href="#" data-tab="2"><h3 class="h-inherit">{{ tab_two_title | default: "Who It's For" }}</h3></a>
     {% endif %}
     {% if product.metafields.globalhealing.suggested_use %}
-    <a href="#" data-tab="3"><h3 class="h-inherit">{{ tab_three_title }}</h3></a>
+    <a href="#" data-tab="3"><h3 class="h-inherit">{{ tab_three_title | default: "Suggested Use" }}</h3></a>
     {% endif %}
   </div>
   <div class="info-tabs__content">
