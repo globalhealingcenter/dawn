@@ -25,6 +25,23 @@
 
 {% assign has_product_config = false %}
 
+
+{% comment %}
+  @change - to temporarily have both versions of tabs/accoridion live while we swap over 
+  product by product
+  @author - heraldo
+{% endcomment %}
+{% assign has_accordion_v2 = false %}
+{% if product and product.metafields.gh_product.data %}
+  {% assign config = product.metafields.gh_product.data.value %}
+  {% if config and config.supplement_facts_accordion.suggested_use.content != blank %}
+    {% assign has_accordion_v2 = true %}
+  {% endif %}
+{% endif %}
+{% comment %}
+  end change
+{% endcomment %}
+
 {% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
   {% assign config = product.metafields.gh_product.data.value %}
@@ -712,6 +729,7 @@
             {% endif %}
 
           {% when 'ingredients-v2' %}
+            {% if has_accordion_v2 %}
             {% assign ghiv2_ingredient_count = block.items.size %}
 
             {% if ghiv2_ingredient_count > 4 %}
@@ -970,8 +988,9 @@
                 </div>
               </section>
             {% endif %}
-
+            {% endif %}
           {% when 'ingredients' %}
+            {% unless has_accordion_v2 %}
             <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
               <div data-type="header">
                 <h2 class="eyebrow">
@@ -1127,6 +1146,7 @@
                 </div>
               </div>
             {% endif %}
+          {% endunless %}
           {% when 'impact' %}
             {% if block.title %}
               <div class="ghd--block--impact ghd--block">
