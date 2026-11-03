@@ -30,11 +30,9 @@
             "product": "{{product}}"
           }
         },
-        "info_tabs_v2_NFgqDz": {
-          "type": "info_tabs_v2",
-          "settings": {
-            "tab_1_title": "About"
-          }
+        "clinical_choice_nzbtiK": {
+          "type": "clinical_choice",
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -98,7 +96,7 @@
           }
         },
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6": {
-          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
@@ -180,7 +178,7 @@
       "block_order": [
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
-        "info_tabs_v2_NFgqDz",
+        "clinical_choice_nzbtiK",
         "variant_picker",
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
         "price",
@@ -297,7 +295,7 @@
       "type": "apps",
       "blocks": {
         "tolstoy_shoppable_video_quiz_stories_block_gCYGWz": {
-          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
