@@ -49,7 +49,7 @@
 {% assign has_accordion_v2 = false %}
 {% if product and product.metafields.gh_product.data %}
   {% assign config = product.metafields.gh_product.data.value %}
-  {% if config and config.supplement_facts_accordion.suggested_use.content %}
+  {% if config and config.supplement_facts_accordion.suggested_use.content != blank %}
     {% assign has_accordion_v2 = true %}
   {% endif %}
 {% endif %}
