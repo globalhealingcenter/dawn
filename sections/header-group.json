@@ -14,6 +14,14 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_azd9FX": {
+          "type": "announcement",
+          "disabled": true,
+          "settings": {
+            "text": "Free Oxy-Powder Sample on Orders $75+",
+            "link": ""
+          }
+        },
         "announcement_zDr4xD": {
           "type": "announcement",
           "settings": {
@@ -30,6 +38,7 @@
         }
       },
       "block_order": [
+        "announcement_azd9FX",
         "announcement_zDr4xD",
         "announcement_GGCHez"
       ],

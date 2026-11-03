@@ -325,3 +325,62 @@
   });
 </script>
 
+<script>
+  (function() {
+    function updateConsentBodyClasses() {
+      // Ensure the Shopify Customer Privacy API object is fully loaded
+      if (!window.Shopify || !window.Shopify.customerPrivacy) return;
+
+      const cp = window.Shopify.customerPrivacy;
+      const body = document.body;
+
+      if (!body) return;
+
+      console.log('DEV: Shopify loading properly');
+
+      // Define the dynamic dual-state map
+      const consentRules = [
+        { allowed: 'consent-analytics-allowed', denied: 'consent-analytics-denied', value: cp.analyticsProcessingAllowed() },
+        { allowed: 'consent-marketing-allowed', denied: 'consent-marketing-denied', value: cp.marketingAllowed() },
+        { allowed: 'consent-preferences-allowed', denied: 'consent-preferences-denied', value: cp.preferencesProcessingAllowed() },
+        { allowed: 'consent-sale-allowed', denied: 'consent-sale-allowed-denied', value: cp.saleOfDataAllowed() }
+      ];
+
+      // Toggle allowed and denied classes cleanly
+      consentRules.forEach(rule => {
+        if (rule.value === true) {
+          body.classList.add(rule.allowed);
+          body.classList.remove(rule.denied);
+        } else {
+          body.classList.add(rule.denied);
+          body.classList.remove(rule.allowed);
+        }
+      });
+    }
+
+    // 1. Initialize classes when Shopify loads the privacy features
+    window.Shopify = window.Shopify || {};
+    window.Shopify.loadFeatures = window.Shopify.loadFeatures || [];
+
+    window.Shopify.loadFeatures(
+      [
+        {
+          name: 'consent-tracking-api',
+          version: '0.1',
+        },
+      ],
+      (error) => {
+        if (error) {
+          console.error('Failed to load Shopify consent-tracking-api:', error);
+          return;
+        }
+        updateConsentBodyClasses();
+      }
+    );
+
+    // 2. Listen for real-time changes if the user updates preferences mid-session
+    document.addEventListener('visitorConsentCollected', () => {
+      updateConsentBodyClasses();
+    });
+  })();
+</script>
