@@ -163,18 +163,6 @@
               {% endif %}
 
               <div class="product__title" {{ block.shopify_attributes }}>
-                <<<<<<< HEAD =======
-                {% if product_line != blank %}
-                  <div class="product__eyebrow">
-                    {% if product_line_url != blank %}
-                      <a href="{{ product_line_url }}">{{ product_line }}</a>
-                    {% else %}
-                      {{ product_line }}
-                    {% endif %}
-                  </div>
-                {% endif %}
-
-                >>>>>>> c4f0b726 (Add custom snippets, rendering, clinical choice)
                 <h1>
                   {% if product.vendor != 'Global Healing' %}
                     <span
