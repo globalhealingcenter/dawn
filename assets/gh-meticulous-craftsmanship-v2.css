@@ -219,11 +219,11 @@
     font-size: 17.49px;
     line-height: 25px;
     font-weight: 400;
-    text-overflow: ellipsis;
+    /* text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
-    overflow: hidden;
+    overflow: hidden; */
 }
 
 
@@ -303,7 +303,7 @@
 
 @media (min-width: 768px) {
     .ghmc-craftsmanship__carousel {
-        height: 655px;
+        height: 685px;
     }
 }
 
