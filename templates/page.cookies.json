@@ -36,7 +36,7 @@
         "custom_liquid_dMW6HU": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": ""
+            "custom_liquid": "<a href=\"#\" class=\"termly-display-preferences\">Consent Preferences</a>"
           }
         }
       },
