@@ -729,7 +729,6 @@
             {% endif %}
 
           {% when 'ingredients-v2' %}
-            {% if has_accordion_v2 %}
             {% assign ghiv2_ingredient_count = block.items.size %}
 
             {% if ghiv2_ingredient_count > 4 %}
@@ -988,9 +987,8 @@
                 </div>
               </section>
             {% endif %}
-            {% endif %}
+
           {% when 'ingredients' %}
-            {% unless has_accordion_v2 %}
             <div class="ghd--block--ingredients ghd--block" data-label="{{ block.label }}">
               <div data-type="header">
                 <h2 class="eyebrow">
@@ -1146,7 +1144,6 @@
                 </div>
               </div>
             {% endif %}
-          {% endunless %}
           {% when 'impact' %}
             {% if block.title %}
               <div class="ghd--block--impact ghd--block">
@@ -1283,6 +1280,60 @@
       {% endfor %}
     </div>
   </section>
+
+  {% unless has_accordion_v2 %}
+    <script>
+    {
+      let ingredients = document.querySelector('.ghd--block--ingredients');
+      let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+      let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+
+      function setActiveImage(){
+        ingredients_inputs.forEach( i => {
+          if(!i.checked) return;
+          ingredients_img.classList.add('loading');
+
+          ingredients_img.src = i.getAttribute('data-ingredient-image') + '?width=600'
+          ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?width=1200 2x' );
+
+          if(ingredients_img.complete){
+            ingredients_img.classList.remove('loading');
+          }
+
+          ingredients_img.addEventListener('load', () => {
+            ingredients_img.classList.remove('loading');
+          })
+
+        })
+      }
+
+      ingredients_inputs.forEach( i => {
+        i.addEventListener('change', e => {
+          if( !i.checked ) return;
+          setActiveImage()
+        })
+      })
+
+      setActiveImage();
+
+      /*
+      ingredients_details.forEach( d => {
+        d.addEventListener('toggle', () => {
+          if( d.open === true ){
+            if( current_open ) current_open.open = false;
+            setCurrentOpen();
+            setActiveImage();
+          }
+        })
+      })
+
+      setCurrentOpen();
+      setActiveImage();
+      */
+    }
+  </script>
+  {% endunless %}
+
 {% endif %}
 
 {% schema %}
