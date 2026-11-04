@@ -918,7 +918,7 @@
                     ============================================================
                   {%- endcomment -%}
 
-                  <div class='ghd--block--ingredients'><div data-type="cols"></div></div>
+                  <div data-prop65="after"></div>
 
                   {% if product.tags contains 'prop65' %}
                     <div class="ghiv2__prop65">
@@ -1014,7 +1014,7 @@
                   }}
                 </h3>
               </div>
-              <div data-type="cols">
+              <div data-type="cols" data-prop65="after">
                 <div data-type="text">
                   <div class="ghd--accordion">
                     {% for detail in block.items %}
