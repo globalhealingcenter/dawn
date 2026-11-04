@@ -1,8 +1,12 @@
 {% assign has_product_config = false %}
+{% assign sf_v3 = false %}
 
 {% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
   {% assign config = product.metafields.gh_product.data.value %}
+  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+    {% assign sf_v3 = true %}
+  {% endif %}
 {% endif %}
 
 <div
@@ -267,8 +271,11 @@
                   </div>
                 </div>
               {% endif %}
-
-              <div class="supplement-facts-label">
+              
+              {% if sf_v3 %}
+                {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}
+              {% else %}
+                <div class="supplement-facts-label">
                 {% if supplement_label.image != blank %}
                   <img
                     src="{{ supplement_label.image }}"
@@ -288,6 +295,7 @@
                   >
                 {% endif %}
               </div>
+              {% endif %}          
             </div>
           </div>
         </div>
