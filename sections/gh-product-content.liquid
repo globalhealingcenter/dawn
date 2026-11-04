@@ -31,11 +31,15 @@
   product by product
   @author - heraldo
 {% endcomment %}
+{% assign sf_v3 = false %}
 {% assign has_accordion_v2 = false %}
 {% if product and product.metafields.gh_product.data %}
   {% assign config = product.metafields.gh_product.data.value %}
   {% if config and config.supplement_facts_accordion.suggested_use.content != blank %}
     {% assign has_accordion_v2 = true %}
+  {% endif %}
+  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+    {% assign sf_v3 = true %}
   {% endif %}
 {% endif %}
 {% comment %}
@@ -868,19 +872,25 @@
 
                   {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
 
+                  {% if sf_v3 %}
+                    {% capture sf_modal_content %}
+                      {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}
+                    {% endcapture %}
+                  {% elsif config.supplement_facts != blank %}
+                    {% capture sf_modal_content %}
+                      {% render 'gh-product-supplement-facts', config: config %}
+                    {% endcapture %}
+                  {% endif %}
+
                   {% if config.supplement_facts != blank %}
                     <div class="ghiv2__full-list">
-                      {% capture ghiv2_supplement_facts_content %}
-                        {% render 'gh-product-supplement-facts', config: config %}
-                      {% endcapture %}
-
                       {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
 
                       {% render 'gh-element-dialog',
                         button_text: ghiv2_link_text,
                         button_class: 'ghiv2__full-list-link font-proxima',
                         id: ghiv2_supplement_dialog_id,
-                        content: ghiv2_supplement_facts_content
+                        content: sf_modal_content
                       %}
                     </div>
 

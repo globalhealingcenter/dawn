@@ -253,8 +253,12 @@
     cursor: pointer;
 }
 
-section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__ingredient-content,
-section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__full-list {
+/**
+ * @change - show full ingredient list even when there is only one ingredient
+ * @author - heraldo
+ */
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__ingredient-content/*,
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__full-list*/ {
     display: none;
 }
 
