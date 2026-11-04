@@ -70,7 +70,7 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
         {%- unless p.rows and p.rows.size > 0 -%}{%- continue -%}{%- endunless -%}
 
         {%- if use_details -%}
-            <details>
+            <details {% if forloop.first %}open{% endif %}>
             <summary>{{ item_title | escape }}</summary>
         {%- endif -%}
 
@@ -264,7 +264,7 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
             width: 475px;
             max-width: 100%;
             box-sizing: border-box;
-            background: #fff;
+            {% comment %} background: #fff; {% endcomment %}
             color: #000;
             font-family: Helvetica, Arial, sans-serif;
             font-size: var(--fs-body);
