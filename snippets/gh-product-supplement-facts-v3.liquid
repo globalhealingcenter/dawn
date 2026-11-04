@@ -24,7 +24,7 @@ example. Liquid cannot parse a JSON string, so a string here renders nothing.
 
 Usage:
 
-    {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}
+    {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3, force_single: boolean %}
 
 Row shape: name, level (0 top / 1 sub blend / 2 deeper), amount, amount_value,
 amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}].
@@ -54,6 +54,9 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
 {%- if sf_count > 1 -%}
     {%- assign use_details = true -%}
 {%- endif -%}
+{% if force_single == true %}
+    {% assign use_details = false %}
+{% endif %}
 
 {%- if sf_count > 0 -%}
 
@@ -70,7 +73,7 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
         {%- unless p.rows and p.rows.size > 0 -%}{%- continue -%}{%- endunless -%}
 
         {%- if use_details -%}
-            <details>
+            <details {% if forloop.first %}open{% endif %}>
             <summary>{{ item_title | escape }}</summary>
         {%- endif -%}
 
@@ -239,6 +242,9 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
             </details>
         {%- endif -%}
 
+        {% if forloop.first and force_single == true %}
+            {% break %}
+        {% endif %}
     {%- endfor -%}
 
     {%- if use_details -%}</div>{%- endif -%}
@@ -264,7 +270,7 @@ amount_unit, daily_value, symbols[], source, note, ingredients[{name, qualifier}
             width: 475px;
             max-width: 100%;
             box-sizing: border-box;
-            background: #fff;
+        {% comment %} background: #fff; {% endcomment %}
             color: #000;
             font-family: Helvetica, Arial, sans-serif;
             font-size: var(--fs-body);
