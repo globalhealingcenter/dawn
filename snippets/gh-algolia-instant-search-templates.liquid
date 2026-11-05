@@ -1,10 +1,3 @@
-<script type="module">
-import { h, render } from 'https://esm.sh/preact';
-import htm from 'https://esm.sh/htm';
-const html = htm.bind(h);
-window['gh_html'] = html
-</script>
-
 <script>
   gh_algolia.instant.templates = {
     product(defaultTemplate, hit, html, components){
@@ -99,10 +92,10 @@ window['gh_html'] = html
           </div>
       </div>`;
     },
-    main( defaultTemplate, data ) {
+    main( defaultTemplate, data, html ) {
       let algolia = algoliaShopify;
       
-      return gh_html`<div class="ais-page">
+      return html`<div class="ais-page">
 
         <div class="ais-page--header">
           <h1 class="color-green-dark">${algolia.translations.searchTitle}s</h1>
@@ -126,7 +119,7 @@ window['gh_html'] = html
               <div class="ais-clear-refinements-container"></div>
               <div class="ais-current-refined-values-container"></div>
               ${data.facets.map( facet =>
-            gh_html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
+            html`<div class="ais-facet-dropdown-wrapper ais-facet-${facet.type} ais-facet-${facet.escapedName}">
                   <label for="${facet.escapedName}" class="ais-range-slider--header ais-facet--header ais-header">${facet.title}</label>
                   <input class="ais-dropdown-checkbox" type="checkbox" id="${facet.escapedName}" name="dropdown" />
                   <div class="ais-facet-${facet.escapedName}-container ais-facet-dropdown-container"></div>
@@ -144,8 +137,8 @@ window['gh_html'] = html
                 </div>
                 <div class="ais-sort">
                   ${data.multipleSortOrders ?
-                    gh_html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
-                    : gh_html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
+                    html`${algolia.translations.sortBy} <span class="ais-sort-orders-container"></span>`
+                    : html`${algolia.translations.sortBy} ${algolia.translations.relevance}`
                   }
                 </div>
               </div>
@@ -174,7 +167,7 @@ window['gh_html'] = html
         </div>
       </div>`
     },
-    noResult(defaultTemplate, templateOptions){
+    noResult(defaultTemplate, html){
        return html`<br/><br/><div class="center">No products found. Try clearing the filters or changing your input</div><br/><br/>`;
     }
   }
