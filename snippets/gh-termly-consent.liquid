@@ -23,6 +23,11 @@
   if (window.__GH_TERMLY_BRIDGE_INSTALLED__) return;
   window.__GH_TERMLY_BRIDGE_INSTALLED__ = true;
 
+  // Temporary switch for the Klaviyo code in this file (cookie clearing,
+  // marking account links with data-k-hub-ignore, and opening the
+  // Customer Hub). Set to true to turn it back on.
+  var KLAVIYO_ENABLED = false;
+
   var attached = false;
   var lastSignature = null;
   var retryCount = 0;
@@ -157,7 +162,7 @@
       consent.sale_of_data = state.do_not_sell !== true;
     }
 
-    if (!consent.marketing) clearKlaviyoIdentity();
+    if (KLAVIYO_ENABLED && !consent.marketing) clearKlaviyoIdentity();
 
     var signature = JSON.stringify(consent);
     if (signature === lastShopifySignature) return;
@@ -302,6 +307,8 @@
 
   // Covers menu links set in Shopify admin and links rendered later.
   document.addEventListener('DOMContentLoaded', function () {
+    if (!KLAVIYO_ENABLED) return;
+
     markAccountLinks(document);
 
     if (typeof MutationObserver === 'function') {
@@ -322,7 +329,7 @@
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     var link = event.target.closest && event.target.closest('a[href]');
-    if (!isAccountLink(link)) return;
+    if (!KLAVIYO_ENABLED || !isAccountLink(link)) return;
 
     link.setAttribute('data-k-hub-ignore', '');
 

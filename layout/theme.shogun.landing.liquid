@@ -8,23 +8,38 @@ This file can be re-written at any time.
   <head>
   {% comment %}Loads Shogun Analytics. Removing this will disrupt analytics data collection.{% endcomment %}
   <script type="text/javascript" async src="https://na.shgcdn3.com/pixel-collector.js"></script>
-    {% render 'gh-termly-consent' %}
 
-    <script data-termly-config>
-      window.TERMLY_CUSTOM_BLOCKING_MAP = {
-        "bat.bing.com": "advertising",
-        "rebuyengine.com": "advertising",
-        "shgcdn3.com": "analytics"
-      };
-    </script>
+        {% render 'gh-termly-consent' %}
 
-    <script
-      src="https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on"
-      onload="onGHTermlyLoaded()">
-    </script>
+        <script data-termly-config>
+          window.TERMLY_CUSTOM_BLOCKING_MAP = {
+            "bat.bing.com": "advertising",
+            "rebuyengine.com": "advertising",
+            "shgcdn3.com": "analytics"
+          };
+        </script>
+
+        <script
+          src="https://app.termly.io/resource-blocker/ad24ba78-82a9-44c9-950e-190730f82f47?autoBlock=on"
+          onload="onGHTermlyLoaded()">
+        </script>
+
+
+      <!-- Open Termly policy links in new tabs -->
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          document.querySelectorAll('a[href*="app.termly.io"]').forEach(function (link) {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener");
+          });
+        });
+      </script>
 
 
     {% render 'elevateab' %}
+
+    {% comment %} {% render 'gcm-integration-script' %} {% endcomment %}
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -570,7 +585,7 @@ This file can be re-written at any time.
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
-      <!-- Post Pilot -->
+        <!-- Post Pilot -->
     <script type="text/javascript">
         var script = document.createElement('script');
         script.src = "https://xp2023-pix.s3.amazonaws.com/px_4W5x6.js";
