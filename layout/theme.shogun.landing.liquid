@@ -838,6 +838,15 @@ This file can be re-written at any time.
           from becoming the displayed value.
         ========================================================= */
 
+        // DISABLED 2026-11-05: the guard writes into Ordergroove's whitespace text node,
+        // which causes "Save 15% 15%" on variant change. Replaced by the hide-only script below.
+        // Setting the flag also stops the copy in Ordergroove's offer template.
+        var GH_OG_DISCOUNT_GUARD_ENABLED = false;
+        if (!GH_OG_DISCOUNT_GUARD_ENABLED) {
+            window.__ghOgDiscountGuardInstalled = true;
+            return;
+        }
+
         if (window.__ghOgDiscountGuardInstalled) {
             return;
         }
@@ -1158,6 +1167,28 @@ This file can be re-written at any time.
 
 })();
 </script>
+
+    <!-- OG DISCOUNT HIDE-WHILE-INVALID (2026-11-05)
+         Hides the Subscribe & Save badge while Ordergroove's DiscountPercent is invalid
+         (e.g. "undefined%") during variant changes. Never edits Ordergroove's text. -->
+    <script>
+      (function () {
+        if (window.__ghOgDiscountHideInstalled) return;
+        window.__ghOgDiscountHideInstalled = true;
+        var SELECTOR = 'og-offer[location="pdp"] og-incentive-text[from="DiscountPercent"]';
+        var VALID = /^\d+(?:\.\d+)?%$/;
+        function update() {
+          document.querySelectorAll(SELECTOR).forEach(function (el) {
+            var target = el.closest('.gh-og-save-badge') || el;
+            var ok = VALID.test((el.textContent || '').replace(/\s+/g, ''));
+            var v = ok ? '' : 'hidden';
+            if (target.style.visibility !== v) target.style.visibility = v;
+          });
+        }
+        update();
+        new MutationObserver(update).observe(document.body, { subtree: true, childList: true, characterData: true });
+      })();
+    </script>
 <script>
       (function () {
 
