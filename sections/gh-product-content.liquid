@@ -1,14 +1,14 @@
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
-    padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
+  padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+  padding-bottom: calc({{ section.settings.padding_bottom }}px  * 0.75);
   }
 
   @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+  .section-{{ section.id }}-padding {
+  padding-top: {{ section.settings.padding_top }}px;
+  padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
   }
 {%- endstyle -%}
 
@@ -24,6 +24,26 @@
 {{ 'gh-ingredients-v2.css' | asset_url | stylesheet_tag }}
 
 {% assign has_product_config = false %}
+
+{% comment %}
+  @change - to temporarily have both versions of tabs/accoridion live while we swap over
+  product by product
+  @author - heraldo
+{% endcomment %}
+{% assign sf_v3 = false %}
+{% assign has_accordion_v2 = false %}
+{% if product and product.metafields.gh_product.data %}
+  {% assign config = product.metafields.gh_product.data.value %}
+  {% if config and config.supplement_facts_accordion.suggested_use.content != blank %}
+    {% assign has_accordion_v2 = true %}
+  {% endif %}
+  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+    {% assign sf_v3 = true %}
+  {% endif %}
+{% endif %}
+{% comment %}
+  end change
+{% endcomment %}
 
 {% if product and product.metafields.gh_product.data %}
   {% assign has_product_config = true %}
@@ -97,9 +117,9 @@
                                   aria-hidden="true"
                                 >
                                   <path
-                                    fill="{% if star <= review_star_rating %}#cca72c{% else %}#d8d8d8{% endif %}"
-                                    fill-rule="evenodd"
-                                    d="m52.75-0.3 12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81L52.75-.3z"
+                                          fill="{% if star <= review_star_rating %}#cca72c{% else %}#d8d8d8{% endif %}"
+                                          fill-rule="evenodd"
+                                          d="m52.75-0.3 12.3 37.86h39.81l-32.21 23.4 12.3 37.85-32.2-23.39-32.21 23.39 12.3-37.85-32.2-23.4h39.81L52.75-.3z"
                                   />
                                 </svg>
                               {% endfor %}
@@ -863,19 +883,25 @@
 
                   {% assign ghiv2_link_text = block.full_ingredient_list.text | default: 'See Full Ingredient List' %}
 
+                  {% if sf_v3 %}
+                    {% capture sf_modal_content %}
+                      {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3 %}
+                    {% endcapture %}
+                  {% elsif config.supplement_facts != blank %}
+                    {% capture sf_modal_content %}
+                      {% render 'gh-product-supplement-facts', config: config %}
+                    {% endcapture %}
+                  {% endif %}
+
                   {% if config.supplement_facts != blank %}
                     <div class="ghiv2__full-list">
-                      {% capture ghiv2_supplement_facts_content %}
-                        {% render 'gh-product-supplement-facts', config: config %}
-                      {% endcapture %}
-
                       {% assign ghiv2_supplement_dialog_id = 'product-supplement-facts-v2-' | append: forloop.index %}
 
                       {% render 'gh-element-dialog',
                         button_text: ghiv2_link_text,
                         button_class: 'ghiv2__full-list-link font-proxima',
                         id: ghiv2_supplement_dialog_id,
-                        content: ghiv2_supplement_facts_content
+                        content: sf_modal_content
                       %}
                     </div>
 
@@ -903,82 +929,7 @@
                     ============================================================
                   {%- endcomment -%}
 
-                  {% if product.tags contains 'prop65' %}
-                    <div class="ghiv2__prop65">
-                      {% assign ghiv2_prop65_id = 'prop65-product-content-v2-' | append: forloop.index %}
-
-                      {% render 'gh-element-dialog',
-                        button_text: "<b>WARNING</b> - California's Proposition 65",
-                        button_class: 'ghiv2__prop65-link font-proxima',
-                        id: ghiv2_prop65_id,
-                        content: ''
-                      %}
-
-                      <script>
-                        (function () {
-
-                          var productSkus = [];
-
-                          {% for variant in product.variants %}
-                            productSkus.push({{ variant.sku | json }});
-                          {% endfor %}
-
-
-                          function loadIngredientsV2Prop65() {
-
-                            if (
-                              !window.gh ||
-                              !window.gh.shopify ||
-                              !window.gh.shopify.checkout ||
-                              typeof window.gh.shopify.checkout.prop65Message !== 'function'
-                            ) {
-                              return;
-                            }
-
-
-                            window.gh.shopify.checkout.prop65Message(
-                              productSkus,
-                              function (html) {
-
-                                var dialogContent = document.querySelector(
-                                  '#dialog-{{ ghiv2_prop65_id }} .ghd--dialog-content'
-                                );
-
-
-                                if (dialogContent) {
-                                  dialogContent.innerHTML = html;
-                                }
-
-                              }
-                            );
-
-                          }
-
-
-                          if (document.readyState === 'loading') {
-
-                            document.addEventListener(
-                              'DOMContentLoaded',
-                              loadIngredientsV2Prop65
-                            );
-
-                          } else {
-
-                            loadIngredientsV2Prop65();
-
-                          }
-
-
-                          window.addEventListener(
-                            'load',
-                            loadIngredientsV2Prop65,
-                            { once: true }
-                          );
-
-                        })();
-                      </script>
-                    </div>
-                  {% endif %}
+                  <div data-prop65="after"></div>
                 </div>
               </section>
             {% endif %}
@@ -997,7 +948,7 @@
                   }}
                 </h3>
               </div>
-              <div data-type="cols">
+              <div data-type="cols" data-prop65="after">
                 <div data-type="text">
                   <div class="ghd--accordion">
                     {% for detail in block.items %}
@@ -1172,12 +1123,12 @@
 
           {% when 'miron' %}
             {% capture miron_default %}
-        <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
-      {% endcapture %}
+              <p>{{ product.title }} is packed in premium MIRON’s violet glass. This luxurious violet glass not only serves as a natural barrier for preserving the product's energy and quality, but also boasts unparalleled storage capabilities compared to conventional glass, plastic, or aluminum packaging. MIRON’s revolutionary glass technology eliminates the need for preservatives, ensuring a longer shelf life and promoting sustainability through the possibility of reuse and recycling.</p>
+            {% endcapture %}
 
             {% capture video_link %}
-        <iframe src="{{ block.video_link | default: 'https://player.vimeo.com/video/405459325' }}?h=3aa1cbbf06&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-      {% endcapture %}
+              <iframe src="{{ block.video_link | default: 'https://player.vimeo.com/video/405459325' }}?h=3aa1cbbf06&title=0&byline=0&portrait=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+            {% endcapture %}
 
             {% capture video_button %}{{ block.video_button | default: 'Watch the Video' }}{% endcapture %}
 
@@ -1258,13 +1209,13 @@
 
                           {%- assign product_form_id = 'product-form-' | append: v.id -%}
                           {% capture buy_buttons %}
-              {%- render 'buy-buttons',
-                  block: block,
-                  product: p,
-                  product_form_id: product_form_id,
-                  section_id: section.id
-                -%}
-                {% endcapture %}
+                            {%- render 'buy-buttons',
+                                    block: block,
+                                    product: p,
+                                    product_form_id: product_form_id,
+                                    section_id: section.id
+                            -%}
+                          {% endcapture %}
                           {{ buy_buttons | replace: '/cart/add', '/cart/add/' }}
                         </div>
                       {% endfor %}
@@ -1277,6 +1228,58 @@
       {% endfor %}
     </div>
   </section>
+
+  {% unless has_accordion_v2 %}
+    <script>
+      {
+        let ingredients = document.querySelector('.ghd--block--ingredients');
+        let ingredients_img = ingredients.querySelector('[data-type="image"] img');
+        let ingredients_inputs = ingredients.querySelectorAll('.ghd--accordion input');
+
+        function setActiveImage() {
+          ingredients_inputs.forEach((i) => {
+            if (!i.checked) return;
+            ingredients_img.classList.add('loading');
+
+            ingredients_img.src = i.getAttribute('data-ingredient-image') + '?width=600';
+            ingredients_img.setAttribute('srcset', i.getAttribute('data-ingredient-image') + '?width=1200 2x');
+
+            if (ingredients_img.complete) {
+              ingredients_img.classList.remove('loading');
+            }
+
+            ingredients_img.addEventListener('load', () => {
+              ingredients_img.classList.remove('loading');
+            });
+          });
+        }
+
+        ingredients_inputs.forEach((i) => {
+          i.addEventListener('change', (e) => {
+            if (!i.checked) return;
+            setActiveImage();
+          });
+        });
+
+        setActiveImage();
+
+        /*
+        ingredients_details.forEach( d => {
+          d.addEventListener('toggle', () => {
+            if( d.open === true ){
+              if( current_open ) current_open.open = false;
+              setCurrentOpen();
+              setActiveImage();
+            }
+          })
+        })
+
+        setCurrentOpen();
+        setActiveImage();
+        */
+      }
+    </script>
+  {% endunless %}
 {% endif %}
 
 {% schema %}

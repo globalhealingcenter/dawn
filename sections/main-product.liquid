@@ -41,6 +41,22 @@
 {% endif %}
 <!-- PERCS ENGAGE: END -->
 
+{% comment %}
+  @change - to temporarily have both versions of tabs/accoridion live while we swap over 
+  product by product
+  @author - heraldo
+{% endcomment %}
+{% assign has_accordion_v2 = false %}
+{% if product and product.metafields.gh_product.data %}
+  {% assign config = product.metafields.gh_product.data.value %}
+  {% if config and config.supplement_facts_accordion.suggested_use.content != blank %}
+    {% assign has_accordion_v2 = true %}
+  {% endif %}
+{% endif %}
+{% comment %}
+  end change
+{% endcomment %}
+
 <section
   id="MainProduct-{{ section.id }}"
   class="evm-also-bought-products page-width section-{{ section.id }}-padding"
@@ -286,11 +302,18 @@
               </div>
 
             {%- when 'info_tabs' -%}
-              {% render 'gh-block-product-tabs', block: block, product: product %}
+              {% unless has_accordion_v2 %}
+                {% render 'gh-block-product-tabs', block: block, product: product %}
+              {% endunless %}
             {%- when 'info_tabs_v2' -%}
-              {% render 'gh-block-product-tabs-v2', block: block, product: product %}
+              {% if has_accordion_v2 %}
+                {% render 'gh-block-product-tabs-v2', block: block, product: product %}
+              {% endif %}
             {%- when 'info_accordions' -%}
-              {% render 'gh-block-product-accordions', block: block, product: product %}
+              {%- render 'gh-flavor-profile', product: product -%}
+              {% if has_accordion_v2 %} 
+                {% render 'gh-block-product-accordions', block: block, product: product %}
+              {% endif %}
             {%- when 'sku' -%}
               <p
                 class="product__sku no-js-hidden{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"

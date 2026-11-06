@@ -226,6 +226,7 @@
     text-decoration: underline;
     text-underline-offset: 2px;
     cursor: pointer;
+    background: none;
 }
 
 
@@ -242,6 +243,11 @@
     border-bottom: 1px solid #496d56;
 }
 
+.ghiv2__inner .conditional-message__popup-button{
+    padding: 10px 0;
+    margin-top: 15px;
+}
+
 .ghiv2__prop65-link {
     margin: 0;
     padding: 0;
@@ -253,8 +259,12 @@
     cursor: pointer;
 }
 
-section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__ingredient-content,
-section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__full-list {
+/**
+ * @change - show full ingredient list even when there is only one ingredient
+ * @author - heraldo
+ */
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__ingredient-content/*,
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__full-list*/ {
     display: none;
 }
 
