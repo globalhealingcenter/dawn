@@ -288,6 +288,11 @@
     padding: 8rem 1rem;
 }
 
+.curate-image-size img {
+    height: auto;
+    width: 225px;
+}
+
 .eyebrow-curated {
     margin: 0 0 5px;
     color: var(--gh-color-gray);
@@ -907,6 +912,10 @@
     gap: 20px;
 }
 
+.download-the-study__icon {
+    flex: none;
+}
+
 .ghd-study--results>div:first-child {
     padding-right: var(--gap-padding);
 }
@@ -1153,7 +1162,8 @@
         gap: 10px;
     }
 
-    .download-the-study img {
+    .download-the-study img,
+    .download-the-study svg {
         min-width: unset;
         height: auto;
         width: 18px !important;

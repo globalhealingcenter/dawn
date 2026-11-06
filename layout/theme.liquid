@@ -976,7 +976,34 @@
 
 
         /* ---------------------------------------------------------
-          GET ORDERGROOVE TEXT NODE
+          EXTRACT A USABLE PERCENTAGE
+
+          Ordergroove (or an earlier guard pass) can leave the
+          element holding the percentage more than once:
+
+              15%15%   ->  rendered as "Save 15% 15%"
+
+          The number itself is still Ordergroove's own value,
+          it is only duplicated, so we pull the first one out
+          and use it to collapse the element back to a single
+          value.
+
+          "undefined%", "null%" and "NaN%" never match here
+          because digits are required.
+        --------------------------------------------------------- */
+
+        function extractDiscount(value) {
+
+            const match =
+                (value || '').match(/\d+(?:\.\d+)?%/);
+
+            return match ? match[0] : null;
+
+        }
+
+
+        /* ---------------------------------------------------------
+          GET ORDERGROOVE TEXT NODES
 
           Ordergroove actually renders something similar to:
 
@@ -986,13 +1013,21 @@
               <!---->
           </og-incentive-text>
 
-          We only modify the text node.
+          Note the whitespace-only text nodes that sit OUTSIDE
+          the Lit comment markers. Writing the percentage into
+          one of those while Ordergroove still holds its own
+          value between the markers is what produced
+
+              Save 15% 15%
 
           We DO NOT remove Ordergroove's comment markers because
           those markers may be used internally when OG updates.
         --------------------------------------------------------- */
 
-        function getDiscountTextNode(element) {
+        function getDiscountTextNodes(element) {
+
+            const nodes = [];
+
 
             for (
                 let i = 0;
@@ -1004,13 +1039,161 @@
 
                 if (node.nodeType === Node.TEXT_NODE) {
 
-                    return node;
+                    nodes.push(node);
 
                 }
 
             }
 
+
+            return nodes;
+
+        }
+
+
+        /* ---------------------------------------------------------
+          FIND THE NODE THAT CARRIES THE VALUE
+
+          Priority:
+
+          1. a text node that already carries a value
+             (digits or "%", so "undefined%" counts too)
+
+          2. the text node Lit renders between its two
+             comment markers
+
+          3. nothing -> the caller inserts a new node
+
+          A whitespace-only node outside the markers is never
+          chosen, otherwise the value would be printed twice.
+        --------------------------------------------------------- */
+
+        function getDiscountTextNode(element) {
+
+            const textNodes =
+                getDiscountTextNodes(element);
+
+
+            for (
+                let i = 0;
+                i < textNodes.length;
+                i++
+            ) {
+
+                if (
+                    /[\d%]/.test(
+                        textNodes[i].nodeValue || ''
+                    )
+                ) {
+
+                    return textNodes[i];
+
+                }
+
+            }
+
+
+            /*
+            * No value anywhere yet.
+            *
+            * Use the slot between Ordergroove's own comment
+            * markers, which is where OG renders its value.
+            */
+            const childNodes =
+                Array.from(element.childNodes);
+
+
+            let firstComment = -1;
+            let lastComment = -1;
+
+
+            for (
+                let i = 0;
+                i < childNodes.length;
+                i++
+            ) {
+
+                if (
+                    childNodes[i].nodeType ===
+                    Node.COMMENT_NODE
+                ) {
+
+                    if (firstComment === -1) {
+
+                        firstComment = i;
+
+                    }
+
+                    lastComment = i;
+
+                }
+
+            }
+
+
+            if (
+                firstComment !== -1 &&
+                lastComment > firstComment
+            ) {
+
+                for (
+                    let i = firstComment + 1;
+                    i < lastComment;
+                    i++
+                ) {
+
+                    if (
+                        childNodes[i].nodeType ===
+                        Node.TEXT_NODE
+                    ) {
+
+                        return childNodes[i];
+
+                    }
+
+                }
+
+            }
+
+
             return null;
+
+        }
+
+
+        /* ---------------------------------------------------------
+          REMOVE ANY SECOND COPY OF THE VALUE
+
+          Only the node we just wrote to is allowed to carry a
+          percentage. Every other text node holding digits or
+          "%" is emptied, so the badge can never read
+
+              Save 15% 15%
+
+          Whitespace-only nodes are left untouched because they
+          are part of Ordergroove's own formatting.
+        --------------------------------------------------------- */
+
+        function clearDuplicateDiscounts(element, keptNode) {
+
+            const textNodes =
+                getDiscountTextNodes(element);
+
+
+            textNodes.forEach(function (node) {
+
+                if (node === keptNode) return;
+
+
+                if (
+                    /[\d%]/.test(node.nodeValue || '')
+                ) {
+
+                    node.nodeValue = '';
+
+                }
+
+            });
 
         }
 
@@ -1043,6 +1226,9 @@
 
                 }
 
+
+                clearDuplicateDiscounts(element, textNode);
+
                 return;
 
             }
@@ -1068,12 +1254,19 @@
 
             if (comments.length >= 2) {
 
-                element.insertBefore(
+                const insertedNode =
                     document.createTextNode(
                         '\n       ' + value + '\n    '
-                    ),
+                    );
+
+
+                element.insertBefore(
+                    insertedNode,
                     comments[comments.length - 1]
                 );
+
+
+                clearDuplicateDiscounts(element, insertedNode);
 
             }
 
@@ -1115,6 +1308,25 @@
 
                     lastValidDiscount = value;
 
+                    return;
+
+                }
+
+
+                /*
+                * Not strictly valid, but still carrying a real
+                * percentage, e.g. a duplicated "15%15%".
+                *
+                * The number came from Ordergroove, so it is safe
+                * to remember it.
+                */
+                const extracted = extractDiscount(value);
+
+
+                if (extracted) {
+
+                    lastValidDiscount = extracted;
+
                 }
 
             });
@@ -1139,6 +1351,29 @@
                 if (isValidDiscount(value)) {
 
                     lastValidDiscount = value;
+
+                    element.style.visibility = '';
+
+                    return;
+
+                }
+
+
+                /*
+                * The value is present but duplicated, e.g.
+                *
+                * 15%15%  ->  "Save 15% 15%"
+                *
+                * Collapse it back to the single percentage.
+                */
+                const extracted = extractDiscount(value);
+
+
+                if (extracted) {
+
+                    lastValidDiscount = extracted;
+
+                    restoreDiscount(element, extracted);
 
                     element.style.visibility = '';
 

@@ -397,9 +397,14 @@
     color: var(--gh-color-green);
 }
 
+product-form.product-form div#rebuy-widget-115516 {
+    padding: 20px 0px;
+}
+
 #rebuy-widget-115516 .rebuy-product-block {
     border-top: 1px solid #545454;
     padding-top: 30px;
+    padding-bottom: 0;
 }
 
 #rebuy-widget-115516 img {

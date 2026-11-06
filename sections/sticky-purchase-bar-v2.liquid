@@ -284,8 +284,16 @@
 
   }
 
-  .gh-spb:has(og-offer[subscribed]) {
-    bottom: 46px !important;
+  /*
+    The lift makes room for the Ordergroove
+    benefits bar. It only applies once that bar
+    has actually rendered, otherwise the sticky
+    bar floats above an empty gap while
+    Ordergroove loads.
+  */
+
+  .gh-spb.gh-spb--og-ready:has(og-offer[subscribed]) {
+    bottom: 48px !important;
   }
 
   /* SHOW AFTER SCROLL */
@@ -864,6 +872,7 @@
       padding: 4px 70px !important;
     }
 
+    .gh-spb.gh-spb--og-ready:has(og-offer[subscribed]),
     .gh-spb:has(og-offer[subscribed]),
     .gh-spb {
       bottom: 0px !important;
@@ -900,7 +909,30 @@
       {{ section.settings.show_after_scroll | default: 500 }};
 
 
+    /*
+     * Ordergroove's main.js is deferred, so the
+     * subscription benefits bar renders a moment
+     * after this sticky bar is already on screen.
+     *
+     * The bar stays hidden until that markup
+     * exists so both appear together.
+     */
+
+    let ordergrooveReady = false;
+
+
     function handleStickyVisibility() {
+
+      if (!ordergrooveReady) {
+
+        section.classList.remove(
+          'gh-spb--visible'
+        );
+
+        return;
+
+      }
+
 
       if (window.scrollY >= SHOW_AFTER_SCROLL) {
 
@@ -929,6 +961,159 @@
 
 
     handleStickyVisibility();
+
+
+    const ordergrooveOffer =
+      section.querySelector(
+        '[data-gh-ordergroove]'
+      );
+
+
+    /* ========================================
+       WAIT FOR ORDERGROOVE
+
+       The benefits bar is rendered by the
+       Ordergroove widget, not by this section,
+       so we watch for it instead of guessing a
+       delay.
+
+       The timeout is a safety net: if
+       Ordergroove is slow or fails, the sticky
+       bar still shows rather than staying
+       hidden forever.
+    ======================================== */
+
+    const OG_READY_TIMEOUT = 3000;
+
+    const OG_BENEFITS_SELECTOR =
+      '.gh-og-subscription-benefits';
+
+
+    function hasOrdergrooveBenefits() {
+
+      if (!ordergrooveOffer)
+        return true;
+
+
+      /*
+       * Below 1024px .gh-spb-left is hidden and
+       * the bar sits flush at bottom: 0, so
+       * there is nothing to wait for.
+       */
+
+      if (
+        window.matchMedia(
+          '(max-width: 1024px)'
+        ).matches
+      ) {
+
+        return true;
+
+      }
+
+
+      /*
+       * The benefits bar enters the DOM, and
+       * even computes to display: flex, roughly
+       * 800ms before it has a box: its og-when
+       * ancestor stays hidden until Ordergroove
+       * resolves eligibility.
+       *
+       * So presence and display are both too
+       * early. Only a rendered box means the
+       * bar is actually on screen.
+       */
+
+      const benefits =
+        section.querySelector(
+          OG_BENEFITS_SELECTOR
+        ) ||
+        document.querySelector(
+          OG_BENEFITS_SELECTOR
+        );
+
+
+      if (!benefits)
+        return false;
+
+
+      return benefits
+        .getBoundingClientRect()
+        .height > 0;
+
+    }
+
+
+    function markOrdergrooveReady() {
+
+      if (ordergrooveReady)
+        return;
+
+
+      ordergrooveReady = true;
+
+
+      section.classList.add(
+        'gh-spb--og-ready'
+      );
+
+
+      handleStickyVisibility();
+
+    }
+
+
+    if (hasOrdergrooveBenefits()) {
+
+      markOrdergrooveReady();
+
+    } else {
+
+      /*
+       * The benefits bar gains its box through a
+       * style change on an ancestor rather than
+       * a DOM insertion, so a childList observer
+       * would miss it. Polling each frame cannot
+       * miss the moment and stops on its own.
+       */
+
+      const deadline =
+        Date.now() +
+        OG_READY_TIMEOUT;
+
+
+      const pollOrdergroove = function() {
+
+        if (hasOrdergrooveBenefits()) {
+
+          markOrdergrooveReady();
+
+          return;
+
+        }
+
+
+        if (Date.now() >= deadline) {
+
+          markOrdergrooveReady();
+
+          return;
+
+        }
+
+
+        window.requestAnimationFrame(
+          pollOrdergroove
+        );
+
+      };
+
+
+      window.requestAnimationFrame(
+        pollOrdergroove
+      );
+
+    }
 
 
     /* ========================================
@@ -986,12 +1171,6 @@
     const variantInput =
       section.querySelector(
         '[data-gh-variant-input]'
-      );
-
-
-    const ordergrooveOffer =
-      section.querySelector(
-        '[data-gh-ordergroove]'
       );
 
 
