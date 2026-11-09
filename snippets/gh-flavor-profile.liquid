@@ -1,18 +1,18 @@
 <style>
-.gh-flavor-profile {
-  width: 100%;
-  padding: 0 0 3rem;
-  color: #244c35;
-}
+  .gh-flavor-profile {
+    width: 100%;
+    padding: 0 0 3rem;
+    color: #244c35;
+  }
 
-.gh-flavor-profile__header {
-  display: flex;
-  align-items: center;
-  gap: 1.8rem;
-  margin-bottom: 4rem;
-}
+  .gh-flavor-profile__header {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    margin-bottom: 4rem;
+  }
 
-.gh-flavor-profile__heading {
+  .gh-flavor-profile__heading {
     text-align: left;
     font-weight: 700 !important;
     position: relative;
@@ -20,156 +20,152 @@
     font-family: var(--gh-font-secondary) !important;
     position: relative;
     margin: 0;
-    background: #F9F2E8;
+    background: #f9f2e8;
     padding-right: 10px;
     font-size: 20px;
     line-height: 27px;
     text-transform: uppercase;
     color: var(--gh-color-green);
     min-width: max-content;
-}
-
-.gh-flavor-profile__header-line {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: var(--gh-color-gray);
-}
-
-.gh-flavor-profile__scale {
-  width: 100%;
-  padding: 0;
-}
-
-.gh-flavor-profile__track {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: start;
-}
-
-/* Horizontal connecting line */
-.gh-flavor-profile__track::before {
-  content: "";
-  position: absolute;
-  top: 1.25rem;
-  left: 10%;
-  right: 10%;
-  height: 0.4rem;
-  background: var(--gh-color-green);
-  transform: translateY(-50%);
-  z-index: 0;
-}
-
-.gh-flavor-profile__item {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
-  text-align: center;
-  min-height: 67px;
-  justify-content: space-between;
-}
-
-.gh-flavor-profile__point {
-  display: block;
-  width: 2.2rem;
-  height: 2.2rem;
-  border: 0.4rem solid var(--gh-color-green);
-  border-radius: 50%;
-  background: #f7f2e9;
-  transition:
-    width 0.2s ease,
-    height 0.2s ease,
-    background-color 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.gh-flavor-profile__label {
-  display: block;
-  margin-top: 1.6rem;
-  color: var(--gh-color-green);
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
-}
-
-/* Selected metafield option */
-.gh-flavor-profile__item--active .gh-flavor-profile__point {
-  border-color: var(--gh-color-green);
-  background: var(--gh-color-green);
-  width: 2.5rem;
-  height: 2.5rem;
-}
-
-.gh-flavor-profile__item--active .gh-flavor-profile__label {
-  color: var(--gh-color-green);
-  font-weight: 700;
-}
-
-@media screen and (max-width: 749px) {
-  .gh-flavor-profile {
-    padding: 2.4rem 0;
   }
 
-  .gh-flavor-profile__header {
-    gap: 1.2rem;
-    margin-bottom: 2rem;
-  }
-
-  .gh-flavor-profile__heading {
-    font-size: 1.8rem;
+  .gh-flavor-profile__header-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: var(--gh-color-gray);
   }
 
   .gh-flavor-profile__scale {
+    width: 100%;
     padding: 0;
   }
 
+  .gh-flavor-profile__track {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  /* Horizontal connecting line */
   .gh-flavor-profile__track::before {
-    top: 1.2rem;
+    content: '';
+    position: absolute;
+    top: 1.25rem;
     left: 10%;
     right: 10%;
-    height: 0.2rem;
+    height: 0.4rem;
+    background: var(--gh-color-green);
+    transform: translateY(-50%);
+    z-index: 0;
+  }
+
+  .gh-flavor-profile__item {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    text-align: center;
+    min-height: 67px;
+    justify-content: space-between;
   }
 
   .gh-flavor-profile__point {
+    display: block;
     width: 2.2rem;
     height: 2.2rem;
-    border-width: 0.4rem;
+    border: 0.4rem solid var(--gh-color-green);
+    border-radius: 50%;
+    background: #f7f2e9;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   }
 
   .gh-flavor-profile__label {
-    margin-top: 1.2rem;
-    font-size: 1.4rem;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .gh-flavor-profile__label {
-    font-size: 1.2rem;
+    display: block;
+    margin-top: 1.6rem;
+    color: var(--gh-color-green);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
   }
 
-  .gh-flavor-profile__point {
-    width: 2rem;
-    height: 2rem;
-    border-width: 0.35rem;
+  /* Selected metafield option */
+  .gh-flavor-profile__item--active .gh-flavor-profile__point {
+    border-color: var(--gh-color-green);
+    background: var(--gh-color-green);
+    width: 2.5rem;
+    height: 2.5rem;
   }
 
-  .gh-flavor-profile__item--active .gh-flavor-profile__point{
-    width: 2.2rem;
-    height: 2.2rem;
+  .gh-flavor-profile__item--active .gh-flavor-profile__label {
+    color: var(--gh-color-green);
+    font-weight: 700;
   }
 
-  .gh-flavor-profile__item{
-    min-height: 60px !important;
+  @media screen and (max-width: 749px) {
+    .gh-flavor-profile {
+      padding: 2.4rem 0;
+    }
+
+    .gh-flavor-profile__header {
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .gh-flavor-profile__heading {
+      font-size: 1.8rem;
+    }
+
+    .gh-flavor-profile__scale {
+      padding: 0;
+    }
+
+    .gh-flavor-profile__track::before {
+      top: 1.2rem;
+      left: 10%;
+      right: 10%;
+      height: 0.2rem;
+    }
+
+    .gh-flavor-profile__point {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-width: 0.4rem;
+    }
+
+    .gh-flavor-profile__label {
+      margin-top: 1.2rem;
+      font-size: 1.4rem;
+    }
   }
 
-  .gh-flavor-profile__track::before {
-    top: 1rem;
+  @media screen and (max-width: 400px) {
+    .gh-flavor-profile__label {
+      font-size: 1.2rem;
+    }
+
+    .gh-flavor-profile__point {
+      width: 2rem;
+      height: 2rem;
+      border-width: 0.35rem;
+    }
+
+    .gh-flavor-profile__item--active .gh-flavor-profile__point {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+
+    .gh-flavor-profile__item {
+      min-height: 60px !important;
+    }
+
+    .gh-flavor-profile__track::before {
+      top: 1rem;
+    }
   }
-}
 </style>
 
 {% comment %}
@@ -180,14 +176,14 @@
   Key: flavor_profile
 
   Supported values:
-  Sweet, Earthy, Bitter, Sour, Bold
+  Sweet, Earthy, Bitter, Tart, Bold
 {% endcomment %}
 
 {% liquid
   assign flavor_profile = product.metafields.globalhealing.flavor_profile.value
   assign active_flavor = flavor_profile | strip | downcase
 
-  assign flavor_options = 'Sweet,Earthy,Bitter,Sour,Bold' | split: ','
+  assign flavor_options = 'Sweet,Earthy,Bitter,Tart,Bold' | split: ','
 %}
 
 {% if flavor_profile != blank %}
@@ -228,4 +224,3 @@
     </div>
   </div>
 {% endif %}
-
