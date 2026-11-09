@@ -1,0 +1,816 @@
+/* ============================================================
+   INGREDIENTS V2
+   ============================================================ */
+
+.ghiv2 {
+    width: 100%;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+.ghiv2__inner {
+    width: 100%;
+    margin: 0 auto;
+    padding: 58px 60px 42px;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.ghiv2__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+    gap: 80px;
+    align-items: end;
+    width: 100%;
+    margin-bottom: 70px;
+}
+
+.ghiv2__header-main {
+    width: 100%;
+    min-width: 0;
+}
+
+.ghiv2__label {
+    margin: 0 0 .8rem;
+    color: var(--gh-color-gray);
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghiv2__heading {
+    display: block;
+    width: 100%;
+    max-width: 720px;
+    margin: 0;
+    color: var(--gh-color-green);
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 400;
+    white-space: normal;
+}
+
+.ghiv2__heading strong {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.ghiv2__heading strong,
+.ghiv2__heading b {
+    font-weight: 700;
+}
+
+.ghiv2__heading em,
+.ghiv2__heading i {
+    font-weight: 400;
+    font-style: italic;
+}
+
+.ghiv2__subhead {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 0 4px;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--gh-color-gray);
+    font-weight: 400;
+}
+
+.ghiv2__subhead p {
+    margin: 0;
+}
+
+
+/* ============================================================
+   CAROUSEL WRAPPER
+   IMPORTANT:
+   On desktop this must behave like a normal full-width wrapper.
+   ============================================================ */
+
+.ghiv2__carousel-viewport {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow: visible;
+}
+
+
+/* ============================================================
+   DESKTOP INGREDIENT GRID
+   ============================================================ */
+
+.ghiv2__ingredients {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    align-items: start;
+
+    transform: none;
+    transition: none;
+}
+
+.ghiv2--count-4 .ghiv2__ingredients {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 52px;
+}
+
+.ghiv2--count-3 .ghiv2__ingredients {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 72px;
+}
+
+
+/* ============================================================
+   INGREDIENT CARD
+   ============================================================ */
+
+.ghiv2__ingredient {
+    display: block;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+}
+
+.ghiv2.ghiv2--count-3.ghiv2--standard .ghiv2__ingredient-media {
+    height: 225px;
+}
+
+.ghiv2__ingredient-media {
+    display: flex;
+
+    width: 100%;
+    height: 155px;
+
+    margin: 0 0 28px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.ghiv2__ingredient-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+
+    object-fit: contain;
+    object-position: center;
+}
+
+.ghiv2__ingredient-content {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+.ghiv2__ingredient-title {
+    display: block;
+    width: 100%;
+    margin: 0 0 8px;
+    padding: 0 0 8px;
+    border-bottom: 1px solid var(--gh-color-green);
+    color: var(--gh-color-green);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+}
+
+.ghiv2__ingredient-description {
+    display: block;
+    width: 100%;
+    margin: 0;
+    color: var(--gh-color-gray);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 400;
+}
+
+.ghiv2__ingredient-description p {
+    margin: 0;
+}
+
+.ghiv2__ingredient-description p+p {
+    margin-top: 10px;
+}
+
+
+/* ============================================================
+   FULL INGREDIENT LIST
+   ============================================================ */
+
+.ghiv2__full-list {
+    display: flex;
+    width: 100%;
+
+    justify-content: center;
+
+    margin-top: 64px;
+}
+
+.ghiv2__full-list-link {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--gh-color-green);
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+    background: none;
+}
+
+
+/* ============================================================
+   PROP 65
+   ============================================================ */
+
+.ghiv2__prop65 {
+    width: 100%;
+
+    margin-top: 36px;
+    padding-bottom: 28px;
+
+    border-bottom: 1px solid #496d56;
+}
+
+.ghiv2__inner .conditional-message__popup-button{
+    padding: 10px 0;
+    margin-top: 15px;
+}
+
+.ghiv2__prop65-link {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gh-color-gray);
+    font-size: 16px;
+    line-height: 26px;
+    cursor: pointer;
+}
+
+/**
+ * @change - show full ingredient list even when there is only one ingredient
+ * @author - heraldo
+ */
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__ingredient-content/*,
+section.ghiv2.ghiv2--count-1.ghiv2--single .ghiv2__full-list*/ {
+    display: none;
+}
+
+/* ============================================================
+   TWO INGREDIENT DESKTOP LAYOUT
+   ============================================================ */
+
+@media screen and (min-width: 900px) {
+
+    .ghiv2--count-2 .ghiv2__inner {
+        display: grid;
+
+        grid-template-columns:
+            minmax(320px, 0.8fr) minmax(0, 1.2fr);
+
+        grid-template-areas:
+            "header ingredients"
+            "link ingredients"
+            "prop65 prop65";
+
+        column-gap: 85px;
+        align-items: start;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__header {
+        grid-area: header;
+
+        display: block;
+
+        width: 100%;
+        min-width: 0;
+
+        margin: 0;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__header-main {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__heading {
+        width: 100%;
+        max-width: 620px;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__subhead {
+        width: 100%;
+        max-width: 400px;
+
+        margin-top: 24px;
+    }
+
+
+    /*
+     * The carousel viewport is the grid item,
+     * because it directly contains the ingredient track.
+     */
+    .ghiv2--count-2 .ghiv2__carousel-viewport {
+        grid-area: ingredients;
+
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+
+        overflow: visible;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__ingredients {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        width: 100%;
+        min-width: 0;
+
+        gap: 62px;
+
+        align-items: start;
+
+        transform: none;
+        transition: none;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__ingredient {
+        display: block;
+
+        width: auto;
+        min-width: 0;
+        max-width: none;
+
+        flex: none;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__ingredient-media {
+        width: 100%;
+        height: 200px;
+        margin-bottom: 28px;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__ingredient-image {
+        max-width: 100%;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__full-list {
+        grid-area: link;
+
+        justify-content: flex-start;
+
+        margin-top: 24px;
+    }
+
+
+    .ghiv2--count-2 .ghiv2__prop65 {
+        grid-area: prop65;
+
+        margin-top: 58px;
+    }
+
+}
+
+
+/* ============================================================
+   SINGLE INGREDIENT DESKTOP LAYOUT
+   ============================================================ */
+
+@media screen and (min-width: 900px) {
+
+    .ghiv2--single .ghiv2__inner {
+        display: grid;
+
+        grid-template-columns:
+            minmax(380px, 0.95fr) minmax(0, 1.05fr);
+
+        grid-template-areas:
+            "header ingredients"
+            "link ingredients"
+            "prop65 prop65";
+
+        column-gap: 100px;
+
+        align-items: center;
+    }
+
+    .ghiv2--single .ghiv2__header {
+        grid-area: header;
+
+        display: block;
+
+        width: 100%;
+        margin: 0;
+    }
+
+    .ghiv2--single .ghiv2__subhead {
+        max-width: 500px;
+        margin-top: 28px;
+    }
+
+    .ghiv2--single .ghiv2__carousel-viewport {
+        grid-area: ingredients;
+
+        width: 100%;
+        min-width: 0;
+    }
+
+    .ghiv2--single .ghiv2__ingredients {
+        display: block;
+
+        width: 100%;
+    }
+
+    .ghiv2--single .ghiv2__ingredient {
+        width: 100%;
+    }
+
+    .ghiv2--single .ghiv2__ingredient-media {
+        width: 100%;
+        height: 330px;
+
+        margin: 0;
+    }
+
+    .ghiv2--single .ghiv2__ingredient-image {
+        max-width: 550px;
+    }
+
+    .ghiv2--single .ghiv2__ingredient-content {
+        max-width: 520px;
+
+        margin: 28px auto 0;
+    }
+
+    .ghiv2--single .ghiv2__full-list {
+        grid-area: link;
+
+        justify-content: flex-start;
+
+        margin-top: 26px;
+    }
+
+    .ghiv2--single .ghiv2__prop65 {
+        grid-area: prop65;
+
+        margin-top: 52px;
+    }
+
+}
+
+
+/* ============================================================
+   DESKTOP SAFETY
+   If carousel JS was previously initialized at a mobile width,
+   desktop must still always return to a clean grid.
+   ============================================================ */
+
+@media screen and (min-width: 900px) {
+
+    .ghiv2__carousel-viewport {
+        overflow: visible;
+        touch-action: auto;
+    }
+
+    .ghiv2__ingredients {
+        width: 100% !important;
+        transform: none !important;
+        transition: none !important;
+        cursor: default !important;
+    }
+
+    .ghiv2__ingredient {
+        flex: none !important;
+
+        width: auto !important;
+        max-width: none !important;
+    }
+
+    .ghiv2 [data-ghiv2-clone="true"] {
+        display: none !important;
+    }
+
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media screen and (min-width: 900px) and (max-width: 1199px) {
+
+    .ghiv2__inner {
+        width: calc(100% - 64px);
+    }
+
+    .ghiv2__header {
+        gap: 50px;
+    }
+
+    .ghiv2__heading {
+        font-size: 38px;
+        line-height: 44px;
+    }
+
+    .ghiv2--count-4 .ghiv2__ingredients {
+        gap: 30px;
+    }
+
+    .ghiv2--count-3 .ghiv2__ingredients {
+        gap: 44px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE CAROUSEL
+   ============================================================ */
+
+@media screen and (max-width: 899px) {
+
+    .ghiv2 {
+        overflow: hidden;
+    }
+
+    .ghiv2__inner,
+    .ghiv2--two-up .ghiv2__inner,
+    .ghiv2--single .ghiv2__inner {
+        display: block;
+        width: calc(100% - 66px);
+        max-width: none;
+        margin: 0 auto;
+        padding: 46px 0 34px;
+    }
+
+
+    /* Header */
+
+    .ghiv2__header,
+    .ghiv2--two-up .ghiv2__header,
+    .ghiv2--single .ghiv2__header {
+        display: block;
+
+        width: 100%;
+
+        margin: 0 0 38px;
+    }
+
+    .ghiv2__header-main {
+        width: 100%;
+    }
+
+    .ghiv2__label {
+        margin-bottom: 8px;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
+    .ghiv2__heading,
+    .ghiv2--single .ghiv2__heading {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .ghiv2__subhead,
+    .ghiv2--two-up .ghiv2__subhead,
+    .ghiv2--single .ghiv2__subhead {
+        width: 100%;
+        max-width: 100%;
+
+        margin: 20px 0 0;
+
+        font-size: 16px;
+        line-height: 21px;
+    }
+
+
+    /* Full screen carousel viewport */
+
+    .ghiv2__carousel-viewport,
+    .ghiv2--two-up .ghiv2__carousel-viewport,
+    .ghiv2--single .ghiv2__carousel-viewport {
+        display: block;
+
+        width: 100vw;
+        max-width: none;
+
+        margin-left: calc((100vw - 100%) / -2);
+
+        overflow: hidden;
+
+        touch-action: pan-y;
+    }
+
+
+    /* Track */
+
+    .ghiv2__ingredients,
+    .ghiv2--count-4 .ghiv2__ingredients,
+    .ghiv2--count-3 .ghiv2__ingredients,
+    .ghiv2--two-up .ghiv2__ingredients,
+    .ghiv2--single .ghiv2__ingredients {
+        display: flex;
+        width: max-content;
+        min-width: 0;
+        max-width: none;
+        grid-template-columns: none;
+        gap: 31px;
+        align-items: flex-start;
+        transform: translate3d(0, 0, 0);
+        will-change: transform;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: pan-y;
+        cursor: grab;
+    }
+
+    .ghiv2__ingredients.is-dragging {
+        cursor: grabbing;
+    }
+
+
+    /* Cards */
+
+    .ghiv2 .ghiv2__ingredient,
+    .ghiv2.ghiv2--single .ghiv2__ingredient {
+        display: block;
+        flex: 0 0 62vw;
+        width: 62vw;
+        max-width: 250px;
+        min-width: 220px;
+        margin: 0;
+    }
+
+
+    /* Image */
+
+    .ghiv2__ingredient-media,
+    .ghiv2--two-up .ghiv2__ingredient-media,
+    .ghiv2--single .ghiv2__ingredient-media,
+    .ghiv2.ghiv2--count-3.ghiv2--standard .ghiv2__ingredient-media,
+    .ghiv2--count-2 .ghiv2__ingredient-media {
+        display: flex;
+
+        width: 100%;
+        height: 160px;
+
+        margin: 0 0 25px;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ghiv2__ingredient-image,
+    .ghiv2--two-up .ghiv2__ingredient-image,
+    .ghiv2--single .ghiv2__ingredient-image {
+        display: block;
+
+        width: 100%;
+        height: 100%;
+        max-width: 240px;
+
+        object-fit: contain;
+        object-position: center;
+
+        pointer-events: none;
+
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+    }
+
+
+    /* Text */
+
+    .ghiv2__ingredient-content,
+    .ghiv2--single .ghiv2__ingredient-content {
+        width: 100%;
+        max-width: none;
+
+        margin: 0;
+    }
+
+    .ghiv2__ingredient-title {
+        width: 100%;
+
+        margin: 0 0 10px;
+        padding: 0 0 9px;
+
+        font-size: 16px;
+        line-height: 26px;
+
+        word-break: normal;
+        overflow-wrap: normal;
+    }
+
+    .ghiv2__ingredient-description {
+        width: 100%;
+
+        font-size: 16px;
+        line-height: 26px;
+
+        word-break: normal;
+        overflow-wrap: break-word;
+    }
+
+
+    /* Ingredient list */
+
+    .ghiv2__full-list,
+    .ghiv2--two-up .ghiv2__full-list,
+    .ghiv2--single .ghiv2__full-list {
+        display: flex;
+
+        width: 100%;
+
+        justify-content: center;
+
+        margin-top: 36px;
+    }
+
+    .ghiv2__full-list-link {
+        font-size: 15px;
+        line-height: 20px;
+
+        text-align: center;
+    }
+
+
+    /* Prop 65 */
+
+    .ghiv2__prop65,
+    .ghiv2--two-up .ghiv2__prop65,
+    .ghiv2--single .ghiv2__prop65 {
+        width: 100%;
+
+        margin-top: 25px;
+        margin-left: 0;
+
+        padding: 0 0 34px;
+
+        border-bottom: 1px solid #777;
+    }
+
+    .ghiv2__prop65-link {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media screen and (max-width: 480px) {
+
+    .ghiv2__inner,
+    .ghiv2--two-up .ghiv2__inner,
+    .ghiv2--single .ghiv2__inner {
+        width: calc(100% - 66px);
+    }
+
+    .ghiv2__heading,
+    .ghiv2--single .ghiv2__heading {
+        font-size: 34px;
+        line-height: 39px;
+    }
+
+    .ghiv2 .ghiv2__ingredient,
+    .ghiv2.ghiv2--single .ghiv2__ingredient {
+        flex-basis: 62vw;
+        width: 62vw;
+        max-width: 250px;
+        min-width: 220px;
+    }
+
+}
