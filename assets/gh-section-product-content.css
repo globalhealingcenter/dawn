@@ -696,12 +696,9 @@
         --item-count: 2;
     }
 
-    .ghd--block--curated [data-type="items"][data-item-count="3"] {
-        --item-count: 3;
-    }
-
+    .ghd--block--curated [data-type="items"][data-item-count="3"],
     .ghd--block--curated [data-type="items"][data-item-count="4"] {
-        --item-count: 4;
+        --item-count: 3;
     }
 
     .ghd--block--blank img {
