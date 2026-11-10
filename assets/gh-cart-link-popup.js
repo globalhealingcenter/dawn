@@ -1,26 +1,18 @@
 /*
-  Add-to-cart links that open the header cart popup (not Rebuy Smart Cart).
+  Add-to-cart links that stay on the page and open the Rebuy Smart Cart sidebar.
 
   Works with Shopify cart permalinks already used on landing pages:
     <a href="/cart/45203563708616:1">Add to cart</a>
     <a href="https://globalhealing.com/cart/111:1,222:2">Add both</a>
 
   Only links inside .landing-page or marked with [data-cart-popup] are handled.
-  If anything fails, the link falls back to its normal behaviour.
+  If Rebuy isn't available, the theme's header cart popup opens instead.
 */
 (function () {
   'use strict';
 
   var SCOPE = '.landing-page a[href*="/cart/"], a[data-cart-popup][href*="/cart/"]';
   var SECTIONS = 'cart-notification-product,cart-notification-button,cart-icon-bubble';
-
-  // Rebuy hides the theme's header popup site-wide with
-  // `.smart-cart--enabled #cart-notification { display: none !important }`.
-  // This script only loads on pages that use the header popup, so show it
-  // again here while it is open.
-  var style = document.createElement('style');
-  style.textContent = 'body.smart-cart--enabled #cart-notification.active { display: block !important; }';
-  document.head.appendChild(style);
 
   // "/cart/111:1,222:2" -> [{ id: 111, quantity: 1 }, { id: 222, quantity: 2 }]
   function parseItems(href) {
@@ -40,17 +32,30 @@
     });
   }
 
-  // Close Rebuy's Smart Cart if it opens because of this add to cart.
-  function blockRebuyFor(ms) {
-    function hide() {
-      if (window.Rebuy && window.Rebuy.SmartCart && typeof window.Rebuy.SmartCart.hide === 'function') {
-        window.Rebuy.SmartCart.hide();
-      }
+  function rebuySmartCart() {
+    var rebuy = window.Rebuy;
+    return rebuy && rebuy.SmartCart && typeof rebuy.SmartCart.show === 'function' ? rebuy : null;
+  }
+
+  function openRebuy(rebuy) {
+    var refresh = rebuy.Cart && typeof rebuy.Cart.fetchCart === 'function'
+      ? Promise.resolve(rebuy.Cart.fetchCart())
+      : Promise.resolve();
+
+    return refresh.catch(function () {}).then(function () {
+      rebuy.SmartCart.show();
+    });
+  }
+
+  function openHeaderPopup(data) {
+    var popup = document.querySelector('cart-notification');
+    if (!popup) {
+      window.location.href = '/cart';
+      return;
     }
-    document.addEventListener('rebuy:smartcart.show', hide);
-    setTimeout(function () {
-      document.removeEventListener('rebuy:smartcart.show', hide);
-    }, ms);
+    // The header popup shows the first added item.
+    data.key = data.items && data.items[0] && data.items[0].key;
+    popup.renderContents(data);
   }
 
   // Capture phase: Rebuy Smart Cart puts its own click handler on cart links
@@ -63,16 +68,13 @@
     if (!link) return;
 
     var items = parseItems(link.getAttribute('href'));
-    var popup = document.querySelector('cart-notification');
-    if (!items || !popup) return; // let the link work normally
+    if (!items) return; // not a cart permalink, let the link work normally
 
     event.preventDefault();
-    event.stopPropagation(); // keep Rebuy's link handler from running
+    event.stopPropagation(); // keep Rebuy's own link handler (go to checkout) from running
     if (link.dataset.loading) return;
     link.dataset.loading = '1';
     link.setAttribute('aria-busy', 'true');
-
-    blockRebuyFor(3000);
 
     fetch('/cart/add.js', {
       method: 'POST',
@@ -90,9 +92,9 @@
         });
       })
       .then(function (data) {
-        // The header popup shows the first added item.
-        data.key = data.items && data.items[0] && data.items[0].key;
-        popup.renderContents(data);
+        var rebuy = rebuySmartCart();
+        if (rebuy) return openRebuy(rebuy);
+        openHeaderPopup(data);
       })
       .catch(function (error) {
         console.error('[GH cart link]', error);
