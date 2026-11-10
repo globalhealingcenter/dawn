@@ -45,6 +45,8 @@
     }, ms);
   }
 
+  // Capture phase: Rebuy Smart Cart puts its own click handler on cart links
+  // and stops propagation, so a normal (bubbling) listener never runs.
   document.addEventListener('click', function (event) {
     if (event.defaultPrevented || event.button !== 0) return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -57,6 +59,7 @@
     if (!items || !popup) return; // let the link work normally
 
     event.preventDefault();
+    event.stopPropagation(); // keep Rebuy's link handler from running
     if (link.dataset.loading) return;
     link.dataset.loading = '1';
     link.setAttribute('aria-busy', 'true');
@@ -91,5 +94,5 @@
         delete link.dataset.loading;
         link.removeAttribute('aria-busy');
       });
-  });
+  }, true);
 })();
