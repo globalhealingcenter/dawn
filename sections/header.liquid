@@ -117,6 +117,9 @@
 <script src="{{ 'details-disclosure.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
+{%- if request.page_type == 'page' and page.handle == '2026-bfcm-insiders' -%}
+  <script src="{{ 'gh-cart-link-popup.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
 <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
 {%- if settings.cart_type == "drawer" -%}
   <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
