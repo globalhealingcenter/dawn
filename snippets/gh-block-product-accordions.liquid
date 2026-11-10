@@ -1,0 +1,728 @@
+{% assign has_product_config = false %}
+{% assign sf_v3 = false %}
+
+{% if product and product.metafields.gh_product.data %}
+  {% assign has_product_config = true %}
+  {% assign config = product.metafields.gh_product.data.value %}
+  {% if config.supplement_facts_v3 and config.supplement_facts_v3.size > 0 %}
+    {% assign sf_v3 = true %}
+  {% endif %}
+{% endif %}
+
+<div
+  class="product__info-accordions"
+  data-block-id="{{ block.id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="info-accordions">
+    {% comment %}
+      Accordion 1: Made With Purpose
+      Replace the metafield below if required.
+    {% endcomment %}
+
+    {% if has_product_config and config.made_with_purpose != blank %}
+      {% assign made_with_purpose = config.made_with_purpose %}
+
+      {% if made_with_purpose.items != blank %}
+        <div class="accordion-item accordion-item--made-with-purpose">
+          <button
+            type="button"
+            class="accordion-header"
+            aria-expanded="false"
+            aria-controls="MadeWithPurpose-{{ block.id }}"
+          >
+            <h3 class="accordion-titles">Made With Purpose</h3>
+
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+
+          <div
+            id="MadeWithPurpose-{{ block.id }}"
+            class="accordion-content"
+          >
+            <div class="accordion-content-inner made-with-purpose-content">
+              <div class="made-with-purpose-benefits">
+                {% for item in made_with_purpose.items %}
+                  {% if item.title != blank or item.content != blank %}
+                    <div class="made-with-purpose-benefit">
+                      {% if item.title != blank %}
+                        <strong class="made-with-purpose-benefit-title">
+                          {{ item.title }}
+                        </strong>
+                      {% endif %}
+
+                      {% if item.content != blank %}
+                        <p>{{ item.content }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              {% assign manufacturing = made_with_purpose.manufacturing %}
+
+              <div class="made-with-purpose-manufacturing">
+                <div class="made-with-purpose-manufacturing-image">
+                  {% if manufacturing.image != blank %}
+                    <img
+                      src="{{ manufacturing.image }}"
+                      alt="{{ manufacturing.image_alt | default: 'Global Healing' | escape }}"
+                      width="130"
+                      height="130"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    {%- comment -%}
+                      Replace with the actual Global Healing manufacturing seal asset.
+                    {%- endcomment -%}
+                    <img
+                      src="{{ 'made-with-purpose.png' | asset_url }}"
+                      alt="Global Healing"
+                      width="130"
+                      height="130"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+
+                <div class="made-with-purpose-manufacturing-content">
+                  {% if manufacturing.content != blank %}
+                    <p>{{ manufacturing.content }}</p>
+                  {% else %}
+                    <p>
+                      Crafted to exceed every standard. Made in-house in small batches through precision processes that
+                      preserve purity, potency, and promote better absorption.
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% comment %}
+      Supplement Facts Accordion
+    {% endcomment %}
+
+    {% assign supplement_accordion = blank %}
+
+    {% if has_product_config and config.supplement_facts_accordion != blank %}
+      {% assign supplement_accordion = config.supplement_facts_accordion %}
+    {% endif %}
+
+    {% if supplement_accordion != blank %}
+      {% assign supplement_suggested_use = supplement_accordion.suggested_use %}
+      {% assign certification_seals = supplement_accordion.certification_seals %}
+      {% assign clean_formulation = supplement_accordion.clean_formulation %}
+      {% assign supplement_label = supplement_accordion.label %}
+
+      {% assign has_supplement_content = false %}
+
+      {% if supplement_suggested_use.content != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if certification_seals != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if clean_formulation.content != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if supplement_label.image != blank %}
+        {% assign has_supplement_content = true %}
+      {% endif %}
+
+      {% if has_supplement_content %}
+        <div class="accordion-item accordion-item--supplement-facts">
+          <button
+            type="button"
+            class="accordion-header"
+            aria-expanded="false"
+            aria-controls="SupplementFacts-{{ block.id }}"
+          >
+            <h3 class="accordion-titles">Supplement Facts</h3>
+
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+
+          <div
+            id="SupplementFacts-{{ block.id }}"
+            class="accordion-content"
+          >
+            <div class="accordion-content-inner supplement-facts-content">
+              {% if supplement_suggested_use.content != blank %}
+                <div class="supplement-facts-section supplement-facts-suggested-use">
+                  <h4 class="supplement-facts-heading">
+                    {{ supplement_suggested_use.title | default: 'Suggested Use' }}
+                  </h4>
+
+                  <div class="supplement-facts-copy">
+                    {{ supplement_suggested_use.content }}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if supplement_suggested_use.anchor.url != blank %}
+                <a
+                  href="{{ supplement_suggested_use.anchor.url }}"
+                  class="supplement-facts-anchor"
+                >
+                  {{ supplement_suggested_use.anchor.text }}
+                </a>
+              {% endif %}
+
+              {% assign included_program = supplement_accordion.included_in_program %}
+
+              {% if included_program.products != blank %}
+                <div class="supplement-facts-program">
+                  <h4 class="supplement-facts-heading">
+                    {{ included_program.title }}
+                  </h4>
+
+                  <div class="supplement-facts-program-products">
+                    {% for product in included_program.products %}
+                      <a
+                        href="{{ product.url }}"
+                        class="supplement-facts-program-product"
+                      >
+                        {% if product.image != blank %}
+                          <img
+                            src="{{ product.image }}"
+                            alt="{{ product.title }}"
+                            loading="lazy"
+                          >
+                        {% endif %}
+
+                        <span>{{ product.title }}</span>
+                      </a>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endif %}
+
+              {% if certification_seals != blank %}
+                <div class="supplement-facts-certifications">
+                  {% for seal in certification_seals %}
+                    {% case seal %}
+                      {% when 'kosher' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="kosher"
+                        >
+                          <img
+                            src="{{ 'kosher.png' | asset_url }}"
+                            alt="Kosher Certified"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+
+                      {% when 'non_gmo' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="non-gmo"
+                        >
+                          <img
+                            src="{{ 'non-gmo.png' | asset_url }}"
+                            alt="Non-GMO Project Verified"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+
+                      {% when 'usda_organic' %}
+                        <div
+                          class="supplement-facts-certification"
+                          data-certification="organic"
+                        >
+                          <img
+                            src="{{ 'organic.png' | asset_url }}"
+                            alt="USDA Organic"
+                            loading="lazy"
+                            width="70"
+                            height="70"
+                          >
+                        </div>
+                    {% endcase %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if clean_formulation.content != blank %}
+                <div class="supplement-facts-section supplement-facts-clean-formulation">
+                  <h4 class="supplement-facts-heading">
+                    {{ clean_formulation.title | default: 'Clean Formulation' }}
+                  </h4>
+
+                  <div class="supplement-facts-copy supplement-facts-clean-copy">
+                    {% if clean_formulation.content != blank %}
+                      {{ clean_formulation.content | replace_first: 'Made without:', '<strong>Made without:</strong>' }}
+
+                    {% else %}
+                      <strong>Made without:</strong> harsh chemicals, alcohol, gluten, soy, dairy, animal products,
+                      binders, fillers, artificial dyes, flavors, or additives.
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+              
+              {% if sf_v3 %}
+                <br>
+                {% render 'gh-product-supplement-facts-v3', panels: config.supplement_facts_v3, force_single: true %}
+                <br>
+              {% else %}
+                <div class="supplement-facts-label">
+                {% if supplement_label.image != blank %}
+                  <img
+                    src="{{ supplement_label.image }}"
+                    alt="{{ supplement_label.alt | default: 'Supplement Facts' | escape }}"
+                    loading="lazy"
+                    width="1200"
+                    height="1600"
+                  >
+
+                {% else %}
+                  <img
+                    src="{{ 'oxy-powder-supplement-facts.png' | asset_url }}"
+                    alt="Oxy-Powder Supplement Facts"
+                    loading="lazy"
+                    width="1200"
+                    height="1600"
+                  >
+                {% endif %}
+              </div>
+              {% endif %}          
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  {% comment %} OXY-POWDER STUDY {% endcomment %}
+  {% assign has_study = false %}
+
+  {% if has_product_config %}
+    {% for config_block in config.blocks %}
+      {% if config_block.type == 'study' %}
+        {% assign has_study = true %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if has_study %}
+    <div class="citruslabs-study mt2">
+      <span class="bold block gh-font-secondary"> Real People, Real Results </span>
+
+      <div class="flex justify-between">
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">95%</div>
+          <div class="gh-font-secondary line-height-2">
+            constipation<br>
+            relief
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">88%</div>
+          <div class="gh-font-secondary line-height-2">
+            bloating<br>
+            relief
+          </div>
+        </div>
+
+        <div class="flex items-center gap-1 flex-wrap mb1">
+          <div class="h3 color-gold">88%</div>
+          <div class="gh-font-secondary line-height-2">
+            improved<br>
+            digestion
+          </div>
+        </div>
+      </div>
+
+      <a
+        class="gh-font-secondary color-green"
+        href="https://cdn.globalhealing.com/products/docs/oxy-powder/global-healing_oxy-powder_study-report-20435.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Read the Citrus Lab Study
+      </a>
+    </div>
+  {% endif %}
+</div>
+
+<script>
+  (function () {
+    const currentScript = document.currentScript;
+
+    const blockContainer = currentScript
+      ? currentScript.previousElementSibling
+      : document.querySelector('[data-block-id="{{ block.id }}"]');
+
+    if (!blockContainer) return;
+
+    const accordionHeaders = blockContainer.querySelectorAll('.accordion-header');
+
+    accordionHeaders.forEach(function (accordionHeader) {
+      accordionHeader.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const accordionContent = accordionHeader.nextElementSibling;
+        const accordionIcon = accordionHeader.querySelector('.accordion-icon');
+
+        const isExpanded = accordionHeader.getAttribute('aria-expanded') === 'true';
+
+        accordionHeaders.forEach(function (otherHeader) {
+          if (otherHeader === accordionHeader) return;
+
+          const otherContent = otherHeader.nextElementSibling;
+          const otherIcon = otherHeader.querySelector('.accordion-icon');
+
+          otherHeader.setAttribute('aria-expanded', 'false');
+
+          if (otherContent) {
+            otherContent.style.display = 'none';
+          }
+
+          if (otherIcon) {
+            otherIcon.textContent = '+';
+          }
+        });
+
+        if (isExpanded) {
+          accordionHeader.setAttribute('aria-expanded', 'false');
+
+          if (accordionContent) {
+            accordionContent.style.display = 'none';
+          }
+
+          if (accordionIcon) {
+            accordionIcon.textContent = '+';
+          }
+        } else {
+          accordionHeader.setAttribute('aria-expanded', 'true');
+
+          if (accordionContent) {
+            accordionContent.style.display = 'block';
+          }
+
+          if (accordionIcon) {
+            accordionIcon.textContent = '−';
+          }
+        }
+      });
+    });
+  })();
+</script>
+
+<style>
+  .info-accordions {
+    margin-top: 1rem;
+  }
+
+  .accordion-item {
+    border-top: 1px solid var(--gh-color-gray);
+  }
+
+  .accordion-item:last-child {
+    border-bottom: 1px solid var(--gh-color-gray);
+  }
+
+  .accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 1.25rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--gh-font-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00000095;
+    text-align: left;
+  }
+
+  .accordion-header[aria-expanded='true'] {
+    color: var(--gh-color-green);
+  }
+
+  .accordion-header h3 {
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  .info-accordions .accordion-icon {
+    flex: 0 0 auto;
+    margin-right: 30px;
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 100;
+  }
+
+  .accordion-content {
+    display: none;
+  }
+
+  .accordion-content-inner {
+    padding-bottom: 1.5rem;
+  }
+
+  .accordion-content p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  /* Made With Purpose Accordion Content */
+  .made-with-purpose-content {
+    padding-bottom: 60px;
+  }
+
+  .made-with-purpose-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0px;
+  }
+
+  .made-with-purpose-benefit {
+    margin: 0;
+  }
+
+  .made-with-purpose-benefit-title {
+    display: block;
+    margin: 0 0 2px;
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 700;
+    color: var(--gh-color-green);
+  }
+
+  .made-with-purpose-benefit p {
+    margin: 0;
+    line-height: 25px;
+    color: var(--gh-color-gray);
+  }
+
+  .made-with-purpose-manufacturing {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-top: 26px;
+    padding: 20px 0px 0px;
+    border-top: 1px solid var(--gh-color-gray);
+  }
+
+  .made-with-purpose-manufacturing-image img {
+    display: block;
+    width: 110px;
+    min-width: 110px;
+    height: 110px;
+  }
+
+  .made-with-purpose-manufacturing-content p {
+    margin: 0;
+    font-family: var(--gh-font-primary);
+    line-height: 25px;
+    font-style: italic;
+    color: var(--gh-color-gray);
+  }
+
+  /* Supplement Facts Content */
+  .supplement-facts-content {
+    padding: 0px;
+  }
+
+  .supplement-facts-section {
+    margin: 0;
+  }
+
+  .supplement-facts-heading {
+    margin: 0 0 2px;
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    line-height: 34px;
+    font-weight: 700;
+    color: var(--gh-color-green);
+  }
+
+  .supplement-facts-copy {
+    font-size: 20px;
+    line-height: 25px;
+    color: var(--gh-color-gray);
+  }
+
+  .supplement-facts-copy br + br {
+    display: block;
+    content: '';
+    margin-top: 22px;
+  }
+
+  .supplement-facts-program {
+    margin-top: 25px;
+  }
+
+  .supplement-facts-program-products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 18px;
+  }
+
+  .supplement-facts-program-product {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .supplement-facts-program-product img {
+    width: 34px;
+    height: 34px;
+    object-fit: contain;
+  }
+
+  .supplement-facts-program-product span {
+    font-size: 20px;
+    color: var(--gh-color-gray);
+  }
+
+  .supplement-facts-certifications {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 34px;
+    padding-top: 30px;
+    border-top: 1px solid var(--gh-color-gray);
+  }
+
+  .supplement-facts-certification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .supplement-facts-certification img {
+    display: block;
+    width: auto;
+    max-width: 72px;
+    max-height: 60px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .supplement-facts-clean-formulation {
+    margin-top: 28px;
+  }
+
+  .supplement-facts-clean-formulation .supplement-facts-copy {
+    line-height: 21px;
+  }
+
+  .supplement-facts-label {
+    margin: 18px 0px 40px;
+    padding-top: 32px;
+  }
+
+  .supplement-facts-label img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .supplement-facts-clean-copy strong {
+    font-weight: 700;
+    color: inherit;
+  }
+
+  .supplement-facts-anchor {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--gh-color-green);
+    font-family: var(--gh-font-secondary);
+    font-size: 20px;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: 767px) {
+    .made-with-purpose-benefit-title,
+    .supplement-facts-heading {
+      font-size: 16px;
+    }
+
+    .made-with-purpose-benefit p {
+      font-size: 16px;
+    }
+
+    .made-with-purpose-manufacturing {
+      gap: 15px;
+    }
+
+    .made-with-purpose-manufacturing-image img {
+      width: 70px;
+      height: 70px;
+      min-width: 70px;
+      display: block;
+    }
+
+    .made-with-purpose-manufacturing-content p {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .supplement-facts-heading {
+      font-size: 18px;
+    }
+
+    .supplement-facts-copy,
+    .supplement-facts-anchor,
+    .supplement-facts-program-product span {
+      font-size: 16px;
+      line-height: 21px;
+    }
+
+    .supplement-facts-program-products {
+      gap: 16px;
+    }
+
+    .supplement-facts-copy br + br {
+      margin-top: 18px;
+    }
+
+    .supplement-facts-certifications {
+      gap: 14px;
+      margin-top: 26px;
+      padding-top: 25px;
+    }
+
+    .supplement-facts-certification img {
+      max-width: 60px;
+      max-height: 52px;
+    }
+
+    .supplement-facts-clean-formulation {
+      margin-top: 25px;
+    }
+
+    .supplement-facts-label {
+      margin-top: 16px;
+      padding-top: 18px;
+    }
+  }
+</style>

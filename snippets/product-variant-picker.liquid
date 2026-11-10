@@ -111,6 +111,7 @@
         form="{{ product_form_id }}"
       >
         {%- for variant in product.variants -%}
+          {%- assign variant_label = variant.metafields.globalhealing.label_for_variant.value | default: variant.metafields.globalhealing.label_for_variant -%}
           <option
             {% if variant == product.selected_or_first_available_variant %}
               selected="selected"
@@ -122,6 +123,9 @@
           >
             {%- liquid
               echo variant.title
+              if variant_label != blank
+                echo ' - ' | append: variant_label
+              endif
               echo variant.price | money | strip_html | prepend: ' - '
               if variant.available == false
                 echo 'products.product.sold_out' | t | prepend: ' - '

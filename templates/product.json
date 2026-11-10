@@ -30,18 +30,21 @@
             "product": "{{product}}"
           }
         },
-        "e142f8f9-de0e-4693-8e61-18c1d705b427": {
+        "clinical_choice_nzbtiK": {
+          "type": "clinical_choice",
+          "settings": {}
+        },
+        "info_tabs_zjEKBh": {
           "type": "info_tabs",
           "settings": {
-            "tab_1_title": "About",
-            "tab_2_title": "Who It's For",
-            "tab_3_title": "Suggested Use"
+            "tab_1_title": "About"
           }
         },
-        "price": {
-          "type": "price",
-          "disabled": true,
-          "settings": {}
+        "info_tabs_v2_i7fnbq": {
+          "type": "info_tabs_v2",
+          "settings": {
+            "tab_1_title": "About"
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -49,18 +52,22 @@
             "picker_type": "button"
           }
         },
-        "custom_liquid_cFDQaa": {
-          "type": "custom_liquid",
-          "disabled": true,
-          "settings": {
-            "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
-          }
-        },
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK": {
           "type": "shopify://apps/yotpo-loyalty-rewards/blocks/product-points-module-app-block/2f9660df-5018-4e02-9868-ee1fb88d6ccd",
           "settings": {}
         },
-        "ordergroove_offer": {
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {}
+        },
+        "custom_liquid_cFDQaa": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "{% if product.handle == 'nad' %}\n  <p>Earn 2x Live Healthy Rewards points on NAD+ purchases for a limited time!</p>\n{% endif %}"
+          }
+        },
+        "ordergroove_subscriptions_pdp_offer_block_wtWwxz": {
           "type": "shopify://apps/ordergroove-subscriptions/blocks/pdp-offer-block/cf69fc68-e893-4d33-87e3-4e71e2f5822f",
           "settings": {
             "location": "{{ product.metafields.ordergroove.pdp_enrollment_code.value }}"
@@ -87,6 +94,10 @@
             "show_gift_card_recipient": true
           }
         },
+        "info_accordions_phd4hW": {
+          "type": "info_accordions",
+          "settings": {}
+        },
         "gh_out_of_stock_form_dAeEPR": {
           "type": "gh_out_of_stock_form",
           "settings": {
@@ -97,7 +108,7 @@
           }
         },
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6": {
-          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
@@ -179,15 +190,18 @@
       "block_order": [
         "title",
         "6cec8e15-6f0b-42e3-ab3f-9bf022206d45",
-        "e142f8f9-de0e-4693-8e61-18c1d705b427",
-        "price",
+        "clinical_choice_nzbtiK",
+        "info_tabs_zjEKBh",
+        "info_tabs_v2_i7fnbq",
         "variant_picker",
-        "custom_liquid_cFDQaa",
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
-        "ordergroove_offer",
+        "price",
+        "custom_liquid_cFDQaa",
+        "ordergroove_subscriptions_pdp_offer_block_wtWwxz",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
         "custom_liquid_TxJtfK",
         "buy_buttons",
+        "info_accordions_phd4hW",
         "gh_out_of_stock_form_dAeEPR",
         "tolstoy_shoppable_video_quiz_stories_block_FwffT6",
         "abra_promotions_banner_gift_RQAc3p",
@@ -295,7 +309,7 @@
       "type": "apps",
       "blocks": {
         "tolstoy_shoppable_video_quiz_stories_block_gCYGWz": {
-          "type": "shopify://apps/tolstoy-ads-image-video/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
+          "type": "shopify://apps/tolstoy/blocks/stories-block/06fa8282-42ff-403e-b67c-1936776aed11",
           "disabled": true,
           "settings": {
             "publishId": "zgl654227kz70"
@@ -342,6 +356,34 @@
         "btn_bg": "#21472d",
         "btn_color": "#ffffff"
       }
+    },
+    "sticky_purchase_bar_v2_PqDkRw": {
+      "type": "sticky-purchase-bar-v2",
+      "name": "Sticky Purchase Bar V2",
+      "settings": {
+        "show_after_scroll": 500,
+        "theme_variant": "dark",
+        "max_width": 1500,
+        "padding_vertical": 16,
+        "padding_horizontal": 30,
+        "light_background": "#f9f2e8",
+        "light_text": "#21472d",
+        "light_accent": "#c8a735",
+        "dark_background": "#21472d",
+        "dark_text": "#ffffff",
+        "dark_accent": "#c8a735",
+        "show_reviews": true,
+        "product_font_size": 25,
+        "price_font_size": 20,
+        "button_text": "Add to Cart",
+        "button_font_size": 18,
+        "button_radius": 5,
+        "benefits_background": "#21472d",
+        "benefits_text_color": "#c8a735",
+        "show_top_button": true,
+        "hide_mobile": false,
+        "hide_desktop": false
+      }
     }
   },
   "order": [
@@ -357,6 +399,7 @@
     "1758490710fe464197",
     "custom_liquid_kweCXJ",
     "custom_liquid_8t6wPh",
-    "gh_sticky_atc_gRBYqU"
+    "gh_sticky_atc_gRBYqU",
+    "sticky_purchase_bar_v2_PqDkRw"
   ]
 }
