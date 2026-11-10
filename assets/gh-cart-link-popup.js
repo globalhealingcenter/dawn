@@ -14,6 +14,14 @@
   var SCOPE = '.landing-page a[href*="/cart/"], a[data-cart-popup][href*="/cart/"]';
   var SECTIONS = 'cart-notification-product,cart-notification-button,cart-icon-bubble';
 
+  // Rebuy hides the theme's header popup site-wide with
+  // `.smart-cart--enabled #cart-notification { display: none !important }`.
+  // This script only loads on pages that use the header popup, so show it
+  // again here while it is open.
+  var style = document.createElement('style');
+  style.textContent = 'body.smart-cart--enabled #cart-notification.active { display: block !important; }';
+  document.head.appendChild(style);
+
   // "/cart/111:1,222:2" -> [{ id: 111, quantity: 1 }, { id: 222, quantity: 2 }]
   function parseItems(href) {
     var path;
