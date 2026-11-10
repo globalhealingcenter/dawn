@@ -12,30 +12,10 @@
     text-transform: uppercase;
 }
 
-.product__eyebrow {
-    font-family: var(--gh-font-secondary);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: 0;
-    text-transform: uppercase;
-    color: #5F8AA5;
-    margin: 10px 0 2px;
-}
-
-.product__eyebrow a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.product__eyebrow a:hover {
-    text-decoration: underline;
-}
-
 
 /* product tabs */
 .product__info-tabs {
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 }
 
 .product__info-tabs li p {
@@ -308,6 +288,40 @@
     padding: 8rem 1rem;
 }
 
+.curate-image-size img {
+    height: auto;
+    width: 225px;
+}
+
+.eyebrow-curated {
+    margin: 0 0 5px;
+    color: var(--gh-color-gray);
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghd--block--curated .eyebrow.h2 {
+    font-family: var(--gh-font-primary);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 50px;
+}
+
+.ghd--block--curated .eyebrow.h2 strong {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.ghd--block--curated .h4.mb3 {
+    width: 537px;
+    margin: 20px auto 50px;
+    font-size: 20px;
+    max-width: 100%;
+    color: var(--gh-color-gray);
+}
+
 .ghd--block--curated [data-type="header"] {
     text-align: center;
     padding-bottom: 2rem;
@@ -317,6 +331,11 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+}
+
+.ghd--block--curated .subtle {
+    font-family: var(--gh-font-secondary);
+    color: var(--gh-color-green);
 }
 
 .ghd--block--curated [data-type="items"]>div {
@@ -343,6 +362,7 @@
     font-family: var(--gh-font-secondary);
     margin: 0;
     line-height: 1.4;
+    color: var(--gh-color-green);
 }
 
 .ghd--block--curated [data-type="items"] .description {
@@ -351,11 +371,9 @@
 
 .ghd--block--curated [data-type="items"] .price {
     font-weight: bold;
-    margin-top: .5em;
     margin-bottom: 1em;
-    border: 1px solid var(--gh-color-gray);
-    border-width: 1px 0;
     padding: 0.25em 0;
+    color: var(--gh-color-green);
 }
 
 @media (min-width: 750px) and (max-width: 1200px) {
@@ -445,7 +463,6 @@
         z-index: 0;
     }
 }
-
 
 /*
     Miron Glass
@@ -590,8 +607,25 @@
         display: none;
     }
 
+    .ghd--block--curated .eyebrow.h2 {
+        font-size: 30px;
+        line-height: 40px;
+    }
+
+    .eyebrow-curated {
+        margin-bottom: 2px;
+        font-size: 16px;
+        line-height: 27px;
+    }
+
+    .ghd--block--curated .h4.mb3 {
+        margin: 10px auto 30px;
+        font-size: 16px;
+        line-height: 26px;
+    }
+
     .product__title h1 {
-        font-size: 3.5rem;
+        font-size: 30px;
     }
 
     h2.eyebrow,
@@ -662,12 +696,9 @@
         --item-count: 2;
     }
 
-    .ghd--block--curated [data-type="items"][data-item-count="3"] {
-        --item-count: 3;
-    }
-
+    .ghd--block--curated [data-type="items"][data-item-count="3"],
     .ghd--block--curated [data-type="items"][data-item-count="4"] {
-        --item-count: 4;
+        --item-count: 3;
     }
 
     .ghd--block--blank img {
@@ -791,23 +822,219 @@
 .ghd--block--study {
     padding-top: 7rem;
     padding-bottom: 7rem;
-    box-shadow: 0 -8px 8px #00000020;
+    position: relative;
+}
+
+.ghd--block--study-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ghd--block--study-content {
+    z-index: 1;
+    position: relative;
+    background-color: rgb(255 255 255 / 70%);
+    border-radius: 6px;
+    padding: 40px 90px;
+}
+
+.ghd--block--study-content h2.eyebrow {
+    font-size: 52px;
+}
+
+.ghd--block--study-content i {
+    font-weight: 400;
+}
+
+.ghd-study--results--stats img {
+    width: 120px;
+    height: 120px;
+}
+
+.gh--stats-content {
+    position: relative;
+    padding: 8px 0px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.gh--stats-content:before,
+.gh--stats-content:after {
+    content: '';
+    width: 80%;
+    height: 0.5px;
+    background-color: var(--gh-color-gray);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.gh--stats-content:before {
+    top: 0
+}
+
+.gh--stats-content:after {
+    bottom: 0
 }
 
 .ghd-study--results {
-    --gap-padding: 65px;
+    --gap-padding: 25px;
+}
+
+.gh--study-content-right p {
+    font-size: 21px;
+    line-height: 31px;
+}
+
+.gh--study-content-right {
+    padding-left: 35px;
+}
+
+.download-the-study {
+    font-size: 21px;
+    background-color: #fff;
+    padding: 10px 25px;
+    border-radius: 6px;
+    line-height: 26px;
+    margin-left: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.download-the-study__icon {
+    flex: none;
 }
 
 .ghd-study--results>div:first-child {
     padding-right: var(--gap-padding);
 }
 
-.ghd-study--results>div:last-child {
-    padding-left: var(--gap-padding);
-}
-
 .ghd-study--results--stats .flex {
     height: 100%;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Backstory V2
+|--------------------------------------------------------------------------
+*/
+
+.ghd--block--backstory-v2 {
+    background: #efe5d9;
+    overflow: hidden;
+}
+
+.ghd--block--backstory-v2__cols {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    align-items: stretch;
+    min-height: 720px;
+}
+
+.ghd--block--backstory-v2__content {
+    display: flex;
+    align-items: center;
+    padding: 10rem 7rem 10rem 16rem;
+}
+
+.ghd--block--backstory-v2__content-inner {
+    width: 100%;
+    max-width: 540px;
+}
+
+.ghd--block--backstory-v2__label {
+    margin: 0 0 5px;
+    color: var(--gh-color-gray);
+    font-size: 25px;
+    line-height: 35px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.ghd--block--backstory-v2__heading {
+    margin: 0 0 3rem;
+    color: var(--gh-color-green);
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 400;
+    font-style: italic;
+    width: 470px;
+    max-width: 100%;
+}
+
+.ghd--block--backstory-v2__heading strong {
+    font-style: normal;
+    font-weight: 700;
+}
+
+.ghd--block--backstory-v2__copy,
+.ghd--block--backstory-v2__copy p {
+    color: var(--gh-color-gray);
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.ghd--block--backstory-v2__copy p {
+    margin: 0 0 20px;
+}
+
+.ghd--block--backstory-v2__copy p:last-child {
+    margin-bottom: 0;
+}
+
+.ghd--block--backstory-v2__media {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+
+.ghd--block--backstory-v2__media picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.ghd--block--backstory-v2__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.ghd--block--backstory__image img {
+    height: 100%;
+    object-fit: cover;
+    object-position: left;
+}
+
+/*--------------------------------------------------------------
+# Tablet
+--------------------------------------------------------------*/
+
+@media screen and (max-width: 1199px) {
+
+    .ghd--block--backstory-v2__cols {
+        grid-template-columns: 55% 45%;
+        min-height: 620px;
+    }
+
+    .ghd--block--backstory-v2__content {
+        padding: 6rem 5rem;
+    }
+
+    .ghd--block--backstory-v2__heading {
+        font-size: 5rem;
+    }
+
 }
 
 @media (min-width: 1024px) and (max-width: 1260px) {
@@ -823,5 +1050,126 @@
 
     .ghd-study--results--stats {
         padding-bottom: 3rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .ghd--block--study-content h2.eyebrow br {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .ghd--block--backstory-v2__cols {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: auto;
+    }
+
+    .ghd--block--backstory-v2__media {
+        aspect-ratio: 1 / 1;
+    }
+
+    .ghd--block--backstory-v2__image {
+        aspect-ratio: 1 / 1;
+    }
+
+    .ghd--block--backstory-v2__content {
+        padding: 15px 30px 40px;
+    }
+
+    .ghd--block--backstory-v2__content-inner {
+        max-width: 100%;
+    }
+
+    .ghd--block--backstory-v2__label {
+        font-size: 16px;
+        letter-spacing: 1px;
+        line-height: 26px;
+        margin-bottom: 0;
+    }
+
+    .ghd--block--backstory-v2__heading {
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 16px;
+        width: 307px;
+    }
+
+    .ghd--block--backstory-v2__copy {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .ghd--block--backstory__image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .ghd--block--study {
+        padding: 40px 30px;
+    }
+
+    .ghd--block--study .page-width {
+        padding: 0;
+    }
+
+    .ghd--block--study-content h2.eyebrow span {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .ghd--block--study-content h2.eyebrow {
+        font-size: 30px;
+    }
+
+    .ghd--block--study-content {
+        padding: 30px 8px;
+    }
+
+    .ghd-study--results--stats img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .gh--stats-content {
+        font-size: 11px;
+        line-height: 15px;
+        padding: 5px 0;
+    }
+
+    .gh--study-content-right {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .gh--study-content-right p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .gh--study-content-right img {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+    }
+
+    .download-the-study {
+        font-size: 15px;
+        gap: 10px;
+    }
+
+    .download-the-study img,
+    .download-the-study svg {
+        min-width: unset;
+        height: auto;
+        width: 18px !important;
+        min-width: unset;
+    }
+
+    .gh--study-content-right .flex.items-center.gap-2 {
+        gap: 10px;
+        justify-content: center;
+        padding-top: 10px;
     }
 }
