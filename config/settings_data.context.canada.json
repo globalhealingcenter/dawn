@@ -11,5 +11,36 @@
   "context": {
     "market": "canada"
   },
-  "current": {}
+  "current": {
+    "color_schemes": {
+      "background-1": {
+        "settings": {}
+      },
+      "background-2": {
+        "settings": {}
+      },
+      "inverse": {
+        "settings": {}
+      },
+      "accent-1": {
+        "settings": {}
+      },
+      "accent-2": {
+        "settings": {}
+      },
+      "scheme-32a978c0-0277-4065-be97-8704ec15e0f1": {
+        "settings": {}
+      },
+      "scheme-06b3de34-9b7e-4f30-93af-7a09a713f3bf": {
+        "settings": {}
+      }
+    },
+    "blocks": {
+      "15922962008143023269": {
+        "type": "shopify://apps/hukify-mega-menu-creator-pro/blocks/app-embed/314182c7-a8e4-4865-bb75-355b6d1f17ea",
+        "disabled": true,
+        "settings": {}
+      }
+    }
+  }
 }
