@@ -38,7 +38,7 @@
     "blocks": {
       "15922962008143023269": {
         "type": "shopify://apps/hukify-mega-menu-creator-pro/blocks/app-embed/314182c7-a8e4-4865-bb75-355b6d1f17ea",
-        "disabled": false,
+        "disabled": true,
         "settings": {}
       }
     }
