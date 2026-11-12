@@ -61,6 +61,12 @@
           "disabled": true,
           "settings": {}
         },
+        "custom_liquid_TxJtfK": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<div id=\"truemed-instructions\" style=\"font-size: 14px;\" icon-height=\"12\" data-public-id=\"tm_qual_0osddr2w2v\"></div>\n<script src=\"https://static.truemed.com/widgets/product-page-widget.min.js\" defer></script>\n<style>\nstyle=\"font-size: 16px; margin-top: 7px; margin-bottom: 10px; font-family: Poppins, sans-serif;\"\n</style>"
+          }
+        },
         "custom_liquid_cFDQaa": {
           "type": "custom_liquid",
           "settings": {
@@ -81,10 +87,10 @@
             "text": "Complimentary Travel Packs of Oxy-Powder with orders $100+!"
           }
         },
-        "custom_liquid_TxJtfK": {
+        "custom_liquid_bPkrra": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "<div id=\"truemed-instructions\" style=\"font-size: 14px;\" icon-height=\"12\" data-public-id=\"tm_qual_0osddr2w2v\"></div>\n<script src=\"https://static.truemed.com/widgets/product-page-widget.min.js\" defer></script>\n<style>\nstyle=\"font-size: 16px; margin-top: 7px; margin-bottom: 10px; font-family: Poppins, sans-serif;\"\n</style>"
+            "custom_liquid": "<p>Due to a high volume of orders, temporary shipping delays may occur.</p>"
           }
         },
         "buy_buttons": {
@@ -196,10 +202,11 @@
         "variant_picker",
         "yotpo_loyalty_rewards_product_points_module_app_block_JQwTzK",
         "price",
+        "custom_liquid_TxJtfK",
         "custom_liquid_cFDQaa",
         "ordergroove_subscriptions_pdp_offer_block_wtWwxz",
         "14bad82e-ab8f-4993-9000-6f5588d43ebf",
-        "custom_liquid_TxJtfK",
+        "custom_liquid_bPkrra",
         "buy_buttons",
         "info_accordions_phd4hW",
         "gh_out_of_stock_form_dAeEPR",
