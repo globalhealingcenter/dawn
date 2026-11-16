@@ -23,9 +23,9 @@
             "banner_1_url": "https://globalhealing.com/pages/veritree",
             "banner_2_desktop_image": "shopify://shop_images/2026-bfcm-advertised-desktop-banner-ukca.jpg",
             "banner_2_mobile_image": "shopify://shop_images/2026-bfcm-advertised-mobile-banner-ukca.jpg",
-            "banner_2_visible": false,
-            "banner_3_visible": false,
-            "banner_2_url": "shopify://collections/canadian-products"
+            "banner_2_url": "shopify://collections/canadian-products",
+            "banner_2_visible": true,
+            "banner_3_visible": false
           }
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
