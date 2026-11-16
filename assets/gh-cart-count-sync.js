@@ -48,15 +48,41 @@
     return true;
   }
 
+  // "Your Cart (N)" title inside the Rebuy side cart. The header HTML comes from
+  // Rebuy's settings and its count span isn't kept up to date by Rebuy.
+  function rebuyCount() {
+    var cart = window.Rebuy && window.Rebuy.Cart && window.Rebuy.Cart.cart;
+    return cart && typeof cart.item_count === 'number' ? cart.item_count : null;
+  }
+
+  function syncTitle(count) {
+    if (typeof count !== 'number') count = rebuyCount();
+    if (count === null) return;
+    var spans = document.querySelectorAll('.rebuy-cart .header-item-count');
+    for (var i = 0; i < spans.length; i++) {
+      if (spans[i].textContent !== String(count)) spans[i].textContent = count;
+    }
+  }
+
   document.addEventListener('rebuy:cart.change', function (event) {
     var detail = event.detail || {};
     var cart = detail.cart && detail.cart.cart;
     var count = cart && typeof cart.item_count === 'number' ? cart.item_count : null;
+
+    syncTitle(count);
+    // Rebuy may redraw its header right after the change; set it again.
+    setTimeout(function () { syncTitle(); }, 100);
 
     if (count !== null && setCount(count)) return;
 
     // Empty <-> not empty, or no count in the event: ask Shopify for the icon.
     clearTimeout(timer);
     timer = setTimeout(renderSection, 600);
+  });
+
+  document.addEventListener('rebuy:cart.ready', function () { syncTitle(); });
+  document.addEventListener('rebuy:smartcart.show', function () {
+    syncTitle();
+    setTimeout(function () { syncTitle(); }, 100);
   });
 })();
