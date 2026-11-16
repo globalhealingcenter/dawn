@@ -21,6 +21,13 @@
             "link": ""
           }
         },
+        "announcement_9tmYP6": {
+          "type": "announcement",
+          "settings": {
+            "text": "GREEN FRIDAY: 15% Off One-Time Orders",
+            "link": ""
+          }
+        },
         "announcement_azd9FX": {
           "type": "announcement",
           "disabled": true,
@@ -31,6 +38,7 @@
         },
         "announcement_zDr4xD": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "Just launched! Forever Active Creatine",
             "link": "shopify://products/creatine"
@@ -46,6 +54,7 @@
       },
       "block_order": [
         "announcement_bMCjXq",
+        "announcement_9tmYP6",
         "announcement_azd9FX",
         "announcement_zDr4xD",
         "announcement_GGCHez"
