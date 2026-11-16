@@ -1173,3 +1173,8 @@
         padding-top: 10px;
     }
 }
+
+/* Fix for preorder button making buy-it-now button look purchasable */
+shopify-buy-it-now-button[disabled] {
+    opacity: .5;
+}

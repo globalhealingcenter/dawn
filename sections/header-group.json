@@ -14,6 +14,13 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_bMCjXq": {
+          "type": "announcement",
+          "settings": {
+            "text": "Due to a high volume of orders, temporary shipping delays may occur.",
+            "link": ""
+          }
+        },
         "announcement_azd9FX": {
           "type": "announcement",
           "disabled": true,
@@ -38,6 +45,7 @@
         }
       },
       "block_order": [
+        "announcement_bMCjXq",
         "announcement_azd9FX",
         "announcement_zDr4xD",
         "announcement_GGCHez"
