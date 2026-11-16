@@ -916,10 +916,6 @@
        SHOW / HIDE AFTER SCROLL
     ======================================== */
 
-    const SHOW_AFTER_SCROLL =
-      {{ section.settings.show_after_scroll | default: 500 }};
-
-
     /*
      * Ordergroove's main.js is deferred, so the
      * subscription benefits bar renders a moment
@@ -931,47 +927,67 @@
 
     let ordergrooveReady = false;
 
+    /*
+     * SHOW / HIDE BASED ON ORIGINAL ATC BUTTON VISIBILITY
+     *
+     * Instead of a fixed scroll-pixel threshold, we watch the
+     * original product-form Add-to-Cart button with an
+     * IntersectionObserver.  The sticky bar is hidden while that
+     * button is visible and shown as soon as it leaves the viewport.
+     */
 
-    function handleStickyVisibility() {
+    // Track whether the original ATC button is in view
+    // true  = button is visible OR hasn't been reached yet → bar stays hidden
+    // false = button has scrolled ABOVE the viewport → bar shows
+    let originalATCVisible = true;
 
-      if (!ordergrooveReady) {
-
-        section.classList.remove(
-          'gh-spb--visible'
-        );
-
-        return;
-
-      }
-
-
-      if (window.scrollY >= SHOW_AFTER_SCROLL) {
-
-        section.classList.add(
-          'gh-spb--visible'
-        );
-
+    function updateStickyVisibility() {
+      if (!ordergrooveReady || originalATCVisible) {
+        section.classList.remove('gh-spb--visible');
       } else {
-
-        section.classList.remove(
-          'gh-spb--visible'
-        );
-
+        section.classList.add('gh-spb--visible');
       }
-
     }
 
+    // Find the original ATC button / its wrapper on the PDP
+    const originalATCTarget =
+      document.querySelector('.product-form__buttons') ||
+      document.querySelector(
+        'form[action*="/cart/add"] button[type="submit"]:not([data-gh-sticky-form] button)'
+      )?.closest('div') ||
+      document.querySelector('form[action*="/cart/add"]');
 
-    window.addEventListener(
-      'scroll',
-      handleStickyVisibility,
-      {
-        passive: true
-      }
-    );
+    if (originalATCTarget) {
+      const atcObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              // Button is visible in viewport → hide sticky bar
+              originalATCVisible = true;
+            } else if (entry.boundingClientRect.top < 0) {
+              // Button has scrolled ABOVE the viewport → show sticky bar
+              originalATCVisible = false;
+            } else {
+              // Button is BELOW the viewport (not yet reached) → keep bar hidden
+              originalATCVisible = true;
+            }
+            updateStickyVisibility();
+          });
+        },
+        { threshold: 0 }
+      );
+      atcObserver.observe(originalATCTarget);
+    } else {
+      // Fallback: if we can't find the button, use the legacy scroll threshold
+      const SHOW_AFTER_SCROLL = {{ section.settings.show_after_scroll | default: 500 }};
+      originalATCVisible = window.scrollY < SHOW_AFTER_SCROLL;
+      window.addEventListener('scroll', () => {
+        originalATCVisible = window.scrollY < SHOW_AFTER_SCROLL;
+        updateStickyVisibility();
+      }, { passive: true });
+    }
 
-
-    handleStickyVisibility();
+    updateStickyVisibility();
 
 
     const ordergrooveOffer =
@@ -1069,7 +1085,7 @@
       );
 
 
-      handleStickyVisibility();
+      updateStickyVisibility();
 
     }
 
