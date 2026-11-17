@@ -1,0 +1,40 @@
+<script>
+(function () {
+  function relay(type) {
+    try {
+      if (window.Shopify && Shopify.analytics && Shopify.analytics.publish) {
+        Shopify.analytics.publish('gh:event', { type: type });
+      }
+    } catch (e) {}
+  }
+
+  // Walk up from the clicked button looking for the nearest input of the
+  // given type, stopping at the first match so we don't accidentally pick up
+  // an unrelated input elsewhere on the page (e.g. the footer signup form).
+  function findNearbyInput(el, selector, maxLevels) {
+    var node = el;
+    for (var i = 0; i < maxLevels && node; i++) {
+      var found = node.querySelector && node.querySelector(selector);
+      if (found) return found;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest && e.target.closest('.klaviyo-form-button');
+    if (!btn) return;
+
+    var emailInput = findNearbyInput(btn, 'input[type="email"]', 6);
+    if (emailInput && emailInput.value && emailInput.value.indexOf('@') > -1) {
+      relay('email_signup');
+      return;
+    }
+
+    var phoneInput = findNearbyInput(btn, 'input[type="tel"]', 6);
+    if (phoneInput && phoneInput.value && phoneInput.value.replace(/\D/g, '').length >= 7) {
+      relay('sms_signup');
+    }
+  }, true);
+})();
+</script>
