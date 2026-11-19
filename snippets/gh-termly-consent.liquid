@@ -304,18 +304,15 @@
 
   function marketingAllowed() {
     try {
-      if (
+      return !!(
         window.Shopify &&
         window.Shopify.customerPrivacy &&
         typeof window.Shopify.customerPrivacy.marketingAllowed === 'function' &&
         window.Shopify.customerPrivacy.marketingAllowed()
-      ) {
-        return true;
-      }
-    } catch (error) {}
-
-    // Fallback: the Termly choice, in case Shopify's API hasn't loaded yet.
-    return !!(window.__GH_CONSENT_STATE__ && window.__GH_CONSENT_STATE__.marketing);
+      );
+    } catch (error) {
+      return false;
+    }
   }
 
   // Covers menu links set in Shopify admin and links rendered later.
