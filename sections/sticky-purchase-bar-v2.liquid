@@ -21,6 +21,7 @@
   id="GHStickyPurchase-{{ section.id }}"
   class="
     gh-spb
+    gh-spb--og-empty
     gh-spb--{{ section.settings.theme_variant }}
     {% if section.settings.hide_mobile %}gh-spb--hide-mobile{% endif %}
     {% if section.settings.hide_desktop %}gh-spb--hide-desktop{% endif %}
@@ -256,7 +257,13 @@
 
     position: fixed;
 
-    bottom: 0;
+    /*
+      The bar normally sits flush on the bottom edge.
+      It is lifted only by the real, measured height of
+      the Ordergroove benefits bar (--gh-spb-og-offset),
+      never by a hard-coded guess.
+    */
+    bottom: var(--gh-spb-og-offset, 0px);
     left: 0;
     right: 0;
 
@@ -280,20 +287,33 @@
     transition:
       opacity .3s ease,
       transform .3s ease,
-      visibility .3s ease;
+      visibility .3s ease,
+      bottom .2s ease;
 
   }
 
   /*
-    The lift makes room for the Ordergroove
-    benefits bar. It only applies once that bar
-    has actually rendered, otherwise the sticky
-    bar floats above an empty gap while
-    Ordergroove loads.
+    ORDERGROOVE BENEFITS OFFSET
+
+    The Ordergroove benefits bar is rendered by the
+    Ordergroove widget, not by this section, and it
+    lands a moment after the rest of the page.
+
+    The sticky bar used to be lifted by a fixed 48px as
+    soon as the offer reported a subscription, so when
+    that benefits bar was slow, hidden, or never
+    rendered at all, the sticky bar floated above an
+    empty 48px strip of page background.
+
+    The lift is now driven by --gh-spb-og-offset, which
+    JS keeps equal to the benefits bar's actual rendered
+    height, and 0 while it is absent, hidden or still
+    loading. No benefits bar on screen means no lift, so
+    the empty gap cannot appear.
   */
 
-  .gh-spb.gh-spb--og-ready:has(og-offer[subscribed]) {
-    bottom: 48px !important;
+  #GHStickyPurchase-{{ section.id }} {
+    --gh-spb-og-offset: 0px;
   }
 
   /* SHOW AFTER SCROLL */
@@ -543,6 +563,48 @@
     display: block;
     padding: 0;
     width: 100%;
+
+  }
+
+
+  /*
+    While Ordergroove has not painted into the offer
+    yet, .gh-spb-left is a blank 44% panel with a
+    divider down its side. Collapsing it keeps the bar
+    looking finished during that window instead of
+    showing an empty block, and the column comes back
+    as soon as the widget has a box.
+  */
+
+  /*
+    Set by JS on the Ordergroove benefits bar whenever
+    the offer is not subscribed. The bar is rendered by
+    Ordergroove and can live outside this section, so
+    the rule is deliberately not scoped to the section
+    id and keys off the class instead.
+  */
+
+  .gh-og-subscription-benefits.gh-spb-og-benefits--hidden {
+
+    display: none !important;
+
+  }
+
+
+  @media screen and (min-width: 1025px) {
+
+    #GHStickyPurchase-{{ section.id }}.gh-spb--og-empty .gh-spb-left {
+
+      display: none;
+
+    }
+
+
+    #GHStickyPurchase-{{ section.id }}.gh-spb--og-empty .gh-spb__inner {
+
+      justify-content: space-between;
+
+    }
 
   }
 
@@ -883,9 +945,14 @@
         height: 12px;
     }
 
-    .gh-spb.gh-spb--og-ready:has(og-offer[subscribed]),
-    .gh-spb:has(og-offer[subscribed]),
+    /*
+      Below 1024px .gh-spb-left is hidden, so the bar
+      always sits flush on the bottom edge and is never
+      lifted for the Ordergroove benefits bar.
+    */
+    #GHStickyPurchase-{{ section.id }},
     .gh-spb {
+      --gh-spb-og-offset: 0px;
       bottom: 0px !important;
     }
   }
@@ -1016,57 +1083,235 @@
       '.gh-og-subscription-benefits';
 
 
-    function hasOrdergrooveBenefits() {
+    function isNarrowViewport() {
 
-      if (!ordergrooveOffer)
-        return true;
+      return window.matchMedia(
+        '(max-width: 1024px)'
+      ).matches;
 
-
-      /*
-       * Below 1024px .gh-spb-left is hidden and
-       * the bar sits flush at bottom: 0, so
-       * there is nothing to wait for.
-       */
-
-      if (
-        window.matchMedia(
-          '(max-width: 1024px)'
-        ).matches
-      ) {
-
-        return true;
-
-      }
+    }
 
 
-      /*
-       * The benefits bar enters the DOM, and
-       * even computes to display: flex, roughly
-       * 800ms before it has a box: its og-when
-       * ancestor stays hidden until Ordergroove
-       * resolves eligibility.
-       *
-       * So presence and display are both too
-       * early. Only a rendered box means the
-       * bar is actually on screen.
-       */
+    function findBenefitsBar() {
 
-      const benefits =
+      return (
         section.querySelector(
           OG_BENEFITS_SELECTOR
         ) ||
         document.querySelector(
           OG_BENEFITS_SELECTOR
-        );
+        )
+      );
+
+    }
+
+
+    /*
+     * Returns the height the Ordergroove benefits
+     * bar actually occupies on screen right now, or
+     * 0 when it occupies nothing.
+     *
+     * The benefits bar enters the DOM, and even
+     * computes to display: flex, roughly 800ms
+     * before it has a box: its og-when ancestor
+     * stays hidden until Ordergroove resolves
+     * eligibility. So presence and display are both
+     * too early. Only a rendered, visible box means
+     * the bar is on screen and the sticky bar has
+     * something to sit on top of.
+     */
+
+    function measureOrdergrooveBenefits() {
+
+      if (!ordergrooveOffer)
+        return 0;
+
+
+      /*
+       * Below 1024px .gh-spb-left is hidden and
+       * the bar sits flush at bottom: 0, so there
+       * is nothing to make room for.
+       */
+
+      if (isNarrowViewport())
+        return 0;
+
+
+      /*
+       * The benefits bar only belongs on screen for a
+       * subscription. On one-time purchase there is
+       * nothing to sit on top of, so there is no lift
+       * even if Ordergroove has left the bar rendered.
+       */
+
+      if (!isSubscribed())
+        return 0;
+
+
+      const benefits = findBenefitsBar();
 
 
       if (!benefits)
-        return false;
+        return 0;
 
 
-      return benefits
-        .getBoundingClientRect()
-        .height > 0;
+      const styles =
+        window.getComputedStyle(benefits);
+
+
+      if (
+        styles.display === 'none' ||
+        styles.visibility === 'hidden' ||
+        parseFloat(styles.opacity) === 0
+      ) {
+
+        return 0;
+
+      }
+
+
+      const height =
+        benefits
+          .getBoundingClientRect()
+          .height;
+
+
+      return height > 1
+        ? Math.round(height)
+        : 0;
+
+    }
+
+
+    /*
+     * Whether the sticky bar is allowed to show yet.
+     *
+     * This used to wait for the benefits bar, which is
+     * wrong now that the bar is only there for a
+     * subscription: on a product the shopper takes
+     * one-time, it would never arrive and the sticky
+     * bar would sit out the whole timeout every time.
+     *
+     * What it should wait for is Ordergroove painting
+     * its offer, so the bar does not appear with a
+     * half-built widget in it. The benefits bar can
+     * come and go afterwards; the lift follows it on
+     * its own.
+     */
+
+    function isOrdergrooveSettled() {
+
+      if (!ordergrooveOffer)
+        return true;
+
+
+      if (isNarrowViewport())
+        return true;
+
+
+      return (
+        ordergrooveHasContent ||
+        measureOrdergrooveBenefits() > 0
+      );
+
+    }
+
+
+    /*
+     * ---------------------------------------------
+     * THE LIFT
+     *
+     * The sticky bar reads --gh-spb-og-offset for
+     * its bottom value, so writing the measured
+     * height here is what keeps the two bars stacked
+     * without a gap. While the benefits bar is
+     * absent, hidden or still loading the offset is
+     * 0 and the sticky bar stays flush on the bottom
+     * edge instead of floating above empty page
+     * background.
+     * ---------------------------------------------
+     */
+
+    let appliedBenefitsOffset = null;
+
+
+    function syncBenefitsOffset() {
+
+      const offset =
+        measureOrdergrooveBenefits();
+
+
+      if (offset === appliedBenefitsOffset)
+        return;
+
+
+      appliedBenefitsOffset = offset;
+
+
+      section.style.setProperty(
+        '--gh-spb-og-offset',
+        offset + 'px'
+      );
+
+    }
+
+
+    /*
+     * ---------------------------------------------
+     * THE WIDGET COLUMN
+     *
+     * .gh-spb-left reserves 44% of the bar for the
+     * Ordergroove offer. Until Ordergroove paints
+     * into it that column is a blank panel with a
+     * divider down its side, so it starts collapsed
+     * and is restored the moment the offer has
+     * content.
+     *
+     * The check reads the offer's markup rather
+     * than its box, because the collapsed column is
+     * display: none and a hidden element measures 0
+     * forever. It is also one-way: once the widget
+     * has rendered the column stays, so a variant
+     * change that briefly empties the offer cannot
+     * make the bar jump.
+     * ---------------------------------------------
+     */
+
+    let ordergrooveHasContent = false;
+
+
+    section.classList.add('gh-spb--og-empty');
+
+
+    function syncOrdergrooveColumn() {
+
+      if (
+        ordergrooveHasContent ||
+        !ordergrooveOffer
+      ) {
+
+        return;
+
+      }
+
+
+      const rendered =
+        ordergrooveOffer.childElementCount > 0 &&
+        (ordergrooveOffer.textContent || '')
+          .trim()
+          .length > 0;
+
+
+      if (!rendered)
+        return;
+
+
+      ordergrooveHasContent = true;
+
+
+      section.classList.remove(
+        'gh-spb--og-empty'
+      );
 
     }
 
@@ -1090,7 +1335,70 @@
     }
 
 
-    if (hasOrdergrooveBenefits()) {
+    /*
+     * ---------------------------------------------
+     * THE BENEFITS BAR ITSELF
+     *
+     * Ordergroove does not take its benefits bar
+     * down when the shopper switches to one-time
+     * purchase: it leaves it rendered and only
+     * half-populated, which reads as a broken strip
+     * along the bottom of the screen. Since the bar
+     * advertises subscription perks it has no
+     * business being on screen at all in that
+     * state, so the section hides it.
+     *
+     * This only takes over once Ordergroove has
+     * painted the offer, so we never fight the
+     * widget while it is still setting itself up.
+     * ---------------------------------------------
+     */
+
+    function syncBenefitsVisibility() {
+
+      if (!ordergrooveHasContent)
+        return;
+
+
+      const benefits = findBenefitsBar();
+
+
+      if (!benefits)
+        return;
+
+
+      benefits.classList.toggle(
+        'gh-spb-og-benefits--hidden',
+        !isSubscribed()
+      );
+
+    }
+
+
+    /*
+     * One tick: re-measure the widget column, the
+     * benefits bar and the lift, in that order, so
+     * the lift is measured against what is on screen
+     * after the other two have settled. Cheap enough
+     * to run on a poll and on every event that can
+     * change any of them.
+     */
+
+    function syncOrdergrooveLayout() {
+
+      syncOrdergrooveColumn();
+
+      syncBenefitsVisibility();
+
+      syncBenefitsOffset();
+
+    }
+
+
+    syncOrdergrooveLayout();
+
+
+    if (isOrdergrooveSettled()) {
 
       markOrdergrooveReady();
 
@@ -1111,7 +1419,10 @@
 
       const pollOrdergroove = function() {
 
-        if (hasOrdergrooveBenefits()) {
+        syncOrdergrooveLayout();
+
+
+        if (isOrdergrooveSettled()) {
 
           markOrdergrooveReady();
 
@@ -1141,6 +1452,179 @@
       );
 
     }
+
+
+    /* ========================================
+       KEEP THE LAYOUT IN SYNC
+
+       The benefits bar and the offer widget can
+       appear, resize or disappear long after the
+       ready check has settled: late Ordergroove
+       responses, variant changes, the shopper
+       switching between subscribe and one-time.
+
+       The ready timeout above is only a safety
+       net for showing the bar; it must never be
+       what decides the lift, otherwise a slow
+       Ordergroove leaves the bar floating above
+       an empty strip. So the measurements are
+       repeated instead of taken once.
+    ======================================== */
+
+    (function watchOrdergrooveLayout() {
+
+      let observedBenefits = null;
+
+      let resizeObserver = null;
+
+
+      if (typeof ResizeObserver !== 'undefined') {
+
+        resizeObserver =
+          new ResizeObserver(
+            syncOrdergrooveLayout
+          );
+
+
+        if (ordergrooveOffer) {
+
+          resizeObserver.observe(
+            ordergrooveOffer
+          );
+
+        }
+
+      }
+
+
+      function tick() {
+
+        if (resizeObserver) {
+
+          const benefits = findBenefitsBar();
+
+
+          if (
+            benefits &&
+            benefits !== observedBenefits
+          ) {
+
+            if (observedBenefits) {
+
+              resizeObserver.unobserve(
+                observedBenefits
+              );
+
+            }
+
+
+            observedBenefits = benefits;
+
+
+            resizeObserver.observe(benefits);
+
+          }
+
+        }
+
+
+        syncOrdergrooveLayout();
+
+      }
+
+
+      tick();
+
+
+      /*
+       * Ordergroove settles within the first few
+       * seconds. The poll covers what the
+       * observers cannot see on their own, such
+       * as an ancestor being un-hidden, then
+       * stops.
+       */
+
+      const LAYOUT_POLL_INTERVAL = 250;
+
+      const LAYOUT_POLL_DURATION = 20000;
+
+
+      const layoutTimer =
+        window.setInterval(
+          tick,
+          LAYOUT_POLL_INTERVAL
+        );
+
+
+      window.setTimeout(
+        function() {
+
+          window.clearInterval(layoutTimer);
+
+        },
+        LAYOUT_POLL_DURATION
+      );
+
+
+      window.addEventListener(
+        'load',
+        tick
+      );
+
+
+      window.addEventListener(
+        'resize',
+        tick,
+        { passive: true }
+      );
+
+
+      if (
+        ordergrooveOffer &&
+        typeof MutationObserver !== 'undefined'
+      ) {
+
+        /*
+         * childList/characterData catches the
+         * widget painting its offer, attributes
+         * catch the shopper switching between
+         * subscribe and one-time.
+         */
+
+        let mutationTimer = null;
+
+
+        new MutationObserver(
+          function() {
+
+            window.clearTimeout(mutationTimer);
+
+
+            mutationTimer =
+              window.setTimeout(tick, 50);
+
+          }
+        ).observe(
+          ordergrooveOffer,
+          {
+            attributes: true,
+
+            attributeFilter: [
+              'subscribed',
+              'frequency'
+            ],
+
+            childList: true,
+
+            subtree: true,
+
+            characterData: true
+          }
+        );
+
+      }
+
+    })();
 
 
     /* ========================================
