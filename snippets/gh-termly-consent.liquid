@@ -23,10 +23,13 @@
   if (window.__GH_TERMLY_BRIDGE_INSTALLED__) return;
   window.__GH_TERMLY_BRIDGE_INSTALLED__ = true;
 
-  // Temporary switch for the Klaviyo code in this file (cookie clearing,
-  // marking account links with data-k-hub-ignore, and opening the
-  // Customer Hub). Set to true to turn it back on.
+  // Temporary switch for clearing the Klaviyo cookie after a decline.
+  // Set to true to turn it back on.
   var KLAVIYO_ENABLED = false;
+
+  // Account links open the Klaviyo Customer Hub when marketing consent
+  // is given, otherwise the normal Shopify account page.
+  var HUB_GATE_ENABLED = true;
 
   var attached = false;
   var lastSignature = null;
@@ -270,22 +273,29 @@
     if (!link || !link.getAttribute) return false;
 
     var href = link.getAttribute('href') || '';
-    var path;
+    var url;
     try {
-      path = new URL(href, window.location.href).pathname;
+      url = new URL(href, window.location.href);
     } catch (error) {
       return false;
     }
 
-    return (
-      /^\/(account|customer_authentication)(\/|$)/.test(path) &&
-      !/\/logout(\/|$)/.test(path)
-    );
+    var path = url.pathname;
+    if (/\/logout(\/|$)/.test(path)) return false;
+
+    // Same site: /account..., /customer_authentication...
+    if (url.hostname === window.location.hostname) {
+      return /^\/(account|customer_authentication)(\/|$)/.test(path);
+    }
+
+    // New customer accounts: account.<store domain>
+    var store = window.location.hostname.replace(/^www\./i, '');
+    return url.hostname === 'account.' + store;
   }
 
   function markAccountLinks(root) {
     var links = (root || document).querySelectorAll(
-      'a[href*="/account"], a[href*="/customer_authentication"]'
+      'a[href*="/account"], a[href*="/customer_authentication"], a[href*="//account."]'
     );
     for (var i = 0; i < links.length; i++) {
       if (isAccountLink(links[i])) links[i].setAttribute('data-k-hub-ignore', '');
@@ -307,7 +317,7 @@
 
   // Covers menu links set in Shopify admin and links rendered later.
   document.addEventListener('DOMContentLoaded', function () {
-    if (!KLAVIYO_ENABLED) return;
+    if (!HUB_GATE_ENABLED) return;
 
     markAccountLinks(document);
 
@@ -329,7 +339,7 @@
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     var link = event.target.closest && event.target.closest('a[href]');
-    if (!KLAVIYO_ENABLED || !isAccountLink(link)) return;
+    if (!HUB_GATE_ENABLED || !isAccountLink(link)) return;
 
     link.setAttribute('data-k-hub-ignore', '');
 
