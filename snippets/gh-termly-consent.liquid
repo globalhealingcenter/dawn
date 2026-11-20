@@ -272,6 +272,9 @@
   function isAccountLink(link) {
     if (!link || !link.getAttribute) return false;
 
+    // Leave the Hub's own links (e.g. its Sign in button) alone.
+    if (link.closest && link.closest('#k-hub')) return false;
+
     var href = link.getAttribute('href') || '';
     var url;
     try {
