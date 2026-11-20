@@ -273,7 +273,7 @@
     if (!link || !link.getAttribute) return false;
 
     // Leave the Hub's own links (e.g. its Sign in button) alone.
-    if (link.closest && link.closest('#k-hub')) return false;
+    if (link.closest && link.closest('.kl-hub-drawer')) return false;
 
     var href = link.getAttribute('href') || '';
     var url;
