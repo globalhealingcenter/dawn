@@ -26,7 +26,10 @@
             "banner_2_url": "shopify://collections/canadian-products",
             "banner_2_visible": false,
             "banner_2_order": 1,
-            "banner_3_visible": false
+            "banner_3_desktop_image": "shopify://shop_images/2026-bfcm-cm-desktop-banner-ukca.jpg",
+            "banner_3_mobile_image": "shopify://shop_images/2026-bfcm-cm-mobile-banner-ukca.jpg",
+            "banner_3_visible": false,
+            "banner_3_url": "shopify://collections/canadian-products"
           }
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
