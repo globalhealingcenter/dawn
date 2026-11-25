@@ -697,12 +697,6 @@
 
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {%- render 'ordergroove_global' -%}
-      {%- if request.path contains '/apps/subscriptions' -%}
-        {%- comment -%} Yotpo "Interactive Rewards S&S Orders": redeem points on the next Autoship order {%- endcomment -%}
-        <div class="page-width">
-          <div class="yotpo-widget-instance" data-yotpo-instance-id="48422"></div>
-        </div>
-      {%- endif -%}
       {{ content_for_layout }}
     </main>
 

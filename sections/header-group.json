@@ -23,6 +23,7 @@
         },
         "announcement_9tmYP6": {
           "type": "announcement",
+          "disabled": true,
           "settings": {
             "text": "GREEN FRIDAY: 15% Off One-Time Orders",
             "link": ""
