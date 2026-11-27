@@ -118,7 +118,7 @@
 <script src="{{ 'details-modal.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'gh-cart-count-sync.js' | asset_url }}" defer="defer"></script>
-{%- if request.page_type == 'page' and page.handle == '2026-bfcm-insiders' -%}
+{%- if request.page_type == 'page' and page.handle == '2026-bfcm-insiders' or page.handle == 'bfcm-2026' -%}
   <script src="{{ 'gh-cart-link-popup.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 <script src="{{ 'search-form.js' | asset_url }}" defer="defer"></script>
