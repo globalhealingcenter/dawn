@@ -24,8 +24,8 @@
         },
         "d5f5c22a-9ff9-4785-8bc6-86c11c7d29be": {
           "settings": {
-            "banner_1_desktop_image": "shopify://shop_images/2026-bfcm-advertised-desktop-banner-ukca.jpg",
-            "banner_1_mobile_image": "shopify://shop_images/2026-bfcm-advertised-mobile-banner-ukca.jpg",
+            "banner_1_desktop_image": "shopify://shop_images/2026-bfcm-bf-desktop-banner-ukca.jpg",
+            "banner_1_mobile_image": "shopify://shop_images/2026-bfcm-bf-mobile-banner-ukca.jpg",
             "banner_1_url": "shopify://collections/products-for-uk",
             "banner_1_visible": true,
             "banner_1_order": 1,
