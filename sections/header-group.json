@@ -14,13 +14,6 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement_bMCjXq": {
-          "type": "announcement",
-          "settings": {
-            "text": "Due to a high volume of orders, temporary shipping delays may occur.",
-            "link": ""
-          }
-        },
         "announcement_9tmYP6": {
           "type": "announcement",
           "settings": {
@@ -28,11 +21,10 @@
             "link": "shopify://pages/bfcm-2026"
           }
         },
-        "announcement_azd9FX": {
+        "announcement_bMCjXq": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
-            "text": "Free Oxy-Powder Sample on Orders $75+",
+            "text": "Due to a high volume of orders, temporary shipping delays may occur.",
             "link": ""
           }
         },
@@ -53,9 +45,8 @@
         }
       },
       "block_order": [
-        "announcement_bMCjXq",
         "announcement_9tmYP6",
-        "announcement_azd9FX",
+        "announcement_bMCjXq",
         "announcement_zDr4xD",
         "announcement_GGCHez"
       ],
