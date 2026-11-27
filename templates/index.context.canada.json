@@ -21,15 +21,16 @@
             "banner_1_desktop_image": "shopify://shop_images/040626-veritree-homepage-banner-897x288.jpg",
             "banner_1_mobile_image": "shopify://shop_images/040926-veritree-homepage-banner-mobile.jpg",
             "banner_1_url": "https://globalhealing.com/pages/veritree",
+            "banner_1_visible": false,
             "banner_2_desktop_image": "shopify://shop_images/2026-bfcm-bf-desktop-banner-ukca.jpg",
             "banner_2_mobile_image": "shopify://shop_images/2026-bfcm-bf-mobile-banner-ukca.jpg",
             "banner_2_url": "shopify://collections/canadian-products",
-            "banner_2_visible": false,
+            "banner_2_visible": true,
             "banner_2_order": 1,
             "banner_3_desktop_image": "shopify://shop_images/2026-bfcm-cm-desktop-banner-ukca.jpg",
             "banner_3_mobile_image": "shopify://shop_images/2026-bfcm-cm-mobile-banner-ukca.jpg",
-            "banner_3_visible": false,
-            "banner_3_url": "shopify://collections/canadian-products"
+            "banner_3_url": "shopify://collections/canadian-products",
+            "banner_3_visible": false
           }
         },
         "1b1d3708-6d8e-44dd-bfbf-107ddf5326ed": {
