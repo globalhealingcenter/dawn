@@ -23,10 +23,9 @@
         },
         "announcement_9tmYP6": {
           "type": "announcement",
-          "disabled": true,
           "settings": {
-            "text": "GREEN FRIDAY: 15% Off One-Time Orders",
-            "link": ""
+            "text": "Black Friday: 20% Off Sitewide + Free Gifts!   2 Oxy-Powder Samples | Free Tote $100+",
+            "link": "shopify://pages/bfcm-2026"
           }
         },
         "announcement_azd9FX": {
